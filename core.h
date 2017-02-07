@@ -10,6 +10,7 @@
 
 class Core : public QThread
 {
+    Q_OBJECT
 private:
     std::atomic_bool _active;
     Device * _device;
@@ -18,8 +19,6 @@ public:
     Core();
     ~Core();
     void run();
-    uint8_t * getAscanPtr();
-
 private:
     void init();
     void check();
@@ -29,6 +28,11 @@ private:
     void finish();
     void work();
 
+signals:
+    void drawAscan(AScan scan);
+    void debug(int);
+    void connectionStatusChanged(bool);
+    void errorStatusChanged(bool);
 };
 
 #endif // CORE_H

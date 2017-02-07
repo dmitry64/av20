@@ -31,7 +31,9 @@ SOURCES += main.cpp\
     device/device.cpp \
     device/spi/driverspi.cpp \
     device/devicestate.cpp \
-    ui/ascanwidget.cpp
+    ui/ascanwidget.cpp \
+    ui/controls/touchspinbox.cpp \
+    ui/controlpanel.cpp
 
 HEADERS  += debuggui.h \
     core.h \
@@ -39,7 +41,11 @@ HEADERS  += debuggui.h \
     device/spi/driverspi.h \
     device/definitions.h \
     device/devicestate.h \
-    ui/ascanwidget.h
+    ui/ascanwidget.h \
+    ui/controls/touchspinbox.h \
+    ui/controlpanel.h
 
 FORMS    += debuggui.ui \
-    ui/ascanwidget.ui
+    ui/ascanwidget.ui \
+    ui/controls/touchspinbox.ui \
+    ui/controlpanel.ui

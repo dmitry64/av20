@@ -95,27 +95,32 @@ void Device::resetChannelsTable()
     }
 }
 
-uint8_t * Device::getAscanForChannel(uint8_t activeChannel)
+AScan Device::getAscanForChannel(uint8_t activeChannel)
 {
-    uint8_t buf[800];
-    switch (activeChannel) {
-    case 0:
-        _spi->getRegister(0x7C, 800, buf);
-        for(int i=0; i<800; i++)
-            _state->getAscanForChannel(0)[i] = buf[i];
-        return _state->getAscanForChannel(0);
-    case 1:
-        _spi->getRegister(0x7D, 800, buf);
-        for(int i=0; i<800; i++)
-            _state->getAscanForChannel(1)[i] = buf[i];
-        return _state->getAscanForChannel(1);
-    default:
-        break;
+    AScan scan;
+    uint8_t buf[ASCAN_SAMPLES_SIZE + ASCAN_HEADER_SIZE];
+    _spi->getRegister((activeChannel == 1) ? 0x7C : 0x7D, ASCAN_SAMPLES_SIZE + ASCAN_HEADER_SIZE, buf);
+
+    scan._header._frameMarker = buf[0];
+    scan._header._descriptorSizeInBytes = buf[1];
+    scan._header._tactNo = buf[2];
+    scan._header._channelNo = buf[3];
+    scan._header._dataType = buf[4];
+    scan._header._dataWidth = buf[5];
+    uint16_t * sptr = reinterpret_cast<uint16_t*>(&(buf[6]));
+    scan._header._samplesPerChannel = *sptr;
+    uint64_t * odoptr = reinterpret_cast<uint64_t*>(&(buf[8]));
+    scan._header._odoStamp = *odoptr;
+
+    for(int i=0; i<ASCAN_SAMPLES_SIZE; i++) {
+        scan._samples[i] = buf[i + ASCAN_HEADER_SIZE];
     }
 
-    /*if(!checkConnection()) {
+    if(!checkConnection()) {
         qFatal("Connection lost after Ascan request!");
-    }*/
+    }
+
+    return scan;
 }
 
 uint8_t Device::getVersion()

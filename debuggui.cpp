@@ -8,6 +8,7 @@ DebugGUI::DebugGUI(QWidget *parent) :
 {
     ui->setupUi(this);
     _core = 0;
+    connect(this,SIGNAL(ascan(AScan)),ui->ascanWidget,SLOT(onAScan(AScan)));
 }
 
 DebugGUI::~DebugGUI()
@@ -18,9 +19,16 @@ DebugGUI::~DebugGUI()
 void DebugGUI::setCore(Core *core)
 {
     _core = core;
-    qDebug() << "set core!";
-    ui->widget->setSource(core->getAscanPtr());
-    qDebug() << "set core2!";
+}
+
+AScanWidget *DebugGUI::getAscanWidget()
+{
+    return ui->ascanWidget;
+}
+
+ControlPanel *DebugGUI::getControlPanel()
+{
+    return ui->controlPanel;
 }
 
 void DebugGUI::debug(int value)
@@ -36,4 +44,14 @@ void DebugGUI::onConnectionStatusChanged(bool status)
 void DebugGUI::onErrorStatusChanged(bool status)
 {
     ui->errorCheckBox->setChecked(status);
+}
+
+void DebugGUI::onAScan(AScan scan)
+{
+    emit ascan(scan);
+}
+
+void DebugGUI::on_exitButton_released()
+{
+    QApplication::exit(0);
 }

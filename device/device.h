@@ -16,7 +16,7 @@ public:
     void resetConfigRegisters();
     void resetTVG();
     void resetChannelsTable();
-    uint8_t *getAscanForChannel(uint8_t activeChannel);
+    AScan getAscanForChannel(uint8_t activeChannel);
     uint8_t getVersion();
     bool checkConnection();
     bool getErrorFlag() const;

@@ -21,11 +21,6 @@ void Core::run()
     finish();
 }
 
-uint8_t *Core::getAscanPtr()
-{
-    return _state->getAscanForChannel(0);
-}
-
 void Core::init()
 {
     _device->init();
@@ -33,14 +28,15 @@ void Core::init()
 
 void Core::check()
 {
-    //emit connectionStatusChanged(_device.checkConnection());
-    //emit errorStatusChanged(_device.getErrorFlag());
+    emit connectionStatusChanged(_device->checkConnection());
+    emit errorStatusChanged(_device->getErrorFlag());
 }
 
 void Core::ascan()
 {
-    _device->getAscanForChannel(0);
-    _device->getAscanForChannel(1);
+    emit drawAscan(_device->getAscanForChannel(0));
+
+    //_device->getAscanForChannel(1);
 }
 
 void Core::process()
@@ -70,6 +66,6 @@ void Core::work()
     process();
     sync();
     counter++;
-    //emit debug(counter);
+    emit debug(counter);
 }
 

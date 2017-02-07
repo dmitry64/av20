@@ -31,16 +31,16 @@ class DeviceState
     TVG _tvg[8];
 
     // A-scan
-    AScanHeader _headerA;
+    /*AScanHeader _headerA;
     uint8_t * _ascanSamplesA;//[800];
     AScanHeader _headerB;
-    uint8_t * _ascanSamplesB;//[800];
+    uint8_t * _ascanSamplesB;//[800];*/
 
 public:
     DeviceState();
     void applyState();
 
-    uint8_t * getAscanForChannel(uint8_t activeChannel);
+    //uint8_t * getAscanForChannel(uint8_t activeChannel);
 
     void setTVGForChannel(uint8_t index, TVG tvg);
     void setChannelsTableTact(uint8_t index, Tact tact);

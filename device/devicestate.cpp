@@ -79,22 +79,22 @@ void DeviceState::setUSM_ID(const uint8_t &USM_ID)
 
 DeviceState::DeviceState()
 {
-    _ascanSamplesA = new uint8_t[800];
-    _ascanSamplesB = new uint8_t[800];
-    for(int i=0; i<800; i++) {
+    /*_ascanSamplesA = new uint8_t[ASCAN_SAMPLES_SIZE];
+    _ascanSamplesB = new uint8_t[ASCAN_SAMPLES_SIZE];
+
+    for(int i=0; i<ASCAN_SAMPLES_SIZE; i++) {
         _ascanSamplesA[i] = 0x00;
         _ascanSamplesB[i] = 0x00;
-    }
+    }*/
 }
 
 void DeviceState::applyState()
 {
 
 }
-
+/*
 uint8_t * DeviceState::getAscanForChannel(uint8_t activeChannel)
 {
-
     switch(activeChannel) {
     case 0:
         return _ascanSamplesA;
@@ -103,7 +103,7 @@ uint8_t * DeviceState::getAscanForChannel(uint8_t activeChannel)
     }
     return _ascanSamplesA;
 }
-
+*/
 void DeviceState::setTVGForChannel(uint8_t index, TVG tvg)
 {
     for(int y=0; y<150; y++) {
