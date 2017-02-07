@@ -3,6 +3,8 @@
 
 #include <stdint.h>
 
+#define TVG_SAMPLES_SIZE 200
+#define TVG_SAMPLES_BYTES 150
 #define ASCAN_SAMPLES_SIZE 800
 #define ASCAN_HEADER_SIZE 12
 
@@ -16,8 +18,9 @@ struct Tact {
 };
 
 struct TVG {
-    uint8_t _samples[150];
+    uint8_t _samples[TVG_SAMPLES_BYTES];
 };
+
 
 struct AScanHeader {
     uint8_t _frameMarker;

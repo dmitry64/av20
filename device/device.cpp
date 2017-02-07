@@ -94,6 +94,22 @@ void Device::resetChannelsTable()
         _state->setChannelsTableTact(j,tact);
     }
 }
+/*
+void setBit(uint8_t * ptr, int bit, uint8_t val) {
+    uint8_t prev = ptr[bit/8];
+    ptr[bit/8] |= (((prev >> (bit % 8)) & val) << (bit % 8));
+}
+
+void Device::setTVG(int chIndex, std::vector<uint8_t> values8bit)
+{
+    uint8_t packedValues[TVG_SAMPLES_BYTES];
+    for(int i=0; i<values8bit.size(); i++) {
+        for(int j=0; j<6; j++) {
+            setBit(packedValues,i*6 + j, (values8bit[i] >> j) & 0b00000001);
+        }
+    }
+    _spi->setRegister(0x40 + chIndex,TVG_SAMPLES_BYTES,packedValues);
+}*/
 
 AScan Device::getAscanForChannel(uint8_t activeChannel)
 {
@@ -122,6 +138,9 @@ AScan Device::getAscanForChannel(uint8_t activeChannel)
 
     return scan;
 }
+
+
+
 
 uint8_t Device::getVersion()
 {

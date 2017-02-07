@@ -14,12 +14,14 @@ class AScanWidget : public QWidget
 
     std::atomic_bool _ready;
     std::vector<QPoint> _points;
+    std::vector<QPoint> _tvg;
 public:
     explicit AScanWidget(QWidget *parent = 0);
     ~AScanWidget();
     void paintEvent(QPaintEvent * event);
 public slots:
     void onAScan(AScan scan);
+    void onTVG(TVG tvg);
 private:
     Ui::AScanWidget *ui;
 };

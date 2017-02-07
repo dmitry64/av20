@@ -19,6 +19,7 @@ DebugGUI::~DebugGUI()
 void DebugGUI::setCore(Core *core)
 {
     _core = core;
+    ui->controlPanel->setCore(core);
 }
 
 AScanWidget *DebugGUI::getAscanWidget()
