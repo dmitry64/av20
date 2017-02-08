@@ -17,7 +17,9 @@ public:
     void resetConfigRegisters();
     void resetTVG();
     void resetChannelsTable();
-    //void setTVG(int chIndex, std::vector<uint8_t> values8bit);
+    void setProgTrigger(bool enabled);
+    DeviceStatus getDeviceStatus();
+    void setTVG(int chIndex, TVG tvg);
     AScan getAscanForChannel(uint8_t activeChannel);
     uint8_t getVersion();
 

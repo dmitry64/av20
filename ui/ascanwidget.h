@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include "device/definitions.h"
+#include <QElapsedTimer>
 
 namespace Ui {
 class AScanWidget;
@@ -15,6 +16,7 @@ class AScanWidget : public QWidget
     std::atomic_bool _ready;
     std::vector<QPoint> _points;
     std::vector<QPoint> _tvg;
+    QElapsedTimer _fpsTimer;
 public:
     explicit AScanWidget(QWidget *parent = 0);
     ~AScanWidget();

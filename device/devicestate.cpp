@@ -77,15 +77,23 @@ void DeviceState::setUSM_ID(const uint8_t &USM_ID)
     _USM_ID = USM_ID;
 }
 
+void DeviceState::setUSM_SR(const uint8_t &USM_SR)
+{
+    _USM_SR = USM_SR;
+}
+
 DeviceState::DeviceState()
 {
-    /*_ascanSamplesA = new uint8_t[ASCAN_SAMPLES_SIZE];
-    _ascanSamplesB = new uint8_t[ASCAN_SAMPLES_SIZE];
-
-    for(int i=0; i<ASCAN_SAMPLES_SIZE; i++) {
-        _ascanSamplesA[i] = 0x00;
-        _ascanSamplesB[i] = 0x00;
-    }*/
+    //TriggerMode _triggerMode;
+    //_triggerMode = TriggerMode::ProgTRG;
+    _USM_ID = 0;
+    _USM_CR = 0;
+    _USM_SR = 0;
+    _TRG_CR = 0;
+    _TRG_DS = 0;
+    _TRG_TS = 0;
+    _PWR_CR = 0;
+    _ODO_CR = 0;
 }
 
 void DeviceState::applyState()

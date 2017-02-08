@@ -47,6 +47,21 @@ void DebugGUI::onErrorStatusChanged(bool status)
     ui->errorCheckBox->setChecked(status);
 }
 
+void DebugGUI::onDeviceErrorStatusChanged(bool status)
+{
+    ui->deviceErrorCheckBox->setChecked(status);
+}
+
+void DebugGUI::onDeviceOverheatStatusChanged(bool status)
+{
+    ui->overheatCheckBox->setChecked(status);
+}
+
+void DebugGUI::onDeviceReadyStatusChanged(bool status)
+{
+    ui->deviceReadyCheckBox->setChecked(status);
+}
+
 void DebugGUI::onAScan(AScan scan)
 {
     emit ascan(scan);

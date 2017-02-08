@@ -31,6 +31,9 @@ public slots:
     void debug(int value);
     void onConnectionStatusChanged(bool status);
     void onErrorStatusChanged(bool status);
+    void onDeviceErrorStatusChanged(bool status);
+    void onDeviceOverheatStatusChanged(bool status);
+    void onDeviceReadyStatusChanged(bool status);
 
     void onAScan(AScan scan);
 signals:

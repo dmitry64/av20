@@ -8,6 +8,7 @@ AScanWidget::AScanWidget(QWidget *parent) :
     ui(new Ui::AScanWidget)
 {
     ui->setupUi(this);
+    _fpsTimer.restart();
 }
 
 AScanWidget::~AScanWidget()
@@ -26,6 +27,18 @@ void AScanWidget::paintEvent(QPaintEvent *event)
     QPoint center(32,h - 32);
     painter.fillRect(QRect(center,QPoint(w - 32, 32)),Qt::white);
     painter.drawRect(QRect(center,QPoint(w - 32, 32)));
+
+    double scaleStep = (w - 64)/200.0;
+    for(int i=0; i<201; i++) {
+        int leng = 0;
+        if(i%10 == 0) {
+            leng = 16;
+        } else {
+            leng = 8;
+        }
+        painter.drawLine(center+QPoint(i*scaleStep,0),center+QPoint(i*scaleStep,leng));
+    }
+
     std::vector<QPoint> polygon;
 
     polygon.push_back(QPoint(center.x(),center.y()));
@@ -48,12 +61,15 @@ void AScanWidget::paintEvent(QPaintEvent *event)
     painter.setPen(QPen(QColor(250,10,10), 2));
     for(int i=0; i<_tvg.size(); i++) {
         QPoint raw =_tvg.at(i);
-        QPoint tvgNext = QPoint((raw.x())*tvgStep + center.x(), center.y() - static_cast<double>(center.y() - 32)*(raw.y() / 63.0));
+        QPoint tvgNext = QPoint((raw.x())*tvgStep + center.x(), center.y() - static_cast<double>(center.y() - 32)*(raw.y() / 127.0));
         //qDebug() << (raw.x())*tvgStep + center.x();
         painter.drawLine(tvgStart,tvgNext);
         tvgStart = tvgNext;
     }
 
+    quint64 time = _fpsTimer.restart();
+    double fps = 1000.0 / time;
+    painter.drawText(QPoint(w - 128, 60),"fps: " + QString::number(fps,'f', 2));
 }
 
 void AScanWidget::onAScan(AScan scan)
@@ -74,7 +90,7 @@ uint8_t getBitFromByteArray(uint8_t * ptr, int bit) {
 }
 
 uint8_t getTVGSample(uint8_t * ptr, int sampleNum) {
-    int bit = sampleNum * 6;
+    int bit = sampleNum * 7;
     uint8_t res = 0x00;
     res |= getBitFromByteArray(ptr,bit);
     res |= getBitFromByteArray(ptr,bit+1) << 1;
@@ -82,6 +98,7 @@ uint8_t getTVGSample(uint8_t * ptr, int sampleNum) {
     res |= getBitFromByteArray(ptr,bit+3) << 3;
     res |= getBitFromByteArray(ptr,bit+4) << 4;
     res |= getBitFromByteArray(ptr,bit+5) << 5;
+    res |= getBitFromByteArray(ptr,bit+6) << 6;
     return res;
 }
 

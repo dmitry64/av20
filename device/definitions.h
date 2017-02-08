@@ -4,9 +4,13 @@
 #include <stdint.h>
 
 #define TVG_SAMPLES_SIZE 200
-#define TVG_SAMPLES_BYTES 150
+#define TVG_SAMPLES_BYTES 175
 #define ASCAN_SAMPLES_SIZE 800
 #define ASCAN_HEADER_SIZE 12
+
+#define DEVICE_MODE_HAND 0x00
+#define DEVICE_MODE_HEAD_SCANNER 0x01
+#define DEVICE_MODE_WHEEL 0x02
 
 struct Tact {
     uint8_t _CR;
@@ -37,5 +41,21 @@ struct AScan {
     AScanHeader _header;
     uint8_t _samples[800];
 };
+
+struct DeviceStatus {
+    bool error;
+    bool thsd;
+    bool ready;
+};
+
+
+enum TriggerMode{
+    PathTRG,
+    TimeTRG,
+    ExtTRG,
+    ProgTRG
+};
+
+
 
 #endif // DEFINITIONS_H

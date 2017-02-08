@@ -58,12 +58,12 @@ void Device::resetConfigRegisters()
 void Device::resetTVG()
 {
     for(int j=0; j<8; j++) {
-        uint8_t tvg[150];
-        for(int i=0; i<150; i++) {
+        uint8_t tvg[TVG_SAMPLES_BYTES];
+        for(int i=0; i<TVG_SAMPLES_BYTES; i++) {
             tvg[i] = 0x00;
         }
 
-        _spi->setRegister(0x40+j,150,tvg);
+        _spi->setRegister(0x40+j,TVG_SAMPLES_BYTES,tvg);
         if(checkConnection()) {
             qDebug() << "TVG for ch #" << j + 1 << "initialized!";
         } else {
@@ -94,22 +94,36 @@ void Device::resetChannelsTable()
         _state->setChannelsTableTact(j,tact);
     }
 }
-/*
-void setBit(uint8_t * ptr, int bit, uint8_t val) {
-    uint8_t prev = ptr[bit/8];
-    ptr[bit/8] |= (((prev >> (bit % 8)) & val) << (bit % 8));
+
+void Device::setProgTrigger(bool enabled)
+{
+    uint8_t val;
+    if(enabled) {
+        val = 0b00000001;
+    } else {
+        val = 0b00000000;
+    }
+    _spi->setRegister(0x05,1,&val);
+    _state->setTRG_CR(val);
 }
 
-void Device::setTVG(int chIndex, std::vector<uint8_t> values8bit)
+DeviceStatus Device::getDeviceStatus()
 {
-    uint8_t packedValues[TVG_SAMPLES_BYTES];
-    for(int i=0; i<values8bit.size(); i++) {
-        for(int j=0; j<6; j++) {
-            setBit(packedValues,i*6 + j, (values8bit[i] >> j) & 0b00000001);
-        }
-    }
-    _spi->setRegister(0x40 + chIndex,TVG_SAMPLES_BYTES,packedValues);
-}*/
+    DeviceStatus st;
+    uint8_t stReg;
+    _spi->getRegister(0x03,1,&stReg);
+    _state->setUSM_SR(stReg);
+    st.error = (stReg & 0b10000000) == 0;
+    st.thsd = (stReg & 0b00001000) == 0;
+    st.ready = (stReg & 0b00000001) == 0;
+    return st;
+}
+
+void Device::setTVG(int chIndex, TVG tvg)
+{
+    _spi->setRegister(0x40 + chIndex,TVG_SAMPLES_BYTES,tvg._samples);
+    _state->setTVGForChannel(chIndex,tvg);
+}
 
 AScan Device::getAscanForChannel(uint8_t activeChannel)
 {
@@ -138,9 +152,6 @@ AScan Device::getAscanForChannel(uint8_t activeChannel)
 
     return scan;
 }
-
-
-
 
 uint8_t Device::getVersion()
 {

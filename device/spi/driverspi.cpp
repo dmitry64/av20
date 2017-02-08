@@ -88,9 +88,9 @@ void DriverSPI::sendCommand(uint8_t commandByte, uint8_t length) {
 }
 
 void DriverSPI::sendData(uint8_t length,const uint8_t * bufPtr) {
-    uint8_t rx[4096];
+    uint8_t rx[length];
 
-    memset(rx,0x00,4096);
+    memset(rx,0x00,length);
 
     struct spi_ioc_transfer tr;
     tr.tx_buf = (unsigned long)bufPtr;
@@ -111,9 +111,9 @@ void DriverSPI::sendData(uint8_t length,const uint8_t * bufPtr) {
 }
 
 void DriverSPI::recvData(uint32_t length, uint8_t * bufPtr) {
-    uint8_t tx[4096];
+    uint8_t tx[length];
 
-    memset(tx,0x00,4096);
+    memset(tx,0x00,length);
 
     struct spi_ioc_transfer tr;
     tr.tx_buf = (unsigned long)tx;

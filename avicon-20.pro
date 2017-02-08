@@ -33,7 +33,10 @@ SOURCES += main.cpp\
     device/devicestate.cpp \
     ui/ascanwidget.cpp \
     ui/controls/touchspinbox.cpp \
-    ui/controlpanel.cpp
+    ui/controlpanel.cpp \
+    device/modificators/modificator.cpp \
+    device/modificators/tvgsimplemodificator.cpp \
+    device/devicecalibration.cpp
 
 HEADERS  += debuggui.h \
     core.h \
@@ -43,7 +46,10 @@ HEADERS  += debuggui.h \
     device/devicestate.h \
     ui/ascanwidget.h \
     ui/controls/touchspinbox.h \
-    ui/controlpanel.h
+    ui/controlpanel.h \
+    device/modificators/modificator.h \
+    device/modificators/tvgsimplemodificator.h \
+    device/devicecalibration.h
 
 FORMS    += debuggui.ui \
     ui/ascanwidget.ui \

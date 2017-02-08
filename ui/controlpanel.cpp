@@ -33,7 +33,6 @@ void ControlPanel::setCore(Core *ptr)
     _core = ptr;
 }
 
-
 void ControlPanel::refreshValues()
 {
 

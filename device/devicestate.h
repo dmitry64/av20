@@ -7,6 +7,8 @@
 class DeviceState
 {
     //Device * _device;
+
+
     // Config registers
     uint8_t _USM_ID;
     uint8_t _USM_SR;
@@ -48,6 +50,7 @@ public:
     uint8_t USM_ID() const;
     void setUSM_ID(const uint8_t &USM_ID);
     uint8_t USM_SR() const;
+    void setUSM_SR(const uint8_t &USM_SR);
     uint8_t USM_CR() const;
     void setUSM_CR(const uint8_t &USM_CR);
     uint8_t TRG_CR() const;
@@ -60,6 +63,7 @@ public:
     void setPWR_CR(const uint8_t &PWR_CR);
     uint8_t ODO_CR() const;
     void setODO_CR(const uint8_t &ODO_CR);
+
 
 };
 

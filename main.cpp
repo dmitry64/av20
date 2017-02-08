@@ -18,9 +18,12 @@ int main(int argc, char *argv[])
     QObject::connect(core,SIGNAL(debug(int)), &w, SLOT(debug(int)));
     QObject::connect(core,SIGNAL(drawAscan(AScan)), w.getAscanWidget(), SLOT(onAScan(AScan)));
 
-    QObject::connect(core,SIGNAL(connectionStatusChanged(bool)), &w, SLOT(onConnectionStatusChanged(bool)));
-    QObject::connect(core,SIGNAL(errorStatusChanged(bool)), &w, SLOT(onErrorStatusChanged(bool)));
 
+    QObject::connect(core,SIGNAL(connection(bool)), &w, SLOT(onConnectionStatusChanged(bool)));
+    QObject::connect(core,SIGNAL(connectionError(bool)), &w, SLOT(onErrorStatusChanged(bool)));
+    QObject::connect(core,SIGNAL(deviceError(bool)), &w, SLOT(onDeviceErrorStatusChanged(bool)));
+    QObject::connect(core,SIGNAL(deviceOverheat(bool)), &w, SLOT(onDeviceOverheatStatusChanged(bool)));
+    QObject::connect(core,SIGNAL(deviceReady(bool)), &w, SLOT(onDeviceReadyStatusChanged(bool)));
 
     core->start();
     w.show();
