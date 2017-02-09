@@ -1,7 +1,7 @@
 #include "bscanwidget.h"
 #include "ui_bscanwidget.h"
 #include <QPainter>
-
+#include <QDebug>
 
 BScanWidget::BScanWidget(QWidget *parent) :
     QWidget(parent),
@@ -34,4 +34,27 @@ void BScanWidget::paintEvent(QPaintEvent *event)
         painter.drawLine(QPoint(16,i*scaleStep),QPoint(32,i*scaleStep));
         painter.drawText(QPoint(1,i*scaleStep + 16),QString::number(i*20));
     }
+
+
+
+    for(int i=0; i<_scans.size(); i++) {
+        QLinearGradient grad;
+
+        for(int j=0; j<ASCAN_SAMPLES_SIZE; j++) {
+            int sam = _scans[i]._samples[j];
+            grad.setColorAt(static_cast<double>(j) / 800.0,QColor(sam * 10,10,10));
+        }
+        painter.setBrush(QBrush(grad));
+        QPoint offset(i*2,0);
+        painter.drawRect(QRect(QPoint(w - 32, 0) -offset,QPoint(w - 32, center.y())-offset));
+    }
+}
+
+void BScanWidget::onAScan(AScan scan)
+{
+    _scans.push_back(scan);
+    /*for(int i=0; i<ASCAN_SAMPLES_SIZE; i++) {
+        //_points[i] = (QPoint(i,scan._samples[i]));
+    }*/
+    update();
 }

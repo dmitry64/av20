@@ -10,6 +10,7 @@ DebugGUI::DebugGUI(QWidget *parent) :
     _core = 0;
     connect(this,SIGNAL(AScanSingle(AScan)),ui->ascanWidgetSingle,SLOT(onAScan(AScan)));
     connect(this,SIGNAL(AScanAB(AScan)),ui->ascanWidgetAB,SLOT(onAScan(AScan)));
+    connect(this,SIGNAL(AScanAB(AScan)),ui->bscanWidgetAB,SLOT(onAScan(AScan)));
 
     connect(this,SIGNAL(TVGReady(TVG)),ui->ascanWidgetSingle,SLOT(onTVG(TVG)));
     connect(this,SIGNAL(TVGReady(TVG)),ui->ascanWidgetAB,SLOT(onTVG(TVG)));
