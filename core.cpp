@@ -201,6 +201,6 @@ void Core::setSingleChannel(uint8_t channel)
 {
     qDebug() << "Setting channel:" <<channel;
     _currentChannel.store(channel);
-    emit ch
+    emit channelChanged(channel);
 }
 
