@@ -8,6 +8,8 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
+CONFIG += c++11
+
 TARGET = avicon-20
 TEMPLATE = app
 
@@ -39,7 +41,12 @@ SOURCES += main.cpp\
     device/devicecalibration.cpp \
     ui/statusbar.cpp \
     device/spi/fakespi.cpp \
-    ui/bscanwidget.cpp
+    ui/bscanwidget.cpp \
+    ui/channelselector.cpp \
+    ui/controls/channelbutton.cpp \
+    device/modificators/activechannelmodificator.cpp \
+    device/tact.cpp \
+    device/channel.cpp
 
 HEADERS  += debuggui.h \
     core.h \
@@ -56,11 +63,18 @@ HEADERS  += debuggui.h \
     ui/statusbar.h \
     device/spi/deviceinterface.h \
     device/spi/fakespi.h \
-    ui/bscanwidget.h
+    ui/bscanwidget.h \
+    ui/channelselector.h \
+    ui/controls/channelbutton.h \
+    device/modificators/activechannelmodificator.h \
+    device/tact.h \
+    device/channel.h
 
 FORMS    += debuggui.ui \
     ui/ascanwidget.ui \
     ui/controls/touchspinbox.ui \
     ui/controlpanel.ui \
     ui/statusbar.ui \
-    ui/bscanwidget.ui
+    ui/bscanwidget.ui \
+    ui/channelselector.ui \
+    ui/controls/channelbutton.ui

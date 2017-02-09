@@ -16,12 +16,15 @@ class ControlPanel : public QWidget
 
     Core * _core;
 
-    TouchSpinBox * _tvgCurve;
+    TouchSpinBox * _sensBaseLevel;
+    int _currentChannel;
 
 public:
     explicit ControlPanel(QWidget *parent = 0);
     ~ControlPanel();
     void setCore(Core * ptr);
+    void setMode(uint8_t deviceMode);
+    void setChannel(int channel);
     void init();
 
 private:
@@ -31,7 +34,7 @@ signals:
 
 
 public slots:
-    void tvgChanged(double value);
+    void sensChanged(double value);
 
 private:
     Ui::ControlPanel *ui;

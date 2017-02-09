@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
+    <width>1024</width>
     <height>600</height>
    </rect>
   </property>
@@ -113,6 +113,16 @@
    </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="ChannelSelector" name="channelSelector" native="true">
+       <property name="minimumSize">
+        <size>
+         <width>48</width>
+         <height>0</height>
+        </size>
+       </property>
+      </widget>
+     </item>
      <item>
       <widget class="QTabWidget" name="tabWidget">
        <property name="currentIndex">
@@ -275,6 +285,12 @@
    <class>BScanWidget</class>
    <extends>QWidget</extends>
    <header>ui/bscanwidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ChannelSelector</class>
+   <extends>QWidget</extends>
+   <header>ui/channelselector.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

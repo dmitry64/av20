@@ -24,6 +24,7 @@ void DebugGUI::setCore(Core *core)
 {
     _core = core;
     ui->controlPanel->setCore(core);
+    ui->channelSelector->setCore(core);
 }
 
 AScanWidget *DebugGUI::getAscanWidgetSingle()
@@ -42,6 +43,7 @@ void DebugGUI::init()
         DeviceCalibration * calibration = _core->getSnapshot();
 
         // TODO: apply
+        ui->ascanWidgetAB->onTVG(calibration->getChannel(0)->generateTVG());
 
         delete calibration;
     }

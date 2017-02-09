@@ -27,7 +27,7 @@ class DeviceState
     uint8_t _RESERVED_0F;
 
     // Channels table
-    Tact _tactTable[8];
+    TactRegisters _tactTable[8];
 
     // TVG
     TVG _tvg[8];
@@ -46,7 +46,8 @@ public:
 
     void setTVGForChannel(uint8_t index, TVG tvg);
     TVG getTvgForChannel(uint8_t index);
-    void setChannelsTableTact(uint8_t index, Tact tact);
+    void setChannelsTableTact(uint8_t index, TactRegisters tact);
+    void setChannelsTableRegister(uint8_t reg, uint8_t value);
 
     uint8_t USM_ID() const;
     void setUSM_ID(const uint8_t &USM_ID);

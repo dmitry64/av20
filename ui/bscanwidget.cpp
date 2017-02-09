@@ -34,8 +34,4 @@ void BScanWidget::paintEvent(QPaintEvent *event)
         painter.drawLine(QPoint(16,i*scaleStep),QPoint(32,i*scaleStep));
         painter.drawText(QPoint(1,i*scaleStep + 16),QString::number(i*20));
     }
-
-
-
-
 }

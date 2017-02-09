@@ -6,6 +6,7 @@
 #include "spi/fakespi.h"
 #include "devicestate.h"
 #include <vector>
+#include "devicecalibration.h"
 
 class Device
 {
@@ -19,10 +20,11 @@ public:
     void resetConfigRegisters();
     void resetTVG();
     void resetChannelsTable();
+    void applyCalibration(DeviceCalibration * calibration);
     void setProgTrigger(bool enabled);
     DeviceStatus getDeviceStatus();
     void setTVG(int chIndex, TVG tvg);
-    AScan getAscanForChannel(uint8_t activeChannel);
+    AScan getAscanForLine(uint8_t activeChannel);
     uint8_t getVersion();
 
     bool checkConnection();

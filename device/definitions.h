@@ -3,6 +3,9 @@
 
 #include <stdint.h>
 
+#define MAX_CHANNELS_COUNT 8
+#define MAX_TACTS_COUNT 8
+
 #define TVG_SAMPLES_SIZE 200
 #define TVG_SAMPLES_BYTES 175
 #define ASCAN_SAMPLES_SIZE 800
@@ -12,7 +15,7 @@
 #define DEVICE_MODE_HEAD_SCANNER 0x01
 #define DEVICE_MODE_WHEEL 0x02
 
-struct Tact {
+struct TactRegisters {
     uint8_t _CR;
     uint8_t _TR1;
     uint8_t _PULSER1;
@@ -48,7 +51,6 @@ struct DeviceStatus {
     bool ready;
 };
 
-
 enum TriggerMode{
     PathTRG,
     TimeTRG,
@@ -62,6 +64,26 @@ enum TVGMode {
     AutoMode
 };
 
+enum PulserFreq {
+    Freq_1_0_MHz,
+    Freq_1_25_MHz,
+    Freq_2_0_MHz,
+    Freq_2_5_MHz,
+    Freq_4_0_MHz,
+    Freq_5_0_MHz,
+    Freq_8_0_MHz,
+    Freq_10_0_MHz
+};
 
+enum PulserProg {
+    Prog_1 = 0b0000,
+    Prog_2 = 0b0001,
+    Prog_3 = 0b0010,
+    Prog_4 = 0b0011,
+    Prog_5 = 0b0100,
+    Prog_6 = 0b0101,
+    Prog_7 = 0b0110,
+    Prog_8 = 0b0111
+};
 
 #endif // DEFINITIONS_H

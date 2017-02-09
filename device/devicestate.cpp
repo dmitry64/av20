@@ -124,7 +124,7 @@ TVG DeviceState::getTvgForChannel(uint8_t index)
     return _tvg[index];
 }
 
-void DeviceState::setChannelsTableTact(uint8_t index, Tact tact)
+void DeviceState::setChannelsTableTact(uint8_t index, TactRegisters tact)
 {
     _tactTable[index]._CR = tact._CR;
     _tactTable[index]._PULSER1 = tact._PULSER1;
@@ -133,3 +133,29 @@ void DeviceState::setChannelsTableTact(uint8_t index, Tact tact)
     _tactTable[index]._TR2 = tact._TR2;
     _tactTable[index]._RESERVED = tact._RESERVED;
 }
+
+void DeviceState::setChannelsTableRegister(uint8_t reg, uint8_t value)
+{
+    switch(reg % 6) {
+        case 0x00:
+        _tactTable[(reg-0x10) / 6]._CR = value;
+        break;
+        case 0x01:
+        _tactTable[(reg-0x10) / 6]._TR1 = value;
+        break;
+        case 0x02:
+        _tactTable[(reg-0x10) / 6]._PULSER1 = value;
+        break;
+        case 0x03:
+        _tactTable[(reg-0x10) / 6]._TR2 = value;
+        break;
+        case 0x04:
+        _tactTable[(reg-0x10) / 6]._PULSER2 = value;
+        break;
+        case 0x05:
+        _tactTable[(reg-0x10) / 6]._RESERVED = value;
+        break;
+    }
+}
+
+

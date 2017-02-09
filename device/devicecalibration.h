@@ -2,24 +2,26 @@
 #define DEVICECALIBRATION_H
 
 #include <vector>
+#include "tact.h"
 #include "definitions.h"
 
 class DeviceCalibration
 {
-    TVGMode _tvgMode;
-    int _tvgCurve;
-    std::vector<uint8_t> _tvgPoints;
+
+    std::vector<Tact *> _tactTable;
+    std::vector<Channel *> _channels;
+
 public:
     DeviceCalibration();
+    void init();
     DeviceCalibration(DeviceCalibration * original);
     DeviceCalibration *getSnapshot();
     // get/set
-    int getTvgCurve() const;
-    void setTvgCurve(int tvgCurve);
-    TVGMode getTvgMode() const;
-    void setTvgMode(const TVGMode &tvgMode);
-    std::vector<uint8_t> getTvgPoints() const;
-    void setTvgPoints(const std::vector<uint8_t> &tvgPoints);
+    Channel *getChannel(int index);
+    uint8_t getMaxTacts();
+    uint8_t getTactIndexByCounter(uint8_t counter);
+    std::vector< std::pair<uint8_t, uint8_t> > getTactLines(uint8_t tactIndex);
+
 };
 
 #endif // DEVICECALIBRATION_H

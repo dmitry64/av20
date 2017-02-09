@@ -132,7 +132,11 @@ void FakeSPI::setRegister(uint8_t reg, const uint32_t length, uint8_t *src)
 
 
     default:
+        if(reg >= 0x10 && reg <=0x3f) {
+            _state.setChannelsTableRegister(reg,src[0]);
+        } else {
         qDebug() << "FakeSPI: unknown register" <<reg;
+        }
         break;
 
     }

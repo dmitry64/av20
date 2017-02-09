@@ -2,6 +2,7 @@
 #define ASCANWIDGET_H
 
 #include <QWidget>
+#include <atomic>
 #include "device/definitions.h"
 #include <QElapsedTimer>
 

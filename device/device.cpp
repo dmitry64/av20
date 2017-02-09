@@ -89,7 +89,7 @@ void Device::resetChannelsTable()
             }
         }
         qDebug() << "Channels table for ch #" << j + 1 << "initialized!";
-        Tact tact;
+        TactRegisters tact;
         tact._CR = 0;
         tact._PULSER1 = 0;
         tact._PULSER2 = 0;
@@ -97,6 +97,21 @@ void Device::resetChannelsTable()
         tact._TR1 = 0;
         tact._TR2 = 0;
         _state->setChannelsTableTact(j,tact);
+    }
+}
+
+void Device::applyCalibration(DeviceCalibration *calibration)
+{
+    for(int j=0; j<8; j++) {
+        TVG tvg = calibration->getChannel(j)->generateTVG();
+
+        _spi->setRegister(0x40+j,TVG_SAMPLES_BYTES,tvg._samples);
+        if(checkConnection()) {
+            qDebug() << "TVG for ch #" << j + 1 << " set!";
+        } else {
+            qDebug() << "TVG for ch #" << j + 1 << "not set!";
+            qFatal("Initialization failed!");
+        }
     }
 }
 
@@ -130,11 +145,11 @@ void Device::setTVG(int chIndex, TVG tvg)
     _state->setTVGForChannel(chIndex,tvg);
 }
 
-AScan Device::getAscanForChannel(uint8_t activeChannel)
+AScan Device::getAscanForLine(uint8_t line)
 {
     AScan scan;
     uint8_t buf[ASCAN_SAMPLES_SIZE + ASCAN_HEADER_SIZE];
-    _spi->getRegister((activeChannel == 1) ? 0x7C : 0x7D, ASCAN_SAMPLES_SIZE + ASCAN_HEADER_SIZE, buf);
+    _spi->getRegister((line == 0) ? 0x7C : 0x7D, ASCAN_SAMPLES_SIZE + ASCAN_HEADER_SIZE, buf);
 
     scan._header._frameMarker = buf[0];
     scan._header._descriptorSizeInBytes = buf[1];

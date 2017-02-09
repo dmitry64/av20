@@ -4,3 +4,8 @@ Modificator::Modificator()
 {
 
 }
+
+Modificator::~Modificator()
+{
+
+}

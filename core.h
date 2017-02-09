@@ -19,12 +19,19 @@ private:
     std::atomic_bool _active;
     std::atomic_uchar _deviceMode;
     std::atomic_bool _snapshotRequested;
+    std::atomic_uchar _currentChannel;
+
+    uint8_t _currentTactCounter;
+    uint8_t _currentTact;
+
     Device * _device;
     DeviceState * _state;
     DeviceCalibration * _currentCalibration;
     DeviceCalibration * _snapshot;
     QMutex * _changesMutex;
     std::queue<Modificator *> _pendingChanges;
+
+
 public:
     Core();
     ~Core();
@@ -48,12 +55,16 @@ private:
 
 public:
     void setDeviceMode(uint8_t mode);
-    void setTvgCurve(int k);
+    void setChannelBaseSens(int channel, int value);
     void setTvgCurve(std::vector<uint8_t> points);
+    void setSingleChannel(uint8_t channel);
+
+    Device *getDevice() const;
 
 signals:
     void drawAscan(AScan scan);
     void drawTVG(TVG tvg);
+    void channelChanged(uint8_t channel);
     void debug(int);
     void connection(bool);
     void connectionError(bool);

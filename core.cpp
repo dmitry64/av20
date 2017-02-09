@@ -11,10 +11,18 @@ DeviceCalibration * Core::getSnapshot()
     return _snapshot;
 }
 
-Core::Core() : _active(true), _state(new DeviceState()), _deviceMode(DEVICE_MODE_HAND), _changesMutex(new QMutex())
+Device *Core::getDevice() const
+{
+    return _device;
+}
+
+Core::Core() : _active(true), _state(new DeviceState()), _deviceMode(DEVICE_MODE_HAND), _currentChannel(0), _changesMutex(new QMutex())
 {
     _device = (new Device(_state));
     _currentCalibration = new DeviceCalibration();
+    _currentCalibration->init();
+    _currentTactCounter = 0;
+    _currentTact = _currentCalibration->getTactIndexByCounter(_currentTactCounter);
     _snapshotRequested.store(false);
     _snapshot = 0;
 }
@@ -53,7 +61,7 @@ DeviceCalibration *Core::getCalibration()
 void Core::init()
 {
     _device->init();
-    setTvgCurve(0);
+    _device->applyCalibration(_currentCalibration);
 }
 
 void Core::check()
@@ -64,7 +72,16 @@ void Core::check()
 
 void Core::trigger()
 {
-    _device->setProgTrigger(true);
+    if(_currentCalibration->getMaxTacts() > 0) {
+
+        _device->setProgTrigger(true);
+        _currentTactCounter++;
+        if(_currentTactCounter>=_currentCalibration->getMaxTacts()) {
+            _currentTactCounter = 0;
+        }
+
+        _currentTact = _currentCalibration->getTactIndexByCounter(_currentTactCounter);
+    }
 }
 
 void Core::status()
@@ -92,8 +109,18 @@ void Core::status()
 
 void Core::ascan()
 {
-    emit drawAscan(_device->getAscanForChannel(0));
-
+    std::vector< std::pair<uint8_t, uint8_t> > lines = _currentCalibration->getTactLines(_currentTact);
+    if(!lines.empty()) {
+        //qDebug() << "cycle" << _currentTact << _currentTactCounter;
+        for(int i=0; i<lines.size(); i++) {
+            //qDebug() << "line " <<lines[i].first << lines[i].second;
+            if(_currentChannel.load() == lines[i].second) {
+                emit drawAscan(_device->getAscanForLine(lines[i].first));
+            }
+        }
+    }
+    //emit drawAscan(_device->getAscanForLine(0));
+    //emit drawAscan(_device->getAscanForLine(1));
     //_device->getAscanForChannel(1);
 }
 
@@ -110,8 +137,7 @@ void Core::sync()
     {
         while(!_pendingChanges.empty()) {
             Modificator * mod = _pendingChanges.front();
-            mod->apply(_device);
-            mod->notify(this);
+            mod->apply(this);
             delete mod;
             _pendingChanges.pop();
         }
@@ -157,10 +183,9 @@ void Core::setDeviceMode(uint8_t mode)
     _deviceMode.store(mode);
 }
 
-
-void Core::setTvgCurve(int k)
+void Core::setChannelBaseSens(int channel, int value)
 {
-    TVGSimpleModificator * mod = new TVGSimpleModificator(0, k);
+    TVGSimpleModificator * mod = new TVGSimpleModificator(channel, value);
 
     _changesMutex->lock();
     _pendingChanges.push(mod);
@@ -170,5 +195,12 @@ void Core::setTvgCurve(int k)
 void Core::setTvgCurve(std::vector<uint8_t> points)
 {
 
+}
+
+void Core::setSingleChannel(uint8_t channel)
+{
+    qDebug() << "Setting channel:" <<channel;
+    _currentChannel.store(channel);
+    emit ch
 }
 
