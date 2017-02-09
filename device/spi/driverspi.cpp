@@ -17,12 +17,12 @@ bool DriverSPI::getErrorFlag() const
     return _errorFlag;
 }
 
-DriverSPI::DriverSPI(QString device) :
+DriverSPI::DriverSPI(QString device) : DeviceInterface(),
     _device(device),
     _mode(0x00),
     _bits(8),
     _speed(50000),
-    _csdelay(1000),
+    _csdelay(100),
     _cschange(0),
     _errorFlag(false)
 {

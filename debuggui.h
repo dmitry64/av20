@@ -21,11 +21,13 @@ public:
     ~DebugGUI();
 
     void setCore(Core * core);
-    AScanWidget * getAscanWidget();
+    AScanWidget * getAscanWidgetSingle();
     ControlPanel * getControlPanel();
 
 private:
     Ui::DebugGUI *ui;
+    void init();
+    void showEvent( QShowEvent* event );
 
 public slots:
     void debug(int value);
@@ -36,10 +38,14 @@ public slots:
     void onDeviceReadyStatusChanged(bool status);
 
     void onAScan(AScan scan);
+    void onTVG(TVG tvg);
 signals:
-    void ascan(AScan scan);
+    void AScanSingle(AScan scan);
+    void AScanAB(AScan scan);
+    void TVGReady(TVG tvg);
 private slots:
     void on_exitButton_released();
+    void on_pushButton_2_released();
 };
 
 #endif // DEBUGGUI_H

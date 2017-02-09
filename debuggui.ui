@@ -6,14 +6,37 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>641</width>
-    <height>300</height>
+    <width>800</width>
+    <height>600</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>800</width>
+    <height>600</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>DebugGUI</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="StatusBar" name="statusBar" native="true">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="Line" name="line_4">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+   </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
@@ -91,13 +114,64 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
-      <widget class="AScanWidget" name="ascanWidget" native="true">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
+      <widget class="QTabWidget" name="tabWidget">
+       <property name="currentIndex">
+        <number>0</number>
        </property>
+       <widget class="QWidget" name="tab">
+        <attribute name="title">
+         <string>A+B Scan</string>
+        </attribute>
+        <layout class="QVBoxLayout" name="verticalLayout_2">
+         <item>
+          <widget class="AScanWidget" name="ascanWidgetAB" native="true">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="Line" name="line_5">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="BScanWidget" name="bscanWidgetAB" native="true"/>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="tab_2">
+        <attribute name="title">
+         <string>A Scan</string>
+        </attribute>
+        <layout class="QVBoxLayout" name="verticalLayout_3">
+         <item>
+          <widget class="AScanWidget" name="ascanWidgetSingle" native="true">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="tab_3">
+        <attribute name="title">
+         <string>B Scan</string>
+        </attribute>
+        <layout class="QVBoxLayout" name="verticalLayout_4">
+         <item>
+          <widget class="BScanWidget" name="bscanWidgetSingle" native="true"/>
+         </item>
+        </layout>
+       </widget>
       </widget>
      </item>
      <item>
@@ -189,6 +263,18 @@
    <class>ControlPanel</class>
    <extends>QWidget</extends>
    <header>ui/controlpanel.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>StatusBar</class>
+   <extends>QWidget</extends>
+   <header>ui/statusbar.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>BScanWidget</class>
+   <extends>QWidget</extends>
+   <header>ui/bscanwidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

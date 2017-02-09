@@ -36,3 +36,13 @@ void TouchSpinBox::on_rightButton_pressed()
     ui->valueLabel->setText(QString::number(_value));
     emit valueChanged(_value);
 }
+
+void TouchSpinBox::on_leftButton_released()
+{
+
+}
+
+void TouchSpinBox::on_rightButton_released()
+{
+
+}

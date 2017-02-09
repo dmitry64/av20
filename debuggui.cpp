@@ -8,7 +8,11 @@ DebugGUI::DebugGUI(QWidget *parent) :
 {
     ui->setupUi(this);
     _core = 0;
-    connect(this,SIGNAL(ascan(AScan)),ui->ascanWidget,SLOT(onAScan(AScan)));
+    connect(this,SIGNAL(AScanSingle(AScan)),ui->ascanWidgetSingle,SLOT(onAScan(AScan)));
+    connect(this,SIGNAL(AScanAB(AScan)),ui->ascanWidgetAB,SLOT(onAScan(AScan)));
+
+    connect(this,SIGNAL(TVGReady(TVG)),ui->ascanWidgetSingle,SLOT(onTVG(TVG)));
+    connect(this,SIGNAL(TVGReady(TVG)),ui->ascanWidgetAB,SLOT(onTVG(TVG)));
 }
 
 DebugGUI::~DebugGUI()
@@ -22,14 +26,30 @@ void DebugGUI::setCore(Core *core)
     ui->controlPanel->setCore(core);
 }
 
-AScanWidget *DebugGUI::getAscanWidget()
+AScanWidget *DebugGUI::getAscanWidgetSingle()
 {
-    return ui->ascanWidget;
+    return ui->ascanWidgetSingle;
 }
 
 ControlPanel *DebugGUI::getControlPanel()
 {
     return ui->controlPanel;
+}
+
+void DebugGUI::init()
+{
+    if(_core!=0) {
+        DeviceCalibration * calibration = _core->getSnapshot();
+
+        // TODO: apply
+
+        delete calibration;
+    }
+}
+
+void DebugGUI::showEvent(QShowEvent *event) {
+    QWidget::showEvent( event );
+    init();
 }
 
 void DebugGUI::debug(int value)
@@ -64,10 +84,28 @@ void DebugGUI::onDeviceReadyStatusChanged(bool status)
 
 void DebugGUI::onAScan(AScan scan)
 {
-    emit ascan(scan);
+    if(ui->tabWidget->currentIndex() == 0) {
+        emit AScanAB(scan);
+    } else {
+        emit AScanSingle(scan);
+    }
+}
+
+void DebugGUI::onTVG(TVG tvg)
+{
+    emit TVGReady(tvg);
 }
 
 void DebugGUI::on_exitButton_released()
 {
     QApplication::exit(0);
+}
+
+void DebugGUI::on_pushButton_2_released()
+{
+    if(ui->controlPanel->isHidden()) {
+        ui->controlPanel->show();
+    } else {
+        ui->controlPanel->hide();
+    }
 }

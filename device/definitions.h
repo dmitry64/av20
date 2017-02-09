@@ -56,6 +56,12 @@ enum TriggerMode{
     ProgTRG
 };
 
+enum TVGMode {
+    CurveMode,
+    PointsMode,
+    AutoMode
+};
+
 
 
 #endif // DEFINITIONS_H

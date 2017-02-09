@@ -2,15 +2,21 @@
 #include <QDebug>
 #include "device/modificators/tvgsimplemodificator.h"
 
-DeviceState *Core::state() const
+DeviceCalibration * Core::getSnapshot()
 {
-    return _state;
+    _snapshotRequested.store(true);
+    while(_snapshotRequested.load()) {
+        usleep(1);
+    }
+    return _snapshot;
 }
 
 Core::Core() : _active(true), _state(new DeviceState()), _deviceMode(DEVICE_MODE_HAND), _changesMutex(new QMutex())
 {
     _device = (new Device(_state));
-
+    _currentCalibration = new DeviceCalibration();
+    _snapshotRequested.store(false);
+    _snapshot = 0;
 }
 
 Core::~Core()
@@ -27,12 +33,21 @@ void Core::run()
         case DEVICE_MODE_HAND:
             handWork();
             break;
+        case DEVICE_MODE_HEAD_SCANNER:
+            break;
+        case DEVICE_MODE_WHEEL:
+            break;
         default:
             qFatal("Unknown mode!");
             break;
         }
     }
     finish();
+}
+
+DeviceCalibration *Core::getCalibration()
+{
+    return _currentCalibration;
 }
 
 void Core::init()
@@ -96,12 +111,21 @@ void Core::sync()
         while(!_pendingChanges.empty()) {
             Modificator * mod = _pendingChanges.front();
             mod->apply(_device);
+            mod->notify(this);
             delete mod;
             _pendingChanges.pop();
         }
         _changesMutex->unlock();
     }
     // apply from ui
+}
+
+void Core::snapshot()
+{
+    if(_snapshotRequested.load()) {
+        _snapshot = _currentCalibration->getSnapshot();
+        _snapshotRequested.store(false);
+    }
 }
 
 void Core::finish()
@@ -112,14 +136,20 @@ void Core::finish()
 void Core::handWork()
 {
     static int counter = 0;
+    snapshot();
     check();
     trigger();
     ascan();
     process();
     sync();
-    QApplication::processEvents();
+    //QApplication::processEvents();
     counter++;
     emit debug(counter);
+}
+
+void Core::notifyTVG(TVG & tvg)
+{
+    emit drawTVG(tvg);
 }
 
 void Core::setDeviceMode(uint8_t mode)
@@ -127,38 +157,18 @@ void Core::setDeviceMode(uint8_t mode)
     _deviceMode.store(mode);
 }
 
-void setBit(uint8_t * ptr, int bit, uint8_t val) {
-    uint8_t prev = ptr[bit/8];
-    ptr[bit/8] |= (((prev >> (bit % 8)) | val) << (bit % 8));
-}
 
 void Core::setTvgCurve(int k)
 {
-    std::vector<uint8_t> samples;
-    for(int i=0; i<TVG_SAMPLES_SIZE; i++) {
-        uint8_t sample = std::min(127, i + k);
-        samples.push_back(sample);
-    }
-
-    uint8_t packedValues[TVG_SAMPLES_BYTES];
-    memset(packedValues,0,TVG_SAMPLES_BYTES);
-    for(int i=0; i<samples.size(); i++) {
-        for(int j=0; j<7; j++) {
-            setBit(packedValues,i*7 + j, (samples[i] >> j) & 0b00000001);
-        }
-    }
-
-    TVG tvg;
-    for(int i=0; i<TVG_SAMPLES_BYTES; i++) {
-        tvg._samples[i] = packedValues[i];
-    }
-
-    emit drawTVG(tvg);
-
-    TVGSimpleModificator * mod = new TVGSimpleModificator(0, tvg);
+    TVGSimpleModificator * mod = new TVGSimpleModificator(0, k);
 
     _changesMutex->lock();
     _pendingChanges.push(mod);
     _changesMutex->unlock();
+}
+
+void Core::setTvgCurve(std::vector<uint8_t> points)
+{
+
 }
 

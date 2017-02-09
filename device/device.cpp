@@ -1,9 +1,14 @@
 #include "device.h"
 #include <QDebug>
+#define FAKESPI
 
-Device::Device(DeviceState *state) : _spi(new DriverSPI("/dev/spidev0.0")), _state(state)
+Device::Device(DeviceState *state) :  _state(state)
 {
-
+#ifdef FAKESPI
+    _spi = new FakeSPI();
+#else
+    _spi = new DriverSPI("/dev/spidev0.0");
+#endif
 }
 
 void Device::init()

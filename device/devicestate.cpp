@@ -114,9 +114,14 @@ uint8_t * DeviceState::getAscanForChannel(uint8_t activeChannel)
 */
 void DeviceState::setTVGForChannel(uint8_t index, TVG tvg)
 {
-    for(int y=0; y<150; y++) {
+    for(int y=0; y<TVG_SAMPLES_BYTES; y++) {
         _tvg[index]._samples[y] = tvg._samples[y];
     }
+}
+
+TVG DeviceState::getTvgForChannel(uint8_t index)
+{
+    return _tvg[index];
 }
 
 void DeviceState::setChannelsTableTact(uint8_t index, Tact tact)

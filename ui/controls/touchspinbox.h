@@ -26,6 +26,8 @@ signals:
 private slots:
     void on_leftButton_pressed();
     void on_rightButton_pressed();
+    void on_leftButton_released();
+    void on_rightButton_released();
 };
 
 #endif // TOUCHSPINBOX_H

@@ -16,6 +16,7 @@ class AScanWidget : public QWidget
     std::atomic_bool _ready;
     std::vector<QPoint> _points;
     std::vector<QPoint> _tvg;
+    std::vector<QPoint> _polygon;
     QElapsedTimer _fpsTimer;
 public:
     explicit AScanWidget(QWidget *parent = 0);

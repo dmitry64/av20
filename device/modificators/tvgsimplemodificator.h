@@ -5,11 +5,13 @@
 
 class TVGSimpleModificator : public Modificator
 {
-    TVG _value;
+    int _value;
     int _channel;
+    TVG _tvg;
 public:
-    TVGSimpleModificator(int channel, TVG &value);
+    TVGSimpleModificator(int channel, int value);
     void apply(Device *device);
+    void notify(Core *core);
 };
 
 #endif // TVGSIMPLEMODIFICATOR_H

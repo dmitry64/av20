@@ -16,13 +16,16 @@ class ControlPanel : public QWidget
 
     Core * _core;
 
-    TouchSpinBox * tvgCurve;
+    TouchSpinBox * _tvgCurve;
 
 public:
     explicit ControlPanel(QWidget *parent = 0);
     ~ControlPanel();
     void setCore(Core * ptr);
-    void refreshValues();
+    void init();
+
+private:
+    void showEvent(QShowEvent *event);
 
 signals:
 

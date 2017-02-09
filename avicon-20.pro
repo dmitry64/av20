@@ -36,7 +36,10 @@ SOURCES += main.cpp\
     ui/controlpanel.cpp \
     device/modificators/modificator.cpp \
     device/modificators/tvgsimplemodificator.cpp \
-    device/devicecalibration.cpp
+    device/devicecalibration.cpp \
+    ui/statusbar.cpp \
+    device/spi/fakespi.cpp \
+    ui/bscanwidget.cpp
 
 HEADERS  += debuggui.h \
     core.h \
@@ -49,9 +52,15 @@ HEADERS  += debuggui.h \
     ui/controlpanel.h \
     device/modificators/modificator.h \
     device/modificators/tvgsimplemodificator.h \
-    device/devicecalibration.h
+    device/devicecalibration.h \
+    ui/statusbar.h \
+    device/spi/deviceinterface.h \
+    device/spi/fakespi.h \
+    ui/bscanwidget.h
 
 FORMS    += debuggui.ui \
     ui/ascanwidget.ui \
     ui/controls/touchspinbox.ui \
-    ui/controlpanel.ui
+    ui/controlpanel.ui \
+    ui/statusbar.ui \
+    ui/bscanwidget.ui

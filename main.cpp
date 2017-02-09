@@ -13,11 +13,10 @@ int main(int argc, char *argv[])
     DebugGUI w;
 
     w.setCore(core);
-    QObject::connect(core,SIGNAL(drawTVG(TVG)), w.getAscanWidget(),SLOT(onTVG(TVG)));
 
-    QObject::connect(core,SIGNAL(debug(int)), &w, SLOT(debug(int)));
-    QObject::connect(core,SIGNAL(drawAscan(AScan)), w.getAscanWidget(), SLOT(onAScan(AScan)));
-
+    //QObject::connect(core,SIGNAL(debug(int)), &w, SLOT(debug(int)));
+    QObject::connect(core,SIGNAL(drawAscan(AScan)), &w, SLOT(onAScan(AScan)));
+    QObject::connect(core,SIGNAL(drawTVG(TVG)), &w,SLOT(onTVG(TVG)));
 
     QObject::connect(core,SIGNAL(connection(bool)), &w, SLOT(onConnectionStatusChanged(bool)));
     QObject::connect(core,SIGNAL(connectionError(bool)), &w, SLOT(onErrorStatusChanged(bool)));

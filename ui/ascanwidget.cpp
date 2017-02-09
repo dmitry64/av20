@@ -9,6 +9,8 @@ AScanWidget::AScanWidget(QWidget *parent) :
 {
     ui->setupUi(this);
     _fpsTimer.restart();
+    _polygon.resize(ASCAN_SAMPLES_SIZE+2);
+    _points.resize(ASCAN_SAMPLES_SIZE);
 }
 
 AScanWidget::~AScanWidget()
@@ -25,43 +27,47 @@ void AScanWidget::paintEvent(QPaintEvent *event)
     int h = height();
     double step = (w - 64)/800.0;
     QPoint center(32,h - 32);
-    painter.fillRect(QRect(center,QPoint(w - 32, 32)),Qt::white);
-    painter.drawRect(QRect(center,QPoint(w - 32, 32)));
+    painter.setPen(Qt::black);
+    painter.fillRect(QRect(center,QPoint(w - 32, 0)),Qt::white);
+    painter.drawRect(QRect(center,QPoint(w - 32, 0)));
 
+    painter.fillRect(QRect(QPoint(0,center.y()),QPoint(w, w - 24)),Qt::white);
     double scaleStep = (w - 64)/200.0;
     for(int i=0; i<201; i++) {
         int leng = 0;
         if(i%10 == 0) {
             leng = 16;
+            painter.drawText(center+QPoint(i*scaleStep+2,24),QString::number(i));
         } else {
             leng = 8;
         }
         painter.drawLine(center+QPoint(i*scaleStep,0),center+QPoint(i*scaleStep,leng));
+
     }
 
-    std::vector<QPoint> polygon;
 
-    polygon.push_back(QPoint(center.x(),center.y()));
+
+    _polygon[0] = (QPoint(center.x(),center.y()));
     QPoint p2(0,center.y());
     for(int i=0; i<_points.size(); i++) {
         QPoint raw =_points.at(i);
-        p2 = QPoint((raw.x())*step + center.x(), center.y() - static_cast<double>(center.y() - 32)*(raw.y() / 255.0));
-        polygon.push_back(p2);
+        p2 = QPoint((raw.x())*step + center.x(), center.y() - static_cast<double>(center.y())*(raw.y() / 255.0));
+        _polygon[i+1] = (p2);
     }
-    polygon.push_back(QPoint(w - 32, p2.y()));
-    polygon.push_back(QPoint(w - 32,center.y()));
+    _polygon[ASCAN_SAMPLES_SIZE] = (QPoint(w - 32, p2.y()));
+    _polygon[ASCAN_SAMPLES_SIZE+1] = (QPoint(w - 32,center.y()));
     painter.setPen(QPen(QColor(10,10,70), 2));
 
     painter.setBrush(QBrush(QColor(80,80,200)));
 
-    painter.drawPolygon(polygon.data(),polygon.size());
+    painter.drawPolygon(_polygon.data(),_polygon.size());
 
     QPoint tvgStart = center;
     double tvgStep = (w - 64)/200.0;
     painter.setPen(QPen(QColor(250,10,10), 2));
     for(int i=0; i<_tvg.size(); i++) {
         QPoint raw =_tvg.at(i);
-        QPoint tvgNext = QPoint((raw.x())*tvgStep + center.x(), center.y() - static_cast<double>(center.y() - 32)*(raw.y() / 127.0));
+        QPoint tvgNext = QPoint((raw.x())*tvgStep + center.x(), center.y() - static_cast<double>(center.y() )*(raw.y() / 127.0));
         //qDebug() << (raw.x())*tvgStep + center.x();
         painter.drawLine(tvgStart,tvgNext);
         tvgStart = tvgNext;
@@ -69,16 +75,14 @@ void AScanWidget::paintEvent(QPaintEvent *event)
 
     quint64 time = _fpsTimer.restart();
     double fps = 1000.0 / time;
-    painter.drawText(QPoint(w - 128, 60),"fps: " + QString::number(fps,'f', 2));
+    painter.drawText(QPoint(w - 140, 30),"fps: " + QString::number(fps,'f', 2));
 }
 
 void AScanWidget::onAScan(AScan scan)
 {
-    _points.clear();
-    _points.reserve(ASCAN_SAMPLES_SIZE);
 
     for(int i=0; i<ASCAN_SAMPLES_SIZE; i++) {
-        _points.push_back(QPoint(i,scan._samples[i]));
+        _points[i] = (QPoint(i,scan._samples[i]));
     }
     update();
 }
@@ -109,7 +113,7 @@ void AScanWidget::onTVG(TVG tvg)
 
     for(int i=0; i<TVG_SAMPLES_SIZE; i++) {
         uint8_t sample = getTVGSample(tvg._samples,i);
-        _tvg.push_back(QPoint(i,sample));
+        _tvg.push_back(QPoint(i,sample /2));
     }
 
     update();
