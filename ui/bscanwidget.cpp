@@ -54,7 +54,8 @@ void BScanWidget::paintEvent(QPaintEvent *event)
     painter.fillRect(QRect(QPoint(w - 32,0),QPoint(w,center.y())),Qt::white);
 
     painter.fillRect(QRect(QPoint(center.x(),0),QPoint(w - 32,center.y())),Qt::white);
-    //painter.drawRect(QRect(QPoint(center.x(),0),QPoint(w - 32 - 1,center.y()-1)));
+    painter.drawRect(QRect(QPoint(center.x(),0),QPoint(w - 32 - 1,center.y()-1)));
+    painter.drawRect(QRect(QPoint(0,0),QPoint(w - 2,center.y()-1)));
 
     /*
     double scaleStep = (h - 4)/10.0;

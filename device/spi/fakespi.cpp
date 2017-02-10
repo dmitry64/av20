@@ -190,7 +190,7 @@ void FakeSPI::getRegister(uint8_t reg, uint32_t length, uint8_t *dest)
         break;
     }
 
-    usleep(1000);
+    usleep(500);
 }
 
 void FakeSPI::setRegister(uint8_t reg, const uint32_t length, uint8_t *src)
