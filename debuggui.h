@@ -22,8 +22,6 @@ public:
 
     void setCore(Core * core);
     AScanWidget * getAscanWidgetSingle();
-    ControlPanel * getControlPanel();
-
 private:
     Ui::DebugGUI *ui;
     void init();

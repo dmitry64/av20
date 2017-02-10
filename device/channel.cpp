@@ -6,6 +6,16 @@ uint8_t Channel::index() const
     return _index;
 }
 
+int Channel::prismTime() const
+{
+    return _prismTime;
+}
+
+void Channel::setPrismTime(int prismTime)
+{
+    _prismTime = prismTime;
+}
+
 Channel::Channel(uint8_t index) :_index(index), _baseSensLevel(0), _tvgMode(TVGMode::CurveMode)
 {
 

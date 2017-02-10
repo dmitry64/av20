@@ -28,18 +28,13 @@ DebugGUI::~DebugGUI()
 void DebugGUI::setCore(Core *core)
 {
     _core = core;
-    ui->controlPanel->setCore(core);
+
     ui->aScanPage->setCore(core);
 }
 
 AScanWidget *DebugGUI::getAscanWidgetSingle()
 {
     return ui->ascanWidgetSingle;
-}
-
-ControlPanel *DebugGUI::getControlPanel()
-{
-    return ui->controlPanel;
 }
 
 void DebugGUI::init()
@@ -50,7 +45,7 @@ void DebugGUI::init()
 
         ui->aScanPage->onTVG(calibration->getChannel(0)->generateTVG());
 
-        ui->controlPanel->init(calibration);
+
         ui->aScanPage->init(0,calibration);
 
         std::vector<Channel*> channels = calibration->getChannels();
@@ -132,11 +127,7 @@ void DebugGUI::on_exitButton_released()
 
 void DebugGUI::on_pushButton_2_released()
 {
-    if(ui->controlPanel->isHidden()) {
-        ui->controlPanel->show();
-    } else {
-        ui->controlPanel->hide();
-    }
+
 }
 
 void DebugGUI::on_tabWidget_currentChanged(int index)
