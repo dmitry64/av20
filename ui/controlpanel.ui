@@ -33,7 +33,7 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
-    <number>1</number>
+    <number>2</number>
    </property>
    <property name="leftMargin">
     <number>0</number>
@@ -59,7 +59,7 @@
       <number>1</number>
      </property>
      <property name="verticalScrollBarPolicy">
-      <enum>Qt::ScrollBarAlwaysOn</enum>
+      <enum>Qt::ScrollBarAsNeeded</enum>
      </property>
      <property name="sizeAdjustPolicy">
       <enum>QAbstractScrollArea::AdjustToContents</enum>
@@ -72,7 +72,7 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>384</width>
+        <width>398</width>
         <height>298</height>
        </rect>
       </property>
@@ -101,6 +101,18 @@
        <item>
         <layout class="QVBoxLayout" name="scrollLayout">
          <property name="spacing">
+          <number>2</number>
+         </property>
+         <property name="leftMargin">
+          <number>2</number>
+         </property>
+         <property name="topMargin">
+          <number>2</number>
+         </property>
+         <property name="rightMargin">
+          <number>2</number>
+         </property>
+         <property name="bottomMargin">
           <number>2</number>
          </property>
         </layout>

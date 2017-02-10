@@ -112,6 +112,7 @@ void Core::status()
 
 void Core::aScanAll()
 {
+    //qDebug() << "Scan tact:" << _currentTact;
     std::vector< std::pair<uint8_t, uint8_t> > lines = _currentCalibration->getTactLines(_currentTact);
     if(!lines.empty()) {
         for(int i=0; i<lines.size(); i++) {

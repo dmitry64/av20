@@ -48,7 +48,8 @@ SOURCES += main.cpp\
     device/tact.cpp \
     device/channel.cpp \
     ui/bscanpage.cpp \
-    ui/ascanpage.cpp
+    ui/ascanpage.cpp \
+    ui/menupanel.cpp
 
 HEADERS  += debuggui.h \
     core.h \
@@ -72,7 +73,8 @@ HEADERS  += debuggui.h \
     device/tact.h \
     device/channel.h \
     ui/bscanpage.h \
-    ui/ascanpage.h
+    ui/ascanpage.h \
+    ui/menupanel.h
 
 FORMS    += debuggui.ui \
     ui/ascanwidget.ui \
@@ -83,4 +85,8 @@ FORMS    += debuggui.ui \
     ui/channelselector.ui \
     ui/controls/channelbutton.ui \
     ui/bscanpage.ui \
-    ui/ascanpage.ui
+    ui/ascanpage.ui \
+    ui/menupanel.ui
+
+RESOURCES += \
+    resources.qrc

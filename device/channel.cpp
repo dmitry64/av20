@@ -1,5 +1,6 @@
 #include "channel.h"
 #include <string.h>
+#include <QDebug>
 
 uint8_t Channel::index() const
 {
@@ -59,8 +60,9 @@ void setBit(uint8_t * ptr, int bit, uint8_t val) {
 TVG Channel::generateTVG()
 {
     std::vector<uint8_t> samples;
+    qDebug() << "Base level:" << _baseSensLevel;
     for(int i=0; i<TVG_SAMPLES_SIZE; i++) {
-        uint8_t sample = std::min(std::min(127,_baseSensLevel), i);
+        uint8_t sample = std::min(127, std::min(64 , i*3) + _baseSensLevel);
         samples.push_back(sample);
     }
 

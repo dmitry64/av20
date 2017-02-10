@@ -102,7 +102,7 @@ void Device::resetChannelsTable()
 
 void Device::applyCalibration(DeviceCalibration *calibration)
 {
-    for(int j=0; j<8; j++) {
+    for(int j=0; j<calibration->getChannelsCount(); j++) {
         TVG tvg = calibration->getChannel(j)->generateTVG();
         _spi->setRegister(0x40+j,TVG_SAMPLES_BYTES,tvg._samples);
         if(checkConnection()) {
@@ -112,7 +112,7 @@ void Device::applyCalibration(DeviceCalibration *calibration)
             qFatal("Initialization failed!");
         }
     }
-    for(int j=0; j<8; j++) {
+    for(int j=0; j<MAX_TACTS_COUNT; j++) {
         TactRegisters tr = calibration->getTactRegistersByIndex(j);
 
         if(_spi->setAndTestRegister(0x10+j*6,1,&tr._CR)) {

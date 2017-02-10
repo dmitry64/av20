@@ -28,6 +28,7 @@ void AScanPage::init(uint8_t channel, DeviceCalibration *snapshot)
     ui->ascanWidget->setChannelsInfo(channels);
     ui->controlPanel->setChannel(channel);
     ui->controlPanel->init(snapshot);
+    ui->channelSelector->init(snapshot);
 }
 
 void AScanPage::setCore(Core *core)

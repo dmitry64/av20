@@ -4,6 +4,7 @@
 #include <QWidget>
 #include "core.h"
 #include "ui/controls/channelbutton.h"
+#include "device/devicecalibration.h"
 
 namespace Ui {
 class ChannelSelector;
@@ -18,6 +19,7 @@ class ChannelSelector : public QWidget
 public:
     explicit ChannelSelector(QWidget *parent = 0);
     ~ChannelSelector();
+    void init(DeviceCalibration *snapshot);
     void setCore(Core * core);
 
 public slots:

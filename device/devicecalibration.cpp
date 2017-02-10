@@ -29,7 +29,7 @@ DeviceCalibration::~DeviceCalibration()
 
 void DeviceCalibration::init()
 {
-    for(int i=0;i<MAX_CHANNELS_COUNT; i++) {
+    for(int i=0;i<8; i++) {
         Channel * ch = new Channel(i);
         ch->setBaseSensLevel(72 + i);
         ch->setTvgMode(TVGMode::CurveMode);
@@ -39,16 +39,18 @@ void DeviceCalibration::init()
         Tact * tact = new Tact();
         tact->setRx1(i);
         tact->setTx1(i);
+        //if(i<8) {
         tact->setRx1Enabled(true);
         tact->setTx1Enabled(true);
         tact->setTactEnabled(true);
+        //}
         _tactTable.push_back(tact);
     }
 }
 
 DeviceCalibration::DeviceCalibration(DeviceCalibration *original)
 {
-    for(int i=0;i<MAX_CHANNELS_COUNT;i++) {
+    for(int i=0;i<original->getChannelsCount();i++) {
         Channel * orig = original->getChannel(i);
         Channel * ch = new Channel(*orig);
         _channels.push_back(ch);
@@ -74,6 +76,11 @@ uint8_t DeviceCalibration::getMaxTacts()
         }
     }
     return num;
+}
+
+uint8_t DeviceCalibration::getChannelsCount()
+{
+    return _channels.size();
 }
 
 uint8_t DeviceCalibration::getTactIndexByCounter(uint8_t counter)

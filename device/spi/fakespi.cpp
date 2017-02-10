@@ -38,37 +38,24 @@ uint8_t FakeSPI::getNextTact()
 
 void FakeSPI::updateCounters()
 {
-    if(_directionL1) {
-        _ascanL1Counter--;
-        if(_ascanL1Counter == -300)
-            _directionL1 = false;
-    } else {
-        _ascanL1Counter++;
-        if(_ascanL1Counter == 300)
-            _directionL1 = true;
+    for(int i=0; i<8; i++) {
+        int cur = _counters[i]->load();
+        cur++;
+        _counters[i]->store(cur);
     }
-    _ascanL1Counter2++;
-
-    if(_directionL2) {
-        _ascanL2Counter--;
-        if(_ascanL2Counter == -300)
-            _directionL2 = false;
-    } else {
-        _ascanL2Counter++;
-        if(_ascanL2Counter == 300)
-            _directionL2 = true;
-    }
-    _ascanL2Counter2++;
 }
 
 void FakeSPI::setAScanForLine1(uint8_t *dest)
 {
-    TactRegisters tact = _state.getTactByIndex(_currentTact+1);
+    TactRegisters tact = _state.getTactByIndex(_currentTact);
     uint8_t chan = ((tact._TR1 & 0b01110000) >> 4);
+    int ascanL1Counter = _counters[chan]->load();
+    int ascanL1Counter2 = ascanL1Counter;
+
     //qDebug() << "Chan: "<<chan << "Tact: " <<tact._TR1;
     TVG tvg = _state.getTvgForChannel(chan);
     //int last = 0;
-    dest[0] = _ascanL1Counter;
+    dest[0] = ascanL1Counter;
     dest[1] = 12;
     dest[2] = _currentTact;
     dest[3] = chan;
@@ -78,9 +65,8 @@ void FakeSPI::setAScanForLine1(uint8_t *dest)
     dest[7] = 0;
 
 
-
     for(int i=0; i<ASCAN_SAMPLES_SIZE; i++) {
-        double x = (i + sin(_ascanL1Counter2/9.0) * 120.14 + (chan-4) * 50 + _ascanL1Counter/2.0 - 400) / 8.0 ;
+        double x = (i + sin(ascanL1Counter2/9.0) * 120.14 + (chan-4) * 50 - 400) / 8.0 ;
         double res = 127.0;
         if(x!=0) {
             res = std::max((((sin(x)/x) + 1)/2.0)*255.0 - 127,0.0);
@@ -91,19 +77,18 @@ void FakeSPI::setAScanForLine1(uint8_t *dest)
         int val = round(res);
         unsigned char sh = val;
         dest[i+ASCAN_HEADER_SIZE] = sh;
-        //std::cout << ", " << sh;
-        //printf(", 0x%02x",sh);
     }
-
 }
 
 void FakeSPI::setAScanForLine2(uint8_t *dest)
 {
-    TactRegisters tact = _state.getTactByIndex(_currentTact+1);
+    TactRegisters tact = _state.getTactByIndex(_currentTact);
     uint8_t chan = ((tact._TR2 & 0b01110000) >> 4);
+    int ascanL2Counter = _counters[chan]->load();
+    int ascanL2Counter2 = ascanL2Counter;
     TVG tvg = _state.getTvgForChannel(chan);
 
-    dest[0] = _ascanL2Counter;
+    dest[0] = ascanL2Counter;
     dest[1] = 12;
     dest[2] = _currentTact;
     dest[3] = chan;
@@ -113,7 +98,7 @@ void FakeSPI::setAScanForLine2(uint8_t *dest)
     dest[7] = 0;
     //int last = 0;
     for(int i=0; i<ASCAN_SAMPLES_SIZE; i++) {
-        double x = (i + sin(_ascanL2Counter2/2.0) * 180.14 + chan * 50 + _ascanL2Counter/5.0 - 400) / 8.0 ;
+        double x = (i + sin(ascanL2Counter2/2.0) * 180.14 + chan * 50 - 400) / 8.0 ;
         double res = 127.0;
         if(x!=0) {
             res = std::max((((sin(x)/x) + 1)/2.0)*255.0 - 127,0.0);
@@ -130,20 +115,26 @@ void FakeSPI::setAScanForLine2(uint8_t *dest)
 
 }
 
+void FakeSPI::run()
+{
+    while(true){
+        updateCounters();
+        usleep(50000);
+    }
+}
+
 FakeSPI::FakeSPI() : DeviceInterface()
 {
-
+    for (int i=0; i<8; i++) {
+        std::atomic_int * a = new std::atomic_int(1);
+        _counters.push_back(a);
+    }
 }
 
 void FakeSPI::init()
 {
-    _ascanL1Counter = 0;
-    _ascanL1Counter2 = 0;
-    _ascanL2Counter = 0;
-    _ascanL2Counter2 = 0;
-    _directionL1 = false;
-    _directionL2 = false;
     _currentTact = -1;
+    start();
 }
 
 

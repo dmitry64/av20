@@ -32,13 +32,15 @@ void AScanWidget::paintEvent(QPaintEvent *event)
     painter.drawRect(QRect(center,QPoint(w - 32, 0)));
 
     painter.fillRect(QRect(QPoint(0,center.y()),QPoint(w, w - 24)),Qt::white);
-    double scaleStep = (w - 64)/200.0;
-    for(int i=0; i<201; i++) {
+    int scale = 200;
+    double scaleStep = (w - 64)/static_cast<double>(scale);
+    for(int i=0; i<scale+1; i++) {
         int leng = 0;
         if(i%10 == 0) {
             leng = 16;
-
-            painter.drawText(center+QPoint(i*scaleStep+2,24),QString::number(i));
+            if(i!=scale) {
+                painter.drawText(center+QPoint(i*scaleStep+2,24),QString::number(i));
+            }
         } else {
             leng = 8;
         }

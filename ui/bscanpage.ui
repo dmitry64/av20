@@ -15,24 +15,24 @@
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
    <property name="spacing">
-    <number>2</number>
+    <number>1</number>
    </property>
    <property name="leftMargin">
-    <number>2</number>
+    <number>0</number>
    </property>
    <property name="topMargin">
-    <number>2</number>
+    <number>0</number>
    </property>
    <property name="rightMargin">
-    <number>2</number>
+    <number>0</number>
    </property>
    <property name="bottomMargin">
-    <number>2</number>
+    <number>0</number>
    </property>
    <item>
     <layout class="QVBoxLayout" name="bscanLayout">
      <property name="spacing">
-      <number>2</number>
+      <number>0</number>
      </property>
     </layout>
    </item>

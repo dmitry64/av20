@@ -17,6 +17,7 @@ class ControlPanel : public QWidget
     Core * _core;
 
     TouchSpinBox * _sensBaseLevel;
+    TouchSpinBox * _prismTimeSpinbox;
     int _currentChannel;
 
 public:

@@ -48,7 +48,7 @@ void BScanWidget::paintEvent(QPaintEvent *event)
     int w = width();
     int h = height();
     painter.setPen(Qt::black);
-    QPoint center(32,h - 4);
+    QPoint center(32,h-1);
 
     painter.fillRect(QRect(QPoint(center.x() - 32,0),QPoint(32,center.y())),Qt::white);
     painter.fillRect(QRect(QPoint(w - 32,0),QPoint(w,center.y())),Qt::white);
@@ -74,8 +74,8 @@ void BScanWidget::paintEvent(QPaintEvent *event)
         int k = (_scans[y]).second;
 
         for(int i=elements; i<samples; i++) {
-            QLinearGradient grad(0,0,0,h - 4);
-            int grstep = 800.0 / (h - 4);
+            QLinearGradient grad(0,0,0,center.y());
+            int grstep = 800.0 / center.y();
             for(int j=0; j<ASCAN_SAMPLES_SIZE; j+=grstep) {
                 int sam = ((_scans[y]).first)[k]._samples[j];
                 if(y%2) {
@@ -89,7 +89,7 @@ void BScanWidget::paintEvent(QPaintEvent *event)
             } else {
                 k++;
             }
-            painter.fillRect(QRectF(QPointF(32.0 + step*i, h-4),QPointF(32.0 + step*(i+1),0)), grad);
+            painter.fillRect(QRectF(QPointF(32.0 + step*i, center.y()),QPointF(32.0 + step*(i+1),0)), grad);
         }
     }
     /*for(int i=_scans.size() -1; i>=0; i--) {

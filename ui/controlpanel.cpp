@@ -12,6 +12,11 @@ ControlPanel::ControlPanel(QWidget *parent) :
 
     _sensBaseLevel = new TouchSpinBox("Sens");
     ui->scrollLayout->addWidget(_sensBaseLevel);
+
+    _prismTimeSpinbox = new TouchSpinBox("Prism time");
+    ui->scrollLayout->addWidget(_prismTimeSpinbox);
+
+
     /*for(int i=0; i<30; i++) {
             TouchSpinBox * wid = new TouchSpinBox("Control #" + QString::number(i));
             ui->scrollLayout->addWidget(wid);

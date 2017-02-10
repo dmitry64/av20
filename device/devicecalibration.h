@@ -10,7 +10,6 @@ class DeviceCalibration
     std::vector<Tact *> _tactTable;
     std::vector<Channel *> _channels;
 
-
 public:
     DeviceCalibration();
     ~DeviceCalibration();
@@ -20,6 +19,7 @@ public:
     // get/set
     Channel *getChannel(int index);
     uint8_t getMaxTacts();
+    uint8_t getChannelsCount();
     uint8_t getTactIndexByCounter(uint8_t counter);
     std::vector< std::pair<uint8_t, uint8_t> > getTactLines(uint8_t tactIndex);
     TactRegisters getTactRegistersByIndex(uint8_t index);
