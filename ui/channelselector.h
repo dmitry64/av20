@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include "core.h"
+#include "ui/controls/channelbutton.h"
 
 namespace Ui {
 class ChannelSelector;
@@ -13,6 +14,7 @@ class ChannelSelector : public QWidget
     Q_OBJECT
 
     Core * _core;
+    std::vector<ChannelButton *> _channelButtons;
 public:
     explicit ChannelSelector(QWidget *parent = 0);
     ~ChannelSelector();
@@ -21,6 +23,8 @@ public:
 public slots:
     void onChannelSelected(uint8_t channel);
 
+signals:
+    void channelChanged(uint8_t channel);
 private:
     Ui::ChannelSelector *ui;
 };

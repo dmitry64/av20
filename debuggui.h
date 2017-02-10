@@ -39,6 +39,7 @@ public slots:
 
     void onAScan(AScan scan);
     void onTVG(TVG tvg);
+    //void onChannelChanged(uint8_t channel);
 signals:
     void AScanSingle(AScan scan);
     void AScanAB(AScan scan);
@@ -46,6 +47,7 @@ signals:
 private slots:
     void on_exitButton_released();
     void on_pushButton_2_released();
+    void on_tabWidget_currentChanged(int index);
 };
 
 #endif // DEBUGGUI_H

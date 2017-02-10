@@ -22,6 +22,7 @@ public:
     TVGMode tvgMode() const;
     void setTvgMode(const TVGMode &tvgMode);
     TVG generateTVG();
+    uint8_t index() const;
 };
 
 #endif // CHANNEL_H

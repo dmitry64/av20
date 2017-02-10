@@ -13,9 +13,11 @@ class ChannelButton : public QWidget
 
     QString _name;
     uint8_t _channel;
+    bool _state;
 public:
     explicit ChannelButton(QString name, uint8_t channel, QWidget *parent = 0);
     ~ChannelButton();
+    void setActive(bool state);
 
 private slots:
     void on_channelButton_released();

@@ -22,7 +22,6 @@ void TouchSpinBox::setValue(double value)
     ui->valueLabel->setText(QString::number(value));
 }
 
-
 void TouchSpinBox::on_leftButton_pressed()
 {
     _value -= 1;

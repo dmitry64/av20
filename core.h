@@ -19,7 +19,8 @@ private:
     std::atomic_bool _active;
     std::atomic_uchar _deviceMode;
     std::atomic_bool _snapshotRequested;
-    std::atomic_uchar _currentChannel;
+    std::atomic_uchar _targetChannel;
+
 
     uint8_t _currentTactCounter;
     uint8_t _currentTact;
@@ -46,12 +47,14 @@ private:
     void check();
     void trigger();
     void status();
-    void ascan();
+    void aScanAll();
+    void aScanSingle();
     void process();
     void sync();
     void snapshot();
     void finish();
-    void handWork();
+    void evaluationWork();
+    void searchWork();
 
 public:
     void setDeviceMode(uint8_t mode);
@@ -64,7 +67,7 @@ public:
 signals:
     void drawAscan(AScan scan);
     void drawTVG(TVG tvg);
-    void channelChanged(uint8_t channel);
+    //void channelChanged(uint8_t channel);
     void debug(int);
     void connection(bool);
     void connectionError(bool);

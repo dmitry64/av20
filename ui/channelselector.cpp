@@ -1,6 +1,6 @@
 #include "channelselector.h"
 #include "ui_channelselector.h"
-#include "ui/controls/channelbutton.h"
+
 
 ChannelSelector::ChannelSelector(QWidget *parent) :
     QWidget(parent),
@@ -12,7 +12,11 @@ ChannelSelector::ChannelSelector(QWidget *parent) :
         ChannelButton * channelButton = new ChannelButton("Ch #" + QString::number(i),i);
         QObject::connect(channelButton,SIGNAL(channelSelected(uint8_t)),this,SLOT(onChannelSelected(uint8_t)));
         ui->channelsLayout->addWidget(channelButton);
+        _channelButtons.push_back(channelButton);
     }
+
+    _channelButtons[0]->setActive(true);
+
 }
 
 ChannelSelector::~ChannelSelector()
@@ -27,7 +31,8 @@ void ChannelSelector::setCore(Core *core)
 
 void ChannelSelector::onChannelSelected(uint8_t channel)
 {
-    if(_core != 0) {
-        _core->setSingleChannel(channel);
+    for(int i=0;i<_channelButtons.size(); i++) {
+        _channelButtons[i]->setActive(i==channel);
     }
+    emit channelChanged(channel);
 }

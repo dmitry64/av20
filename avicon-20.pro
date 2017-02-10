@@ -46,7 +46,9 @@ SOURCES += main.cpp\
     ui/controls/channelbutton.cpp \
     device/modificators/activechannelmodificator.cpp \
     device/tact.cpp \
-    device/channel.cpp
+    device/channel.cpp \
+    ui/bscanpage.cpp \
+    ui/ascanpage.cpp
 
 HEADERS  += debuggui.h \
     core.h \
@@ -68,7 +70,9 @@ HEADERS  += debuggui.h \
     ui/controls/channelbutton.h \
     device/modificators/activechannelmodificator.h \
     device/tact.h \
-    device/channel.h
+    device/channel.h \
+    ui/bscanpage.h \
+    ui/ascanpage.h
 
 FORMS    += debuggui.ui \
     ui/ascanwidget.ui \
@@ -77,4 +81,6 @@ FORMS    += debuggui.ui \
     ui/statusbar.ui \
     ui/bscanwidget.ui \
     ui/channelselector.ui \
-    ui/controls/channelbutton.ui
+    ui/controls/channelbutton.ui \
+    ui/bscanpage.ui \
+    ui/ascanpage.ui

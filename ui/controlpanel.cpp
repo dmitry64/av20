@@ -12,17 +12,17 @@ ControlPanel::ControlPanel(QWidget *parent) :
 
     _sensBaseLevel = new TouchSpinBox("Sens");
     ui->scrollLayout->addWidget(_sensBaseLevel);
-    for(int i=0; i<30; i++) {
+    /*for(int i=0; i<30; i++) {
             TouchSpinBox * wid = new TouchSpinBox("Control #" + QString::number(i));
             ui->scrollLayout->addWidget(wid);
-    }
+    }*/
     QObject::connect(_sensBaseLevel,SIGNAL(valueChanged(double)),this,SLOT(sensChanged(double)));
 
 }
 
 void ControlPanel::showEvent(QShowEvent *event) {
     QWidget::showEvent( event );
-    init();
+    //init();
 }
 
 ControlPanel::~ControlPanel()
@@ -45,13 +45,10 @@ void ControlPanel::setChannel(int channel)
     _currentChannel = channel;
 }
 
-void ControlPanel::init()
+void ControlPanel::init(DeviceCalibration * calibration)
 {
-    DeviceCalibration * calibration = _core->getSnapshot();
-
     _sensBaseLevel->setValue(calibration->getChannel(_currentChannel)->baseSensLevel());
 
-    delete calibration;
 }
 
 void ControlPanel::sensChanged(double value)

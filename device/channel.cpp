@@ -1,6 +1,11 @@
 #include "channel.h"
 #include <string.h>
 
+uint8_t Channel::index() const
+{
+    return _index;
+}
+
 Channel::Channel(uint8_t index) :_index(index), _baseSensLevel(0), _tvgMode(TVGMode::CurveMode)
 {
 
@@ -45,7 +50,7 @@ TVG Channel::generateTVG()
 {
     std::vector<uint8_t> samples;
     for(int i=0; i<TVG_SAMPLES_SIZE; i++) {
-        uint8_t sample = std::min(127, i + _baseSensLevel);
+        uint8_t sample = std::min(std::min(127,_baseSensLevel), i);
         samples.push_back(sample);
     }
 

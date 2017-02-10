@@ -1,15 +1,37 @@
 #include "devicecalibration.h"
 
+std::vector<Channel *> DeviceCalibration::getChannels() const
+{
+    return _channels;
+}
+
+std::vector<Tact *> DeviceCalibration::getTactTable() const
+{
+    return _tactTable;
+}
+
 DeviceCalibration::DeviceCalibration()
 {
 
+}
+
+DeviceCalibration::~DeviceCalibration()
+{
+    for(int i=0; i<_tactTable.size(); i++) {
+        delete _tactTable.at(i);
+    }
+    for(int i=0; i<_channels.size(); i++) {
+        delete _channels.at(i);
+    }
+    _tactTable.clear();
+    _channels.clear();
 }
 
 void DeviceCalibration::init()
 {
     for(int i=0;i<MAX_CHANNELS_COUNT; i++) {
         Channel * ch = new Channel(i);
-        ch->setBaseSensLevel(16 + i);
+        ch->setBaseSensLevel(72 + i);
         ch->setTvgMode(TVGMode::CurveMode);
         _channels.push_back(ch);
     }
@@ -83,4 +105,9 @@ std::vector< std::pair<uint8_t, uint8_t> > DeviceCalibration::getTactLines(uint8
     }
 
     return lines;
+}
+
+TactRegisters DeviceCalibration::getTactRegistersByIndex(uint8_t index)
+{
+    return _tactTable[index]->getRegisters();
 }

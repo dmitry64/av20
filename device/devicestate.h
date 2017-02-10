@@ -48,6 +48,7 @@ public:
     TVG getTvgForChannel(uint8_t index);
     void setChannelsTableTact(uint8_t index, TactRegisters tact);
     void setChannelsTableRegister(uint8_t reg, uint8_t value);
+    TactRegisters getTactByIndex(uint8_t index);
 
     uint8_t USM_ID() const;
     void setUSM_ID(const uint8_t &USM_ID);

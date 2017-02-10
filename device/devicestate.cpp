@@ -136,7 +136,8 @@ void DeviceState::setChannelsTableTact(uint8_t index, TactRegisters tact)
 
 void DeviceState::setChannelsTableRegister(uint8_t reg, uint8_t value)
 {
-    switch(reg % 6) {
+
+    switch((reg-0x10) % 6) {
         case 0x00:
         _tactTable[(reg-0x10) / 6]._CR = value;
         break;
@@ -156,6 +157,11 @@ void DeviceState::setChannelsTableRegister(uint8_t reg, uint8_t value)
         _tactTable[(reg-0x10) / 6]._RESERVED = value;
         break;
     }
+}
+
+TactRegisters DeviceState::getTactByIndex(uint8_t index)
+{
+    return _tactTable[index];
 }
 
 

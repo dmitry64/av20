@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <atomic>
 #include "device/definitions.h"
+#include "device/channel.h"
 #include <QElapsedTimer>
 
 namespace Ui {
@@ -18,11 +19,13 @@ class AScanWidget : public QWidget
     std::vector<QPoint> _points;
     std::vector<QPoint> _tvg;
     std::vector<QPoint> _polygon;
+    std::vector<Channel> _channels;
     QElapsedTimer _fpsTimer;
 public:
     explicit AScanWidget(QWidget *parent = 0);
     ~AScanWidget();
     void paintEvent(QPaintEvent * event);
+    void setChannelsInfo(std::vector<Channel> channels);
 public slots:
     void onAScan(AScan scan);
     void onTVG(TVG tvg);

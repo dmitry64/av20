@@ -6,11 +6,23 @@
 #include "device/devicestate.h"
 #include "deviceinterface.h"
 
-class FakeSPI : public DeviceInterface , public QThread
+class FakeSPI : public DeviceInterface, public QThread
 {
     DeviceState _state;
-    int _ascanCounter;
-    bool direction;
+    int _ascanL1Counter;
+    int _ascanL1Counter2;
+    int _ascanL2Counter;
+    int _ascanL2Counter2;
+    bool _directionL1;
+    bool _directionL2;
+
+    uint8_t _currentTact;
+
+private:
+    uint8_t getNextTact();
+    void updateCounters();
+    void setAScanForLine1(uint8_t * dest);
+    void setAScanForLine2(uint8_t * dest);
 public:
     FakeSPI();
     void init();

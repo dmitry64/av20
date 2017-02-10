@@ -37,6 +37,7 @@ void AScanWidget::paintEvent(QPaintEvent *event)
         int leng = 0;
         if(i%10 == 0) {
             leng = 16;
+
             painter.drawText(center+QPoint(i*scaleStep+2,24),QString::number(i));
         } else {
             leng = 8;
@@ -78,13 +79,27 @@ void AScanWidget::paintEvent(QPaintEvent *event)
     painter.drawText(QPoint(w - 140, 30),"fps: " + QString::number(fps,'f', 2));
 }
 
+void AScanWidget::setChannelsInfo(std::vector<Channel> channels)
+{
+    _channels = channels;
+    if(!channels.empty()) {
+        onTVG(channels[0].generateTVG());
+    }
+}
+
 void AScanWidget::onAScan(AScan scan)
 {
-
-    for(int i=0; i<ASCAN_SAMPLES_SIZE; i++) {
-        _points[i] = (QPoint(i,scan._samples[i]));
+    for(int j=0; j<_channels.size(); j++) {
+        uint8_t chan = scan._header._channelNo;
+        if(chan == _channels[j].index()) {
+            for(int i=0; i<ASCAN_SAMPLES_SIZE; i++) {
+                _points[i] = (QPoint(i,scan._samples[i]));
+            }
+        }
     }
-    update();
+    if(isVisible()) {
+        update();
+    }
 }
 
 

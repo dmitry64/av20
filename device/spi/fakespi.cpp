@@ -2,15 +2,6 @@
 #include <QDebug>
 #include "math.h"
 
-FakeSPI::FakeSPI() : DeviceInterface()
-{
-
-}
-
-void FakeSPI::init()
-{
-    _ascanCounter = 0;
-}
 
 uint8_t getBitFromByteArray2(uint8_t * ptr, int bit) {
     int b = bit / 8;
@@ -29,6 +20,132 @@ uint8_t getTVGSample2(uint8_t * ptr, int sampleNum) {
     res |= getBitFromByteArray2(ptr,bit+6) << 6;
     return res;
 }
+
+uint8_t FakeSPI::getNextTact()
+{
+    for(int i=_currentTact+1; i<MAX_TACTS_COUNT; i++) {
+        if(_state.getTactByIndex(i)._CR & 0b00000001) {
+            return i;
+        }
+    }
+    for(int i=0; i<MAX_TACTS_COUNT; i++) {
+        if(_state.getTactByIndex(i)._CR & 0b00000001) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+void FakeSPI::updateCounters()
+{
+    if(_directionL1) {
+        _ascanL1Counter--;
+        if(_ascanL1Counter == -300)
+            _directionL1 = false;
+    } else {
+        _ascanL1Counter++;
+        if(_ascanL1Counter == 300)
+            _directionL1 = true;
+    }
+    _ascanL1Counter2++;
+
+    if(_directionL2) {
+        _ascanL2Counter--;
+        if(_ascanL2Counter == -300)
+            _directionL2 = false;
+    } else {
+        _ascanL2Counter++;
+        if(_ascanL2Counter == 300)
+            _directionL2 = true;
+    }
+    _ascanL2Counter2++;
+}
+
+void FakeSPI::setAScanForLine1(uint8_t *dest)
+{
+    TactRegisters tact = _state.getTactByIndex(_currentTact+1);
+    uint8_t chan = ((tact._TR1 & 0b01110000) >> 4);
+    //qDebug() << "Chan: "<<chan << "Tact: " <<tact._TR1;
+    TVG tvg = _state.getTvgForChannel(chan);
+    //int last = 0;
+    dest[0] = _ascanL1Counter;
+    dest[1] = 12;
+    dest[2] = _currentTact;
+    dest[3] = chan;
+    dest[4] = 0;
+    dest[5] = 8;
+    dest[6] = 0;
+    dest[7] = 0;
+
+
+
+    for(int i=0; i<ASCAN_SAMPLES_SIZE; i++) {
+        double x = (i + sin(_ascanL1Counter2/9.0) * 120.14 + (chan-4) * 50 + _ascanL1Counter/2.0 - 400) / 8.0 ;
+        double res = 127.0;
+        if(x!=0) {
+            res = std::max((((sin(x)/x) + 1)/2.0)*255.0 - 127,0.0);
+        }
+
+        res *= getTVGSample2( tvg._samples, i/4) / 127.0;
+        res *= 1.8;
+        int val = round(res);
+        unsigned char sh = val;
+        dest[i+ASCAN_HEADER_SIZE] = sh;
+        //std::cout << ", " << sh;
+        //printf(", 0x%02x",sh);
+    }
+
+}
+
+void FakeSPI::setAScanForLine2(uint8_t *dest)
+{
+    TactRegisters tact = _state.getTactByIndex(_currentTact+1);
+    uint8_t chan = ((tact._TR2 & 0b01110000) >> 4);
+    TVG tvg = _state.getTvgForChannel(chan);
+
+    dest[0] = _ascanL2Counter;
+    dest[1] = 12;
+    dest[2] = _currentTact;
+    dest[3] = chan;
+    dest[4] = 0;
+    dest[5] = 8;
+    dest[6] = 0;
+    dest[7] = 0;
+    //int last = 0;
+    for(int i=0; i<ASCAN_SAMPLES_SIZE; i++) {
+        double x = (i + sin(_ascanL2Counter2/2.0) * 180.14 + chan * 50 + _ascanL2Counter/5.0 - 400) / 8.0 ;
+        double res = 127.0;
+        if(x!=0) {
+            res = std::max((((sin(x)/x) + 1)/2.0)*255.0 - 127,0.0);
+        }
+
+        res *= getTVGSample2( tvg._samples, i/4) / 127.0;
+        res *= 1.8;
+        int val = round(res);
+        unsigned char sh = val;
+        dest[i+ASCAN_HEADER_SIZE] = sh;
+        //std::cout << ", " << sh;
+        //printf(", 0x%02x",sh);
+    }
+
+}
+
+FakeSPI::FakeSPI() : DeviceInterface()
+{
+
+}
+
+void FakeSPI::init()
+{
+    _ascanL1Counter = 0;
+    _ascanL1Counter2 = 0;
+    _ascanL2Counter = 0;
+    _ascanL2Counter2 = 0;
+    _directionL1 = false;
+    _directionL2 = false;
+    _currentTact = -1;
+}
+
 
 void FakeSPI::getRegister(uint8_t reg, uint32_t length, uint8_t *dest)
 {
@@ -63,40 +180,16 @@ void FakeSPI::getRegister(uint8_t reg, uint32_t length, uint8_t *dest)
     case 0x09:
         dest[0] = _state.ODO_CR();
         break;
-    case 0x7D:
     case 0x7C:
-        /*for(int i=0; i<length; i++) {
-            dest[i] = i + _ascanCounter;
-        }*/
-        TVG tvg = _state.getTvgForChannel(0);
-        //int last = 0;
-        for(int i=0; i<ASCAN_SAMPLES_SIZE; i++) {
-            double x = (i + _ascanCounter/2 - 400) / 8.0 ;
-            double res = 127.0;
-            if(x!=0) {
-                res = std::max((((sin(x)/x) + 1)/2.0)*255.0 - 127,0.0);
-            }
-
-            res *= getTVGSample2( tvg._samples, i/4) / 127.0;
-            int val = round(res);
-            unsigned char sh = val;
-            dest[i+ASCAN_HEADER_SIZE] = sh;
-            //std::cout << ", " << sh;
-            //printf(", 0x%02x",sh);
-        }
-        if(direction) {
-            _ascanCounter--;
-            if(_ascanCounter == -500)
-                direction = false;
-        } else {
-            _ascanCounter++;
-            if(_ascanCounter == 500)
-                direction = true;
-
-        }
-
+        if(_currentTact!=-1)
+            setAScanForLine1(dest);
+        break;
+    case 0x7D:
+        if(_currentTact!=-1)
+            setAScanForLine1(dest);
         break;
     }
+
     usleep(1000);
 }
 
@@ -106,7 +199,10 @@ void FakeSPI::setRegister(uint8_t reg, const uint32_t length, uint8_t *src)
     case 0x05:
         _state.setTRG_CR(src[0]);
         if((src[0] & 0b00000001) !=0) {
+
             _state.setUSM_SR(0b00000001);
+            _currentTact = getNextTact();
+
         }
         break;
     case 0x06:
@@ -129,8 +225,6 @@ void FakeSPI::setRegister(uint8_t reg, const uint32_t length, uint8_t *src)
         }
         _state.setTVGForChannel(reg - 0x40, tvg);
         break;
-
-
     default:
         if(reg >= 0x10 && reg <=0x3f) {
             _state.setChannelsTableRegister(reg,src[0]);
@@ -138,15 +232,14 @@ void FakeSPI::setRegister(uint8_t reg, const uint32_t length, uint8_t *src)
         qDebug() << "FakeSPI: unknown register" <<reg;
         }
         break;
-
     }
-    usleep(1000);
+    usleep(500);
 }
 
 bool FakeSPI::setAndTestRegister(uint8_t reg, const uint32_t length, uint8_t *src)
 {
     setRegister(reg,length,src);
-    usleep(8000);
+    usleep(100);
     return false;
 }
 

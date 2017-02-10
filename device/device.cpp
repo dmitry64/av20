@@ -104,7 +104,6 @@ void Device::applyCalibration(DeviceCalibration *calibration)
 {
     for(int j=0; j<8; j++) {
         TVG tvg = calibration->getChannel(j)->generateTVG();
-
         _spi->setRegister(0x40+j,TVG_SAMPLES_BYTES,tvg._samples);
         if(checkConnection()) {
             qDebug() << "TVG for ch #" << j + 1 << " set!";
@@ -113,6 +112,38 @@ void Device::applyCalibration(DeviceCalibration *calibration)
             qFatal("Initialization failed!");
         }
     }
+    for(int j=0; j<8; j++) {
+        TactRegisters tr = calibration->getTactRegistersByIndex(j);
+
+        if(_spi->setAndTestRegister(0x10+j*6,1,&tr._CR)) {
+            qFatal("Unable to set register");
+        }
+
+        if(_spi->setAndTestRegister(0x10+j*6+1,1,&tr._TR1)) {
+            qFatal("Unable to set register");
+        }
+
+        if(_spi->setAndTestRegister(0x10+j*6+2,1,&tr._PULSER1)) {
+            qFatal("Unable to set register");
+        }
+
+        if(_spi->setAndTestRegister(0x10+j*6+3,1,&tr._TR2)) {
+            qFatal("Unable to set register");
+        }
+
+        if(_spi->setAndTestRegister(0x10+j*6+4,1,&tr._PULSER2)) {
+            qFatal("Unable to set register");
+        }
+
+        if(_spi->setAndTestRegister(0x10+j*6+5,1,&tr._RESERVED)) {
+            qFatal("Unable to set register");
+        }
+
+        qDebug() << "Channels table for ch #" << j + 1 << " loaded!";
+
+        _state->setChannelsTableTact(j,tr);
+    }
+
 }
 
 void Device::setProgTrigger(bool enabled)

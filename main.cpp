@@ -18,6 +18,8 @@ int main(int argc, char *argv[])
     QObject::connect(core,SIGNAL(drawAscan(AScan)), &w, SLOT(onAScan(AScan)));
     QObject::connect(core,SIGNAL(drawTVG(TVG)), &w,SLOT(onTVG(TVG)));
 
+    //QObject::connect(core,SIGNAL(channelChanged(uint8_t)),&w,SLOT(onChannelChanged(uint8_t)));
+
     QObject::connect(core,SIGNAL(connection(bool)), &w, SLOT(onConnectionStatusChanged(bool)));
     QObject::connect(core,SIGNAL(connectionError(bool)), &w, SLOT(onErrorStatusChanged(bool)));
     QObject::connect(core,SIGNAL(deviceError(bool)), &w, SLOT(onDeviceErrorStatusChanged(bool)));

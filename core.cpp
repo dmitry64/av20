@@ -16,7 +16,7 @@ Device *Core::getDevice() const
     return _device;
 }
 
-Core::Core() : _active(true), _state(new DeviceState()), _deviceMode(DEVICE_MODE_HAND), _currentChannel(0), _changesMutex(new QMutex())
+Core::Core() : _active(true), _state(new DeviceState()), _deviceMode(DEVICE_MODE_EVAL), _targetChannel(0), _changesMutex(new QMutex())
 {
     _device = (new Device(_state));
     _currentCalibration = new DeviceCalibration();
@@ -38,8 +38,11 @@ void Core::run()
     init();
     while(_active) {
         switch (_deviceMode.load()) {
-        case DEVICE_MODE_HAND:
-            handWork();
+        case DEVICE_MODE_EVAL:
+            //evaluationWork();
+            //break;
+        case DEVICE_MODE_SEARCH:
+            searchWork();
             break;
         case DEVICE_MODE_HEAD_SCANNER:
             break;
@@ -107,21 +110,26 @@ void Core::status()
     _device->setProgTrigger(false);
 }
 
-void Core::ascan()
+void Core::aScanAll()
 {
     std::vector< std::pair<uint8_t, uint8_t> > lines = _currentCalibration->getTactLines(_currentTact);
     if(!lines.empty()) {
-        //qDebug() << "cycle" << _currentTact << _currentTactCounter;
         for(int i=0; i<lines.size(); i++) {
-            //qDebug() << "line " <<lines[i].first << lines[i].second;
-            if(_currentChannel.load() == lines[i].second) {
+            emit drawAscan(_device->getAscanForLine(lines[i].first));
+        }
+    }
+}
+
+void Core::aScanSingle()
+{
+    std::vector< std::pair<uint8_t, uint8_t> > lines = _currentCalibration->getTactLines(_currentTact);
+    if(!lines.empty()) {
+        for(int i=0; i<lines.size(); i++) {
+            if(_targetChannel.load() == lines[i].second) {
                 emit drawAscan(_device->getAscanForLine(lines[i].first));
             }
         }
     }
-    //emit drawAscan(_device->getAscanForLine(0));
-    //emit drawAscan(_device->getAscanForLine(1));
-    //_device->getAscanForChannel(1);
 }
 
 
@@ -159,18 +167,24 @@ void Core::finish()
     qDebug() << "Disconnected!";
 }
 
-void Core::handWork()
+void Core::evaluationWork()
 {
-    static int counter = 0;
     snapshot();
     check();
     trigger();
-    ascan();
+    aScanSingle();
     process();
     sync();
-    //QApplication::processEvents();
-    counter++;
-    emit debug(counter);
+}
+
+void Core::searchWork()
+{
+    snapshot();
+    check();
+    trigger();
+    aScanAll();
+    process();
+    sync();
 }
 
 void Core::notifyTVG(TVG & tvg)
@@ -200,7 +214,7 @@ void Core::setTvgCurve(std::vector<uint8_t> points)
 void Core::setSingleChannel(uint8_t channel)
 {
     qDebug() << "Setting channel:" <<channel;
-    _currentChannel.store(channel);
-    emit channelChanged(channel);
+    _targetChannel.store(channel);
+    //emit channelChanged(channel);
 }
 

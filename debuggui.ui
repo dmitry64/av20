@@ -114,16 +114,6 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
-      <widget class="ChannelSelector" name="channelSelector" native="true">
-       <property name="minimumSize">
-        <size>
-         <width>48</width>
-         <height>0</height>
-        </size>
-       </property>
-      </widget>
-     </item>
-     <item>
       <widget class="QTabWidget" name="tabWidget">
        <property name="currentIndex">
         <number>0</number>
@@ -134,24 +124,7 @@
         </attribute>
         <layout class="QVBoxLayout" name="verticalLayout_2">
          <item>
-          <widget class="AScanWidget" name="ascanWidgetAB" native="true">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="Line" name="line_5">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="BScanWidget" name="bscanWidgetAB" native="true"/>
+          <widget class="AScanPage" name="aScanPage" native="true"/>
          </item>
         </layout>
        </widget>
@@ -174,13 +147,28 @@
        </widget>
        <widget class="QWidget" name="tab_3">
         <attribute name="title">
-         <string>B Scan</string>
+         <string>B Scan Single</string>
         </attribute>
         <layout class="QVBoxLayout" name="verticalLayout_4">
          <item>
           <widget class="BScanWidget" name="bscanWidgetSingle" native="true"/>
          </item>
         </layout>
+       </widget>
+       <widget class="QWidget" name="tab_5">
+        <attribute name="title">
+         <string>B Scan 8</string>
+        </attribute>
+        <layout class="QHBoxLayout" name="horizontalLayout_4">
+         <item>
+          <widget class="BScanPage" name="bscan8" native="true"/>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="tab_4">
+        <attribute name="title">
+         <string>TVG</string>
+        </attribute>
        </widget>
       </widget>
      </item>
@@ -288,9 +276,15 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>ChannelSelector</class>
+   <class>BScanPage</class>
    <extends>QWidget</extends>
-   <header>ui/channelselector.h</header>
+   <header>ui/bscanpage.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>AScanPage</class>
+   <extends>QWidget</extends>
+   <header>ui/ascanpage.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
