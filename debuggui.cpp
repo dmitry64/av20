@@ -9,12 +9,15 @@ DebugGUI::DebugGUI(QWidget *parent) :
 {
     ui->setupUi(this);
     _core = 0;
-    connect(this,SIGNAL(AScanSingle(AScan)),ui->ascanWidgetSingle,SLOT(onAScan(AScan)));
+    //connect(this,SIGNAL(AScanSingle(AScan)),ui->ascanWidgetSingle,SLOT(onAScan(AScan)));
+    connect(this,SIGNAL(AScanAB(QSharedPointer<AScanDrawData>)),ui->aScanPage,SLOT(onAScan(QSharedPointer<AScanDrawData>)));
+    connect(this,SIGNAL(BScanAB(QSharedPointer<BScanDrawData>)),ui->aScanPage,SLOT(onBScan(QSharedPointer<BScanDrawData>)));
     //connect(this,SIGNAL(AScanAB(AScan)),ui->aScanPage,SLOT(onAScan(AScan)));
-    //connect(this,SIGNAL(AScanAB(AScan)),ui->aScanPage,SLOT(onAScan(AScan)));
-    connect(this,SIGNAL(AScanSingle(AScan)),ui->aScanPage,SLOT(onAScan(AScan)));
-    connect(this,SIGNAL(AScanSingle(AScan)),ui->bscanWidgetSingle,SLOT(onAScan(AScan)));
-    connect(this,SIGNAL(AScanSingle(AScan)), ui->bscan8,SLOT(onAScan(AScan)));
+    //connect(this,SIGNAL(AScanSingle(AScan)),ui->aScanPage,SLOT(onAScan(AScan)));
+    //connect(this,SIGNAL(AScanSingle(AScan)),ui->bscanWidgetSingle,SLOT(onAScan(AScan)));
+    connect(this,SIGNAL(BScanAB(QSharedPointer<BScanDrawData>)), ui->bscan8,SLOT(onBScan(QSharedPointer<BScanDrawData>)));
+
+    connect(this,SIGNAL(drawDisplayPackage(QSharedPointer<DisplayPackage>)), ui->aScanPage,SLOT(onDisplayPackage(QSharedPointer<DisplayPackage>)));
 
     connect(this,SIGNAL(TVGReady(TVG)),ui->ascanWidgetSingle,SLOT(onTVG(TVG)));
     connect(this,SIGNAL(TVGReady(TVG)),ui->aScanPage,SLOT(onTVG(TVG)));
@@ -104,14 +107,24 @@ void DebugGUI::onDeviceReadyStatusChanged(bool status)
     ui->deviceReadyCheckBox->setChecked(status);
 }
 
-void DebugGUI::onAScan(AScan scan)
+void DebugGUI::onAScan(QSharedPointer<AScanDrawData> scan)
 {
-    emit AScanSingle(scan);
+    emit AScanAB(scan);
+}
+
+void DebugGUI::onBScan(QSharedPointer<BScanDrawData> scan)
+{
+    emit BScanAB(scan);
 }
 
 void DebugGUI::onTVG(TVG tvg)
 {
     emit TVGReady(tvg);
+}
+
+void DebugGUI::onDisplayPackage(QSharedPointer<DisplayPackage> dp)
+{
+    emit drawDisplayPackage(dp);
 }
 
 /*void DebugGUI::onChannelChanged(uint8_t channel)

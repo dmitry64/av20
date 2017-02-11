@@ -3,6 +3,7 @@
 
 #include <QThread>
 #include <QApplication>
+#include <QSharedPointer>
 #include <atomic>
 #include <queue>
 #include "device/modificators/modificator.h"
@@ -21,7 +22,6 @@ private:
     std::atomic_bool _snapshotRequested;
     std::atomic_uchar _targetChannel;
 
-
     uint8_t _currentTactCounter;
     uint8_t _currentTact;
 
@@ -32,7 +32,8 @@ private:
     QMutex * _changesMutex;
     std::queue<Modificator *> _pendingChanges;
 
-
+    AScan * _line1CurrentAscan;
+    AScan * _line2CurrentAscan;
 public:
     Core();
     ~Core();
@@ -65,7 +66,9 @@ public:
     Device *getDevice() const;
 
 signals:
-    void drawAscan(AScan scan);
+    void drawAscan(QSharedPointer<AScanDrawData> scan);
+    void drawBscan(QSharedPointer<BScanDrawData> scan);
+    void drawDisplayPackage(QSharedPointer<DisplayPackage> package);
     void drawTVG(TVG tvg);
     //void channelChanged(uint8_t channel);
     void debug(int);

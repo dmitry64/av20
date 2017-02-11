@@ -14,8 +14,10 @@ class BScanWidget : public QWidget
 {
     Q_OBJECT
 
-    std::vector< std::pair< std::vector<AScan> , int> > _scans;
+    std::vector< std::pair< std::vector<BScanDrawData> , int> > _scans;
     std::vector<Channel> _channels;
+
+    std::vector< QLinearGradient > _gradients;
 
     int _width;
     //int _start;
@@ -32,7 +34,7 @@ public:
     std::vector<Channel> channels() const;
 
 public slots:
-    void onAScan(AScan scan);
+    void onBScan(BScanDrawData * scan);
 private:
     Ui::BScanWidget *ui;
 };

@@ -7,7 +7,9 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    qRegisterMetaType<AScan>("AScan");
+    qRegisterMetaType<QSharedPointer<DisplayPackage> >("QSharedPointer<DisplayPackage>");
+    qRegisterMetaType<QSharedPointer<AScanDrawData> >("QSharedPointer<AScanDrawData>");
+    qRegisterMetaType<QSharedPointer<BScanDrawData> >("QSharedPointer<BScanDrawData>");
     qRegisterMetaType<TVG>("TVG");
     Core * core = new Core();
     DebugGUI w;
@@ -15,8 +17,10 @@ int main(int argc, char *argv[])
     w.setCore(core);
 
     //QObject::connect(core,SIGNAL(debug(int)), &w, SLOT(debug(int)));
-    QObject::connect(core,SIGNAL(drawAscan(AScan)), &w, SLOT(onAScan(AScan)));
+    QObject::connect(core,SIGNAL(drawAscan(QSharedPointer<AScanDrawData>)), &w, SLOT(onAScan(QSharedPointer<AScanDrawData>)));
+    QObject::connect(core,SIGNAL(drawBscan(QSharedPointer<BScanDrawData>)), &w, SLOT(onBScan(QSharedPointer<BScanDrawData>)));
     QObject::connect(core,SIGNAL(drawTVG(TVG)), &w,SLOT(onTVG(TVG)));
+    QObject::connect(core,SIGNAL(drawDisplayPackage(QSharedPointer<DisplayPackage>)), &w, SLOT(onDisplayPackage(QSharedPointer<DisplayPackage>)));
 
     //QObject::connect(core,SIGNAL(channelChanged(uint8_t)),&w,SLOT(onChannelChanged(uint8_t)));
 
@@ -27,7 +31,7 @@ int main(int argc, char *argv[])
     //QObject::connect(core,SIGNAL(deviceReady(bool)), &w, SLOT(onDeviceReadyStatusChanged(bool)));
 
     core->start();
-    w.show();
+    w.showFullScreen();
 
     return a.exec();
 }

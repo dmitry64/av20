@@ -2,6 +2,7 @@
 #define DEFINITIONS_H
 
 #include <stdint.h>
+#include <vector>
 
 #define MAX_CHANNELS_COUNT 8
 #define MAX_TACTS_COUNT 8
@@ -30,6 +31,7 @@ struct TVG {
 };
 
 
+#pragma pack(push, 1)
 struct AScanHeader {
     uint8_t _frameMarker;
     uint8_t _descriptorSizeInBytes;
@@ -40,11 +42,29 @@ struct AScanHeader {
     uint16_t _samplesPerChannel;
     uint64_t _odoStamp;
 };
+#pragma pack(pop)
 
+struct AScanDrawData {
+    uint8_t _channel;
+    std::vector<uint8_t> _samples;
+};
+
+struct BScanDrawData {
+    uint8_t _channel;
+    std::vector<uint8_t> _samples;
+};
+
+struct DisplayPackage {
+    AScanDrawData ascan;
+    BScanDrawData bscan;
+};
+
+#pragma pack(push, 1)
 struct AScan {
     AScanHeader _header;
     uint8_t _samples[800];
 };
+#pragma pack(pop)
 
 struct DeviceStatus {
     bool error;

@@ -176,13 +176,14 @@ void Device::setTVG(int chIndex, TVG tvg)
     _state->setTVGForChannel(chIndex,tvg);
 }
 
-AScan Device::getAscanForLine(uint8_t line)
+AScan Device::getAscanForLine(uint8_t line, AScan * output)
 {
-    AScan scan;
-    uint8_t buf[ASCAN_SAMPLES_SIZE + ASCAN_HEADER_SIZE];
+    //AScan scan;
+    uint8_t * buf = reinterpret_cast<uint8_t*>(output);
+    //uint8_t buf[ASCAN_SAMPLES_SIZE + ASCAN_HEADER_SIZE];
     _spi->getRegister((line == 0) ? 0x7C : 0x7D, ASCAN_SAMPLES_SIZE + ASCAN_HEADER_SIZE, buf);
 
-    scan._header._frameMarker = buf[0];
+    /*scan._header._frameMarker = buf[0];
     scan._header._descriptorSizeInBytes = buf[1];
     scan._header._tactNo = buf[2];
     scan._header._channelNo = buf[3];
@@ -196,12 +197,12 @@ AScan Device::getAscanForLine(uint8_t line)
     for(int i=0; i<ASCAN_SAMPLES_SIZE; i++) {
         scan._samples[i] = buf[i + ASCAN_HEADER_SIZE];
     }
-
+*/
     if(!checkConnection()) {
         qFatal("Connection lost after Ascan request!");
     }
 
-    return scan;
+    return *(reinterpret_cast<AScan*>(buf));
 }
 
 uint8_t Device::getVersion()

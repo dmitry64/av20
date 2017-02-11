@@ -35,12 +35,17 @@ public slots:
     void onDeviceOverheatStatusChanged(bool status);
     void onDeviceReadyStatusChanged(bool status);
 
-    void onAScan(AScan scan);
+    void onAScan(QSharedPointer<AScanDrawData> scan);
+    void onBScan(QSharedPointer<BScanDrawData> scan);
     void onTVG(TVG tvg);
+
+    void onDisplayPackage(QSharedPointer<DisplayPackage> dp);
     //void onChannelChanged(uint8_t channel);
 signals:
-    void AScanSingle(AScan scan);
-    void AScanAB(AScan scan);
+    //void AScanSingle(AScan scan);
+    void drawDisplayPackage(QSharedPointer<DisplayPackage>);
+    void AScanAB(QSharedPointer<AScanDrawData> scan);
+    void BScanAB(QSharedPointer<BScanDrawData> scan);
     void TVGReady(TVG tvg);
 private slots:
     void on_exitButton_released();

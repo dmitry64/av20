@@ -45,12 +45,12 @@ void BScanPage::setChannles(std::vector<std::vector<Channel> > channelsConfigura
     }
 }
 
-void BScanPage::onAScan(AScan scan)
+void BScanPage::onBScan(QSharedPointer<BScanDrawData> scan)
 {
-    uint8_t channel = scan._header._channelNo;
+    uint8_t channel = scan->_channel;
     std::vector<BScanWidget*> widgets = getWidgetsByChannel(channel);
     //qDebug() << "size:"<<widgets.size();
     for(int i=0; i<widgets.size(); i++) {
-        widgets[i]->onAScan(scan);
+        //widgets[i]->onBScan(scan);
     }
 }

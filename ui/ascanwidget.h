@@ -2,6 +2,7 @@
 #define ASCANWIDGET_H
 
 #include <QWidget>
+#include <QPen>
 #include <atomic>
 #include "device/definitions.h"
 #include "device/channel.h"
@@ -21,13 +22,17 @@ class AScanWidget : public QWidget
     std::vector<QPoint> _polygon;
     std::vector<Channel> _channels;
     QElapsedTimer _fpsTimer;
+
+    QPen _tvgCurvePen;
+    QPen _ascanPen;
+    QBrush _ascanBrush;
 public:
     explicit AScanWidget(QWidget *parent = 0);
     ~AScanWidget();
     void paintEvent(QPaintEvent * event);
     void setChannelsInfo(std::vector<Channel> channels);
 public slots:
-    void onAScan(AScan scan);
+    void onAScan(AScanDrawData * scan);
     void onTVG(TVG tvg);
 private:
     Ui::AScanWidget *ui;

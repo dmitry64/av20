@@ -24,7 +24,9 @@ public:
     void setAScanChannels(std::vector<Channel> channels);
     void setBScanChannels(std::vector<Channel> channels);
 public slots:
-    void onAScan(AScan scan);
+    void onAScan(QSharedPointer<AScanDrawData> scan);
+    void onBScan(QSharedPointer<BScanDrawData> scan);
+    void onDisplayPackage(QSharedPointer<DisplayPackage> package);
     void onTVG(TVG tvg);
     void setChannel(uint8_t channel);
 private:

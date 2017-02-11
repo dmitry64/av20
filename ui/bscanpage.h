@@ -24,9 +24,9 @@ public:
     void setCore(Core * core);
     void setChannles(std::vector< std::vector<Channel> > channelsConfiguration);
 public slots:
-    void onAScan(AScan scan);
+    void onBScan(QSharedPointer<BScanDrawData> scan);
 signals:
-    void drawBScan(AScan scan);
+    void drawBScan(QSharedPointer<BScanDrawData> scan);
 private:
     Ui::BScanPage *ui;
 };

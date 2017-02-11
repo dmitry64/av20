@@ -23,6 +23,8 @@ Core::Core() : _active(true), _state(new DeviceState()), _deviceMode(DEVICE_MODE
     _currentCalibration->init();
     _currentTactCounter = 0;
     _currentTact = _currentCalibration->getTactIndexByCounter(_currentTactCounter);
+    _line1CurrentAscan = new AScan();
+    _line2CurrentAscan = new AScan();
     _snapshotRequested.store(false);
     _snapshot = 0;
 }
@@ -76,13 +78,11 @@ void Core::check()
 void Core::trigger()
 {
     if(_currentCalibration->getMaxTacts() > 0) {
-
         _device->setProgTrigger(true);
         _currentTactCounter++;
         if(_currentTactCounter>=_currentCalibration->getMaxTacts()) {
             _currentTactCounter = 0;
         }
-
         _currentTact = _currentCalibration->getTactIndexByCounter(_currentTactCounter);
     }
 }
@@ -116,7 +116,7 @@ void Core::aScanAll()
     std::vector< std::pair<uint8_t, uint8_t> > lines = _currentCalibration->getTactLines(_currentTact);
     if(!lines.empty()) {
         for(int i=0; i<lines.size(); i++) {
-            emit drawAscan(_device->getAscanForLine(lines[i].first));
+            _device->getAscanForLine(lines[i].first,_line1CurrentAscan);
         }
     }
 }
@@ -127,7 +127,7 @@ void Core::aScanSingle()
     if(!lines.empty()) {
         for(int i=0; i<lines.size(); i++) {
             if(_targetChannel.load() == lines[i].second) {
-                emit drawAscan(_device->getAscanForLine(lines[i].first));
+                _device->getAscanForLine(lines[i].first, _line1CurrentAscan);
             }
         }
     }
@@ -136,7 +136,26 @@ void Core::aScanSingle()
 
 void Core::process()
 {
-    // modify state
+    /*AScanDrawData * ascanData = new AScanDrawData();
+    BScanDrawData * bscanData = new BScanDrawData();*/
+    DisplayPackage * dp = new DisplayPackage();
+
+    dp->ascan._samples.resize(ASCAN_SAMPLES_SIZE);
+    dp->bscan._samples.resize(ASCAN_SAMPLES_SIZE);
+
+    dp->ascan._channel = _line1CurrentAscan->_header._channelNo;
+    dp->bscan._channel = _line1CurrentAscan->_header._channelNo;
+
+    memcpy(dp->ascan._samples.data(),_line1CurrentAscan->_samples,ASCAN_SAMPLES_SIZE);
+    memcpy(dp->bscan._samples.data(),_line1CurrentAscan->_samples,ASCAN_SAMPLES_SIZE);
+    /*for(int i=0; i<ASCAN_SAMPLES_SIZE; i++) {
+        drawData->_samples.push_back(_line1CurrentAscan->_samples[i]);
+    }*/
+
+    //QSharedPointer<AScanDrawData> data = ;
+    emit drawDisplayPackage(QSharedPointer<DisplayPackage>(dp));
+    //emit drawBscan(QSharedPointer<BScanDrawData>(bscanData));
+    //emit drawAscan(QSharedPointer<AScanDrawData>(ascanData));
 }
 
 void Core::sync()
