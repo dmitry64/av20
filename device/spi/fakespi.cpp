@@ -73,7 +73,7 @@ void FakeSPI::setAScanForLine1(uint8_t *dest)
         }
 
         res *= getTVGSample2( tvg._samples, i/4) / 127.0;
-        res *= 1.8;
+        res *= 1.8 * (ascanL1Counter2 % 255)/255.0;
         int val = round(res);
         unsigned char sh = val;
         dest[i+ASCAN_HEADER_SIZE] = sh;
@@ -181,7 +181,7 @@ void FakeSPI::getRegister(uint8_t reg, uint32_t length, uint8_t *dest)
         break;
     }
 
-    usleep(500);
+    usleep(10);
 }
 
 void FakeSPI::setRegister(uint8_t reg, const uint32_t length, uint8_t *src)
@@ -224,13 +224,13 @@ void FakeSPI::setRegister(uint8_t reg, const uint32_t length, uint8_t *src)
         }
         break;
     }
-    usleep(500);
+    usleep(10);
 }
 
 bool FakeSPI::setAndTestRegister(uint8_t reg, const uint32_t length, uint8_t *src)
 {
     setRegister(reg,length,src);
-    usleep(100);
+    usleep(10);
     return false;
 }
 

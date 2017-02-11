@@ -38,6 +38,7 @@ void BScanPage::setChannles(std::vector<std::vector<Channel> > channelsConfigura
 {
     for(int i=0; i<channelsConfiguration.size(); i++) {
         BScanWidget * widget = new BScanWidget(this);
+        widget->setRestrictedToChannel(true);
         std::vector<Channel> info = channelsConfiguration[i];
         widget->setChannelsInfo(info);
         _bScanWidgets.push_back(widget);
@@ -52,5 +53,15 @@ void BScanPage::onBScan(QSharedPointer<BScanDrawData> scan)
     //qDebug() << "size:"<<widgets.size();
     for(int i=0; i<widgets.size(); i++) {
         //widgets[i]->onBScan(scan);
+    }
+}
+
+void BScanPage::onDisplayPackage(QSharedPointer<DisplayPackage> dp)
+{
+    uint8_t channel = dp->bscan._channel;
+    std::vector<BScanWidget*> widgets = getWidgetsByChannel(channel);
+    //qDebug() << "size:"<<widgets.size();
+    for(int i=0; i<widgets.size(); i++) {
+        widgets[i]->onBScan(&(dp->bscan));
     }
 }
