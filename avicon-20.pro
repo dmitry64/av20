@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui opengl
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -52,7 +52,14 @@ SOURCES += main.cpp\
     device/channel.cpp \
     ui/bscanpage.cpp \
     ui/ascanpage.cpp \
-    ui/menupanel.cpp
+    ui/menupanel.cpp \
+    ui/bscanwidgetopengl.cpp \
+    device/modificators/gatemodificator.cpp \
+    ui/controls/gatecontroller.cpp \
+    ui/controls/addgatebutton.cpp \
+    ui/controls/iconwidget.cpp \
+    device/modificators/addgatemodificator.cpp \
+    device/modificators/removegatemodificator.cpp
 
 HEADERS  += debuggui.h \
     core.h \
@@ -77,7 +84,14 @@ HEADERS  += debuggui.h \
     device/channel.h \
     ui/bscanpage.h \
     ui/ascanpage.h \
-    ui/menupanel.h
+    ui/menupanel.h \
+    ui/bscanwidgetopengl.h \
+    device/modificators/gatemodificator.h \
+    ui/controls/gatecontroller.h \
+    ui/controls/addgatebutton.h \
+    ui/controls/iconwidget.h \
+    device/modificators/addgatemodificator.h \
+    device/modificators/removegatemodificator.h
 
 FORMS    += debuggui.ui \
     ui/ascanwidget.ui \
@@ -89,7 +103,11 @@ FORMS    += debuggui.ui \
     ui/controls/channelbutton.ui \
     ui/bscanpage.ui \
     ui/ascanpage.ui \
-    ui/menupanel.ui
+    ui/menupanel.ui \
+    ui/bscanwidgetopengl.ui \
+    ui/controls/gatecontroller.ui \
+    ui/controls/addgatebutton.ui \
+    ui/controls/iconwidget.ui
 
 RESOURCES += \
     resources.qrc

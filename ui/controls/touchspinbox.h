@@ -17,10 +17,11 @@ class TouchSpinBox : public QWidget
     QString _name;
     QTimer _timer;
 public:
-    explicit TouchSpinBox(QString name, QWidget *parent = 0);
+    explicit TouchSpinBox( QWidget *parent = 0);
     ~TouchSpinBox();
 
     void setValue(double value);
+    void setName(QString name);
 private:
     Ui::TouchSpinBox *ui;
 signals:

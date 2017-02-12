@@ -37,8 +37,10 @@ public:
     void setRestrictedToChannel(bool flag);
     std::vector<Channel> channels() const;
 
+
 public slots:
     void onBScan(BScanDrawData * scan);
+    void onChannelChanged(Channel channel);
 private:
     Ui::BScanWidget *ui;
 };

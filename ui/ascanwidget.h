@@ -34,6 +34,7 @@ public:
 public slots:
     void onAScan(AScanDrawData * scan);
     void onTVG(TVG tvg);
+    void onChannelChanged(Channel channel);
 private:
     Ui::AScanWidget *ui;
 };

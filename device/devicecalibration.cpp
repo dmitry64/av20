@@ -33,6 +33,14 @@ void DeviceCalibration::init()
         Channel * ch = new Channel(i);
         ch->setBaseSensLevel(72 + i);
         ch->setTvgMode(TVGMode::CurveMode);
+        std::vector<Gate> gates;
+        Gate g1;
+        g1._start = 110;
+        g1._finish = 152;
+        g1._level = 53;
+        g1._id = 0;
+        gates.push_back(g1);
+        ch->setGates(gates);
         _channels.push_back(ch);
     }
     for(int i=0;i<MAX_TACTS_COUNT; i++) {

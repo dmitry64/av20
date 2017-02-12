@@ -1,6 +1,9 @@
 #include "core.h"
 #include <QDebug>
 #include "device/modificators/tvgsimplemodificator.h"
+#include "device/modificators/gatemodificator.h"
+#include "device/modificators/addgatemodificator.h"
+#include "device/modificators/removegatemodificator.h"
 
 DeviceCalibration * Core::getSnapshot()
 {
@@ -105,7 +108,7 @@ void Core::status()
         if(status.ready!=current.ready) {
             emit deviceReady(current.ready);
         }
-        usleep(100);
+        usleep(10);
     }
     _device->setProgTrigger(false);
 }
@@ -207,9 +210,21 @@ void Core::searchWork()
     sync();
 }
 
+void Core::addModificator(Modificator *mod)
+{
+    _changesMutex->lock();
+    _pendingChanges.push(mod);
+    _changesMutex->unlock();
+}
+
 void Core::notifyTVG(TVG & tvg)
 {
     emit drawTVG(tvg);
+}
+
+void Core::notifyChannel(Channel channel)
+{
+    emit channelChanged(channel);
 }
 
 void Core::setDeviceMode(uint8_t mode)
@@ -217,13 +232,10 @@ void Core::setDeviceMode(uint8_t mode)
     _deviceMode.store(mode);
 }
 
-void Core::setChannelBaseSens(int channel, int value)
+void Core::setChannelBaseSens(uint8_t channel, int value)
 {
     TVGSimpleModificator * mod = new TVGSimpleModificator(channel, value);
-
-    _changesMutex->lock();
-    _pendingChanges.push(mod);
-    _changesMutex->unlock();
+    addModificator(mod);
 }
 
 void Core::setTvgCurve(std::vector<uint8_t> points)
@@ -236,5 +248,26 @@ void Core::setSingleChannel(uint8_t channel)
     qDebug() << "Setting channel:" <<channel;
     _targetChannel.store(channel);
     //emit channelChanged(channel);
+}
+
+void Core::addGate(uint8_t channel, Gate gate)
+{
+    qDebug() << "Add gate to channel" <<channel;
+    AddGateModificator * mod = new AddGateModificator(channel,gate);
+    addModificator(mod);
+}
+
+void Core::modifyGate(uint8_t channel, Gate gate)
+{
+    qDebug() << "Modify gate" << gate._id << "from channel" <<channel;
+    GateModificator * mod = new GateModificator(channel,gate);
+    addModificator(mod);
+}
+
+void Core::removeGate(uint8_t channel, uint8_t id)
+{
+    qDebug() << "Remove gate" << id << "from channel" <<channel;
+    RemoveGateModificator * mod = new RemoveGateModificator(channel,id);
+    addModificator(mod);
 }
 

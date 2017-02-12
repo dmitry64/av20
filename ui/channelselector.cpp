@@ -8,10 +8,6 @@ ChannelSelector::ChannelSelector(QWidget *parent) :
     ui(new Ui::ChannelSelector)
 {
     ui->setupUi(this);
-
-
-
-
 }
 
 ChannelSelector::~ChannelSelector()

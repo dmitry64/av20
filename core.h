@@ -42,6 +42,7 @@ public:
     DeviceCalibration *getSnapshot();
 
     void notifyTVG(TVG &tvg);
+    void notifyChannel(Channel channel);
 
 private:
     void init();
@@ -57,11 +58,17 @@ private:
     void evaluationWork();
     void searchWork();
 
+
+    void addModificator(Modificator * mod);
+
 public:
     void setDeviceMode(uint8_t mode);
-    void setChannelBaseSens(int channel, int value);
+    void setChannelBaseSens(uint8_t channel, int value);
     void setTvgCurve(std::vector<uint8_t> points);
     void setSingleChannel(uint8_t channel);
+    void addGate(uint8_t channel, Gate gate);
+    void modifyGate(uint8_t channel, Gate gate);
+    void removeGate(uint8_t channel, uint8_t id);
 
     Device *getDevice() const;
 
@@ -70,6 +77,7 @@ signals:
     void drawBscan(QSharedPointer<BScanDrawData> scan);
     void drawDisplayPackage(QSharedPointer<DisplayPackage> package);
     void drawTVG(TVG tvg);
+    void channelChanged(Channel channel);
     //void channelChanged(uint8_t channel);
     void debug(int);
     void connection(bool);

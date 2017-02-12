@@ -10,7 +10,7 @@ class Modificator
 public:
     Modificator();
     virtual ~Modificator();
-    virtual void apply(Core * device) = 0;
+    virtual void apply(Core * core) = 0;
 };
 
 #endif // MODIFICATOR_H

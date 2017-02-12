@@ -38,6 +38,7 @@ public slots:
     void onAScan(QSharedPointer<AScanDrawData> scan);
     void onBScan(QSharedPointer<BScanDrawData> scan);
     void onTVG(TVG tvg);
+    void onChannelChanged(Channel channel);
 
     void onDisplayPackage(QSharedPointer<DisplayPackage> dp);
     //void onChannelChanged(uint8_t channel);
@@ -47,6 +48,7 @@ signals:
     void AScanAB(QSharedPointer<AScanDrawData> scan);
     void BScanAB(QSharedPointer<BScanDrawData> scan);
     void TVGReady(TVG tvg);
+    void channelChanged(Channel channel);
 private slots:
     void on_exitButton_released();
     void on_pushButton_2_released();

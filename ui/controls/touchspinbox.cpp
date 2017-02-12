@@ -1,14 +1,13 @@
 #include "touchspinbox.h"
 #include "ui_touchspinbox.h"
 
-TouchSpinBox::TouchSpinBox(QString name, QWidget *parent) :
+TouchSpinBox::TouchSpinBox(QWidget *parent) :
     QWidget(parent),
-    _name(name),
     _value(0),
     ui(new Ui::TouchSpinBox)
 {
     ui->setupUi(this);
-    ui->nameLabel->setText(name);
+    ui->nameLabel->setText("");
     _timer.setInterval(100);
     connect(&_timer,SIGNAL(timeout()),this,SLOT(onTimer()));
     _direction = false;
@@ -23,6 +22,12 @@ void TouchSpinBox::setValue(double value)
 {
     _value = value;
     ui->valueLabel->setText(QString::number(value));
+}
+
+void TouchSpinBox::setName(QString name)
+{
+    _name = name;
+    ui->nameLabel->setText(name);
 }
 
 void TouchSpinBox::onTimer()

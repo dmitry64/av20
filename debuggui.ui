@@ -606,7 +606,7 @@
         </attribute>
         <layout class="QVBoxLayout" name="verticalLayout_4">
          <item>
-          <widget class="BScanWidget" name="bscanWidgetSingle" native="true"/>
+          <widget class="BScanWidgetOpenGL" name="bscanWidgetSingle" native="true"/>
          </item>
         </layout>
        </widget>
@@ -672,12 +672,6 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>BScanWidget</class>
-   <extends>QWidget</extends>
-   <header>ui/bscanwidget.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
    <class>BScanPage</class>
    <extends>QWidget</extends>
    <header>ui/bscanpage.h</header>
@@ -693,6 +687,12 @@
    <class>MenuPanel</class>
    <extends>QWidget</extends>
    <header>ui/menupanel.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>BScanWidgetOpenGL</class>
+   <extends>QWidget</extends>
+   <header>ui/bscanwidgetopengl.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

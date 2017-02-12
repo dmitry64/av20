@@ -14,6 +14,7 @@ AScanWidget::AScanWidget(QWidget *parent) :
     _tvgCurvePen = QPen(QColor(250,10,10), 2);
     _ascanBrush = QBrush(QColor(80,80,200));
     _ascanPen = QPen(QColor(10,10,70), 1);
+    this->setAttribute(Qt::WA_OpaquePaintEvent);
 }
 
 AScanWidget::~AScanWidget()
@@ -24,6 +25,7 @@ AScanWidget::~AScanWidget()
 void AScanWidget::paintEvent(QPaintEvent *event)
 {
     QPainter painter(this);
+
     const int w = width();
     const int h = height();
     const int width = w - 64;
@@ -34,6 +36,7 @@ void AScanWidget::paintEvent(QPaintEvent *event)
     const int left = 32;
     const int top = 32;
     const int bottom = h - 32;
+    painter.fillRect(0,0,w,h,Qt::white);
 
     painter.setPen(Qt::black);
     painter.fillRect(left,bottom,top,right, Qt::white);//QRect(bottomLeft,topRight),Qt::white);
@@ -137,5 +140,16 @@ void AScanWidget::onTVG(TVG tvg)
     }
 
     update();
+}
+
+void AScanWidget::onChannelChanged(Channel channel)
+{
+    for(uint8_t j=0; j<_channels.size(); j++) {
+        uint8_t chan = channel.index();
+        if(chan == _channels[j].index())
+        {
+            _channels[j] = channel;
+        }
+    }
 }
 

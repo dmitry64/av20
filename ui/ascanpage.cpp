@@ -7,6 +7,7 @@ AScanPage::AScanPage(QWidget *parent) :
 {
     ui->setupUi(this);
     connect(ui->channelSelector,SIGNAL(channelChanged(uint8_t)),this,SLOT(setChannel(uint8_t)));
+    //connect(this,SIGNAL(drawDisplayPackage(QSharedPointer<DisplayPackage>)),ui->ascanWidget,SLOT()
 }
 
 AScanPage::~AScanPage()
@@ -68,6 +69,12 @@ void AScanPage::onDisplayPackage(QSharedPointer<DisplayPackage> package)
 void AScanPage::onTVG(TVG tvg)
 {
     ui->ascanWidget->onTVG(tvg);
+}
+
+void AScanPage::onChannelChanged(Channel channel)
+{
+    ui->ascanWidget->onChannelChanged(channel);
+    ui->bscanWidget->onChannelChanged(channel);
 }
 
 void AScanPage::setChannel(uint8_t channel)

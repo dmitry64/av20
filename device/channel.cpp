@@ -17,6 +17,16 @@ void Channel::setPrismTime(int prismTime)
     _prismTime = prismTime;
 }
 
+std::vector<Gate> Channel::gates() const
+{
+    return _gates;
+}
+
+void Channel::setGates(const std::vector<Gate> &gates)
+{
+    _gates = gates;
+}
+
 Channel::Channel(uint8_t index) :_index(index), _baseSensLevel(0), _tvgMode(TVGMode::CurveMode)
 {
 

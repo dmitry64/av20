@@ -2,9 +2,11 @@
 #define CONTROLPANEL_H
 
 #include <QWidget>
+#include <QVBoxLayout>
 #include "core.h"
 #include "ui/controls/touchspinbox.h"
-
+#include "ui/controls/gatecontroller.h"
+#include "ui/controls/addgatebutton.h"
 
 namespace Ui {
 class ControlPanel;
@@ -18,14 +20,18 @@ class ControlPanel : public QWidget
 
     TouchSpinBox * _sensBaseLevel;
     TouchSpinBox * _prismTimeSpinbox;
-    int _currentChannel;
+    std::vector<GateController*> _gates;
+    QVBoxLayout * _gatesLayout;
+    AddGateButton * _addGateButton;
+    uint8_t _gateCounter;
+    uint8_t _currentChannel;
 
 public:
     explicit ControlPanel(QWidget *parent = 0);
     ~ControlPanel();
     void setCore(Core * ptr);
     void setMode(uint8_t deviceMode);
-    void setChannel(int channel);
+    void setChannel(uint8_t channel);
     void init(DeviceCalibration *calibration);
 
 private:
@@ -36,6 +42,8 @@ signals:
 
 public slots:
     void sensChanged(double value);
+    void onDeleteGate(Gate gate, GateController * controller);
+    void onAddGate();
 
 private:
     Ui::ControlPanel *ui;

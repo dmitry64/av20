@@ -28,7 +28,10 @@ public slots:
     void onBScan(QSharedPointer<BScanDrawData> scan);
     void onDisplayPackage(QSharedPointer<DisplayPackage> package);
     void onTVG(TVG tvg);
+    void onChannelChanged(Channel channel);
     void setChannel(uint8_t channel);
+signals:
+    void drawDisplayPackage(QSharedPointer<DisplayPackage> package);
 private:
     Ui::AScanPage *ui;
 };

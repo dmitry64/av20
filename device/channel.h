@@ -13,6 +13,7 @@ class Channel
     std::vector<uint8_t> _tvgPoints;
     TVGMode _tvgMode;
     int _prismTime;
+    std::vector<Gate> _gates;
 
 public:
     Channel(uint8_t index);
@@ -26,6 +27,8 @@ public:
     uint8_t index() const;
     int prismTime() const;
     void setPrismTime(int prismTime);
+    std::vector<Gate> gates() const;
+    void setGates(const std::vector<Gate> &gates);
 };
 
 #endif // CHANNEL_H
