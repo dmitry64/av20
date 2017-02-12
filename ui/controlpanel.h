@@ -5,6 +5,7 @@
 #include <QVBoxLayout>
 #include "core.h"
 #include "ui/controls/touchspinbox.h"
+#include "ui/controls/touchspinboxstring.h"
 #include "ui/controls/gatecontroller.h"
 #include "ui/controls/addgatebutton.h"
 
@@ -20,6 +21,8 @@ class ControlPanel : public QWidget
 
     TouchSpinBox * _sensBaseLevel;
     TouchSpinBox * _prismTimeSpinbox;
+    TouchSpinBoxString * _frequencySpinbox;
+    TouchSpinBoxString * _progSpinbox;
     std::vector<GateController*> _gates;
     QVBoxLayout * _gatesLayout;
     AddGateButton * _addGateButton;
@@ -42,6 +45,7 @@ signals:
 
 public slots:
     void sensChanged(double value);
+    void onGateChanged(Gate gate);
     void onDeleteGate(Gate gate, GateController * controller);
     void onAddGate();
 

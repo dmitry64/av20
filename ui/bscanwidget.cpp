@@ -24,19 +24,19 @@ BScanWidget::BScanWidget(QWidget *parent) :
     ui(new Ui::BScanWidget)
 {
     ui->setupUi(this);
-    _width = 800;
+    _width = 1000;
 
     for(int i=0; i<MAX_CHANNELS_COUNT; i++) {
-        std::pair< std::vector<QLinearGradient> , int> pair;
+        std::pair< std::vector< std::vector<BScanDrawSample> > , int> pair;
         pair.first.resize(_width);
         pair.second = 0;
-        _gradients.push_back(pair);
+        _samples.push_back(pair);
     }
 
     _restrictedToChannel = false;
-    this->setAttribute(Qt::WA_OpaquePaintEvent);
+    //this->setAttribute(Qt::WA_OpaquePaintEvent);
 
-    _end = 799;
+    _end = 999;
 }
 
 BScanWidget::~BScanWidget()
@@ -72,19 +72,26 @@ void BScanWidget::paintEvent(QPaintEvent *event)
 
     for(uint8_t n=0; n<_channels.size(); n++) {
         uint8_t chan = _channels[n].index();
-        uint16_t elements = std::max(static_cast<int>(_width - _gradients[chan].first.size()),0);
-        uint16_t k = (_gradients[chan]).second;
+        uint16_t elements = std::max(static_cast<int>(_width - _samples[chan].first.size()),0);
+        uint16_t k = (_samples[chan]).second;
 
 
         for(uint16_t i=elements; i<_width; i++) {
-            QLinearGradient & grad = ((_gradients[chan]).first)[k];
+            std::vector<BScanDrawSample> sam = ((_samples[chan]).first)[k];
             if(k == _end ) {
                 k = 0;
             } else {
                 k++;
             }
 
-            painter.fillRect(QRectF(left + step*i,1.0,step,bottom-2.0), QColor(i % 255,k % 255,80));
+            //painter.fillRect(QRectF(left + step*i,1.0,step,bottom-2.0), Qt::white);
+
+            for(int y=0; y<sam.size(); y++) {
+                int y1 = (sam[y]._begin) * ( h / 200.0);
+                int y2 = (sam[y]._end) * ( h / 200.0);
+                uint8_t level = sam[y]._level;
+                painter.fillRect(QRectF(left + step*i,1.0 + y1,step, y2 - y1), QColor( level ,255 - level, 0 ));
+            }
         }
     }
 
@@ -119,9 +126,17 @@ void BScanWidget::onBScan(BScanDrawData *scan)
         }
     }
 
-    int oldStart = (_gradients[chan]).second;
+    int oldStart = (_samples[chan]).second;
 
-    QLinearGradient grad(0,0,0,1);
+    ((_samples[chan]).first)[oldStart] = scan->_samples;
+
+    (_samples[chan]).second++;
+
+    if((_samples[chan]).second == _width) {
+        (_samples[chan]).second = 0;
+    }
+
+    /*QLinearGradient grad(0,0,0,1);
     grad.setCoordinateMode(QGradient::ObjectBoundingMode);
 
     for(uint16_t j=0; j<scan->_samples.size(); j+=8) {
@@ -138,7 +153,7 @@ void BScanWidget::onBScan(BScanDrawData *scan)
 
     if((_gradients[chan]).second == _width) {
         (_gradients[chan]).second = 0;
-    }
+    }*/
 
     if(isVisible()) {
         update();

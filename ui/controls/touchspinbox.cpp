@@ -1,6 +1,20 @@
 #include "touchspinbox.h"
 #include "ui_touchspinbox.h"
 
+void TouchSpinBox::inc()
+{
+    if(_value < _max) {
+        _value += _step;
+    }
+}
+
+void TouchSpinBox::dec()
+{
+    if(_value > _min) {
+        _value -= _step;
+    }
+}
+
 TouchSpinBox::TouchSpinBox(QWidget *parent) :
     QWidget(parent),
     _value(0),
@@ -11,6 +25,10 @@ TouchSpinBox::TouchSpinBox(QWidget *parent) :
     _timer.setInterval(100);
     connect(&_timer,SIGNAL(timeout()),this,SLOT(onTimer()));
     _direction = false;
+    _min = 0;
+    _max = 255;
+    _step = 1;
+    _suffix = QString("");
 }
 
 TouchSpinBox::~TouchSpinBox()
@@ -21,7 +39,7 @@ TouchSpinBox::~TouchSpinBox()
 void TouchSpinBox::setValue(double value)
 {
     _value = value;
-    ui->valueLabel->setText(QString::number(value));
+    ui->valueLabel->setText(QString::number(value) + " " + _suffix);
 }
 
 void TouchSpinBox::setName(QString name)
@@ -30,21 +48,41 @@ void TouchSpinBox::setName(QString name)
     ui->nameLabel->setText(name);
 }
 
+void TouchSpinBox::setMax(double max)
+{
+    _max = max;
+}
+
+void TouchSpinBox::setMin(double min)
+{
+    _min = min;
+}
+
+void TouchSpinBox::setStep(double step)
+{
+    _step = step;
+}
+
+void TouchSpinBox::setSuffix(QString suf)
+{
+    _suffix = suf;
+}
+
 void TouchSpinBox::onTimer()
 {
     if(_direction) {
-        _value -= 1;
+        dec();
     } else {
-        _value += 1;
+        inc();
     }
-    ui->valueLabel->setText(QString::number(_value));
+    ui->valueLabel->setText(QString::number(_value) + " " + _suffix);
     emit valueChanged(_value);
 }
 
 void TouchSpinBox::on_leftButton_pressed()
 {
-    _value -= 1;
-    ui->valueLabel->setText(QString::number(_value));
+    dec();
+    ui->valueLabel->setText(QString::number(_value) + " " + _suffix);
     _direction = true;
     _timer.start();
 
@@ -53,8 +91,8 @@ void TouchSpinBox::on_leftButton_pressed()
 
 void TouchSpinBox::on_rightButton_pressed()
 {
-    _value += 1;
-    ui->valueLabel->setText(QString::number(_value));
+    inc();
+    ui->valueLabel->setText(QString::number(_value) + " " + _suffix);
     _timer.start();
     _direction = false;
     emit valueChanged(_value);

@@ -16,7 +16,7 @@ class Channel
     std::vector<Gate> _gates;
 
 public:
-    Channel(uint8_t index);
+    Channel();
     int baseSensLevel() const;
     void setBaseSensLevel(int baseSensLevel);
     std::vector<uint8_t> tvgPoints() const;
@@ -29,6 +29,7 @@ public:
     void setPrismTime(int prismTime);
     std::vector<Gate> gates() const;
     void setGates(const std::vector<Gate> &gates);
+    void setIndex(const uint8_t &index);
 };
 
 #endif // CHANNEL_H

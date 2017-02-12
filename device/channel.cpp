@@ -27,7 +27,12 @@ void Channel::setGates(const std::vector<Gate> &gates)
     _gates = gates;
 }
 
-Channel::Channel(uint8_t index) :_index(index), _baseSensLevel(0), _tvgMode(TVGMode::CurveMode)
+void Channel::setIndex(const uint8_t &index)
+{
+    _index = index;
+}
+
+Channel::Channel() :_index(0), _baseSensLevel(0), _tvgMode(TVGMode::CurveMode)
 {
 
 }

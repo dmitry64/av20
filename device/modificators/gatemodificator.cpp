@@ -18,5 +18,7 @@ void GateModificator::apply(Core *core)
         }
     }
 
+    core->getCalibration()->getChannel(_channel)->setGates(gates);
+
     core->notifyChannel(*(core->getCalibration()->getChannel(_channel)));
 }

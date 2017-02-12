@@ -16,12 +16,24 @@ class TouchSpinBox : public QWidget
     bool _direction;
     QString _name;
     QTimer _timer;
+    double _max;
+    double _min;
+    double _step;
+    QString _suffix;
+
+private:
+    void inc();
+    void dec();
 public:
     explicit TouchSpinBox( QWidget *parent = 0);
     ~TouchSpinBox();
 
     void setValue(double value);
     void setName(QString name);
+    void setMax(double max);
+    void setMin(double min);
+    void setStep(double step);
+    void setSuffix(QString suf);
 private:
     Ui::TouchSpinBox *ui;
 signals:

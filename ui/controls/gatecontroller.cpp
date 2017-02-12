@@ -1,5 +1,6 @@
 #include "gatecontroller.h"
 #include "ui_gatecontroller.h"
+#include <QDebug>
 
 void GateController::updateGate()
 {
@@ -8,7 +9,7 @@ void GateController::updateGate()
     ui->gateLevel->setValue(_gate._level);
     ui->gateButton->setText("Gate: "+QString::number(_gate._start)+"-"+QString::number(_gate._finish)+"\n"+
                             "Level: "+QString::number(_gate._level));
-    ui->gateIcon->setColor(QColor(_gate._level,128,255 - _gate._level));
+    ui->gateIcon->setColor(QColor( _gate._level ,255 - _gate._level, 0 ));
     update();
 }
 
@@ -18,8 +19,11 @@ GateController::GateController(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->gateStart->setName("Gate start");
+    ui->gateStart->setSuffix("us");
     ui->gateFinish->setName("Gate end");
+    ui->gateFinish->setSuffix("us");
     ui->gateLevel->setName("Gate level");
+    ui->gateLevel->setSuffix("us");
     ui->gateIcon->setIcon(QIcon(":/icons/resources/icons/arrows_fit_horizontal.png"));
     ui->gateIcon->setColor(Qt::red);
     ui->gateStart->hide();
@@ -38,6 +42,7 @@ GateController::~GateController()
 
 void GateController::setGate(Gate gate)
 {
+    qDebug() << "Set gate" << gate._start;
     _gate = gate;
     updateGate();
 }

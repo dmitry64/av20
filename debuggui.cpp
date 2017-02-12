@@ -20,6 +20,8 @@ DebugGUI::DebugGUI(QWidget *parent) :
     connect(this,SIGNAL(drawDisplayPackage(QSharedPointer<DisplayPackage>)), ui->aScanPage,SLOT(onDisplayPackage(QSharedPointer<DisplayPackage>)));
     connect(this,SIGNAL(drawDisplayPackage(QSharedPointer<DisplayPackage>)), ui->bscan8,SLOT(onDisplayPackage(QSharedPointer<DisplayPackage>)));
 
+    connect(this,SIGNAL(channelChanged(Channel)),ui->aScanPage,SLOT(onChannelChanged(Channel)));
+
     connect(this,SIGNAL(TVGReady(TVG)),ui->ascanWidgetSingle,SLOT(onTVG(TVG)));
     connect(this,SIGNAL(TVGReady(TVG)),ui->aScanPage,SLOT(onTVG(TVG)));
 }

@@ -26,6 +26,7 @@ class AScanWidget : public QWidget
     QPen _tvgCurvePen;
     QPen _ascanPen;
     QBrush _ascanBrush;
+
 public:
     explicit AScanWidget(QWidget *parent = 0);
     ~AScanWidget();

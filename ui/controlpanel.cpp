@@ -12,14 +12,46 @@ ControlPanel::ControlPanel(QWidget *parent) :
 
     _sensBaseLevel = new TouchSpinBox();
     _sensBaseLevel->setName("Base sens.");
+    _sensBaseLevel->setSuffix("dB");
     ui->scrollLayout->addWidget(_sensBaseLevel);
 
     _prismTimeSpinbox = new TouchSpinBox();
     _prismTimeSpinbox->setName("Prism time");
+    _prismTimeSpinbox->setMin(0);
+    _prismTimeSpinbox->setMax(50);
+    _prismTimeSpinbox->setValue(0);
+    _prismTimeSpinbox->setSuffix("us");
     ui->scrollLayout->addWidget(_prismTimeSpinbox);
 
-    _gateCounter = 0;
+    _frequencySpinbox = new TouchSpinBoxString();
+    std::vector<QString> freqvalues;
+    freqvalues.push_back("1.0 MHz");
+    freqvalues.push_back("1.25 MHz");
+    freqvalues.push_back("2.0 MHz");
+    freqvalues.push_back("2.5 MHz");
+    freqvalues.push_back("4.0 MHz");
+    freqvalues.push_back("5.0 MHz");
+    freqvalues.push_back("8.0 MHz");
+    freqvalues.push_back("10.0 MHz");
+    _frequencySpinbox->setValues(freqvalues);
+    _frequencySpinbox->setName("Frequency");
+    ui->scrollLayout->addWidget(_frequencySpinbox);
 
+    _progSpinbox = new TouchSpinBoxString();
+    std::vector<QString> progvalues;
+    progvalues.push_back("Prog 1");
+    progvalues.push_back("Prog 2");
+    progvalues.push_back("Prog 3");
+    progvalues.push_back("Prog 4");
+    progvalues.push_back("Prog 5");
+    progvalues.push_back("Prog 6");
+    progvalues.push_back("Prog 7");
+    progvalues.push_back("Prog 8");
+    _progSpinbox->setValues(progvalues);
+    _progSpinbox->setName("Pulse prog.");
+    ui->scrollLayout->addWidget(_progSpinbox);
+
+    _gateCounter = 0;
     _gatesLayout = new QVBoxLayout();
     ui->scrollLayout->addLayout(_gatesLayout);
 
@@ -73,17 +105,19 @@ void ControlPanel::setMode(uint8_t deviceMode)
 void ControlPanel::setChannel(uint8_t channel)
 {
     _currentChannel = channel;
+
+}
+
+void ControlPanel::init(DeviceCalibration * calibration)
+{
+    _sensBaseLevel->setValue(calibration->getChannel(_currentChannel)->baseSensLevel());
+
     _gateCounter = 0;
     for(int i=0; i<_gates.size(); i++) {
         _gatesLayout->removeWidget(_gates[i]);
         delete _gates[i];
     }
     _gates.clear();
-}
-
-void ControlPanel::init(DeviceCalibration * calibration)
-{
-    _sensBaseLevel->setValue(calibration->getChannel(_currentChannel)->baseSensLevel());
 
     std::vector<Gate> gates = calibration->getChannel(_currentChannel)->gates();
     for(uint8_t i=0; i<gates.size(); i++) {
@@ -92,6 +126,7 @@ void ControlPanel::init(DeviceCalibration * calibration)
         _gates.push_back(gateController);
         _gatesLayout->addWidget(gateController);
         connect(gateController,SIGNAL(deleteGate(Gate,GateController*)),this,SLOT(onDeleteGate(Gate,GateController*)));
+        connect(gateController,SIGNAL(gateChanged(Gate)),this,SLOT(onGateChanged(Gate)));
         _gateCounter++;
     }
 }
@@ -99,6 +134,11 @@ void ControlPanel::init(DeviceCalibration * calibration)
 void ControlPanel::sensChanged(double value)
 {
     _core->setChannelBaseSens(_currentChannel, value);
+}
+
+void ControlPanel::onGateChanged(Gate gate)
+{
+    _core->modifyGate(_currentChannel,gate);
 }
 
 void ControlPanel::onDeleteGate(Gate gate, GateController *controller)
@@ -131,4 +171,5 @@ void ControlPanel::onAddGate()
     _gates.push_back(gateController);
     _gatesLayout->addWidget(gateController);
     connect(gateController,SIGNAL(deleteGate(Gate,GateController*)),this,SLOT(onDeleteGate(Gate,GateController*)));
+    connect(gateController,SIGNAL(gateChanged(Gate)),this,SLOT(onGateChanged(Gate)));
 }

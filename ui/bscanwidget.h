@@ -19,7 +19,8 @@ class BScanWidget : public QWidget
     std::vector<Channel> _channels;
 
     //std::map<uint8_t, std::vector<QLinearGradient> > _gradients;
-    std::vector< std::pair< std::vector<QLinearGradient> , int> > _gradients;
+    //std::vector< std::pair< std::vector<QLinearGradient> , int> > _gradients;
+    std::vector< std::pair< std::vector< std::vector<BScanDrawSample> > , int> > _samples;
 
     int _width;
     int _end;

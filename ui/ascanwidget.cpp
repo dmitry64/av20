@@ -25,7 +25,6 @@ AScanWidget::~AScanWidget()
 void AScanWidget::paintEvent(QPaintEvent *event)
 {
     QPainter painter(this);
-
     const int w = width();
     const int h = height();
     const int width = w - 64;
@@ -82,8 +81,23 @@ void AScanWidget::paintEvent(QPaintEvent *event)
         tvgStart = tvgNext;
     }
 
+
+    for(uint8_t i=0; i<_channels.size(); i++) {
+        for(uint8_t j=0; j<_channels[i].gates().size(); j++) {
+            Gate gate = _channels[i].gates()[j];
+            int level = bottom - (gate._level * (h/255.0));
+            painter.setPen(QPen(QColor( gate._level ,255 - gate._level, 0 ), 3));
+            painter.drawLine(left + gate._start * scaleStep,level,left + gate._finish* scaleStep, level);
+            painter.drawLine(left + gate._start * scaleStep,level,left + gate._start * scaleStep - 5, level + 5);
+            painter.drawLine(left + gate._start * scaleStep,level,left + gate._start * scaleStep - 5, level - 5);
+            painter.drawLine(left + gate._finish * scaleStep,level,left + gate._finish * scaleStep + 5, level + 5);
+            painter.drawLine(left + gate._finish * scaleStep,level,left + gate._finish * scaleStep + 5, level - 5);
+        }
+    }
+
     quint64 time = _fpsTimer.restart();
     double fps = 1000.0 / time;
+    painter.setPen(QPen(Qt::black));
     painter.drawText(QPoint(w - 140, 30),"fps: " + QString::number(fps,'f', 2));
 }
 
@@ -106,6 +120,7 @@ void AScanWidget::onAScan(AScanDrawData *scan)
                 }
             }
         }
+        //if(!_vsync)
         update();
     }
 }

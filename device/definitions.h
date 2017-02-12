@@ -44,6 +44,13 @@ struct AScanHeader {
 };
 #pragma pack(pop)
 
+
+struct BScanDrawSample {
+    uint8_t _begin;
+    uint8_t _end;
+    uint8_t _level;
+};
+
 struct AScanDrawData {
     uint8_t _channel;
     std::vector<uint8_t> _samples;
@@ -51,7 +58,7 @@ struct AScanDrawData {
 
 struct BScanDrawData {
     uint8_t _channel;
-    std::vector<uint8_t> _samples;
+    std::vector<BScanDrawSample> _samples;
 };
 
 struct DisplayPackage {

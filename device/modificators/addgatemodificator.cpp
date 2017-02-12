@@ -11,4 +11,5 @@ void AddGateModificator::apply(Core *core)
     std::vector<Gate> gates = core->getCalibration()->getChannel(_channel)->gates();
     gates.push_back(_gate);
     core->getCalibration()->getChannel(_channel)->setGates(gates);
+    core->notifyChannel(*(core->getCalibration()->getChannel(_channel)));
 }

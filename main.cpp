@@ -10,6 +10,8 @@ int main(int argc, char *argv[])
     qRegisterMetaType<QSharedPointer<DisplayPackage> >("QSharedPointer<DisplayPackage>");
     qRegisterMetaType<QSharedPointer<AScanDrawData> >("QSharedPointer<AScanDrawData>");
     qRegisterMetaType<QSharedPointer<BScanDrawData> >("QSharedPointer<BScanDrawData>");
+    qRegisterMetaType<Channel>("Channel");
+    qRegisterMetaType<Gate>("Gate");
     qRegisterMetaType<TVG>("TVG");
     Core * core = new Core();
     DebugGUI w;
@@ -32,7 +34,7 @@ int main(int argc, char *argv[])
     //QObject::connect(core,SIGNAL(deviceReady(bool)), &w, SLOT(onDeviceReadyStatusChanged(bool)));
 
     core->start();
-    w.show();
+    w.showFullScreen();
 
     return a.exec();
 }

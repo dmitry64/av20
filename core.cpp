@@ -144,16 +144,54 @@ void Core::process()
     DisplayPackage * dp = new DisplayPackage();
 
     dp->ascan._samples.resize(ASCAN_SAMPLES_SIZE);
-    dp->bscan._samples.resize(ASCAN_SAMPLES_SIZE);
+    //dp->bscan._samples.resize(ASCAN_SAMPLES_SIZE);
 
     dp->ascan._channel = _line1CurrentAscan->_header._channelNo;
     dp->bscan._channel = _line1CurrentAscan->_header._channelNo;
 
     memcpy(dp->ascan._samples.data(),_line1CurrentAscan->_samples,ASCAN_SAMPLES_SIZE);
-    memcpy(dp->bscan._samples.data(),_line1CurrentAscan->_samples,ASCAN_SAMPLES_SIZE);
+    //memcpy(dp->bscan._samples.data(),_line1CurrentAscan->_samples,ASCAN_SAMPLES_SIZE);
     /*for(int i=0; i<ASCAN_SAMPLES_SIZE; i++) {
         drawData->_samples.push_back(_line1CurrentAscan->_samples[i]);
     }*/
+
+    std::vector<Gate> gates = _currentCalibration->getChannel(dp->bscan._channel)->gates();
+
+    /*if(dp->bscan._channel == 0) {
+        qDebug() << "Gates size:" <<gates.size();
+        for(int i=0; i<gates.size(); i++) {
+            qDebug() << "Gate" <<gates[i]._id << "level" <<gates[i]._level << "start" << gates[i]._start;
+
+        }
+    }*/
+
+    for(int j=0; j<gates.size(); j++) {
+        Gate gate = gates[j];
+        int gateStart = static_cast<int>(gate._start) * 4;
+        int gateEnd = static_cast<int>(gate._finish) * 4;
+        int start = -1;
+        //int end = -1;
+        bool startFound = false;
+        for(int i=0; i<ASCAN_SAMPLES_SIZE; i++) {
+            uint8_t sample = _line1CurrentAscan->_samples[i];
+            if((sample>gate._level) &&(!startFound) && (i >= gateStart) && (i <= gateEnd)) {
+                start = i;
+                startFound = true;
+            } else if (startFound && (sample<gate._level || (i >= gateEnd))) {
+                BScanDrawSample drawSample;
+                drawSample._begin = start / 4;
+                drawSample._end = i / 4;
+                //if(dp->bscan._channel == 0)
+                //qDebug() << "Sample: "<<drawSample._begin<<drawSample._end << "st/i" <<start << i <<"passed"<<gate._start << gate._finish <<"alt"<<gateStart<<gateEnd;
+                drawSample._level = gate._level;
+                dp->bscan._samples.push_back(drawSample);
+                startFound = false;
+                start = -1;
+            }
+        }
+    }
+
+    //qDebug() << "Samples: " << dp->bscan._samples.size();
 
     //QSharedPointer<AScanDrawData> data = ;
     emit drawDisplayPackage(QSharedPointer<DisplayPackage>(dp));
