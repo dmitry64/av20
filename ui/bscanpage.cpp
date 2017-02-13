@@ -34,6 +34,11 @@ void BScanPage::setCore(Core *core)
     _core = core;
 }
 
+void BScanPage::init(DeviceCalibration *snapshot)
+{
+    ui->channelSelectionWidget->init(snapshot);
+}
+
 void BScanPage::setChannles(std::vector<std::vector<Channel> > channelsConfiguration)
 {
     for(int i=0; i<channelsConfiguration.size(); i++) {

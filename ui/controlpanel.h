@@ -21,8 +21,8 @@ class ControlPanel : public QWidget
 
     TouchSpinBox * _sensBaseLevel;
     TouchSpinBox * _prismTimeSpinbox;
-    TouchSpinBoxString * _frequencySpinbox;
-    TouchSpinBoxString * _progSpinbox;
+    //TouchSpinBoxString * _frequencySpinbox;
+    //TouchSpinBoxString * _progSpinbox;
     std::vector<GateController*> _gates;
     QVBoxLayout * _gatesLayout;
     AddGateButton * _addGateButton;

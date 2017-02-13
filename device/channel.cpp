@@ -54,6 +54,16 @@ uint8_t Channel::getColorBlue()
     return _colorBlue;
 }
 
+std::string Channel::getName() const
+{
+    return _name;
+}
+
+void Channel::setName(const std::string &name)
+{
+    _name = name;
+}
+
 Channel::Channel() :_index(0), _baseSensLevel(0), _tvgMode(TVGMode::CurveMode), _colorRed(0), _colorGreen(0), _colorBlue(0)
 {
 

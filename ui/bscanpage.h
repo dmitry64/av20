@@ -22,6 +22,8 @@ public:
     ~BScanPage();
 
     void setCore(Core * core);
+    void init(DeviceCalibration * snapshot);
+
     void setChannles(std::vector< std::vector<Channel> > channelsConfiguration);
 public slots:
     void onBScan(QSharedPointer<BScanDrawData> scan);

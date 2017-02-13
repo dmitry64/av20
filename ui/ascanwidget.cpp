@@ -107,6 +107,7 @@ void AScanWidget::setChannelsInfo(std::vector<Channel> channels)
     if(!channels.empty()) {
         onTVG(channels[0].generateTVG());
     }
+    update();
 }
 
 void AScanWidget::onAScan(AScanDrawData *scan)
@@ -164,7 +165,10 @@ void AScanWidget::onChannelChanged(Channel channel)
         if(chan == _channels[j].index())
         {
             _channels[j] = channel;
+            onTVG(channel.generateTVG());
         }
     }
+
+    update();
 }
 

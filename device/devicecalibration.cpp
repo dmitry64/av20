@@ -43,6 +43,8 @@ void DeviceCalibration::init()
         g1._finish = 172;
         g1._level = 50;
         g1._id = 0;
+        gates.push_back(g1);
+        ch->setGates(gates);
 
         switch (i) {
             case 0:
@@ -52,38 +54,44 @@ void DeviceCalibration::init()
             ch->setColor(30,255,30);
             break;
             case 2:
-            ch->setColor(30,30,255);
+            ch->setColor(255,30,255);
             break;
             case 3:
-            ch->setColor(255,255,30);
+            ch->setColor(255,128,128);
             break;
             case 4:
-            ch->setColor(255,30,255);
+            ch->setColor(255,255,30);
             break;
             case 5:
             ch->setColor(30,255,255);
             break;
             case 6:
-            ch->setColor(30,30,30);
+            ch->setColor(128,128,255);
             break;
             case 7:
-            ch->setColor(255,255,255);
+            ch->setColor(30,30,255);
             break;
         }
 
-        gates.push_back(g1);
-        ch->setGates(gates);
+        ch->setName("58");
+
         _channels.push_back(ch);
     }
     for(int i=0;i<MAX_TACTS_COUNT; i++) {
         Tact * tact = new Tact();
         tact->setRx1(i);
         tact->setTx1(i);
-        //if(i<8) {
+
         tact->setRx1Enabled(true);
         tact->setTx1Enabled(true);
         tact->setTactEnabled(true);
-        //}
+
+        tact->setFreq1(PulserFreq::Freq_2_5_MHz);
+        tact->setProg1(PulserProg::Prog_1);
+
+        tact->setFreq2(PulserFreq::Freq_2_5_MHz);
+        tact->setProg2(PulserProg::Prog_1);
+
         _tactTable.push_back(tact);
     }
 }

@@ -22,8 +22,8 @@ DebugGUI::DebugGUI(QWidget *parent) :
 
     connect(this,SIGNAL(channelChanged(Channel)),ui->aScanPage,SLOT(onChannelChanged(Channel)));
 
-    connect(this,SIGNAL(TVGReady(TVG)),ui->ascanWidgetSingle,SLOT(onTVG(TVG)));
-    connect(this,SIGNAL(TVGReady(TVG)),ui->aScanPage,SLOT(onTVG(TVG)));
+    //connect(this,SIGNAL(TVGReady(TVG)),ui->ascanWidgetSingle,SLOT(onTVG(TVG)));
+    //connect(this,SIGNAL(TVGReady(TVG)),ui->aScanPage,SLOT(onTVG(TVG)));
 }
 
 DebugGUI::~DebugGUI()
@@ -36,6 +36,7 @@ void DebugGUI::setCore(Core *core)
     _core = core;
 
     ui->aScanPage->setCore(core);
+    ui->channelsWidget->setCore(core);
 }
 
 AScanWidget *DebugGUI::getAscanWidgetSingle()
@@ -47,11 +48,7 @@ void DebugGUI::init()
 {
     if(_core!=0) {
         DeviceCalibration * calibration = _core->getSnapshot();
-
-
         ui->aScanPage->onTVG(calibration->getChannel(0)->generateTVG());
-
-
         ui->aScanPage->init(0,calibration);
 
         std::vector<Channel*> channels = calibration->getChannels();
@@ -64,14 +61,6 @@ void DebugGUI::init()
         ui->bscan8->setChannles(channelsTable);
 
         ui->channelsWidget->init(calibration);
-//        // TODO: apply
-
-//        ui->bscanWidgetSingle->setChannelsInfo(channelsCopy);
-//        ui->aScanPage->setBScanChannels(channelsCopy);
-
-//        std::vector<Channel> ascanChannels;
-//        ascanChannels.push_back(channelsCopy.at(0));
-//        ui->aScanPage->setAScanChannels(ascanChannels);
 
         delete calibration;
     }

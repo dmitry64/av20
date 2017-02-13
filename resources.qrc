@@ -101,5 +101,21 @@
         <file>resources/icons/basic_notebook_pen.png</file>
         <file>resources/icons/basic_folder.png</file>
         <file>resources/icons/basic_flag1.png</file>
+        <file>resources/icons/basic_webpage_multiple.png</file>
+        <file>resources/icons/arrows_squares.png</file>
+        <file>resources/icons/arrows_glide.png</file>
+        <file>resources/icons/weather_lightning.png</file>
+        <file>resources/icons/weather_drop.png</file>
+        <file>resources/icons/music_shuffle_button.png</file>
+        <file>resources/icons/music_rewind_button.png</file>
+        <file>resources/icons/music_repeat_button.png</file>
+        <file>resources/icons/music_play_button.png</file>
+        <file>resources/icons/music_pause_button.png</file>
+        <file>resources/icons/music_microphone_old.png</file>
+        <file>resources/icons/music_headphones.png</file>
+        <file>resources/icons/music_fastforward_button.png</file>
+        <file>resources/icons/music_end_button.png</file>
+        <file>resources/icons/music_eject_button.png</file>
+        <file>resources/icons/music_beginning_button.png</file>
     </qresource>
 </RCC>

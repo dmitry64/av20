@@ -22,7 +22,7 @@ ControlPanel::ControlPanel(QWidget *parent) :
     _prismTimeSpinbox->setValue(0);
     _prismTimeSpinbox->setSuffix("us");
     ui->scrollLayout->addWidget(_prismTimeSpinbox);
-
+/*
     _frequencySpinbox = new TouchSpinBoxString();
     std::vector<QString> freqvalues;
     freqvalues.push_back("1.0 MHz");
@@ -50,7 +50,7 @@ ControlPanel::ControlPanel(QWidget *parent) :
     _progSpinbox->setValues(progvalues);
     _progSpinbox->setName("Pulse prog.");
     ui->scrollLayout->addWidget(_progSpinbox);
-
+*/
     _gateCounter = 0;
     _gatesLayout = new QVBoxLayout();
     ui->scrollLayout->addLayout(_gatesLayout);
@@ -105,7 +105,7 @@ void ControlPanel::setMode(uint8_t deviceMode)
 void ControlPanel::setChannel(uint8_t channel)
 {
     _currentChannel = channel;
-
+    update();
 }
 
 void ControlPanel::init(DeviceCalibration * calibration)
@@ -129,6 +129,7 @@ void ControlPanel::init(DeviceCalibration * calibration)
         connect(gateController,SIGNAL(gateChanged(Gate)),this,SLOT(onGateChanged(Gate)));
         _gateCounter++;
     }
+    update();
 }
 
 void ControlPanel::sensChanged(double value)
@@ -139,6 +140,7 @@ void ControlPanel::sensChanged(double value)
 void ControlPanel::onGateChanged(Gate gate)
 {
     _core->modifyGate(_currentChannel,gate);
+    update();
 }
 
 void ControlPanel::onDeleteGate(Gate gate, GateController *controller)
@@ -155,6 +157,7 @@ void ControlPanel::onDeleteGate(Gate gate, GateController *controller)
     }
     _gates.erase(it);
     _core->removeGate(_currentChannel,gate._id);
+    update();
 }
 
 void ControlPanel::onAddGate()
@@ -172,4 +175,5 @@ void ControlPanel::onAddGate()
     _gatesLayout->addWidget(gateController);
     connect(gateController,SIGNAL(deleteGate(Gate,GateController*)),this,SLOT(onDeleteGate(Gate,GateController*)));
     connect(gateController,SIGNAL(gateChanged(Gate)),this,SLOT(onGateChanged(Gate)));
+    update();
 }

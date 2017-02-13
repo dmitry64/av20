@@ -9,11 +9,13 @@
 class Channel
 {
     uint8_t _index;
+    std::string _name;
     int _baseSensLevel;
     std::vector<uint8_t> _tvgPoints;
     TVGMode _tvgMode;
     int _prismTime;
     std::vector<Gate> _gates;
+
 
     uint8_t _colorRed;
     uint8_t _colorGreen;
@@ -37,6 +39,8 @@ public:
     uint8_t getColorRed();
     uint8_t getColorGreen();
     uint8_t getColorBlue();
+    std::string getName() const;
+    void setName(const std::string &name);
 };
 
 #endif // CHANNEL_H

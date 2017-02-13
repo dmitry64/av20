@@ -30,11 +30,13 @@ void ChannelSelector::init(DeviceCalibration *snapshot)
         }
         _channelButtons[0]->setActive(true);
     }
+    update();
 }
 
 void ChannelSelector::setCore(Core *core)
 {
     _core = core;
+    update();
 }
 
 void ChannelSelector::onChannelSelected(uint8_t channel)

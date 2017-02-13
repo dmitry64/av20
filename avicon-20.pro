@@ -62,7 +62,9 @@ SOURCES += main.cpp\
     device/modificators/removegatemodificator.cpp \
     ui/controls/touchspinboxstring.cpp \
     ui/channelsview.cpp \
-    ui/controls/channelstableitem.cpp
+    ui/mainwindow.cpp \
+    ui/helpwidget.cpp \
+    ui/modeselectionwidget.cpp
 
 HEADERS  += debuggui.h \
     core.h \
@@ -97,7 +99,9 @@ HEADERS  += debuggui.h \
     device/modificators/removegatemodificator.h \
     ui/controls/touchspinboxstring.h \
     ui/channelsview.h \
-    ui/controls/channelstableitem.h
+    ui/mainwindow.h \
+    ui/helpwidget.h \
+    ui/modeselectionwidget.h
 
 FORMS    += debuggui.ui \
     ui/ascanwidget.ui \
@@ -115,7 +119,10 @@ FORMS    += debuggui.ui \
     ui/controls/addgatebutton.ui \
     ui/controls/iconwidget.ui \
     ui/controls/touchspinboxstring.ui \
-    ui/channelsview.ui
+    ui/channelsview.ui \
+    ui/mainwindow.ui \
+    ui/helpwidget.ui \
+    ui/modeselectionwidget.ui
 
 RESOURCES += \
     resources.qrc

@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 #include <vector>
+#include <string>
 
 #define MAX_CHANNELS_COUNT 8
 #define MAX_TACTS_COUNT 8
@@ -110,6 +111,17 @@ enum PulserFreq {
     Freq_10_0_MHz
 };
 
+static std::string FreqStrings[8] = {
+    "1.0",
+    "1.25",
+    "2.0",
+    "2.5",
+    "4.0",
+    "5.0",
+    "8.0",
+    "10.0"
+};
+
 enum PulserProg {
     Prog_1 = 0b0000,
     Prog_2 = 0b0001,
@@ -119,6 +131,17 @@ enum PulserProg {
     Prog_6 = 0b0101,
     Prog_7 = 0b0110,
     Prog_8 = 0b0111
+};
+
+static std::string ProgStrings[8] = {
+    "Prog 1",
+    "Prog 2",
+    "Prog 3",
+    "Prog 4",
+    "Prog 5",
+    "Prog 6",
+    "Prog 7",
+    "Prog 8"
 };
 
 #endif // DEFINITIONS_H

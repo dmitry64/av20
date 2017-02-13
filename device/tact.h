@@ -60,6 +60,10 @@ public:
     PulserFreq getFreq1() const;
     PulserProg getProg2() const;
     PulserFreq getFreq2() const;
+    void setProg1(const PulserProg &prog1);
+    void setFreq1(const PulserFreq &freq1);
+    void setProg2(const PulserProg &prog2);
+    void setFreq2(const PulserFreq &freq2);
 };
 
 #endif // TACT_H

@@ -1,5 +1,6 @@
 #include "ascanpage.h"
 #include "ui_ascanpage.h"
+#include <QDebug>
 
 AScanPage::AScanPage(QWidget *parent) :
     QWidget(parent),
@@ -7,7 +8,6 @@ AScanPage::AScanPage(QWidget *parent) :
 {
     ui->setupUi(this);
     connect(ui->channelSelector,SIGNAL(channelChanged(uint8_t)),this,SLOT(setChannel(uint8_t)));
-    //connect(this,SIGNAL(drawDisplayPackage(QSharedPointer<DisplayPackage>)),ui->ascanWidget,SLOT()
 }
 
 AScanPage::~AScanPage()
@@ -23,6 +23,7 @@ void AScanPage::init(uint8_t channel)
 
 void AScanPage::init(uint8_t channel, DeviceCalibration *snapshot)
 {
+    qDebug() << "Ascan init!";
     std::vector<Channel> channels;
     channels.push_back(*(snapshot->getChannel(channel)));
     ui->bscanWidget->setChannelsInfo(channels);
@@ -30,6 +31,7 @@ void AScanPage::init(uint8_t channel, DeviceCalibration *snapshot)
     ui->controlPanel->setChannel(channel);
     ui->controlPanel->init(snapshot);
     ui->channelSelector->init(snapshot);
+    update();
 }
 
 void AScanPage::setCore(Core *core)

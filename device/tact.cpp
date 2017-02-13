@@ -113,6 +113,26 @@ PulserFreq Tact::getFreq2() const
     return _freq2;
 }
 
+void Tact::setProg1(const PulserProg &prog1)
+{
+    _prog1 = prog1;
+}
+
+void Tact::setFreq1(const PulserFreq &freq1)
+{
+    _freq1 = freq1;
+}
+
+void Tact::setProg2(const PulserProg &prog2)
+{
+    _prog2 = prog2;
+}
+
+void Tact::setFreq2(const PulserFreq &freq2)
+{
+    _freq2 = freq2;
+}
+
 Tact::Tact() :
     _tactEnabled(false),
     _diffMode(false),
