@@ -23,7 +23,7 @@ GateController::GateController(QWidget *parent) :
     ui->gateFinish->setName("Gate end");
     ui->gateFinish->setSuffix("us");
     ui->gateLevel->setName("Gate level");
-    ui->gateLevel->setSuffix("us");
+    ui->gateLevel->setSuffix("dB");
     ui->gateIcon->setIcon(QIcon(":/icons/resources/icons/arrows_fit_horizontal.png"));
     ui->gateIcon->setColor(Qt::red);
     ui->gateStart->hide();
