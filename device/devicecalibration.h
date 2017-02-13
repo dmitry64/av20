@@ -14,7 +14,7 @@ public:
     DeviceCalibration();
     ~DeviceCalibration();
     void init();
-    DeviceCalibration(DeviceCalibration * original);
+    DeviceCalibration(DeviceCalibration *original);
     DeviceCalibration *getSnapshot();
     // get/set
     Channel *getChannel(int index);

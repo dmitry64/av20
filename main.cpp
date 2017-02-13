@@ -34,7 +34,7 @@ int main(int argc, char *argv[])
     //QObject::connect(core,SIGNAL(deviceReady(bool)), &w, SLOT(onDeviceReadyStatusChanged(bool)));
 
     core->start();
-    w.showFullScreen();
+    w.show();
 
     return a.exec();
 }

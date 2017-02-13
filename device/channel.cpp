@@ -32,7 +32,29 @@ void Channel::setIndex(const uint8_t &index)
     _index = index;
 }
 
-Channel::Channel() :_index(0), _baseSensLevel(0), _tvgMode(TVGMode::CurveMode)
+void Channel::setColor(uint8_t red, uint8_t green, uint8_t blue)
+{
+    _colorRed = red;
+    _colorBlue = blue;
+    _colorGreen = green;
+}
+
+uint8_t Channel::getColorRed()
+{
+    return _colorRed;
+}
+
+uint8_t Channel::getColorGreen()
+{
+    return _colorGreen;
+}
+
+uint8_t Channel::getColorBlue()
+{
+    return _colorBlue;
+}
+
+Channel::Channel() :_index(0), _baseSensLevel(0), _tvgMode(TVGMode::CurveMode), _colorRed(0), _colorGreen(0), _colorBlue(0)
 {
 
 }

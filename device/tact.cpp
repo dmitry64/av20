@@ -93,6 +93,26 @@ void Tact::setTactEnabled(bool tactEnabled)
     _tactEnabled = tactEnabled;
 }
 
+PulserProg Tact::getProg1() const
+{
+    return _prog1;
+}
+
+PulserFreq Tact::getFreq1() const
+{
+    return _freq1;
+}
+
+PulserProg Tact::getProg2() const
+{
+    return _prog2;
+}
+
+PulserFreq Tact::getFreq2() const
+{
+    return _freq2;
+}
+
 Tact::Tact() :
     _tactEnabled(false),
     _diffMode(false),

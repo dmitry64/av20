@@ -1,4 +1,5 @@
 #include "devicecalibration.h"
+#include <QDebug>
 
 std::vector<Channel *> DeviceCalibration::getChannels() const
 {
@@ -17,6 +18,7 @@ DeviceCalibration::DeviceCalibration()
 
 DeviceCalibration::~DeviceCalibration()
 {
+    qDebug() << "Device calibration deleted";
     for(int i=0; i<_tactTable.size(); i++) {
         delete _tactTable.at(i);
     }
@@ -34,12 +36,41 @@ void DeviceCalibration::init()
         ch->setIndex(i);
         ch->setBaseSensLevel(72 + i);
         ch->setTvgMode(TVGMode::CurveMode);
+        ch->setPrismTime(0);
         std::vector<Gate> gates;
         Gate g1;
         g1._start = 33;
         g1._finish = 172;
         g1._level = 50;
         g1._id = 0;
+
+        switch (i) {
+            case 0:
+            ch->setColor(255,30,30);
+            break;
+            case 1:
+            ch->setColor(30,255,30);
+            break;
+            case 2:
+            ch->setColor(30,30,255);
+            break;
+            case 3:
+            ch->setColor(255,255,30);
+            break;
+            case 4:
+            ch->setColor(255,30,255);
+            break;
+            case 5:
+            ch->setColor(30,255,255);
+            break;
+            case 6:
+            ch->setColor(30,30,30);
+            break;
+            case 7:
+            ch->setColor(255,255,255);
+            break;
+        }
+
         gates.push_back(g1);
         ch->setGates(gates);
         _channels.push_back(ch);
@@ -63,6 +94,11 @@ DeviceCalibration::DeviceCalibration(DeviceCalibration *original)
         Channel * orig = original->getChannel(i);
         Channel * ch = new Channel(*orig);
         _channels.push_back(ch);
+    }
+    for(int i=0;i<original->getTactTable().size();i++) {
+        Tact * tact = original->getTactTable().at(i);
+        Tact * tactNew = new Tact(*tact);
+        _tactTable.push_back(tactNew);
     }
 }
 

@@ -3,6 +3,8 @@
 
 #include <stdint.h>
 #include <QThread>
+#include <atomic>
+#include <vector>
 #include "device/devicestate.h"
 #include "deviceinterface.h"
 

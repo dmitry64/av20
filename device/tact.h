@@ -56,6 +56,10 @@ public:
     void setRx2(const uint8_t &rx2);
     bool getTactEnabled() const;
     void setTactEnabled(bool tactEnabled);
+    PulserProg getProg1() const;
+    PulserFreq getFreq1() const;
+    PulserProg getProg2() const;
+    PulserFreq getFreq2() const;
 };
 
 #endif // TACT_H

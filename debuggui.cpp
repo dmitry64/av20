@@ -62,6 +62,8 @@ void DebugGUI::init()
             channelsTable.push_back(channelsForTape);
         }
         ui->bscan8->setChannles(channelsTable);
+
+        ui->channelsWidget->init(calibration);
 //        // TODO: apply
 
 //        ui->bscanWidgetSingle->setChannelsInfo(channelsCopy);

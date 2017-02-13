@@ -15,6 +15,9 @@ class Channel
     int _prismTime;
     std::vector<Gate> _gates;
 
+    uint8_t _colorRed;
+    uint8_t _colorGreen;
+    uint8_t _colorBlue;
 public:
     Channel();
     int baseSensLevel() const;
@@ -30,6 +33,10 @@ public:
     std::vector<Gate> gates() const;
     void setGates(const std::vector<Gate> &gates);
     void setIndex(const uint8_t &index);
+    void setColor(uint8_t red, uint8_t green, uint8_t blue);
+    uint8_t getColorRed();
+    uint8_t getColorGreen();
+    uint8_t getColorBlue();
 };
 
 #endif // CHANNEL_H
