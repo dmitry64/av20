@@ -31,45 +31,45 @@
      <colorrole role="Button">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>150</red>
-        <green>152</green>
-        <blue>163</blue>
+        <red>193</red>
+        <green>199</green>
+        <blue>209</blue>
        </color>
       </brush>
      </colorrole>
      <colorrole role="Light">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>225</red>
-        <green>228</green>
-        <blue>245</blue>
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
        </color>
       </brush>
      </colorrole>
      <colorrole role="Midlight">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>187</red>
-        <green>190</green>
-        <blue>204</blue>
+        <red>224</red>
+        <green>227</green>
+        <blue>232</blue>
        </color>
       </brush>
      </colorrole>
      <colorrole role="Dark">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>75</red>
-        <green>76</green>
-        <blue>81</blue>
+        <red>96</red>
+        <green>99</green>
+        <blue>104</blue>
        </color>
       </brush>
      </colorrole>
      <colorrole role="Mid">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>100</red>
-        <green>101</green>
-        <blue>109</blue>
+        <red>129</red>
+        <green>133</green>
+        <blue>139</blue>
        </color>
       </brush>
      </colorrole>
@@ -112,9 +112,9 @@
      <colorrole role="Window">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>150</red>
-        <green>152</green>
-        <blue>163</blue>
+        <red>193</red>
+        <green>199</green>
+        <blue>209</blue>
        </color>
       </brush>
      </colorrole>
@@ -130,9 +130,9 @@
      <colorrole role="AlternateBase">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>202</red>
-        <green>203</green>
-        <blue>209</blue>
+        <red>224</red>
+        <green>227</green>
+        <blue>232</blue>
        </color>
       </brush>
      </colorrole>
@@ -168,45 +168,45 @@
      <colorrole role="Button">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>150</red>
-        <green>152</green>
-        <blue>163</blue>
+        <red>193</red>
+        <green>199</green>
+        <blue>209</blue>
        </color>
       </brush>
      </colorrole>
      <colorrole role="Light">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>225</red>
-        <green>228</green>
-        <blue>245</blue>
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
        </color>
       </brush>
      </colorrole>
      <colorrole role="Midlight">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>187</red>
-        <green>190</green>
-        <blue>204</blue>
+        <red>224</red>
+        <green>227</green>
+        <blue>232</blue>
        </color>
       </brush>
      </colorrole>
      <colorrole role="Dark">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>75</red>
-        <green>76</green>
-        <blue>81</blue>
+        <red>96</red>
+        <green>99</green>
+        <blue>104</blue>
        </color>
       </brush>
      </colorrole>
      <colorrole role="Mid">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>100</red>
-        <green>101</green>
-        <blue>109</blue>
+        <red>129</red>
+        <green>133</green>
+        <blue>139</blue>
        </color>
       </brush>
      </colorrole>
@@ -249,9 +249,9 @@
      <colorrole role="Window">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>150</red>
-        <green>152</green>
-        <blue>163</blue>
+        <red>193</red>
+        <green>199</green>
+        <blue>209</blue>
        </color>
       </brush>
      </colorrole>
@@ -267,9 +267,9 @@
      <colorrole role="AlternateBase">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>202</red>
-        <green>203</green>
-        <blue>209</blue>
+        <red>224</red>
+        <green>227</green>
+        <blue>232</blue>
        </color>
       </brush>
      </colorrole>
@@ -296,63 +296,63 @@
      <colorrole role="WindowText">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>75</red>
-        <green>76</green>
-        <blue>81</blue>
+        <red>96</red>
+        <green>99</green>
+        <blue>104</blue>
        </color>
       </brush>
      </colorrole>
      <colorrole role="Button">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>150</red>
-        <green>152</green>
-        <blue>163</blue>
+        <red>193</red>
+        <green>199</green>
+        <blue>209</blue>
        </color>
       </brush>
      </colorrole>
      <colorrole role="Light">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>225</red>
-        <green>228</green>
-        <blue>245</blue>
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
        </color>
       </brush>
      </colorrole>
      <colorrole role="Midlight">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>187</red>
-        <green>190</green>
-        <blue>204</blue>
+        <red>224</red>
+        <green>227</green>
+        <blue>232</blue>
        </color>
       </brush>
      </colorrole>
      <colorrole role="Dark">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>75</red>
-        <green>76</green>
-        <blue>81</blue>
+        <red>96</red>
+        <green>99</green>
+        <blue>104</blue>
        </color>
       </brush>
      </colorrole>
      <colorrole role="Mid">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>100</red>
-        <green>101</green>
-        <blue>109</blue>
+        <red>129</red>
+        <green>133</green>
+        <blue>139</blue>
        </color>
       </brush>
      </colorrole>
      <colorrole role="Text">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>75</red>
-        <green>76</green>
-        <blue>81</blue>
+        <red>96</red>
+        <green>99</green>
+        <blue>104</blue>
        </color>
       </brush>
      </colorrole>
@@ -368,27 +368,27 @@
      <colorrole role="ButtonText">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>75</red>
-        <green>76</green>
-        <blue>81</blue>
+        <red>96</red>
+        <green>99</green>
+        <blue>104</blue>
        </color>
       </brush>
      </colorrole>
      <colorrole role="Base">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>150</red>
-        <green>152</green>
-        <blue>163</blue>
+        <red>193</red>
+        <green>199</green>
+        <blue>209</blue>
        </color>
       </brush>
      </colorrole>
      <colorrole role="Window">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>150</red>
-        <green>152</green>
-        <blue>163</blue>
+        <red>193</red>
+        <green>199</green>
+        <blue>209</blue>
        </color>
       </brush>
      </colorrole>
@@ -404,9 +404,9 @@
      <colorrole role="AlternateBase">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>150</red>
-        <green>152</green>
-        <blue>163</blue>
+        <red>193</red>
+        <green>199</green>
+        <blue>209</blue>
        </color>
       </brush>
      </colorrole>
@@ -477,7 +477,7 @@
          <enum>QTabWidget::Rounded</enum>
         </property>
         <property name="currentIndex">
-         <number>3</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="ascanTab">
          <attribute name="icon">

@@ -64,7 +64,8 @@ SOURCES += main.cpp\
     ui/channelsview.cpp \
     ui/mainwindow.cpp \
     ui/helpwidget.cpp \
-    ui/modeselectionwidget.cpp
+    ui/modeselectionwidget.cpp \
+    ui/registrationwidget.cpp
 
 HEADERS  += debuggui.h \
     core.h \
@@ -101,7 +102,8 @@ HEADERS  += debuggui.h \
     ui/channelsview.h \
     ui/mainwindow.h \
     ui/helpwidget.h \
-    ui/modeselectionwidget.h
+    ui/modeselectionwidget.h \
+    ui/registrationwidget.h
 
 FORMS    += debuggui.ui \
     ui/ascanwidget.ui \
@@ -122,7 +124,8 @@ FORMS    += debuggui.ui \
     ui/channelsview.ui \
     ui/mainwindow.ui \
     ui/helpwidget.ui \
-    ui/modeselectionwidget.ui
+    ui/modeselectionwidget.ui \
+    ui/registrationwidget.ui
 
 RESOURCES += \
     resources.qrc

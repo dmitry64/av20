@@ -6,6 +6,7 @@
 #include "core.h"
 #include "ui/helpwidget.h"
 #include "ui/modeselectionwidget.h"
+#include "ui/registrationwidget.h"
 
 namespace Ui {
 class MainWindow;
@@ -19,6 +20,7 @@ class MainWindow : public QMainWindow
 
     HelpWidget * _helpWidget;
     ModeSelectionWidget * _modeSelectionWidget;
+    RegistrationWidget * _registrationWidget;
     QPushButton * _backgroundWidget;
 
 private:

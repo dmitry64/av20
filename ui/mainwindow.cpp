@@ -20,6 +20,9 @@ MainWindow::MainWindow(QWidget *parent) :
     _modeSelectionWidget = new ModeSelectionWidget(ui->centralTabWidget);
     _modeSelectionWidget->hide();
 
+    _registrationWidget = new RegistrationWidget(ui->centralTabWidget);
+    _registrationWidget->hide();
+
     _helpWidget = new HelpWidget(ui->centralTabWidget);
     _helpWidget->hide();
 
@@ -86,7 +89,7 @@ void MainWindow::onHelpMenuClosed()
 
 void MainWindow::onModeMenuOpened()
 {
-    _modeSelectionWidget->setGeometry((ui->centralTabWidget->width()/6) ,ui->centralTabWidget->height() - 200, ui->centralTabWidget->width()/6, 200);
+    _modeSelectionWidget->setGeometry((ui->centralTabWidget->width()/6) ,ui->centralTabWidget->height() - 220, ui->centralTabWidget->width()/6, 220);
     _backgroundWidget->show();
     _modeSelectionWidget->show();
 }
@@ -99,11 +102,14 @@ void MainWindow::onModeMenuClosed()
 
 void MainWindow::onRegistrationMenuOpened()
 {
+    _registrationWidget->setGeometry(ui->centralTabWidget->width()/2 - 800/2,ui->centralTabWidget->height()/2 - 400/2, 800, 400);
+    _registrationWidget->show();
     _backgroundWidget->show();
 }
 
 void MainWindow::onRegistrationMenuClosed()
 {
+    _registrationWidget->hide();
     _backgroundWidget->hide();
 }
 
