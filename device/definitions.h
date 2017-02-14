@@ -54,7 +54,9 @@ struct BScanDrawSample {
 
 struct AScanDrawData {
     uint8_t _channel;
-    std::vector<uint8_t> _samples;
+    uint16_t _markerPos;
+    uint16_t _markerValue;
+    std::vector<uint16_t> _samples;
 };
 
 struct BScanDrawData {

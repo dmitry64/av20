@@ -32,6 +32,10 @@ private:
     QMutex * _changesMutex;
     std::queue<Modificator *> _pendingChanges;
 
+    bool _deviceOverheat;
+    bool _deviceError;
+    bool _deviceConnectionError;
+
     AScan * _line1CurrentAscan;
     AScan * _line2CurrentAscan;
 public:
@@ -60,6 +64,9 @@ private:
 
 
     void addModificator(Modificator * mod);
+    void handleDeviceError(bool status);
+    void handleDeviceOverheat(bool status);
+    void handleDeviceConnectionError(bool status);
 
 public:
     void setDeviceMode(uint8_t mode);
@@ -78,13 +85,15 @@ signals:
     void drawDisplayPackage(QSharedPointer<DisplayPackage> package);
     void drawTVG(TVG tvg);
     void channelChanged(Channel channel);
-    //void channelChanged(uint8_t channel);
-    void debug(int);
-    void connection(bool);
-    void connectionError(bool);
-    void deviceError(bool);
-    void deviceOverheat(bool);
-    void deviceReady(bool);
+
+    void deviceErrorEnable();
+    void deviceErrorDisable();
+
+    void deviceOverheatEnable();
+    void deviceOverheatDisable();
+
+    void deviceConnectionErrorEnable();
+    void deviceConnectionErrorDisable();
 };
 
 #endif // CORE_H

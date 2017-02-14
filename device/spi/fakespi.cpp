@@ -52,6 +52,8 @@ void FakeSPI::setAScanForLine1(uint8_t *dest)
     int ascanL1Counter = _counters[chan]->load();
     int ascanL1Counter2 = ascanL1Counter;
 
+
+
     //qDebug() << "Chan: "<<chan << "Tact: " <<tact._TR1;
     TVG tvg = _state.getTvgForChannel(chan);
     //int last = 0;
@@ -120,7 +122,19 @@ void FakeSPI::run()
     while(true){
         updateCounters();
         usleep(50000);
+        if(_specialCounter == 77) {
+            _state.setUSM_SR(_state.USM_SR() ^ 0b00001000);
+        }
+
+        if(_specialCounter == 177) {
+            _state.setUSM_SR(_state.USM_SR() ^ 0b10000000);
+        }
+
+        _specialCounter++;
     }
+
+
+
 }
 
 FakeSPI::FakeSPI() : DeviceInterface()
@@ -129,6 +143,7 @@ FakeSPI::FakeSPI() : DeviceInterface()
         std::atomic_int * a = new std::atomic_int(1);
         _counters.push_back(a);
     }
+    _specialCounter = 0;
 }
 
 void FakeSPI::init()
@@ -191,7 +206,7 @@ void FakeSPI::setRegister(uint8_t reg, const uint32_t length, uint8_t *src)
         _state.setTRG_CR(src[0]);
         if((src[0] & 0b00000001) !=0) {
 
-            _state.setUSM_SR(0b00000001);
+            _state.setUSM_SR(_state.USM_SR() | 0b00000001);
             _currentTact = getNextTact();
 
         }

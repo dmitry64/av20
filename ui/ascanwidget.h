@@ -17,6 +17,8 @@ class AScanWidget : public QWidget
     Q_OBJECT
 
     std::atomic_bool _ready;
+    uint16_t _markerPos;
+    uint16_t _markerValue;
     std::vector<QPoint> _points;
     std::vector<QPoint> _tvg;
     std::vector<QPoint> _polygon;

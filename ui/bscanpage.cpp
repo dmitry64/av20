@@ -70,3 +70,10 @@ void BScanPage::onDisplayPackage(QSharedPointer<DisplayPackage> dp)
         widgets[i]->onBScan(&(dp->bscan));
     }
 }
+
+void BScanPage::onChannelChanged(Channel channel)
+{
+    for(int i=0; i<_bScanWidgets.size(); i++) {
+        _bScanWidgets[i]->onChannelChanged(channel);
+    }
+}

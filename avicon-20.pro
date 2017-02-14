@@ -65,7 +65,11 @@ SOURCES += main.cpp\
     ui/mainwindow.cpp \
     ui/helpwidget.cpp \
     ui/modeselectionwidget.cpp \
-    ui/registrationwidget.cpp
+    ui/registrationwidget.cpp \
+    ui/memorywidget.cpp \
+    ui/optionswidget.cpp \
+    ui/systemwidget.cpp \
+    ui/tvgeditorwidget.cpp
 
 HEADERS  += debuggui.h \
     core.h \
@@ -103,7 +107,11 @@ HEADERS  += debuggui.h \
     ui/mainwindow.h \
     ui/helpwidget.h \
     ui/modeselectionwidget.h \
-    ui/registrationwidget.h
+    ui/registrationwidget.h \
+    ui/memorywidget.h \
+    ui/optionswidget.h \
+    ui/systemwidget.h \
+    ui/tvgeditorwidget.h
 
 FORMS    += debuggui.ui \
     ui/ascanwidget.ui \
@@ -125,7 +133,11 @@ FORMS    += debuggui.ui \
     ui/mainwindow.ui \
     ui/helpwidget.ui \
     ui/modeselectionwidget.ui \
-    ui/registrationwidget.ui
+    ui/registrationwidget.ui \
+    ui/memorywidget.ui \
+    ui/optionswidget.ui \
+    ui/systemwidget.ui \
+    ui/tvgeditorwidget.ui
 
 RESOURCES += \
     resources.qrc

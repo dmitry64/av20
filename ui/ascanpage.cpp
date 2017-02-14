@@ -50,7 +50,7 @@ void AScanPage::setBScanChannels(std::vector<Channel> channels)
 {
     ui->bscanWidget->setChannelsInfo(channels);
 }
-
+/*
 void AScanPage::onAScan(QSharedPointer<AScanDrawData> scan)
 {
     //ui->ascanWidget->onAScan(scan);
@@ -60,7 +60,7 @@ void AScanPage::onAScan(QSharedPointer<AScanDrawData> scan)
 void AScanPage::onBScan(QSharedPointer<BScanDrawData> scan)
 {
     //ui->bscanWidget->onBScan(scan);
-}
+}*/
 
 void AScanPage::onDisplayPackage(QSharedPointer<DisplayPackage> package)
 {
@@ -68,10 +68,10 @@ void AScanPage::onDisplayPackage(QSharedPointer<DisplayPackage> package)
     ui->bscanWidget->onBScan(&(package->bscan));
 }
 
-void AScanPage::onTVG(TVG tvg)
+/*void AScanPage::onTVG(TVG tvg)
 {
     ui->ascanWidget->onTVG(tvg);
-}
+}*/
 
 void AScanPage::onChannelChanged(Channel channel)
 {

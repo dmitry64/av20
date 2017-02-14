@@ -37,6 +37,14 @@ int main(int argc, char *argv[])
     QObject::connect(core,SIGNAL(channelChanged(Channel)),mainWindow, SLOT(onChannelChanged(Channel)));
     QObject::connect(core,SIGNAL(drawDisplayPackage(QSharedPointer<DisplayPackage>)), mainWindow, SIGNAL(drawDisplayPackage(QSharedPointer<DisplayPackage>)),Qt::ConnectionType::QueuedConnection); //SLOT(onDisplayPackage(QSharedPointer<DisplayPackage>)));
 
+    QObject::connect(core,SIGNAL(deviceOverheatEnable()),mainWindow, SLOT(onDeviceOverheatEnable()));
+    QObject::connect(core,SIGNAL(deviceOverheatDisable()),mainWindow, SLOT(onDeviceOverheatDisable()));
+    QObject::connect(core,SIGNAL(deviceErrorEnable()),mainWindow, SLOT(onDeviceErrorEnable()));
+    QObject::connect(core,SIGNAL(deviceErrorDisable()),mainWindow, SLOT(onDeviceErrorDisable()));
+    QObject::connect(core,SIGNAL(deviceConnectionErrorEnable()),mainWindow, SLOT(onDeviceConnectionErrorEnable()));
+    QObject::connect(core,SIGNAL(deviceConnectionErrorDisable()),mainWindow, SLOT(onDeviceConnectionErrorDisable()));
+
+
     core->start();
     //w.show();
 

@@ -17,19 +17,31 @@ MainWindow::MainWindow(QWidget *parent) :
     _backgroundWidget->hide();
     connect(_backgroundWidget,SIGNAL(pressed()),ui->menuWidget,SLOT(resetMenu()));
 
+    _helpWidget = new HelpWidget(ui->centralTabWidget);
+    _helpWidget->hide();
+
     _modeSelectionWidget = new ModeSelectionWidget(ui->centralTabWidget);
     _modeSelectionWidget->hide();
 
     _registrationWidget = new RegistrationWidget(ui->centralTabWidget);
     _registrationWidget->hide();
 
-    _helpWidget = new HelpWidget(ui->centralTabWidget);
-    _helpWidget->hide();
+    _memoryWidget = new MemoryWidget(ui->centralTabWidget);
+    _memoryWidget->hide();
+
+    _optionsWidget = new OptionsWidget(ui->centralTabWidget);
+    _optionsWidget->hide();
+
+    _systemWidget = new SystemWidget(ui->centralTabWidget);
+    _systemWidget->hide();
 
     connect(this,SIGNAL(drawDisplayPackage(QSharedPointer<DisplayPackage>)), ui->aScanPage,SLOT(onDisplayPackage(QSharedPointer<DisplayPackage>)));
     connect(this,SIGNAL(drawDisplayPackage(QSharedPointer<DisplayPackage>)), ui->bScanPage,SLOT(onDisplayPackage(QSharedPointer<DisplayPackage>)));
+    connect(this,SIGNAL(drawDisplayPackage(QSharedPointer<DisplayPackage>)), ui->tvgEditorWidget,SLOT(onDisplayPackage(QSharedPointer<DisplayPackage>)));
 
     connect(this,SIGNAL(channelChanged(Channel)),ui->aScanPage,SLOT(onChannelChanged(Channel)));
+    connect(this,SIGNAL(channelChanged(Channel)),ui->bScanPage,SLOT(onChannelChanged(Channel)));
+    connect(this,SIGNAL(channelChanged(Channel)),ui->tvgEditorWidget,SLOT(onChannelChanged(Channel)));
 
     connect(ui->menuWidget,SIGNAL(helpMenuOpened()),this,SLOT(onHelpMenuOpened()));
     connect(ui->menuWidget,SIGNAL(helpMenuClosed()),this,SLOT(onHelpMenuClosed()));
@@ -56,6 +68,7 @@ void MainWindow::setCore(Core *core)
 
     ui->aScanPage->setCore(core);
     ui->bScanPage->setCore(core);
+    ui->tvgEditorWidget->setCore(core);
     ui->channelsWidget->setCore(core);
 }
 
@@ -115,32 +128,71 @@ void MainWindow::onRegistrationMenuClosed()
 
 void MainWindow::onMemoryMenuOpened()
 {
+    _memoryWidget->setGeometry(ui->centralTabWidget->width()/2 - 800/2,ui->centralTabWidget->height()/2 - 400/2, 800, 400);
+    _memoryWidget->show();
     _backgroundWidget->show();
 }
 
 void MainWindow::onMemoryMenuClosed()
 {
+    _memoryWidget->hide();
     _backgroundWidget->hide();
 }
 
 void MainWindow::onOptionsMenuOpened()
 {
+    _optionsWidget->setGeometry(ui->centralTabWidget->width()/2 - 800/2,ui->centralTabWidget->height()/2 - 400/2, 800, 400);
+    _optionsWidget->show();
     _backgroundWidget->show();
 }
 
 void MainWindow::onOptionsMenuClosed()
 {
+    _optionsWidget->hide();
     _backgroundWidget->hide();
 }
 
 void MainWindow::onSystemMenuOpened()
 {
+    _systemWidget->setGeometry(ui->centralTabWidget->width()/2 - 800/2,ui->centralTabWidget->height()/2 - 400/2, 800, 400);
+    _systemWidget->show();
     _backgroundWidget->show();
 }
 
 void MainWindow::onSystemMenuClosed()
 {
+    _systemWidget->hide();
     _backgroundWidget->hide();
+}
+
+void MainWindow::onDeviceOverheatEnable()
+{
+    ui->statusWidget->onDeviceOverheatEnabled();
+}
+
+void MainWindow::onDeviceOverheatDisable()
+{
+    ui->statusWidget->onDeviceOverheatDisabled();
+}
+
+void MainWindow::onDeviceErrorEnable()
+{
+    ui->statusWidget->onDeviceErrorEnabled();
+}
+
+void MainWindow::onDeviceErrorDisable()
+{
+    ui->statusWidget->onDeviceErrorDisabled();
+}
+
+void MainWindow::onDeviceConnectionErrorEnable()
+{
+    ui->statusWidget->onDeviceConnectionErrorEnabled();
+}
+
+void MainWindow::onDeviceConnectionErrorDisable()
+{
+    ui->statusWidget->onDeviceConnectionErrorDisabled();
 }
 
 void MainWindow::init()
@@ -148,8 +200,9 @@ void MainWindow::init()
     if(_core!=0) {
         DeviceCalibration * calibration = _core->getSnapshot();
 
-        ui->aScanPage->onTVG(calibration->getChannel(0)->generateTVG());
+        //ui->aScanPage->onTVG(calibration->getChannel(0)->generateTVG());
         ui->aScanPage->init(0,calibration);
+        ui->tvgEditorWidget->init(0,calibration);
 
         std::vector<Channel*> channels = calibration->getChannels();
         std::vector< std::vector<Channel> > channelsTable;

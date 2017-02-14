@@ -48,7 +48,7 @@ void DebugGUI::init()
 {
     if(_core!=0) {
         DeviceCalibration * calibration = _core->getSnapshot();
-        ui->aScanPage->onTVG(calibration->getChannel(0)->generateTVG());
+        //ui->aScanPage->onTVG(calibration->getChannel(0)->generateTVG());
         ui->aScanPage->init(0,calibration);
 
         std::vector<Channel*> channels = calibration->getChannels();

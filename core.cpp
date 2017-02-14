@@ -30,6 +30,9 @@ Core::Core() : _active(true), _state(new DeviceState()), _deviceMode(DEVICE_MODE
     _line2CurrentAscan = new AScan();
     _snapshotRequested.store(false);
     _snapshot = 0;
+    _deviceOverheat = false;
+    _deviceError = false;
+    _deviceConnectionError = false;
 }
 
 Core::~Core()
@@ -74,8 +77,8 @@ void Core::init()
 
 void Core::check()
 {
-    emit connection(_device->checkConnection());
-    emit connectionError(_device->getErrorFlag());
+    _device->checkConnection();
+    handleDeviceConnectionError(_device->getErrorFlag());
 }
 
 void Core::trigger()
@@ -93,22 +96,16 @@ void Core::trigger()
 void Core::status()
 {
     DeviceStatus status = _device->getDeviceStatus();
-    emit deviceError(status.error);
-    emit deviceOverheat(status.thsd);
-    emit deviceReady(status.ready);
+
+    handleDeviceError(status.error);
+    handleDeviceOverheat(status.thsd);
+
     DeviceStatus current = status;
     while(!current.ready) {
-        current = _device->getDeviceStatus();
-        if(status.error!=current.error) {
-            emit deviceError(current.error);
-        }
-        if(status.thsd!=current.thsd) {
-            emit deviceOverheat(current.thsd);
-        }
-        if(status.ready!=current.ready) {
-            emit deviceReady(current.ready);
-        }
         usleep(10);
+        current = _device->getDeviceStatus();
+        handleDeviceError(current.error);
+        handleDeviceOverheat(current.thsd);
     }
     _device->setProgTrigger(false);
 }
@@ -149,11 +146,25 @@ void Core::process()
     dp->ascan._channel = _line1CurrentAscan->_header._channelNo;
     dp->bscan._channel = _line1CurrentAscan->_header._channelNo;
 
-    memcpy(dp->ascan._samples.data(),_line1CurrentAscan->_samples,ASCAN_SAMPLES_SIZE);
+    //memcpy(dp->ascan._samples.data(),_line1CurrentAscan->_samples,ASCAN_SAMPLES_SIZE);
     //memcpy(dp->bscan._samples.data(),_line1CurrentAscan->_samples,ASCAN_SAMPLES_SIZE);
     /*for(int i=0; i<ASCAN_SAMPLES_SIZE; i++) {
         drawData->_samples.push_back(_line1CurrentAscan->_samples[i]);
     }*/
+
+    uint16_t max = 0;
+    uint16_t pos = 0;
+    for(uint16_t i=0; i<ASCAN_SAMPLES_SIZE; i++) {
+        uint16_t sample = _line1CurrentAscan->_samples[i];
+        if(sample >= max) {
+            max = sample;
+            pos = i;
+        }
+        dp->ascan._samples[i] = sample;
+    }
+    //qDebug() << "Max:" << max << "Pos:" << pos;
+    dp->ascan._markerPos = pos;
+    dp->ascan._markerValue = max;
 
     std::vector<Gate> gates = _currentCalibration->getChannel(dp->bscan._channel)->gates();
 
@@ -233,6 +244,7 @@ void Core::evaluationWork()
     snapshot();
     check();
     trigger();
+    status();
     aScanSingle();
     process();
     sync();
@@ -243,6 +255,7 @@ void Core::searchWork()
     snapshot();
     check();
     trigger();
+    status();
     aScanAll();
     process();
     sync();
@@ -253,6 +266,46 @@ void Core::addModificator(Modificator *mod)
     _changesMutex->lock();
     _pendingChanges.push(mod);
     _changesMutex->unlock();
+}
+
+void Core::handleDeviceError(bool status)
+{
+    if(_deviceError!=status) {
+        if(_deviceError == false) {
+            _deviceError = true;
+            emit deviceErrorEnable();
+        } else {
+            _deviceError = false;
+            emit deviceErrorDisable();
+        }
+    }
+}
+
+void Core::handleDeviceOverheat(bool status)
+{
+    //qDebug() << "Overheat = " <<status;
+    if(_deviceOverheat!=status) {
+        if(_deviceOverheat == false) {
+            _deviceOverheat = true;
+            emit deviceOverheatEnable();
+        } else {
+            _deviceOverheat = false;
+            emit deviceOverheatDisable();
+        }
+    }
+}
+
+void Core::handleDeviceConnectionError(bool status)
+{
+    if(_deviceConnectionError!=status) {
+        if(_deviceConnectionError == false) {
+            _deviceConnectionError = true;
+            emit deviceConnectionErrorEnable();
+        } else {
+            _deviceConnectionError = false;
+            emit deviceConnectionErrorDisable();
+        }
+    }
 }
 
 void Core::notifyTVG(TVG & tvg)

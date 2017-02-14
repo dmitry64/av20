@@ -164,9 +164,9 @@ DeviceStatus Device::getDeviceStatus()
     uint8_t stReg;
     _spi->getRegister(0x03,1,&stReg);
     _state->setUSM_SR(stReg);
-    st.error = (stReg & 0b10000000) == 0;
-    st.thsd = (stReg & 0b00001000) == 0;
-    st.ready = (stReg & 0b00000001) == 0;
+    st.error = (stReg & 0b10000000) != 0;
+    st.thsd = (stReg & 0b00001000) != 0;
+    st.ready = (stReg & 0b00000001) != 0;
     return st;
 }
 

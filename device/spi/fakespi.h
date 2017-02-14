@@ -16,6 +16,7 @@ class FakeSPI : public DeviceInterface, public QThread
 
     uint8_t _currentTact;
 
+    uint8_t _specialCounter;
 private:
     uint8_t getNextTact();
     void updateCounters();

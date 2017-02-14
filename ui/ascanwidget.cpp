@@ -38,10 +38,10 @@ void AScanWidget::paintEvent(QPaintEvent *event)
     painter.fillRect(0,0,w,h,Qt::white);
 
     painter.setPen(Qt::black);
-    painter.fillRect(left,bottom,top,right, Qt::white);//QRect(bottomLeft,topRight),Qt::white);
-    painter.drawRect(left,bottom,top,right);
+    //painter.fillRect(left,bottom,w,h, Qt::white);//QRect(bottomLeft,topRight),Qt::white);
+    painter.drawRect(0,0,w-1,h-1);
 
-    painter.fillRect(0,bottom,w, w - 24,Qt::white);
+    //painter.fillRect(0,bottom,w, h - 24,Qt::white);
     uint8_t scale = 200;
     double scaleStep = width/static_cast<double>(scale);
     for(uint8_t i=0; i<scale+1; i++) {
@@ -57,11 +57,13 @@ void AScanWidget::paintEvent(QPaintEvent *event)
         painter.drawLine(QPoint(left + i*scaleStep,bottom),QPoint(i*scaleStep + left,leng + bottom));
     }
 
+    painter.drawLine(left,bottom,left,top);
+
     // start
     _polygon[0] = QPoint(left,bottom);
     QPoint p2(0,bottom);
     for(uint16_t i=0; i<_points.size(); i++) {
-        p2 = QPoint((_points[i].x())*step + left, bottom - static_cast<double>(bottom)*(_points[i].y() / 255.0));
+        p2 = QPoint((_points[i].x())*step + left, bottom - static_cast<double>(h - 64)*(_points[i].y() / 255.0));
         _polygon[i+1] = (p2);
     }
     _polygon[ASCAN_SAMPLES_SIZE] = QPoint(right, p2.y());
@@ -85,7 +87,7 @@ void AScanWidget::paintEvent(QPaintEvent *event)
     for(uint8_t i=0; i<_channels.size(); i++) {
         for(uint8_t j=0; j<_channels[i].gates().size(); j++) {
             Gate gate = _channels[i].gates()[j];
-            int level = bottom - (gate._level * (h/255.0));
+            int level = bottom - (gate._level * ((h-64)/255.0));
             painter.setPen(QPen(QColor( gate._level ,255 - gate._level, 0 ), 3));
             painter.drawLine(left + gate._start * scaleStep,level,left + gate._finish* scaleStep, level);
             painter.drawLine(left + gate._start * scaleStep,level,left + gate._start * scaleStep - 5, level + 5);
@@ -95,9 +97,13 @@ void AScanWidget::paintEvent(QPaintEvent *event)
         }
     }
 
+    painter.setPen(QPen(Qt::black, 1, Qt::PenStyle::DotLine));
+    int markerHeight =  h -  (_markerValue / 255.0) * (h - 64) - 32;
+    int markerPos = left + (_markerPos / 800.0) * width;
+    painter.drawLine(left, markerHeight,markerPos, markerHeight);
+
     quint64 time = _fpsTimer.restart();
     double fps = 1000.0 / time;
-    painter.setPen(QPen(Qt::black));
     painter.drawText(QPoint(w - 140, 30),"fps: " + QString::number(fps,'f', 2));
 }
 
@@ -119,8 +125,11 @@ void AScanWidget::onAScan(AScanDrawData *scan)
                 for(uint16_t i=0; i<scan->_samples.size(); i++) {
                     _points[i] = (QPoint(i,scan->_samples[i]));
                 }
+                _markerPos = scan->_markerPos;
+                _markerValue = scan->_markerValue;
             }
         }
+
         //if(!_vsync)
         update();
     }

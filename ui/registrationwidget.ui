@@ -22,13 +22,27 @@
      <property name="title">
       <string>Operator</string>
      </property>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Ivanov I.I.</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </item>
    <item>
     <widget class="QGroupBox" name="groupBox_2">
      <property name="title">
-      <string>Name</string>
+      <string>Description</string>
      </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QTextEdit" name="textEdit"/>
+      </item>
+     </layout>
     </widget>
    </item>
    <item>

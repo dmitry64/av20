@@ -117,5 +117,10 @@
         <file>resources/icons/music_end_button.png</file>
         <file>resources/icons/music_eject_button.png</file>
         <file>resources/icons/music_beginning_button.png</file>
+        <file>resources/icons/sys_icon_user.png</file>
+        <file>resources/icons/sys_icon_uploud.png</file>
+        <file>resources/icons/sys_icon_light.png</file>
+        <file>resources/icons/sys_icon_clock.png</file>
+        <file>resources/icons/sys_icon_calendar.png</file>
     </qresource>
 </RCC>

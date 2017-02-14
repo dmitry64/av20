@@ -7,6 +7,9 @@
 #include "ui/helpwidget.h"
 #include "ui/modeselectionwidget.h"
 #include "ui/registrationwidget.h"
+#include "ui/memorywidget.h"
+#include "ui/optionswidget.h"
+#include "ui/systemwidget.h"
 
 namespace Ui {
 class MainWindow;
@@ -21,6 +24,9 @@ class MainWindow : public QMainWindow
     HelpWidget * _helpWidget;
     ModeSelectionWidget * _modeSelectionWidget;
     RegistrationWidget * _registrationWidget;
+    MemoryWidget * _memoryWidget;
+    OptionsWidget * _optionsWidget;
+    SystemWidget * _systemWidget;
     QPushButton * _backgroundWidget;
 
 private:
@@ -34,6 +40,8 @@ public:
 public slots:
     void onChannelChanged(Channel channel);
     void onDisplayPackage(QSharedPointer<DisplayPackage> dp);
+
+    // Menu handlers
     void onHelpMenuOpened();
     void onHelpMenuClosed();
     void onModeMenuOpened();
@@ -46,6 +54,16 @@ public slots:
     void onOptionsMenuClosed();
     void onSystemMenuOpened();
     void onSystemMenuClosed();
+
+    // Device handlers
+    void onDeviceOverheatEnable();
+    void onDeviceOverheatDisable();
+    void onDeviceErrorEnable();
+    void onDeviceErrorDisable();
+    void onDeviceConnectionErrorEnable();
+    void onDeviceConnectionErrorDisable();
+
+
 signals:
     void drawDisplayPackage(QSharedPointer<DisplayPackage> dp);
     void channelChanged(Channel channel);
