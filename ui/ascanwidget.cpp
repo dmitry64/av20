@@ -44,13 +44,16 @@ void AScanWidget::paintEvent(QPaintEvent *event)
     //painter.fillRect(0,bottom,w, h - 24,Qt::white);
     uint8_t scale = 200;
     double scaleStep = width/static_cast<double>(scale);
+    QFont font = painter.font();
+    font.setPointSize(6);
+    painter.setFont(font);
     for(uint8_t i=0; i<scale+1; i++) {
         uint8_t leng = 0;
         if(i%10 == 0) {
             leng = 16;
-            if(i!=scale) {
-                painter.drawText(QPoint(left + i*scaleStep+2,24 + bottom),QString::number(i));
-            }
+            //if(i!=scale) {
+                painter.drawText(QPoint(left + i*scaleStep-6,28 + bottom),QString::number(i));
+            //}
         } else {
             leng = 8;
         }
@@ -101,6 +104,10 @@ void AScanWidget::paintEvent(QPaintEvent *event)
     int markerHeight =  h -  (_markerValue / 255.0) * (h - 64) - 32;
     int markerPos = left + (_markerPos / 800.0) * width;
     painter.drawLine(left, markerHeight,markerPos, markerHeight);
+    painter.drawLine(markerPos,markerHeight,markerPos,bottom);
+
+    painter.setPen(QPen(Qt::red, 1));
+    painter.drawLine(markerPos,bottom,markerPos,h-16);
 
     quint64 time = _fpsTimer.restart();
     double fps = 1000.0 / time;

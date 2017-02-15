@@ -22,6 +22,14 @@ ControlPanel::ControlPanel(QWidget *parent) :
     _prismTimeSpinbox->setValue(0);
     _prismTimeSpinbox->setSuffix("us");
     ui->scrollLayout->addWidget(_prismTimeSpinbox);
+
+    _markerPositionSpinbox = new TouchSpinBox();
+    _markerPositionSpinbox->setName("Marker");
+    _markerPositionSpinbox->setMin(0);
+    _markerPositionSpinbox->setMax(800);
+    _markerPositionSpinbox->setValue(0);
+    _markerPositionSpinbox->setSuffix("us");
+    ui->scrollLayout->addWidget(_markerPositionSpinbox);
 /*
     _frequencySpinbox = new TouchSpinBoxString();
     std::vector<QString> freqvalues;

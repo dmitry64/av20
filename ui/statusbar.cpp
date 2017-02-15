@@ -1,5 +1,6 @@
 #include "statusbar.h"
 #include "ui_statusbar.h"
+#include "system/system.h"
 
 StatusBar::StatusBar(QWidget *parent) :
     QWidget(parent),
@@ -14,6 +15,15 @@ StatusBar::StatusBar(QWidget *parent) :
 StatusBar::~StatusBar()
 {
     delete ui;
+}
+
+void StatusBar::init()
+{
+    System * system = System::getInstance();
+    ui->timeLabel->setText(system->getTime().toString(Qt::DefaultLocaleShortDate));
+    ui->dateLabel->setText(system->getDate().toString(Qt::DefaultLocaleShortDate));
+    ui->batteryButton->setText(QString::number(system->getBatteryPercent()) + "%");
+    ui->soundButton->setText(QString::number(system->getSoundVolume()) + "%");
 }
 
 void StatusBar::onDeviceOverheatEnabled()

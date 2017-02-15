@@ -197,6 +197,7 @@ void MainWindow::onDeviceConnectionErrorDisable()
 
 void MainWindow::init()
 {
+    ui->statusWidget->init();
     if(_core!=0) {
         DeviceCalibration * calibration = _core->getSnapshot();
 

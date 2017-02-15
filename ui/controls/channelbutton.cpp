@@ -15,6 +15,7 @@ ChannelButton::ChannelButton(QString name, uint8_t channel, QWidget *parent) :
     _colorBlue = 255;
     setActive(false);
     ui->channelButton->update();
+    ui->channelMarkerButton->hide();
 }
 
 ChannelButton::~ChannelButton()
@@ -26,8 +27,10 @@ void ChannelButton::setActive(bool state)
 {
     _state = state;
     if(state) {
-        ui->channelButton->setStyleSheet("color: red; background-color: rgb("+QString::number(_colorRed)+","+QString::number(_colorGreen)+","+QString::number(_colorBlue)+")");
+        ui->channelMarkerButton->show();
+        ui->channelButton->setStyleSheet("color: green; background-color: rgb("+QString::number(_colorRed)+","+QString::number(_colorGreen)+","+QString::number(_colorBlue)+")");
     } else {
+        ui->channelMarkerButton->hide();
         ui->channelButton->setStyleSheet("color: black; background-color: rgb("+QString::number(_colorRed)+","+QString::number(_colorGreen)+","+QString::number(_colorBlue)+")");
     }
     ui->channelButton->update();

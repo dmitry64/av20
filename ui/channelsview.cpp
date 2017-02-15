@@ -87,7 +87,7 @@ void ChannelsView::init(DeviceCalibration *snapshot)
     }
     QColor disabledChannelsColor = QColor(60,60,60);
     std::vector<Tact*> tacts = snapshot->getTactTable();
-    qDebug() << "Size:" <<tacts.size();
+
     for(int i=0; i<tacts.size(); i++) {
         Tact * tact = tacts.at(i);
         QTableWidgetItem * item = new QTableWidgetItem("#" + QString::number(i));

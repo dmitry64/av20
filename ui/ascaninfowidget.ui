@@ -1,19 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>AScanInfoWidget</class>
+ <widget class="QWidget" name="AScanInfoWidget">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1024</width>
-    <height>600</height>
+    <width>472</width>
+    <height>24</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>1024</width>
-    <height>600</height>
+    <width>0</width>
+    <height>24</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>16777215</width>
+    <height>24</height>
    </size>
   </property>
   <property name="palette">
@@ -31,9 +37,9 @@
      <colorrole role="Button">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>193</red>
-        <green>199</green>
-        <blue>209</blue>
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
        </color>
       </brush>
      </colorrole>
@@ -49,27 +55,27 @@
      <colorrole role="Midlight">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>224</red>
-        <green>227</green>
-        <blue>232</blue>
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
        </color>
       </brush>
      </colorrole>
      <colorrole role="Dark">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>96</red>
-        <green>99</green>
-        <blue>104</blue>
+        <red>127</red>
+        <green>127</green>
+        <blue>127</blue>
        </color>
       </brush>
      </colorrole>
      <colorrole role="Mid">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>129</red>
-        <green>133</green>
-        <blue>139</blue>
+        <red>170</red>
+        <green>170</green>
+        <blue>170</blue>
        </color>
       </brush>
      </colorrole>
@@ -112,9 +118,9 @@
      <colorrole role="Window">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>193</red>
-        <green>199</green>
-        <blue>209</blue>
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
        </color>
       </brush>
      </colorrole>
@@ -130,9 +136,9 @@
      <colorrole role="AlternateBase">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>224</red>
-        <green>227</green>
-        <blue>232</blue>
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
        </color>
       </brush>
      </colorrole>
@@ -168,9 +174,9 @@
      <colorrole role="Button">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>193</red>
-        <green>199</green>
-        <blue>209</blue>
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
        </color>
       </brush>
      </colorrole>
@@ -186,27 +192,27 @@
      <colorrole role="Midlight">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>224</red>
-        <green>227</green>
-        <blue>232</blue>
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
        </color>
       </brush>
      </colorrole>
      <colorrole role="Dark">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>96</red>
-        <green>99</green>
-        <blue>104</blue>
+        <red>127</red>
+        <green>127</green>
+        <blue>127</blue>
        </color>
       </brush>
      </colorrole>
      <colorrole role="Mid">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>129</red>
-        <green>133</green>
-        <blue>139</blue>
+        <red>170</red>
+        <green>170</green>
+        <blue>170</blue>
        </color>
       </brush>
      </colorrole>
@@ -249,9 +255,9 @@
      <colorrole role="Window">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>193</red>
-        <green>199</green>
-        <blue>209</blue>
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
        </color>
       </brush>
      </colorrole>
@@ -267,9 +273,9 @@
      <colorrole role="AlternateBase">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>224</red>
-        <green>227</green>
-        <blue>232</blue>
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
        </color>
       </brush>
      </colorrole>
@@ -296,18 +302,18 @@
      <colorrole role="WindowText">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>96</red>
-        <green>99</green>
-        <blue>104</blue>
+        <red>127</red>
+        <green>127</green>
+        <blue>127</blue>
        </color>
       </brush>
      </colorrole>
      <colorrole role="Button">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>193</red>
-        <green>199</green>
-        <blue>209</blue>
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
        </color>
       </brush>
      </colorrole>
@@ -323,36 +329,36 @@
      <colorrole role="Midlight">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>224</red>
-        <green>227</green>
-        <blue>232</blue>
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
        </color>
       </brush>
      </colorrole>
      <colorrole role="Dark">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>96</red>
-        <green>99</green>
-        <blue>104</blue>
+        <red>127</red>
+        <green>127</green>
+        <blue>127</blue>
        </color>
       </brush>
      </colorrole>
      <colorrole role="Mid">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>129</red>
-        <green>133</green>
-        <blue>139</blue>
+        <red>170</red>
+        <green>170</green>
+        <blue>170</blue>
        </color>
       </brush>
      </colorrole>
      <colorrole role="Text">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>96</red>
-        <green>99</green>
-        <blue>104</blue>
+        <red>127</red>
+        <green>127</green>
+        <blue>127</blue>
        </color>
       </brush>
      </colorrole>
@@ -368,27 +374,27 @@
      <colorrole role="ButtonText">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>96</red>
-        <green>99</green>
-        <blue>104</blue>
+        <red>127</red>
+        <green>127</green>
+        <blue>127</blue>
        </color>
       </brush>
      </colorrole>
      <colorrole role="Base">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>193</red>
-        <green>199</green>
-        <blue>209</blue>
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
        </color>
       </brush>
      </colorrole>
      <colorrole role="Window">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>193</red>
-        <green>199</green>
-        <blue>209</blue>
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
        </color>
       </brush>
      </colorrole>
@@ -404,9 +410,9 @@
      <colorrole role="AlternateBase">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>193</red>
-        <green>199</green>
-        <blue>209</blue>
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
        </color>
       </brush>
      </colorrole>
@@ -431,220 +437,84 @@
     </disabled>
    </palette>
   </property>
+  <property name="font">
+   <font>
+    <pointsize>12</pointsize>
+   </font>
+  </property>
   <property name="windowTitle">
-   <string>Avicon-20</string>
+   <string>Form</string>
   </property>
-  <property name="windowIcon">
-   <iconset resource="../resources.qrc">
-    <normaloff>:/icons/resources/icons/basic_star.png</normaloff>:/icons/resources/icons/basic_star.png</iconset>
+  <property name="autoFillBackground">
+   <bool>true</bool>
   </property>
-  <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="mainLayout">
-    <property name="spacing">
-     <number>0</number>
-    </property>
-    <property name="leftMargin">
-     <number>0</number>
-    </property>
-    <property name="topMargin">
-     <number>0</number>
-    </property>
-    <property name="rightMargin">
-     <number>0</number>
-    </property>
-    <property name="bottomMargin">
-     <number>0</number>
-    </property>
-    <item>
-     <widget class="StatusBar" name="statusWidget" native="true"/>
-    </item>
-    <item>
-     <layout class="QVBoxLayout" name="widgetsLayout">
-      <property name="spacing">
-       <number>0</number>
-      </property>
-      <item>
-       <widget class="QTabWidget" name="centralTabWidget">
-        <property name="font">
-         <font>
-          <pointsize>9</pointsize>
-         </font>
-        </property>
-        <property name="styleSheet">
-         <string notr="true"/>
-        </property>
-        <property name="tabShape">
-         <enum>QTabWidget::Rounded</enum>
-        </property>
-        <property name="currentIndex">
-         <number>0</number>
-        </property>
-        <widget class="QWidget" name="ascanTab">
-         <attribute name="icon">
-          <iconset resource="../resources.qrc">
-           <normaloff>:/icons/resources/icons/sys_icon_zoom_in.png</normaloff>:/icons/resources/icons/sys_icon_zoom_in.png</iconset>
-         </attribute>
-         <attribute name="title">
-          <string>A+B Scan</string>
-         </attribute>
-         <layout class="QHBoxLayout" name="horizontalLayout">
-          <property name="spacing">
-           <number>0</number>
-          </property>
-          <property name="leftMargin">
-           <number>0</number>
-          </property>
-          <property name="topMargin">
-           <number>0</number>
-          </property>
-          <property name="rightMargin">
-           <number>0</number>
-          </property>
-          <property name="bottomMargin">
-           <number>0</number>
-          </property>
-          <item>
-           <widget class="AScanPage" name="aScanPage" native="true"/>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="bscanTab">
-         <attribute name="icon">
-          <iconset resource="../resources.qrc">
-           <normaloff>:/icons/resources/icons/sys_icon_zoom.png</normaloff>:/icons/resources/icons/sys_icon_zoom.png</iconset>
-         </attribute>
-         <attribute name="title">
-          <string>B Scan</string>
-         </attribute>
-         <layout class="QHBoxLayout" name="horizontalLayout_2">
-          <property name="spacing">
-           <number>0</number>
-          </property>
-          <property name="leftMargin">
-           <number>0</number>
-          </property>
-          <property name="topMargin">
-           <number>0</number>
-          </property>
-          <property name="rightMargin">
-           <number>0</number>
-          </property>
-          <property name="bottomMargin">
-           <number>0</number>
-          </property>
-          <item>
-           <widget class="BScanPage" name="bScanPage" native="true"/>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="tvgTab">
-         <attribute name="icon">
-          <iconset resource="../resources.qrc">
-           <normaloff>:/icons/resources/icons/software_vector_composite.png</normaloff>:/icons/resources/icons/software_vector_composite.png</iconset>
-         </attribute>
-         <attribute name="title">
-          <string>TVG</string>
-         </attribute>
-         <layout class="QHBoxLayout" name="horizontalLayout_4">
-          <property name="spacing">
-           <number>0</number>
-          </property>
-          <property name="leftMargin">
-           <number>0</number>
-          </property>
-          <property name="topMargin">
-           <number>0</number>
-          </property>
-          <property name="rightMargin">
-           <number>0</number>
-          </property>
-          <property name="bottomMargin">
-           <number>0</number>
-          </property>
-          <item>
-           <widget class="TVGEditorWidget" name="tvgEditorWidget" native="true"/>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="channelsTab">
-         <attribute name="icon">
-          <iconset resource="../resources.qrc">
-           <normaloff>:/icons/resources/icons/software_layout-8boxes.png</normaloff>:/icons/resources/icons/software_layout-8boxes.png</iconset>
-         </attribute>
-         <attribute name="title">
-          <string>Channels</string>
-         </attribute>
-         <layout class="QHBoxLayout" name="horizontalLayout_3">
-          <property name="spacing">
-           <number>0</number>
-          </property>
-          <property name="leftMargin">
-           <number>0</number>
-          </property>
-          <property name="topMargin">
-           <number>0</number>
-          </property>
-          <property name="rightMargin">
-           <number>0</number>
-          </property>
-          <property name="bottomMargin">
-           <number>0</number>
-          </property>
-          <item>
-           <widget class="ChannelsView" name="channelsWidget" native="true"/>
-          </item>
-         </layout>
-        </widget>
-       </widget>
-      </item>
-     </layout>
-    </item>
-    <item>
-     <widget class="MenuPanel" name="menuWidget" native="true"/>
-    </item>
-   </layout>
-  </widget>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,0,1">
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>H = 0</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_2">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>Att: 30(0)</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>StatusBar</class>
-   <extends>QWidget</extends>
-   <header>ui/statusbar.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>BScanPage</class>
-   <extends>QWidget</extends>
-   <header>ui/bscanpage.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>AScanPage</class>
-   <extends>QWidget</extends>
-   <header>ui/ascanpage.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>MenuPanel</class>
-   <extends>QWidget</extends>
-   <header>ui/menupanel.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>ChannelsView</class>
-   <extends>QWidget</extends>
-   <header>ui/channelsview.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>TVGEditorWidget</class>
-   <extends>QWidget</extends>
-   <header>ui/tvgeditorwidget.h</header>
-   <container>1</container>
-  </customwidget>
- </customwidgets>
- <resources>
-  <include location="../resources.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

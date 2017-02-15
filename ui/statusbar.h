@@ -14,6 +14,7 @@ class StatusBar : public QWidget
 public:
     explicit StatusBar(QWidget *parent = 0);
     ~StatusBar();
+    void init();
 public slots:
     void onDeviceOverheatEnabled();
     void onDeviceOverheatDisabled();
