@@ -92,7 +92,7 @@ void Tact::setTactEnabled(bool tactEnabled)
 {
     _tactEnabled = tactEnabled;
 }
-
+/*
 PulserProg Tact::getProg1() const
 {
     return _prog1;
@@ -132,6 +132,11 @@ void Tact::setFreq2(const PulserFreq &freq2)
 {
     _freq2 = freq2;
 }
+*/
+bool Tact::getDiffMode() const
+{
+    return _diffMode;
+}
 
 Tact::Tact() :
     _tactEnabled(false),
@@ -140,20 +145,20 @@ Tact::Tact() :
     _tx1(0x00),
     _rx1Enabled(false),
     _rx1(0x00),
-    _double1(false),
-    _prog1(PulserProg::Prog_1),
-    _freq1(PulserFreq::Freq_1_0_MHz),
+    //_double1(false),
+    //_prog1(PulserProg::Prog_1),
+   // _freq1(PulserFreq::Freq_1_0_MHz),
     _tx2Enabled(false),
     _tx2(0x00),
     _rx2Enabled(false),
-    _rx2(0x00),
-    _double2(false),
-    _prog2(PulserProg::Prog_1),
-    _freq2(PulserFreq::Freq_1_0_MHz)
+    _rx2(0x00)
+   // _double2(false),
+    //_prog2(PulserProg::Prog_1),
+   // _freq2(PulserFreq::Freq_1_0_MHz)
 {
 
 }
-
+/*
 TactRegisters Tact::getRegisters()
 {
     TactRegisters reg;
@@ -190,4 +195,4 @@ TactRegisters Tact::getRegisters()
     reg._RESERVED = 0x00;
 
     return reg;
-}
+}*/

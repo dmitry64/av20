@@ -8,7 +8,7 @@
 #include <queue>
 #include "device/modificators/modificator.h"
 #include "device/definitions.h"
-#include "device/devicecalibration.h"
+#include "device/devicemode.h"
 #include "device/devicestate.h"
 #include "device/device.h"
 #include <QMutex>
@@ -18,7 +18,6 @@ class Core : public QThread
     Q_OBJECT
 private:
     std::atomic_bool _active;
-    std::atomic_uchar _deviceMode;
     std::atomic_bool _snapshotRequested;
     std::atomic_uchar _targetChannel;
 
@@ -27,8 +26,8 @@ private:
 
     Device * _device;
     DeviceState * _state;
-    DeviceCalibration * _currentCalibration;
-    DeviceCalibration * _snapshot;
+    DeviceMode * _currentCalibration;
+    DeviceMode * _snapshot;
     QMutex * _changesMutex;
     std::queue<Modificator *> _pendingChanges;
 
@@ -42,8 +41,8 @@ public:
     Core();
     ~Core();
     void run();
-    DeviceCalibration *getCalibration();
-    DeviceCalibration *getSnapshot();
+    DeviceMode *getCalibration();
+    DeviceMode *getSnapshot();
 
     void notifyTVG(TVG &tvg);
     void notifyChannel(Channel channel);
@@ -69,7 +68,6 @@ private:
     void handleDeviceConnectionError(bool status);
 
 public:
-    void setDeviceMode(uint8_t mode);
     void setChannelBaseSens(uint8_t channel, int value);
     void setTvgCurve(std::vector<uint8_t> points);
     void setSingleChannel(uint8_t channel);

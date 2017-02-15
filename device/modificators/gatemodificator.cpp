@@ -8,7 +8,7 @@ GateModificator::GateModificator(uint8_t channel, Gate gate)
 
 void GateModificator::apply(Core *core)
 {
-    std::vector<Gate> gates = core->getCalibration()->getChannel(_channel)->gates();
+    std::vector<Gate> gates = core->getCalibration()->getChannel(_channel)->rx()->gates();
 
     for(int i=0; i<gates.size(); i++) {
         if(gates[i]._id == _gate._id) {
@@ -18,7 +18,7 @@ void GateModificator::apply(Core *core)
         }
     }
 
-    core->getCalibration()->getChannel(_channel)->setGates(gates);
+    core->getCalibration()->getChannel(_channel)->rx()->setGates(gates);
 
     core->notifyChannel(*(core->getCalibration()->getChannel(_channel)));
 }

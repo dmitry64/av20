@@ -15,7 +15,7 @@ ChannelSelector::~ChannelSelector()
     delete ui;
 }
 
-void ChannelSelector::init(DeviceCalibration *snapshot)
+void ChannelSelector::init(DeviceMode *snapshot)
 {
     int count = snapshot->getChannelsCount();
 

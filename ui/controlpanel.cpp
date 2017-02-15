@@ -116,9 +116,9 @@ void ControlPanel::setChannel(uint8_t channel)
     update();
 }
 
-void ControlPanel::init(DeviceCalibration * calibration)
+void ControlPanel::init(DeviceMode * calibration)
 {
-    _sensBaseLevel->setValue(calibration->getChannel(_currentChannel)->baseSensLevel());
+    _sensBaseLevel->setValue(calibration->getChannel(_currentChannel)->rx()->baseSensLevel());
 
     _gateCounter = 0;
     for(int i=0; i<_gates.size(); i++) {
@@ -127,7 +127,7 @@ void ControlPanel::init(DeviceCalibration * calibration)
     }
     _gates.clear();
 
-    std::vector<Gate> gates = calibration->getChannel(_currentChannel)->gates();
+    std::vector<Gate> gates = calibration->getChannel(_currentChannel)->rx()->gates();
     for(uint8_t i=0; i<gates.size(); i++) {
         GateController * gateController = new GateController();
         gateController->setGate(gates[i]);

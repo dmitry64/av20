@@ -19,7 +19,7 @@ public:
     explicit AScanPage(QWidget *parent = 0);
     ~AScanPage();
     void init(uint8_t channel);
-    void init(uint8_t channel, DeviceCalibration * snapshot);
+    void init(uint8_t channel, DeviceMode * snapshot);
     void setCore(Core * core);
     void setAScanChannels(std::vector<Channel> channels);
     void setBScanChannels(std::vector<Channel> channels);

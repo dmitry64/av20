@@ -36,7 +36,7 @@ public:
     void setCore(Core * ptr);
     void setMode(uint8_t deviceMode);
     void setChannel(uint8_t channel);
-    void init(DeviceCalibration *calibration);
+    void init(DeviceMode *calibration);
 
 private:
     void showEvent(QShowEvent *event);

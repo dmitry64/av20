@@ -17,11 +17,11 @@ AScanPage::~AScanPage()
 
 void AScanPage::init(uint8_t channel)
 {
-    DeviceCalibration * snapshot =  _core->getSnapshot();
+    DeviceMode * snapshot =  _core->getSnapshot();
     init(channel,snapshot);
 }
 
-void AScanPage::init(uint8_t channel, DeviceCalibration *snapshot)
+void AScanPage::init(uint8_t channel, DeviceMode *snapshot)
 {
     qDebug() << "Ascan init!";
     std::vector<Channel> channels;

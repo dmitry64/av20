@@ -1,22 +1,22 @@
-#include "devicecalibration.h"
+#include "devicemode.h"
 #include <QDebug>
 
-std::vector<Channel *> DeviceCalibration::getChannels() const
+std::vector<Channel *> DeviceMode::getChannels() const
 {
     return _channels;
 }
 
-std::vector<Tact *> DeviceCalibration::getTactTable() const
+std::vector<Tact *> DeviceMode::getTactTable() const
 {
     return _tactTable;
 }
 
-DeviceCalibration::DeviceCalibration()
+DeviceMode::DeviceMode()
 {
 
 }
 
-DeviceCalibration::~DeviceCalibration()
+DeviceMode::~DeviceMode()
 {
     qDebug() << "Device calibration deleted";
     for(int i=0; i<_tactTable.size(); i++) {
@@ -29,14 +29,23 @@ DeviceCalibration::~DeviceCalibration()
     _channels.clear();
 }
 
-void DeviceCalibration::init()
+void DeviceMode::init()
 {
     for(int i=0;i<8; i++) {
-        Channel * ch = new Channel();
-        ch->setIndex(i);
-        ch->setBaseSensLevel(72 + i);
-        ch->setTvgMode(TVGMode::CurveMode);
-        ch->setPrismTime(0);
+        Channel * chTemp = new Channel();
+        RxChannel * rx = new RxChannel();
+        TxChannel * tx = new TxChannel();
+        chTemp->setRx(rx);
+        chTemp->setTx(tx);
+
+        tx->setFreq(PulserFreq::Freq_2_5_MHz);
+        tx->setProg(PulserProg::Prog_1);
+
+
+        chTemp->setIndex(i);
+        rx->setBaseSensLevel(72 + i);
+        rx->setTvgMode(TVGMode::CurveMode);
+        rx->setPrismTime(0);
         std::vector<Gate> gates;
         Gate g1;
         g1._start = 33;
@@ -44,38 +53,38 @@ void DeviceCalibration::init()
         g1._level = 50;
         g1._id = 0;
         gates.push_back(g1);
-        ch->setGates(gates);
+        rx->setGates(gates);
 
         switch (i) {
             case 0:
-            ch->setColor(255,30,30);
+            chTemp->setColor(255,30,30);
             break;
             case 1:
-            ch->setColor(30,255,30);
+            chTemp->setColor(30,255,30);
             break;
             case 2:
-            ch->setColor(255,30,255);
+            chTemp->setColor(255,30,255);
             break;
             case 3:
-            ch->setColor(255,128,128);
+            chTemp->setColor(255,128,128);
             break;
             case 4:
-            ch->setColor(255,255,30);
+            chTemp->setColor(255,255,30);
             break;
             case 5:
-            ch->setColor(30,255,255);
+            chTemp->setColor(30,255,255);
             break;
             case 6:
-            ch->setColor(128,128,255);
+            chTemp->setColor(128,128,255);
             break;
             case 7:
-            ch->setColor(30,30,255);
+            chTemp->setColor(30,30,255);
             break;
         }
 
-        ch->setName("58");
+        rx->setName("58");
 
-        _channels.push_back(ch);
+        _channels.push_back(chTemp);
     }
     for(int i=0;i<MAX_TACTS_COUNT; i++) {
         Tact * tact = new Tact();
@@ -86,17 +95,13 @@ void DeviceCalibration::init()
         tact->setTx1Enabled(true);
         tact->setTactEnabled(true);
 
-        tact->setFreq1(PulserFreq::Freq_2_5_MHz);
-        tact->setProg1(PulserProg::Prog_1);
 
-        tact->setFreq2(PulserFreq::Freq_2_5_MHz);
-        tact->setProg2(PulserProg::Prog_1);
 
         _tactTable.push_back(tact);
     }
 }
 
-DeviceCalibration::DeviceCalibration(DeviceCalibration *original)
+DeviceMode::DeviceMode(DeviceMode *original)
 {
     for(int i=0;i<original->getChannelsCount();i++) {
         Channel * orig = original->getChannel(i);
@@ -110,17 +115,17 @@ DeviceCalibration::DeviceCalibration(DeviceCalibration *original)
     }
 }
 
-DeviceCalibration * DeviceCalibration::getSnapshot()
+DeviceMode * DeviceMode::getSnapshot()
 {
-    return new DeviceCalibration(this);
+    return new DeviceMode(this);
 }
 
-Channel * DeviceCalibration::getChannel(int index)
+Channel *DeviceMode::getChannel(int index)
 {
     return _channels.at(index);
 }
 
-uint8_t DeviceCalibration::getMaxTacts()
+uint8_t DeviceMode::getMaxTacts()
 {
     uint8_t num = 0;
     for(int i=0; i<MAX_TACTS_COUNT; i++) {
@@ -131,12 +136,12 @@ uint8_t DeviceCalibration::getMaxTacts()
     return num;
 }
 
-uint8_t DeviceCalibration::getChannelsCount()
+uint8_t DeviceMode::getChannelsCount()
 {
     return _channels.size();
 }
 
-uint8_t DeviceCalibration::getTactIndexByCounter(uint8_t counter)
+uint8_t DeviceMode::getTactIndexByCounter(uint8_t counter)
 {
     uint8_t num = 0;
     for(int i=0; i<MAX_TACTS_COUNT; i++) {
@@ -150,7 +155,7 @@ uint8_t DeviceCalibration::getTactIndexByCounter(uint8_t counter)
     return 0;
 }
 
-std::vector< std::pair<uint8_t, uint8_t> > DeviceCalibration::getTactLines(uint8_t tactIndex)
+std::vector< std::pair<uint8_t, uint8_t> > DeviceMode::getTactLines(uint8_t tactIndex)
 {
     std::vector< std::pair<uint8_t, uint8_t> > lines;
 
@@ -167,7 +172,12 @@ std::vector< std::pair<uint8_t, uint8_t> > DeviceCalibration::getTactLines(uint8
     return lines;
 }
 
-TactRegisters DeviceCalibration::getTactRegistersByIndex(uint8_t index)
+Tact *DeviceMode::getTactByIndex(uint8_t index)
 {
-    return _tactTable[index]->getRegisters();
+    return _tactTable[index];
 }
+
+//TactRegisters DeviceMode::getTactRegistersByIndex(uint8_t index)
+//{
+//    return _tactTable[index]->getRegisters();
+//}

@@ -12,8 +12,6 @@ class System : public QObject
     Q_OBJECT
 
     Filesystem * _filesystem;
-
-
 private:
     System();
     System( const System &);

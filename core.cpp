@@ -5,7 +5,7 @@
 #include "device/modificators/addgatemodificator.h"
 #include "device/modificators/removegatemodificator.h"
 
-DeviceCalibration * Core::getSnapshot()
+DeviceMode * Core::getSnapshot()
 {
     _snapshotRequested.store(true);
     while(_snapshotRequested.load()) {
@@ -19,10 +19,10 @@ Device *Core::getDevice() const
     return _device;
 }
 
-Core::Core() : _active(true), _state(new DeviceState()), _deviceMode(DEVICE_MODE_EVAL), _targetChannel(0), _changesMutex(new QMutex())
+Core::Core() : _active(true), _state(new DeviceState()), _targetChannel(0), _changesMutex(new QMutex())
 {
     _device = (new Device(_state));
-    _currentCalibration = new DeviceCalibration();
+    _currentCalibration = new DeviceMode();
     _currentCalibration->init();
     _currentTactCounter = 0;
     _currentTact = _currentCalibration->getTactIndexByCounter(_currentTactCounter);
@@ -45,26 +45,13 @@ void Core::run()
 {
     init();
     while(_active) {
-        switch (_deviceMode.load()) {
-        case DEVICE_MODE_EVAL:
-            //evaluationWork();
-            //break;
-        case DEVICE_MODE_SEARCH:
-            searchWork();
-            break;
-        case DEVICE_MODE_HEAD_SCANNER:
-            break;
-        case DEVICE_MODE_WHEEL:
-            break;
-        default:
-            qFatal("Unknown mode!");
-            break;
-        }
+        searchWork();
+
     }
     finish();
 }
 
-DeviceCalibration *Core::getCalibration()
+DeviceMode *Core::getCalibration()
 {
     return _currentCalibration;
 }
@@ -166,7 +153,7 @@ void Core::process()
     dp->ascan._markerPos = pos;
     dp->ascan._markerValue = max;
 
-    std::vector<Gate> gates = _currentCalibration->getChannel(dp->bscan._channel)->gates();
+    std::vector<Gate> gates = _currentCalibration->getChannel(dp->bscan._channel)->rx()->gates();
 
     /*if(dp->bscan._channel == 0) {
         qDebug() << "Gates size:" <<gates.size();
@@ -318,10 +305,6 @@ void Core::notifyChannel(Channel channel)
     emit channelChanged(channel);
 }
 
-void Core::setDeviceMode(uint8_t mode)
-{
-    _deviceMode.store(mode);
-}
 
 void Core::setChannelBaseSens(uint8_t channel, int value)
 {

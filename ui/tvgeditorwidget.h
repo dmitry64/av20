@@ -3,7 +3,7 @@
 
 #include <QWidget>
 #include "device/definitions.h"
-#include "device/devicecalibration.h"
+#include "device/devicemode.h"
 #include "core.h"
 
 namespace Ui {
@@ -19,7 +19,7 @@ public:
     explicit TVGEditorWidget(QWidget *parent = 0);
     ~TVGEditorWidget();
     void init(uint8_t channel);
-    void init(uint8_t channel, DeviceCalibration * snapshot);
+    void init(uint8_t channel, DeviceMode * snapshot);
     void setCore(Core * core);
 public slots:
     void onDisplayPackage(QSharedPointer<DisplayPackage> package);

@@ -31,7 +31,6 @@ target.path = /home/root
 INSTALLS += target
 
 SOURCES += main.cpp\
-        debuggui.cpp \
     core.cpp \
     device/device.cpp \
     device/spi/driverspi.cpp \
@@ -41,7 +40,6 @@ SOURCES += main.cpp\
     ui/controlpanel.cpp \
     device/modificators/modificator.cpp \
     device/modificators/tvgsimplemodificator.cpp \
-    device/devicecalibration.cpp \
     ui/statusbar.cpp \
     device/spi/fakespi.cpp \
     ui/bscanwidget.cpp \
@@ -49,7 +47,6 @@ SOURCES += main.cpp\
     ui/controls/channelbutton.cpp \
     device/modificators/activechannelmodificator.cpp \
     device/tact.cpp \
-    device/channel.cpp \
     ui/bscanpage.cpp \
     ui/ascanpage.cpp \
     ui/menupanel.cpp \
@@ -72,9 +69,13 @@ SOURCES += main.cpp\
     ui/tvgeditorwidget.cpp \
     ui/ascaninfowidget.cpp \
     system/system.cpp \
-    system/filesystem.cpp
+    system/filesystem.cpp \
+    device/devicemode.cpp \
+    device/rxchannel.cpp \
+    device/txchannel.cpp \
+    device/channel.cpp
 
-HEADERS  += debuggui.h \
+HEADERS  += \
     core.h \
     device/device.h \
     device/spi/driverspi.h \
@@ -85,7 +86,6 @@ HEADERS  += debuggui.h \
     ui/controlpanel.h \
     device/modificators/modificator.h \
     device/modificators/tvgsimplemodificator.h \
-    device/devicecalibration.h \
     ui/statusbar.h \
     device/spi/deviceinterface.h \
     device/spi/fakespi.h \
@@ -94,7 +94,6 @@ HEADERS  += debuggui.h \
     ui/controls/channelbutton.h \
     device/modificators/activechannelmodificator.h \
     device/tact.h \
-    device/channel.h \
     ui/bscanpage.h \
     ui/ascanpage.h \
     ui/menupanel.h \
@@ -117,9 +116,13 @@ HEADERS  += debuggui.h \
     ui/tvgeditorwidget.h \
     ui/ascaninfowidget.h \
     system/system.h \
-    system/filesystem.h
+    system/filesystem.h \
+    device/devicemode.h \
+    device/rxchannel.h \
+    device/txchannel.h \
+    device/channel.h
 
-FORMS    += debuggui.ui \
+FORMS    += \
     ui/ascanwidget.ui \
     ui/controls/touchspinbox.ui \
     ui/controlpanel.ui \

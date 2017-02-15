@@ -45,31 +45,32 @@ ChannelsView::~ChannelsView()
 void ChannelsView::init()
 {
     if(_core!=0) {
-    DeviceCalibration * snapshot =  _core->getSnapshot();
+    DeviceMode * snapshot =  _core->getSnapshot();
     init(snapshot);
     } else {
         qFatal("ChannelsView core error!");
     }
 }
 
-void ChannelsView::init(DeviceCalibration *snapshot)
+void ChannelsView::init(DeviceMode *snapshot)
 {
     ui->channelsWidget->clearContents();
     ui->tactWidget->clearContents();
     std::vector<Channel*> channels = snapshot->getChannels();
 
     for(int i=0; i<channels.size(); i++) {
-        Channel * chan = channels[i];
+        Channel * chan = channels.at(i);
+        RxChannel * rxchan = channels[i]->rx();
         QTableWidgetItem * item = new QTableWidgetItem("Chan #" + QString::number(i));
         item->setBackgroundColor(QColor(chan->getColorRed(),chan->getColorGreen(),chan->getColorBlue()));
         ui->channelsWidget->setItem(i,0,item);
-        item = new QTableWidgetItem(QString::number(chan->baseSensLevel()));
+        item = new QTableWidgetItem(QString::number(rxchan->baseSensLevel()));
         item->setTextAlignment( Qt::AlignHCenter | Qt::AlignCenter );
         ui->channelsWidget->setItem(i,1,item);
-        item = new QTableWidgetItem(QString::number(chan->prismTime()));
+        item = new QTableWidgetItem(QString::number(rxchan->prismTime()));
         item->setTextAlignment( Qt::AlignHCenter | Qt::AlignCenter );
         ui->channelsWidget->setItem(i,2,item);
-        std::vector<Gate> gates = chan->gates();
+        std::vector<Gate> gates = rxchan->gates();
         QString gatesString;
         for(int j=0; j<gates.size(); j++) {
             Gate gate = gates.at(j);
@@ -111,10 +112,10 @@ void ChannelsView::init(DeviceCalibration *snapshot)
             item->setBackgroundColor(disabledChannelsColor);
         }
         ui->tactWidget->setItem(i,2,item);
-        item = new QTableWidgetItem(QString(ProgStrings[tact->getProg1()].c_str()));
+        item = new QTableWidgetItem(QString(ProgStrings[channels.at(tact->getTx1())->tx()->prog()].c_str()));
         item->setTextAlignment( Qt::AlignHCenter | Qt::AlignCenter );
         ui->tactWidget->setItem(i,3,item);
-        item = new QTableWidgetItem(QString(FreqStrings[tact->getFreq1()].c_str()));
+        item = new QTableWidgetItem(QString(FreqStrings[channels.at(tact->getTx1())->tx()->freq()].c_str()));
         item->setTextAlignment( Qt::AlignHCenter | Qt::AlignCenter );
         ui->tactWidget->setItem(i,4,item);
         item = new QTableWidgetItem(QString::number(tact->getRx2()));
@@ -135,10 +136,10 @@ void ChannelsView::init(DeviceCalibration *snapshot)
             item->setBackgroundColor(disabledChannelsColor);
         }
         ui->tactWidget->setItem(i,6,item);
-        item = new QTableWidgetItem(QString(ProgStrings[tact->getProg2()].c_str()));
+        item = new QTableWidgetItem(QString(ProgStrings[channels.at(tact->getTx2())->tx()->prog()].c_str()));
         item->setTextAlignment( Qt::AlignHCenter | Qt::AlignCenter );
         ui->tactWidget->setItem(i,7,item);
-        item = new QTableWidgetItem(QString(FreqStrings[tact->getFreq2()].c_str()));
+        item = new QTableWidgetItem(QString(FreqStrings[channels.at(tact->getTx2())->tx()->freq()].c_str()));
         item->setTextAlignment( Qt::AlignHCenter | Qt::AlignCenter );
         ui->tactWidget->setItem(i,8,item);
     }

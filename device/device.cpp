@@ -2,6 +2,49 @@
 #include <QDebug>
 #define FAKESPI
 
+TactRegisters Device::getRegistersByTact(uint8_t index, DeviceMode * mode)
+{
+    TactRegisters reg;
+    Tact * tact = mode->getTactByIndex(index);
+    tact->getRx1();
+
+    reg._CR = 0x00;
+    reg._CR |= ((tact->getDiffMode() & 0b00000001) << 1);
+    reg._CR |= (tact->getTactEnabled() & 0b00000001);
+
+    reg._TR1 = 0x00;
+    reg._TR1 |= ((tact->getRx1Enabled() & 0b00000001) << 7);
+    reg._TR1 |= ((tact->getRx1() & 0b00000111) << 4);
+    reg._TR1 |= ((tact->getTx1Enabled() & 0b00000001) << 3);
+    reg._TR1 |= (tact->getTx1() & 0b00000111);
+
+    TxChannel * firstTx = mode->getChannel(tact->getTx1())->tx();
+    reg._PULSER1 = 0x00;
+    reg._PULSER1 |= ((firstTx->doubleMode() & 0b00000001) << 7);
+    uint8_t prog1 = firstTx->prog();
+    reg._PULSER1 |= ((prog1 & 0b00001111) << 3);
+    uint8_t freq1 = firstTx->prog();
+    reg._PULSER1 |= (freq1 & 0b00001111);
+
+    reg._TR2 = 0x00;
+    reg._TR2 |= ((tact->getRx2Enabled() & 0b00000001) << 7);
+    reg._TR2 |= ((tact->getRx2() & 0b00000111) << 4);
+    reg._TR2 |= ((tact->getTx2Enabled() & 0b00000001) << 3);
+    reg._TR2 |= (tact->getTx2() & 0b00000111);
+
+    TxChannel * secondTx = mode->getChannel(tact->getTx2())->tx();
+    reg._PULSER2 = 0x00;
+    reg._PULSER2 |= ((secondTx->doubleMode() & 0b00000001) << 7);
+    uint8_t prog2 = secondTx->prog();
+    reg._PULSER1 |= ((prog2 & 0b00001111) << 3);
+    uint8_t freq2 = secondTx->freq();
+    reg._PULSER2 |= (freq2 & 0b00001111);
+
+    reg._RESERVED = 0x00;
+
+    return reg;
+}
+
 Device::Device(DeviceState *state) :  _state(state)
 {
 #ifdef FAKESPI
@@ -100,10 +143,10 @@ void Device::resetChannelsTable()
     }
 }
 
-void Device::applyCalibration(DeviceCalibration *calibration)
+void Device::applyCalibration(DeviceMode *calibration)
 {
     for(int j=0; j<calibration->getChannelsCount(); j++) {
-        TVG tvg = calibration->getChannel(j)->generateTVG();
+        TVG tvg = calibration->getChannel(j)->rx()->generateTVG();
         _spi->setRegister(0x40+j,TVG_SAMPLES_BYTES,tvg._samples);
         if(checkConnection()) {
             qDebug() << "TVG for ch #" << j + 1 << " set!";
@@ -113,7 +156,7 @@ void Device::applyCalibration(DeviceCalibration *calibration)
         }
     }
     for(int j=0; j<MAX_TACTS_COUNT; j++) {
-        TactRegisters tr = calibration->getTactRegistersByIndex(j);
+        TactRegisters tr = getRegistersByTact(j,calibration);//calibration->getTactRegistersByIndex(j);
 
         if(_spi->setAndTestRegister(0x10+j*6,1,&tr._CR)) {
             qFatal("Unable to set register");

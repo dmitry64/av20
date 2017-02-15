@@ -10,8 +10,8 @@ TVGSimpleModificator::TVGSimpleModificator(int channel, int value) : Modificator
 
 void TVGSimpleModificator::apply(Core *core)
 {
-    core->getCalibration()->getChannel(_channel)->setBaseSensLevel(_value);
-    TVG tvg = core->getCalibration()->getChannel(_channel)->generateTVG();
+    core->getCalibration()->getChannel(_channel)->rx()->setBaseSensLevel(_value);
+    TVG tvg = core->getCalibration()->getChannel(_channel)->rx()->generateTVG();
     core->getDevice()->setTVG(_channel, tvg);
     core->notifyChannel(*(core->getCalibration()->getChannel(_channel)));
 }

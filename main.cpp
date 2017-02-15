@@ -1,4 +1,3 @@
-#include "debuggui.h"
 #include "ui/mainwindow.h"
 #include <QApplication>
 #include <QObject>

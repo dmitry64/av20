@@ -95,7 +95,7 @@ void BScanWidget::paintEvent(QPaintEvent *event)
             }
         }
 
-        std::vector<Gate> gates = _channels[n].gates();
+        std::vector<Gate> gates = _channels[n].rx()->gates();
 
         for(uint8_t i=0; i<gates.size(); i++) {
             int y1 = (gates[i]._start) * ( h / 200.0);

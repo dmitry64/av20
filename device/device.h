@@ -6,12 +6,15 @@
 #include "spi/fakespi.h"
 #include "devicestate.h"
 #include <vector>
-#include "devicecalibration.h"
+#include "devicemode.h"
 
 class Device
 {
     DeviceInterface * _spi;
     DeviceState * _state;
+
+private:
+    TactRegisters getRegistersByTact(uint8_t index, DeviceMode *mode);
 
 public:
     Device(DeviceState * state);
@@ -20,7 +23,7 @@ public:
     void resetConfigRegisters();
     void resetTVG();
     void resetChannelsTable();
-    void applyCalibration(DeviceCalibration * calibration);
+    void applyCalibration(DeviceMode * calibration);
     void setProgTrigger(bool enabled);
     DeviceStatus getDeviceStatus();
     void setTVG(int chIndex, TVG tvg);

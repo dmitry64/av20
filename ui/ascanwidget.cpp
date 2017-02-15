@@ -88,8 +88,8 @@ void AScanWidget::paintEvent(QPaintEvent *event)
 
 
     for(uint8_t i=0; i<_channels.size(); i++) {
-        for(uint8_t j=0; j<_channels[i].gates().size(); j++) {
-            Gate gate = _channels[i].gates()[j];
+        for(uint8_t j=0; j<_channels[i].rx()->gates().size(); j++) {
+            Gate gate = _channels[i].rx()->gates()[j];
             int level = bottom - (gate._level * ((h-64)/255.0));
             painter.setPen(QPen(QColor( gate._level ,255 - gate._level, 0 ), 3));
             painter.drawLine(left + gate._start * scaleStep,level,left + gate._finish* scaleStep, level);
@@ -118,7 +118,7 @@ void AScanWidget::setChannelsInfo(std::vector<Channel> channels)
 {
     _channels = channels;
     if(!channels.empty()) {
-        onTVG(channels[0].generateTVG());
+        onTVG(channels[0].rx()->generateTVG());
     }
     update();
 }
@@ -181,7 +181,7 @@ void AScanWidget::onChannelChanged(Channel channel)
         if(chan == _channels[j].index())
         {
             _channels[j] = channel;
-            onTVG(channel.generateTVG());
+            onTVG(channel.rx()->generateTVG());
         }
     }
 

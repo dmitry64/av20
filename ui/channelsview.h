@@ -2,7 +2,7 @@
 #define CHANNELSVIEW_H
 
 #include <QWidget>
-#include <device/devicecalibration.h>
+#include <device/devicemode.h>
 #include "core.h"
 
 namespace Ui {
@@ -19,7 +19,7 @@ public:
     ~ChannelsView();
 
     void init();
-    void init(DeviceCalibration * snapshot);
+    void init(DeviceMode * snapshot);
     void setCore(Core * core);
     void showEvent( QShowEvent* event );
 private:
