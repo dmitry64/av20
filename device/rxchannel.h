@@ -4,29 +4,26 @@
 #include <vector>
 #include "stdint.h"
 
+#include "device/tvgcurve.h"
 #include "definitions.h"
+
+
 
 class RxChannel
 {
 
     std::string _name;
-    int _baseSensLevel;
-    std::vector<uint8_t> _tvgPoints;
-    TVGMode _tvgMode;
+    TVGCurve * _tvgCurve;
+
     int _prismTime;
+    int _markerPos;
     std::vector<Gate> _gates;
-
-
 
 public:
     RxChannel();
-    int baseSensLevel() const;
-    void setBaseSensLevel(int baseSensLevel);
-    std::vector<uint8_t> tvgPoints() const;
-    void setTvgPoints(const std::vector<uint8_t> &tvgPoints);
-    TVGMode tvgMode() const;
-    void setTvgMode(const TVGMode &tvgMode);
-    TVG generateTVG();
+   // int baseSensLevel() const;
+    //void setBaseSensLevel(int baseSensLevel);
+
     int prismTime() const;
     void setPrismTime(int prismTime);
     std::vector<Gate> gates() const;
@@ -34,6 +31,10 @@ public:
 
     std::string getName() const;
     void setName(const std::string &name);
+    int getMarkerPos() const;
+    void setMarkerPos(int markerPos);
+    TVGCurve *getTvgCurve() const;
+    void setTvgCurve(TVGCurve *tvgCurve);
 };
 
 #endif // CHANNEL_H

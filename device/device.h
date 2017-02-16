@@ -7,6 +7,7 @@
 #include "devicestate.h"
 #include <vector>
 #include "devicemode.h"
+#include "tvgcurve.h"
 
 class Device
 {
@@ -15,7 +16,8 @@ class Device
 
 private:
     TactRegisters getRegistersByTact(uint8_t index, DeviceMode *mode);
-
+    TVG getTVGFromCurve(TVGCurve * curve);
+    void setBit(uint8_t * ptr, int bit, uint8_t val);
 public:
     Device(DeviceState * state);
     void init();

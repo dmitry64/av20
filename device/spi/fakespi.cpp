@@ -71,7 +71,7 @@ void FakeSPI::setAScanForLine1(uint8_t *dest)
         double x = (i + sin(ascanL1Counter2/9.0) * 120.14 + (chan-4) * 50 - 400) / 8.0 ;
         double res = 127.0;
         if(x!=0) {
-            res = std::max((((sin(x)/x) + 1)/2.0)*255.0 - 107,0.0);
+            res = std::max((((sin(x)/x) + 1)/2.0)*255.0 - 127  ,0.0);
         }
 
         res *= getTVGSample2( tvg._samples, i/4) / 127.0;

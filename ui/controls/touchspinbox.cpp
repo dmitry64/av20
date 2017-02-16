@@ -28,6 +28,7 @@ TouchSpinBox::TouchSpinBox(QWidget *parent) :
     _min = 0;
     _max = 255;
     _step = 1;
+    _value = 0;
     _suffix = QString("");
 }
 

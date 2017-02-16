@@ -47,6 +47,7 @@ void ChannelsView::init()
     if(_core!=0) {
     DeviceMode * snapshot =  _core->getSnapshot();
     init(snapshot);
+    delete snapshot;
     } else {
         qFatal("ChannelsView core error!");
     }
@@ -64,9 +65,9 @@ void ChannelsView::init(DeviceMode *snapshot)
         QTableWidgetItem * item = new QTableWidgetItem("Chan #" + QString::number(i));
         item->setBackgroundColor(QColor(chan->getColorRed(),chan->getColorGreen(),chan->getColorBlue()));
         ui->channelsWidget->setItem(i,0,item);
-        item = new QTableWidgetItem(QString::number(rxchan->baseSensLevel()));
-        item->setTextAlignment( Qt::AlignHCenter | Qt::AlignCenter );
-        ui->channelsWidget->setItem(i,1,item);
+        //item = new QTableWidgetItem(QString::number(rxchan->baseSensLevel()));
+        //item->setTextAlignment( Qt::AlignHCenter | Qt::AlignCenter );
+        //ui->channelsWidget->setItem(i,1,item);
         item = new QTableWidgetItem(QString::number(rxchan->prismTime()));
         item->setTextAlignment( Qt::AlignHCenter | Qt::AlignCenter );
         ui->channelsWidget->setItem(i,2,item);

@@ -3,6 +3,11 @@
 #include <QPainter>
 #include <QDebug>
 
+void AScanWidget::setTVGCurve(TVGCurve *curve)
+{
+    _tvgCurve = curve;
+}
+
 AScanWidget::AScanWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::AScanWidget)
@@ -14,6 +19,8 @@ AScanWidget::AScanWidget(QWidget *parent) :
     _tvgCurvePen = QPen(QColor(250,10,10), 2);
     _ascanBrush = QBrush(QColor(80,80,200));
     _ascanPen = QPen(QColor(10,10,70), 1);
+    _markerPos = 0;
+    _markerValue = 0;
     this->setAttribute(Qt::WA_OpaquePaintEvent);
 }
 
@@ -77,15 +84,16 @@ void AScanWidget::paintEvent(QPaintEvent *event)
     painter.setBrush(_ascanBrush);
     painter.drawPolygon(_polygon.data(),_polygon.size());
 
-    QPoint tvgStart(left,bottom);
+    QPoint tvgStart(left, (h - 32) - _tvgCurve->getSample(0)*(h-64)/2.0);
     double tvgStep = width/200.0;
     painter.setPen(_tvgCurvePen);
-    for(uint8_t i=0; i<_tvg.size(); i++) {
-        QPoint tvgNext = QPoint((_tvg[i].x())*tvgStep + left, bottom - static_cast<double>(bottom)*(_tvg[i].y() / 127.0));
+    for(uint8_t i=0; i<200; i++) {
+        int x = i*tvgStep + left;
+        int y = (h - 32) - _tvgCurve->getSample(static_cast<double>(i) / 200.0) * (h-64)/2.0 ;
+        QPoint tvgNext = QPoint(x,y);
         painter.drawLine(tvgStart,tvgNext);
         tvgStart = tvgNext;
     }
-
 
     for(uint8_t i=0; i<_channels.size(); i++) {
         for(uint8_t j=0; j<_channels[i].rx()->gates().size(); j++) {
@@ -118,7 +126,7 @@ void AScanWidget::setChannelsInfo(std::vector<Channel> channels)
 {
     _channels = channels;
     if(!channels.empty()) {
-        onTVG(channels[0].rx()->generateTVG());
+        setTVGCurve(channels[0].rx()->getTvgCurve());
     }
     update();
 }
@@ -160,7 +168,7 @@ uint8_t getTVGSample(uint8_t * ptr, int sampleNum) {
     res |= getBitFromByteArray(ptr,bit+6) << 6;
     return res;
 }
-
+/*
 void AScanWidget::onTVG(TVG tvg)
 {
     _tvg.clear();
@@ -172,7 +180,9 @@ void AScanWidget::onTVG(TVG tvg)
     }
 
     update();
-}
+}*/
+
+
 
 void AScanWidget::onChannelChanged(Channel channel)
 {
@@ -181,7 +191,8 @@ void AScanWidget::onChannelChanged(Channel channel)
         if(chan == _channels[j].index())
         {
             _channels[j] = channel;
-            onTVG(channel.rx()->generateTVG());
+            setTVGCurve(channel.rx()->getTvgCurve());
+            //onTVG(channel.rx()->generateTVG());
         }
     }
 

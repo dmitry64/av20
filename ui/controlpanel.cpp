@@ -9,12 +9,12 @@ ControlPanel::ControlPanel(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->scrollArea->setWidgetResizable(true);
-
+/*
     _sensBaseLevel = new TouchSpinBox();
     _sensBaseLevel->setName("Base sens.");
     _sensBaseLevel->setSuffix("dB");
     ui->scrollLayout->addWidget(_sensBaseLevel);
-
+*/
     _prismTimeSpinbox = new TouchSpinBox();
     _prismTimeSpinbox->setName("Prism time");
     _prismTimeSpinbox->setMin(0);
@@ -86,7 +86,7 @@ ControlPanel::ControlPanel(QWidget *parent) :
             TouchSpinBox * wid = new TouchSpinBox("Control #" + QString::number(i));
             ui->scrollLayout->addWidget(wid);
     }*/
-    QObject::connect(_sensBaseLevel,SIGNAL(valueChanged(double)),this,SLOT(sensChanged(double)));
+    //QObject::connect(_sensBaseLevel,SIGNAL(valueChanged(double)),this,SLOT(sensChanged(double)));
 
 }
 
@@ -105,10 +105,6 @@ void ControlPanel::setCore(Core *ptr)
     _core = ptr;
 }
 
-void ControlPanel::setMode(uint8_t deviceMode)
-{
-
-}
 
 void ControlPanel::setChannel(uint8_t channel)
 {
@@ -118,7 +114,9 @@ void ControlPanel::setChannel(uint8_t channel)
 
 void ControlPanel::init(DeviceMode * calibration)
 {
-    _sensBaseLevel->setValue(calibration->getChannel(_currentChannel)->rx()->baseSensLevel());
+    //_sensBaseLevel->setValue(calibration->getChannel(_currentChannel)->rx()->baseSensLevel());
+    _prismTimeSpinbox->setValue(calibration->getChannel(_currentChannel)->rx()->prismTime());
+    _markerPositionSpinbox->setValue(calibration->getChannel(_currentChannel)->rx()->getMarkerPos());
 
     _gateCounter = 0;
     for(int i=0; i<_gates.size(); i++) {
@@ -138,11 +136,6 @@ void ControlPanel::init(DeviceMode * calibration)
         _gateCounter++;
     }
     update();
-}
-
-void ControlPanel::sensChanged(double value)
-{
-    _core->setChannelBaseSens(_currentChannel, value);
 }
 
 void ControlPanel::onGateChanged(Gate gate)

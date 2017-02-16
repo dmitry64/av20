@@ -63,6 +63,11 @@ public slots:
     void onDeviceConnectionErrorEnable();
     void onDeviceConnectionErrorDisable();
 
+    // System handlers
+    void onShutdown();
+    void onReboot();
+    void onPause();
+
 
 signals:
     void drawDisplayPackage(QSharedPointer<DisplayPackage> dp);

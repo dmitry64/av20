@@ -45,6 +45,63 @@ TactRegisters Device::getRegistersByTact(uint8_t index, DeviceMode * mode)
     return reg;
 }
 
+
+void Device::setBit(uint8_t * ptr, int bit, uint8_t val) {
+    uint8_t prev = ptr[bit/8];
+    ptr[bit/8] |= (((prev >> (bit % 8)) | val) << (bit % 8));
+}
+/*
+TVG RxChannel::generateTVG()
+{
+    std::vector<uint8_t> samples;
+    //qDebug() << "Base level:" << _baseSensLevel;
+    for(int i=0; i<TVG_SAMPLES_SIZE; i++) {
+        uint8_t sample = std::min(127, std::min(64 , i*3));
+        samples.push_back(sample);
+    }
+
+    uint8_t packedValues[TVG_SAMPLES_BYTES];
+    memset(packedValues,0,TVG_SAMPLES_BYTES);
+    for(int i=0; i<samples.size(); i++) {
+        for(int j=0; j<7; j++) {
+            setBit(packedValues,i*7 + j, (samples[i] >> j) & 0b00000001);
+        }
+    }
+
+    TVG tvg;
+
+    for(int i=0; i<TVG_SAMPLES_BYTES; i++) {
+        tvg._samples[i] = packedValues[i];
+    }
+
+    return tvg;
+} */
+
+TVG Device::getTVGFromCurve(TVGCurve *curve)
+{
+
+
+    uint8_t packedValues[TVG_SAMPLES_BYTES];
+    memset(packedValues,0,TVG_SAMPLES_BYTES);
+    for(int i=0; i<TVG_SAMPLES_SIZE; i++) {
+        double sample = curve->getSample(static_cast<double>(i) / TVG_SAMPLES_SIZE);
+
+        uint8_t value = qRound(sample * TVG_MAX_DB);
+        Q_ASSERT(value <= TVG_MAX_DB);
+        for(int j=0; j<7; j++) {
+            setBit(packedValues,i*7 + j, (value >> j) & 0b00000001);
+        }
+    }
+
+    TVG tvg;
+
+    for(int i=0; i<TVG_SAMPLES_BYTES; i++) {
+        tvg._samples[i] = packedValues[i];
+    }
+
+    return tvg;
+}
+
 Device::Device(DeviceState *state) :  _state(state)
 {
 #ifdef FAKESPI
@@ -146,7 +203,7 @@ void Device::resetChannelsTable()
 void Device::applyCalibration(DeviceMode *calibration)
 {
     for(int j=0; j<calibration->getChannelsCount(); j++) {
-        TVG tvg = calibration->getChannel(j)->rx()->generateTVG();
+        TVG tvg = getTVGFromCurve(calibration->getChannel(j)->rx()->getTvgCurve());
         _spi->setRegister(0x40+j,TVG_SAMPLES_BYTES,tvg._samples);
         if(checkConnection()) {
             qDebug() << "TVG for ch #" << j + 1 << " set!";

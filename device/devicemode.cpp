@@ -1,5 +1,8 @@
 #include "devicemode.h"
+#include "tvg/tvgsinglepoint.h"
+
 #include <QDebug>
+
 
 std::vector<Channel *> DeviceMode::getChannels() const
 {
@@ -43,8 +46,9 @@ void DeviceMode::init()
 
 
         chTemp->setIndex(i);
-        rx->setBaseSensLevel(72 + i);
-        rx->setTvgMode(TVGMode::CurveMode);
+        //rx->setBaseSensLevel(72 + i);
+        //rx->setTvgMode(TVGMode::CurveMode);
+        rx->setTvgCurve(new TVGSinglePoint(1));
         rx->setPrismTime(0);
         std::vector<Gate> gates;
         Gate g1;

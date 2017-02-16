@@ -32,11 +32,31 @@ void RxChannel::setName(const std::string &name)
     _name = name;
 }
 
-RxChannel::RxChannel() :_baseSensLevel(0), _tvgMode(TVGMode::CurveMode), _prismTime(0)
+int RxChannel::getMarkerPos() const
+{
+    return _markerPos;
+}
+
+void RxChannel::setMarkerPos(int markerPos)
+{
+    _markerPos = markerPos;
+}
+
+TVGCurve *RxChannel::getTvgCurve() const
+{
+    return _tvgCurve;
+}
+
+void RxChannel::setTvgCurve(TVGCurve *tvgCurve)
+{
+    _tvgCurve = tvgCurve;
+}
+
+RxChannel::RxChannel() : _prismTime(0), _markerPos(0), _tvgCurve(0)
 {
 
 }
-
+/*
 int RxChannel::baseSensLevel() const
 {
     return _baseSensLevel;
@@ -45,39 +65,19 @@ int RxChannel::baseSensLevel() const
 void RxChannel::setBaseSensLevel(int baseSensLevel)
 {
     _baseSensLevel = baseSensLevel;
-}
-
-std::vector<uint8_t> RxChannel::tvgPoints() const
-{
-    return _tvgPoints;
-}
-
-void RxChannel::setTvgPoints(const std::vector<uint8_t> &tvgPoints)
-{
-    _tvgPoints = tvgPoints;
-}
-
-TVGMode RxChannel::tvgMode() const
-{
-    return _tvgMode;
-}
-
-void RxChannel::setTvgMode(const TVGMode &tvgMode)
-{
-    _tvgMode = tvgMode;
-}
-
+}*/
+/*
 void setBit(uint8_t * ptr, int bit, uint8_t val) {
     uint8_t prev = ptr[bit/8];
     ptr[bit/8] |= (((prev >> (bit % 8)) | val) << (bit % 8));
-}
-
+}*/
+/*
 TVG RxChannel::generateTVG()
 {
     std::vector<uint8_t> samples;
-    qDebug() << "Base level:" << _baseSensLevel;
+    //qDebug() << "Base level:" << _baseSensLevel;
     for(int i=0; i<TVG_SAMPLES_SIZE; i++) {
-        uint8_t sample = std::min(127, std::min(64 , i*3) + _baseSensLevel);
+        uint8_t sample = std::min(127, std::min(64 , i*3));
         samples.push_back(sample);
     }
 
@@ -96,4 +96,4 @@ TVG RxChannel::generateTVG()
     }
 
     return tvg;
-}
+} */

@@ -17,6 +17,7 @@ void TVGEditorWidget::init(uint8_t channel)
 {
     DeviceMode * snapshot =  _core->getSnapshot();
     init(channel,snapshot);
+    delete snapshot;
 }
 
 void TVGEditorWidget::init(uint8_t channel, DeviceMode *snapshot)

@@ -1,6 +1,5 @@
 #include "core.h"
 #include <QDebug>
-#include "device/modificators/tvgsimplemodificator.h"
 #include "device/modificators/gatemodificator.h"
 #include "device/modificators/addgatemodificator.h"
 #include "device/modificators/removegatemodificator.h"
@@ -49,6 +48,12 @@ void Core::run()
 
     }
     finish();
+}
+
+void Core::stopCore()
+{
+    _active.store(false);
+    this->wait();
 }
 
 DeviceMode *Core::getCalibration()
@@ -303,13 +308,6 @@ void Core::notifyTVG(TVG & tvg)
 void Core::notifyChannel(Channel channel)
 {
     emit channelChanged(channel);
-}
-
-
-void Core::setChannelBaseSens(uint8_t channel, int value)
-{
-    TVGSimpleModificator * mod = new TVGSimpleModificator(channel, value);
-    addModificator(mod);
 }
 
 void Core::setTvgCurve(std::vector<uint8_t> points)

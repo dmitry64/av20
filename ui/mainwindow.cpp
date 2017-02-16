@@ -55,6 +55,11 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->menuWidget,SIGNAL(optionsMenuClosed()),this,SLOT(onOptionsMenuClosed()));
     connect(ui->menuWidget,SIGNAL(systemMenuOpened()),this,SLOT(onSystemMenuOpened()));
     connect(ui->menuWidget,SIGNAL(systemMenuClosed()),this,SLOT(onSystemMenuClosed()));
+
+    connect(_systemWidget,SIGNAL(shutdown()),this,SLOT(onShutdown()));
+    connect(_systemWidget,SIGNAL(reboot()),this,SLOT(onReboot()));
+    connect(_systemWidget,SIGNAL(pause()),this,SLOT(onPause()));
+
 }
 
 MainWindow::~MainWindow()
@@ -193,6 +198,23 @@ void MainWindow::onDeviceConnectionErrorEnable()
 void MainWindow::onDeviceConnectionErrorDisable()
 {
     ui->statusWidget->onDeviceConnectionErrorDisabled();
+}
+
+void MainWindow::onShutdown()
+{
+    _core->stopCore();
+    QApplication::exit(0);
+}
+
+void MainWindow::onReboot()
+{
+    _core->stopCore();
+    QApplication::exit(0);
+}
+
+void MainWindow::onPause()
+{
+
 }
 
 void MainWindow::init()

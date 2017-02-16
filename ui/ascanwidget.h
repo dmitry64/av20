@@ -20,14 +20,19 @@ class AScanWidget : public QWidget
     uint16_t _markerPos;
     uint16_t _markerValue;
     std::vector<QPoint> _points;
-    std::vector<QPoint> _tvg;
+    //std::vector<QPoint> _tvg;
     std::vector<QPoint> _polygon;
     std::vector<Channel> _channels;
     QElapsedTimer _fpsTimer;
 
+    TVGCurve * _tvgCurve;
+
     QPen _tvgCurvePen;
     QPen _ascanPen;
     QBrush _ascanBrush;
+
+private:
+    void setTVGCurve(TVGCurve * curve);
 
 public:
     explicit AScanWidget(QWidget *parent = 0);
@@ -36,7 +41,7 @@ public:
     void setChannelsInfo(std::vector<Channel> channels);
 public slots:
     void onAScan(AScanDrawData * scan);
-    void onTVG(TVG tvg);
+    //void onTVG(TVG tvg);
     void onChannelChanged(Channel channel);
 private:
     Ui::AScanWidget *ui;

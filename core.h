@@ -41,6 +41,7 @@ public:
     Core();
     ~Core();
     void run();
+    void stopCore();
     DeviceMode *getCalibration();
     DeviceMode *getSnapshot();
 
@@ -68,7 +69,6 @@ private:
     void handleDeviceConnectionError(bool status);
 
 public:
-    void setChannelBaseSens(uint8_t channel, int value);
     void setTvgCurve(std::vector<uint8_t> points);
     void setSingleChannel(uint8_t channel);
     void addGate(uint8_t channel, Gate gate);

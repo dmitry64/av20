@@ -19,7 +19,6 @@ class ControlPanel : public QWidget
 
     Core * _core;
 
-    TouchSpinBox * _sensBaseLevel;
     TouchSpinBox * _prismTimeSpinbox;
     //TouchSpinBoxString * _frequencySpinbox;
     //TouchSpinBoxString * _progSpinbox;
@@ -34,7 +33,6 @@ public:
     explicit ControlPanel(QWidget *parent = 0);
     ~ControlPanel();
     void setCore(Core * ptr);
-    void setMode(uint8_t deviceMode);
     void setChannel(uint8_t channel);
     void init(DeviceMode *calibration);
 
@@ -45,7 +43,6 @@ signals:
 
 
 public slots:
-    void sensChanged(double value);
     void onGateChanged(Gate gate);
     void onDeleteGate(Gate gate, GateController * controller);
     void onAddGate();

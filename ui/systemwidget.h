@@ -15,6 +15,16 @@ public:
     explicit SystemWidget(QWidget *parent = 0);
     ~SystemWidget();
 
+private slots:
+    void on_shutdownButton_released();
+    void on_rebootButton_released();
+    void on_pauseButton_released();
+
+signals:
+    void pause();
+    void reboot();
+    void shutdown();
+
 private:
     Ui::SystemWidget *ui;
 };

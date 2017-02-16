@@ -39,7 +39,6 @@ SOURCES += main.cpp\
     ui/controls/touchspinbox.cpp \
     ui/controlpanel.cpp \
     device/modificators/modificator.cpp \
-    device/modificators/tvgsimplemodificator.cpp \
     ui/statusbar.cpp \
     device/spi/fakespi.cpp \
     ui/bscanwidget.cpp \
@@ -73,7 +72,9 @@ SOURCES += main.cpp\
     device/devicemode.cpp \
     device/rxchannel.cpp \
     device/txchannel.cpp \
-    device/channel.cpp
+    device/channel.cpp \
+    device/tvgcurve.cpp \
+    device/tvg/tvgsinglepoint.cpp
 
 HEADERS  += \
     core.h \
@@ -85,7 +86,6 @@ HEADERS  += \
     ui/controls/touchspinbox.h \
     ui/controlpanel.h \
     device/modificators/modificator.h \
-    device/modificators/tvgsimplemodificator.h \
     ui/statusbar.h \
     device/spi/deviceinterface.h \
     device/spi/fakespi.h \
@@ -120,7 +120,9 @@ HEADERS  += \
     device/devicemode.h \
     device/rxchannel.h \
     device/txchannel.h \
-    device/channel.h
+    device/channel.h \
+    device/tvgcurve.h \
+    device/tvg/tvgsinglepoint.h
 
 FORMS    += \
     ui/ascanwidget.ui \

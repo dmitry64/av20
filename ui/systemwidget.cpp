@@ -12,3 +12,19 @@ SystemWidget::~SystemWidget()
 {
     delete ui;
 }
+
+
+void SystemWidget::on_shutdownButton_released()
+{
+    emit shutdown();
+}
+
+void SystemWidget::on_rebootButton_released()
+{
+    emit reboot();
+}
+
+void SystemWidget::on_pauseButton_released()
+{
+    emit pause();
+}
