@@ -8,7 +8,7 @@
 
 class DeviceMode
 {
-    ModeConfiguration _mode;
+    //ModeConfiguration _mode;
     std::vector<Tact *> _tactTable;
     std::vector<Channel *> _channels;
 
@@ -27,7 +27,6 @@ public:
     Tact * getTactByIndex(uint8_t index);
     std::vector<Channel *> getChannels() const;
     std::vector<Tact *> getTactTable() const;
-    ModeConfiguration getMode() const;
 };
 
 #endif // DEVICEMODE_H

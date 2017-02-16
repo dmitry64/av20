@@ -14,14 +14,9 @@ std::vector<Tact *> DeviceMode::getTactTable() const
     return _tactTable;
 }
 
-ModeConfiguration DeviceMode::getMode() const
-{
-    return _mode;
-}
-
 DeviceMode::DeviceMode()
 {
-    _mode = ModeConfiguration::Mode8Ch;
+
 }
 
 DeviceMode::~DeviceMode()
