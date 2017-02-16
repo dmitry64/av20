@@ -6,22 +6,12 @@
 
 std::vector<Channel *> DeviceMode::getChannels() const
 {
-    return _channelConfiguration->channels();
+    return _channels;
 }
 
 std::vector<Tact *> DeviceMode::getTactTable() const
 {
     return _tactTable;
-}
-
-ChannelConfiguration *DeviceMode::getChannelConfiguration() const
-{
-    return _channelConfiguration;
-}
-
-void DeviceMode::setChannelConfiguration(ChannelConfiguration *channelConfiguration)
-{
-    _channelConfiguration = channelConfiguration;
 }
 
 ModeConfiguration DeviceMode::getMode() const
@@ -32,7 +22,6 @@ ModeConfiguration DeviceMode::getMode() const
 DeviceMode::DeviceMode()
 {
     _mode = ModeConfiguration::Mode8Ch;
-    _channelConfiguration = 0;
 }
 
 DeviceMode::~DeviceMode()
@@ -42,14 +31,15 @@ DeviceMode::~DeviceMode()
         delete _tactTable.at(i);
     }
 
+    for(int i=0; i<_channels.size(); i++) {
+        delete _channels.at(i);
+    }
     _tactTable.clear();
-
-    delete _channelConfiguration;
 }
 
 void DeviceMode::init()
 {
-        _channelConfiguration = new ChannelConfiguration();
+
 
         for(int i=0;i<8; i++) {
             Channel * chTemp = new Channel();
@@ -104,7 +94,7 @@ void DeviceMode::init()
 
             rx->setName("58");
 
-            _channelConfiguration->addChannel(chTemp);
+            _channels.push_back(chTemp);
         }
 
         for(int i=0;i<MAX_TACTS_COUNT; i++) {
@@ -128,7 +118,11 @@ void DeviceMode::init()
 
 DeviceMode::DeviceMode(DeviceMode *original)
 {
-    _channelConfiguration = new ChannelConfiguration(original->_channelConfiguration);
+    for(int i=0;i<original->getChannelsCount();i++) {
+        Channel * orig = original->getChannel(i);
+        Channel * ch = new Channel(*orig);
+        _channels.push_back(ch);
+    }
     for(int i=0;i<original->getTactTable().size();i++) {
         Tact * tact = original->getTactTable().at(i);
         Tact * tactNew = new Tact(*tact);
@@ -143,7 +137,7 @@ DeviceMode * DeviceMode::getSnapshot()
 
 Channel *DeviceMode::getChannel(int index)
 {
-    return _channelConfiguration->getChannel(index);
+    return _channels.at(index);
 }
 
 uint8_t DeviceMode::getMaxTacts()
@@ -159,7 +153,7 @@ uint8_t DeviceMode::getMaxTacts()
 
 uint8_t DeviceMode::getChannelsCount()
 {
-    return _channelConfiguration->getChannelsCount();
+    return _channels.size();
 }
 
 uint8_t DeviceMode::getTactIndexByCounter(uint8_t counter)
