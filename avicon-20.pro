@@ -74,7 +74,9 @@ SOURCES += main.cpp\
     device/txchannel.cpp \
     device/channel.cpp \
     device/tvgcurve.cpp \
-    device/tvg/tvgsinglepoint.cpp
+    device/tvg/tvgsinglepoint.cpp \
+    device/modemanager.cpp \
+    device/channelconfiguration.cpp
 
 HEADERS  += \
     core.h \
@@ -122,7 +124,9 @@ HEADERS  += \
     device/txchannel.h \
     device/channel.h \
     device/tvgcurve.h \
-    device/tvg/tvgsinglepoint.h
+    device/tvg/tvgsinglepoint.h \
+    device/modemanager.h \
+    device/channelconfiguration.h
 
 FORMS    += \
     ui/ascanwidget.ui \

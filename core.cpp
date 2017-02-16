@@ -18,10 +18,10 @@ Device *Core::getDevice() const
     return _device;
 }
 
-Core::Core() : _active(true), _state(new DeviceState()), _targetChannel(0), _changesMutex(new QMutex())
+Core::Core(ModeManager *modeManager) : _active(true), _state(new DeviceState()), _targetChannel(0), _changesMutex(new QMutex()), _modeManager(modeManager)
 {
     _device = (new Device(_state));
-    _currentCalibration = new DeviceMode();
+    _currentCalibration = modeManager->getDefaultMode();
     _currentCalibration->init();
     _currentTactCounter = 0;
     _currentTact = _currentCalibration->getTactIndexByCounter(_currentTactCounter);
@@ -45,7 +45,6 @@ void Core::run()
     init();
     while(_active) {
         searchWork();
-
     }
     finish();
 }
@@ -128,21 +127,12 @@ void Core::aScanSingle()
 
 void Core::process()
 {
-    /*AScanDrawData * ascanData = new AScanDrawData();
-    BScanDrawData * bscanData = new BScanDrawData();*/
     DisplayPackage * dp = new DisplayPackage();
 
     dp->ascan._samples.resize(ASCAN_SAMPLES_SIZE);
-    //dp->bscan._samples.resize(ASCAN_SAMPLES_SIZE);
 
     dp->ascan._channel = _line1CurrentAscan->_header._channelNo;
     dp->bscan._channel = _line1CurrentAscan->_header._channelNo;
-
-    //memcpy(dp->ascan._samples.data(),_line1CurrentAscan->_samples,ASCAN_SAMPLES_SIZE);
-    //memcpy(dp->bscan._samples.data(),_line1CurrentAscan->_samples,ASCAN_SAMPLES_SIZE);
-    /*for(int i=0; i<ASCAN_SAMPLES_SIZE; i++) {
-        drawData->_samples.push_back(_line1CurrentAscan->_samples[i]);
-    }*/
 
     uint16_t max = 0;
     uint16_t pos = 0;
@@ -154,19 +144,10 @@ void Core::process()
         }
         dp->ascan._samples[i] = sample;
     }
-    //qDebug() << "Max:" << max << "Pos:" << pos;
     dp->ascan._markerPos = pos;
     dp->ascan._markerValue = max;
 
     std::vector<Gate> gates = _currentCalibration->getChannel(dp->bscan._channel)->rx()->gates();
-
-    /*if(dp->bscan._channel == 0) {
-        qDebug() << "Gates size:" <<gates.size();
-        for(int i=0; i<gates.size(); i++) {
-            qDebug() << "Gate" <<gates[i]._id << "level" <<gates[i]._level << "start" << gates[i]._start;
-
-        }
-    }*/
 
     for(int j=0; j<gates.size(); j++) {
         Gate gate = gates[j];
@@ -184,8 +165,6 @@ void Core::process()
                 BScanDrawSample drawSample;
                 drawSample._begin = start / 4;
                 drawSample._end = i / 4;
-                //if(dp->bscan._channel == 0)
-                //qDebug() << "Sample: "<<drawSample._begin<<drawSample._end << "st/i" <<start << i <<"passed"<<gate._start << gate._finish <<"alt"<<gateStart<<gateEnd;
                 drawSample._level = gate._level;
                 dp->bscan._samples.push_back(drawSample);
                 startFound = false;
@@ -194,12 +173,7 @@ void Core::process()
         }
     }
 
-    //qDebug() << "Samples: " << dp->bscan._samples.size();
-
-    //QSharedPointer<AScanDrawData> data = ;
     emit drawDisplayPackage(QSharedPointer<DisplayPackage>(dp));
-    //emit drawBscan(QSharedPointer<BScanDrawData>(bscanData));
-    //emit drawAscan(QSharedPointer<AScanDrawData>(ascanData));
 }
 
 void Core::sync()

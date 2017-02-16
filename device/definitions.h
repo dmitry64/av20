@@ -14,10 +14,14 @@
 #define ASCAN_SAMPLES_SIZE 800
 #define ASCAN_HEADER_SIZE 12
 
-/*#define DEVICE_MODE_EVAL 0x00
-#define DEVICE_MODE_SEARCH 0x01
-#define DEVICE_MODE_HEAD_SCANNER 0x02
-#define DEVICE_MODE_WHEEL 0x03*/
+enum ModeConfiguration {
+    Mode8Ch,
+    Mode4Ch,
+    Mode2Ch,
+    Mode1Ch
+};
+
+
 
 struct TactRegisters {
     uint8_t _CR;
@@ -95,12 +99,6 @@ enum TriggerMode{
     TimeTRG,
     ExtTRG,
     ProgTRG
-};
-
-enum TVGMode {
-    CurveMode,
-    PointsMode,
-    AutoMode
 };
 
 enum PulserFreq {

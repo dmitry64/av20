@@ -10,7 +10,6 @@ class Channel
     RxChannel * _rx;
     TxChannel * _tx;
 
-
     uint8_t _colorRed;
     uint8_t _colorGreen;
     uint8_t _colorBlue;

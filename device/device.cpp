@@ -6,7 +6,6 @@ TactRegisters Device::getRegistersByTact(uint8_t index, DeviceMode * mode)
 {
     TactRegisters reg;
     Tact * tact = mode->getTactByIndex(index);
-    tact->getRx1();
 
     reg._CR = 0x00;
     reg._CR |= ((tact->getDiffMode() & 0b00000001) << 1);
@@ -212,8 +211,9 @@ void Device::applyCalibration(DeviceMode *calibration)
             qFatal("Initialization failed!");
         }
     }
-    for(int j=0; j<MAX_TACTS_COUNT; j++) {
-        TactRegisters tr = getRegistersByTact(j,calibration);//calibration->getTactRegistersByIndex(j);
+    for(int k=0; k<calibration->getMaxTacts(); k++) {
+        int j = calibration->getTactIndexByCounter(k);
+        TactRegisters tr = getRegistersByTact(j,calibration);
 
         if(_spi->setAndTestRegister(0x10+j*6,1,&tr._CR)) {
             qFatal("Unable to set register");

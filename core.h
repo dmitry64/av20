@@ -11,6 +11,7 @@
 #include "device/devicemode.h"
 #include "device/devicestate.h"
 #include "device/device.h"
+#include "device/modemanager.h"
 #include <QMutex>
 
 class Core : public QThread
@@ -26,6 +27,7 @@ private:
 
     Device * _device;
     DeviceState * _state;
+    ModeManager * _modeManager;
     DeviceMode * _currentCalibration;
     DeviceMode * _snapshot;
     QMutex * _changesMutex;
@@ -38,7 +40,7 @@ private:
     AScan * _line1CurrentAscan;
     AScan * _line2CurrentAscan;
 public:
-    Core();
+    Core(ModeManager * modeManager);
     ~Core();
     void run();
     void stopCore();

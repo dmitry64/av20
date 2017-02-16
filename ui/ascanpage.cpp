@@ -19,6 +19,7 @@ void AScanPage::init(uint8_t channel)
 {
     DeviceMode * snapshot =  _core->getSnapshot();
     init(channel,snapshot);
+    delete snapshot;
 }
 
 void AScanPage::init(uint8_t channel, DeviceMode *snapshot)
@@ -31,6 +32,7 @@ void AScanPage::init(uint8_t channel, DeviceMode *snapshot)
     ui->controlPanel->setChannel(channel);
     ui->controlPanel->init(snapshot);
     ui->channelSelector->init(snapshot);
+    ui->aScanInfoWidget->hide();
     update();
 }
 
