@@ -75,7 +75,6 @@ SOURCES += main.cpp\
     device/channel.cpp \
     device/tvgcurve.cpp \
     device/tvg/tvgsinglepoint.cpp \
-    device/modemanager.cpp \
     device/channelconfiguration.cpp
 
 HEADERS  += \
@@ -125,7 +124,6 @@ HEADERS  += \
     device/channel.h \
     device/tvgcurve.h \
     device/tvg/tvgsinglepoint.h \
-    device/modemanager.h \
     device/channelconfiguration.h
 
 FORMS    += \

@@ -22,7 +22,6 @@ public:
     // get/set
     Channel *getChannel(int index);
     uint8_t getMaxTacts();
-    void addTact(Tact * tact);
     uint8_t getChannelsCount();
     uint8_t getTactIndexByCounter(uint8_t counter);
     std::vector< std::pair<uint8_t, uint8_t> > getTactLines(uint8_t tactIndex);

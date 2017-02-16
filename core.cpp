@@ -18,10 +18,10 @@ Device *Core::getDevice() const
     return _device;
 }
 
-Core::Core(ModeManager *modeManager) : _active(true), _state(new DeviceState()), _targetChannel(0), _changesMutex(new QMutex()), _modeManager(modeManager)
+Core::Core() : _active(true), _state(new DeviceState()), _targetChannel(0), _changesMutex(new QMutex())
 {
     _device = (new Device(_state));
-    _currentCalibration = modeManager->getDefaultMode();
+    _currentCalibration = new DeviceMode();
     _currentCalibration->init();
     _currentTactCounter = 0;
     _currentTact = _currentCalibration->getTactIndexByCounter(_currentTactCounter);

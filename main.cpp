@@ -5,7 +5,6 @@
 #include <core.h>
 #include "device/definitions.h"
 #include "system/system.h"
-#include "device/modemanager.h"
 
 int main(int argc, char *argv[])
 {
@@ -21,10 +20,7 @@ int main(int argc, char *argv[])
     System * system = System::getInstance();
     system->init();
 
-    ModeManager * modeManager = new ModeManager();
-    modeManager->init();
-
-    Core * core = new Core(modeManager);
+    Core * core = new Core();
     MainWindow * mainWindow = new MainWindow();
 
     QObject::connect(core,SIGNAL(channelChanged(Channel)),mainWindow, SLOT(onChannelChanged(Channel)));
