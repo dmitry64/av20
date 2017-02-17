@@ -17,7 +17,7 @@ AScanPage::~AScanPage()
 
 void AScanPage::init(uint8_t channel)
 {
-    ChannelsCalibration * snapshot =  _core->getSnapshot();
+    ChannelsCalibration * snapshot =  _core->getCalibrationsSnapshot();
     init(channel,snapshot);
     delete snapshot;
 }

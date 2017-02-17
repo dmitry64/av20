@@ -22,6 +22,7 @@ ControlPanel::ControlPanel(QWidget *parent) :
     _prismTimeSpinbox->setValue(0);
     _prismTimeSpinbox->setSuffix("us");
     ui->scrollLayout->addWidget(_prismTimeSpinbox);
+    connect(_prismTimeSpinbox,SIGNAL(valueChanged(double)),this,SLOT(onPrismTimeChanged(double)));
 
     _markerPositionSpinbox = new TouchSpinBox();
     _markerPositionSpinbox->setName("Marker");
@@ -115,7 +116,7 @@ void ControlPanel::setChannel(uint8_t channel)
 void ControlPanel::init(ChannelsCalibration * calibration)
 {
     //_sensBaseLevel->setValue(calibration->getChannel(_currentChannel)->rx()->baseSensLevel());
-    _prismTimeSpinbox->setValue(calibration->getChannel(_currentChannel)->rx()->prismTime());
+    _prismTimeSpinbox->setValue(calibration->getChannel(_currentChannel)->rx()->getPrismTime());
     _markerPositionSpinbox->setValue(calibration->getChannel(_currentChannel)->rx()->getMarkerPos());
 
     _gateCounter = 0;
@@ -177,4 +178,9 @@ void ControlPanel::onAddGate()
     connect(gateController,SIGNAL(deleteGate(Gate,GateController*)),this,SLOT(onDeleteGate(Gate,GateController*)));
     connect(gateController,SIGNAL(gateChanged(Gate)),this,SLOT(onGateChanged(Gate)));
     update();
+}
+
+void ControlPanel::onPrismTimeChanged(double value)
+{
+    _core->setPrismTime(_currentChannel,value);
 }

@@ -12,6 +12,7 @@ public:
     TactTable(TactTable * original);
     ~TactTable();
     void init();
+    TactTable * getSnapshot();
     uint8_t getTactIndexByCounter(uint8_t counter);
     std::vector< std::pair<uint8_t, uint8_t> > getTactLines(uint8_t tactIndex);
     Tact * getTactByIndex(uint8_t index);

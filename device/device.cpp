@@ -246,6 +246,7 @@ void Device::applyCalibration(ChannelsCalibration *calibration, TactTable *tactT
 
 }
 
+
 void Device::setProgTrigger(bool enabled)
 {
     uint8_t val;

@@ -19,9 +19,8 @@ class Core : public QThread
     Q_OBJECT
 private:
     std::atomic_bool _active;
-    std::atomic_bool _snapshotRequested;
-    std::atomic_uchar _targetChannel;
-
+    std::atomic_bool _calibrationSnapshotRequested;
+    std::atomic_bool _tactTableSnapshotRequested;
     uint8_t _currentTactCounter;
     uint8_t _currentTact;
 
@@ -31,6 +30,7 @@ private:
     ChannelsCalibration * _calibrationsSnapshot;
 
     TactTable * _tactTable;
+    TactTable * _tactTableSnapshot;
 
     QMutex * _changesMutex;
     std::queue<Modificator *> _pendingChanges;
@@ -47,10 +47,14 @@ public:
     void run();
     void stopCore();
     ChannelsCalibration *getCalibration();
-    ChannelsCalibration *getSnapshot();
+    ChannelsCalibration *getCalibrationsSnapshot();
+
+    TactTable *getTactTable();
+    TactTable *getTactTableSnapshot();
 
     void notifyTVG(TVG &tvg);
     void notifyChannel(Channel channel);
+    void applyCurrentCalibrationToDevice();
 
 private:
     void init();
@@ -58,12 +62,10 @@ private:
     void trigger();
     void status();
     void aScanAll();
-    void aScanSingle();
     void process();
     void sync();
     void snapshot();
     void finish();
-    void evaluationWork();
     void searchWork();
 
     void addModificator(Modificator * mod);
@@ -72,11 +74,10 @@ private:
     void handleDeviceConnectionError(bool status);
 
 public:
-    void setTvgCurve(std::vector<uint8_t> points);
-    void setSingleChannel(uint8_t channel);
     void addGate(uint8_t channel, Gate gate);
     void modifyGate(uint8_t channel, Gate gate);
     void removeGate(uint8_t channel, uint8_t id);
+    void setPrismTime(uint8_t channel, uint8_t value);
 
     Device *getDevice() const;
 

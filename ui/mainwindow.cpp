@@ -221,7 +221,8 @@ void MainWindow::init()
 {
     ui->statusWidget->init();
     if(_core!=0) {
-        ChannelsCalibration * calibration = _core->getSnapshot();
+        ChannelsCalibration * calibration = _core->getCalibrationsSnapshot();
+        TactTable * tactTableSnapshot = _core->getTactTableSnapshot();
 
         //ui->aScanPage->onTVG(calibration->getChannel(0)->generateTVG());
         ui->aScanPage->init(0,calibration);
@@ -237,7 +238,7 @@ void MainWindow::init()
         ui->bScanPage->setChannles(channelsTable);
         ui->bScanPage->init(calibration);
 
-        ui->channelsWidget->init(calibration);
+        ui->channelsWidget->init(calibration,tactTableSnapshot);
 
         delete calibration;
     } else {

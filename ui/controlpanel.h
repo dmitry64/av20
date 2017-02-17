@@ -46,6 +46,7 @@ public slots:
     void onGateChanged(Gate gate);
     void onDeleteGate(Gate gate, GateController * controller);
     void onAddGate();
+    void onPrismTimeChanged(double value);
 
 private:
     Ui::ControlPanel *ui;

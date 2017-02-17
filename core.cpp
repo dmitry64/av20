@@ -3,14 +3,29 @@
 #include "device/modificators/gatemodificator.h"
 #include "device/modificators/addgatemodificator.h"
 #include "device/modificators/removegatemodificator.h"
+#include "device/modificators/prismtimemodificator.h"
 
-ChannelsCalibration * Core::getSnapshot()
+ChannelsCalibration * Core::getCalibrationsSnapshot()
 {
-    _snapshotRequested.store(true);
-    while(_snapshotRequested.load()) {
+    _calibrationSnapshotRequested.store(true);
+    while(_calibrationSnapshotRequested.load()) {
         usleep(1);
     }
     return _calibrationsSnapshot;
+}
+
+TactTable *Core::getTactTable()
+{
+    return _tactTable;
+}
+
+TactTable *Core::getTactTableSnapshot()
+{
+    _tactTableSnapshotRequested.store(true);
+    while(_tactTableSnapshotRequested.load()) {
+        usleep(1);
+    }
+    return _tactTableSnapshot;
 }
 
 Device *Core::getDevice() const
@@ -18,7 +33,7 @@ Device *Core::getDevice() const
     return _device;
 }
 
-Core::Core() : _active(true), _state(new DeviceState()), _targetChannel(0), _changesMutex(new QMutex())
+Core::Core() : _active(true), _state(new DeviceState()), _changesMutex(new QMutex())
 {
     _device = (new Device(_state));
     _currentCalibration = new ChannelsCalibration();
@@ -29,8 +44,10 @@ Core::Core() : _active(true), _state(new DeviceState()), _targetChannel(0), _cha
     _currentTact = _tactTable->getTactIndexByCounter(_currentTactCounter);
     _line1CurrentAscan = new AScan();
     _line2CurrentAscan = new AScan();
-    _snapshotRequested.store(false);
+    _calibrationSnapshotRequested.store(false);
     _calibrationsSnapshot = 0;
+    _tactTableSnapshotRequested.store(false);
+    _tactTableSnapshot = 0;
     _deviceOverheat = false;
     _deviceError = false;
     _deviceConnectionError = false;
@@ -114,19 +131,6 @@ void Core::aScanAll()
     }
 }
 
-void Core::aScanSingle()
-{
-    std::vector< std::pair<uint8_t, uint8_t> > lines = _tactTable->getTactLines(_currentTact);
-    if(!lines.empty()) {
-        for(size_t i=0; i<lines.size(); i++) {
-            if(_targetChannel.load() == lines[i].second) {
-                _device->getAscanForLine(lines[i].first, _line1CurrentAscan);
-            }
-        }
-    }
-}
-
-
 void Core::process()
 {
     DisplayPackage * dp = new DisplayPackage();
@@ -196,26 +200,19 @@ void Core::sync()
 
 void Core::snapshot()
 {
-    if(_snapshotRequested.load()) {
+    if(_calibrationSnapshotRequested.load()) {
         _calibrationsSnapshot = _currentCalibration->getSnapshot();
-        _snapshotRequested.store(false);
+        _calibrationSnapshotRequested.store(false);
+    }
+    if(_tactTableSnapshotRequested.load()){
+        _tactTableSnapshot = _tactTable->getSnapshot();
+        _tactTableSnapshotRequested.store(false);
     }
 }
 
 void Core::finish()
 {
     qDebug() << "Disconnected!";
-}
-
-void Core::evaluationWork()
-{
-    snapshot();
-    check();
-    trigger();
-    status();
-    aScanSingle();
-    process();
-    sync();
 }
 
 void Core::searchWork()
@@ -286,16 +283,9 @@ void Core::notifyChannel(Channel channel)
     emit channelChanged(channel);
 }
 
-void Core::setTvgCurve(std::vector<uint8_t> points)
+void Core::applyCurrentCalibrationToDevice()
 {
-
-}
-
-void Core::setSingleChannel(uint8_t channel)
-{
-    qDebug() << "Setting channel:" <<channel;
-    _targetChannel.store(channel);
-    //emit channelChanged(channel);
+    _device->applyCalibration(_currentCalibration, _tactTable);
 }
 
 void Core::addGate(uint8_t channel, Gate gate)
@@ -316,6 +306,13 @@ void Core::removeGate(uint8_t channel, uint8_t id)
 {
     qDebug() << "Remove gate" << id << "from channel" <<channel;
     RemoveGateModificator * mod = new RemoveGateModificator(channel,id);
+    addModificator(mod);
+}
+
+void Core::setPrismTime(uint8_t channel, uint8_t value)
+{
+    qDebug() << "Changing prism time ch =" << channel << "value =" <<value;
+    PrismTimeModificator * mod = new PrismTimeModificator(channel,value);
     addModificator(mod);
 }
 

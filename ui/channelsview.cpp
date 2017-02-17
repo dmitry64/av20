@@ -45,19 +45,21 @@ ChannelsView::~ChannelsView()
 void ChannelsView::init()
 {
     if(_core!=0) {
-        ChannelsCalibration * snapshot =  _core->getSnapshot();
-        init(snapshot);
-        delete snapshot;
+        ChannelsCalibration * calibration =  _core->getCalibrationsSnapshot();
+        TactTable * tactTable = _core->getTactTableSnapshot();
+        init(calibration,tactTable);
+        delete calibration;
+        delete tactTable;
     } else {
         qFatal("ChannelsView core error!");
     }
 }
 
-void ChannelsView::init(ChannelsCalibration *snapshot)
+void ChannelsView::init(ChannelsCalibration *calibrationsSnapshot, TactTable * tactTableSnapshot)
 {
     ui->channelsWidget->clearContents();
     ui->tactWidget->clearContents();
-    std::vector<Channel*> channels = snapshot->getChannels();
+    std::vector<Channel*> channels = calibrationsSnapshot->getChannels();
 
     for(int i=0; i<channels.size(); i++) {
         Channel * chan = channels.at(i);
@@ -68,7 +70,7 @@ void ChannelsView::init(ChannelsCalibration *snapshot)
         //item = new QTableWidgetItem(QString::number(rxchan->baseSensLevel()));
         //item->setTextAlignment( Qt::AlignHCenter | Qt::AlignCenter );
         //ui->channelsWidget->setItem(i,1,item);
-        item = new QTableWidgetItem(QString::number(rxchan->prismTime()));
+        item = new QTableWidgetItem(QString::number(rxchan->getPrismTime()));
         item->setTextAlignment( Qt::AlignHCenter | Qt::AlignCenter );
         ui->channelsWidget->setItem(i,2,item);
         std::vector<Gate> gates = rxchan->gates();
@@ -88,7 +90,8 @@ void ChannelsView::init(ChannelsCalibration *snapshot)
         ui->channelsWidget->setItem(i,3,item);
     }
     QColor disabledChannelsColor = QColor(60,60,60);
-    /*std::vector<Tact*> tacts = snapshot->getTactTable();
+
+    std::vector<Tact*> tacts = tactTableSnapshot->getTactTable();
 
     for(int i=0; i<tacts.size(); i++) {
         Tact * tact = tacts.at(i);
@@ -149,7 +152,7 @@ void ChannelsView::init(ChannelsCalibration *snapshot)
             item->setTextAlignment( Qt::AlignHCenter | Qt::AlignCenter );
             ui->tactWidget->setItem(i,8,item);
         }
-    }*/
+    }
 
     update();
 }

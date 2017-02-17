@@ -2,12 +2,8 @@
 #include <string.h>
 #include <QDebug>
 
-int RxChannel::prismTime() const
-{
-    return _prismTime;
-}
 
-void RxChannel::setPrismTime(int prismTime)
+void RxChannel::setPrismTime(uint8_t prismTime)
 {
     _prismTime = prismTime;
 }
@@ -50,6 +46,11 @@ TVGCurve *RxChannel::getTvgCurve() const
 void RxChannel::setTvgCurve(TVGCurve *tvgCurve)
 {
     _tvgCurve = tvgCurve;
+}
+
+uint8_t RxChannel::getPrismTime() const
+{
+    return _prismTime;
 }
 
 RxChannel::RxChannel() : _prismTime(0), _markerPos(0), _tvgCurve(0)

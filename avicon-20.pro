@@ -44,7 +44,6 @@ SOURCES += main.cpp\
     ui/bscanwidget.cpp \
     ui/channelselector.cpp \
     ui/controls/channelbutton.cpp \
-    device/modificators/activechannelmodificator.cpp \
     device/tact/tact.cpp \
     ui/bscanpage.cpp \
     ui/ascanpage.cpp \
@@ -75,7 +74,8 @@ SOURCES += main.cpp\
     device/channel/channel.cpp \
     device/tvg/tvgcurve.cpp \
     device/tvg/tvgsinglepoint.cpp \
-    device/tact/tacttable.cpp
+    device/tact/tacttable.cpp \
+    device/modificators/prismtimemodificator.cpp
 
 HEADERS  += \
     core.h \
@@ -93,7 +93,6 @@ HEADERS  += \
     ui/bscanwidget.h \
     ui/channelselector.h \
     ui/controls/channelbutton.h \
-    device/modificators/activechannelmodificator.h \
     device/tact/tact.h \
     ui/bscanpage.h \
     ui/ascanpage.h \
@@ -124,7 +123,8 @@ HEADERS  += \
     device/channel/channel.h \
     device/tvg/tvgcurve.h \
     device/tvg/tvgsinglepoint.h \
-    device/tact/tacttable.h
+    device/tact/tacttable.h \
+    device/modificators/prismtimemodificator.h
 
 FORMS    += \
     ui/ascanwidget.ui \

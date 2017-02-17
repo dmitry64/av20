@@ -42,6 +42,11 @@ void TactTable::init()
     }
 }
 
+TactTable *TactTable::getSnapshot()
+{
+    return new TactTable(this);
+}
+
 uint8_t TactTable::getMaxTacts()
 {
     uint8_t num = 0;
