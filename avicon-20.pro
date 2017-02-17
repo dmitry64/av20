@@ -45,7 +45,7 @@ SOURCES += main.cpp\
     ui/channelselector.cpp \
     ui/controls/channelbutton.cpp \
     device/modificators/activechannelmodificator.cpp \
-    device/tact.cpp \
+    device/tact/tact.cpp \
     ui/bscanpage.cpp \
     ui/ascanpage.cpp \
     ui/menupanel.cpp \
@@ -70,11 +70,12 @@ SOURCES += main.cpp\
     system/system.cpp \
     system/filesystem.cpp \
     device/devicemode.cpp \
-    device/rxchannel.cpp \
-    device/txchannel.cpp \
-    device/channel.cpp \
-    device/tvgcurve.cpp \
-    device/tvg/tvgsinglepoint.cpp
+    device/channel/rxchannel.cpp \
+    device/channel/txchannel.cpp \
+    device/channel/channel.cpp \
+    device/tvg/tvgcurve.cpp \
+    device/tvg/tvgsinglepoint.cpp \
+    device/tact/tacttable.cpp
 
 HEADERS  += \
     core.h \
@@ -93,7 +94,7 @@ HEADERS  += \
     ui/channelselector.h \
     ui/controls/channelbutton.h \
     device/modificators/activechannelmodificator.h \
-    device/tact.h \
+    device/tact/tact.h \
     ui/bscanpage.h \
     ui/ascanpage.h \
     ui/menupanel.h \
@@ -118,11 +119,12 @@ HEADERS  += \
     system/system.h \
     system/filesystem.h \
     device/devicemode.h \
-    device/rxchannel.h \
-    device/txchannel.h \
-    device/channel.h \
-    device/tvgcurve.h \
-    device/tvg/tvgsinglepoint.h
+    device/channel/rxchannel.h \
+    device/channel/txchannel.h \
+    device/channel/channel.h \
+    device/tvg/tvgcurve.h \
+    device/tvg/tvgsinglepoint.h \
+    device/tact/tacttable.h
 
 FORMS    += \
     ui/ascanwidget.ui \

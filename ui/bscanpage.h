@@ -22,7 +22,7 @@ public:
     ~BScanPage();
 
     void setCore(Core * core);
-    void init(DeviceMode * snapshot);
+    void init(ChannelsCalibration * snapshot);
 
     void setChannles(std::vector<std::vector<Channel> > channelsConfiguration);
 public slots:

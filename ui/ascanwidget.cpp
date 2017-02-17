@@ -119,7 +119,7 @@ void AScanWidget::paintEvent(QPaintEvent *event)
 
     quint64 time = _fpsTimer.restart();
     double fps = 1000.0 / time;
-    painter.drawText(QPoint(w - 140, 30),"fps: " + QString::number(fps,'f', 2));
+   // painter.drawText(QPoint(w - 140, 30),"fps: " + QString::number(fps,'f', 2));
 }
 
 void AScanWidget::setChannelsInfo(std::vector<Channel> channels)

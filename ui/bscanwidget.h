@@ -5,7 +5,7 @@
 #include <queue>
 #include <map>
 #include "device/definitions.h"
-#include "device/channel.h"
+#include "device/channel/channel.h"
 
 namespace Ui {
 class BScanWidget;

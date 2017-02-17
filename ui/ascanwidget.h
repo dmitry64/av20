@@ -5,7 +5,7 @@
 #include <QPen>
 #include <atomic>
 #include "device/definitions.h"
-#include "device/channel.h"
+#include "device/channel/channel.h"
 #include <QElapsedTimer>
 
 namespace Ui {

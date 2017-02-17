@@ -4,13 +4,13 @@
 #include "device/modificators/addgatemodificator.h"
 #include "device/modificators/removegatemodificator.h"
 
-DeviceMode * Core::getSnapshot()
+ChannelsCalibration * Core::getSnapshot()
 {
     _snapshotRequested.store(true);
     while(_snapshotRequested.load()) {
         usleep(1);
     }
-    return _snapshot;
+    return _calibrationsSnapshot;
 }
 
 Device *Core::getDevice() const
@@ -21,14 +21,16 @@ Device *Core::getDevice() const
 Core::Core() : _active(true), _state(new DeviceState()), _targetChannel(0), _changesMutex(new QMutex())
 {
     _device = (new Device(_state));
-    _currentCalibration = new DeviceMode();
+    _currentCalibration = new ChannelsCalibration();
     _currentCalibration->init();
     _currentTactCounter = 0;
-    _currentTact = _currentCalibration->getTactIndexByCounter(_currentTactCounter);
+    _tactTable = new TactTable();
+    _tactTable->init();
+    _currentTact = _tactTable->getTactIndexByCounter(_currentTactCounter);
     _line1CurrentAscan = new AScan();
     _line2CurrentAscan = new AScan();
     _snapshotRequested.store(false);
-    _snapshot = 0;
+    _calibrationsSnapshot = 0;
     _deviceOverheat = false;
     _deviceError = false;
     _deviceConnectionError = false;
@@ -55,7 +57,7 @@ void Core::stopCore()
     this->wait();
 }
 
-DeviceMode *Core::getCalibration()
+ChannelsCalibration *Core::getCalibration()
 {
     return _currentCalibration;
 }
@@ -63,7 +65,7 @@ DeviceMode *Core::getCalibration()
 void Core::init()
 {
     _device->init();
-    _device->applyCalibration(_currentCalibration);
+    _device->applyCalibration(_currentCalibration, _tactTable);
 }
 
 void Core::check()
@@ -74,13 +76,13 @@ void Core::check()
 
 void Core::trigger()
 {
-    if(_currentCalibration->getMaxTacts() > 0) {
+    if(_tactTable->getMaxTacts() > 0) {
         _device->setProgTrigger(true);
         _currentTactCounter++;
-        if(_currentTactCounter>=_currentCalibration->getMaxTacts()) {
+        if(_currentTactCounter>=_tactTable->getMaxTacts()) {
             _currentTactCounter = 0;
         }
-        _currentTact = _currentCalibration->getTactIndexByCounter(_currentTactCounter);
+        _currentTact = _tactTable->getTactIndexByCounter(_currentTactCounter);
     }
 }
 
@@ -104,9 +106,9 @@ void Core::status()
 void Core::aScanAll()
 {
     //qDebug() << "Scan tact:" << _currentTact;
-    std::vector< std::pair<uint8_t, uint8_t> > lines = _currentCalibration->getTactLines(_currentTact);
+    std::vector< std::pair<uint8_t, uint8_t> > lines = _tactTable->getTactLines(_currentTact);
     if(!lines.empty()) {
-        for(int i=0; i<lines.size(); i++) {
+        for(size_t i=0; i<lines.size(); i++) {
             _device->getAscanForLine(lines[i].first,_line1CurrentAscan);
         }
     }
@@ -114,9 +116,9 @@ void Core::aScanAll()
 
 void Core::aScanSingle()
 {
-    std::vector< std::pair<uint8_t, uint8_t> > lines = _currentCalibration->getTactLines(_currentTact);
+    std::vector< std::pair<uint8_t, uint8_t> > lines = _tactTable->getTactLines(_currentTact);
     if(!lines.empty()) {
-        for(int i=0; i<lines.size(); i++) {
+        for(size_t i=0; i<lines.size(); i++) {
             if(_targetChannel.load() == lines[i].second) {
                 _device->getAscanForLine(lines[i].first, _line1CurrentAscan);
             }
@@ -149,7 +151,7 @@ void Core::process()
 
     std::vector<Gate> gates = _currentCalibration->getChannel(dp->bscan._channel)->rx()->gates();
 
-    for(int j=0; j<gates.size(); j++) {
+    for(size_t j=0; j<gates.size(); j++) {
         Gate gate = gates[j];
         int gateStart = static_cast<int>(gate._start) * 4;
         int gateEnd = static_cast<int>(gate._finish) * 4;
@@ -195,7 +197,7 @@ void Core::sync()
 void Core::snapshot()
 {
     if(_snapshotRequested.load()) {
-        _snapshot = _currentCalibration->getSnapshot();
+        _calibrationsSnapshot = _currentCalibration->getSnapshot();
         _snapshotRequested.store(false);
     }
 }

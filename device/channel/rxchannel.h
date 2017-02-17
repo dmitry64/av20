@@ -4,10 +4,8 @@
 #include <vector>
 #include "stdint.h"
 
-#include "device/tvgcurve.h"
-#include "definitions.h"
-
-
+#include "device/tvg/tvgcurve.h"
+#include "device/definitions.h"
 
 class RxChannel
 {

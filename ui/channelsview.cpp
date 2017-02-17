@@ -45,7 +45,7 @@ ChannelsView::~ChannelsView()
 void ChannelsView::init()
 {
     if(_core!=0) {
-        DeviceMode * snapshot =  _core->getSnapshot();
+        ChannelsCalibration * snapshot =  _core->getSnapshot();
         init(snapshot);
         delete snapshot;
     } else {
@@ -53,7 +53,7 @@ void ChannelsView::init()
     }
 }
 
-void ChannelsView::init(DeviceMode *snapshot)
+void ChannelsView::init(ChannelsCalibration *snapshot)
 {
     ui->channelsWidget->clearContents();
     ui->tactWidget->clearContents();
@@ -88,7 +88,7 @@ void ChannelsView::init(DeviceMode *snapshot)
         ui->channelsWidget->setItem(i,3,item);
     }
     QColor disabledChannelsColor = QColor(60,60,60);
-    std::vector<Tact*> tacts = snapshot->getTactTable();
+    /*std::vector<Tact*> tacts = snapshot->getTactTable();
 
     for(int i=0; i<tacts.size(); i++) {
         Tact * tact = tacts.at(i);
@@ -149,7 +149,7 @@ void ChannelsView::init(DeviceMode *snapshot)
             item->setTextAlignment( Qt::AlignHCenter | Qt::AlignCenter );
             ui->tactWidget->setItem(i,8,item);
         }
-    }
+    }*/
 
     update();
 }

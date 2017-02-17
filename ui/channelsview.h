@@ -19,7 +19,7 @@ public:
     ~ChannelsView();
 
     void init();
-    void init(DeviceMode * snapshot);
+    void init(ChannelsCalibration * snapshot);
     void setCore(Core * core);
     void showEvent( QShowEvent* event );
 private:

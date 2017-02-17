@@ -15,12 +15,12 @@ TVGEditorWidget::~TVGEditorWidget()
 
 void TVGEditorWidget::init(uint8_t channel)
 {
-    DeviceMode * snapshot =  _core->getSnapshot();
+    ChannelsCalibration * snapshot =  _core->getSnapshot();
     init(channel,snapshot);
     delete snapshot;
 }
 
-void TVGEditorWidget::init(uint8_t channel, DeviceMode *snapshot)
+void TVGEditorWidget::init(uint8_t channel, ChannelsCalibration *snapshot)
 {
     std::vector<Channel> channels;
     channels.push_back(*(snapshot->getChannel(channel)));

@@ -1,7 +1,7 @@
 #ifndef TVGSINGLEPOINT_H
 #define TVGSINGLEPOINT_H
 
-#include "device/tvgcurve.h"
+#include "tvgcurve.h"
 
 class TVGSinglePoint : public TVGCurve
 {

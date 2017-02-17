@@ -19,7 +19,7 @@ public:
     explicit TVGEditorWidget(QWidget *parent = 0);
     ~TVGEditorWidget();
     void init(uint8_t channel);
-    void init(uint8_t channel, DeviceMode * snapshot);
+    void init(uint8_t channel, ChannelsCalibration * snapshot);
     void setCore(Core * core);
 public slots:
     void onDisplayPackage(QSharedPointer<DisplayPackage> package);

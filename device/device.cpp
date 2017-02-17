@@ -2,10 +2,10 @@
 #include <QDebug>
 #define FAKESPI
 
-TactRegisters Device::getRegistersByTact(uint8_t index, DeviceMode * mode)
+TactRegisters Device::getRegistersByTact(uint8_t index, ChannelsCalibration * mode, TactTable * tactTable)
 {
     TactRegisters reg;
-    Tact * tact = mode->getTactByIndex(index);
+    Tact * tact = tactTable->getTactByIndex(index);
 
     reg._CR = 0x00;
     reg._CR |= ((tact->getDiffMode() & 0b00000001) << 1);
@@ -199,7 +199,7 @@ void Device::resetChannelsTable()
     }
 }
 
-void Device::applyCalibration(DeviceMode *calibration)
+void Device::applyCalibration(ChannelsCalibration *calibration, TactTable *tactTable)
 {
     for(int j=0; j<calibration->getChannelsCount(); j++) {
         TVG tvg = getTVGFromCurve(calibration->getChannel(j)->rx()->getTvgCurve());
@@ -211,9 +211,9 @@ void Device::applyCalibration(DeviceMode *calibration)
             qFatal("Initialization failed!");
         }
     }
-    for(int k=0; k<calibration->getMaxTacts(); k++) {
-        int j = calibration->getTactIndexByCounter(k);
-        TactRegisters tr = getRegistersByTact(j,calibration);
+    for(int k=0; k<tactTable->getMaxTacts(); k++) {
+        int j = tactTable->getTactIndexByCounter(k);
+        TactRegisters tr = getRegistersByTact(j,calibration,tactTable);
 
         if(_spi->setAndTestRegister(0x10+j*6,1,&tr._CR)) {
             qFatal("Unable to set register");

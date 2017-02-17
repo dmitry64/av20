@@ -112,7 +112,7 @@ void ControlPanel::setChannel(uint8_t channel)
     update();
 }
 
-void ControlPanel::init(DeviceMode * calibration)
+void ControlPanel::init(ChannelsCalibration * calibration)
 {
     //_sensBaseLevel->setValue(calibration->getChannel(_currentChannel)->rx()->baseSensLevel());
     _prismTimeSpinbox->setValue(calibration->getChannel(_currentChannel)->rx()->prismTime());

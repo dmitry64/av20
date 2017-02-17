@@ -11,6 +11,7 @@
 #include "device/devicemode.h"
 #include "device/devicestate.h"
 #include "device/device.h"
+#include "device/tact/tacttable.h"
 #include <QMutex>
 
 class Core : public QThread
@@ -26,8 +27,11 @@ private:
 
     Device * _device;
     DeviceState * _state;
-    DeviceMode * _currentCalibration;
-    DeviceMode * _snapshot;
+    ChannelsCalibration * _currentCalibration;
+    ChannelsCalibration * _calibrationsSnapshot;
+
+    TactTable * _tactTable;
+
     QMutex * _changesMutex;
     std::queue<Modificator *> _pendingChanges;
 
@@ -42,8 +46,8 @@ public:
     ~Core();
     void run();
     void stopCore();
-    DeviceMode *getCalibration();
-    DeviceMode *getSnapshot();
+    ChannelsCalibration *getCalibration();
+    ChannelsCalibration *getSnapshot();
 
     void notifyTVG(TVG &tvg);
     void notifyChannel(Channel channel);
@@ -61,7 +65,6 @@ private:
     void finish();
     void evaluationWork();
     void searchWork();
-
 
     void addModificator(Modificator * mod);
     void handleDeviceError(bool status);

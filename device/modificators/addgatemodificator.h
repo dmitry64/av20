@@ -1,7 +1,7 @@
 #ifndef ADDGATEMODIFICATOR_H
 #define ADDGATEMODIFICATOR_H
 
-#include "device/modificators/modificator.h"
+#include "modificator.h"
 #include "core.h"
 
 class AddGateModificator : public Modificator

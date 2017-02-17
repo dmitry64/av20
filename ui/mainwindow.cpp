@@ -221,7 +221,7 @@ void MainWindow::init()
 {
     ui->statusWidget->init();
     if(_core!=0) {
-        DeviceMode * calibration = _core->getSnapshot();
+        ChannelsCalibration * calibration = _core->getSnapshot();
 
         //ui->aScanPage->onTVG(calibration->getChannel(0)->generateTVG());
         ui->aScanPage->init(0,calibration);

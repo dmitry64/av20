@@ -1,8 +1,8 @@
 #ifndef RXCHANNEL_H
 #define RXCHANNEL_H
 
-#include "device/rxchannel.h"
-#include "device/txchannel.h"
+#include "rxchannel.h"
+#include "txchannel.h"
 
 
 class Channel

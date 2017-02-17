@@ -7,7 +7,7 @@
 #include "devicestate.h"
 #include <vector>
 #include "devicemode.h"
-#include "tvgcurve.h"
+#include "tvg/tvgcurve.h"
 
 class Device
 {
@@ -15,7 +15,7 @@ class Device
     DeviceState * _state;
 
 private:
-    TactRegisters getRegistersByTact(uint8_t index, DeviceMode *mode);
+    TactRegisters getRegistersByTact(uint8_t index, ChannelsCalibration *mode, TactTable *tactTable);
     TVG getTVGFromCurve(TVGCurve * curve);
     void setBit(uint8_t * ptr, int bit, uint8_t val);
 public:
@@ -25,7 +25,7 @@ public:
     void resetConfigRegisters();
     void resetTVG();
     void resetChannelsTable();
-    void applyCalibration(DeviceMode * calibration);
+    void applyCalibration(ChannelsCalibration * calibration, TactTable * tactTable);
     void setProgTrigger(bool enabled);
     DeviceStatus getDeviceStatus();
     void setTVG(int chIndex, TVG tvg);

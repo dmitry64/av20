@@ -4,8 +4,8 @@
 #include <stdint.h>
 #include <vector>
 
-#include "rxchannel.h"
-#include "definitions.h"
+#include "device/channel/rxchannel.h"
+#include "device/definitions.h"
 
 class Tact
 {

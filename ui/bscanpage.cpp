@@ -34,7 +34,7 @@ void BScanPage::setCore(Core *core)
     _core = core;
 }
 
-void BScanPage::init(DeviceMode *snapshot)
+void BScanPage::init(ChannelsCalibration *snapshot)
 {
     ui->channelSelectionWidget->init(snapshot);
 }

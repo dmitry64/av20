@@ -119,11 +119,11 @@ void FakeSPI::run()
         updateCounters();
         usleep(50000);
         if(_specialCounter == 77) {
-            _state.setUSM_SR(_state.USM_SR() ^ 0b00001000);
+            //_state.setUSM_SR(_state.USM_SR() ^ 0b00001000);
         }
 
         if(_specialCounter == 177) {
-            _state.setUSM_SR(_state.USM_SR() ^ 0b10000000);
+           // _state.setUSM_SR(_state.USM_SR() ^ 0b10000000);
         }
 
         _specialCounter++;

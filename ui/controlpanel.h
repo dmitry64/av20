@@ -34,7 +34,7 @@ public:
     ~ControlPanel();
     void setCore(Core * ptr);
     void setChannel(uint8_t channel);
-    void init(DeviceMode *calibration);
+    void init(ChannelsCalibration *calibration);
 
 private:
     void showEvent(QShowEvent *event);
