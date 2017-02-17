@@ -30,11 +30,12 @@ class MainWindow : public QMainWindow
     QPushButton * _backgroundWidget;
 
 private:
-    void init();
+
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+    void init();
     void setCore(Core * core);
     void showEvent( QShowEvent* event );
 public slots:

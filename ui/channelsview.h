@@ -2,7 +2,7 @@
 #define CHANNELSVIEW_H
 
 #include <QWidget>
-#include <device/devicemode.h>
+#include <device/channelscalibration.h>
 #include "core.h"
 
 namespace Ui {

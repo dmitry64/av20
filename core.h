@@ -8,7 +8,7 @@
 #include <queue>
 #include "device/modificators/modificator.h"
 #include "device/definitions.h"
-#include "device/devicemode.h"
+#include "device/channelscalibration.h"
 #include "device/devicestate.h"
 #include "device/device.h"
 #include "device/tact/tacttable.h"

@@ -1,4 +1,4 @@
-#include "devicemode.h"
+#include "channelscalibration.h"
 #include "tvg/tvgsinglepoint.h"
 
 #include <QDebug>

@@ -4,7 +4,7 @@
 #include <QWidget>
 #include "core.h"
 #include "ui/controls/channelbutton.h"
-#include "device/devicemode.h"
+#include "device/channelscalibration.h"
 
 namespace Ui {
 class ChannelSelector;

@@ -3,7 +3,7 @@
 
 #include <QWidget>
 #include "device/definitions.h"
-#include "device/devicemode.h"
+#include "device/channelscalibration.h"
 #include "core.h"
 
 namespace Ui {

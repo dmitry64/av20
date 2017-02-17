@@ -243,9 +243,7 @@ void Device::applyCalibration(ChannelsCalibration *calibration, TactTable *tactT
 
         _state->setChannelsTableTact(j,tr);
     }
-
 }
-
 
 void Device::setProgTrigger(bool enabled)
 {

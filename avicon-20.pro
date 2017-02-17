@@ -68,14 +68,14 @@ SOURCES += main.cpp\
     ui/ascaninfowidget.cpp \
     system/system.cpp \
     system/filesystem.cpp \
-    device/devicemode.cpp \
     device/channel/rxchannel.cpp \
     device/channel/txchannel.cpp \
     device/channel/channel.cpp \
     device/tvg/tvgcurve.cpp \
     device/tvg/tvgsinglepoint.cpp \
     device/tact/tacttable.cpp \
-    device/modificators/prismtimemodificator.cpp
+    device/modificators/prismtimemodificator.cpp \
+    device/channelscalibration.cpp
 
 HEADERS  += \
     core.h \
@@ -117,14 +117,14 @@ HEADERS  += \
     ui/ascaninfowidget.h \
     system/system.h \
     system/filesystem.h \
-    device/devicemode.h \
     device/channel/rxchannel.h \
     device/channel/txchannel.h \
     device/channel/channel.h \
     device/tvg/tvgcurve.h \
     device/tvg/tvgsinglepoint.h \
     device/tact/tacttable.h \
-    device/modificators/prismtimemodificator.h
+    device/modificators/prismtimemodificator.h \
+    device/channelscalibration.h
 
 FORMS    += \
     ui/ascanwidget.ui \

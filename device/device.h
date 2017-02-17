@@ -6,7 +6,7 @@
 #include "spi/fakespi.h"
 #include "devicestate.h"
 #include <vector>
-#include "devicemode.h"
+#include "channelscalibration.h"
 #include "tvg/tvgcurve.h"
 
 class Device

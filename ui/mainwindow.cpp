@@ -79,7 +79,7 @@ void MainWindow::setCore(Core *core)
 
 void MainWindow::showEvent(QShowEvent *event)
 {
-    init();
+    //init();
 }
 
 void MainWindow::onChannelChanged(Channel channel)

@@ -26,7 +26,6 @@ public:
 
     void setChannles(std::vector<std::vector<Channel> > channelsConfiguration);
 public slots:
-    void onBScan(QSharedPointer<BScanDrawData> scan);
     void onDisplayPackage(QSharedPointer<DisplayPackage> dp);
     void onChannelChanged(Channel channel);
 signals:

@@ -41,6 +41,15 @@ void BScanPage::init(ChannelsCalibration *snapshot)
 
 void BScanPage::setChannles(std::vector<std::vector<Channel> > channelsConfiguration)
 {
+    qDebug() << "BScan page setChannels";
+
+    for(int i=0; i<_bScanWidgets.size(); i++) {
+        ui->bscanLayout->removeWidget(_bScanWidgets.at(i));
+        delete _bScanWidgets.at(i);
+    }
+
+    _bScanWidgets.clear();
+
     for(int i=0; i<channelsConfiguration.size(); i++) {
         BScanWidget * widget = new BScanWidget(this);
         widget->setRestrictedToChannel(true);
@@ -48,16 +57,6 @@ void BScanPage::setChannles(std::vector<std::vector<Channel> > channelsConfigura
         widget->setChannelsInfo(info);
         _bScanWidgets.push_back(widget);
         ui->bscanLayout->addWidget(widget);
-    }
-}
-
-void BScanPage::onBScan(QSharedPointer<BScanDrawData> scan)
-{
-    uint8_t channel = scan->_channel;
-    std::vector<BScanWidget*> widgets = getWidgetsByChannel(channel);
-    //qDebug() << "size:"<<widgets.size();
-    for(int i=0; i<widgets.size(); i++) {
-        //widgets[i]->onBScan(scan);
     }
 }
 
