@@ -12,6 +12,7 @@
 #include "device/devicestate.h"
 #include "device/device.h"
 #include "device/tact/tacttable.h"
+#include "device/modemanager.h"
 #include <QMutex>
 
 class Core : public QThread
@@ -21,15 +22,26 @@ private:
     std::atomic_bool _active;
     std::atomic_bool _calibrationSnapshotRequested;
     std::atomic_bool _tactTableSnapshotRequested;
+    std::atomic_bool _modeswitchRequested;
+
+    uint8_t _requestedMode;
+    uint8_t _requestedScheme;
+
     uint8_t _currentTactCounter;
     uint8_t _currentTact;
 
     Device * _device;
-    DeviceState * _state;
+   // DeviceState * _state;
+
+    ModeManager * _modeManager;
+
     ChannelsCalibration * _currentCalibration;
     ChannelsCalibration * _calibrationsSnapshot;
 
-    TactTable * _tactTable;
+    DeviceMode * _currentMode;
+
+    //TactTable * _tactTable;
+    uint8_t _currentScheme;
     TactTable * _tactTableSnapshot;
 
     QMutex * _changesMutex;
@@ -41,18 +53,17 @@ private:
 
     AScan * _line1CurrentAscan;
     AScan * _line2CurrentAscan;
+
 public:
-    Core();
+    Core(ModeManager * modeManager);
     ~Core();
     void run();
     void stopCore();
     ChannelsCalibration *getCalibration();
     ChannelsCalibration *getCalibrationsSnapshot();
 
-    TactTable *getTactTable();
     TactTable *getTactTableSnapshot();
 
-    void notifyTVG(TVG &tvg);
     void notifyChannel(Channel channel);
     void applyCurrentCalibrationToDevice();
 
@@ -65,6 +76,7 @@ private:
     void process();
     void sync();
     void snapshot();
+    void modeswitch();
     void finish();
     void searchWork();
 
@@ -73,19 +85,24 @@ private:
     void handleDeviceOverheat(bool status);
     void handleDeviceConnectionError(bool status);
 
+    TactTable *getTactTable();
+
 public:
     void addGate(uint8_t channel, Gate gate);
     void modifyGate(uint8_t channel, Gate gate);
     void removeGate(uint8_t channel, uint8_t id);
     void setPrismTime(uint8_t channel, uint8_t value);
+    void setDeviceMode(uint8_t modeIndex, uint8_t schemeIndex);
 
     Device *getDevice() const;
 
+    ModeManager *getModeManager() const;
+
 signals:
-    void drawAscan(QSharedPointer<AScanDrawData> scan);
-    void drawBscan(QSharedPointer<BScanDrawData> scan);
+    //void drawAscan(QSharedPointer<AScanDrawData> scan);
+    //void drawBscan(QSharedPointer<BScanDrawData> scan);
     void drawDisplayPackage(QSharedPointer<DisplayPackage> package);
-    void drawTVG(TVG tvg);
+    //void drawTVG(TVG tvg);
     void channelChanged(Channel channel);
 
     void deviceErrorEnable();

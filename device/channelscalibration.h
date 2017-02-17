@@ -20,7 +20,6 @@ public:
     // get/set
     Channel *getChannel(int index);
     uint8_t getChannelsCount();
-    std::vector<Channel *> getChannels() const;
 };
 
 #endif // CHANNELSCALIBRATION_H

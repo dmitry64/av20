@@ -41,6 +41,7 @@ public:
 public slots:
     void onChannelChanged(Channel channel);
     void onDisplayPackage(QSharedPointer<DisplayPackage> dp);
+    void onModeChanged(uint8_t modeIndex, uint8_t tableIndex);
 
     // Menu handlers
     void onHelpMenuOpened();
@@ -70,9 +71,11 @@ public slots:
     void onPause();
 
 
+
 signals:
     void drawDisplayPackage(QSharedPointer<DisplayPackage> dp);
     void channelChanged(Channel channel);
+    void resetMenu();
 private:
     Ui::MainWindow *ui;
 };

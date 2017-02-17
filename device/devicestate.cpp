@@ -1,6 +1,6 @@
 #include "devicestate.h"
 
-
+#include <QDebug>
 
 uint8_t DeviceState::USM_ID() const
 {
@@ -84,8 +84,6 @@ void DeviceState::setUSM_SR(const uint8_t &USM_SR)
 
 DeviceState::DeviceState()
 {
-    //TriggerMode _triggerMode;
-    //_triggerMode = TriggerMode::ProgTRG;
     _USM_ID = 0;
     _USM_CR = 0;
     _USM_SR = 0;
@@ -100,18 +98,7 @@ void DeviceState::applyState()
 {
 
 }
-/*
-uint8_t * DeviceState::getAscanForChannel(uint8_t activeChannel)
-{
-    switch(activeChannel) {
-    case 0:
-        return _ascanSamplesA;
-    case 1:
-        return _ascanSamplesB;
-    }
-    return _ascanSamplesA;
-}
-*/
+
 void DeviceState::setTVGForChannel(uint8_t index, TVG tvg)
 {
     for(int y=0; y<TVG_SAMPLES_BYTES; y++) {
@@ -161,6 +148,7 @@ void DeviceState::setChannelsTableRegister(uint8_t reg, uint8_t value)
 
 TactRegisters DeviceState::getTactByIndex(uint8_t index)
 {
+    Q_ASSERT(index < 8);
     return _tactTable[index];
 }
 

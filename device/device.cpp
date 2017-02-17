@@ -4,8 +4,13 @@
 
 TactRegisters Device::getRegistersByTact(uint8_t index, ChannelsCalibration * mode, TactTable * tactTable)
 {
-    TactRegisters reg;
+    Q_ASSERT(index < 8);
+    Q_ASSERT(mode);
+    Q_ASSERT(tactTable);
     Tact * tact = tactTable->getTactByIndex(index);
+    Q_ASSERT(tact);
+
+    TactRegisters reg;
 
     reg._CR = 0x00;
     reg._CR |= ((tact->getDiffMode() & 0b00000001) << 1);
@@ -18,6 +23,7 @@ TactRegisters Device::getRegistersByTact(uint8_t index, ChannelsCalibration * mo
     reg._TR1 |= (tact->getTx1() & 0b00000111);
 
     TxChannel * firstTx = mode->getChannel(tact->getTx1())->tx();
+    Q_ASSERT(firstTx);
     reg._PULSER1 = 0x00;
     reg._PULSER1 |= ((firstTx->doubleMode() & 0b00000001) << 7);
     uint8_t prog1 = firstTx->prog();
@@ -32,6 +38,7 @@ TactRegisters Device::getRegistersByTact(uint8_t index, ChannelsCalibration * mo
     reg._TR2 |= (tact->getTx2() & 0b00000111);
 
     TxChannel * secondTx = mode->getChannel(tact->getTx2())->tx();
+    Q_ASSERT(secondTx);
     reg._PULSER2 = 0x00;
     reg._PULSER2 |= ((secondTx->doubleMode() & 0b00000001) << 7);
     uint8_t prog2 = secondTx->prog();
@@ -49,36 +56,10 @@ void Device::setBit(uint8_t * ptr, int bit, uint8_t val) {
     uint8_t prev = ptr[bit/8];
     ptr[bit/8] |= (((prev >> (bit % 8)) | val) << (bit % 8));
 }
-/*
-TVG RxChannel::generateTVG()
-{
-    std::vector<uint8_t> samples;
-    //qDebug() << "Base level:" << _baseSensLevel;
-    for(int i=0; i<TVG_SAMPLES_SIZE; i++) {
-        uint8_t sample = std::min(127, std::min(64 , i*3));
-        samples.push_back(sample);
-    }
-
-    uint8_t packedValues[TVG_SAMPLES_BYTES];
-    memset(packedValues,0,TVG_SAMPLES_BYTES);
-    for(int i=0; i<samples.size(); i++) {
-        for(int j=0; j<7; j++) {
-            setBit(packedValues,i*7 + j, (samples[i] >> j) & 0b00000001);
-        }
-    }
-
-    TVG tvg;
-
-    for(int i=0; i<TVG_SAMPLES_BYTES; i++) {
-        tvg._samples[i] = packedValues[i];
-    }
-
-    return tvg;
-} */
 
 TVG Device::getTVGFromCurve(TVGCurve *curve)
 {
-
+    Q_ASSERT(curve);
 
     uint8_t packedValues[TVG_SAMPLES_BYTES];
     memset(packedValues,0,TVG_SAMPLES_BYTES);
@@ -101,7 +82,7 @@ TVG Device::getTVGFromCurve(TVGCurve *curve)
     return tvg;
 }
 
-Device::Device(DeviceState *state) :  _state(state)
+Device::Device() //:  //_state(state)
 {
 #ifdef FAKESPI
     _spi = new FakeSPI();
@@ -117,7 +98,7 @@ void Device::init()
 
     if(status) {
         uint8_t version = getVersion();
-        _state->setUSM_ID(version);
+        //_state->setUSM_ID(version);
         qDebug() << "Device version:" << QString::number(static_cast<unsigned int>(version),16).toUpper();
         fillRegisters();
     } else {
@@ -139,7 +120,7 @@ void Device::resetConfigRegisters()
         qFatal("TRG_CR Initialization failed!");
     } else {
         qDebug() << "TRG_CR initialized!";
-        _state->setTRG_CR(trg_cr_send);
+        //_state->setTRG_CR(trg_cr_send);
     }
 
     uint8_t trg_ds_send = 0b00000000;
@@ -147,7 +128,7 @@ void Device::resetConfigRegisters()
         qFatal("TRG_DS Initialization failed!");
     } else {
         qDebug() << "TRG_DS initialized!";
-        _state->setTRG_DS(trg_ds_send);
+        //_state->setTRG_DS(trg_ds_send);
     }
 
     uint8_t trg_ts_send = 0b00000000;
@@ -155,7 +136,7 @@ void Device::resetConfigRegisters()
         qFatal("TRG_TS Initialization failed!");
     } else {
         qDebug() << "TRG_TS initialized!";
-        _state->setTRG_TS(trg_ts_send);
+        //_state->setTRG_TS(trg_ts_send);
     }
 }
 
@@ -195,12 +176,22 @@ void Device::resetChannelsTable()
         tact._RESERVED = 0;
         tact._TR1 = 0;
         tact._TR2 = 0;
-        _state->setChannelsTableTact(j,tact);
+        //_state->setChannelsTableTact(j,tact);
     }
+}
+
+void Device::resetDevice()
+{
+    resetConfigRegisters();
+    resetChannelsTable();
+    resetTVG();
 }
 
 void Device::applyCalibration(ChannelsCalibration *calibration, TactTable *tactTable)
 {
+    Q_ASSERT(calibration);
+    Q_ASSERT(tactTable);
+
     for(int j=0; j<calibration->getChannelsCount(); j++) {
         TVG tvg = getTVGFromCurve(calibration->getChannel(j)->rx()->getTvgCurve());
         _spi->setRegister(0x40+j,TVG_SAMPLES_BYTES,tvg._samples);
@@ -241,7 +232,7 @@ void Device::applyCalibration(ChannelsCalibration *calibration, TactTable *tactT
 
         qDebug() << "Channels table for ch #" << j + 1 << " loaded!";
 
-        _state->setChannelsTableTact(j,tr);
+        //_state->setChannelsTableTact(j,tr);
     }
 }
 
@@ -254,7 +245,7 @@ void Device::setProgTrigger(bool enabled)
         val = 0b00000000;
     }
     _spi->setRegister(0x05,1,&val);
-    _state->setTRG_CR(val);
+    //_state->setTRG_CR(val);
 }
 
 DeviceStatus Device::getDeviceStatus()
@@ -262,7 +253,7 @@ DeviceStatus Device::getDeviceStatus()
     DeviceStatus st;
     uint8_t stReg;
     _spi->getRegister(0x03,1,&stReg);
-    _state->setUSM_SR(stReg);
+    //_state->setUSM_SR(stReg);
     st.error = (stReg & 0b10000000) != 0;
     st.thsd = (stReg & 0b00001000) != 0;
     st.ready = (stReg & 0b00000001) != 0;
@@ -271,32 +262,17 @@ DeviceStatus Device::getDeviceStatus()
 
 void Device::setTVG(int chIndex, TVG tvg)
 {
+    Q_ASSERT(chIndex < 8);
     _spi->setRegister(0x40 + chIndex,TVG_SAMPLES_BYTES,tvg._samples);
-    _state->setTVGForChannel(chIndex,tvg);
+    //_state->setTVGForChannel(chIndex,tvg);
 }
 
 AScan Device::getAscanForLine(uint8_t line, AScan * output)
 {
-    //AScan scan;
+    Q_ASSERT(output);
     uint8_t * buf = reinterpret_cast<uint8_t*>(output);
-    //uint8_t buf[ASCAN_SAMPLES_SIZE + ASCAN_HEADER_SIZE];
     _spi->getRegister((line == 0) ? 0x7C : 0x7D, ASCAN_SAMPLES_SIZE + ASCAN_HEADER_SIZE, buf);
 
-    /*scan._header._frameMarker = buf[0];
-    scan._header._descriptorSizeInBytes = buf[1];
-    scan._header._tactNo = buf[2];
-    scan._header._channelNo = buf[3];
-    scan._header._dataType = buf[4];
-    scan._header._dataWidth = buf[5];
-    uint16_t * sptr = reinterpret_cast<uint16_t*>(&(buf[6]));
-    scan._header._samplesPerChannel = *sptr;
-    uint64_t * odoptr = reinterpret_cast<uint64_t*>(&(buf[8]));
-    scan._header._odoStamp = *odoptr;
-
-    for(int i=0; i<ASCAN_SAMPLES_SIZE; i++) {
-        scan._samples[i] = buf[i + ASCAN_HEADER_SIZE];
-    }
-*/
     if(!checkConnection()) {
         qFatal("Connection lost after Ascan request!");
     }

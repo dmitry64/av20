@@ -12,19 +12,18 @@
 class Device
 {
     DeviceInterface * _spi;
-    DeviceState * _state;
-
 private:
     TactRegisters getRegistersByTact(uint8_t index, ChannelsCalibration *mode, TactTable *tactTable);
     TVG getTVGFromCurve(TVGCurve * curve);
     void setBit(uint8_t * ptr, int bit, uint8_t val);
 public:
-    Device(DeviceState * state);
+    Device();
     void init();
     void fillRegisters();
     void resetConfigRegisters();
     void resetTVG();
     void resetChannelsTable();
+    void resetDevice();
     void applyCalibration(ChannelsCalibration * calibration, TactTable * tactTable);
     void setProgTrigger(bool enabled);
     DeviceStatus getDeviceStatus();

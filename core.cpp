@@ -16,7 +16,7 @@ ChannelsCalibration * Core::getCalibrationsSnapshot()
 
 TactTable *Core::getTactTable()
 {
-    return _tactTable;
+    return _currentMode->tactTables().at(_currentScheme);
 }
 
 TactTable *Core::getTactTableSnapshot()
@@ -33,21 +33,27 @@ Device *Core::getDevice() const
     return _device;
 }
 
-Core::Core() : _active(true), _state(new DeviceState()), _changesMutex(new QMutex())
+ModeManager *Core::getModeManager() const
 {
-    _device = (new Device(_state));
+    return _modeManager;
+}
+
+Core::Core(ModeManager *modeManager) : _active(true), _changesMutex(new QMutex())
+{
+    _modeManager = modeManager;
+    _device = new Device();
     _currentCalibration = new ChannelsCalibration();
     _currentCalibration->init();
     _currentTactCounter = 0;
-    _tactTable = new TactTable();
-    _tactTable->init();
-    _currentTact = _tactTable->getTactIndexByCounter(_currentTactCounter);
+    _currentScheme = 0;
+    _currentTact = 0;
     _line1CurrentAscan = new AScan();
     _line2CurrentAscan = new AScan();
     _calibrationSnapshotRequested.store(false);
     _calibrationsSnapshot = 0;
     _tactTableSnapshotRequested.store(false);
     _tactTableSnapshot = 0;
+    _modeswitchRequested.store(false);
     _deviceOverheat = false;
     _deviceError = false;
     _deviceConnectionError = false;
@@ -82,7 +88,12 @@ ChannelsCalibration *Core::getCalibration()
 void Core::init()
 {
     _device->init();
-    _device->applyCalibration(_currentCalibration, _tactTable);
+    _currentMode = _modeManager->modes().at(0);
+    _currentScheme = 0;
+    TactTable * current = getTactTable();
+    Q_ASSERT(current);
+    _currentTact = current->getTactIndexByCounter(_currentTactCounter);
+    _device->applyCalibration(_currentCalibration, current);
 }
 
 void Core::check()
@@ -93,13 +104,14 @@ void Core::check()
 
 void Core::trigger()
 {
-    if(_tactTable->getMaxTacts() > 0) {
+    TactTable * table = getTactTable();
+    if(table->getMaxTacts() > 0) {
         _device->setProgTrigger(true);
         _currentTactCounter++;
-        if(_currentTactCounter>=_tactTable->getMaxTacts()) {
+        if(_currentTactCounter>=table->getMaxTacts()) {
             _currentTactCounter = 0;
         }
-        _currentTact = _tactTable->getTactIndexByCounter(_currentTactCounter);
+        _currentTact = table->getTactIndexByCounter(_currentTactCounter);
     }
 }
 
@@ -122,8 +134,7 @@ void Core::status()
 
 void Core::aScanAll()
 {
-    //qDebug() << "Scan tact:" << _currentTact;
-    std::vector< std::pair<uint8_t, uint8_t> > lines = _tactTable->getTactLines(_currentTact);
+    std::vector< std::pair<uint8_t, uint8_t> > lines = getTactTable()->getTactLines(_currentTact);
     if(!lines.empty()) {
         for(size_t i=0; i<lines.size(); i++) {
             _device->getAscanForLine(lines[i].first,_line1CurrentAscan);
@@ -205,8 +216,22 @@ void Core::snapshot()
         _calibrationSnapshotRequested.store(false);
     }
     if(_tactTableSnapshotRequested.load()){
-        _tactTableSnapshot = _tactTable->getSnapshot();
+        _tactTableSnapshot = getTactTable()->getSnapshot();
         _tactTableSnapshotRequested.store(false);
+    }
+}
+
+void Core::modeswitch()
+{
+    if(_modeswitchRequested.load()) {
+        //_tactTable = _modeManager->modes().at(_requestedMode)->tactTables().at(_requestedScheme);
+        _currentScheme = _requestedScheme;
+        _currentMode =  _modeManager->modes().at(_requestedMode);
+        _currentTact = 0;
+        _currentTactCounter = 0;
+        _device->resetDevice();
+        applyCurrentCalibrationToDevice();
+        _modeswitchRequested.store(false);
     }
 }
 
@@ -224,6 +249,7 @@ void Core::searchWork()
     aScanAll();
     process();
     sync();
+    modeswitch();
 }
 
 void Core::addModificator(Modificator *mod)
@@ -273,11 +299,6 @@ void Core::handleDeviceConnectionError(bool status)
     }
 }
 
-void Core::notifyTVG(TVG & tvg)
-{
-    emit drawTVG(tvg);
-}
-
 void Core::notifyChannel(Channel channel)
 {
     emit channelChanged(channel);
@@ -285,7 +306,7 @@ void Core::notifyChannel(Channel channel)
 
 void Core::applyCurrentCalibrationToDevice()
 {
-    _device->applyCalibration(_currentCalibration, _tactTable);
+    _device->applyCalibration(_currentCalibration, getTactTable());
 }
 
 void Core::addGate(uint8_t channel, Gate gate)
@@ -314,5 +335,15 @@ void Core::setPrismTime(uint8_t channel, uint8_t value)
     qDebug() << "Changing prism time ch =" << channel << "value =" <<value;
     PrismTimeModificator * mod = new PrismTimeModificator(channel,value);
     addModificator(mod);
+}
+
+void Core::setDeviceMode(uint8_t modeIndex, uint8_t schemeIndex)
+{
+    _requestedMode = modeIndex;
+    _requestedScheme = schemeIndex;
+    _modeswitchRequested.store(true);
+    while(_modeswitchRequested.load()) {
+        usleep(10);
+    }
 }
 

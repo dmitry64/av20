@@ -4,13 +4,6 @@
 #include <QDebug>
 
 
-std::vector<Channel *> ChannelsCalibration::getChannels() const
-{
-    return _channels;
-}
-
-
-
 ChannelsCalibration::ChannelsCalibration()
 {
 
@@ -19,7 +12,6 @@ ChannelsCalibration::ChannelsCalibration()
 ChannelsCalibration::~ChannelsCalibration()
 {
     qDebug() << "Device calibration deleted";
-
 
     for(int i=0; i<_channels.size(); i++) {
         delete _channels.at(i);

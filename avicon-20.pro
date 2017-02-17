@@ -75,7 +75,11 @@ SOURCES += main.cpp\
     device/tvg/tvgsinglepoint.cpp \
     device/tact/tacttable.cpp \
     device/modificators/prismtimemodificator.cpp \
-    device/channelscalibration.cpp
+    device/channelscalibration.cpp \
+    device/devicemode.cpp \
+    device/modemanager.cpp \
+    ui/controls/modeselectionbutton.cpp \
+    ui/controls/schemeselectionbutton.cpp
 
 HEADERS  += \
     core.h \
@@ -124,7 +128,11 @@ HEADERS  += \
     device/tvg/tvgsinglepoint.h \
     device/tact/tacttable.h \
     device/modificators/prismtimemodificator.h \
-    device/channelscalibration.h
+    device/channelscalibration.h \
+    device/devicemode.h \
+    device/modemanager.h \
+    ui/controls/modeselectionbutton.h \
+    ui/controls/schemeselectionbutton.h
 
 FORMS    += \
     ui/ascanwidget.ui \
@@ -151,7 +159,9 @@ FORMS    += \
     ui/optionswidget.ui \
     ui/systemwidget.ui \
     ui/tvgeditorwidget.ui \
-    ui/ascaninfowidget.ui
+    ui/ascaninfowidget.ui \
+    ui/controls/modeselectionbutton.ui \
+    ui/controls/schemeselectionbutton.ui
 
 RESOURCES += \
     resources.qrc

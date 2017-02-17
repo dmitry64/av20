@@ -42,7 +42,6 @@ GateController::~GateController()
 
 void GateController::setGate(Gate gate)
 {
-    qDebug() << "Set gate" << gate._start;
     _gate = gate;
     updateGate();
 }

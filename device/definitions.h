@@ -14,12 +14,15 @@
 #define ASCAN_SAMPLES_SIZE 800
 #define ASCAN_HEADER_SIZE 12
 
-enum ModeConfiguration {
-    Mode8Ch,
-    Mode4Ch,
-    Mode2Ch,
-    Mode1Ch
+enum ModeTypes {
+    Unknown,
+    SearchMode,
+    HandMode,
+    HeadMode,
+    WheelMode
 };
+
+
 
 
 

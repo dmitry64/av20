@@ -1,5 +1,10 @@
 #include "tacttable.h"
 
+void TactTable::setTactTable(const std::vector<Tact *> &tactTable)
+{
+    _tactTable = tactTable;
+}
+
 TactTable::TactTable()
 {
 
@@ -47,23 +52,13 @@ TactTable *TactTable::getSnapshot()
     return new TactTable(this);
 }
 
-uint8_t TactTable::getMaxTacts()
-{
-    uint8_t num = 0;
-    for(int i=0; i<MAX_TACTS_COUNT; i++) {
-        if(_tactTable[i]->getTactEnabled()) {
-            num++;
-        }
-    }
-    return num;
-}
 
 std::vector<Tact *> TactTable::getTactTable() const
 {
     return _tactTable;
 }
 
-uint8_t TactTable::getTactIndexByCounter(uint8_t counter)
+uint8_t TactTable::getTactIndexByCounter(uint8_t counter) const
 {
     uint8_t num = 0;
     for(int i=0; i<MAX_TACTS_COUNT; i++) {
@@ -97,4 +92,15 @@ std::vector< std::pair<uint8_t, uint8_t> > TactTable::getTactLines(uint8_t tactI
 Tact *TactTable::getTactByIndex(uint8_t index)
 {
     return _tactTable[index];
+}
+
+uint8_t TactTable::getMaxTacts() const
+{
+    uint8_t num = 0;
+    for(int i=0; i<_tactTable.size(); i++) {
+        if(_tactTable[i]->getTactEnabled()) {
+            num++;
+        }
+    }
+    return num;
 }

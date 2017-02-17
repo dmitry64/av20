@@ -20,7 +20,10 @@ int main(int argc, char *argv[])
     System * system = System::getInstance();
     system->init();
 
-    Core * core = new Core();
+    ModeManager * modeManager = new ModeManager();
+    modeManager->init();
+
+    Core * core = new Core(modeManager);
     MainWindow * mainWindow = new MainWindow();
 
     QObject::connect(core,SIGNAL(channelChanged(Channel)),mainWindow, SLOT(onChannelChanged(Channel)));
@@ -32,6 +35,7 @@ int main(int argc, char *argv[])
     QObject::connect(core,SIGNAL(deviceErrorDisable()),mainWindow, SLOT(onDeviceErrorDisable()));
     QObject::connect(core,SIGNAL(deviceConnectionErrorEnable()),mainWindow, SLOT(onDeviceConnectionErrorEnable()));
     QObject::connect(core,SIGNAL(deviceConnectionErrorDisable()),mainWindow, SLOT(onDeviceConnectionErrorDisable()));
+
 
 
     core->start();
