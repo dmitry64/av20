@@ -82,18 +82,16 @@ uint8_t TactTable::getTactIndexByCounter(uint8_t counter) const
     return 0;
 }
 
-std::vector< std::pair<uint8_t, uint8_t> > TactTable::getTactLines(uint8_t tactIndex)
+std::vector< uint8_t > TactTable::getTactLines(uint8_t tactIndex)
 {
-    std::vector< std::pair<uint8_t, uint8_t> > lines;
+    std::vector< uint8_t > lines;
 
     Tact * tact = _tactTable.at(tactIndex);
     if(tact->getRx1Enabled()) {
-        std::pair<uint8_t, uint8_t> p1(0,tact->getRx1());
-        lines.push_back(p1);
+        lines.push_back(0);
     }
     if(tact->getRx2Enabled()) {
-        std::pair<uint8_t, uint8_t> p2(1,tact->getRx2());
-        lines.push_back(p2);
+        lines.push_back(1);
     }
 
     return lines;

@@ -66,7 +66,7 @@ void CalibrationManager::initSearchModeCalibration()
     ChannelsCalibration * cal2 = new ChannelsCalibration();
     cal2->setTactId(TACT_ID_SEARCH_SCHEME_2);
     std::vector<Channel *> channels2;
-    for(int i=0;i<4; i++) {
+    for(int i=0;i<8; i++) {
         Channel * chTemp = new Channel();
         RxChannel * rx = new RxChannel();
         TxChannel * tx = new TxChannel();

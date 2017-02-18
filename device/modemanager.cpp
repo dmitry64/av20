@@ -29,6 +29,8 @@ DeviceMode *ModeManager::generateSearchMode()
         } else {
             tact->setRx1Enabled(false);
             tact->setTx1Enabled(false);
+            tact->setRx2Enabled(false);
+            tact->setTx2Enabled(false);
             tact->setTactEnabled(false);
         }
 
@@ -44,10 +46,14 @@ DeviceMode *ModeManager::generateSearchMode()
         Tact * tact = new Tact();
         tact->setRx1(i);
         tact->setTx1(i);
+        tact->setRx2(4+i);
+        tact->setTx2(4+i);
 
         if(i<4) {
         tact->setRx1Enabled(true);
         tact->setTx1Enabled(true);
+        tact->setRx2Enabled(true);
+        tact->setTx2Enabled(true);
         tact->setTactEnabled(true);
         } else {
             tact->setRx1Enabled(false);

@@ -74,8 +74,8 @@ private:
     void check();
     void trigger();
     void status();
-    void aScanAll();
-    void process();
+    void aScanAll(std::vector<uint8_t> lines);
+    void aScanProcess(uint8_t line);
     void sync();
     void snapshot();
     void modeswitch();

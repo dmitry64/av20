@@ -9,32 +9,33 @@ ChannelsView::ChannelsView(QWidget *parent) :
 {
     ui->setupUi(this);
     _core = 0;
-    ui->channelsWidget->setColumnCount(4);
+    ui->channelsWidget->setColumnCount(6);
     ui->channelsWidget->setHorizontalHeaderItem(0,new QTableWidgetItem("Name"));
     ui->channelsWidget->setHorizontalHeaderItem(1,new QTableWidgetItem("Angle"));
     ui->channelsWidget->setHorizontalHeaderItem(2,new QTableWidgetItem("Prism time (us)"));
     ui->channelsWidget->setHorizontalHeaderItem(3,new QTableWidgetItem("Gates"));
+    ui->channelsWidget->setHorizontalHeaderItem(4,new QTableWidgetItem("Freq (MHz)"));
+    ui->channelsWidget->setHorizontalHeaderItem(5,new QTableWidgetItem("Prog #"));
 
-    ui->tactWidget->setColumnCount(9);
+    ui->channelsWidget->setColumnWidth(0,70);
+    ui->channelsWidget->setColumnWidth(1,50);
+
+    ui->tactWidget->setColumnCount(5);
     ui->tactWidget->setHorizontalHeaderItem(0,new QTableWidgetItem("Index"));
     ui->tactWidget->setHorizontalHeaderItem(1,new QTableWidgetItem("Rx I"));
     ui->tactWidget->setHorizontalHeaderItem(2,new QTableWidgetItem("Tx I"));
-    ui->tactWidget->setHorizontalHeaderItem(3,new QTableWidgetItem("Prog. I"));
-    ui->tactWidget->setHorizontalHeaderItem(4,new QTableWidgetItem("Freq. I"));
-    ui->tactWidget->setHorizontalHeaderItem(5,new QTableWidgetItem("Rx II"));
-    ui->tactWidget->setHorizontalHeaderItem(6,new QTableWidgetItem("Tx II"));
-    ui->tactWidget->setHorizontalHeaderItem(7,new QTableWidgetItem("Prog. II"));
-    ui->tactWidget->setHorizontalHeaderItem(8,new QTableWidgetItem("Freq. II"));
+//    ui->tactWidget->setHorizontalHeaderItem(3,new QTableWidgetItem("Prog. I"));
+//    ui->tactWidget->setHorizontalHeaderItem(4,new QTableWidgetItem("Freq. I"));
+    ui->tactWidget->setHorizontalHeaderItem(3,new QTableWidgetItem("Rx II"));
+    ui->tactWidget->setHorizontalHeaderItem(4,new QTableWidgetItem("Tx II"));
+//    ui->tactWidget->setHorizontalHeaderItem(7,new QTableWidgetItem("Prog. II"));
+//    ui->tactWidget->setHorizontalHeaderItem(8,new QTableWidgetItem("Freq. II"));
 
     ui->tactWidget->setColumnWidth(0,50);
     ui->tactWidget->setColumnWidth(1,50);
     ui->tactWidget->setColumnWidth(2,50);
     ui->tactWidget->setColumnWidth(3,50);
     ui->tactWidget->setColumnWidth(4,50);
-    ui->tactWidget->setColumnWidth(5,50);
-    ui->tactWidget->setColumnWidth(6,50);
-    ui->tactWidget->setColumnWidth(7,50);
-    ui->tactWidget->setColumnWidth(8,50);
 }
 
 ChannelsView::~ChannelsView()
@@ -87,6 +88,13 @@ void ChannelsView::init(ChannelsCalibration *calibrationsSnapshot, TactTable * t
         item = new QTableWidgetItem(gatesString);
         item->setTextAlignment( Qt::AlignHCenter | Qt::AlignCenter );
         ui->channelsWidget->setItem(i,3,item);
+        item = new QTableWidgetItem(QString(FreqStrings[chan->tx()->freq()].c_str()));
+        item->setTextAlignment( Qt::AlignHCenter | Qt::AlignCenter );
+        ui->channelsWidget->setItem(i,4,item);
+        item = new QTableWidgetItem(QString(ProgStrings[chan->tx()->prog()].c_str()));
+        item->setTextAlignment( Qt::AlignHCenter | Qt::AlignCenter );
+        ui->channelsWidget->setItem(i,5,item);
+
     }
     QColor disabledChannelsColor = QColor(60,60,60);
 
@@ -118,12 +126,12 @@ void ChannelsView::init(ChannelsCalibration *calibrationsSnapshot, TactTable * t
                 item->setBackgroundColor(disabledChannelsColor);
             }
             ui->tactWidget->setItem(i,2,item);
-            item = new QTableWidgetItem(QString(ProgStrings[calibrationsSnapshot->getChannel(tact->getTx1())->tx()->prog()].c_str()));
+            /*item = new QTableWidgetItem(QString(ProgStrings[calibrationsSnapshot->getChannel(tact->getTx1())->tx()->prog()].c_str()));
             item->setTextAlignment( Qt::AlignHCenter | Qt::AlignCenter );
             ui->tactWidget->setItem(i,3,item);
             item = new QTableWidgetItem(QString(FreqStrings[calibrationsSnapshot->getChannel(tact->getTx1())->tx()->freq()].c_str()));
             item->setTextAlignment( Qt::AlignHCenter | Qt::AlignCenter );
-            ui->tactWidget->setItem(i,4,item);
+            ui->tactWidget->setItem(i,4,item);*/
             item = new QTableWidgetItem(QString::number(tact->getRx2()));
             item->setTextAlignment( Qt::AlignHCenter | Qt::AlignCenter );
 
@@ -133,7 +141,7 @@ void ChannelsView::init(ChannelsCalibration *calibrationsSnapshot, TactTable * t
             } else {
                 item->setBackgroundColor(disabledChannelsColor);
             }
-            ui->tactWidget->setItem(i,5,item);
+            ui->tactWidget->setItem(i,3,item);
             item = new QTableWidgetItem(QString::number(tact->getTx2()));
             item->setTextAlignment( Qt::AlignHCenter | Qt::AlignCenter );
 
@@ -143,13 +151,14 @@ void ChannelsView::init(ChannelsCalibration *calibrationsSnapshot, TactTable * t
             } else {
                 item->setBackgroundColor(disabledChannelsColor);
             }
-            ui->tactWidget->setItem(i,6,item);
+            ui->tactWidget->setItem(i,4,item);
+            /*
             item = new QTableWidgetItem(QString(ProgStrings[calibrationsSnapshot->getChannel(tact->getTx2())->tx()->prog()].c_str()));
             item->setTextAlignment( Qt::AlignHCenter | Qt::AlignCenter );
             ui->tactWidget->setItem(i,7,item);
             item = new QTableWidgetItem(QString(FreqStrings[calibrationsSnapshot->getChannel(tact->getTx2())->tx()->freq()].c_str()));
             item->setTextAlignment( Qt::AlignHCenter | Qt::AlignCenter );
-            ui->tactWidget->setItem(i,8,item);
+            ui->tactWidget->setItem(i,8,item);*/
         }
     }
 

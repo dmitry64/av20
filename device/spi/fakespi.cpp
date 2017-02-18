@@ -97,19 +97,17 @@ void FakeSPI::setAScanForLine2(uint8_t *dest)
     dest[7] = 0;
     //int last = 0;
     for(int i=0; i<ASCAN_SAMPLES_SIZE; i++) {
-        double x = (i + sin(ascanL2Counter2/2.0) * 180.14 + chan * 50 - 400) / 8.0 ;
+        double x = (i + sin(ascanL2Counter2/9.0) * 120.14 + (chan-4.0) * 50.0 - 400.0) / 8.0 ;
         double res = 127.0;
         if(x!=0) {
-            res = std::max((((sin(x)/x) + 1)/2.0)*255.0 - 127,0.0);
+            res = std::max((((sin(x)/x) + 1)/2.0)*255.0 - 128.0 ,0.0);
         }
 
         res *= getTVGSample2( tvg._samples, i/4) / 127.0;
-        res *= 1.8;
+        res *= (1.3 * (ascanL2Counter2 % 255) + 60.0)/255.0 ;
         int val = round(res);
         unsigned char sh = val;
         dest[i+ASCAN_HEADER_SIZE] = sh;
-        //std::cout << ", " << sh;
-        //printf(", 0x%02x",sh);
     }
 }
 
@@ -188,7 +186,7 @@ void FakeSPI::getRegister(uint8_t reg, uint32_t length, uint8_t *dest)
         break;
     case 0x7D:
         if(_currentTact!=-1)
-            setAScanForLine1(dest);
+            setAScanForLine2(dest);
         break;
     }
 

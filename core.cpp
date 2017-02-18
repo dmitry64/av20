@@ -137,29 +137,40 @@ void Core::status()
     _device->setProgTrigger(false);
 }
 
-void Core::aScanAll()
+void Core::aScanAll(std::vector< uint8_t > lines)
 {
-    std::vector< std::pair<uint8_t, uint8_t> > lines = getTactTable()->getTactLines(_currentTact);
+
     if(!lines.empty()) {
         for(size_t i=0; i<lines.size(); i++) {
-            _device->getAscanForLine(lines[i].first,_line1CurrentAscan);
+            if(lines[i] == 0) {
+                _device->getAscanForLine(lines[i],_line1CurrentAscan);
+            } else if(lines[i] == 1){
+                _device->getAscanForLine(lines[i],_line2CurrentAscan);
+            }
         }
     }
 }
 
-void Core::process()
+void Core::aScanProcess(uint8_t line)
 {
     DisplayPackage * dp = new DisplayPackage();
 
     dp->ascan._samples.resize(ASCAN_SAMPLES_SIZE);
+    AScan * scanptr = 0;
 
-    dp->ascan._channel = _line1CurrentAscan->_header._channelNo;
-    dp->bscan._channel = _line1CurrentAscan->_header._channelNo;
+    if(line == 0) {
+        scanptr = _line1CurrentAscan;
+    } else if (line == 1) {
+        scanptr = _line2CurrentAscan;
+    }
+
+    dp->ascan._channel = scanptr->_header._channelNo;
+    dp->bscan._channel = scanptr->_header._channelNo;
 
     uint16_t max = 0;
     uint16_t pos = 0;
     for(uint16_t i=0; i<ASCAN_SAMPLES_SIZE; i++) {
-        uint16_t sample = _line1CurrentAscan->_samples[i];
+        uint16_t sample = scanptr->_samples[i];
         if(sample >= max) {
             max = sample;
             pos = i;
@@ -179,7 +190,7 @@ void Core::process()
         //int end = -1;
         bool startFound = false;
         for(int i=0; i<ASCAN_SAMPLES_SIZE; i++) {
-            uint8_t sample = _line1CurrentAscan->_samples[i];
+            uint8_t sample = scanptr->_samples[i];
             if((sample>gate._level) &&(!startFound) && (i >= gateStart) && (i <= gateEnd)) {
                 start = i;
                 startFound = true;
@@ -252,8 +263,11 @@ void Core::searchWork()
     check();
     trigger();
     status();
-    aScanAll();
-    process();
+    std::vector< uint8_t > lines = getTactTable()->getTactLines(_currentTact);
+    aScanAll(lines);
+    for(size_t i=0; i<lines.size(); i++) {
+        aScanProcess(lines[i]);
+    }
     sync();
     modeswitch();
 }
