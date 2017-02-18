@@ -8,6 +8,7 @@ AScanPage::AScanPage(QWidget *parent) :
 {
     ui->setupUi(this);
     connect(ui->channelSelector,SIGNAL(channelChanged(uint8_t)),this,SLOT(setChannel(uint8_t)));
+    ui->aScanInfoWidget->hide();
 }
 
 AScanPage::~AScanPage()
@@ -17,7 +18,7 @@ AScanPage::~AScanPage()
 
 void AScanPage::init(uint8_t channel)
 {
-    ChannelsCalibration * snapshot =  _core->getCalibrationsSnapshot();
+    ChannelsCalibration * snapshot = _core->getCalibrationsSnapshot();
     init(channel,snapshot);
     delete snapshot;
 }
@@ -32,7 +33,7 @@ void AScanPage::init(uint8_t channel, ChannelsCalibration *snapshot)
     ui->controlPanel->setChannel(channel);
     ui->controlPanel->init(snapshot);
     ui->channelSelector->init(snapshot);
-    ui->aScanInfoWidget->hide();
+
     update();
 }
 
@@ -52,28 +53,12 @@ void AScanPage::setBScanChannels(std::vector<Channel> channels)
 {
     ui->bscanWidget->setChannelsInfo(channels);
 }
-/*
-void AScanPage::onAScan(QSharedPointer<AScanDrawData> scan)
-{
-    //ui->ascanWidget->onAScan(scan);
-    //ui->bscanWidget->onAScan(scan);
-}
-
-void AScanPage::onBScan(QSharedPointer<BScanDrawData> scan)
-{
-    //ui->bscanWidget->onBScan(scan);
-}*/
 
 void AScanPage::onDisplayPackage(QSharedPointer<DisplayPackage> package)
 {
     ui->ascanWidget->onAScan(&(package->ascan));
     ui->bscanWidget->onBScan(&(package->bscan));
 }
-
-/*void AScanPage::onTVG(TVG tvg)
-{
-    ui->ascanWidget->onTVG(tvg);
-}*/
 
 void AScanPage::onChannelChanged(Channel channel)
 {
@@ -83,5 +68,13 @@ void AScanPage::onChannelChanged(Channel channel)
 
 void AScanPage::setChannel(uint8_t channel)
 {
-    init(channel);
+    ChannelsCalibration * snapshot = _core->getCalibrationsSnapshot();
+    std::vector<Channel> channels;
+    channels.push_back(*(snapshot->getChannel(channel)));
+    ui->bscanWidget->setChannelsInfo(channels);
+    ui->ascanWidget->setChannelsInfo(channels);
+    ui->controlPanel->setChannel(channel);
+    ui->controlPanel->init(snapshot);
+    update();
+    //init(channel);
 }

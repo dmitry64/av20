@@ -250,6 +250,7 @@ void MainWindow::init()
         ui->bScanPage->init(calibration);
 
         ui->channelsWidget->init(calibration,tactTableSnapshot);
+        delete tactTableSnapshot;
         delete calibration;
     } else {
         qFatal("Core uninitialized!");

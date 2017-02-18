@@ -5,6 +5,16 @@ void TactTable::setTactTable(const std::vector<Tact *> &tactTable)
     _tactTable = tactTable;
 }
 
+uint16_t TactTable::getId() const
+{
+    return _id;
+}
+
+void TactTable::setId(const uint16_t &id)
+{
+    _id = id;
+}
+
 TactTable::TactTable()
 {
 

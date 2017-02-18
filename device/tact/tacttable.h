@@ -6,6 +6,7 @@
 
 class TactTable
 {
+    uint16_t _id;
     std::vector<Tact *> _tactTable;
 public:
     TactTable();
@@ -19,6 +20,8 @@ public:
     uint8_t getMaxTacts() const;
     std::vector<Tact *> getTactTable() const;
     void setTactTable(const std::vector<Tact *> &tactTable);
+    uint16_t getId() const;
+    void setId(const uint16_t &id);
 };
 
 #endif // TACTTABLE_H

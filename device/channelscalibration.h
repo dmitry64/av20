@@ -9,6 +9,7 @@
 
 class ChannelsCalibration
 {
+    uint16_t _tactId;
     std::vector<Channel *> _channels;
 
 public:
@@ -20,6 +21,9 @@ public:
     // get/set
     Channel *getChannel(int index);
     uint8_t getChannelsCount();
+    uint16_t getTactId() const;
+    void setTactId(const uint16_t &tactId);
+    void setChannels(const std::vector<Channel *> &channels);
 };
 
 #endif // CHANNELSCALIBRATION_H

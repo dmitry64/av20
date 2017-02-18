@@ -1,4 +1,5 @@
 #include "modemanager.h"
+#include "tactid.h"
 
 std::vector<DeviceMode *> ModeManager::modes() const
 {
@@ -13,6 +14,7 @@ DeviceMode *ModeManager::generateSearchMode()
     std::vector<TactTable *> tactTables;
 
     TactTable * table1 = new TactTable();
+    table1->setId(TACT_ID_SEARCH_SCHEME_1);
 
     std::vector<Tact*> scheme1;
     for(int i=0;i<8; i++) {
@@ -35,6 +37,7 @@ DeviceMode *ModeManager::generateSearchMode()
     table1->setTactTable(scheme1);
 
     TactTable * table2 = new TactTable();
+    table2->setId(TACT_ID_SEARCH_SCHEME_2);
 
     std::vector<Tact*> scheme2;
     for(int i=0;i<4; i++) {
@@ -72,6 +75,7 @@ DeviceMode *ModeManager::generateHandMode()
     std::vector<TactTable *> tactTables;
 
     TactTable * table1 = new TactTable();
+    table1->setId(TACT_ID_HAND_SCHEME_1);
 
     std::vector<Tact*> scheme1;
     for(int i=0;i<3; i++) {
@@ -94,6 +98,7 @@ DeviceMode *ModeManager::generateHandMode()
     table1->setTactTable(scheme1);
 
     TactTable * table2 = new TactTable();
+    table2->setId(TACT_ID_HAND_SCHEME_2);
 
     std::vector<Tact*> scheme2;
     for(int i=0;i<2; i++) {

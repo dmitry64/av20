@@ -13,6 +13,7 @@
 #include "device/device.h"
 #include "device/tact/tacttable.h"
 #include "device/modemanager.h"
+#include "device/calibrationmanager.h"
 #include <QMutex>
 
 class Core : public QThread
@@ -34,6 +35,7 @@ private:
    // DeviceState * _state;
 
     ModeManager * _modeManager;
+    CalibrationManager * _calibrationManager;
 
     ChannelsCalibration * _currentCalibration;
     ChannelsCalibration * _calibrationsSnapshot;
@@ -55,7 +57,7 @@ private:
     AScan * _line2CurrentAscan;
 
 public:
-    Core(ModeManager * modeManager);
+    Core(ModeManager * modeManager, CalibrationManager * calibrationManager);
     ~Core();
     void run();
     void stopCore();

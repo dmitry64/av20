@@ -60,15 +60,6 @@ void BScanWidget::paintEvent(QPaintEvent *event)
     painter.drawRect(left,0,w - 32 - 1,bottom-1);
     painter.drawRect(0,0,w - 32,bottom-1);
 
-    /*
-    double scaleStep = (h - 4)/10.0;
-    for(int i=0; i<10; i++) {
-        painter.drawLine(QPoint(16,i*scaleStep),QPoint(32,i*scaleStep));
-        //painter.drawText(QPoint(1,i*scaleStep + 16),QString::number(i*20));
-    }
-    */
-
-
     double step = (w - 64) / static_cast<double>(_width);
 
     for(uint8_t n=0; n<_channels.size(); n++) {
@@ -106,17 +97,6 @@ void BScanWidget::paintEvent(QPaintEvent *event)
             painter.drawLine(offset,y1,offset,y2);
         }
     }
-
-
-    /*for(int i=_scans.size() -1; i>=0; i--) {
-        QLinearGradient grad(0,0,0,h - 4);
-        for(int j=0; j<ASCAN_SAMPLES_SIZE; j+=5) {
-            int sam = _scans[i]._samples[j];
-            grad.setColorAt(static_cast<double>(j) / 800.0, QColor(sam,10,255 - sam));
-        }
-        QPoint offset(i,0);
-        painter.fillRect(QRect(QPoint(w - 32, 0) -offset,QPoint(w - 32, center.y())-offset),grad);
-    }*/
 }
 
 void BScanWidget::setChannelsInfo(std::vector<Channel> channels)
@@ -147,25 +127,6 @@ void BScanWidget::onBScan(BScanDrawData *scan)
     if((_samples[chan]).second == _width) {
         (_samples[chan]).second = 0;
     }
-
-    /*QLinearGradient grad(0,0,0,1);
-    grad.setCoordinateMode(QGradient::ObjectBoundingMode);
-
-    for(uint16_t j=0; j<scan->_samples.size(); j+=8) {
-        uint8_t sam = scan->_samples[j];
-        if(chan%2) {
-            grad.setColorAt(j / 800.0, QColor(sam,10,10, sam));
-        } else {
-            grad.setColorAt(j / 800.0, QColor(10,10,sam, sam));
-        }
-    }
-
-    (_gradients[chan].first)[oldStart] = grad;
-    (_gradients[chan]).second++;
-
-    if((_gradients[chan]).second == _width) {
-        (_gradients[chan]).second = 0;
-    }*/
 
     if(isVisible()) {
         update();

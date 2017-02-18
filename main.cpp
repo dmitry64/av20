@@ -5,6 +5,7 @@
 #include <core.h>
 #include "device/definitions.h"
 #include "system/system.h"
+#include "device/calibrationmanager.h"
 
 int main(int argc, char *argv[])
 {
@@ -20,10 +21,13 @@ int main(int argc, char *argv[])
     System * system = System::getInstance();
     system->init();
 
+    CalibrationManager * calibrationManager = new CalibrationManager();
+    calibrationManager->init();
+
     ModeManager * modeManager = new ModeManager();
     modeManager->init();
 
-    Core * core = new Core(modeManager);
+    Core * core = new Core(modeManager, calibrationManager);
     MainWindow * mainWindow = new MainWindow();
 
     QObject::connect(core,SIGNAL(channelChanged(Channel)),mainWindow, SLOT(onChannelChanged(Channel)));

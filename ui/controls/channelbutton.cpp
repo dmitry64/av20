@@ -14,7 +14,6 @@ ChannelButton::ChannelButton(QString name, uint8_t channel, QWidget *parent) :
     _colorGreen = 255;
     _colorBlue = 255;
     setActive(false);
-    ui->channelButton->update();
     ui->channelMarkerButton->hide();
 }
 

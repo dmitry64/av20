@@ -79,7 +79,8 @@ SOURCES += main.cpp\
     device/devicemode.cpp \
     device/modemanager.cpp \
     ui/controls/modeselectionbutton.cpp \
-    ui/controls/schemeselectionbutton.cpp
+    ui/controls/schemeselectionbutton.cpp \
+    device/calibrationmanager.cpp
 
 HEADERS  += \
     core.h \
@@ -132,7 +133,9 @@ HEADERS  += \
     device/devicemode.h \
     device/modemanager.h \
     ui/controls/modeselectionbutton.h \
-    ui/controls/schemeselectionbutton.h
+    ui/controls/schemeselectionbutton.h \
+    device/calibrationmanager.h \
+    device/tactid.h
 
 FORMS    += \
     ui/ascanwidget.ui \

@@ -11,7 +11,7 @@ ChannelsView::ChannelsView(QWidget *parent) :
     _core = 0;
     ui->channelsWidget->setColumnCount(4);
     ui->channelsWidget->setHorizontalHeaderItem(0,new QTableWidgetItem("Name"));
-    ui->channelsWidget->setHorizontalHeaderItem(1,new QTableWidgetItem("Sensitivity (dB)"));
+    ui->channelsWidget->setHorizontalHeaderItem(1,new QTableWidgetItem("Angle"));
     ui->channelsWidget->setHorizontalHeaderItem(2,new QTableWidgetItem("Prism time (us)"));
     ui->channelsWidget->setHorizontalHeaderItem(3,new QTableWidgetItem("Gates"));
 
@@ -44,19 +44,19 @@ ChannelsView::~ChannelsView()
 
 void ChannelsView::init()
 {
-    if(_core!=0) {
-        ChannelsCalibration * calibration =  _core->getCalibrationsSnapshot();
-        TactTable * tactTable = _core->getTactTableSnapshot();
-        init(calibration,tactTable);
-        delete calibration;
-        delete tactTable;
-    } else {
-        qFatal("ChannelsView core error!");
-    }
+    Q_ASSERT(_core);
+    ChannelsCalibration * calibration =  _core->getCalibrationsSnapshot();
+    TactTable * tactTable = _core->getTactTableSnapshot();
+    init(calibration,tactTable);
+    delete calibration;
+    delete tactTable;
 }
 
 void ChannelsView::init(ChannelsCalibration *calibrationsSnapshot, TactTable * tactTableSnapshot)
 {
+    Q_ASSERT(calibrationsSnapshot);
+    Q_ASSERT(tactTableSnapshot);
+    Q_ASSERT(_core);
     ui->channelsWidget->clearContents();
     ui->tactWidget->clearContents();
 
@@ -66,9 +66,9 @@ void ChannelsView::init(ChannelsCalibration *calibrationsSnapshot, TactTable * t
         QTableWidgetItem * item = new QTableWidgetItem("Chan #" + QString::number(i));
         item->setBackgroundColor(QColor(chan->getColorRed(),chan->getColorGreen(),chan->getColorBlue()));
         ui->channelsWidget->setItem(i,0,item);
-        //item = new QTableWidgetItem(QString::number(rxchan->baseSensLevel()));
-        //item->setTextAlignment( Qt::AlignHCenter | Qt::AlignCenter );
-        //ui->channelsWidget->setItem(i,1,item);
+        item = new QTableWidgetItem(QString(rxchan->getName().c_str()));
+        item->setTextAlignment( Qt::AlignHCenter | Qt::AlignCenter );
+        ui->channelsWidget->setItem(i,1,item);
         item = new QTableWidgetItem(QString::number(rxchan->getPrismTime()));
         item->setTextAlignment( Qt::AlignHCenter | Qt::AlignCenter );
         ui->channelsWidget->setItem(i,2,item);

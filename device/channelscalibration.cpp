@@ -1,8 +1,23 @@
 #include "channelscalibration.h"
-#include "tvg/tvgsinglepoint.h"
+
 
 #include <QDebug>
 
+
+uint16_t ChannelsCalibration::getTactId() const
+{
+    return _tactId;
+}
+
+void ChannelsCalibration::setTactId(const uint16_t &tactId)
+{
+    _tactId = tactId;
+}
+
+void ChannelsCalibration::setChannels(const std::vector<Channel *> &channels)
+{
+    _channels = channels;
+}
 
 ChannelsCalibration::ChannelsCalibration()
 {
@@ -20,7 +35,7 @@ ChannelsCalibration::~ChannelsCalibration()
 
 void ChannelsCalibration::init()
 {
-    for(int i=0;i<8; i++) {
+    /*for(int i=0;i<8; i++) {
         Channel * chTemp = new Channel();
         RxChannel * rx = new RxChannel();
         TxChannel * tx = new TxChannel();
@@ -72,7 +87,7 @@ void ChannelsCalibration::init()
         rx->setName("58");
 
         _channels.push_back(chTemp);
-    }
+    }*/
 }
 
 ChannelsCalibration::ChannelsCalibration(ChannelsCalibration *original)

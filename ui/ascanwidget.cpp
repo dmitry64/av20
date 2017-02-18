@@ -36,8 +36,6 @@ void AScanWidget::paintEvent(QPaintEvent *event)
     const int h = height();
     const int width = w - 64;
     const double step = width/800.0;
-    //QPoint bottomLeft(32,h - 32);
-    //QPoint topRight(w - 32, 0);
     const int right = w - 32;
     const int left = 32;
     const int top = 32;
@@ -45,10 +43,8 @@ void AScanWidget::paintEvent(QPaintEvent *event)
     painter.fillRect(0,0,w,h,Qt::white);
 
     painter.setPen(Qt::black);
-    //painter.fillRect(left,bottom,w,h, Qt::white);//QRect(bottomLeft,topRight),Qt::white);
     painter.drawRect(0,0,w-1,h-1);
 
-    //painter.fillRect(0,bottom,w, h - 24,Qt::white);
     uint8_t scale = 200;
     double scaleStep = width/static_cast<double>(scale);
     QFont font = painter.font();
@@ -118,8 +114,8 @@ void AScanWidget::paintEvent(QPaintEvent *event)
     painter.drawLine(markerPos,bottom,markerPos,h-16);
 
     quint64 time = _fpsTimer.restart();
-    double fps = 1000.0 / time;
-   // painter.drawText(QPoint(w - 140, 30),"fps: " + QString::number(fps,'f', 2));
+    double fps = 1000.0 / static_cast<double>(time);
+    painter.drawText(QPoint(w - 140, 30),"fps: " + QString::number(fps,'f', 2));
 }
 
 void AScanWidget::setChannelsInfo(std::vector<Channel> channels)
@@ -145,7 +141,6 @@ void AScanWidget::onAScan(AScanDrawData *scan)
             }
         }
 
-        //if(!_vsync)
         update();
     }
 }
@@ -168,21 +163,6 @@ uint8_t getTVGSample(uint8_t * ptr, int sampleNum) {
     res |= getBitFromByteArray(ptr,bit+6) << 6;
     return res;
 }
-/*
-void AScanWidget::onTVG(TVG tvg)
-{
-    _tvg.clear();
-    _tvg.reserve(TVG_SAMPLES_SIZE);
-
-    for(int i=0; i<TVG_SAMPLES_SIZE; i++) {
-        uint8_t sample = getTVGSample(tvg._samples,i);
-        _tvg.push_back(QPoint(i,sample /2));
-    }
-
-    update();
-}*/
-
-
 
 void AScanWidget::onChannelChanged(Channel channel)
 {
@@ -192,10 +172,8 @@ void AScanWidget::onChannelChanged(Channel channel)
         {
             _channels[j] = channel;
             setTVGCurve(channel.rx()->getTvgCurve());
-            //onTVG(channel.rx()->generateTVG());
         }
     }
-
     update();
 }
 

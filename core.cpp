@@ -38,14 +38,18 @@ ModeManager *Core::getModeManager() const
     return _modeManager;
 }
 
-Core::Core(ModeManager *modeManager) : _active(true), _changesMutex(new QMutex())
+Core::Core(ModeManager *modeManager, CalibrationManager * calibrationManager) : _active(true), _changesMutex(new QMutex())
 {
     _modeManager = modeManager;
+    _currentMode = 0;
     _device = new Device();
-    _currentCalibration = new ChannelsCalibration();
-    _currentCalibration->init();
-    _currentTactCounter = 0;
     _currentScheme = 0;
+    _calibrationManager = calibrationManager;
+
+    //_currentCalibration = new ChannelsCalibration();
+    //_currentCalibration->init();
+    _currentTactCounter = 0;
+
     _currentTact = 0;
     _line1CurrentAscan = new AScan();
     _line2CurrentAscan = new AScan();
@@ -90,6 +94,7 @@ void Core::init()
     _device->init();
     _currentMode = _modeManager->modes().at(0);
     _currentScheme = 0;
+    _currentCalibration = _calibrationManager->getLastCalibrationByTactID(_currentMode->tactTables().at(_currentScheme)->getId());
     TactTable * current = getTactTable();
     Q_ASSERT(current);
     _currentTact = current->getTactIndexByCounter(_currentTactCounter);
@@ -229,6 +234,7 @@ void Core::modeswitch()
         _currentMode =  _modeManager->modes().at(_requestedMode);
         _currentTact = 0;
         _currentTactCounter = 0;
+        _currentCalibration = _calibrationManager->getLastCalibrationByTactID(_currentMode->tactTables().at(_currentScheme)->getId());
         _device->resetDevice();
         applyCurrentCalibrationToDevice();
         _modeswitchRequested.store(false);
