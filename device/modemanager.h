@@ -15,6 +15,7 @@ public:
     ModeManager();
     void init();
     std::vector<DeviceMode *> modes() const;
+    void addMode(DeviceMode * mode);
 };
 
 #endif // MODEMANAGER_H

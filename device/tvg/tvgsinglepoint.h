@@ -12,6 +12,9 @@ public:
     virtual TVGSinglePoint * clone() const;
     double getSample(double x);
     std::vector< std::pair< double, double > > getReferencePoints();
+    TVGType getType();
+    double getXOffset() const;
+    double getYHeight() const;
 };
 
 #endif // TVGSINGLEPOINT_H

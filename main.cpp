@@ -7,6 +7,8 @@
 #include "system/system.h"
 #include "device/calibrationmanager.h"
 
+
+#ifdef DEFAULT_MODE
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
@@ -52,3 +54,4 @@ int main(int argc, char *argv[])
 
     return a.exec();
 }
+#endif

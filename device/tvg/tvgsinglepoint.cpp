@@ -2,6 +2,16 @@
 #include "math.h"
 #include <QDebug>
 
+double TVGSinglePoint::getXOffset() const
+{
+    return _xOffset;
+}
+
+double TVGSinglePoint::getYHeight() const
+{
+    return _yHeight;
+}
+
 TVGSinglePoint::TVGSinglePoint(double offset, double height) : _xOffset(offset), _yHeight(height)
 {
 
@@ -33,4 +43,9 @@ std::vector<std::pair<double, double> > TVGSinglePoint::getReferencePoints()
     std::vector<std::pair<double, double> > result;
     result.push_back(std::pair<double, double>(_xOffset,_yHeight));
     return result;
+}
+
+TVGType TVGSinglePoint::getType()
+{
+    return TVGType::TVGSimple;
 }

@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui opengl
+QT       += core gui opengl testlib
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -82,7 +82,8 @@ SOURCES += main.cpp\
     ui/controls/schemeselectionbutton.cpp \
     device/calibrationmanager.cpp \
     ui/calibrationswidget.cpp \
-    device/modificators/tvgmodificator.cpp
+    device/modificators/tvgmodificator.cpp \
+    tests/coretest.cpp
 
 HEADERS  += \
     core.h \
@@ -139,7 +140,8 @@ HEADERS  += \
     device/calibrationmanager.h \
     device/tactid.h \
     ui/calibrationswidget.h \
-    device/modificators/tvgmodificator.h
+    device/modificators/tvgmodificator.h \
+    tests/coretest.h
 
 FORMS    += \
     ui/ascanwidget.ui \

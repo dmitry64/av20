@@ -54,6 +54,7 @@ void BScanPage::setChannles(std::vector<std::vector<Channel*> > channelsConfigur
     qDebug() << "BScan page setChannels";
 
     for(int i=0; i<_bScanWidgets.size(); i++) {
+        Q_ASSERT(_bScanWidgets.at(i));
         ui->bscanLayout->removeWidget(_bScanWidgets.at(i));
         delete _bScanWidgets.at(i);
     }

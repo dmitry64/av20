@@ -39,8 +39,8 @@ void AScanPage::init(uint8_t channel, ChannelsCalibration *snapshot)
     ui->controlPanel->setChannel(channel);
     ui->controlPanel->init(snapshot);
     ui->channelSelector->init(snapshot);
-
     channels.clear();
+
 
     update();
 }

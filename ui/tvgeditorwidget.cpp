@@ -10,6 +10,7 @@ TVGEditorWidget::TVGEditorWidget(QWidget *parent) :
     ui->setupUi(this);
     ui->singleOffset->setName("Offset");
     ui->singleOffset->setValue(0);
+    ui->singleOffset->setSuffix("us");
     ui->singleHeight->setName("Height");
     ui->singleHeight->setValue(0);
     ui->singleType->setName("Type");
@@ -48,6 +49,13 @@ void TVGEditorWidget::init(uint8_t channel, ChannelsCalibration *snapshot)
     ui->aScanWidget->setChannelsInfo(channels);
     channels.clear();
     ui->channelSelector->init(snapshot);
+    TVGCurve * curve = snapshot->getChannel(channel)->rx()->getTvgCurve();
+    if(curve->getType() == TVGType::TVGSimple) {
+        TVGSinglePoint * single = static_cast<TVGSinglePoint*> (curve);
+        ui->singleHeight->setValue(qRound(single->getYHeight()*200.0));
+        ui->singleOffset->setValue(qRound(single->getXOffset()*200.0));
+
+    }
     update();
 }
 

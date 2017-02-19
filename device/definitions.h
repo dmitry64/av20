@@ -22,7 +22,9 @@ enum ModeTypes {
     WheelMode
 };
 
-
+enum TVGType {
+    TVGSimple
+};
 
 
 

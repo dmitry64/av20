@@ -34,7 +34,6 @@ BScanWidget::BScanWidget(QWidget *parent) :
     }
 
     _restrictedToChannel = false;
-    //this->setAttribute(Qt::WA_OpaquePaintEvent);
 
     _end = 799;
 }

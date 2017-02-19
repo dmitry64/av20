@@ -6,6 +6,11 @@ std::vector<DeviceMode *> ModeManager::modes() const
     return _modes;
 }
 
+void ModeManager::addMode(DeviceMode *mode)
+{
+    _modes.push_back(mode);
+}
+
 DeviceMode *ModeManager::generateSearchMode()
 {
     DeviceMode * mode = new DeviceMode();

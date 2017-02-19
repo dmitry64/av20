@@ -33,12 +33,10 @@ void Channel::setIndex(const uint8_t &index)
 
 Channel::Channel() : _rx(0), _tx(0), _colorRed(0), _colorGreen(0), _colorBlue(0)
 {
-    qDebug() << "Normal constructor" <<this;
 }
 
 Channel::~Channel()
 {
-    qDebug() << "Channel removed" <<this;
     Q_ASSERT(_rx);
     Q_ASSERT(_tx);
     delete _rx;
@@ -48,7 +46,6 @@ Channel::~Channel()
 Channel::Channel(Channel *channel)
 {
     Q_ASSERT(channel);
-    qDebug() << "Channel copy from" <<channel <<"this"<<this;
     _colorRed = channel->getColorRed();
     _colorGreen = channel->getColorGreen();
     _colorBlue = channel->getColorBlue();

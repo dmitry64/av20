@@ -173,6 +173,9 @@ void AScanWidget::setChannelsInfo(std::vector<Channel *> channels)
         result.push_back(new Channel(channels.at(i)));
     }
     _channels = result;
+    if(channels.size() > 0) {
+        setTVGCurve(channels[0]->rx()->getTvgCurve());
+    }
 }
 
 void AScanWidget::onAScan(AScanDrawData *scan)
@@ -188,7 +191,6 @@ void AScanWidget::onAScan(AScanDrawData *scan)
                 _markerValue = scan->_markerValue;
             }
         }
-
         update();
     }
 }
@@ -255,7 +257,7 @@ void AScanWidget::onChannelChanged(Channel * channel)
         {
             delete _channels[j];
             _channels[j] = new Channel(channel);
-            //setTVGCurve(channel->rx()->getTvgCurve());
+            setTVGCurve(channel->rx()->getTvgCurve());
         }
     }
     update();
