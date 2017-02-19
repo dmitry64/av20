@@ -19,6 +19,8 @@ class RxChannel
 
 public:
     RxChannel();
+    RxChannel(RxChannel * original);
+    ~RxChannel();
    // int baseSensLevel() const;
     //void setBaseSensLevel(int baseSensLevel);
 

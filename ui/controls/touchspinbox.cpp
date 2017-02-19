@@ -1,6 +1,11 @@
 #include "touchspinbox.h"
 #include "ui_touchspinbox.h"
 
+double TouchSpinBox::value() const
+{
+    return _value;
+}
+
 void TouchSpinBox::inc()
 {
     if(_value < _max) {

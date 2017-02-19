@@ -4,3 +4,8 @@ TVGCurve::TVGCurve()
 {
 
 }
+
+TVGCurve::~TVGCurve()
+{
+
+}

@@ -4,7 +4,7 @@
 #include <QLinearGradient>
 #include <QDebug>
 
-std::vector<Channel> BScanWidget::channels() const
+std::vector<Channel*> BScanWidget::channels() const
 {
     return _channels;
 }
@@ -12,7 +12,7 @@ std::vector<Channel> BScanWidget::channels() const
 bool BScanWidget::channelSelected(uint8_t chan)
 {
     for(int i=0; i<_channels.size(); i++) {
-        if(_channels[i].index() == chan) {
+        if(_channels[i]->index() == chan) {
             return true;
         }
     }
@@ -24,7 +24,7 @@ BScanWidget::BScanWidget(QWidget *parent) :
     ui(new Ui::BScanWidget)
 {
     ui->setupUi(this);
-    _width = 1000;
+    _width = 800;
 
     for(int i=0; i<MAX_CHANNELS_COUNT; i++) {
         std::pair< std::vector< std::vector<BScanDrawSample> > , int> pair;
@@ -36,11 +36,15 @@ BScanWidget::BScanWidget(QWidget *parent) :
     _restrictedToChannel = false;
     //this->setAttribute(Qt::WA_OpaquePaintEvent);
 
-    _end = 999;
+    _end = 799;
 }
 
 BScanWidget::~BScanWidget()
 {
+    for(size_t i=0; i<_channels.size(); i++) {
+        delete _channels[i];
+    }
+    _channels.clear();
     delete ui;
 }
 
@@ -61,9 +65,10 @@ void BScanWidget::paintEvent(QPaintEvent *event)
     painter.drawRect(0,0,w - 32,bottom-1);
 
     double step = (w - 64) / static_cast<double>(_width);
+    double hstep = ( h / 200.0);
 
     for(uint8_t n=0; n<_channels.size(); n++) {
-        uint8_t chan = _channels[n].index();
+        uint8_t chan = _channels[n]->index();
         uint16_t elements = std::max(static_cast<int>(_width - _samples[chan].first.size()),0);
         uint16_t k = (_samples[chan]).second;
 
@@ -76,21 +81,19 @@ void BScanWidget::paintEvent(QPaintEvent *event)
                 k++;
             }
 
-            //painter.fillRect(QRectF(left + step*i,1.0,step,bottom-2.0), Qt::white);
-
-            for(int y=0; y<sam.size(); y++) {
-                int y1 = (sam[y]._begin) * ( h / 200.0);
-                int y2 = (sam[y]._end) * ( h / 200.0);
+            for(uint16_t y=0; y<sam.size(); y++) {
+                uint16_t y1 = (sam[y]._begin) * hstep;
+                uint16_t y2 = (sam[y]._end) * hstep;
                 uint8_t level = sam[y]._level;
-                painter.fillRect(QRectF(left + step*i,1.0 + y1,step, y2 - y1), QColor( level ,255 - level, 0 ));
+                painter.fillRect(QRectF(left + step*i,1 + y1,step, y2 - y1), QColor( level ,255 - level, 0 ));
             }
         }
 
-        std::vector<Gate> gates = _channels[n].rx()->gates();
+        std::vector<Gate> gates = _channels.at(n)->rx()->gates();
 
-        for(uint8_t i=0; i<gates.size(); i++) {
-            int y1 = (gates[i]._start) * ( h / 200.0);
-            int y2 = (gates[i]._finish) * ( h / 200.0);
+        for(size_t i=0; i<gates.size(); i++) {
+            uint16_t y1 = (gates[i]._start) * hstep;
+            uint16_t y2 = (gates[i]._finish) * hstep;
             uint16_t level = gates[i]._level;
             uint16_t offset = w - 32 + ((level/255.0) *32) + 1;
             painter.setPen(QPen(QColor( level ,255 - level, 0 ),2));
@@ -99,14 +102,30 @@ void BScanWidget::paintEvent(QPaintEvent *event)
     }
 }
 
-void BScanWidget::setChannelsInfo(std::vector<Channel> channels)
+void BScanWidget::setChannelsInfo(std::vector<Channel*> channels)
 {
-    _channels = channels;
+    for(size_t i=0; i<_channels.size(); i++) {
+        delete _channels.at(i);
+    }
+    _channels.clear();
+    std::vector<Channel*> result;
+    for(size_t i=0; i<channels.size(); i++) {
+        result.push_back(new Channel(channels.at(i)));
+    }
+    _channels = result;
 }
 
 void BScanWidget::setRestrictedToChannel(bool flag)
 {
     _restrictedToChannel = flag;
+}
+
+void BScanWidget::reset()
+{
+    for(size_t i=0; i<_channels.size(); i++) {
+        delete _channels.at(i);
+    }
+    _channels.clear();
 }
 
 void BScanWidget::onBScan(BScanDrawData *scan)
@@ -133,13 +152,14 @@ void BScanWidget::onBScan(BScanDrawData *scan)
     }
 }
 
-void BScanWidget::onChannelChanged(Channel channel)
+void BScanWidget::onChannelChanged(Channel * channel)
 {
     for(uint8_t j=0; j<_channels.size(); j++) {
-        uint8_t chan = channel.index();
-        if(chan == _channels[j].index())
+        uint8_t chan = channel->index();
+        if(chan == _channels[j]->index())
         {
-            _channels[j] = channel;
+            delete _channels[j];
+            _channels[j] = new Channel(channel);
         }
     }
 }

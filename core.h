@@ -66,7 +66,7 @@ public:
 
     TactTable *getTactTableSnapshot();
 
-    void notifyChannel(Channel channel);
+    void notifyChannel(Channel * channel);
     void applyCurrentCalibrationToDevice();
 
 private:
@@ -94,6 +94,7 @@ public:
     void modifyGate(uint8_t channel, Gate gate);
     void removeGate(uint8_t channel, uint8_t id);
     void setPrismTime(uint8_t channel, uint8_t value);
+    void setTVG(uint8_t channel, TVGCurve * ptr);
     void setDeviceMode(uint8_t modeIndex, uint8_t schemeIndex);
 
     Device *getDevice() const;
@@ -105,7 +106,7 @@ signals:
     //void drawBscan(QSharedPointer<BScanDrawData> scan);
     void drawDisplayPackage(QSharedPointer<DisplayPackage> package);
     //void drawTVG(TVG tvg);
-    void channelChanged(Channel channel);
+    void channelChanged(Channel * channel);
 
     void deviceErrorEnable();
     void deviceErrorDisable();

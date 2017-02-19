@@ -6,6 +6,7 @@
 #include "core.h"
 #include "ui/helpwidget.h"
 #include "ui/modeselectionwidget.h"
+#include "ui/calibrationswidget.h"
 #include "ui/registrationwidget.h"
 #include "ui/memorywidget.h"
 #include "ui/optionswidget.h"
@@ -23,6 +24,7 @@ class MainWindow : public QMainWindow
 
     HelpWidget * _helpWidget;
     ModeSelectionWidget * _modeSelectionWidget;
+    CalibrationsWidget * _calibrationsWidget;
     RegistrationWidget * _registrationWidget;
     MemoryWidget * _memoryWidget;
     OptionsWidget * _optionsWidget;
@@ -36,10 +38,11 @@ public:
     ~MainWindow();
 
     void init();
+    void reset();
     void setCore(Core * core);
     void showEvent( QShowEvent* event );
 public slots:
-    void onChannelChanged(Channel channel);
+    void onChannelChanged(Channel * channel);
     void onDisplayPackage(QSharedPointer<DisplayPackage> dp);
     void onModeChanged(uint8_t modeIndex, uint8_t tableIndex);
 
@@ -48,6 +51,8 @@ public slots:
     void onHelpMenuClosed();
     void onModeMenuOpened();
     void onModeMenuClosed();
+    void onCalibrationsMenuOpened();
+    void onCalibrationsMenuClosed();
     void onRegistrationMenuOpened();
     void onRegistrationMenuClosed();
     void onMemoryMenuOpened();
@@ -74,7 +79,7 @@ public slots:
 
 signals:
     void drawDisplayPackage(QSharedPointer<DisplayPackage> dp);
-    void channelChanged(Channel channel);
+    void channelChanged(Channel * channel);
     void resetMenu();
 private:
     Ui::MainWindow *ui;

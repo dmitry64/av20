@@ -15,6 +15,7 @@ class MenuPanel : public QWidget
         DefaultState,
         HelpMenuState,
         ModeMenuState,
+        CalibrationsMenuState,
         RegistrationMenuState,
         MemoryMenuState,
         OptionsMenuState,
@@ -42,11 +43,15 @@ private slots:
     void on_optionsButton_released();
     void on_systemButton_released();
 
+    void on_calibrationButton_released();
+
 signals:
     void helpMenuOpened();
     void helpMenuClosed();
     void modeMenuOpened();
     void modeMenuClosed();
+    void calibrationsMenuOpened();
+    void calibrationsMenuClosed();
     void registrationMenuOpened();
     void registrationMenuClosed();
     void memoryMenuOpened();

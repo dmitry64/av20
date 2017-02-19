@@ -23,6 +23,9 @@ MainWindow::MainWindow(QWidget *parent) :
     _modeSelectionWidget = new ModeSelectionWidget(ui->centralTabWidget);
     _modeSelectionWidget->hide();
 
+    _calibrationsWidget = new CalibrationsWidget(ui->centralTabWidget);
+    _calibrationsWidget->hide();
+
     _registrationWidget = new RegistrationWidget(ui->centralTabWidget);
     _registrationWidget->hide();
 
@@ -39,9 +42,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(this,SIGNAL(drawDisplayPackage(QSharedPointer<DisplayPackage>)), ui->bScanPage,SLOT(onDisplayPackage(QSharedPointer<DisplayPackage>)));
     connect(this,SIGNAL(drawDisplayPackage(QSharedPointer<DisplayPackage>)), ui->tvgEditorWidget,SLOT(onDisplayPackage(QSharedPointer<DisplayPackage>)));
 
-    connect(this,SIGNAL(channelChanged(Channel)),ui->aScanPage,SLOT(onChannelChanged(Channel)));
-    connect(this,SIGNAL(channelChanged(Channel)),ui->bScanPage,SLOT(onChannelChanged(Channel)));
-    connect(this,SIGNAL(channelChanged(Channel)),ui->tvgEditorWidget,SLOT(onChannelChanged(Channel)));
+    connect(this,SIGNAL(channelChanged(Channel*)),ui->aScanPage,SLOT(onChannelChanged(Channel*)));
+    connect(this,SIGNAL(channelChanged(Channel*)),ui->bScanPage,SLOT(onChannelChanged(Channel*)));
+    connect(this,SIGNAL(channelChanged(Channel*)),ui->tvgEditorWidget,SLOT(onChannelChanged(Channel*)));
 
     connect(this,SIGNAL(resetMenu()),ui->menuWidget,SLOT(resetMenu()));
 
@@ -49,6 +52,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->menuWidget,SIGNAL(helpMenuClosed()),this,SLOT(onHelpMenuClosed()));
     connect(ui->menuWidget,SIGNAL(modeMenuOpened()),this,SLOT(onModeMenuOpened()));
     connect(ui->menuWidget,SIGNAL(modeMenuClosed()),this,SLOT(onModeMenuClosed()));
+    connect(ui->menuWidget,SIGNAL(calibrationsMenuOpened()),this,SLOT(onCalibrationsMenuOpened()));
+    connect(ui->menuWidget,SIGNAL(calibrationsMenuClosed()),this,SLOT(onCalibrationsMenuClosed()));
     connect(ui->menuWidget,SIGNAL(registrationMenuOpened()),this,SLOT(onRegistrationMenuOpened()));
     connect(ui->menuWidget,SIGNAL(registrationMenuClosed()),this,SLOT(onRegistrationMenuClosed()));
     connect(ui->menuWidget,SIGNAL(memoryMenuOpened()),this,SLOT(onMemoryMenuOpened()));
@@ -89,7 +94,7 @@ void MainWindow::showEvent(QShowEvent *event)
 
 }
 
-void MainWindow::onChannelChanged(Channel channel)
+void MainWindow::onChannelChanged(Channel *channel)
 {
     emit channelChanged(channel);
 }
@@ -101,6 +106,7 @@ void MainWindow::onDisplayPackage(QSharedPointer<DisplayPackage> dp)
 
 void MainWindow::onModeChanged(uint8_t modeIndex, uint8_t tableIndex)
 {
+    reset();
     _core->setDeviceMode(modeIndex,tableIndex);
     init();
 }
@@ -129,6 +135,19 @@ void MainWindow::onModeMenuClosed()
 {
     _backgroundWidget->hide();
     _modeSelectionWidget->hide();
+}
+
+void MainWindow::onCalibrationsMenuOpened()
+{
+    _calibrationsWidget->setGeometry(ui->centralTabWidget->width()/2 - 800/2,ui->centralTabWidget->height()/2 - 400/2, 800, 400);
+    _backgroundWidget->show();
+    _calibrationsWidget->show();
+}
+
+void MainWindow::onCalibrationsMenuClosed()
+{
+    _backgroundWidget->hide();
+    _calibrationsWidget->hide();
 }
 
 void MainWindow::onRegistrationMenuOpened()
@@ -233,26 +252,32 @@ void MainWindow::onPause()
 void MainWindow::init()
 {
     ui->statusWidget->init();
-    if(_core!=0) {
-        ChannelsCalibration * calibration = _core->getCalibrationsSnapshot();
-        TactTable * tactTableSnapshot = _core->getTactTableSnapshot();
+    Q_ASSERT(_core);
+    ChannelsCalibration * calibration = _core->getCalibrationsSnapshot();
+    TactTable * tactTableSnapshot = _core->getTactTableSnapshot();
 
-        ui->aScanPage->init(0,calibration);
-        ui->tvgEditorWidget->init(0,calibration);
+    ui->aScanPage->init(0,calibration);
+    ui->tvgEditorWidget->init(0,calibration);
 
-        std::vector< std::vector<Channel> > channelsTable;
-        for(int i=0; i<calibration->getChannelsCount(); i++) {
-            std::vector<Channel> channelsForTape;
-            channelsForTape.push_back(*(calibration->getChannel(i)));
-            channelsTable.push_back(channelsForTape);
-        }
-        ui->bScanPage->setChannles(channelsTable);
-        ui->bScanPage->init(calibration);
-
-        ui->channelsWidget->init(calibration,tactTableSnapshot);
-        delete tactTableSnapshot;
-        delete calibration;
-    } else {
-        qFatal("Core uninitialized!");
+    std::vector< std::vector<Channel*> > channelsTable;
+    for(int i=0; i<calibration->getChannelsCount(); i++) {
+        std::vector<Channel*> channelsForTape;
+        channelsForTape.push_back(calibration->getChannel(i));
+        channelsTable.push_back(channelsForTape);
     }
+    ui->bScanPage->setChannles(channelsTable);
+    ui->bScanPage->init(calibration);
+
+    ui->channelsWidget->init(calibration,tactTableSnapshot);
+
+    delete tactTableSnapshot;
+    delete calibration;
+}
+
+void MainWindow::reset()
+{
+    Q_ASSERT(_core);
+    ui->aScanPage->reset();
+    ui->tvgEditorWidget->reset();
+    ui->bScanPage->reset();
 }

@@ -1,4 +1,5 @@
 #include "txchannel.h"
+#include <QDebug>
 
 PulserFreq TxChannel::freq() const
 {
@@ -31,6 +32,19 @@ void TxChannel::setDoubleMode(bool doubleMode)
 }
 
 TxChannel::TxChannel() : _freq(PulserFreq::Freq_1_0_MHz), _prog(PulserProg::Prog_1), _doubleMode(false)
+{
+
+}
+
+TxChannel::TxChannel(TxChannel *original)
+{
+    Q_ASSERT(original);
+    _doubleMode = original->doubleMode();
+    _freq = original->freq();
+    _prog = original->prog();
+}
+
+TxChannel::~TxChannel()
 {
 
 }

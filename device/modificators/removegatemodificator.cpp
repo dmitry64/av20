@@ -16,5 +16,5 @@ void RemoveGateModificator::apply(Core *core)
         }
     }
     core->getCalibration()->getChannel(_channel)->rx()->setGates(result);
-    core->notifyChannel(*(core->getCalibration()->getChannel(_channel)));
+    core->notifyChannel((core->getCalibration()->getChannel(_channel)));
 }

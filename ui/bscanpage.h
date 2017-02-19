@@ -23,11 +23,11 @@ public:
 
     void setCore(Core * core);
     void init(ChannelsCalibration * snapshot);
-
-    void setChannles(std::vector<std::vector<Channel> > channelsConfiguration);
+    void reset();
+    void setChannles(std::vector<std::vector<Channel *> > channelsConfiguration);
 public slots:
     void onDisplayPackage(QSharedPointer<DisplayPackage> dp);
-    void onChannelChanged(Channel channel);
+    void onChannelChanged(Channel *channel);
 signals:
     void drawBScan(QSharedPointer<BScanDrawData> scan);
 private:

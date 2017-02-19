@@ -34,6 +34,8 @@ public:
     void setMin(double min);
     void setStep(double step);
     void setSuffix(QString suf);
+    double value() const;
+
 private:
     Ui::TouchSpinBox *ui;
 signals:

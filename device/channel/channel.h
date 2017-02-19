@@ -17,6 +17,9 @@ class Channel
     uint8_t _index;
 public:
     Channel();
+    Channel(Channel * channel);
+    ~Channel();
+
 
     RxChannel *rx() const;
     void setRx(RxChannel *rx);

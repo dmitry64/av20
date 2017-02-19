@@ -21,7 +21,7 @@ void ChannelsCalibration::setChannels(const std::vector<Channel *> &channels)
 
 ChannelsCalibration::ChannelsCalibration()
 {
-
+    _tactId = 0;
 }
 
 ChannelsCalibration::~ChannelsCalibration()
@@ -40,9 +40,10 @@ void ChannelsCalibration::init()
 
 ChannelsCalibration::ChannelsCalibration(ChannelsCalibration *original)
 {
+    Q_ASSERT(original);
+    _tactId = original->getTactId();
     for(int i=0;i<original->getChannelsCount();i++) {
-        Channel * orig = original->getChannel(i);
-        Channel * ch = new Channel(*orig);
+        Channel * ch = new Channel(original->getChannel(i));
         _channels.push_back(ch);
     }
 }
@@ -54,6 +55,7 @@ ChannelsCalibration * ChannelsCalibration::getSnapshot()
 
 Channel *ChannelsCalibration::getChannel(int index)
 {
+    Q_ASSERT(_channels.size() > 0);
     return _channels.at(index);
 }
 

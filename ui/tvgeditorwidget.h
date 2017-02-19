@@ -15,16 +15,25 @@ class TVGEditorWidget : public QWidget
     Q_OBJECT
 
     Core * _core;
+    uint8_t _currentChannel;
 public:
     explicit TVGEditorWidget(QWidget *parent = 0);
     ~TVGEditorWidget();
+    void reset();
     void init(uint8_t channel);
     void init(uint8_t channel, ChannelsCalibration * snapshot);
     void setCore(Core * core);
 public slots:
     void onDisplayPackage(QSharedPointer<DisplayPackage> package);
-    void onChannelChanged(Channel channel);
+    void onChannelChanged(Channel *channel);
     void setChannel(uint8_t channel);
+
+    void onSingleOffsetChanged(double value);
+    void onSingleHeightChanged(double value);
+
+private slots:
+    void on_applyButton_released();
+
 private:
     Ui::TVGEditorWidget *ui;
 };

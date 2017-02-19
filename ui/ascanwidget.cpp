@@ -5,7 +5,10 @@
 
 void AScanWidget::setTVGCurve(TVGCurve *curve)
 {
-    _tvgCurve = curve;
+    if(_tvgCurve !=0) {
+        delete _tvgCurve;
+    }
+    _tvgCurve = curve->clone();
 }
 
 AScanWidget::AScanWidget(QWidget *parent) :
@@ -17,15 +20,22 @@ AScanWidget::AScanWidget(QWidget *parent) :
     _polygon.resize(ASCAN_SAMPLES_SIZE+2);
     _points.resize(ASCAN_SAMPLES_SIZE);
     _tvgCurvePen = QPen(QColor(250,10,10), 2);
+    _tempCurvePen = QPen(QColor(10,10,250), 2);
     _ascanBrush = QBrush(QColor(80,80,200));
     _ascanPen = QPen(QColor(10,10,70), 1);
     _markerPos = 0;
     _markerValue = 0;
+    _tvgCurve = 0;
+    _tempCurve = 0;
     this->setAttribute(Qt::WA_OpaquePaintEvent);
 }
 
 AScanWidget::~AScanWidget()
 {
+    for(size_t i=0; i<_channels.size(); i++) {
+        delete _channels[i];
+    }
+    _channels.clear();
     delete ui;
 }
 
@@ -35,7 +45,9 @@ void AScanWidget::paintEvent(QPaintEvent *event)
     const int w = width();
     const int h = height();
     const int width = w - 64;
-    const double step = width/800.0;
+    const int height = h - 64;
+    const double dHeight = height;
+    const double step = width/static_cast<double>(_points.size());
     const int right = w - 32;
     const int left = 32;
     const int top = 32;
@@ -64,36 +76,67 @@ void AScanWidget::paintEvent(QPaintEvent *event)
     }
 
     painter.drawLine(left,bottom,left,top);
-
+/*
     // start
     _polygon[0] = QPoint(left,bottom);
     QPoint p2(0,bottom);
     for(uint16_t i=0; i<_points.size(); i++) {
-        p2 = QPoint((_points[i].x())*step + left, bottom - static_cast<double>(h - 64)*(_points[i].y() / 255.0));
+        p2 = QPoint(qRound((_points[i].x())*step) + left, bottom - qRound(height*(_points[i].y() / 255.0)));
         _polygon[i+1] = (p2);
     }
     _polygon[ASCAN_SAMPLES_SIZE] = QPoint(right, p2.y());
     _polygon[ASCAN_SAMPLES_SIZE+1] = QPoint(right,bottom);
     // end
+*/
+    _polygon[0] = QPointF(left,bottom);
+    QPointF p2(0,bottom);
+    for(uint16_t i=0; i<_points.size(); i++) {
+        p2 = QPointF(left + _points[i].x()*step, bottom - dHeight*(_points[i].y() / 256.0));
+        _polygon[i+1] = (p2);
+    }
+    _polygon[ASCAN_SAMPLES_SIZE] = QPointF(right, p2.y());
+    _polygon[ASCAN_SAMPLES_SIZE+1] = QPointF(right,bottom);
 
     painter.setPen(_ascanPen);
     painter.setBrush(_ascanBrush);
-    painter.drawPolygon(_polygon.data(),_polygon.size());
-
-    QPoint tvgStart(left, (h - 32) - _tvgCurve->getSample(0)*(h-64)/2.0);
+    //painter.drawPolygon(_polygon.data(),_polygon.size(),Qt::FillRule::WindingFill);
+    //painter.drawPoints(_polygon.data(),_polygon.size());
+    painter.drawPolygon(_polygon.data(),_polygon.size(),Qt::FillRule::OddEvenFill);
     double tvgStep = width/200.0;
-    painter.setPen(_tvgCurvePen);
-    for(uint8_t i=0; i<200; i++) {
-        int x = i*tvgStep + left;
-        int y = (h - 32) - _tvgCurve->getSample(static_cast<double>(i) / 200.0) * (h-64)/2.0 ;
-        QPoint tvgNext = QPoint(x,y);
-        painter.drawLine(tvgStart,tvgNext);
-        tvgStart = tvgNext;
+    if(_tvgCurve!=0) {
+        QPoint tvgStart(left, (h - 32) - _tvgCurve->getSample(0)*(h-64)/2.0);
+
+        painter.setPen(_tvgCurvePen);
+        for(uint8_t i=0; i<200; i++) {
+            int x = i*tvgStep + left;
+            int y = (h - 32) - _tvgCurve->getSample(static_cast<double>(i) / 200.0) * (h-64)/2.0 ;
+            QPoint tvgNext = QPoint(x,y);
+            painter.drawLine(tvgStart,tvgNext);
+            tvgStart = tvgNext;
+        }
     }
 
+    if(_tempCurve != 0) {
+        QPoint tvgStart(left, (h - 32) - _tempCurve->getSample(0)*(h-64)/2.0);
+        painter.setPen(_tempCurvePen);
+        for(uint8_t i=0; i<200; i++) {
+            int x = i*tvgStep + left;
+            int y = (h - 32) - _tempCurve->getSample(static_cast<double>(i) / 200.0) * (h-64)/2.0 ;
+            QPoint tvgNext = QPoint(x,y);
+            painter.drawLine(tvgStart,tvgNext);
+            tvgStart = tvgNext;
+        }
+        auto referencePoints = _tempCurve->getReferencePoints();
+        for(size_t i=0; i<referencePoints.size(); i++) {
+            QPoint p(left + referencePoints[i].first * (w - 64) ,(h - 32) - referencePoints[i].second * (h-64)/2.0);
+            painter.fillRect(QRect(p-QPoint(3,3),p+QPoint(3,3)),Qt::red);
+        }
+    }
+
+
     for(uint8_t i=0; i<_channels.size(); i++) {
-        for(uint8_t j=0; j<_channels[i].rx()->gates().size(); j++) {
-            Gate gate = _channels[i].rx()->gates()[j];
+        for(uint8_t j=0; j<_channels.at(i)->rx()->gates().size(); j++) {
+            Gate gate = _channels.at(i)->rx()->gates()[j];
             int level = bottom - (gate._level * ((h-64)/255.0));
             painter.setPen(QPen(QColor( gate._level ,255 - gate._level, 0 ), 3));
             painter.drawLine(left + gate._start * scaleStep,level,left + gate._finish* scaleStep, level);
@@ -118,13 +161,18 @@ void AScanWidget::paintEvent(QPaintEvent *event)
     painter.drawText(QPoint(w - 140, 30),"fps: " + QString::number(fps,'f', 2));
 }
 
-void AScanWidget::setChannelsInfo(std::vector<Channel> channels)
+void AScanWidget::setChannelsInfo(std::vector<Channel *> channels)
 {
-    _channels = channels;
-    if(!channels.empty()) {
-        setTVGCurve(channels[0].rx()->getTvgCurve());
+    _tvgCurve = 0;
+    for(size_t i=0; i<_channels.size(); i++) {
+        delete _channels.at(i);
     }
-    update();
+    _channels.clear();
+    std::vector<Channel*> result;
+    for(size_t i=0; i<channels.size(); i++) {
+        result.push_back(new Channel(channels.at(i)));
+    }
+    _channels = result;
 }
 
 void AScanWidget::onAScan(AScanDrawData *scan)
@@ -132,7 +180,7 @@ void AScanWidget::onAScan(AScanDrawData *scan)
     if(isVisible()) {
         for(uint8_t j=0; j<_channels.size(); j++) {
             uint8_t chan = scan->_channel;
-            if(chan == _channels[j].index()) {
+            if(chan == _channels[j]->index()) {
                 for(uint16_t i=0; i<scan->_samples.size(); i++) {
                     _points[i] = (QPoint(i,scan->_samples[i]));
                 }
@@ -143,6 +191,41 @@ void AScanWidget::onAScan(AScanDrawData *scan)
 
         update();
     }
+}
+
+void AScanWidget::drawTempTVG(TVGCurve *curve)
+{
+    if(_tempCurve!=0) {
+        delete _tempCurve;
+    }
+    _tempCurve = curve->clone();
+}
+
+void AScanWidget::applyTempCurve()
+{
+    if(_tempCurve!=0) {
+        if(_tvgCurve !=0) {
+            delete _tvgCurve;
+        }
+        _tvgCurve = _tempCurve->clone();
+        _tempCurve = 0;
+    }
+}
+
+void AScanWidget::reset()
+{
+    if(_tvgCurve !=0) {
+        delete _tvgCurve;
+    }
+    if(_tempCurve !=0) {
+        delete _tempCurve;
+    }
+    _tvgCurve = 0;
+    _tempCurve = 0;
+    for(size_t i=0; i<_channels.size(); i++) {
+        delete _channels.at(i);
+    }
+    _channels.clear();
 }
 
 
@@ -164,14 +247,15 @@ uint8_t getTVGSample(uint8_t * ptr, int sampleNum) {
     return res;
 }
 
-void AScanWidget::onChannelChanged(Channel channel)
+void AScanWidget::onChannelChanged(Channel * channel)
 {
     for(uint8_t j=0; j<_channels.size(); j++) {
-        uint8_t chan = channel.index();
-        if(chan == _channels[j].index())
+        uint8_t chan = channel->index();
+        if(chan == _channels[j]->index())
         {
-            _channels[j] = channel;
-            setTVGCurve(channel.rx()->getTvgCurve());
+            delete _channels[j];
+            _channels[j] = new Channel(channel);
+            //setTVGCurve(channel->rx()->getTvgCurve());
         }
     }
     update();

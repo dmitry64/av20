@@ -4,6 +4,7 @@
 #include "device/modificators/addgatemodificator.h"
 #include "device/modificators/removegatemodificator.h"
 #include "device/modificators/prismtimemodificator.h"
+#include "device/modificators/tvgmodificator.h"
 
 ChannelsCalibration * Core::getCalibrationsSnapshot()
 {
@@ -184,24 +185,24 @@ void Core::aScanProcess(uint8_t line)
 
     for(size_t j=0; j<gates.size(); j++) {
         Gate gate = gates[j];
-        int gateStart = static_cast<int>(gate._start) * 4;
-        int gateEnd = static_cast<int>(gate._finish) * 4;
-        int start = -1;
+        uint16_t gateStart = (gate._start) * 4;
+        uint16_t gateEnd = (gate._finish) * 4;
+        uint16_t start = 0;
         //int end = -1;
         bool startFound = false;
-        for(int i=0; i<ASCAN_SAMPLES_SIZE; i++) {
+        for(uint16_t i=0; i<ASCAN_SAMPLES_SIZE; i++) {
             uint8_t sample = scanptr->_samples[i];
             if((sample>gate._level) &&(!startFound) && (i >= gateStart) && (i <= gateEnd)) {
                 start = i;
                 startFound = true;
             } else if (startFound && (sample<gate._level || (i >= gateEnd))) {
                 BScanDrawSample drawSample;
-                drawSample._begin = start / 4;
-                drawSample._end = i / 4;
+                drawSample._begin = start / 0x0004;
+                drawSample._end = i / 0x0004;
                 drawSample._level = gate._level;
                 dp->bscan._samples.push_back(drawSample);
                 startFound = false;
-                start = -1;
+                start = 0;
             }
         }
     }
@@ -254,6 +255,7 @@ void Core::modeswitch()
 
 void Core::finish()
 {
+
     qDebug() << "Disconnected!";
 }
 
@@ -319,7 +321,7 @@ void Core::handleDeviceConnectionError(bool status)
     }
 }
 
-void Core::notifyChannel(Channel channel)
+void Core::notifyChannel(Channel *channel)
 {
     emit channelChanged(channel);
 }
@@ -354,6 +356,14 @@ void Core::setPrismTime(uint8_t channel, uint8_t value)
 {
     qDebug() << "Changing prism time ch =" << channel << "value =" <<value;
     PrismTimeModificator * mod = new PrismTimeModificator(channel,value);
+    addModificator(mod);
+}
+
+void Core::setTVG(uint8_t channel, TVGCurve *ptr)
+{
+    qDebug() << "Changing tvg for ch =" <<channel;
+    TVGCurve * curve = ptr->clone();
+    TVGModificator * mod = new TVGModificator(channel,curve);
     addModificator(mod);
 }
 

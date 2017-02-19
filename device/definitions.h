@@ -85,8 +85,8 @@ struct AScan {
 #pragma pack(pop)
 
 struct Gate {
-    uint8_t _start;
-    uint8_t _finish;
+    uint16_t _start;
+    uint16_t _finish;
     uint8_t _level;
     uint8_t _id;
 };

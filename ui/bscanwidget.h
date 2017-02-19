@@ -15,11 +15,7 @@ class BScanWidget : public QWidget
 {
     Q_OBJECT
 
-    //std::vector< std::pair< std::vector<BScanDrawData> , int> > _scans;
-    std::vector<Channel> _channels;
-
-    //std::map<uint8_t, std::vector<QLinearGradient> > _gradients;
-    //std::vector< std::pair< std::vector<QLinearGradient> , int> > _gradients;
+    std::vector<Channel*> _channels;
     std::vector< std::pair< std::vector< std::vector<BScanDrawSample> > , int> > _samples;
 
     int _width;
@@ -34,14 +30,15 @@ public:
     ~BScanWidget();
     void paintEvent(QPaintEvent * event);
 
-    void setChannelsInfo(std::vector<Channel> channels);
+    void setChannelsInfo(std::vector<Channel *> channels);
     void setRestrictedToChannel(bool flag);
-    std::vector<Channel> channels() const;
+    void reset();
+    std::vector<Channel *> channels() const;
 
 
 public slots:
     void onBScan(BScanDrawData * scan);
-    void onChannelChanged(Channel channel);
+    void onChannelChanged(Channel *channel);
 private:
     Ui::BScanWidget *ui;
 };

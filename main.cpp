@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
     qRegisterMetaType<QSharedPointer<DisplayPackage> >("QSharedPointer<DisplayPackage>");
     qRegisterMetaType<QSharedPointer<AScanDrawData> >("QSharedPointer<AScanDrawData>");
     qRegisterMetaType<QSharedPointer<BScanDrawData> >("QSharedPointer<BScanDrawData>");
-    qRegisterMetaType<Channel>("Channel");
+    qRegisterMetaType<Channel*>("Channel*");
 
     System * system = System::getInstance();
     system->init();
@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
     Core * core = new Core(modeManager, calibrationManager);
     MainWindow * mainWindow = new MainWindow();
 
-    QObject::connect(core,SIGNAL(channelChanged(Channel)),mainWindow, SLOT(onChannelChanged(Channel)));
+    QObject::connect(core,SIGNAL(channelChanged(Channel*)),mainWindow, SLOT(onChannelChanged(Channel*)));
     QObject::connect(core,SIGNAL(drawDisplayPackage(QSharedPointer<DisplayPackage>)), mainWindow, SIGNAL(drawDisplayPackage(QSharedPointer<DisplayPackage>)),Qt::ConnectionType::QueuedConnection); //SLOT(onDisplayPackage(QSharedPointer<DisplayPackage>)));
 
     QObject::connect(core,SIGNAL(deviceOverheatEnable()),mainWindow, SLOT(onDeviceOverheatEnable()));

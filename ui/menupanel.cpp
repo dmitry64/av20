@@ -14,6 +14,11 @@ void MenuPanel::closeCurrent()
         ui->modeButton->setPalette(_defaultPalette);
         emit modeMenuClosed();
         break;
+        case MenuState::CalibrationsMenuState:
+        _state = MenuState::DefaultState;
+        ui->calibrationButton->setPalette(_defaultPalette);
+        emit calibrationsMenuClosed();
+        break;
         case MenuState::RegistrationMenuState:
         _state = MenuState::DefaultState;
         ui->registrationButton->setPalette(_defaultPalette);
@@ -118,6 +123,17 @@ void MenuPanel::on_systemButton_released()
         _state = MenuState::SystemMenuState;
         ui->systemButton->setPalette(_activePalette);
         emit systemMenuOpened();
+    } else {
+        closeCurrent();
+    }
+}
+
+void MenuPanel::on_calibrationButton_released()
+{
+    if(_state == DefaultState) {
+        _state = MenuState::CalibrationsMenuState;
+        ui->calibrationButton->setPalette(_activePalette);
+        emit calibrationsMenuOpened();
     } else {
         closeCurrent();
     }

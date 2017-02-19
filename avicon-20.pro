@@ -80,7 +80,9 @@ SOURCES += main.cpp\
     device/modemanager.cpp \
     ui/controls/modeselectionbutton.cpp \
     ui/controls/schemeselectionbutton.cpp \
-    device/calibrationmanager.cpp
+    device/calibrationmanager.cpp \
+    ui/calibrationswidget.cpp \
+    device/modificators/tvgmodificator.cpp
 
 HEADERS  += \
     core.h \
@@ -135,7 +137,9 @@ HEADERS  += \
     ui/controls/modeselectionbutton.h \
     ui/controls/schemeselectionbutton.h \
     device/calibrationmanager.h \
-    device/tactid.h
+    device/tactid.h \
+    ui/calibrationswidget.h \
+    device/modificators/tvgmodificator.h
 
 FORMS    += \
     ui/ascanwidget.ui \
@@ -164,7 +168,8 @@ FORMS    += \
     ui/tvgeditorwidget.ui \
     ui/ascaninfowidget.ui \
     ui/controls/modeselectionbutton.ui \
-    ui/controls/schemeselectionbutton.ui
+    ui/controls/schemeselectionbutton.ui \
+    ui/calibrationswidget.ui
 
 RESOURCES += \
     resources.qrc
