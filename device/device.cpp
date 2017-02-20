@@ -89,6 +89,7 @@ Device::Device() //:  //_state(state)
 #else
     _spi = new DriverSPI("/dev/spidev0.0");
 #endif
+    Q_ASSERT(_spi);
 }
 
 void Device::init()
@@ -98,7 +99,6 @@ void Device::init()
 
     if(status) {
         uint8_t version = getVersion();
-        //_state->setUSM_ID(version);
         qDebug() << "Device version:" << QString::number(static_cast<unsigned int>(version),16).toUpper();
         fillRegisters();
     } else {
@@ -119,7 +119,7 @@ void Device::resetConfigRegisters()
     if(_spi->setAndTestRegister(0x05, 1, &trg_cr_send)) {
         qFatal("TRG_CR Initialization failed!");
     } else {
-        qDebug() << "TRG_CR initialized!";
+       // qDebug() << "TRG_CR initialized!";
         //_state->setTRG_CR(trg_cr_send);
     }
 
@@ -127,7 +127,7 @@ void Device::resetConfigRegisters()
     if(_spi->setAndTestRegister(0x06, 1, &trg_ds_send)) {
         qFatal("TRG_DS Initialization failed!");
     } else {
-        qDebug() << "TRG_DS initialized!";
+        //qDebug() << "TRG_DS initialized!";
         //_state->setTRG_DS(trg_ds_send);
     }
 
@@ -135,7 +135,7 @@ void Device::resetConfigRegisters()
     if(_spi->setAndTestRegister(0x07, 1, &trg_ts_send)) {
         qFatal("TRG_TS Initialization failed!");
     } else {
-        qDebug() << "TRG_TS initialized!";
+        //qDebug() << "TRG_TS initialized!";
         //_state->setTRG_TS(trg_ts_send);
     }
 }
@@ -150,7 +150,7 @@ void Device::resetTVG()
 
         _spi->setRegister(0x40+j,TVG_SAMPLES_BYTES,tvg);
         if(checkConnection()) {
-            qDebug() << "TVG for ch #" << j + 1 << "initialized!";
+           // qDebug() << "TVG for ch #" << j + 1 << "initialized!";
         } else {
             qDebug() << "TVG for ch #" << j + 1 << "not initialized!";
             qFatal("Initialization failed!");
@@ -168,7 +168,7 @@ void Device::resetChannelsTable()
                 qFatal("Initialization failed!");
             }
         }
-        qDebug() << "Channels table for ch #" << j + 1 << "initialized!";
+       // qDebug() << "Channels table for ch #" << j + 1 << "initialized!";
         TactRegisters tact;
         tact._CR = 0;
         tact._PULSER1 = 0;
@@ -193,10 +193,16 @@ void Device::applyCalibration(ChannelsCalibration *calibration, TactTable *tactT
     Q_ASSERT(tactTable);
 
     for(int j=0; j<calibration->getChannelsCount(); j++) {
-        TVG tvg = getTVGFromCurve(calibration->getChannel(j)->rx()->getTvgCurve());
+        Channel * chan = calibration->getChannel(j);
+        Q_ASSERT(chan);
+        RxChannel * rxchan = chan->rx();
+        Q_ASSERT(rxchan);
+        TVGCurve * curve = rxchan->getTvgCurve();
+        Q_ASSERT(curve);
+        TVG tvg = getTVGFromCurve(curve);
         _spi->setRegister(0x40+j,TVG_SAMPLES_BYTES,tvg._samples);
         if(checkConnection()) {
-            qDebug() << "TVG for ch #" << j + 1 << " set!";
+           // qDebug() << "TVG for ch #" << j + 1 << " set!";
         } else {
             qDebug() << "TVG for ch #" << j + 1 << "not set!";
             qFatal("Initialization failed!");
@@ -230,9 +236,7 @@ void Device::applyCalibration(ChannelsCalibration *calibration, TactTable *tactT
             qFatal("Unable to set register");
         }
 
-        qDebug() << "Channels table for ch #" << j + 1 << " loaded!";
-
-        //_state->setChannelsTableTact(j,tr);
+       // qDebug() << "Channels table for ch #" << j + 1 << " loaded!";
     }
 }
 
@@ -270,6 +274,7 @@ void Device::setTVG(int chIndex, TVG tvg)
 AScan Device::getAscanForLine(uint8_t line, AScan * output)
 {
     Q_ASSERT(output);
+    Q_ASSERT(line==0 || line==1);
     uint8_t * buf = reinterpret_cast<uint8_t*>(output);
     _spi->getRegister((line == 0) ? 0x7C : 0x7D, ASCAN_SAMPLES_SIZE + ASCAN_HEADER_SIZE, buf);
 

@@ -106,7 +106,9 @@ void TVGEditorWidget::setChannel(uint8_t channel)
     ChannelsCalibration * snapshot = _core->getCalibrationsSnapshot();
     Q_ASSERT(snapshot);
     std::vector<Channel*> channels;
-    channels.push_back((snapshot->getChannel(channel)));
+    Channel * chan = snapshot->getChannel(channel);
+    Q_ASSERT(chan);
+    channels.push_back(chan);
     ui->aScanWidget->setChannelsInfo(channels);
     initCurve(snapshot->getChannel(channel)->rx()->getTvgCurve());
     update();

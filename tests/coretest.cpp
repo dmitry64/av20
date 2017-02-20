@@ -1,113 +1,6 @@
 #include "coretest.h"
 #include "device/tvg/tvgsinglepoint.h"
-
-QTEST_MAIN(CoreTest)
-
-ModeManager *CoreTest::generateManager()
-{
-    DeviceMode * mode = new DeviceMode();
-
-    mode->setType(ModeTypes::SearchMode);
-    std::vector<TactTable *> tactTables;
-
-    TactTable * table1 = new TactTable();
-    table1->setId(TACT_ID_HAND_SCHEME_1);
-
-    std::vector<Tact*> scheme1;
-    for(int i=0;i<3; i++) {
-        Tact * tact = new Tact();
-        tact->setRx1(i);
-        tact->setTx1(i);
-
-        if(i<3) {
-        tact->setRx1Enabled(true);
-        tact->setTx1Enabled(true);
-        tact->setTactEnabled(true);
-        } else {
-            tact->setRx1Enabled(false);
-            tact->setTx1Enabled(false);
-            tact->setTactEnabled(false);
-        }
-
-        scheme1.push_back(tact);
-    }
-    table1->setTactTable(scheme1);
-    table1->setId(TACT_ID_SEARCH_SCHEME_1);
-    tactTables.push_back(table1);
-
-
-    mode->setTactTables(tactTables);
-    mode->setType(ModeTypes::SearchMode);
-
-
-    ModeManager * manager = new ModeManager();
-    manager->addMode(mode);
-    return manager;
-}
-
-CalibrationManager *CoreTest::generateCalibration()
-{
-    CalibrationManager * calibrationManager = new CalibrationManager();
-    ChannelsCalibration * calib = new ChannelsCalibration();
-    calib->setTactId(TACT_ID_SEARCH_SCHEME_1);
-    std::vector<Channel *> channels1;
-    for(int i=0;i<8; i++) {
-        Channel * chTemp = new Channel();
-        RxChannel * rx = new RxChannel();
-        TxChannel * tx = new TxChannel();
-        chTemp->setRx(rx);
-        chTemp->setTx(tx);
-
-        tx->setFreq(PulserFreq::Freq_10_0_MHz);
-        tx->setProg(PulserProg::Prog_6);
-
-        chTemp->setIndex(i);
-        rx->setTvgCurve(new TVGSinglePoint(0.9,0.9));
-        rx->setPrismTime(0);
-        std::vector<Gate> gates;
-        Gate g1;
-        g1._start = 10;
-        g1._finish = 12;
-        g1._level = 5;
-        g1._id = 0;
-        gates.push_back(g1);
-        rx->setGates(gates);
-
-        switch (i) {
-            case 0:
-            chTemp->setColor(255,30,30);
-            break;
-            case 1:
-            chTemp->setColor(30,255,30);
-            break;
-            case 2:
-            chTemp->setColor(255,30,255);
-            break;
-            case 3:
-            chTemp->setColor(255,128,128);
-            break;
-            case 4:
-            chTemp->setColor(255,255,30);
-            break;
-            case 5:
-            chTemp->setColor(30,255,255);
-            break;
-            case 6:
-            chTemp->setColor(128,128,255);
-            break;
-            case 7:
-            chTemp->setColor(30,30,255);
-            break;
-        }
-
-        rx->setName("58");
-
-        channels1.push_back(chTemp);
-    }
-    calib->setChannels(channels1);
-    calibrationManager->addCalibration(calib);
-    return calibrationManager;
-}
+#include "testdatagenerators.h"
 
 CoreTest::CoreTest(QObject *parent) : QObject(parent)
 {
@@ -168,10 +61,161 @@ void CoreTest::coreCommunicationSimple()
     gate._start = 20;
     gate._level = 99;
     core->modifyGate(0,gate);
-    TVGSinglePoint * simple = new TVGSinglePoint(0.999,0.999);
+    TVGSinglePoint * simple = new TVGSinglePoint(65.0,35.0,70.0,32.0,25.0);
     core->setTVG(0,simple);
     delete simple;
 
+    QThread::msleep(200);
+
+    core->stopCore();
+    delete core;
+    delete manager;
+    delete calib;
+}
+
+void CoreTest::coreGateSetup()
+{
+    ModeManager * manager = generateManager();
+    CalibrationManager * calib = generateCalibration();
+
+    Core * core = new Core(manager,calib);
+    core->start();
+
+    Gate gate;
+    gate._start = 23;
+    gate._finish = 32;
+    gate._id = 1;
+    gate._level = 20;
+    core->addGate(0,gate);
+
+    QThread::usleep(500);
+
+    gate._start = 1;
+    gate._finish = 1;
+    gate._id = 2;
+    gate._level = 1;
+    core->addGate(0,gate);
+
+    QThread::usleep(500);
+
+    gate._start = 99;
+    gate._finish = 99;
+    gate._id = 0;
+    gate._level = 80;
+    core->addGate(1,gate);
+
+    QThread::usleep(500);
+
+    gate._start = 200;
+    gate._finish = 200;
+    gate._id = 1;
+    gate._level = 0;
+    core->addGate(2,gate);
+
+    QThread::usleep(500);
+
+    gate._start = 0;
+    gate._finish = 200;
+    gate._id = 0;
+    gate._level = 0;
+    core->addGate(3,gate);
+
+    QThread::usleep(500);
+
+    gate._start = 55;
+    gate._finish = 55;
+    gate._id = 0;
+    gate._level = 0;
+    core->addGate(4,gate);
+
+    QThread::usleep(500);
+
+    gate._start = 0;
+    gate._finish = 0;
+    gate._id = 0;
+    gate._level = 0;
+    core->addGate(5,gate);
+
+    QThread::usleep(500);
+
+    gate._start = 200;
+    gate._finish = 200;
+    gate._id = 99;
+    gate._level = 79;
+    core->addGate(6,gate);
+
+    QThread::usleep(500);
+
+    gate._start = 1;
+    gate._finish = 1;
+    gate._id = 1;
+    gate._level = 1;
+    core->addGate(7,gate);
+
+    QThread::usleep(500);
+
+    core->getCalibrationsSnapshot();
+    core->getTactTableSnapshot();
+
+    gate._finish = 77;
+    gate._start = 20;
+    gate._level = 99;
+    gate._id = 1;
+
+    QThread::usleep(500);
+
+    core->modifyGate(0,gate);
+    TVGSinglePoint * simple = new TVGSinglePoint(65.0,35.0,70.0,32.0,25.0);
+    core->setTVG(0,simple);
+    delete simple;
+
+    QThread::msleep(100);
+
+    core->stopCore();
+    delete core;
+    delete manager;
+    delete calib;
+}
+
+void CoreTest::coreTvgSetup()
+{
+    ModeManager * manager = generateManager();
+    CalibrationManager * calib = generateCalibration();
+
+    Core * core = new Core(manager,calib);
+    core->start();
+
+    core->getCalibrationsSnapshot();
+    core->getTactTableSnapshot();
+
+    for(int i=0; i<10; i++) {
+        for(int j=0; j<8; j++) {
+            TVGSinglePoint * simple = new TVGSinglePoint(8.0 * i,35.0,70.0,32.0,25.0);
+            core->setTVG(j,simple);
+            delete simple;
+        }
+        QThread::msleep(50);
+    }
+
+    for(int i=0; i<10; i++) {
+        for(int j=0; j<8; j++) {
+            TVGSinglePoint * simple = new TVGSinglePoint(65,35.0,70.0,8.0 * i,25.0);
+            core->setTVG(j,simple);
+            delete simple;
+        }
+        QThread::msleep(50);
+    }
+
+    for(int i=0; i<10; i++) {
+        for(int j=0; j<8; j++) {
+            TVGSinglePoint * simple = new TVGSinglePoint(10.0 * j,20.0 * i,20.0 * i,30.0,25.0);
+            core->setTVG(j,simple);
+            delete simple;
+        }
+        QThread::msleep(50);
+    }
+
+    QThread::msleep(200);
 
     core->stopCore();
     delete core;

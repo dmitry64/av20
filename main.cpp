@@ -42,8 +42,6 @@ int main(int argc, char *argv[])
     QObject::connect(core,SIGNAL(deviceConnectionErrorEnable()),mainWindow, SLOT(onDeviceConnectionErrorEnable()));
     QObject::connect(core,SIGNAL(deviceConnectionErrorDisable()),mainWindow, SLOT(onDeviceConnectionErrorDisable()));
 
-
-
     core->start();
 
     mainWindow->setCore(core);

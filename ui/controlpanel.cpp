@@ -103,6 +103,7 @@ ControlPanel::~ControlPanel()
 
 void ControlPanel::setCore(Core *ptr)
 {
+    Q_ASSERT(ptr);
     _core = ptr;
 }
 
@@ -141,6 +142,7 @@ void ControlPanel::init(ChannelsCalibration * calibration)
 
 void ControlPanel::onGateChanged(Gate gate)
 {
+    Q_ASSERT(_core);
     _core->modifyGate(_currentChannel,gate);
     update();
 }
@@ -182,5 +184,6 @@ void ControlPanel::onAddGate()
 
 void ControlPanel::onPrismTimeChanged(double value)
 {
+    Q_ASSERT(_core);
     _core->setPrismTime(_currentChannel,value);
 }

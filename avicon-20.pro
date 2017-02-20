@@ -7,6 +7,14 @@
 QT       += core gui opengl
 #QT += testlib
 
+CONFIG(testconf) {
+    message(Test configuration)
+    include(tests/tests.pro)
+} else {
+    message(Default configuration)
+    SOURCES += main.cpp
+}
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++11
@@ -31,8 +39,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 target.path = /home/root
 INSTALLS += target
 
-SOURCES += main.cpp\
-    core.cpp \
+SOURCES += core.cpp \
     device/device.cpp \
     device/spi/driverspi.cpp \
     device/devicestate.cpp \

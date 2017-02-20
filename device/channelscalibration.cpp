@@ -29,13 +29,14 @@ ChannelsCalibration::~ChannelsCalibration()
     qDebug() << "Device calibration deleted";
 
     for(int i=0; i<_channels.size(); i++) {
-        delete _channels.at(i);
+        Channel * chan = _channels.at(i);
+        Q_ASSERT(chan);
+        delete chan;
     }
 }
 
 void ChannelsCalibration::init()
 {
-
 }
 
 ChannelsCalibration::ChannelsCalibration(ChannelsCalibration *original)
@@ -55,11 +56,14 @@ ChannelsCalibration * ChannelsCalibration::getSnapshot()
 
 Channel *ChannelsCalibration::getChannel(int index)
 {
+    Q_ASSERT(index<8);
     Q_ASSERT(_channels.size() > 0);
     return _channels.at(index);
 }
 
 uint8_t ChannelsCalibration::getChannelsCount()
 {
-    return _channels.size();
+    size_t size = _channels.size();
+    Q_ASSERT(size <= 8);
+    return size;
 }

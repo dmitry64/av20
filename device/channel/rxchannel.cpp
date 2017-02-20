@@ -45,6 +45,7 @@ TVGCurve *RxChannel::getTvgCurve() const
 
 void RxChannel::setTvgCurve(TVGCurve *tvgCurve)
 {
+    Q_ASSERT(tvgCurve);
     if(_tvgCurve!=0) {
         delete _tvgCurve;
     }
@@ -69,9 +70,10 @@ RxChannel::RxChannel(RxChannel *original)
     _tvgCurve = original->getTvgCurve()->clone();
     _prismTime = original->getPrismTime();
     _markerPos = original->getMarkerPos();
-    for(size_t i=0; i<original->gates().size(); i++) {
+    /*for(size_t i=0; i<original->gates().size(); i++) {
         _gates.push_back(original->gates().at(i));
-    }
+    }*/
+    _gates = original->gates();
 }
 
 RxChannel::~RxChannel()

@@ -24,6 +24,7 @@ void AScanPage::reset()
 
 void AScanPage::init(uint8_t channel)
 {
+    Q_ASSERT(_core);
     ChannelsCalibration * snapshot = _core->getCalibrationsSnapshot();
     init(channel,snapshot);
     delete snapshot;
@@ -32,21 +33,23 @@ void AScanPage::init(uint8_t channel)
 void AScanPage::init(uint8_t channel, ChannelsCalibration *snapshot)
 {
     qDebug() << "Ascan init!";
+    Q_ASSERT(snapshot);
     std::vector<Channel *> channels;
-    channels.push_back((snapshot->getChannel(channel)));
+    Channel * chan = (snapshot->getChannel(channel));
+    Q_ASSERT(chan);
+    channels.push_back(chan);
     ui->bscanWidget->setChannelsInfo(channels);
     ui->ascanWidget->setChannelsInfo(channels);
     ui->controlPanel->setChannel(channel);
     ui->controlPanel->init(snapshot);
     ui->channelSelector->init(snapshot);
     channels.clear();
-
-
     update();
 }
 
 void AScanPage::setCore(Core *core)
 {
+    Q_ASSERT(core);
     _core = core;
     ui->controlPanel->setCore(core);
     ui->channelSelector->setCore(core);
@@ -79,7 +82,9 @@ void AScanPage::setChannel(uint8_t channel)
     ChannelsCalibration * snapshot = _core->getCalibrationsSnapshot();
     Q_ASSERT(snapshot);
     std::vector<Channel*> channels;
-    channels.push_back((snapshot->getChannel(channel)));
+    Channel * chan = (snapshot->getChannel(channel));
+    Q_ASSERT(chan);
+    channels.push_back(chan);
     ui->bscanWidget->setChannelsInfo(channels);
     ui->ascanWidget->setChannelsInfo(channels);
     ui->controlPanel->setChannel(channel);

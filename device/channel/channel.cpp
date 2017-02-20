@@ -50,6 +50,7 @@ Channel::Channel(Channel *channel)
     _colorGreen = channel->getColorGreen();
     _colorBlue = channel->getColorBlue();
     _index = channel->index();
+    Q_ASSERT(_index<8);
     _rx = new RxChannel(channel->rx());
     _tx = new TxChannel(channel->tx());
 }

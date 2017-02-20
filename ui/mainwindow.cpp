@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -73,6 +74,15 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
+    qDebug() << "Destoying main window";
+    delete _backgroundWidget;
+    delete _calibrationsWidget;
+    delete _helpWidget;
+    delete _memoryWidget;
+    delete _modeSelectionWidget;
+    delete _optionsWidget;
+    delete _registrationWidget;
+    delete _systemWidget;
     delete ui;
 }
 
@@ -255,6 +265,8 @@ void MainWindow::init()
     Q_ASSERT(_core);
     ChannelsCalibration * calibration = _core->getCalibrationsSnapshot();
     TactTable * tactTableSnapshot = _core->getTactTableSnapshot();
+    Q_ASSERT(calibration);
+    Q_ASSERT(tactTableSnapshot);
 
     ui->aScanPage->init(0,calibration);
     ui->tvgEditorWidget->init(0,calibration);

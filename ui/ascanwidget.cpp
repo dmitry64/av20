@@ -197,6 +197,7 @@ void AScanWidget::onAScan(AScanDrawData *scan)
 
 void AScanWidget::drawTempTVG(TVGCurve *curve)
 {
+    Q_ASSERT(curve);
     if(_tempCurve!=0) {
         delete _tempCurve;
     }
@@ -251,13 +252,20 @@ uint8_t getTVGSample(uint8_t * ptr, int sampleNum) {
 
 void AScanWidget::onChannelChanged(Channel * channel)
 {
+    Q_ASSERT(channel);
     for(uint8_t j=0; j<_channels.size(); j++) {
         uint8_t chan = channel->index();
         if(chan == _channels[j]->index())
         {
-            delete _channels[j];
+            Channel * chan = _channels[j];
+            Q_ASSERT(chan);
+            delete chan;
             _channels[j] = new Channel(channel);
-            setTVGCurve(channel->rx()->getTvgCurve());
+            RxChannel * rx = channel->rx();
+            Q_ASSERT(rx);
+            TVGCurve * tvg = rx->getTvgCurve();
+            Q_ASSERT(tvg);
+            setTVGCurve(tvg);
         }
     }
     update();

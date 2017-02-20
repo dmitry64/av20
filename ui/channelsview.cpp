@@ -63,6 +63,7 @@ void ChannelsView::init(ChannelsCalibration *calibrationsSnapshot, TactTable * t
 
     for(int i=0; i<calibrationsSnapshot->getChannelsCount(); i++) {
         Channel * chan = calibrationsSnapshot->getChannel(i);
+        Q_ASSERT(chan);
         RxChannel * rxchan = chan->rx();
         QTableWidgetItem * item = new QTableWidgetItem("Chan #" + QString::number(i));
         item->setBackgroundColor(QColor(chan->getColorRed(),chan->getColorGreen(),chan->getColorBlue()));
@@ -102,6 +103,7 @@ void ChannelsView::init(ChannelsCalibration *calibrationsSnapshot, TactTable * t
 
     for(int i=0; i<tacts.size(); i++) {
         Tact * tact = tacts.at(i);
+        Q_ASSERT(tact);
         if(tact->getTactEnabled()) {
             QTableWidgetItem * item = new QTableWidgetItem("#" + QString::number(i));
             item->setTextAlignment( Qt::AlignHCenter | Qt::AlignCenter );
@@ -167,6 +169,7 @@ void ChannelsView::init(ChannelsCalibration *calibrationsSnapshot, TactTable * t
 
 void ChannelsView::setCore(Core *core)
 {
+    Q_ASSERT(core);
     _core = core;
 }
 

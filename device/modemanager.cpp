@@ -1,5 +1,6 @@
 #include "modemanager.h"
 #include "tactid.h"
+#include <QDebug>
 
 std::vector<DeviceMode *> ModeManager::modes() const
 {
@@ -8,6 +9,7 @@ std::vector<DeviceMode *> ModeManager::modes() const
 
 void ModeManager::addMode(DeviceMode *mode)
 {
+    Q_ASSERT(mode);
     _modes.push_back(mode);
 }
 
@@ -148,20 +150,4 @@ void ModeManager::init()
 {
     _modes.push_back(generateSearchMode());
     _modes.push_back(generateHandMode());
-    /*for(size_t i=0; i<4; i++) {
-        DeviceMode * mode = new DeviceMode();
-
-        mode->setType(static_cast<ModeTypes>(i+1));
-        std::vector<TactTable *> tactTables;
-        for(size_t j=0; j<4-i; j++) {
-            TactTable * table = new TactTable();
-            table->init();
-            tactTables.push_back(table);
-        }
-
-        mode->setTactTables(tactTables);
-
-        _modes.push_back(mode);
-    }*/
-
 }
