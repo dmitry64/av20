@@ -18,7 +18,7 @@ void CalibrationManager::initSearchModeCalibration()
         tx->setProg(PulserProg::Prog_1);
 
         chTemp->setIndex(i);
-        rx->setTvgCurve(new TVGSinglePoint(0.5,0.5));
+        rx->setTvgCurve(new TVGSinglePoint(65.0,35.0,70.0,32.0,25.0));
         rx->setPrismTime(0);
         std::vector<Gate> gates;
         Gate g1;
@@ -77,7 +77,7 @@ void CalibrationManager::initSearchModeCalibration()
         tx->setProg(PulserProg::Prog_1);
 
         chTemp->setIndex(i);
-        rx->setTvgCurve(new TVGSinglePoint(0.5,0.5));
+        rx->setTvgCurve(new TVGSinglePoint(65.0,35.0,70.0,32.0,25.0));
         rx->setPrismTime(0);
         std::vector<Gate> gates;
         Gate g1;
@@ -139,7 +139,7 @@ void CalibrationManager::initHandModeCalibration()
         tx->setProg(PulserProg::Prog_1);
 
         chTemp->setIndex(i);
-        rx->setTvgCurve(new TVGSinglePoint(0.5,0.5));
+        rx->setTvgCurve(new TVGSinglePoint(65.0,35.0,70.0,32.0,25.0));
         rx->setPrismTime(0);
         std::vector<Gate> gates;
         Gate g1;
@@ -198,7 +198,7 @@ void CalibrationManager::initHandModeCalibration()
         tx->setProg(PulserProg::Prog_1);
 
         chTemp->setIndex(i);
-        rx->setTvgCurve(new TVGSinglePoint(0.5,0.5));
+        rx->setTvgCurve(new TVGSinglePoint(65.0,35.0,70.0,32.0,25.0));
         rx->setPrismTime(0);
         std::vector<Gate> gates;
         Gate g1;

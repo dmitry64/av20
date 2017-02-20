@@ -6,7 +6,7 @@
 #include "device/definitions.h"
 #include "system/system.h"
 #include "device/calibrationmanager.h"
-
+#define DEFAULT_MODE
 
 #ifdef DEFAULT_MODE
 int main(int argc, char *argv[])

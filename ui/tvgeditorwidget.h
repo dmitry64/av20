@@ -22,6 +22,7 @@ public:
     void reset();
     void init(uint8_t channel);
     void init(uint8_t channel, ChannelsCalibration * snapshot);
+    void initCurve(TVGCurve * curve);
     void setCore(Core * core);
 public slots:
     void onDisplayPackage(QSharedPointer<DisplayPackage> package);
@@ -30,6 +31,9 @@ public slots:
 
     void onSingleOffsetChanged(double value);
     void onSingleHeightChanged(double value);
+    void onSingleBaseChanged(double value);
+    void onSingleWidthChanged(double value);
+    void onSingleFormChanged(double value);
 
 private slots:
     void on_applyButton_released();

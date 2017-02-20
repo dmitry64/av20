@@ -72,10 +72,16 @@
             <layout class="QVBoxLayout" name="verticalLayout_6">
              <item>
               <layout class="QHBoxLayout" name="horizontalLayout_4">
+               <property name="rightMargin">
+                <number>20</number>
+               </property>
                <item>
                 <layout class="QVBoxLayout" name="verticalLayout_4">
                  <item>
-                  <widget class="TouchSpinBoxString" name="singleType" native="true"/>
+                  <widget class="TouchSpinBox" name="singleBase" native="true"/>
+                 </item>
+                 <item>
+                  <widget class="TouchSpinBox" name="singleWidth" native="true"/>
                  </item>
                  <item>
                   <spacer name="verticalSpacer_2">
@@ -102,6 +108,26 @@
                  </item>
                  <item>
                   <spacer name="verticalSpacer_3">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>40</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QVBoxLayout" name="verticalLayout_7">
+                 <item>
+                  <widget class="TouchSpinBox" name="singleForm" native="true"/>
+                 </item>
+                 <item>
+                  <spacer name="verticalSpacer_4">
                    <property name="orientation">
                     <enum>Qt::Vertical</enum>
                    </property>
@@ -235,12 +261,6 @@
    <class>ChannelSelector</class>
    <extends>QWidget</extends>
    <header>ui/channelselector.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>TouchSpinBoxString</class>
-   <extends>QWidget</extends>
-   <header>ui/controls/touchspinboxstring.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
