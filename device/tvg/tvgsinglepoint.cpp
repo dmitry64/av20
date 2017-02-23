@@ -47,12 +47,12 @@ double TVGSinglePoint::getSample(double x)
 
         double b = 0.0001 * exp(_curve / 7.0);
 
-        //double ki = _yHeight * (1.0 - ti / _xWidth) - b * ti*(_xWidth - ti);
-        double m = _yHeight / _xWidth;
+        double ki = _yHeight * (1.0 - ti / _xWidth) - b * ti*(_xWidth - ti);
+        //double m = _yHeight / _xWidth;
         //double inter =
-        double ki = m * (Xms - _xOffset) + _yBase;
+        //double ki = m * (Xms - _xOffset) + _yBase;
 
-        return std::max(std::min(ki,1.0),std::max(0.0,(_yBase - _yHeight))) / 80.0;
+        return std::max(std::min(_yBase - ki,_yBase),std::max(0.0,(_yBase - _yHeight))) / 80.0;
     } else {
         return _yBase / 80.0;
     }

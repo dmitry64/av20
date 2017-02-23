@@ -75,7 +75,30 @@ void AScanWidget::paintEvent(QPaintEvent *event)
         painter.drawLine(QPoint(left + i*scaleStep,bottom),QPoint(i*scaleStep + left,leng + bottom));
     }
 
+    painter.setPen(_ascanBrush.color());
     painter.drawLine(left,bottom,left,top);
+
+    int scanScale = 10;
+    int scanScaleStep = height / scanScale;
+
+    for(uint16_t i=0; i<=scanScale; i++) {
+        painter.drawLine(left-4,bottom - i * scanScaleStep,left,bottom - i * scanScaleStep);
+        painter.drawText(left-28,bottom - i * scanScaleStep + 4,QString::number(i * 8.0/scanScale) + " V");
+    }
+
+    painter.setPen(_tvgCurvePen.color());
+    painter.drawLine(right,bottom,right,top);
+
+
+    int tvgScale = 10;
+    int tvgScaleStep = height / tvgScale;
+
+    for(uint16_t i=0; i<=tvgScale; i++) {
+        painter.drawLine(right+4,bottom - i * tvgScaleStep,right,bottom - i * tvgScaleStep);
+        painter.drawText(right+6,bottom - i * tvgScaleStep + 4,QString::number(i * 80/tvgScale) + " dB");
+    }
+
+
 /*
     // start
     _polygon[0] = QPoint(left,bottom);
