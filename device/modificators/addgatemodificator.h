@@ -7,9 +7,9 @@
 class AddGateModificator : public Modificator
 {
     Gate _gate;
-    uint8_t _channel;
+    ChannelID _channel;
 public:
-    AddGateModificator(uint8_t channel, Gate gate);
+    AddGateModificator(ChannelID channel, Gate gate);
     void apply(Core * core);
 };
 

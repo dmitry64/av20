@@ -185,17 +185,3 @@ void TVGEditorWidget::onSingleFormChanged(double value)
     delete curve;
 }
 
-
-void TVGEditorWidget::on_applyButton_released()
-{
-    TVGCurve * curve = 0;
-    double base = ui->singleBase->value();
-    double height = ui->singleHeight->value();
-    double width = ui->singleWidth->value();
-    double offset = ui->singleOffset->value();
-    double form = ui->singleForm->value();
-    curve = new TVGSinglePoint(base, offset, width, height, form);
-    _core->setTVG(_currentChannel,curve);
-    ui->aScanWidget->applyTempCurve();
-    delete curve;
-}

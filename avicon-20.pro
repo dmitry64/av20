@@ -90,7 +90,8 @@ SOURCES += core.cpp \
     ui/controls/schemeselectionbutton.cpp \
     device/calibrationmanager.cpp \
     ui/calibrationswidget.cpp \
-    device/modificators/tvgmodificator.cpp
+    device/modificators/tvgmodificator.cpp \
+    ui/controls/calibrationbutton.cpp
 #    tests/coretest.cpp
 
 HEADERS  += \
@@ -148,7 +149,8 @@ HEADERS  += \
     device/calibrationmanager.h \
     device/tactid.h \
     ui/calibrationswidget.h \
-    device/modificators/tvgmodificator.h
+    device/modificators/tvgmodificator.h \
+    ui/controls/calibrationbutton.h
 #    tests/coretest.h
 
 FORMS    += \
@@ -179,7 +181,8 @@ FORMS    += \
     ui/ascaninfowidget.ui \
     ui/controls/modeselectionbutton.ui \
     ui/controls/schemeselectionbutton.ui \
-    ui/calibrationswidget.ui
+    ui/calibrationswidget.ui \
+    ui/controls/calibrationbutton.ui
 
 RESOURCES += \
     resources.qrc

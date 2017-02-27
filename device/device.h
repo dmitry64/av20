@@ -28,7 +28,7 @@ public:
     void setProgTrigger(bool enabled);
     DeviceStatus getDeviceStatus();
     void setTVG(int chIndex, TVG tvg);
-    AScan getAscanForLine(uint8_t activeChannel, AScan * output);
+    AScan getAscanForLine(uint8_t line, AScan * output);
     uint8_t getVersion();
 
     bool checkConnection();

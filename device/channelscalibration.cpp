@@ -1,15 +1,13 @@
 #include "channelscalibration.h"
-
-
 #include <QDebug>
 
 
-uint16_t ChannelsCalibration::getTactId() const
+TactID ChannelsCalibration::getTactId() const
 {
     return _tactId;
 }
 
-void ChannelsCalibration::setTactId(const uint16_t &tactId)
+void ChannelsCalibration::setTactId(const TactID &tactId)
 {
     _tactId = tactId;
 }
@@ -19,9 +17,16 @@ void ChannelsCalibration::setChannels(const std::vector<Channel *> &channels)
     _channels = channels;
 }
 
+CalibrationInfo ChannelsCalibration::getInfo() const
+{
+    return _info;
+}
+
 ChannelsCalibration::ChannelsCalibration()
 {
     _tactId = 0;
+    _info._id = 0;
+    _info._name = "none";
 }
 
 ChannelsCalibration::~ChannelsCalibration()
@@ -47,6 +52,7 @@ ChannelsCalibration::ChannelsCalibration(ChannelsCalibration *original)
         Channel * ch = new Channel(original->getChannel(i));
         _channels.push_back(ch);
     }
+    _info = original->getInfo();
 }
 
 ChannelsCalibration * ChannelsCalibration::getSnapshot()
@@ -54,7 +60,7 @@ ChannelsCalibration * ChannelsCalibration::getSnapshot()
     return new ChannelsCalibration(this);
 }
 
-Channel *ChannelsCalibration::getChannel(int index)
+Channel *ChannelsCalibration::getChannel(ChannelID index)
 {
     Q_ASSERT(index<8);
     Q_ASSERT(_channels.size() > 0);

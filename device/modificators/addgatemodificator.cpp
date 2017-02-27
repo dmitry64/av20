@@ -1,6 +1,6 @@
 #include "addgatemodificator.h"
 
-AddGateModificator::AddGateModificator(uint8_t channel, Gate gate)
+AddGateModificator::AddGateModificator(ChannelID channel, Gate gate)
 {
     _gate = gate;
     _channel = channel;

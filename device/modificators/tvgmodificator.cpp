@@ -1,6 +1,6 @@
 #include "tvgmodificator.h"
 
-TVGModificator::TVGModificator(uint8_t channel, TVGCurve *curve) : _channel(channel), _curve(curve)
+TVGModificator::TVGModificator(ChannelID channel, TVGCurve *curve) : _channel(channel), _curve(curve)
 {
 
 }

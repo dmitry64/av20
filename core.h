@@ -20,54 +20,62 @@ class Core : public QThread
 {
     Q_OBJECT
 private:
+    // Atomic flags
     std::atomic_bool _active;
     std::atomic_bool _calibrationSnapshotRequested;
     std::atomic_bool _tactTableSnapshotRequested;
+    std::atomic_bool _calibrationsInfoSnapshotRequested;
     std::atomic_bool _modeswitchRequested;
 
-    uint8_t _requestedMode;
-    uint8_t _requestedScheme;
+    // Mode switch values
+    DeviceModeIndex _requestedMode;
+    SchemeIndex _requestedScheme;
 
+    // Tact control
     uint8_t _currentTactCounter;
     uint8_t _currentTact;
 
+    // Core objects
     Device * _device;
-   // DeviceState * _state;
-
     ModeManager * _modeManager;
     CalibrationManager * _calibrationManager;
 
-    ChannelsCalibration * _currentCalibration;
-    ChannelsCalibration * _calibrationsSnapshot;
-
-    DeviceMode * _currentMode;
-
-    //TactTable * _tactTable;
-    uint8_t _currentScheme;
-    TactTable * _tactTableSnapshot;
-
-    QMutex * _changesMutex;
-    std::queue<Modificator *> _pendingChanges;
-
+    // Internal state
     bool _deviceOverheat;
     bool _deviceError;
     bool _deviceConnectionError;
+    SchemeIndex _currentScheme;
+    ChannelsCalibration * _currentCalibration;
+    DeviceModeIndex _currentMode;
+
+    // Snapshots
+    ChannelsCalibration * _calibrationsSnapshot;
+    CalibrationsInfoList _calibrationsInfoListSnapshot;
+    TactTable * _tactTableSnapshot;
+
+    // Sync stuff
+    QMutex * _changesMutex;
+    std::queue<Modificator *> _pendingChanges;
 
     AScan * _line1CurrentAscan;
     AScan * _line2CurrentAscan;
-
 public:
     Core(ModeManager * modeManager, CalibrationManager * calibrationManager);
     ~Core();
+
+    // System
     void run();
     void stopCore();
+
+    // Internal
     ChannelsCalibration *getCalibration();
-    ChannelsCalibration *getCalibrationsSnapshot();
-
-    TactTable *getTactTableSnapshot();
-
     void notifyChannel(Channel * channel);
     void applyCurrentCalibrationToDevice();
+
+    // External
+    ChannelsCalibration *getCalibrationsSnapshot();
+    CalibrationsInfoList getAvailableCalibrationsSnapshot();
+    TactTable *getTactTableSnapshot();
 
 private:
     void init();
@@ -89,24 +97,20 @@ private:
     void handleDeviceConnectionError(bool status);
 
     TactTable *getTactTable();
+    DeviceMode * getCurrentDeviceMode();
 
 public:
-    void addGate(uint8_t channel, Gate gate);
-    void modifyGate(uint8_t channel, Gate gate);
-    void removeGate(uint8_t channel, uint8_t id);
-    void setPrismTime(uint8_t channel, uint8_t value);
-    void setTVG(uint8_t channel, TVGCurve * ptr);
-    void setDeviceMode(uint8_t modeIndex, uint8_t schemeIndex);
-
-    Device *getDevice() const;
+    void addGate(ChannelID channel, Gate gate);
+    void modifyGate(ChannelID channel, Gate gate);
+    void removeGate(ChannelID channel, uint8_t id);
+    void setPrismTime(ChannelID channel, uint8_t value);
+    void setTVG(ChannelID channel, TVGCurve * ptr);
+    void setDeviceMode(DeviceModeIndex modeIndex, SchemeIndex schemeIndex);
 
     ModeManager *getModeManager() const;
 
 signals:
-    //void drawAscan(QSharedPointer<AScanDrawData> scan);
-    //void drawBscan(QSharedPointer<BScanDrawData> scan);
     void drawDisplayPackage(QSharedPointer<DisplayPackage> package);
-    //void drawTVG(TVG tvg);
     void channelChanged(Channel * channel);
 
     void deviceErrorEnable();

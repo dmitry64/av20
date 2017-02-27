@@ -73,7 +73,7 @@
              <item>
               <layout class="QHBoxLayout" name="horizontalLayout_4">
                <property name="rightMargin">
-                <number>20</number>
+                <number>0</number>
                </property>
                <item>
                 <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -179,53 +179,6 @@
            <property name="bottomMargin">
             <number>2</number>
            </property>
-           <item>
-            <spacer name="verticalSpacer">
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>20</width>
-               <height>40</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item>
-            <widget class="QPushButton" name="cancelButton">
-             <property name="minimumSize">
-              <size>
-               <width>48</width>
-               <height>64</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>Cancel</string>
-             </property>
-             <property name="icon">
-              <iconset resource="../resources.qrc">
-               <normaloff>:/icons/resources/icons/sys_icon_delete_all.png</normaloff>:/icons/resources/icons/sys_icon_delete_all.png</iconset>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="applyButton">
-             <property name="minimumSize">
-              <size>
-               <width>48</width>
-               <height>64</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>Apply</string>
-             </property>
-             <property name="icon">
-              <iconset resource="../resources.qrc">
-               <normaloff>:/icons/resources/icons/sys_icon_check.png</normaloff>:/icons/resources/icons/sys_icon_check.png</iconset>
-             </property>
-            </widget>
-           </item>
           </layout>
          </item>
         </layout>

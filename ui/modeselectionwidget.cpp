@@ -23,7 +23,7 @@ void ModeSelectionWidget::setCore(Core *core)
 void ModeSelectionWidget::init()
 {
     Q_ASSERT(_core);
-    ModeManager * manager = _core->getModeManager();
+    const ModeManager * manager = _core->getModeManager();
     std::vector<DeviceMode*> modes = manager->modes();
     for(size_t i=0; i<modes.size(); i++) {
         ModeSelectionButton * button = new ModeSelectionButton();

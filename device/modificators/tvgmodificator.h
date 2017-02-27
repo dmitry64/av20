@@ -6,10 +6,10 @@
 
 class TVGModificator : public Modificator
 {
-    uint8_t _channel;
+    ChannelID _channel;
     TVGCurve * _curve;
 public:
-    TVGModificator(uint8_t channel, TVGCurve * curve);
+    TVGModificator(ChannelID channel, TVGCurve * curve);
     void apply(Core * core);
 };
 

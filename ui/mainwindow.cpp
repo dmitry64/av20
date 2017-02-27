@@ -96,7 +96,7 @@ void MainWindow::setCore(Core *core)
     ui->channelsWidget->setCore(core);
     _modeSelectionWidget->setCore(core);
     _modeSelectionWidget->init();
-
+    _calibrationsWidget->setCore(core);
 }
 
 void MainWindow::showEvent(QShowEvent *event)
@@ -281,6 +281,8 @@ void MainWindow::init()
     ui->bScanPage->init(calibration);
 
     ui->channelsWidget->init(calibration,tactTableSnapshot);
+
+    _calibrationsWidget->init(calibration);
 
     delete tactTableSnapshot;
     delete calibration;

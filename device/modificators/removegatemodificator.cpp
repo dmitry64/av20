@@ -1,6 +1,6 @@
 #include "removegatemodificator.h"
 
-RemoveGateModificator::RemoveGateModificator(uint8_t channel, uint8_t gateId)
+RemoveGateModificator::RemoveGateModificator(ChannelID channel, GateID gateId)
 {
     _channel = channel;
     _gateId = gateId;

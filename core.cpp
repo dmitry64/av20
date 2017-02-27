@@ -15,9 +15,18 @@ ChannelsCalibration * Core::getCalibrationsSnapshot()
     return _calibrationsSnapshot;
 }
 
+CalibrationsInfoList Core::getAvailableCalibrationsSnapshot()
+{
+    _calibrationsInfoSnapshotRequested.store(true);
+    while(_calibrationsInfoSnapshotRequested.load()) {
+        usleep(1);
+    }
+    return _calibrationsInfoListSnapshot;
+}
+
 TactTable *Core::getTactTable()
 {
-    return _currentMode->tactTables().at(_currentScheme);
+    return getCurrentDeviceMode()->tactTables().at(_currentScheme);
 }
 
 TactTable *Core::getTactTableSnapshot()
@@ -27,11 +36,6 @@ TactTable *Core::getTactTableSnapshot()
         usleep(1);
     }
     return _tactTableSnapshot;
-}
-
-Device *Core::getDevice() const
-{
-    return _device;
 }
 
 ModeManager *Core::getModeManager() const
@@ -57,6 +61,7 @@ Core::Core(ModeManager *modeManager, CalibrationManager * calibrationManager) : 
     _tactTableSnapshotRequested.store(false);
     _tactTableSnapshot = 0;
     _modeswitchRequested.store(false);
+    _calibrationsInfoSnapshotRequested.store(false);
     _deviceOverheat = false;
     _deviceError = false;
     _deviceConnectionError = false;
@@ -91,13 +96,17 @@ ChannelsCalibration *Core::getCalibration()
     return _currentCalibration;
 }
 
+DeviceMode *Core::getCurrentDeviceMode()
+{
+    return _modeManager->modes().at(_currentMode);
+}
+
 void Core::init()
 {
     _device->init();
-    _currentMode = _modeManager->modes().at(0);
-    Q_ASSERT(_currentMode);
+    _currentMode = 0;
     _currentScheme = 0;
-    _currentCalibration = _calibrationManager->getLastCalibrationByTactID(_currentMode->tactTables().at(_currentScheme)->getId());
+    _currentCalibration = _calibrationManager->getLastCalibrationByTactID(getCurrentDeviceMode()->tactTables().at(_currentScheme)->getId());
     Q_ASSERT(_currentCalibration);
     TactTable * current = getTactTable();
     Q_ASSERT(current);
@@ -250,9 +259,13 @@ void Core::snapshot()
         _calibrationsSnapshot = _currentCalibration->getSnapshot();
         _calibrationSnapshotRequested.store(false);
     }
-    if(_tactTableSnapshotRequested.load()){
+    if(_tactTableSnapshotRequested.load()) {
         _tactTableSnapshot = getTactTable()->getSnapshot();
         _tactTableSnapshotRequested.store(false);
+    }
+    if(_calibrationsInfoSnapshotRequested.load()) {
+        _calibrationsInfoListSnapshot = _calibrationManager->getCalibrationsInfoByTactID(getCurrentDeviceMode()->tactTables().at(_currentScheme)->getId());
+        _calibrationsInfoSnapshotRequested.store(false);
     }
 }
 
@@ -260,11 +273,10 @@ void Core::modeswitch()
 {
     if(_modeswitchRequested.load()) {
         _currentScheme = _requestedScheme;
-        _currentMode =  _modeManager->modes().at(_requestedMode);
-        Q_ASSERT(_currentMode);
+        _currentMode =  _requestedMode;
         _currentTact = 0;
         _currentTactCounter = 0;
-        _currentCalibration = _calibrationManager->getLastCalibrationByTactID(_currentMode->tactTables().at(_currentScheme)->getId());
+        _currentCalibration = _calibrationManager->getLastCalibrationByTactID(getCurrentDeviceMode()->tactTables().at(_currentScheme)->getId());
         Q_ASSERT(_currentCalibration);
         _device->resetDevice();
         applyCurrentCalibrationToDevice();
@@ -345,35 +357,35 @@ void Core::applyCurrentCalibrationToDevice()
     _device->applyCalibration(_currentCalibration, getTactTable());
 }
 
-void Core::addGate(uint8_t channel, Gate gate)
+void Core::addGate(ChannelID channel, Gate gate)
 {
     //qDebug() << "Add gate to channel" <<channel;
     AddGateModificator * mod = new AddGateModificator(channel,gate);
     addModificator(mod);
 }
 
-void Core::modifyGate(uint8_t channel, Gate gate)
+void Core::modifyGate(ChannelID channel, Gate gate)
 {
     //qDebug() << "Modify gate" << gate._id << "from channel" <<channel;
     GateModificator * mod = new GateModificator(channel,gate);
     addModificator(mod);
 }
 
-void Core::removeGate(uint8_t channel, uint8_t id)
+void Core::removeGate(ChannelID channel, uint8_t id)
 {
     //qDebug() << "Remove gate" << id << "from channel" <<channel;
     RemoveGateModificator * mod = new RemoveGateModificator(channel,id);
     addModificator(mod);
 }
 
-void Core::setPrismTime(uint8_t channel, uint8_t value)
+void Core::setPrismTime(ChannelID channel, uint8_t value)
 {
     //qDebug() << "Changing prism time ch =" << channel << "value =" <<value;
     PrismTimeModificator * mod = new PrismTimeModificator(channel,value);
     addModificator(mod);
 }
 
-void Core::setTVG(uint8_t channel, TVGCurve *ptr)
+void Core::setTVG(ChannelID channel, TVGCurve *ptr)
 {
     //qDebug() << "Changing tvg for ch =" <<channel;
     TVGCurve * curve = ptr->clone();
@@ -381,13 +393,13 @@ void Core::setTVG(uint8_t channel, TVGCurve *ptr)
     addModificator(mod);
 }
 
-void Core::setDeviceMode(uint8_t modeIndex, uint8_t schemeIndex)
+void Core::setDeviceMode(DeviceModeIndex modeIndex, SchemeIndex schemeIndex)
 {
     _requestedMode = modeIndex;
     _requestedScheme = schemeIndex;
     _modeswitchRequested.store(true);
     while(_modeswitchRequested.load()) {
-        usleep(10);
+        usleep(1);
     }
 }
 

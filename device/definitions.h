@@ -14,6 +14,19 @@
 #define ASCAN_SAMPLES_SIZE 800
 #define ASCAN_HEADER_SIZE 12
 
+typedef uint16_t TactID;
+typedef uint8_t ChannelID;
+typedef uint8_t DeviceModeIndex;
+typedef uint8_t SchemeIndex;
+typedef uint8_t GateID;
+
+struct CalibrationInfo{
+    uint16_t _id;
+    std::string _name;
+};
+
+typedef std::vector<CalibrationInfo> CalibrationsInfoList;
+
 enum ModeTypes {
     Unknown,
     SearchMode,
@@ -25,8 +38,6 @@ enum ModeTypes {
 enum TVGType {
     TVGSimple
 };
-
-
 
 struct TactRegisters {
     uint8_t _CR;
@@ -40,7 +51,6 @@ struct TactRegisters {
 struct TVG {
     uint8_t _samples[TVG_SAMPLES_BYTES];
 };
-
 
 #pragma pack(push, 1)
 struct AScanHeader {
@@ -90,7 +100,7 @@ struct Gate {
     uint16_t _start;
     uint16_t _finish;
     uint8_t _level;
-    uint8_t _id;
+    GateID _id;
 };
 
 struct DeviceStatus {

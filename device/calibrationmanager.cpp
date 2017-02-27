@@ -255,7 +255,7 @@ void CalibrationManager::init()
     initHandModeCalibration();
 }
 
-ChannelsCalibration *CalibrationManager::getLastCalibrationByTactID(uint16_t id)
+ChannelsCalibration *CalibrationManager::getLastCalibrationByTactID(TactID id)
 {
     if(_calibrations.find(id) != _calibrations.end()) {
         auto list = _calibrations.at(id);
@@ -266,9 +266,24 @@ ChannelsCalibration *CalibrationManager::getLastCalibrationByTactID(uint16_t id)
     }
 }
 
-std::vector<ChannelsCalibration *> CalibrationManager::getCalibrationsByTactID(uint16_t id)
+std::vector<ChannelsCalibration *> CalibrationManager::getCalibrationsByTactID(TactID id)
 {
     Q_ASSERT(false);
+}
+
+std::vector<CalibrationInfo> CalibrationManager::getCalibrationsInfoByTactID(TactID id)
+{
+    if(_calibrations.find(id) != _calibrations.end()) {
+        auto list = _calibrations.at(id);
+        std::vector<CalibrationInfo> result;
+        for(auto it = list->begin(); it!=list->end(); it++) {
+            result.push_back(it.operator*()->getInfo());
+        }
+        return result;
+    } else {
+        Q_ASSERT(false);
+        return std::vector<CalibrationInfo>();
+    }
 }
 
 void CalibrationManager::addCalibration(ChannelsCalibration *calibration)

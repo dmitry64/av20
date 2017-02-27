@@ -127,12 +127,12 @@ void AScanWidget::paintEvent(QPaintEvent *event)
     painter.drawPolygon(_polygon.data(),_polygon.size(),Qt::FillRule::OddEvenFill);
     double tvgStep = width/200.0;
     if(_tvgCurve!=0) {
-        QPoint tvgStart(left, (h - 32) - _tvgCurve->getSample(0)*(h-64)/2.0);
+        QPoint tvgStart(left, (h - 32) - _tvgCurve->getSample(0)*(h-64));
 
         painter.setPen(_tvgCurvePen);
         for(uint8_t i=0; i<200; i++) {
             int x = i*tvgStep + left;
-            int y = (h - 32) - _tvgCurve->getSample(static_cast<double>(i) / 200.0) * (h-64)/2.0 ;
+            int y = (h - 32) - _tvgCurve->getSample(static_cast<double>(i) / 200.0) * (h-64) ;
             QPoint tvgNext = QPoint(x,y);
             painter.drawLine(tvgStart,tvgNext);
             tvgStart = tvgNext;
@@ -140,18 +140,18 @@ void AScanWidget::paintEvent(QPaintEvent *event)
     }
 
     if(_tempCurve != 0) {
-        QPoint tvgStart(left, (h - 32) - _tempCurve->getSample(0)*(h-64)/2.0);
+        /*QPoint tvgStart(left, (h - 32) - _tempCurve->getSample(0)*(h-64)/2.0);
         painter.setPen(_tempCurvePen);
         for(uint8_t i=0; i<200; i++) {
             int x = i*tvgStep + left;
-            int y = (h - 32) - _tempCurve->getSample(static_cast<double>(i) / 200.0) * (h-64)/2.0 ;
+            int y = (h - 32) - _tempCurve->getSample(static_cast<double>(i) / 200.0) * (h-64);
             QPoint tvgNext = QPoint(x,y);
             painter.drawLine(tvgStart,tvgNext);
             tvgStart = tvgNext;
-        }
+        }*/
         auto referencePoints = _tempCurve->getReferencePoints();
         for(size_t i=0; i<referencePoints.size(); i++) {
-            QPoint p(left + referencePoints[i].first * (w - 64) ,(h - 32) - referencePoints[i].second * (h-64)/2.0);
+            QPoint p(left + referencePoints[i].first * (w - 64) ,(h - 32) - referencePoints[i].second * (h-64));
             painter.fillRect(QRect(p-QPoint(3,3),p+QPoint(3,3)),Qt::red);
         }
     }
