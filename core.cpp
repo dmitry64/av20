@@ -78,6 +78,7 @@ Core::Core(ModeManager *modeManager, CalibrationManager * calibrationManager) : 
     _tactTableSnapshot = 0;
     _modeswitchRequested.store(false);
     _calibrationsInfoSnapshotRequested.store(false);
+    _calibrationSwitchRequested.store(false);
     _deviceOverheat = false;
     _deviceError = false;
     _deviceConnectionError = false;
@@ -296,6 +297,11 @@ void Core::modeswitch()
         applyCurrentCalibrationToDevice();
         _modeswitchRequested.store(false);
     }
+    if(_calibrationSwitchRequested.load()) {
+        _currentCalibration.store(_requestedCalibration);
+        applyCurrentCalibrationToDevice();
+        _calibrationSwitchRequested.store(false);
+    }
 }
 
 void Core::finish()
@@ -415,5 +421,16 @@ void Core::setDeviceMode(DeviceModeIndex modeIndex, SchemeIndex schemeIndex)
     while(_modeswitchRequested.load()) {
         usleep(1);
     }
+    emit modeChanged();
+}
+
+void Core::switchCalibration(CalibrationIndex index)
+{
+    _requestedCalibration = index;
+    _calibrationSwitchRequested.store(true);
+    while(_calibrationSwitchRequested.load()){
+        usleep(1);
+    }
+    emit calibrationChanged();
 }
 

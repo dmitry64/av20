@@ -35,6 +35,9 @@ AScanWidget::~AScanWidget()
     for(size_t i=0; i<_channels.size(); i++) {
         delete _channels[i];
     }
+    if(_tvgCurve !=0) {
+        delete _tvgCurve;
+    }
     _channels.clear();
     delete ui;
 }
@@ -187,6 +190,9 @@ void AScanWidget::paintEvent(QPaintEvent *event)
 
 void AScanWidget::setChannelsInfo(std::vector<Channel *> channels)
 {
+    if(_tvgCurve !=0) {
+        delete _tvgCurve;
+    }
     _tvgCurve = 0;
     for(size_t i=0; i<_channels.size(); i++) {
         delete _channels.at(i);

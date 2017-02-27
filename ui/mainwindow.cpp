@@ -68,8 +68,10 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(_systemWidget,SIGNAL(reboot()),this,SLOT(onReboot()));
     connect(_systemWidget,SIGNAL(pause()),this,SLOT(onPause()));
 
-    connect(_modeSelectionWidget,SIGNAL(modeSelected(uint8_t,uint8_t)),this,SLOT(onModeChanged(uint8_t,uint8_t)));
+    connect(_modeSelectionWidget,SIGNAL(modeSelected(uint8_t,uint8_t)),this,SLOT(onModeChangeRequested(uint8_t,uint8_t)));
     connect(_modeSelectionWidget,SIGNAL(closeWindow()),this,SIGNAL(resetMenu()));
+    connect(_calibrationsWidget,SIGNAL(calibrationSelected()),this,SIGNAL(resetMenu()));
+
 }
 
 MainWindow::~MainWindow()
@@ -114,10 +116,20 @@ void MainWindow::onDisplayPackage(QSharedPointer<DisplayPackage> dp)
     emit drawDisplayPackage(dp);
 }
 
-void MainWindow::onModeChanged(uint8_t modeIndex, uint8_t tableIndex)
+void MainWindow::onModeChangeRequested(uint8_t modeIndex, uint8_t tableIndex)
 {
     reset();
     _core->setDeviceMode(modeIndex,tableIndex);
+    //init();
+}
+
+void MainWindow::onModeChanged()
+{
+    init();
+}
+
+void MainWindow::onCalibrationChanged()
+{
     init();
 }
 

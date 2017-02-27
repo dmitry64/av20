@@ -26,10 +26,12 @@ private:
     std::atomic_bool _tactTableSnapshotRequested;
     std::atomic_bool _calibrationsInfoSnapshotRequested;
     std::atomic_bool _modeswitchRequested;
+    std::atomic_bool _calibrationSwitchRequested;
 
     // Mode switch values
     DeviceModeIndex _requestedMode;
     SchemeIndex _requestedScheme;
+    CalibrationIndex _requestedCalibration;
 
     // Tact control
     uint8_t _currentTactCounter;
@@ -107,16 +109,17 @@ public:
     void setPrismTime(ChannelID channel, uint8_t value);
     void setTVG(ChannelID channel, TVGCurve * ptr);
     void setDeviceMode(DeviceModeIndex modeIndex, SchemeIndex schemeIndex);
-
+    void switchCalibration(CalibrationIndex index);
 
 
     SchemeIndex  getCurrentScheme() const;
     DeviceModeIndex getCurrentMode() const;
     CalibrationIndex getCurrentCalibration() const;
-
 signals:
     void drawDisplayPackage(QSharedPointer<DisplayPackage> package);
     void channelChanged(Channel * channel);
+    void modeChanged();
+    void calibrationChanged();
 
     void deviceErrorEnable();
     void deviceErrorDisable();

@@ -47,6 +47,7 @@ void CalibrationsWidget::init(ChannelsCalibration * calibration)
         ui->calibrationsLayout->addWidget(button);
         _buttons.push_back(button);
     }
+    _selectedIndex = calibration->getInfo()._id;
 
 }
 
@@ -62,7 +63,15 @@ CalibrationsWidget::~CalibrationsWidget()
 
 void CalibrationsWidget::onCalibrationSelected(CalibrationIndex index)
 {
-
+    _selectedIndex = index;
+    for(size_t i=0; i<_buttons.size(); i++) {
+        CalibrationButton * button = _buttons.at(i);
+        if(button->info()._id == index) {
+            button->setActive(true);
+        } else {
+            button->setActive(false);
+        }
+    }
 }
 
 void CalibrationsWidget::on_newButton_released()
@@ -77,5 +86,6 @@ void CalibrationsWidget::on_removeButton_released()
 
 void CalibrationsWidget::on_selectButton_2_released()
 {
-
+    _core->switchCalibration(_selectedIndex);
+    emit calibrationSelected();
 }

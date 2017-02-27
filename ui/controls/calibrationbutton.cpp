@@ -1,6 +1,11 @@
 #include "calibrationbutton.h"
 #include "ui_calibrationbutton.h"
 
+CalibrationInfo CalibrationButton::info() const
+{
+    return _info;
+}
+
 CalibrationButton::CalibrationButton(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::CalibrationButton)

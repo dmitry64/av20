@@ -207,6 +207,10 @@ void CalibrationManager::initHandModeCalibration()
 {
     ChannelsCalibration * cal1 = new ChannelsCalibration();
     cal1->setTactId(TACT_ID_HAND_SCHEME_1);
+    CalibrationInfo info;
+    info._id = 0;
+    info._name = "Default hand mode calibration";
+    cal1->setInfo(info);
     std::vector<Channel *> channels1;
     for(int i=0;i<3; i++) {
         Channel * chTemp = new Channel();
@@ -265,6 +269,7 @@ void CalibrationManager::initHandModeCalibration()
     addCalibration(cal1);
 
     ChannelsCalibration * cal2 = new ChannelsCalibration();
+    cal2->setInfo(info);
     cal2->setTactId(TACT_ID_HAND_SCHEME_2);
     std::vector<Channel *> channels2;
     for(int i=0;i<2; i++) {

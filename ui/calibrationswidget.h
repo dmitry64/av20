@@ -16,6 +16,7 @@ class CalibrationsWidget : public QWidget
 
     Core * _core;
     std::vector<CalibrationButton *> _buttons;
+    CalibrationIndex _selectedIndex;
 public:
     explicit CalibrationsWidget(QWidget *parent = 0);
     void init(ChannelsCalibration *calibration);
@@ -29,6 +30,9 @@ private slots:
     void on_newButton_released();
     void on_removeButton_released();
     void on_selectButton_2_released();
+
+signals:
+    void calibrationSelected();
 
 private:
     Ui::CalibrationsWidget *ui;

@@ -44,7 +44,9 @@ public:
 public slots:
     void onChannelChanged(Channel * channel);
     void onDisplayPackage(QSharedPointer<DisplayPackage> dp);
-    void onModeChanged(uint8_t modeIndex, uint8_t tableIndex);
+    void onModeChangeRequested(uint8_t modeIndex, uint8_t tableIndex);
+    void onModeChanged();
+    void onCalibrationChanged();
 
     // Menu handlers
     void onHelpMenuOpened();
@@ -74,7 +76,6 @@ public slots:
     void onShutdown();
     void onReboot();
     void onPause();
-
 
 
 signals:

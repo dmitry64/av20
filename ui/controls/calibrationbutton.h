@@ -21,6 +21,8 @@ public:
     ~CalibrationButton();
     void setCalibrationInfo(CalibrationInfo info);
     void setActive(bool status);
+    CalibrationInfo info() const;
+
 signals:
     void calibrationSelected(CalibrationIndex index);
 
