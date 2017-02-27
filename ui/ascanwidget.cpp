@@ -79,7 +79,7 @@ void AScanWidget::paintEvent(QPaintEvent *event)
     painter.drawLine(left,bottom,left,top);
 
     int scanScale = 10;
-    int scanScaleStep = height / scanScale;
+    double scanScaleStep = height / static_cast<double>(scanScale);
 
     for(uint16_t i=0; i<=scanScale; i++) {
         painter.drawLine(left-4,bottom - i * scanScaleStep,left,bottom - i * scanScaleStep);
@@ -91,7 +91,7 @@ void AScanWidget::paintEvent(QPaintEvent *event)
 
 
     int tvgScale = 10;
-    int tvgScaleStep = height / tvgScale;
+    double tvgScaleStep = height / static_cast<double>(tvgScale);
 
     for(uint16_t i=0; i<=tvgScale; i++) {
         painter.drawLine(right+4,bottom - i * tvgScaleStep,right,bottom - i * tvgScaleStep);

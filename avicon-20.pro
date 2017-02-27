@@ -150,7 +150,8 @@ HEADERS  += \
     device/tactid.h \
     ui/calibrationswidget.h \
     device/modificators/tvgmodificator.h \
-    ui/controls/calibrationbutton.h
+    ui/controls/calibrationbutton.h \
+    device/commonfunctions.h
 #    tests/coretest.h
 
 FORMS    += \

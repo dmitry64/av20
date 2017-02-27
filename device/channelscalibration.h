@@ -26,6 +26,7 @@ public:
     void setTactId(const TactID &tactId);
     void setChannels(const std::vector<Channel *> &channels);
     CalibrationInfo getInfo() const;
+    void setInfo(const CalibrationInfo &info);
 };
 
 #endif // CHANNELSCALIBRATION_H

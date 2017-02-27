@@ -22,6 +22,11 @@ CalibrationInfo ChannelsCalibration::getInfo() const
     return _info;
 }
 
+void ChannelsCalibration::setInfo(const CalibrationInfo &info)
+{
+    _info = info;
+}
+
 ChannelsCalibration::ChannelsCalibration()
 {
     _tactId = 0;

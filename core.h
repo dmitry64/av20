@@ -44,9 +44,9 @@ private:
     bool _deviceOverheat;
     bool _deviceError;
     bool _deviceConnectionError;
-    SchemeIndex _currentScheme;
-    ChannelsCalibration * _currentCalibration;
-    DeviceModeIndex _currentMode;
+    std::atomic<SchemeIndex> _currentScheme;
+    std::atomic<CalibrationIndex> _currentCalibration;
+    std::atomic<DeviceModeIndex> _currentMode;
 
     // Snapshots
     ChannelsCalibration * _calibrationsSnapshot;
@@ -71,6 +71,7 @@ public:
     ChannelsCalibration *getCalibration();
     void notifyChannel(Channel * channel);
     void applyCurrentCalibrationToDevice();
+    ModeManager *getModeManager() const;
 
     // External
     ChannelsCalibration *getCalibrationsSnapshot();
@@ -107,7 +108,11 @@ public:
     void setTVG(ChannelID channel, TVGCurve * ptr);
     void setDeviceMode(DeviceModeIndex modeIndex, SchemeIndex schemeIndex);
 
-    ModeManager *getModeManager() const;
+
+
+    SchemeIndex  getCurrentScheme() const;
+    DeviceModeIndex getCurrentMode() const;
+    CalibrationIndex getCurrentCalibration() const;
 
 signals:
     void drawDisplayPackage(QSharedPointer<DisplayPackage> package);

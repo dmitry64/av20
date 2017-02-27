@@ -36,7 +36,7 @@ void ChannelSelector::init(ChannelsCalibration *snapshot)
         ui->channelsLayout->addWidget(channelButton);
         _channelButtons.push_back(channelButton);
     }
-    _channelButtons[0]->setActive(true);
+    _channelButtons.at(0)->setActive(true);
 
     update();
 }

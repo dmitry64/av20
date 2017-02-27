@@ -67,7 +67,7 @@
               <normaloff>:/icons/resources/icons/arrows_glide_horizontal.png</normaloff>:/icons/resources/icons/arrows_glide_horizontal.png</iconset>
             </attribute>
             <attribute name="title">
-             <string>Single point</string>
+             <string>Two points</string>
             </attribute>
             <layout class="QVBoxLayout" name="verticalLayout_6">
              <item>

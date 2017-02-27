@@ -64,7 +64,7 @@ void BScanWidget::paintEvent(QPaintEvent *event)
     painter.drawRect(0,0,w - 32,bottom-1);
 
     double step = (w - 64) / static_cast<double>(_width);
-    double hstep = ( h / 200.0);
+    double hstep = ((h - 1.0) / 200.0);
 
     for(uint8_t n=0; n<_channels.size(); n++) {
         uint8_t chan = _channels[n]->index();
@@ -81,18 +81,18 @@ void BScanWidget::paintEvent(QPaintEvent *event)
             }
 
             for(uint16_t y=0; y<sam.size(); y++) {
-                uint16_t y1 = (sam[y]._begin) * hstep;
-                uint16_t y2 = (sam[y]._end) * hstep;
+                double y1 = static_cast<double>(sam[y]._begin) * hstep;
+                double y2 = static_cast<double>(sam[y]._end) * hstep;
                 uint8_t level = sam[y]._level;
-                painter.fillRect(QRectF(left + step*i,1 + y1,step, y2 - y1), QColor( level ,255 - level, 0 ));
+                painter.fillRect(QRectF(left + step*i,1.0 + y1,step, y2 - y1), QColor( level ,255 - level, 0 ));
             }
         }
 
         std::vector<Gate> gates = _channels.at(n)->rx()->gates();
 
         for(size_t i=0; i<gates.size(); i++) {
-            uint16_t y1 = (gates[i]._start) * hstep;
-            uint16_t y2 = (gates[i]._finish) * hstep;
+            uint16_t y1 = static_cast<double>(gates[i]._start) * hstep;
+            uint16_t y2 = static_cast<double>(gates[i]._finish) * hstep;
             uint16_t level = gates[i]._level;
             uint16_t offset = w - 32 + ((level/255.0) *32) + 1;
             painter.setPen(QPen(QColor( level ,255 - level, 0 ),2));

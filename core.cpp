@@ -43,14 +43,30 @@ ModeManager *Core::getModeManager() const
     return _modeManager;
 }
 
+SchemeIndex Core::getCurrentScheme() const
+{
+    return _currentScheme.load();
+}
+
+DeviceModeIndex Core::getCurrentMode() const
+{
+    return _currentMode.load();
+}
+
+CalibrationIndex Core::getCurrentCalibration() const
+{
+    return _currentCalibration.load();
+}
+
 Core::Core(ModeManager *modeManager, CalibrationManager * calibrationManager) : _active(true), _changesMutex(new QMutex())
 {
     Q_ASSERT(modeManager);
     Q_ASSERT(calibrationManager);
     _modeManager = modeManager;
-    _currentMode = 0;
     _device = new Device();
-    _currentScheme = 0;
+    _currentScheme.store(0);
+    _currentCalibration.store(0);
+    _currentMode.store(0);
     _calibrationManager = calibrationManager;
     _currentTactCounter = 0;
     _currentTact = 0;
@@ -93,26 +109,25 @@ void Core::stopCore()
 
 ChannelsCalibration *Core::getCalibration()
 {
-    return _currentCalibration;
+    return _calibrationManager->getCalibrationsByTactID(getCurrentDeviceMode()->tactTables().at(_currentScheme)->getId()).at(_currentCalibration.load());
 }
 
 DeviceMode *Core::getCurrentDeviceMode()
 {
-    return _modeManager->modes().at(_currentMode);
+    return _modeManager->modes().at(_currentMode.load());
 }
 
 void Core::init()
 {
     _device->init();
-    _currentMode = 0;
-    _currentScheme = 0;
-    _currentCalibration = _calibrationManager->getLastCalibrationByTactID(getCurrentDeviceMode()->tactTables().at(_currentScheme)->getId());
-    Q_ASSERT(_currentCalibration);
+    _currentScheme.store(0);
+    _currentCalibration.store(0);
+    _currentMode.store(0);
     TactTable * current = getTactTable();
     Q_ASSERT(current);
     _currentTact = current->getTactIndexByCounter(_currentTactCounter);
     Q_ASSERT(_currentTact<8);
-    _device->applyCalibration(_currentCalibration, current);
+    _device->applyCalibration(getCalibration(), current);
 }
 
 void Core::check()
@@ -207,7 +222,7 @@ void Core::aScanProcess(uint8_t line)
     dp->ascan._markerPos = pos;
     dp->ascan._markerValue = max;
 
-    std::vector<Gate> gates = _currentCalibration->getChannel(dp->bscan._channel)->rx()->gates();
+    std::vector<Gate> gates = getCalibration()->getChannel(dp->bscan._channel)->rx()->gates();
 
     for(size_t j=0; j<gates.size(); j++) {
         Gate gate = gates[j];
@@ -256,7 +271,7 @@ void Core::sync()
 void Core::snapshot()
 {
     if(_calibrationSnapshotRequested.load()) {
-        _calibrationsSnapshot = _currentCalibration->getSnapshot();
+        _calibrationsSnapshot = getCalibration()->getSnapshot();
         _calibrationSnapshotRequested.store(false);
     }
     if(_tactTableSnapshotRequested.load()) {
@@ -272,12 +287,11 @@ void Core::snapshot()
 void Core::modeswitch()
 {
     if(_modeswitchRequested.load()) {
-        _currentScheme = _requestedScheme;
-        _currentMode =  _requestedMode;
+        _currentScheme.store(_requestedScheme);
+        _currentMode.store(_requestedMode);
         _currentTact = 0;
         _currentTactCounter = 0;
-        _currentCalibration = _calibrationManager->getLastCalibrationByTactID(getCurrentDeviceMode()->tactTables().at(_currentScheme)->getId());
-        Q_ASSERT(_currentCalibration);
+        _currentCalibration.store(0);
         _device->resetDevice();
         applyCurrentCalibrationToDevice();
         _modeswitchRequested.store(false);
@@ -354,7 +368,7 @@ void Core::notifyChannel(Channel *channel)
 
 void Core::applyCurrentCalibrationToDevice()
 {
-    _device->applyCalibration(_currentCalibration, getTactTable());
+    _device->applyCalibration(getCalibration(), getTactTable());
 }
 
 void Core::addGate(ChannelID channel, Gate gate)

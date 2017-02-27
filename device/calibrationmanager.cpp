@@ -6,6 +6,10 @@ void CalibrationManager::initSearchModeCalibration()
 {
     ChannelsCalibration * cal1 = new ChannelsCalibration();
     cal1->setTactId(TACT_ID_SEARCH_SCHEME_1);
+    CalibrationInfo info;
+    info._id = 0;
+    info._name = "Default calibration";
+    cal1->setInfo(info);
     std::vector<Channel *> channels1;
     for(int i=0;i<8; i++) {
         Channel * chTemp = new Channel();
@@ -268,7 +272,17 @@ ChannelsCalibration *CalibrationManager::getLastCalibrationByTactID(TactID id)
 
 std::vector<ChannelsCalibration *> CalibrationManager::getCalibrationsByTactID(TactID id)
 {
-    Q_ASSERT(false);
+    if(_calibrations.find(id) != _calibrations.end()) {
+        auto list = _calibrations.at(id);
+        std::vector<ChannelsCalibration *> result;
+        for(auto it = list->begin(); it!=list->end(); it++) {
+            result.push_back(it.operator*());
+        }
+        return result;
+    } else {
+        Q_ASSERT(false);
+        return std::vector<ChannelsCalibration *>();
+    }
 }
 
 std::vector<CalibrationInfo> CalibrationManager::getCalibrationsInfoByTactID(TactID id)

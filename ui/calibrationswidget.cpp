@@ -12,7 +12,25 @@ void CalibrationsWidget::init(ChannelsCalibration * calibration)
 {
     Q_ASSERT(_core);
 
+    ModeManager * manager = _core->getModeManager();
+
+    DeviceModeIndex mode = _core->getCurrentMode();
+    SchemeIndex scheme = _core->getCurrentScheme();
+
+    ModeTypes modeType = manager->modes().at(mode)->type();
+    TactID tactid = manager->modes().at(mode)->tactTables().at(scheme)->getId();
+
+    ui->modeLabel->setText(QString::number(modeType));
+    ui->schemeLabel->setText(QString::number(tactid));
+
     CalibrationsInfoList info =  _core->getAvailableCalibrationsSnapshot();
+
+    for(size_t i=0; i<_buttons.size(); i++) {
+        CalibrationButton * button = _buttons.at(i);
+        ui->calibrationsLayout->removeWidget(button);
+        delete button;
+    }
+    _buttons.clear();
 
     for(size_t i=0; i<info.size(); i++) {
         CalibrationButton * button = new CalibrationButton();
@@ -38,4 +56,19 @@ void CalibrationsWidget::setCore(Core *core)
 CalibrationsWidget::~CalibrationsWidget()
 {
     delete ui;
+}
+
+void CalibrationsWidget::on_newButton_released()
+{
+
+}
+
+void CalibrationsWidget::on_removeButton_released()
+{
+
+}
+
+void CalibrationsWidget::on_selectButton_2_released()
+{
+
 }

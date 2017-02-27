@@ -84,7 +84,7 @@ DeviceMode *ModeManager::generateHandMode()
 {
     DeviceMode * mode = new DeviceMode();
 
-    mode->setType(ModeTypes::SearchMode);
+    mode->setType(ModeTypes::HandMode);
     std::vector<TactTable *> tactTables;
 
     TactTable * table1 = new TactTable();
