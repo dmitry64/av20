@@ -5,6 +5,7 @@
 #include <queue>
 #include <map>
 #include "device/definitions.h"
+#include "device/commonfunctions.h"
 #include "device/channel/channel.h"
 
 namespace Ui {

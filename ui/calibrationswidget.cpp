@@ -27,6 +27,7 @@ void CalibrationsWidget::init(ChannelsCalibration * calibration)
 
     for(size_t i=0; i<_buttons.size(); i++) {
         CalibrationButton * button = _buttons.at(i);
+        disconnect(button,SIGNAL(calibrationSelected(CalibrationIndex)),this,SLOT(onCalibrationSelected(CalibrationIndex)));
         ui->calibrationsLayout->removeWidget(button);
         delete button;
     }
@@ -34,6 +35,7 @@ void CalibrationsWidget::init(ChannelsCalibration * calibration)
 
     for(size_t i=0; i<info.size(); i++) {
         CalibrationButton * button = new CalibrationButton();
+        connect(button,SIGNAL(calibrationSelected(CalibrationIndex)),this,SLOT(onCalibrationSelected(CalibrationIndex)));
         CalibrationInfo calibInfo = info.at(i);
         button->setCalibrationInfo(calibInfo);
         if(calibration->getInfo()._id == calibInfo._id) {
@@ -56,6 +58,11 @@ void CalibrationsWidget::setCore(Core *core)
 CalibrationsWidget::~CalibrationsWidget()
 {
     delete ui;
+}
+
+void CalibrationsWidget::onCalibrationSelected(CalibrationIndex index)
+{
+
 }
 
 void CalibrationsWidget::on_newButton_released()

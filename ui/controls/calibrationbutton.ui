@@ -36,6 +36,9 @@
        <pointsize>12</pointsize>
       </font>
      </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
      <property name="text">
       <string>ID</string>
      </property>

@@ -35,3 +35,8 @@ void CalibrationButton::setActive(bool status)
         ui->calibrationButton->setPalette(palette);
     }
 }
+
+void CalibrationButton::on_calibrationButton_released()
+{
+    emit calibrationSelected(_info._id);
+}

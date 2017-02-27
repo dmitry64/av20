@@ -21,6 +21,11 @@ public:
     ~CalibrationButton();
     void setCalibrationInfo(CalibrationInfo info);
     void setActive(bool status);
+signals:
+    void calibrationSelected(CalibrationIndex index);
+
+private slots:
+    void on_calibrationButton_released();
 
 private:
     Ui::CalibrationButton *ui;

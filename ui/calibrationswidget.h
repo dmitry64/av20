@@ -22,11 +22,12 @@ public:
     void setCore(Core * core);
     ~CalibrationsWidget();
 
+
+
 private slots:
+    void onCalibrationSelected(CalibrationIndex index);
     void on_newButton_released();
-
     void on_removeButton_released();
-
     void on_selectButton_2_released();
 
 private:

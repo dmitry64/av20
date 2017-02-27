@@ -65,14 +65,14 @@ void FakeSPI::setAScanForLine1(uint8_t *dest)
     dest[7] = 0;
 
     for(int i=0; i<ASCAN_SAMPLES_SIZE; i++) {
-        double x = (i + sin(ascanL1Counter2/9.0) * 120.14 + (chan-4.0) * 50.0 - 400.0) / 8.0 ;
+        double x = (i + sin(ascanL1Counter2/9.0) * 120.14 + (chan-4.0) * 50.0 - 400.0) / 16.0 ;
         double res = 127.0;
         if(x!=0) {
             res = std::max((((sin(x)/x) + 1)/2.0)*255.0 - 128.0 ,0.0);
         }
 
         res *= getTVGSample2( tvg._samples, i/4) / 127.0;
-        res *= (1.3 * (ascanL1Counter2 % 255) + 60.0)/255.0 ;
+        res *= (2.3 * (ascanL1Counter2 % 255) + 60.0)/255.0 ;
         int val = round(res);
         unsigned char sh = val;
         dest[i+ASCAN_HEADER_SIZE] = sh;
@@ -126,9 +126,6 @@ void FakeSPI::run()
 
         _specialCounter++;
     }
-
-
-
 }
 
 FakeSPI::FakeSPI() : DeviceInterface()
@@ -146,38 +143,47 @@ void FakeSPI::init()
     start();
 }
 
-
 void FakeSPI::getRegister(uint8_t reg, uint32_t length, uint8_t *dest)
 {
     switch(reg) {
     case 0x00:
+        Q_ASSERT(length==1);
         dest[0] = 0x00;
         break;
     case 0x01:
+        Q_ASSERT(length==1);
         dest[0] = 0xFF;
         break;
     case 0x02:
+        Q_ASSERT(length==1);
         dest[0] = 0xAE;
         break;
     case 0x03:
+        Q_ASSERT(length==1);
         dest[0] = _state.USM_SR();
         break;
     case 0x04:
+        Q_ASSERT(length==1);
         dest[0] = _state.USM_CR();
         break;
     case 0x05:
+        Q_ASSERT(length==1);
         dest[0] = _state.TRG_CR();
         break;
     case 0x06:
+        Q_ASSERT(length==1);
         dest[0] = _state.TRG_DS();
         break;
     case 0x07:
+        Q_ASSERT(length==1);
         dest[0] = _state.TRG_TS();
         break;
     case 0x08:
+        Q_ASSERT(length==1);
         dest[0] = _state.PWR_CR();
         break;
     case 0x09:
+        Q_ASSERT(length==1);
         dest[0] = _state.ODO_CR();
         break;
     case 0x7C:

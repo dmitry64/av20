@@ -9,7 +9,7 @@ void GateController::updateGate()
     ui->gateLevel->setValue(_gate._level);
     ui->gateButton->setText("Gate: "+QString::number(_gate._start)+"-"+QString::number(_gate._finish)+"\n"+
                             "Level: "+QString::number(_gate._level));
-    ui->gateIcon->setColor(QColor( _gate._level ,255 - _gate._level, 0 ));
+    ui->gateIcon->setColor(getColorByLevel(_gate._level));//QColor( _gate._level ,255 - _gate._level, 0 ));
     update();
 }
 
@@ -24,7 +24,7 @@ GateController::GateController(QWidget *parent) :
     ui->gateFinish->setSuffix("us");
     ui->gateLevel->setName("Gate level");
     ui->gateLevel->setSuffix("mV");
-    ui->gateLevel->setMax(100);
+    ui->gateLevel->setMax(255);
     ui->gateIcon->setIcon(QIcon(":/icons/resources/icons/arrows_fit_horizontal.png"));
     ui->gateIcon->setColor(Qt::red);
     ui->gateStart->hide();

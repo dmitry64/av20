@@ -34,6 +34,9 @@
      <property name="title">
       <string>Sub-modes</string>
      </property>
+     <property name="flat">
+      <bool>true</bool>
+     </property>
      <layout class="QVBoxLayout" name="verticalLayout">
       <property name="leftMargin">
        <number>2</number>

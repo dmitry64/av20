@@ -161,7 +161,8 @@ void AScanWidget::paintEvent(QPaintEvent *event)
         for(uint8_t j=0; j<_channels.at(i)->rx()->gates().size(); j++) {
             Gate gate = _channels.at(i)->rx()->gates()[j];
             int level = bottom - (gate._level * ((h-64)/255.0));
-            painter.setPen(QPen(QColor( gate._level ,255 - gate._level, 0 ), 3));
+            //painter.setPen(QPen(QColor( gate._level ,255 - gate._level, 0 ), 3));
+            painter.setPen(QPen(getColorByLevel(gate._level),3));
             painter.drawLine(left + gate._start * scaleStep,level,left + gate._finish* scaleStep, level);
             painter.drawLine(left + gate._start * scaleStep,level,left + gate._start * scaleStep - 5, level + 5);
             painter.drawLine(left + gate._start * scaleStep,level,left + gate._start * scaleStep - 5, level - 5);

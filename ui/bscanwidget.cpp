@@ -84,7 +84,7 @@ void BScanWidget::paintEvent(QPaintEvent *event)
                 double y1 = static_cast<double>(sam[y]._begin) * hstep;
                 double y2 = static_cast<double>(sam[y]._end) * hstep;
                 uint8_t level = sam[y]._level;
-                painter.fillRect(QRectF(left + step*i,1.0 + y1,step, y2 - y1), QColor( level ,255 - level, 0 ));
+                painter.fillRect(QRectF(left + step*i,1.0 + y1,step, y2 - y1), getColorByLevel(level));
             }
         }
 
@@ -93,9 +93,9 @@ void BScanWidget::paintEvent(QPaintEvent *event)
         for(size_t i=0; i<gates.size(); i++) {
             uint16_t y1 = static_cast<double>(gates[i]._start) * hstep;
             uint16_t y2 = static_cast<double>(gates[i]._finish) * hstep;
-            uint16_t level = gates[i]._level;
+            uint8_t level = gates[i]._level;
             uint16_t offset = w - 32 + ((level/255.0) *32) + 1;
-            painter.setPen(QPen(QColor( level ,255 - level, 0 ),2));
+            painter.setPen(QPen(getColorByLevel(level),2));//QColor( level ,255 - level, 0 ),2));
             painter.drawLine(offset,y1,offset,y2);
         }
     }

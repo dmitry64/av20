@@ -4,6 +4,7 @@
 #include <QWidget>
 
 #include "device/definitions.h"
+#include "device/commonfunctions.h"
 
 namespace Ui {
 class GateController;
