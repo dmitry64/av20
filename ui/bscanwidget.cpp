@@ -24,7 +24,7 @@ BScanWidget::BScanWidget(QWidget *parent) :
     ui(new Ui::BScanWidget)
 {
     ui->setupUi(this);
-    _width = 800;
+    _width = 1000;
 
     for(int i=0; i<MAX_CHANNELS_COUNT; i++) {
         std::pair< std::vector< std::vector<BScanDrawSample> > , int> pair;
@@ -35,7 +35,7 @@ BScanWidget::BScanWidget(QWidget *parent) :
 
     _restrictedToChannel = false;
 
-    _end = 799;
+    _end = 999;
 }
 
 BScanWidget::~BScanWidget()
@@ -90,7 +90,7 @@ void BScanWidget::paintEvent(QPaintEvent *event)
                 const BScanDrawSample & sample = sam[y];
                 const double y1 = static_cast<double>(sample._begin) * hstep;
                 const double y2 = static_cast<double>(sample._end) * hstep;
-                painter.fillRect(QRectF(left + step*i,1.0 + y1,step, y2 - y1), getColorByLevel(sample._level));
+                painter.fillRect(QRectF(static_cast<double>(left) + step*i,1.0 + y1, step, y2 - y1), getColorByLevel(sample._level));
             }
         }
 

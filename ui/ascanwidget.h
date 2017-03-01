@@ -45,7 +45,7 @@ private:
     void drawGates(QPainter &painter, int width, int height, int left, int bottom);
     void drawAscan(QPainter &painter, int width, int height, int left, int bottom, int right);
     void drawMarker(QPainter &painter, int width, int height, int left, int bottom);
-    void drawFps(QPainter &painter, int width);
+    void drawFps(QPainter &painter, int posx, int posy);
 
 public:
     explicit AScanWidget(QWidget *parent = 0);
