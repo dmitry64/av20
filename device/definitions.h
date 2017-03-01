@@ -15,6 +15,7 @@
 #define ASCAN_HEADER_SIZE 12
 
 typedef uint16_t TactID;
+typedef uint8_t TactIndex;
 typedef uint8_t ChannelID;
 typedef uint8_t DeviceModeIndex;
 typedef uint8_t SchemeIndex;

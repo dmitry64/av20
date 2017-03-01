@@ -4,7 +4,7 @@
 #include "spi/deviceinterface.h"
 #include "spi/driverspi.h"
 #include "spi/fakespi.h"
-#include "devicestate.h"
+#include "commonfunctions.h"
 #include <vector>
 #include "channelscalibration.h"
 #include "tvg/tvgcurve.h"
@@ -15,7 +15,6 @@ class Device
 private:
     TactRegisters getRegistersByTact(uint8_t index, ChannelsCalibration *mode, TactTable *tactTable);
     TVG getTVGFromCurve(TVGCurve * curve);
-    void setBit(uint8_t * ptr, int bit, uint8_t val);
 public:
     Device();
     void init();
@@ -28,6 +27,7 @@ public:
     void setProgTrigger(bool enabled);
     DeviceStatus getDeviceStatus();
     void setTVG(int chIndex, TVG tvg);
+    void setTact(TactRegisters reg, TactIndex index);
     AScan getAscanForLine(uint8_t line, AScan * output);
     uint8_t getVersion();
 

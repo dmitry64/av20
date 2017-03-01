@@ -20,6 +20,7 @@ class AScanWidget : public QWidget
     std::atomic_bool _ready;
     uint16_t _markerPos;
     uint16_t _markerValue;
+    uint16_t _scale;
     std::vector<QPoint> _points;
     //std::vector<QPoint> _tvg;
     std::vector<QPointF> _polygon;
@@ -28,8 +29,6 @@ class AScanWidget : public QWidget
 
     TVGCurve * _tvgCurve;
 
-    TVGCurve * _tempCurve;
-
     QPen _tvgCurvePen;
     QPen _tempCurvePen;
     QPen _ascanPen;
@@ -37,14 +36,21 @@ class AScanWidget : public QWidget
 
 private:
     void setTVGCurve(TVGCurve * curve);
+    void drawTimeScale(QPainter & painter, int width, int bottom, int left);
+    void drawScanScale(QPainter & painter, int left, int bottom, int top, int height);
+    void drawTvgScale(QPainter & painter, int right, int bottom, int top, int height);
+    void drawTvgCurve(QPainter & painter, int width, int left, int bottom, int height);
+    void drawGates(QPainter &painter, int width, int height, int left, int bottom);
+    void drawAscan(QPainter &painter, int width, int height, int left, int bottom, int right);
+    void drawMarker(QPainter &painter, int width, int height, int left, int bottom);
+    void drawFps(QPainter &painter, int width);
 
 public:
     explicit AScanWidget(QWidget *parent = 0);
     ~AScanWidget();
     void paintEvent(QPaintEvent * event);
     void setChannelsInfo(std::vector<Channel*> channels);
-    void drawTempTVG(TVGCurve * curve);
-    void applyTempCurve();
+    //void applyTempCurve();
     void reset();
 public slots:
     void onAScan(AScanDrawData * scan);

@@ -14,7 +14,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QPalette palette;
     palette.setColor(QPalette::Button, QColor(100,100,100,200));
     _backgroundWidget->setPalette(palette);
-    _backgroundWidget->setGeometry(0,0,1024,800);
+    _backgroundWidget->setGeometry(0,0,2048,2048);
     _backgroundWidget->hide();
     connect(_backgroundWidget,SIGNAL(pressed()),ui->menuWidget,SLOT(resetMenu()));
 

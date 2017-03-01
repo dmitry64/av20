@@ -2,22 +2,16 @@
 #include <QDebug>
 #include "math.h"
 
-
-uint8_t getBitFromByteArray2(uint8_t * ptr, int bit) {
-    int b = bit / 8;
-    return (ptr[b] >> (bit % 8)) & 0b00000001;
-}
-
-uint8_t getTVGSample2(uint8_t * ptr, int sampleNum) {
+uint8_t getTVGSample(uint8_t * ptr, int sampleNum) {
     int bit = sampleNum * 7;
     uint8_t res = 0x00;
-    res |= getBitFromByteArray2(ptr,bit);
-    res |= getBitFromByteArray2(ptr,bit+1) << 1;
-    res |= getBitFromByteArray2(ptr,bit+2) << 2;
-    res |= getBitFromByteArray2(ptr,bit+3) << 3;
-    res |= getBitFromByteArray2(ptr,bit+4) << 4;
-    res |= getBitFromByteArray2(ptr,bit+5) << 5;
-    res |= getBitFromByteArray2(ptr,bit+6) << 6;
+    res |= getBitFromByteArray(ptr,bit);
+    res |= getBitFromByteArray(ptr,bit+1) << 1;
+    res |= getBitFromByteArray(ptr,bit+2) << 2;
+    res |= getBitFromByteArray(ptr,bit+3) << 3;
+    res |= getBitFromByteArray(ptr,bit+4) << 4;
+    res |= getBitFromByteArray(ptr,bit+5) << 5;
+    res |= getBitFromByteArray(ptr,bit+6) << 6;
     return res;
 }
 
@@ -71,7 +65,7 @@ void FakeSPI::setAScanForLine1(uint8_t *dest)
             res = std::max((((sin(x)/x) + 1)/2.0)*255.0 - 128.0 ,0.0);
         }
 
-        res *= getTVGSample2( tvg._samples, i/4) / 127.0;
+        res *= getTVGSample( tvg._samples, i/4) / 127.0;
         res *= (2.3 * (ascanL1Counter2 % 255) + 60.0)/255.0 ;
         int val = round(res);
         unsigned char sh = val;
@@ -103,7 +97,7 @@ void FakeSPI::setAScanForLine2(uint8_t *dest)
             res = std::max((((sin(x)/x) + 1)/2.0)*255.0 - 128.0 ,0.0);
         }
 
-        res *= getTVGSample2( tvg._samples, i/4) / 127.0;
+        res *= getTVGSample( tvg._samples, i/4) / 127.0;
         res *= (1.3 * (ascanL2Counter2 % 255) + 60.0)/255.0 ;
         int val = round(res);
         unsigned char sh = val;

@@ -68,7 +68,7 @@ std::vector<Tact *> TactTable::getTactTable() const
     return _tactTable;
 }
 
-uint8_t TactTable::getTactIndexByCounter(uint8_t counter) const
+TactIndex TactTable::getTactIndexByCounter(uint8_t counter) const
 {
     uint8_t num = 0;
     for(int i=0; i<MAX_TACTS_COUNT; i++) {

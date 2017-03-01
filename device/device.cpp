@@ -52,10 +52,6 @@ TactRegisters Device::getRegistersByTact(uint8_t index, ChannelsCalibration * mo
 }
 
 
-void Device::setBit(uint8_t * ptr, int bit, uint8_t val) {
-    uint8_t prev = ptr[bit/8];
-    ptr[bit/8] |= (((prev >> (bit % 8)) | val) << (bit % 8));
-}
 
 TVG Device::getTVGFromCurve(TVGCurve *curve)
 {
@@ -82,7 +78,7 @@ TVG Device::getTVGFromCurve(TVGCurve *curve)
     return tvg;
 }
 
-Device::Device() //:  //_state(state)
+Device::Device()
 {
 #ifdef FAKESPI
     _spi = new FakeSPI();
@@ -118,25 +114,16 @@ void Device::resetConfigRegisters()
     uint8_t trg_cr_send = 0b00000001;
     if(_spi->setAndTestRegister(0x05, 1, &trg_cr_send)) {
         qFatal("TRG_CR Initialization failed!");
-    } else {
-       // qDebug() << "TRG_CR initialized!";
-        //_state->setTRG_CR(trg_cr_send);
     }
 
     uint8_t trg_ds_send = 0b00000000;
     if(_spi->setAndTestRegister(0x06, 1, &trg_ds_send)) {
         qFatal("TRG_DS Initialization failed!");
-    } else {
-        //qDebug() << "TRG_DS initialized!";
-        //_state->setTRG_DS(trg_ds_send);
     }
 
     uint8_t trg_ts_send = 0b00000000;
     if(_spi->setAndTestRegister(0x07, 1, &trg_ts_send)) {
         qFatal("TRG_TS Initialization failed!");
-    } else {
-        //qDebug() << "TRG_TS initialized!";
-        //_state->setTRG_TS(trg_ts_send);
     }
 }
 
@@ -168,7 +155,6 @@ void Device::resetChannelsTable()
                 qFatal("Initialization failed!");
             }
         }
-       // qDebug() << "Channels table for ch #" << j + 1 << "initialized!";
         TactRegisters tact;
         tact._CR = 0;
         tact._PULSER1 = 0;
@@ -176,7 +162,7 @@ void Device::resetChannelsTable()
         tact._RESERVED = 0;
         tact._TR1 = 0;
         tact._TR2 = 0;
-        //_state->setChannelsTableTact(j,tact);
+        setTact(tact,j);
     }
 }
 
@@ -209,34 +195,9 @@ void Device::applyCalibration(ChannelsCalibration *calibration, TactTable *tactT
         }
     }
     for(int k=0; k<tactTable->getMaxTacts(); k++) {
-        int j = tactTable->getTactIndexByCounter(k);
+        TactIndex j = tactTable->getTactIndexByCounter(k);
         TactRegisters tr = getRegistersByTact(j,calibration,tactTable);
-
-        if(_spi->setAndTestRegister(0x10+j*6,1,&tr._CR)) {
-            qFatal("Unable to set register");
-        }
-
-        if(_spi->setAndTestRegister(0x10+j*6+1,1,&tr._TR1)) {
-            qFatal("Unable to set register");
-        }
-
-        if(_spi->setAndTestRegister(0x10+j*6+2,1,&tr._PULSER1)) {
-            qFatal("Unable to set register");
-        }
-
-        if(_spi->setAndTestRegister(0x10+j*6+3,1,&tr._TR2)) {
-            qFatal("Unable to set register");
-        }
-
-        if(_spi->setAndTestRegister(0x10+j*6+4,1,&tr._PULSER2)) {
-            qFatal("Unable to set register");
-        }
-
-        if(_spi->setAndTestRegister(0x10+j*6+5,1,&tr._RESERVED)) {
-            qFatal("Unable to set register");
-        }
-
-       // qDebug() << "Channels table for ch #" << j + 1 << " loaded!";
+        setTact(tr,j);
     }
 }
 
@@ -249,7 +210,6 @@ void Device::setProgTrigger(bool enabled)
         val = 0b00000000;
     }
     _spi->setRegister(0x05,1,&val);
-    //_state->setTRG_CR(val);
 }
 
 DeviceStatus Device::getDeviceStatus()
@@ -269,6 +229,30 @@ void Device::setTVG(int chIndex, TVG tvg)
     Q_ASSERT(chIndex < 8);
     _spi->setRegister(0x40 + chIndex,TVG_SAMPLES_BYTES,tvg._samples);
     //_state->setTVGForChannel(chIndex,tvg);
+}
+
+void Device::setTact(TactRegisters reg, TactIndex index)
+{
+    Q_ASSERT(index<8);
+    if(_spi->setAndTestRegister(0x10+index*6,1,&reg._CR)) {
+        Q_ASSERT(false);
+    }
+    if(_spi->setAndTestRegister(0x10+index*6+1,1,&reg._TR1)) {
+        Q_ASSERT(false);
+    }
+    if(_spi->setAndTestRegister(0x10+index*6+2,1,&reg._PULSER1)){
+        Q_ASSERT(false);
+    }
+    if(_spi->setAndTestRegister(0x10+index*6+3,1,&reg._TR2)){
+        Q_ASSERT(false);
+    }
+    if(_spi->setAndTestRegister(0x10+index*6+4,1,&reg._PULSER2)){
+        Q_ASSERT(false);
+    }
+    if(_spi->setAndTestRegister(0x10+index*6+5,1,&reg._RESERVED)){
+        Q_ASSERT(false);
+    }
+
 }
 
 AScan Device::getAscanForLine(uint8_t line, AScan * output)
