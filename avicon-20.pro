@@ -188,3 +188,6 @@ FORMS    += \
 
 RESOURCES += \
     resources.qrc
+
+DISTFILES += \
+    style.astylerc
