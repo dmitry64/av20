@@ -11,7 +11,7 @@ void CalibrationManager::initSearchModeCalibration()
     info._name = "Default calibration";
     cal1->setInfo(info);
     std::vector<Channel *> channels1;
-    for(int i=0;i<8; i++) {
+    for(int i=0; i<8; i++) {
         Channel * chTemp = new Channel();
         RxChannel * rx = new RxChannel();
         TxChannel * tx = new TxChannel();
@@ -44,28 +44,28 @@ void CalibrationManager::initSearchModeCalibration()
         rx->setGates(gates);
 
         switch (i) {
-            case 0:
+        case 0:
             chTemp->setColor(255,30,30);
             break;
-            case 1:
+        case 1:
             chTemp->setColor(30,255,30);
             break;
-            case 2:
+        case 2:
             chTemp->setColor(255,30,255);
             break;
-            case 3:
+        case 3:
             chTemp->setColor(255,128,128);
             break;
-            case 4:
+        case 4:
             chTemp->setColor(255,255,30);
             break;
-            case 5:
+        case 5:
             chTemp->setColor(30,255,255);
             break;
-            case 6:
+        case 6:
             chTemp->setColor(128,128,255);
             break;
-            case 7:
+        case 7:
             chTemp->setColor(30,30,255);
             break;
         }
@@ -83,7 +83,7 @@ void CalibrationManager::initSearchModeCalibration()
     info._name = "Default calibration";
     cal2->setInfo(info);
     std::vector<Channel *> channels2;
-    for(int i=0;i<8; i++) {
+    for(int i=0; i<8; i++) {
         Channel * chTemp = new Channel();
         RxChannel * rx = new RxChannel();
         TxChannel * tx = new TxChannel();
@@ -106,28 +106,28 @@ void CalibrationManager::initSearchModeCalibration()
         rx->setGates(gates);
 
         switch (i) {
-            case 0:
+        case 0:
             chTemp->setColor(255,30,30);
             break;
-            case 1:
+        case 1:
             chTemp->setColor(30,255,30);
             break;
-            case 2:
+        case 2:
             chTemp->setColor(255,30,255);
             break;
-            case 3:
+        case 3:
             chTemp->setColor(255,128,128);
             break;
-            case 4:
+        case 4:
             chTemp->setColor(255,255,30);
             break;
-            case 5:
+        case 5:
             chTemp->setColor(30,255,255);
             break;
-            case 6:
+        case 6:
             chTemp->setColor(128,128,255);
             break;
-            case 7:
+        case 7:
             chTemp->setColor(30,30,255);
             break;
         }
@@ -146,7 +146,7 @@ void CalibrationManager::initSearchModeCalibration()
     info._name = "Alt calibration";
     cal3->setInfo(info);
     std::vector<Channel *> channels3;
-    for(int i=0;i<8; i++) {
+    for(int i=0; i<8; i++) {
         Channel * chTemp = new Channel();
         RxChannel * rx = new RxChannel();
         TxChannel * tx = new TxChannel();
@@ -169,28 +169,28 @@ void CalibrationManager::initSearchModeCalibration()
         rx->setGates(gates);
 
         switch (i) {
-            case 0:
+        case 0:
             chTemp->setColor(255,30,30);
             break;
-            case 1:
+        case 1:
             chTemp->setColor(30,255,30);
             break;
-            case 2:
+        case 2:
             chTemp->setColor(255,30,255);
             break;
-            case 3:
+        case 3:
             chTemp->setColor(255,128,128);
             break;
-            case 4:
+        case 4:
             chTemp->setColor(255,255,30);
             break;
-            case 5:
+        case 5:
             chTemp->setColor(30,255,255);
             break;
-            case 6:
+        case 6:
             chTemp->setColor(128,128,255);
             break;
-            case 7:
+        case 7:
             chTemp->setColor(30,30,255);
             break;
         }
@@ -212,7 +212,7 @@ void CalibrationManager::initHandModeCalibration()
     info._name = "Default hand mode calibration";
     cal1->setInfo(info);
     std::vector<Channel *> channels1;
-    for(int i=0;i<3; i++) {
+    for(int i=0; i<3; i++) {
         Channel * chTemp = new Channel();
         RxChannel * rx = new RxChannel();
         TxChannel * tx = new TxChannel();
@@ -235,28 +235,28 @@ void CalibrationManager::initHandModeCalibration()
         rx->setGates(gates);
 
         switch (i) {
-            case 0:
+        case 0:
             chTemp->setColor(255,30,30);
             break;
-            case 1:
+        case 1:
             chTemp->setColor(30,255,30);
             break;
-            case 2:
+        case 2:
             chTemp->setColor(255,30,255);
             break;
-            case 3:
+        case 3:
             chTemp->setColor(255,128,128);
             break;
-            case 4:
+        case 4:
             chTemp->setColor(255,255,30);
             break;
-            case 5:
+        case 5:
             chTemp->setColor(30,255,255);
             break;
-            case 6:
+        case 6:
             chTemp->setColor(128,128,255);
             break;
-            case 7:
+        case 7:
             chTemp->setColor(30,30,255);
             break;
         }
@@ -272,7 +272,7 @@ void CalibrationManager::initHandModeCalibration()
     cal2->setInfo(info);
     cal2->setTactId(TACT_ID_HAND_SCHEME_2);
     std::vector<Channel *> channels2;
-    for(int i=0;i<2; i++) {
+    for(int i=0; i<2; i++) {
         Channel * chTemp = new Channel();
         RxChannel * rx = new RxChannel();
         TxChannel * tx = new TxChannel();
@@ -295,28 +295,28 @@ void CalibrationManager::initHandModeCalibration()
         rx->setGates(gates);
 
         switch (i) {
-            case 0:
+        case 0:
             chTemp->setColor(255,30,30);
             break;
-            case 1:
+        case 1:
             chTemp->setColor(30,255,30);
             break;
-            case 2:
+        case 2:
             chTemp->setColor(255,30,255);
             break;
-            case 3:
+        case 3:
             chTemp->setColor(255,128,128);
             break;
-            case 4:
+        case 4:
             chTemp->setColor(255,255,30);
             break;
-            case 5:
+        case 5:
             chTemp->setColor(30,255,255);
             break;
-            case 6:
+        case 6:
             chTemp->setColor(128,128,255);
             break;
-            case 7:
+        case 7:
             chTemp->setColor(30,30,255);
             break;
         }
@@ -345,7 +345,8 @@ ChannelsCalibration *CalibrationManager::getLastCalibrationByTactID(TactID id)
     if(_calibrations.find(id) != _calibrations.end()) {
         auto list = _calibrations.at(id);
         return list->back();
-    } else {
+    }
+    else {
         Q_ASSERT(false);
         return 0;
     }
@@ -360,7 +361,8 @@ std::vector<ChannelsCalibration *> CalibrationManager::getCalibrationsByTactID(T
             result.push_back(it.operator*());
         }
         return result;
-    } else {
+    }
+    else {
         Q_ASSERT(false);
         return std::vector<ChannelsCalibration *>();
     }
@@ -375,7 +377,8 @@ std::vector<CalibrationInfo> CalibrationManager::getCalibrationsInfoByTactID(Tac
             result.push_back(it.operator*()->getInfo());
         }
         return result;
-    } else {
+    }
+    else {
         Q_ASSERT(false);
         return std::vector<CalibrationInfo>();
     }
@@ -387,7 +390,8 @@ void CalibrationManager::addCalibration(ChannelsCalibration *calibration)
     uint16_t id = calibration->getTactId();
     if(_calibrations.find(id) != _calibrations.end()) {
         list = _calibrations.at(id);
-    } else {
+    }
+    else {
         list = new std::list<ChannelsCalibration*>();
         _calibrations[id] = list;
     }
@@ -398,5 +402,3 @@ void CalibrationManager::removeCalibration(ChannelsCalibration *calibration)
 {
     Q_ASSERT(false);
 }
-
-
