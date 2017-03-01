@@ -29,7 +29,7 @@ TactTable *Core::getTactTable()
     return getCurrentDeviceMode()->tactTables().at(_currentScheme);
 }
 
-TactTable *Core::getTactTableSnapshot()
+const TactTable *Core::getTactTableSnapshot()
 {
     _tactTableSnapshotRequested.store(true);
     while(_tactTableSnapshotRequested.load()) {
@@ -38,7 +38,7 @@ TactTable *Core::getTactTableSnapshot()
     return _tactTableSnapshot;
 }
 
-ModeManager *Core::getModeManager() const
+const ModeManager *Core::getModeManager() const
 {
     return _modeManager;
 }
@@ -141,7 +141,7 @@ void Core::trigger()
 {
     TactTable * table = getTactTable();
     Q_ASSERT(table);
-    if(table->getMaxTacts() > 0) {
+    if(Q_LIKELY(table->getMaxTacts() > 0)) {
         _device->setProgTrigger(true);
         _currentTactCounter++;
         if(_currentTactCounter>=table->getMaxTacts()) {
@@ -160,7 +160,7 @@ void Core::status()
 
     DeviceStatus current = status;
     while(!current.ready) {
-        usleep(10);
+        usleep(1);
         current = _device->getDeviceStatus();
         handleDeviceError(current.error);
         handleDeviceOverheat(current.thsd);
@@ -170,22 +170,25 @@ void Core::status()
 
 void Core::process()
 {
-    std::vector< uint8_t > lines = getTactTable()->getTactLines(_currentTact);
+    const std::vector< uint8_t > & lines = getTactTable()->getTactLines(_currentTact);
     aScanAll(lines);
-    for(size_t i=0; i<lines.size(); i++) {
+    uint8_t count = lines.size();
+    for(uint8_t i=0; i<count; i++) {
         aScanProcess(lines[i]);
     }
 }
 
-void Core::aScanAll(std::vector< uint8_t > lines)
+void Core::aScanAll(const std::vector<uint8_t> &lines)
 {
-    if(!lines.empty()) {
+    if(Q_LIKELY(!lines.empty())) {
         for(size_t i=0; i<lines.size(); i++) {
             if(lines[i] == 0) {
                 _device->getAscanForLine(lines[i],_line1CurrentAscan);
-            } else if(lines[i] == 1){
+            }
+            else if(lines[i] == 1) {
                 _device->getAscanForLine(lines[i],_line2CurrentAscan);
-            } else {
+            }
+            else {
                 Q_ASSERT(false);
             }
         }
@@ -201,9 +204,11 @@ void Core::aScanProcess(uint8_t line)
 
     if(line == 0) {
         scanptr = _line1CurrentAscan;
-    } else if (line == 1) {
+    }
+    else if (line == 1) {
         scanptr = _line2CurrentAscan;
-    } else {
+    }
+    else {
         Q_ASSERT(false);
     }
 
@@ -223,10 +228,10 @@ void Core::aScanProcess(uint8_t line)
     dp->ascan._markerPos = pos;
     dp->ascan._markerValue = max;
 
-    std::vector<Gate> gates = getCalibration()->getChannel(dp->bscan._channel)->rx()->gates();
+    const std::vector<Gate> & gates = getCalibration()->getChannel(dp->bscan._channel)->rx()->gates();
 
     for(size_t j=0; j<gates.size(); j++) {
-        Gate gate = gates[j];
+        const Gate & gate = gates[j];
         uint16_t gateStart = (gate._start) * 4;
         uint16_t gateEnd = (gate._finish) * 4;
         uint16_t start = 0;
@@ -237,7 +242,8 @@ void Core::aScanProcess(uint8_t line)
             if((sample>gate._level) &&(!startFound) && (i >= gateStart) && (i <= gateEnd)) {
                 start = i;
                 startFound = true;
-            } else if (startFound && (sample<gate._level || (i >= gateEnd))) {
+            }
+            else if (startFound && (sample<gate._level || (i >= gateEnd))) {
                 BScanDrawSample drawSample;
                 drawSample._begin = start / 0x0004;
                 drawSample._end = i / 0x0004;
@@ -255,9 +261,8 @@ void Core::aScanProcess(uint8_t line)
 void Core::sync()
 {
     // emit to ui
-    if(_changesMutex->tryLock())
-    {
-        while(!_pendingChanges.empty()) {
+    if(_changesMutex->tryLock()) {
+        while(Q_UNLIKELY(!_pendingChanges.empty())) {
             Modificator * mod = _pendingChanges.front();
             Q_ASSERT(mod);
             mod->apply(this);
@@ -333,7 +338,8 @@ void Core::handleDeviceError(bool status)
         if(_deviceError == false) {
             _deviceError = true;
             emit deviceErrorEnable();
-        } else {
+        }
+        else {
             _deviceError = false;
             emit deviceErrorDisable();
         }
@@ -346,7 +352,8 @@ void Core::handleDeviceOverheat(bool status)
         if(_deviceOverheat == false) {
             _deviceOverheat = true;
             emit deviceOverheatEnable();
-        } else {
+        }
+        else {
             _deviceOverheat = false;
             emit deviceOverheatDisable();
         }
@@ -359,7 +366,8 @@ void Core::handleDeviceConnectionError(bool status)
         if(_deviceConnectionError == false) {
             _deviceConnectionError = true;
             emit deviceConnectionErrorEnable();
-        } else {
+        }
+        else {
             _deviceConnectionError = false;
             emit deviceConnectionErrorDisable();
         }
@@ -377,35 +385,35 @@ void Core::applyCurrentCalibrationToDevice()
     _device->applyCalibration(getCalibration(), getTactTable());
 }
 
-void Core::addGate(ChannelID channel, Gate gate)
+void Core::addGate(const ChannelID channel, const Gate & gate)
 {
     //qDebug() << "Add gate to channel" <<channel;
     AddGateModificator * mod = new AddGateModificator(channel,gate);
     addModificator(mod);
 }
 
-void Core::modifyGate(ChannelID channel, Gate gate)
+void Core::modifyGate(const ChannelID channel,const Gate & gate)
 {
     //qDebug() << "Modify gate" << gate._id << "from channel" <<channel;
     GateModificator * mod = new GateModificator(channel,gate);
     addModificator(mod);
 }
 
-void Core::removeGate(ChannelID channel, uint8_t id)
+void Core::removeGate(const ChannelID channel,const uint8_t id)
 {
     //qDebug() << "Remove gate" << id << "from channel" <<channel;
     RemoveGateModificator * mod = new RemoveGateModificator(channel,id);
     addModificator(mod);
 }
 
-void Core::setPrismTime(ChannelID channel, uint8_t value)
+void Core::setPrismTime(const ChannelID channel,const uint8_t value)
 {
     //qDebug() << "Changing prism time ch =" << channel << "value =" <<value;
     PrismTimeModificator * mod = new PrismTimeModificator(channel,value);
     addModificator(mod);
 }
 
-void Core::setTVG(ChannelID channel, TVGCurve *ptr)
+void Core::setTVG(const ChannelID channel, const TVGCurve *ptr)
 {
     //qDebug() << "Changing tvg for ch =" <<channel;
     TVGCurve * curve = ptr->clone();
@@ -413,7 +421,7 @@ void Core::setTVG(ChannelID channel, TVGCurve *ptr)
     addModificator(mod);
 }
 
-void Core::setDeviceMode(DeviceModeIndex modeIndex, SchemeIndex schemeIndex)
+void Core::setDeviceMode(const DeviceModeIndex modeIndex,const SchemeIndex schemeIndex)
 {
     _requestedMode = modeIndex;
     _requestedScheme = schemeIndex;
@@ -424,13 +432,12 @@ void Core::setDeviceMode(DeviceModeIndex modeIndex, SchemeIndex schemeIndex)
     emit modeChanged();
 }
 
-void Core::switchCalibration(CalibrationIndex index)
+void Core::switchCalibration(const CalibrationIndex index)
 {
     _requestedCalibration = index;
     _calibrationSwitchRequested.store(true);
-    while(_calibrationSwitchRequested.load()){
+    while(_calibrationSwitchRequested.load()) {
         usleep(1);
     }
     emit calibrationChanged();
 }
-

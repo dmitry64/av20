@@ -8,11 +8,11 @@ CalibrationsWidget::CalibrationsWidget(QWidget *parent) :
     ui->setupUi(this);
 }
 
-void CalibrationsWidget::init(ChannelsCalibration * calibration)
+void CalibrationsWidget::init(const ChannelsCalibration * calibration)
 {
     Q_ASSERT(_core);
 
-    ModeManager * manager = _core->getModeManager();
+    const ModeManager * manager = _core->getModeManager();
 
     DeviceModeIndex mode = _core->getCurrentMode();
     SchemeIndex scheme = _core->getCurrentScheme();
@@ -40,7 +40,8 @@ void CalibrationsWidget::init(ChannelsCalibration * calibration)
         button->setCalibrationInfo(calibInfo);
         if(calibration->getInfo()._id == calibInfo._id) {
             button->setActive(true);
-        } else {
+        }
+        else {
             button->setActive(false);
         }
 
@@ -68,7 +69,8 @@ void CalibrationsWidget::onCalibrationSelected(CalibrationIndex index)
         CalibrationButton * button = _buttons.at(i);
         if(button->info()._id == index) {
             button->setActive(true);
-        } else {
+        }
+        else {
             button->setActive(false);
         }
     }

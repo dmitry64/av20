@@ -271,7 +271,7 @@ void MainWindow::init()
     ui->statusWidget->init();
     Q_ASSERT(_core);
     ChannelsCalibration * calibration = _core->getCalibrationsSnapshot();
-    TactTable * tactTableSnapshot = _core->getTactTableSnapshot();
+    const TactTable * tactTableSnapshot = _core->getTactTableSnapshot();
     Q_ASSERT(calibration);
     Q_ASSERT(tactTableSnapshot);
 

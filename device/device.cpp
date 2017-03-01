@@ -2,12 +2,12 @@
 #include <QDebug>
 #define FAKESPI
 
-TactRegisters Device::getRegistersByTact(uint8_t index, ChannelsCalibration * mode, TactTable * tactTable)
+TactRegisters Device::getRegistersByTact(const uint8_t index, const ChannelsCalibration * mode, const TactTable * tactTable)
 {
     Q_ASSERT(index < 8);
     Q_ASSERT(mode);
     Q_ASSERT(tactTable);
-    Tact * tact = tactTable->getTactByIndex(index);
+    const Tact * tact = tactTable->getTactByIndex(index);
     Q_ASSERT(tact);
 
     TactRegisters reg;
@@ -51,27 +51,25 @@ TactRegisters Device::getRegistersByTact(uint8_t index, ChannelsCalibration * mo
     return reg;
 }
 
-
-
-TVG Device::getTVGFromCurve(TVGCurve *curve)
+TVG Device::getTVGFromCurve(const TVGCurve *curve) const
 {
     Q_ASSERT(curve);
 
     uint8_t packedValues[TVG_SAMPLES_BYTES];
     memset(packedValues,0,TVG_SAMPLES_BYTES);
-    for(int i=0; i<TVG_SAMPLES_SIZE; i++) {
+    for(uint8_t i=0; i<TVG_SAMPLES_SIZE; i++) {
         double sample = curve->getSample(static_cast<double>(i) / TVG_SAMPLES_SIZE);
 
         uint8_t value = qRound(sample * TVG_MAX_DB);
         Q_ASSERT(value <= TVG_MAX_DB);
-        for(int j=0; j<7; j++) {
+        for(uint8_t j=0; j<7; j++) {
             setBit(packedValues,i*7 + j, (value >> j) & 0b00000001);
         }
     }
 
     TVG tvg;
 
-    for(int i=0; i<TVG_SAMPLES_BYTES; i++) {
+    for(uint8_t i=0; i<TVG_SAMPLES_BYTES; i++) {
         tvg._samples[i] = packedValues[i];
     }
 
@@ -97,7 +95,8 @@ void Device::init()
         uint8_t version = getVersion();
         qDebug() << "Device version:" << QString::number(static_cast<unsigned int>(version),16).toUpper();
         fillRegisters();
-    } else {
+    }
+    else {
         qFatal("Cannot initialize device!");
     }
 }
@@ -129,26 +128,19 @@ void Device::resetConfigRegisters()
 
 void Device::resetTVG()
 {
-    for(int j=0; j<8; j++) {
+    for(uint8_t j=0; j<8; j++) {
         uint8_t tvg[TVG_SAMPLES_BYTES];
-        for(int i=0; i<TVG_SAMPLES_BYTES; i++) {
+        for(uint8_t i=0; i<TVG_SAMPLES_BYTES; i++) {
             tvg[i] = 0x00;
         }
-
         _spi->setRegister(0x40+j,TVG_SAMPLES_BYTES,tvg);
-        if(checkConnection()) {
-           // qDebug() << "TVG for ch #" << j + 1 << "initialized!";
-        } else {
-            qDebug() << "TVG for ch #" << j + 1 << "not initialized!";
-            qFatal("Initialization failed!");
-        }
     }
 }
 
 void Device::resetChannelsTable()
 {
-    for(int j=0; j<8; j++) {
-        for(int i=0; i<6; i++) {
+    for(uint8_t j=0; j<8; j++) {
+        for(uint8_t i=0; i<6; i++) {
             uint8_t temp = 0;
             if(_spi->setAndTestRegister(0x10+j*6+i,1,&temp)) {
                 qDebug() << "Channels table for ch #" << j + 1 << "not initialized!";
@@ -173,30 +165,28 @@ void Device::resetDevice()
     resetTVG();
 }
 
-void Device::applyCalibration(ChannelsCalibration *calibration, TactTable *tactTable)
+void Device::applyCalibration(const ChannelsCalibration *calibration, const TactTable *tactTable)
 {
     Q_ASSERT(calibration);
     Q_ASSERT(tactTable);
+    uint8_t channelsCount = calibration->getChannelsCount();
 
-    for(int j=0; j<calibration->getChannelsCount(); j++) {
-        Channel * chan = calibration->getChannel(j);
+    for(uint8_t j=0; j<channelsCount; j++) {
+        const Channel * chan = calibration->getChannel(j);
         Q_ASSERT(chan);
-        RxChannel * rxchan = chan->rx();
+        const RxChannel * rxchan = chan->rx();
         Q_ASSERT(rxchan);
-        TVGCurve * curve = rxchan->getTvgCurve();
+        const TVGCurve * curve = rxchan->getTvgCurve();
         Q_ASSERT(curve);
-        TVG tvg = getTVGFromCurve(curve);
+        const TVG & tvg = getTVGFromCurve(curve);
         _spi->setRegister(0x40+j,TVG_SAMPLES_BYTES,tvg._samples);
-        if(checkConnection()) {
-           // qDebug() << "TVG for ch #" << j + 1 << " set!";
-        } else {
-            qDebug() << "TVG for ch #" << j + 1 << "not set!";
-            qFatal("Initialization failed!");
-        }
     }
-    for(int k=0; k<tactTable->getMaxTacts(); k++) {
+
+    uint8_t tactsCount = tactTable->getMaxTacts();
+
+    for(uint8_t k=0; k<tactsCount; k++) {
         TactIndex j = tactTable->getTactIndexByCounter(k);
-        TactRegisters tr = getRegistersByTact(j,calibration,tactTable);
+        const TactRegisters & tr = getRegistersByTact(j,calibration,tactTable);
         setTact(tr,j);
     }
 }
@@ -206,7 +196,8 @@ void Device::setProgTrigger(bool enabled)
     uint8_t val;
     if(enabled) {
         val = 0b00000001;
-    } else {
+    }
+    else {
         val = 0b00000000;
     }
     _spi->setRegister(0x05,1,&val);
@@ -217,21 +208,20 @@ DeviceStatus Device::getDeviceStatus()
     DeviceStatus st;
     uint8_t stReg;
     _spi->getRegister(0x03,1,&stReg);
-    //_state->setUSM_SR(stReg);
     st.error = (stReg & 0b10000000) != 0;
     st.thsd = (stReg & 0b00001000) != 0;
     st.ready = (stReg & 0b00000001) != 0;
     return st;
 }
 
-void Device::setTVG(int chIndex, TVG tvg)
+void Device::setTVG(const ChannelID chIndex, const TVG &tvg)
 {
     Q_ASSERT(chIndex < 8);
     _spi->setRegister(0x40 + chIndex,TVG_SAMPLES_BYTES,tvg._samples);
     //_state->setTVGForChannel(chIndex,tvg);
 }
 
-void Device::setTact(TactRegisters reg, TactIndex index)
+void Device::setTact(const TactRegisters & reg, const TactIndex index)
 {
     Q_ASSERT(index<8);
     if(_spi->setAndTestRegister(0x10+index*6,1,&reg._CR)) {
@@ -240,22 +230,22 @@ void Device::setTact(TactRegisters reg, TactIndex index)
     if(_spi->setAndTestRegister(0x10+index*6+1,1,&reg._TR1)) {
         Q_ASSERT(false);
     }
-    if(_spi->setAndTestRegister(0x10+index*6+2,1,&reg._PULSER1)){
+    if(_spi->setAndTestRegister(0x10+index*6+2,1,&reg._PULSER1)) {
         Q_ASSERT(false);
     }
-    if(_spi->setAndTestRegister(0x10+index*6+3,1,&reg._TR2)){
+    if(_spi->setAndTestRegister(0x10+index*6+3,1,&reg._TR2)) {
         Q_ASSERT(false);
     }
-    if(_spi->setAndTestRegister(0x10+index*6+4,1,&reg._PULSER2)){
+    if(_spi->setAndTestRegister(0x10+index*6+4,1,&reg._PULSER2)) {
         Q_ASSERT(false);
     }
-    if(_spi->setAndTestRegister(0x10+index*6+5,1,&reg._RESERVED)){
+    if(_spi->setAndTestRegister(0x10+index*6+5,1,&reg._RESERVED)) {
         Q_ASSERT(false);
     }
 
 }
 
-AScan Device::getAscanForLine(uint8_t line, AScan * output)
+AScan Device::getAscanForLine(const uint8_t line, AScan * output)
 {
     Q_ASSERT(output);
     Q_ASSERT(line==0 || line==1);
@@ -289,4 +279,3 @@ bool Device::getErrorFlag() const
 {
     return _spi->getErrorFlag();
 }
-

@@ -48,13 +48,13 @@ void ChannelsView::init()
 {
     Q_ASSERT(_core);
     ChannelsCalibration * calibration =  _core->getCalibrationsSnapshot();
-    TactTable * tactTable = _core->getTactTableSnapshot();
+    const TactTable * tactTable = _core->getTactTableSnapshot();
     init(calibration,tactTable);
     delete calibration;
     delete tactTable;
 }
 
-void ChannelsView::init(ChannelsCalibration *calibrationsSnapshot, TactTable * tactTableSnapshot)
+void ChannelsView::init(ChannelsCalibration *calibrationsSnapshot, const TactTable * tactTableSnapshot)
 {
     Q_ASSERT(calibrationsSnapshot);
     Q_ASSERT(tactTableSnapshot);
@@ -83,8 +83,8 @@ void ChannelsView::init(ChannelsCalibration *calibrationsSnapshot, TactTable * t
                 gatesString+="\n";
             }
             gatesString+=QString::number(gate._start) +
-                   "-" + QString::number(gate._finish) +
-                   " [" + QString::number(gate._level) + "]";
+                         "-" + QString::number(gate._finish) +
+                         " [" + QString::number(gate._level) + "]";
 
         }
         item = new QTableWidgetItem(gatesString);
@@ -116,7 +116,8 @@ void ChannelsView::init(ChannelsCalibration *calibrationsSnapshot, TactTable * t
             if(tact->getRx1Enabled()) {
                 Channel * chan = calibrationsSnapshot->getChannel(tact->getRx1());
                 item->setBackgroundColor(QColor(chan->getColorRed(),chan->getColorGreen(),chan->getColorBlue()));
-            } else {
+            }
+            else {
                 item->setBackgroundColor(disabledChannelsColor);
             }
             ui->tactWidget->setItem(i,1,item);
@@ -126,7 +127,8 @@ void ChannelsView::init(ChannelsCalibration *calibrationsSnapshot, TactTable * t
             if(tact->getTx1Enabled()) {
                 Channel * chan = calibrationsSnapshot->getChannel(tact->getTx1());
                 item->setBackgroundColor(QColor(chan->getColorRed(),chan->getColorGreen(),chan->getColorBlue()));
-            } else {
+            }
+            else {
                 item->setBackgroundColor(disabledChannelsColor);
             }
             ui->tactWidget->setItem(i,2,item);
@@ -142,7 +144,8 @@ void ChannelsView::init(ChannelsCalibration *calibrationsSnapshot, TactTable * t
             if(tact->getRx2Enabled()) {
                 Channel * chan = calibrationsSnapshot->getChannel(tact->getRx2());
                 item->setBackgroundColor(QColor(chan->getColorRed(),chan->getColorGreen(),chan->getColorBlue()));
-            } else {
+            }
+            else {
                 item->setBackgroundColor(disabledChannelsColor);
             }
             ui->tactWidget->setItem(i,3,item);
@@ -152,7 +155,8 @@ void ChannelsView::init(ChannelsCalibration *calibrationsSnapshot, TactTable * t
             if(tact->getTx2Enabled()) {
                 Channel * chan = calibrationsSnapshot->getChannel(tact->getTx2());
                 item->setBackgroundColor(QColor(chan->getColorRed(),chan->getColorGreen(),chan->getColorBlue()));
-            } else {
+            }
+            else {
                 item->setBackgroundColor(disabledChannelsColor);
             }
             ui->tactWidget->setItem(i,4,item);

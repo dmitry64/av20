@@ -9,7 +9,8 @@
 #include "device/channel/channel.h"
 #include <QElapsedTimer>
 
-namespace Ui {
+namespace Ui
+{
 class AScanWidget;
 }
 
@@ -30,12 +31,12 @@ class AScanWidget : public QWidget
     TVGCurve * _tvgCurve;
 
     QPen _tvgCurvePen;
-    QPen _tempCurvePen;
+    //QPen _tempCurvePen;
     QPen _ascanPen;
     QBrush _ascanBrush;
 
 private:
-    void setTVGCurve(TVGCurve * curve);
+    void setTVGCurve(const TVGCurve *curve);
     void drawTimeScale(QPainter & painter, int width, int bottom, int left);
     void drawScanScale(QPainter & painter, int left, int bottom, int top, int height);
     void drawTvgScale(QPainter & painter, int right, int bottom, int top, int height);

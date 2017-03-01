@@ -27,9 +27,9 @@ private:
 public:
     FakeSPI();
     void init();
-    void getRegister(uint8_t reg, uint32_t length, uint8_t * dest);
-    void setRegister(uint8_t reg, const uint32_t length, uint8_t * src);
-    bool setAndTestRegister(uint8_t reg, const uint32_t length, uint8_t * src);
+    void getRegister(uint8_t reg, const uint32_t length, uint8_t * dest);
+    void setRegister(uint8_t reg, const uint32_t length, const uint8_t * src);
+    bool setAndTestRegister(uint8_t reg, const uint32_t length, const uint8_t * src);
     bool getErrorFlag() const;
 };
 

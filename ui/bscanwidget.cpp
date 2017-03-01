@@ -67,21 +67,25 @@ void BScanWidget::paintEvent(QPaintEvent *event)
     double step = (w - 64) / static_cast<double>(_width);
     double hstep = ((h - 1.0) / 200.0);
 
-    for(uint8_t n=0; n<_channels.size(); n++) {
+    uint8_t channelsCount = _channels.size();
+
+    for(uint8_t n=0; n<channelsCount; n++) {
         uint8_t chan = _channels[n]->index();
         uint16_t elements = std::max(static_cast<int>(_width - _samples[chan].first.size()),0);
         uint16_t k = (_samples[chan]).second;
 
 
         for(uint16_t i=elements; i<_width; i++) {
-            std::vector<BScanDrawSample> sam = ((_samples[chan]).first)[k];
+            const std::vector<BScanDrawSample> & sam = ((_samples[chan]).first)[k];
+            uint8_t samplesCount = sam.size();
             if(k == _end ) {
                 k = 0;
-            } else {
+            }
+            else {
                 k++;
             }
 
-            for(uint16_t y=0; y<sam.size(); y++) {
+            for(uint16_t y=0; y<samplesCount; y++) {
                 double y1 = static_cast<double>(sam[y]._begin) * hstep;
                 double y2 = static_cast<double>(sam[y]._end) * hstep;
                 uint8_t level = sam[y]._level;
@@ -89,14 +93,14 @@ void BScanWidget::paintEvent(QPaintEvent *event)
             }
         }
 
-        std::vector<Gate> gates = _channels.at(n)->rx()->gates();
+        const std::vector<Gate> & gates = _channels.at(n)->rx()->gates();
 
         for(size_t i=0; i<gates.size(); i++) {
             uint16_t y1 = static_cast<double>(gates[i]._start) * hstep;
             uint16_t y2 = static_cast<double>(gates[i]._finish) * hstep;
             uint8_t level = gates[i]._level;
             uint16_t offset = w - 32 + ((level/255.0) *32) + 1;
-            painter.setPen(QPen(getColorByLevel(level),2));//QColor( level ,255 - level, 0 ),2));
+            painter.setPen(QPen(getColorByLevel(level),2));
             painter.drawLine(offset,y1,offset,y2);
         }
     }
@@ -157,8 +161,7 @@ void BScanWidget::onChannelChanged(Channel * channel)
     Q_ASSERT(channel);
     for(uint8_t j=0; j<_channels.size(); j++) {
         uint8_t chan = channel->index();
-        if(chan == _channels[j]->index())
-        {
+        if(chan == _channels[j]->index()) {
             Channel * chan = _channels[j];
             Q_ASSERT(chan);
             delete chan;

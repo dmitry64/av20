@@ -34,12 +34,12 @@ void CalibrationManager::initSearchModeCalibration()
         g1._start = 100;
         g1._finish = 190;
         g1._level = 80;
-        g1._id = 0;
+        g1._id = 1;
         gates.push_back(g1);
         g1._start = 100;
         g1._finish = 190;
         g1._level = 130;
-        g1._id = 0;
+        g1._id = 2;
         gates.push_back(g1);
         rx->setGates(gates);
 

@@ -53,7 +53,7 @@ ChannelsCalibration::ChannelsCalibration(ChannelsCalibration *original)
 {
     Q_ASSERT(original);
     _tactId = original->getTactId();
-    for(int i=0;i<original->getChannelsCount();i++) {
+    for(int i=0; i<original->getChannelsCount(); i++) {
         Channel * ch = new Channel(original->getChannel(i));
         _channels.push_back(ch);
     }
@@ -65,14 +65,14 @@ ChannelsCalibration * ChannelsCalibration::getSnapshot()
     return new ChannelsCalibration(this);
 }
 
-Channel *ChannelsCalibration::getChannel(ChannelID index)
+Channel *ChannelsCalibration::getChannel(ChannelID index) const
 {
     Q_ASSERT(index<8);
     Q_ASSERT(_channels.size() > 0);
     return _channels.at(index);
 }
 
-uint8_t ChannelsCalibration::getChannelsCount()
+uint8_t ChannelsCalibration::getChannelsCount() const
 {
     size_t size = _channels.size();
     Q_ASSERT(size <= 8);

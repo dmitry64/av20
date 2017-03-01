@@ -7,9 +7,9 @@
 class TVGModificator : public Modificator
 {
     ChannelID _channel;
-    TVGCurve * _curve;
+    const TVGCurve * _curve;
 public:
-    TVGModificator(ChannelID channel, TVGCurve * curve);
+    TVGModificator(ChannelID channel, const TVGCurve * curve);
     void apply(Core * core);
 };
 

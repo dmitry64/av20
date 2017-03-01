@@ -34,37 +34,45 @@ void DriverSPI::init()
     qDebug("Initializing SPI driver...");
     _deviceFD = open(_device.toStdString().c_str(), O_RDWR);
     int ret = 0;
-    if (_deviceFD < 0)
+    if (_deviceFD < 0) {
         qFatal("can't open device");
+    }
 
     ret = ioctl(_deviceFD, SPI_IOC_WR_MODE, &_mode);
-    if (ret == -1)
+    if (ret == -1) {
         qFatal("can't set spi mode");
+    }
 
     ret = ioctl(_deviceFD, SPI_IOC_RD_MODE, &_mode);
-    if (ret == -1)
+    if (ret == -1) {
         qFatal("can't get spi mode");
+    }
 
     ret = ioctl(_deviceFD, SPI_IOC_WR_BITS_PER_WORD, &_bits);
-    if (ret == -1)
+    if (ret == -1) {
         qFatal("can't set bits per word");
+    }
 
     ret = ioctl(_deviceFD, SPI_IOC_RD_BITS_PER_WORD, &_bits);
-    if (ret == -1)
+    if (ret == -1) {
         qFatal("can't get bits per word");
+    }
 
     ret = ioctl(_deviceFD, SPI_IOC_WR_MAX_SPEED_HZ, &_speed);
-    if (ret == -1)
+    if (ret == -1) {
         qFatal("can't set max speed hz");
+    }
 
     ret = ioctl(_deviceFD, SPI_IOC_RD_MAX_SPEED_HZ, &_speed);
-    if (ret == -1)
+    if (ret == -1) {
         qFatal("can't get max speed hz");
+    }
 
     qDebug("SPI driver initialized.");
 }
 
-void DriverSPI::sendCommand(uint8_t commandByte, uint8_t length) {
+void DriverSPI::sendCommand(uint8_t commandByte, uint8_t length)
+{
     uint8_t tx[2] = { commandByte, length };
     uint8_t rx[2] = { 0, 0 };
 
@@ -83,11 +91,13 @@ void DriverSPI::sendCommand(uint8_t commandByte, uint8_t length) {
     //printf("[tx: 0x%02x len: 0x%02x]\n",tx[0],tx[1]);
     int ret = ioctl(_deviceFD, SPI_IOC_MESSAGE(1), &tr);
     //printf("[rx: 0x%02x rx+: 0x%02x]\n",rx[0],rx[1]);
-    if (ret < 1)
+    if (ret < 1) {
         qFatal("can't send command message");
+    }
 }
 
-void DriverSPI::sendData(uint8_t length,const uint8_t * bufPtr) {
+void DriverSPI::sendData(uint8_t length,const uint8_t * bufPtr)
+{
     uint8_t rx[length];
 
     memset(rx,0x00,length);
@@ -106,11 +116,13 @@ void DriverSPI::sendData(uint8_t length,const uint8_t * bufPtr) {
 
     int ret = ioctl(_deviceFD, SPI_IOC_MESSAGE(1), &tr);
 
-    if (ret < 1)
+    if (ret < 1) {
         qFatal("can't send command message");
+    }
 }
 
-void DriverSPI::recvData(uint32_t length, uint8_t * bufPtr) {
+void DriverSPI::recvData(uint32_t length, uint8_t * bufPtr)
+{
     uint8_t tx[length];
 
     memset(tx,0x00,length);
@@ -129,15 +141,18 @@ void DriverSPI::recvData(uint32_t length, uint8_t * bufPtr) {
 
     int ret = ioctl(_deviceFD, SPI_IOC_MESSAGE(1), &tr);
 
-    if (ret < 1)
+    if (ret < 1) {
         qFatal("can't send command message");
+    }
 }
 
-void DriverSPI::getRegister(uint8_t reg, uint32_t length, uint8_t * dest) {
+void DriverSPI::getRegister(uint8_t reg, const uint32_t length, uint8_t * dest)
+{
     uint8_t byteLength = 0;
     if(length>=255) {
         byteLength = 0xff;
-    } else {
+    }
+    else {
         byteLength = length;
     }
     sendCommand(reg,byteLength);
@@ -157,11 +172,13 @@ void DriverSPI::getRegister(uint8_t reg, uint32_t length, uint8_t * dest) {
     printf("\n");*/
 }
 
-void DriverSPI::setRegister(uint8_t reg,const uint32_t length, uint8_t * src) {
+void DriverSPI::setRegister(uint8_t reg, const uint32_t length, const uint8_t *src)
+{
     uint8_t byteLength = 0;
     if(length>=255) {
         byteLength = 0xff;
-    } else {
+    }
+    else {
         byteLength = length;
     }
 
@@ -170,7 +187,8 @@ void DriverSPI::setRegister(uint8_t reg,const uint32_t length, uint8_t * src) {
     sendData(length,src);
 }
 
-bool DriverSPI::setAndTestRegister(uint8_t reg,const uint32_t length, uint8_t * src) {
+bool DriverSPI::setAndTestRegister(uint8_t reg,const uint32_t length, const uint8_t * src)
+{
     setRegister(reg,length,src);
     uint8_t result[length];
     getRegister(reg,length,result);
@@ -184,4 +202,3 @@ bool DriverSPI::setAndTestRegister(uint8_t reg,const uint32_t length, uint8_t * 
     }
     return status;
 }
-

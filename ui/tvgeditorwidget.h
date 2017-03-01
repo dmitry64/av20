@@ -22,7 +22,7 @@ public:
     void reset();
     void init(uint8_t channel);
     void init(uint8_t channel, ChannelsCalibration * snapshot);
-    void initCurve(TVGCurve * curve);
+    void initCurve(const TVGCurve *curve);
     void setCore(Core * core);
 public slots:
     void onDisplayPackage(QSharedPointer<DisplayPackage> package);

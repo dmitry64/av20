@@ -2,7 +2,8 @@
 #include <QDebug>
 #include "math.h"
 
-uint8_t getTVGSample(uint8_t * ptr, int sampleNum) {
+uint8_t getTVGSample(uint8_t * ptr, int sampleNum)
+{
     int bit = sampleNum * 7;
     uint8_t res = 0x00;
     res |= getBitFromByteArray(ptr,bit);
@@ -107,7 +108,7 @@ void FakeSPI::setAScanForLine2(uint8_t *dest)
 
 void FakeSPI::run()
 {
-    while(true){
+    while(true) {
         updateCounters();
         usleep(50000);
         if(_specialCounter == 77) {
@@ -115,7 +116,7 @@ void FakeSPI::run()
         }
 
         if(_specialCounter == 177) {
-           // _state.setUSM_SR(_state.USM_SR() ^ 0b10000000);
+            // _state.setUSM_SR(_state.USM_SR() ^ 0b10000000);
         }
 
         _specialCounter++;
@@ -137,7 +138,7 @@ void FakeSPI::init()
     start();
 }
 
-void FakeSPI::getRegister(uint8_t reg, uint32_t length, uint8_t *dest)
+void FakeSPI::getRegister(uint8_t reg, const uint32_t length, uint8_t *dest)
 {
     switch(reg) {
     case 0x00:
@@ -181,19 +182,21 @@ void FakeSPI::getRegister(uint8_t reg, uint32_t length, uint8_t *dest)
         dest[0] = _state.ODO_CR();
         break;
     case 0x7C:
-        if(_currentTact!=255)
+        if(_currentTact!=255) {
             setAScanForLine1(dest);
+        }
         break;
     case 0x7D:
-        if(_currentTact!=255)
+        if(_currentTact!=255) {
             setAScanForLine2(dest);
+        }
         break;
     }
 
     usleep(10);
 }
 
-void FakeSPI::setRegister(uint8_t reg, const uint32_t length, uint8_t *src)
+void FakeSPI::setRegister(uint8_t reg, const uint32_t length, const uint8_t *src)
 {
     switch(reg) {
     case 0x05:
@@ -228,7 +231,8 @@ void FakeSPI::setRegister(uint8_t reg, const uint32_t length, uint8_t *src)
     default:
         if(reg >= 0x10 && reg <=0x3f) {
             _state.setChannelsTableRegister(reg,src[0]);
-        } else {
+        }
+        else {
             qDebug() << "FakeSPI: unknown register" <<reg;
         }
         break;
@@ -236,7 +240,7 @@ void FakeSPI::setRegister(uint8_t reg, const uint32_t length, uint8_t *src)
     usleep(10);
 }
 
-bool FakeSPI::setAndTestRegister(uint8_t reg, const uint32_t length, uint8_t *src)
+bool FakeSPI::setAndTestRegister(uint8_t reg, const uint32_t length, const uint8_t *src)
 {
     setRegister(reg,length,src);
     usleep(10);

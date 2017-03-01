@@ -19,7 +19,7 @@ public:
     ~ChannelsView();
 
     void init();
-    void init(ChannelsCalibration * calibrationsSnapshot, TactTable *tactTableSnapshot);
+    void init(ChannelsCalibration * calibrationsSnapshot, const TactTable *tactTableSnapshot);
     void setCore(Core * core);
     void showEvent( QShowEvent* event );
 private:

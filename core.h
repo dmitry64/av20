@@ -73,12 +73,12 @@ public:
     ChannelsCalibration *getCalibration();
     void notifyChannel(Channel * channel);
     void applyCurrentCalibrationToDevice();
-    ModeManager *getModeManager() const;
+    const ModeManager *getModeManager() const;
 
     // External
     ChannelsCalibration *getCalibrationsSnapshot();
     CalibrationsInfoList getAvailableCalibrationsSnapshot();
-    TactTable *getTactTableSnapshot();
+    const TactTable *getTactTableSnapshot();
 
 private:
     void init();
@@ -86,7 +86,7 @@ private:
     void trigger();
     void status();
     void process();
-    void aScanAll(std::vector<uint8_t> lines);
+    void aScanAll(const std::vector<uint8_t> & lines);
     void aScanProcess(uint8_t line);
     void sync();
     void snapshot();
@@ -94,7 +94,7 @@ private:
     void finish();
     void searchWork();
 
-    void addModificator(Modificator * mod);
+    void addModificator(Modificator *mod);
     void handleDeviceError(bool status);
     void handleDeviceOverheat(bool status);
     void handleDeviceConnectionError(bool status);
@@ -103,13 +103,13 @@ private:
     DeviceMode * getCurrentDeviceMode();
 
 public:
-    void addGate(ChannelID channel, Gate gate);
-    void modifyGate(ChannelID channel, Gate gate);
-    void removeGate(ChannelID channel, uint8_t id);
-    void setPrismTime(ChannelID channel, uint8_t value);
-    void setTVG(ChannelID channel, TVGCurve * ptr);
-    void setDeviceMode(DeviceModeIndex modeIndex, SchemeIndex schemeIndex);
-    void switchCalibration(CalibrationIndex index);
+    void addGate(const ChannelID channel,const Gate & gate);
+    void modifyGate(const ChannelID channel,const Gate & gate);
+    void removeGate(const ChannelID channel, const uint8_t id);
+    void setPrismTime(const ChannelID channel, const uint8_t value);
+    void setTVG(const ChannelID channel, const TVGCurve * ptr);
+    void setDeviceMode(const DeviceModeIndex modeIndex, const SchemeIndex schemeIndex);
+    void switchCalibration(const CalibrationIndex index);
 
 
     SchemeIndex  getCurrentScheme() const;

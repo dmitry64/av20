@@ -16,7 +16,7 @@ public:
     TactTable * getSnapshot();
     TactIndex getTactIndexByCounter(uint8_t counter) const;
     std::vector<uint8_t> getTactLines(uint8_t tactIndex);
-    Tact * getTactByIndex(uint8_t index);
+    Tact * getTactByIndex(uint8_t index) const;
     uint8_t getMaxTacts() const;
     std::vector<Tact *> getTactTable() const;
     void setTactTable(const std::vector<Tact *> &tactTable);

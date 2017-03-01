@@ -13,8 +13,8 @@ class Device
 {
     DeviceInterface * _spi;
 private:
-    TactRegisters getRegistersByTact(uint8_t index, ChannelsCalibration *mode, TactTable *tactTable);
-    TVG getTVGFromCurve(TVGCurve * curve);
+    TactRegisters getRegistersByTact(const uint8_t index, const ChannelsCalibration *mode, const TactTable *tactTable);
+    TVG getTVGFromCurve(const TVGCurve *curve) const;
 public:
     Device();
     void init();
@@ -23,12 +23,12 @@ public:
     void resetTVG();
     void resetChannelsTable();
     void resetDevice();
-    void applyCalibration(ChannelsCalibration * calibration, TactTable * tactTable);
+    void applyCalibration(const ChannelsCalibration * calibration, const TactTable * tactTable);
     void setProgTrigger(bool enabled);
     DeviceStatus getDeviceStatus();
-    void setTVG(int chIndex, TVG tvg);
-    void setTact(TactRegisters reg, TactIndex index);
-    AScan getAscanForLine(uint8_t line, AScan * output);
+    void setTVG(const ChannelID chIndex, const TVG &tvg);
+    void setTact(const TactRegisters &reg, const TactIndex index);
+    AScan getAscanForLine(const uint8_t line, AScan * output);
     uint8_t getVersion();
 
     bool checkConnection();

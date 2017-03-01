@@ -37,12 +37,13 @@ TVGSinglePoint *TVGSinglePoint::clone() const
     return new TVGSinglePoint(*this);
 }
 
-double TVGSinglePoint::getSample(double x)
+double TVGSinglePoint::getSample(double x) const
 {
     double Xms = x * 200.0;
     if(Xms<=_xOffset) {
         return std::max(0.0,(_yBase - _yHeight)) / 80.0;
-    } else if (Xms>_xOffset && Xms<(_xOffset + _xWidth)) {
+    }
+    else if (Xms>_xOffset && Xms<(_xOffset + _xWidth)) {
         double ti = (Xms - _xOffset);
 
         double b = 0.0001 * exp(_curve / 7.0);
@@ -53,11 +54,12 @@ double TVGSinglePoint::getSample(double x)
         //double ki = m * (Xms - _xOffset) + _yBase;
 
         return std::max(std::min(_yBase - ki,_yBase),std::max(0.0,(_yBase - _yHeight))) / 80.0;
-    } else {
+    }
+    else {
         return _yBase / 80.0;
     }
 
-   // return (sin(x * 30) + 1.0)/2.0;
+    // return (sin(x * 30) + 1.0)/2.0;
     /*double voff = (_yHeight == 0.0) ? 0.001 : _yHeight;
     double hoff = (_xOffset == 0.0) ? 0.001 : _xOffset;
 
@@ -79,7 +81,7 @@ std::vector<std::pair<double, double> > TVGSinglePoint::getReferencePoints()
     return result;
 }
 
-TVGType TVGSinglePoint::getType()
+TVGType TVGSinglePoint::getType() const
 {
     return TVGType::TVGSimple;
 }

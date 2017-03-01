@@ -13,9 +13,9 @@ class TVGSinglePoint : public TVGCurve
 public:
     TVGSinglePoint(double base, double offset, double width, double height, double curve);
     virtual TVGSinglePoint * clone() const;
-    double getSample(double x);
+    double getSample(double x) const;
     std::vector< std::pair< double, double > > getReferencePoints();
-    TVGType getType();
+    TVGType getType() const;
     double getXOffset() const;
     double getYHeight() const;
     double getYBase() const;

@@ -6,7 +6,8 @@
 #include "controls/calibrationbutton.h"
 
 
-namespace Ui {
+namespace Ui
+{
 class CalibrationsWidget;
 }
 
@@ -19,11 +20,9 @@ class CalibrationsWidget : public QWidget
     CalibrationIndex _selectedIndex;
 public:
     explicit CalibrationsWidget(QWidget *parent = 0);
-    void init(ChannelsCalibration *calibration);
+    void init(const ChannelsCalibration *calibration);
     void setCore(Core * core);
     ~CalibrationsWidget();
-
-
 
 private slots:
     void onCalibrationSelected(CalibrationIndex index);

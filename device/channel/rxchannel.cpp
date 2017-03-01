@@ -38,12 +38,12 @@ void RxChannel::setMarkerPos(int markerPos)
     _markerPos = markerPos;
 }
 
-TVGCurve *RxChannel::getTvgCurve() const
+const TVGCurve *RxChannel::getTvgCurve() const
 {
     return _tvgCurve;
 }
 
-void RxChannel::setTvgCurve(TVGCurve *tvgCurve)
+void RxChannel::setTvgCurve(const TVGCurve *tvgCurve)
 {
     Q_ASSERT(tvgCurve);
     if(_tvgCurve!=0) {
@@ -81,4 +81,3 @@ RxChannel::~RxChannel()
     Q_ASSERT(_tvgCurve);
     delete _tvgCurve;
 }
-

@@ -65,16 +65,16 @@ void TVGEditorWidget::init(uint8_t channel, ChannelsCalibration *snapshot)
     ui->aScanWidget->setChannelsInfo(channels);
     channels.clear();
     ui->channelSelector->init(snapshot);
-    TVGCurve * curve = snapshot->getChannel(channel)->rx()->getTvgCurve();
+    const TVGCurve * curve = snapshot->getChannel(channel)->rx()->getTvgCurve();
     initCurve(curve);
     update();
 }
 
-void TVGEditorWidget::initCurve(TVGCurve *curve)
+void TVGEditorWidget::initCurve(const TVGCurve *curve)
 {
     Q_ASSERT(curve);
     if(curve->getType() == TVGType::TVGSimple) {
-        TVGSinglePoint * single = static_cast<TVGSinglePoint*> (curve);
+        const TVGSinglePoint * single = static_cast<const TVGSinglePoint*> (curve);
         ui->singleHeight->setValue(qRound(single->getYHeight()));
         ui->singleOffset->setValue(qRound(single->getXOffset()));
         ui->singleBase->setValue(qRound(single->getYBase()));
@@ -178,4 +178,3 @@ void TVGEditorWidget::onSingleFormChanged(double value)
     _core->setTVG(_currentChannel,curve);
     delete curve;
 }
-
