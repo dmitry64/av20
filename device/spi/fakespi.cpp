@@ -181,11 +181,11 @@ void FakeSPI::getRegister(uint8_t reg, uint32_t length, uint8_t *dest)
         dest[0] = _state.ODO_CR();
         break;
     case 0x7C:
-        if(_currentTact!=-1)
+        if(_currentTact!=255)
             setAScanForLine1(dest);
         break;
     case 0x7D:
-        if(_currentTact!=-1)
+        if(_currentTact!=255)
             setAScanForLine2(dest);
         break;
     }
@@ -220,7 +220,7 @@ void FakeSPI::setRegister(uint8_t reg, const uint32_t length, uint8_t *src)
     case 0x46:
     case 0x47:
         TVG tvg;
-        for(int i=0; i<length; i++) {
+        for(uint32_t i=0; i<length; i++) {
             tvg._samples[i] = src[i];
         }
         _state.setTVGForChannel(reg - 0x40, tvg);
@@ -229,7 +229,7 @@ void FakeSPI::setRegister(uint8_t reg, const uint32_t length, uint8_t *src)
         if(reg >= 0x10 && reg <=0x3f) {
             _state.setChannelsTableRegister(reg,src[0]);
         } else {
-        qDebug() << "FakeSPI: unknown register" <<reg;
+            qDebug() << "FakeSPI: unknown register" <<reg;
         }
         break;
     }

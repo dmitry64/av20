@@ -5,6 +5,7 @@
 
 void IconWidget::paintEvent(QPaintEvent *event)
 {
+    Q_UNUSED(event);
     QPainter painter(this);
     painter.setBrush(QBrush(_color));
     painter.setPen(QPen(_color));

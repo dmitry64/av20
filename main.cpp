@@ -50,7 +50,7 @@ int main(int argc, char *argv[])
     mainWindow->init();
 
     //splashsceen.hide();
-    mainWindow->showFullScreen();
+    mainWindow->show();
 
     return a.exec();
 }

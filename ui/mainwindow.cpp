@@ -101,11 +101,6 @@ void MainWindow::setCore(Core *core)
     _calibrationsWidget->setCore(core);
 }
 
-void MainWindow::showEvent(QShowEvent *event)
-{
-
-}
-
 void MainWindow::onChannelChanged(Channel *channel)
 {
     emit channelChanged(channel);

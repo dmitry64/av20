@@ -51,7 +51,6 @@ void AScanWidget::drawTvgScale(QPainter &painter, int right, int bottom, int top
     painter.setPen(_tvgCurvePen.color());
     painter.drawLine(right,bottom,right,top);
 
-
     int tvgScale = 10;
     double tvgScaleStep = height / static_cast<double>(tvgScale);
 
@@ -117,7 +116,6 @@ void AScanWidget::drawAscan(QPainter &painter, int width, int height, int left, 
     painter.setPen(_ascanPen);
     painter.setBrush(_ascanBrush);
     painter.drawPolygon(_polygon.data(),_polygon.size(),Qt::FillRule::OddEvenFill);
-
 }
 
 void AScanWidget::drawMarker(QPainter &painter, int width, int height, int left, int bottom)
@@ -173,6 +171,8 @@ AScanWidget::~AScanWidget()
 
 void AScanWidget::paintEvent(QPaintEvent *event)
 {
+    Q_UNUSED(event);
+
     QPainter painter(this);
     const int w = width();
     const int h = height();

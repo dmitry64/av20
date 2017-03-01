@@ -10,7 +10,7 @@ void RemoveGateModificator::apply(Core *core)
 {
     std::vector<Gate> gates = core->getCalibration()->getChannel(_channel)->rx()->gates();
     std::vector<Gate> result;
-    for(int i=0; i<gates.size(); i++) {
+    for(size_t i=0; i<gates.size(); i++) {
         if(gates[i]._id!=_gateId) {
             result.push_back(gates[i]);
         }

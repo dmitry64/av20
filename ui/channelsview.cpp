@@ -20,6 +20,7 @@ ChannelsView::ChannelsView(QWidget *parent) :
     ui->channelsWidget->setColumnWidth(0,70);
     ui->channelsWidget->setColumnWidth(1,50);
 
+
     ui->tactWidget->setColumnCount(5);
     ui->tactWidget->setHorizontalHeaderItem(0,new QTableWidgetItem("Index"));
     ui->tactWidget->setHorizontalHeaderItem(1,new QTableWidgetItem("Rx I"));
@@ -76,7 +77,7 @@ void ChannelsView::init(ChannelsCalibration *calibrationsSnapshot, TactTable * t
         ui->channelsWidget->setItem(i,2,item);
         std::vector<Gate> gates = rxchan->gates();
         QString gatesString;
-        for(int j=0; j<gates.size(); j++) {
+        for(size_t j=0; j<gates.size(); j++) {
             Gate gate = gates.at(j);
             if(j!=0) {
                 gatesString+="\n";
@@ -95,13 +96,14 @@ void ChannelsView::init(ChannelsCalibration *calibrationsSnapshot, TactTable * t
         item = new QTableWidgetItem(QString(ProgStrings[chan->tx()->prog()].c_str()));
         item->setTextAlignment( Qt::AlignHCenter | Qt::AlignCenter );
         ui->channelsWidget->setItem(i,5,item);
+        ui->channelsWidget->setRowHeight(i,50);
 
     }
     QColor disabledChannelsColor = QColor(60,60,60);
 
     std::vector<Tact*> tacts = tactTableSnapshot->getTactTable();
 
-    for(int i=0; i<tacts.size(); i++) {
+    for(size_t i=0; i<tacts.size(); i++) {
         Tact * tact = tacts.at(i);
         Q_ASSERT(tact);
         if(tact->getTactEnabled()) {
@@ -175,5 +177,6 @@ void ChannelsView::setCore(Core *core)
 
 void ChannelsView::showEvent(QShowEvent *event)
 {
+    Q_UNUSED(event);
     init();
 }

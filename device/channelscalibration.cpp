@@ -38,7 +38,7 @@ ChannelsCalibration::~ChannelsCalibration()
 {
     qDebug() << "Device calibration deleted";
 
-    for(int i=0; i<_channels.size(); i++) {
+    for(size_t i=0; i<_channels.size(); i++) {
         Channel * chan = _channels.at(i);
         Q_ASSERT(chan);
         delete chan;

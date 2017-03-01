@@ -121,14 +121,14 @@ void ControlPanel::init(ChannelsCalibration * calibration)
     _markerPositionSpinbox->setValue(calibration->getChannel(_currentChannel)->rx()->getMarkerPos());
 
     _gateCounter = 0;
-    for(int i=0; i<_gates.size(); i++) {
+    for(size_t i=0; i<_gates.size(); i++) {
         _gatesLayout->removeWidget(_gates[i]);
         delete _gates[i];
     }
     _gates.clear();
 
     std::vector<Gate> gates = calibration->getChannel(_currentChannel)->rx()->gates();
-    for(uint8_t i=0; i<gates.size(); i++) {
+    for(size_t i=0; i<gates.size(); i++) {
         GateController * gateController = new GateController();
         gateController->setGate(gates[i]);
         _gates.push_back(gateController);

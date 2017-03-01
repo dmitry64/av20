@@ -11,7 +11,7 @@ std::vector<Channel*> BScanWidget::channels() const
 
 bool BScanWidget::channelSelected(uint8_t chan)
 {
-    for(int i=0; i<_channels.size(); i++) {
+    for(size_t i=0; i<_channels.size(); i++) {
         if(_channels[i]->index() == chan) {
             return true;
         }
@@ -49,6 +49,7 @@ BScanWidget::~BScanWidget()
 
 void BScanWidget::paintEvent(QPaintEvent *event)
 {
+    Q_UNUSED(event);
     QPainter painter(this);
     const int w = width();
     const int h = height();

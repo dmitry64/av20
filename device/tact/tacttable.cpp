@@ -22,7 +22,7 @@ TactTable::TactTable()
 
 TactTable::TactTable(TactTable *original)
 {
-    for(int i=0;i<original->getTactTable().size();i++) {
+    for(size_t i=0;i<original->getTactTable().size();i++) {
         Tact * tact = original->getTactTable().at(i);
         Tact * tactNew = new Tact(*tact);
         _tactTable.push_back(tactNew);
@@ -31,14 +31,14 @@ TactTable::TactTable(TactTable *original)
 
 TactTable::~TactTable()
 {
-    for(int i=0; i<_tactTable.size(); i++) {
+    for(size_t i=0; i<_tactTable.size(); i++) {
         delete _tactTable.at(i);
     }
 }
 
 void TactTable::init()
 {
-    for(int i=0;i<MAX_TACTS_COUNT; i++) {
+    for(uint8_t i=0;i<MAX_TACTS_COUNT; i++) {
         Tact * tact = new Tact();
         tact->setRx1(i);
         tact->setTx1(i);
@@ -71,7 +71,7 @@ std::vector<Tact *> TactTable::getTactTable() const
 TactIndex TactTable::getTactIndexByCounter(uint8_t counter) const
 {
     uint8_t num = 0;
-    for(int i=0; i<MAX_TACTS_COUNT; i++) {
+    for(uint8_t i=0; i<MAX_TACTS_COUNT; i++) {
         if(_tactTable[i]->getTactEnabled()) {
             if(counter == num) {
                 return i;
@@ -105,7 +105,7 @@ Tact *TactTable::getTactByIndex(uint8_t index)
 uint8_t TactTable::getMaxTacts() const
 {
     uint8_t num = 0;
-    for(int i=0; i<_tactTable.size(); i++) {
+    for(size_t i=0; i<_tactTable.size(); i++) {
         if(_tactTable[i]->getTactEnabled()) {
             num++;
         }

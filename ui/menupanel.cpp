@@ -39,6 +39,9 @@ void MenuPanel::closeCurrent()
         ui->systemButton->setPalette(_defaultPalette);
         emit systemMenuClosed();
         break;
+        case MenuState::DefaultState:
+        return;
+        break;
     }
 }
 

@@ -2,10 +2,10 @@
 #include "ui_channelbutton.h"
 
 ChannelButton::ChannelButton(QString name, uint8_t channel, QWidget *parent) :
+    QWidget(parent),
     _name(name),
     _channel(channel),
     _state(false),
-    QWidget(parent),
     ui(new Ui::ChannelButton)
 {
     ui->setupUi(this);

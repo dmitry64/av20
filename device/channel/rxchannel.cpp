@@ -57,7 +57,7 @@ uint8_t RxChannel::getPrismTime() const
     return _prismTime;
 }
 
-RxChannel::RxChannel() : _prismTime(0), _markerPos(0), _tvgCurve(0)
+RxChannel::RxChannel() : _prismTime(0), _tvgCurve(0), _markerPos(0)
 {
 
 }

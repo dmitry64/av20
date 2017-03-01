@@ -12,7 +12,7 @@ class TouchSpinBoxString : public QWidget
     Q_OBJECT
 
     std::vector<QString> _values;
-    int _current;
+    unsigned int _current;
     QString _name;
 private:
     void next();

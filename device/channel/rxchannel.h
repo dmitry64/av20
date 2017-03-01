@@ -11,9 +11,8 @@ class RxChannel
 {
 
     std::string _name;
-    TVGCurve * _tvgCurve;
-
     uint8_t _prismTime;
+    TVGCurve * _tvgCurve;   
     int _markerPos;
     std::vector<Gate> _gates;
 

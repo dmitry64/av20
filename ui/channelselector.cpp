@@ -49,7 +49,7 @@ void ChannelSelector::setCore(Core *core)
 
 void ChannelSelector::onChannelSelected(uint8_t channel)
 {
-    for(int i=0;i<_channelButtons.size(); i++) {
+    for(size_t i=0;i<_channelButtons.size(); i++) {
         ChannelButton * button = _channelButtons.at(i);
         Q_ASSERT(button);
         button->setActive(i==channel);

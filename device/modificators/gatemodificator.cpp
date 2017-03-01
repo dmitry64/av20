@@ -10,7 +10,7 @@ void GateModificator::apply(Core *core)
 {
     std::vector<Gate> gates = core->getCalibration()->getChannel(_channel)->rx()->gates();
 
-    for(int i=0; i<gates.size(); i++) {
+    for(size_t i=0; i<gates.size(); i++) {
         if(gates[i]._id == _gate._id) {
             gates[i]._start = _gate._start;
             gates[i]._finish = _gate._finish;

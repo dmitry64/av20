@@ -40,7 +40,6 @@ public:
     void init();
     void reset();
     void setCore(Core * core);
-    void showEvent( QShowEvent* event );
 public slots:
     void onChannelChanged(Channel * channel);
     void onDisplayPackage(QSharedPointer<DisplayPackage> dp);
