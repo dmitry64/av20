@@ -51,6 +51,7 @@ void BScanWidget::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event);
     QPainter painter(this);
+    painter.setCompositionMode(QPainter::CompositionMode_Source);
     const int w = width();
     const int h = height();
     painter.setPen(Qt::black);

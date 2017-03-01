@@ -108,17 +108,24 @@ void AScanWidget::drawAscan(QPainter &painter, int width, int height, int left, 
     _polygon[0] = QPointF(left,bottom);
     QPointF p2(0,bottom);
     uint16_t pointsCount = _points.size();
+    uint16_t currentSize = 0;
+    uint16_t currentIndex = 0;
     for(uint16_t i=0; i<pointsCount; i++) {
         const QPoint & old = _points[i];
-        p2 = QPointF(left + old.x()*step, bottom - height*(old.y() / 256.0));
-        _polygon[i+1] = (p2);
+        if(i!=0)
+            if(old.y()!= _points[i-1].y()) {
+                p2 = QPointF(left + old.x()*step, bottom - height*(old.y() / 256.0));
+                _polygon[currentIndex+1] = (p2);
+                currentIndex++;
+            }
     }
-    _polygon[ASCAN_SAMPLES_SIZE] = QPointF(right, p2.y());
-    _polygon[ASCAN_SAMPLES_SIZE+1] = QPointF(right,bottom);
-
+    _polygon[currentIndex] = QPointF(right, p2.y());
+    currentIndex++;
+    _polygon[currentIndex] = QPointF(right,bottom);
+    currentIndex++;
     painter.setPen(_ascanPen);
     painter.setBrush(_ascanBrush);
-    painter.drawPolygon(_polygon.data(),_polygon.size(),Qt::FillRule::OddEvenFill);
+    painter.drawPolygon(_polygon.data(),currentIndex,Qt::FillRule::OddEvenFill);
 }
 
 void AScanWidget::drawMarker(QPainter &painter, int width, int height, int left, int bottom)
@@ -179,6 +186,7 @@ void AScanWidget::paintEvent(QPaintEvent *event)
     Q_UNUSED(event);
 
     QPainter painter(this);
+    painter.setCompositionMode(QPainter::CompositionMode_Source);
     const int w = width();
     const int h = height();
     const int width = w - 64;
