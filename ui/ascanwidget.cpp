@@ -9,7 +9,6 @@ void AScanWidget::setTVGCurve(const TVGCurve *curve)
         delete _tvgCurve;
     }
     _tvgCurve = curve->clone();
-
 }
 
 void AScanWidget::drawTimeScale(QPainter &painter, int width, int bottom, int left)
@@ -17,9 +16,7 @@ void AScanWidget::drawTimeScale(QPainter &painter, int width, int bottom, int le
     painter.setPen(Qt::black);
 
     double scaleStep = width/static_cast<double>(_scale);
-    QFont font = painter.font();
-    font.setPointSize(6);
-    painter.setFont(font);
+    painter.setFont(_scaleFont);
     for(uint8_t i=0; i<_scale+1; i++) {
         uint8_t leng = 0;
         if(i%10 == 0) {
@@ -158,6 +155,8 @@ AScanWidget::AScanWidget(QWidget *parent) :
     _markerPos = 0;
     _markerValue = 0;
     _tvgCurve = 0;
+    _scaleFont = QGuiApplication::font();
+    _scaleFont.setPixelSize(8);
     //_tempCurve = 0;
     _scale = 200;
     this->setAttribute(Qt::WA_OpaquePaintEvent);

@@ -22,8 +22,8 @@ class AScanWidget : public QWidget
     uint16_t _markerPos;
     uint16_t _markerValue;
     uint16_t _scale;
+
     std::vector<QPoint> _points;
-    //std::vector<QPoint> _tvg;
     std::vector<QPointF> _polygon;
     std::vector<Channel*> _channels;
     QElapsedTimer _fpsTimer;
@@ -31,7 +31,7 @@ class AScanWidget : public QWidget
     TVGCurve * _tvgCurve;
 
     QPen _tvgCurvePen;
-    //QPen _tempCurvePen;
+    QFont _scaleFont;
     QPen _ascanPen;
     QBrush _ascanBrush;
 

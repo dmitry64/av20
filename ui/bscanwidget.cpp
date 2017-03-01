@@ -64,20 +64,20 @@ void BScanWidget::paintEvent(QPaintEvent *event)
     painter.drawRect(left,0,w - 32 - 1,bottom-1);
     painter.drawRect(0,0,w - 32,bottom-1);
 
-    double step = (w - 64) / static_cast<double>(_width);
-    double hstep = ((h - 1.0) / 200.0);
+    const double step = (w - 64) / static_cast<double>(_width);
+    const double hstep = ((h - 1.0) / 200.0);
 
     uint8_t channelsCount = _channels.size();
 
     for(uint8_t n=0; n<channelsCount; n++) {
-        uint8_t chan = _channels[n]->index();
-        uint16_t elements = std::max(static_cast<int>(_width - _samples[chan].first.size()),0);
+        const uint8_t chan = _channels[n]->index();
+        const uint16_t elements = std::max(static_cast<int>(_width - _samples[chan].first.size()),0);
         uint16_t k = (_samples[chan]).second;
 
 
         for(uint16_t i=elements; i<_width; i++) {
             const std::vector<BScanDrawSample> & sam = ((_samples[chan]).first)[k];
-            uint8_t samplesCount = sam.size();
+            const uint8_t samplesCount = sam.size();
             if(k == _end ) {
                 k = 0;
             }
@@ -86,21 +86,21 @@ void BScanWidget::paintEvent(QPaintEvent *event)
             }
 
             for(uint16_t y=0; y<samplesCount; y++) {
-                double y1 = static_cast<double>(sam[y]._begin) * hstep;
-                double y2 = static_cast<double>(sam[y]._end) * hstep;
-                uint8_t level = sam[y]._level;
-                painter.fillRect(QRectF(left + step*i,1.0 + y1,step, y2 - y1), getColorByLevel(level));
+                const BScanDrawSample & sample = sam[y];
+                const double y1 = static_cast<double>(sample._begin) * hstep;
+                const double y2 = static_cast<double>(sample._end) * hstep;
+                painter.fillRect(QRectF(left + step*i,1.0 + y1,step, y2 - y1), getColorByLevel(sample._level));
             }
         }
 
         const std::vector<Gate> & gates = _channels.at(n)->rx()->gates();
 
         for(size_t i=0; i<gates.size(); i++) {
-            uint16_t y1 = static_cast<double>(gates[i]._start) * hstep;
-            uint16_t y2 = static_cast<double>(gates[i]._finish) * hstep;
-            uint8_t level = gates[i]._level;
-            uint16_t offset = w - 32 + ((level/255.0) *32) + 1;
-            painter.setPen(QPen(getColorByLevel(level),2));
+            const Gate & gate = gates[i];
+            const uint16_t y1 = static_cast<double>(gate._start) * hstep;
+            const uint16_t y2 = static_cast<double>(gate._finish) * hstep;
+            uint16_t offset = w - 32 + ((gate._level/255.0) *32) + 1;
+            painter.setPen(QPen(getColorByLevel(gate._level),2));
             painter.drawLine(offset,y1,offset,y2);
         }
     }

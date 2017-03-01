@@ -20,8 +20,6 @@ public:
     RxChannel();
     RxChannel(RxChannel * original);
     ~RxChannel();
-    // int baseSensLevel() const;
-    //void setBaseSensLevel(int baseSensLevel);
 
     void setPrismTime(uint8_t prismTime);
     std::vector<Gate> gates() const;
