@@ -15,7 +15,7 @@ ChannelSelector::~ChannelSelector()
     delete ui;
 }
 
-void ChannelSelector::init(ChannelsCalibration *snapshot)
+void ChannelSelector::init(const ChannelsCalibration *snapshot)
 {
     qDebug() << "Selector init!";
     Q_ASSERT(snapshot);
@@ -23,7 +23,7 @@ void ChannelSelector::init(ChannelsCalibration *snapshot)
         ChannelButton * button = _channelButtons.at(i);
         Q_ASSERT(button);
         ui->channelsLayout->removeWidget(button);
-        QObject::disconnect(button,SIGNAL(channelSelected(uint8_t)),this,SLOT(onChannelSelected(uint8_t)));
+        QObject::disconnect(button,SIGNAL(channelSelected(ChannelID)),this,SLOT(onChannelSelected(ChannelID)));
         delete button;
     }
     int count = snapshot->getChannelsCount();
@@ -32,7 +32,7 @@ void ChannelSelector::init(ChannelsCalibration *snapshot)
         Channel * chan = snapshot->getChannel(i);
         ChannelButton * channelButton = new ChannelButton("Ch #" + QString::number(i),i);
         channelButton->setColor(chan->getColorRed(),chan->getColorGreen(), chan->getColorBlue());
-        QObject::connect(channelButton,SIGNAL(channelSelected(uint8_t)),this,SLOT(onChannelSelected(uint8_t)));
+        QObject::connect(channelButton,SIGNAL(channelSelected(ChannelID)),this,SLOT(onChannelSelected(ChannelID)));
         ui->channelsLayout->addWidget(channelButton);
         _channelButtons.push_back(channelButton);
     }
@@ -47,9 +47,9 @@ void ChannelSelector::setCore(Core *core)
     update();
 }
 
-void ChannelSelector::onChannelSelected(uint8_t channel)
+void ChannelSelector::onChannelSelected(ChannelID channel)
 {
-    for(size_t i=0;i<_channelButtons.size(); i++) {
+    for(size_t i=0; i<_channelButtons.size(); i++) {
         ChannelButton * button = _channelButtons.at(i);
         Q_ASSERT(button);
         button->setActive(i==channel);

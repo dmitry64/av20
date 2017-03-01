@@ -10,12 +10,12 @@ class TactTable
     std::vector<Tact *> _tactTable;
 public:
     TactTable();
-    TactTable(TactTable * original);
+    TactTable(const TactTable * original);
     ~TactTable();
     void init();
     TactTable * getSnapshot();
     TactIndex getTactIndexByCounter(uint8_t counter) const;
-    std::vector<uint8_t> getTactLines(uint8_t tactIndex);
+    std::vector<uint8_t> getTactLines(const uint8_t tactIndex) const;
     Tact * getTactByIndex(uint8_t index) const;
     uint8_t getMaxTacts() const;
     std::vector<Tact *> getTactTable() const;

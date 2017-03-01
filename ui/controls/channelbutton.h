@@ -2,8 +2,10 @@
 #define CHANNELBUTTON_H
 
 #include <QWidget>
+#include "device/definitions.h"
 
-namespace Ui {
+namespace Ui
+{
 class ChannelButton;
 }
 
@@ -12,7 +14,7 @@ class ChannelButton : public QWidget
     Q_OBJECT
 
     QString _name;
-    uint8_t _channel;
+    ChannelID _channel;
     bool _state;
     uint8_t _colorRed;
     uint8_t _colorGreen;
@@ -28,7 +30,7 @@ private slots:
     void on_channelButton_released();
 
 signals:
-    void channelSelected(uint8_t);
+    void channelSelected(ChannelID);
 private:
     Ui::ChannelButton *ui;
 };

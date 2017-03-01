@@ -65,7 +65,7 @@ ChannelsCalibration * ChannelsCalibration::getSnapshot()
     return new ChannelsCalibration(this);
 }
 
-Channel *ChannelsCalibration::getChannel(ChannelID index) const
+Channel *ChannelsCalibration::getChannel(const ChannelID index) const
 {
     Q_ASSERT(index<8);
     Q_ASSERT(_channels.size() > 0);

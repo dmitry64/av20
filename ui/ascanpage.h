@@ -5,7 +5,8 @@
 #include "device/definitions.h"
 #include "core.h"
 
-namespace Ui {
+namespace Ui
+{
 class AScanPage;
 }
 
@@ -19,18 +20,15 @@ public:
     explicit AScanPage(QWidget *parent = 0);
     ~AScanPage();
     void reset();
-    void init(uint8_t channel);
-    void init(uint8_t channel, ChannelsCalibration * snapshot);
+    void init(const ChannelID channel);
+    void init(const ChannelID channel, const ChannelsCalibration *snapshot);
     void setCore(Core * core);
-    void setAScanChannels(std::vector<Channel*> channels);
-    void setBScanChannels(std::vector<Channel*> channels);
+    void setAScanChannels(const std::vector<Channel*> channels);
+    void setBScanChannels(const std::vector<Channel*> channels);
 public slots:
-    //void onAScan(QSharedPointer<AScanDrawData> scan);
-    //void onBScan(QSharedPointer<BScanDrawData> scan);
     void onDisplayPackage(QSharedPointer<DisplayPackage> package);
-    //void onTVG(TVG tvg);
     void onChannelChanged(Channel *channel);
-    void setChannel(uint8_t channel);
+    void setChannel(ChannelID channel);
 signals:
     void drawDisplayPackage(QSharedPointer<DisplayPackage> package);
 private:

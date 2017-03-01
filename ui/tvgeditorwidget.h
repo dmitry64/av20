@@ -6,7 +6,8 @@
 #include "device/channelscalibration.h"
 #include "core.h"
 
-namespace Ui {
+namespace Ui
+{
 class TVGEditorWidget;
 }
 
@@ -27,7 +28,7 @@ public:
 public slots:
     void onDisplayPackage(QSharedPointer<DisplayPackage> package);
     void onChannelChanged(Channel *channel);
-    void setChannel(uint8_t channel);
+    void setChannel(ChannelID channel);
 
     void onSingleOffsetChanged(double value);
     void onSingleHeightChanged(double value);

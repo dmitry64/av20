@@ -54,7 +54,7 @@ public:
     //void applyTempCurve();
     void reset();
 public slots:
-    void onAScan(AScanDrawData * scan);
+    void onAScan(const AScanDrawData *scan);
     //void onTVG(TVG tvg);
 
 

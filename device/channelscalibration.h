@@ -20,7 +20,7 @@ public:
     ChannelsCalibration(ChannelsCalibration *original);
     ChannelsCalibration *getSnapshot();
     // get/set
-    Channel *getChannel(ChannelID index) const;
+    Channel *getChannel(const ChannelID index) const;
     uint8_t getChannelsCount() const;
     TactID getTactId() const;
     void setTactId(const TactID &tactId);

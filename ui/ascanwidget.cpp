@@ -224,13 +224,14 @@ void AScanWidget::setChannelsInfo(std::vector<Channel *> channels)
     }
 }
 
-void AScanWidget::onAScan(AScanDrawData *scan)
+void AScanWidget::onAScan(const AScanDrawData *scan)
 {
     if(isVisible()) {
         for(uint8_t j=0; j<_channels.size(); j++) {
             uint8_t chan = scan->_channel;
             if(chan == _channels[j]->index()) {
-                for(uint16_t i=0; i<scan->_samples.size(); i++) {
+                uint16_t samplesCount = scan->_samples.size();
+                for(uint16_t i=0; i<samplesCount; i++) {
                     _points[i] = QPoint(i,scan->_samples[i]);
                 }
                 _markerPos = scan->_markerPos;

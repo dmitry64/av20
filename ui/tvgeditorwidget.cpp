@@ -36,8 +36,7 @@ TVGEditorWidget::TVGEditorWidget(QWidget *parent) :
     connect(ui->singleBase,SIGNAL(valueChanged(double)),this,SLOT(onSingleBaseChanged(double)));
     connect(ui->singleForm,SIGNAL(valueChanged(double)),this,SLOT(onSingleFormChanged(double)));
 
-
-    connect(ui->channelSelector,SIGNAL(channelChanged(uint8_t)),this,SLOT(setChannel(uint8_t)));
+    connect(ui->channelSelector,SIGNAL(channelChanged(ChannelID)),this,SLOT(setChannel(ChannelID)));
 }
 
 TVGEditorWidget::~TVGEditorWidget()
@@ -99,7 +98,7 @@ void TVGEditorWidget::onChannelChanged(Channel * channel)
     ui->aScanWidget->onChannelChanged(channel);
 }
 
-void TVGEditorWidget::setChannel(uint8_t channel)
+void TVGEditorWidget::setChannel(ChannelID channel)
 {
     _currentChannel = channel;
     ChannelsCalibration * snapshot = _core->getCalibrationsSnapshot();
