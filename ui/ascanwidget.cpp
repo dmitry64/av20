@@ -104,20 +104,28 @@ void AScanWidget::drawGates(QPainter &painter, int width, int height, int left, 
 
 void AScanWidget::drawAscan(QPainter &painter, int width, int height, int left, int bottom, int right)
 {
-    const double step = width/static_cast<double>(_points.size());
-    _polygon[0] = QPointF(left,bottom);
+    //const double step = width/static_cast<double>(_points.size());
+    /*_polygon[0] = QPointF(left,bottom);
     QPointF p2(0,bottom);
     uint16_t pointsCount = _points.size();
-    uint16_t currentSize = 0;
     uint16_t currentIndex = 0;
-    for(uint16_t i=0; i<pointsCount; i++) {
+    uint16_t currentLineStart = 0;
+    _polygon[currentIndex] = QPointF(left + _points[0].x()*step, bottom - height*(_points[0].y() / 256.0));
+    for(uint16_t i=1; i<pointsCount; i++) {
         const QPoint & old = _points[i];
-        if(i!=0)
-            if(old.y()!= _points[i-1].y()) {
-                p2 = QPointF(left + old.x()*step, bottom - height*(old.y() / 256.0));
+
+        if(old.y()!=_points[i-1].y()) {
+            if(currentLineStart != i-1) {
+                p2 = QPointF(left + old.x()*step, bottom - height*(_points[currentLineStart].y() / 256.0));
                 _polygon[currentIndex+1] = (p2);
                 currentIndex++;
             }
+            p2 = QPointF(left + old.x()*step, bottom - height*(old.y() / 256.0));
+            _polygon[currentIndex+1] = (p2);
+            currentIndex++;
+            currentLineStart = i;
+        }
+
     }
     _polygon[currentIndex] = QPointF(right, p2.y());
     currentIndex++;
@@ -125,7 +133,46 @@ void AScanWidget::drawAscan(QPainter &painter, int width, int height, int left, 
     currentIndex++;
     painter.setPen(_ascanPen);
     painter.setBrush(_ascanBrush);
+
     painter.drawPolygon(_polygon.data(),currentIndex,Qt::FillRule::OddEvenFill);
+    painter.setPen(Qt::red);
+    painter.drawPoints(_polygon.data(),currentIndex);*/
+
+    //_polygon[0] = QPoint(left,bottom);
+
+    painter.setPen(_ascanPen);
+    painter.setBrush(_ascanBrush);
+
+    painter.drawLine(left,bottom,right,bottom);
+    const double step = width/800.0;
+    uint16_t size = _samples.size();
+    uint16_t currentCount = 0;
+    uint16_t currentStart = 0;
+    for(uint16_t i=0; i<size; i++) {
+        if(_samples[i] > 0) {
+            if(currentCount==0) {
+                _polygon[currentCount] = QPoint(left + (i-1)*step, bottom);
+                currentCount++;
+            }
+            _polygon[currentCount] = QPoint(left + i*step, bottom - height*(_samples[i] / 256.0));
+            currentCount++;
+        } else {
+            if(currentCount!=0) {
+                _polygon[currentCount] = QPoint(left + (i+1)*step, bottom);
+                currentCount++;
+                //painter.setBrush(QBrush(QColor((i*145)%255,(i*11)%255,(i*63)%255)));
+                painter.drawPolygon(_polygon.data(),currentCount);
+                currentStart = i;
+                currentCount = 0;
+            }
+        }
+    }
+    if(currentCount!=0) {
+        _polygon[currentCount] = QPoint(left + 800*step, bottom - height*(_samples[size-1] / 256.0));
+        currentCount++;
+        painter.drawPolygon(_polygon.data(),currentCount);
+    }
+
 }
 
 void AScanWidget::drawMarker(QPainter &painter, int width, int height, int left, int bottom)
@@ -143,7 +190,7 @@ void AScanWidget::drawFps(QPainter &painter, int width)
 {
     quint64 time = _fpsTimer.nsecsElapsed();
     _fpsTimer.start();
-    double fps = 1000000000.0 / static_cast<double>(time);
+    double fps = 1/(static_cast<double>(time) / 1000000000.0);
     painter.drawText(QPoint(width - 140, 30),"fps: " + QString::number(fps,'f', 3));
 }
 
@@ -154,7 +201,7 @@ AScanWidget::AScanWidget(QWidget *parent) :
     ui->setupUi(this);
     _fpsTimer.restart();
     _polygon.resize(ASCAN_SAMPLES_SIZE+2);
-    _points.resize(ASCAN_SAMPLES_SIZE);
+    //_points.resize(ASCAN_SAMPLES_SIZE);
     _tvgCurvePen = QPen(QColor(250,10,10), 2);
     //_tempCurvePen = QPen(QColor(10,10,250), 2);
     _ascanBrush = QBrush(QColor(80,80,200));
@@ -237,10 +284,8 @@ void AScanWidget::onAScan(const AScanDrawData *scan)
         for(uint8_t j=0; j<_channels.size(); j++) {
             uint8_t chan = scan->_channel;
             if(chan == _channels[j]->index()) {
-                uint16_t samplesCount = scan->_samples.size();
-                for(uint16_t i=0; i<samplesCount; i++) {
-                    _points[i] = QPoint(i,scan->_samples[i]);
-                }
+                _samples = scan->_samples;
+
                 _markerPos = scan->_markerPos;
                 _markerValue = scan->_markerValue;
             }

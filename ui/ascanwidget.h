@@ -23,8 +23,9 @@ class AScanWidget : public QWidget
     uint16_t _markerValue;
     uint16_t _scale;
 
-    std::vector<QPoint> _points;
-    std::vector<QPointF> _polygon;
+    //std::vector<QPoint> _points;
+    std::vector<QPoint> _polygon;
+    std::vector<uint16_t> _samples;
     std::vector<Channel*> _channels;
     QElapsedTimer _fpsTimer;
 
