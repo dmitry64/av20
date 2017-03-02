@@ -49,8 +49,8 @@ int main(int argc, char *argv[])
     mainWindow->setCore(core);
     mainWindow->init();
 
-    //splashsceen.hide();
-    mainWindow->show();
+    mainWindow->move(-1000,0);
+    mainWindow->showFullScreen();
 
     return a.exec();
 }

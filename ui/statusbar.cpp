@@ -25,6 +25,7 @@ void StatusBar::init()
     ui->dateLabel->setText(system->getDate().toString(Qt::DefaultLocaleShortDate));
     ui->batteryButton->setText(QString::number(system->getBatteryPercent()) + "%");
     ui->soundButton->setText(QString::number(system->getSoundVolume()) + "%");
+    ui->tempButton->setText(QString::number(22.3) + "\u2103");
 }
 
 void StatusBar::onDeviceOverheatEnabled()

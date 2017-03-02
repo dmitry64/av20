@@ -122,5 +122,19 @@
         <file>resources/icons/sys_icon_light.png</file>
         <file>resources/icons/sys_icon_clock.png</file>
         <file>resources/icons/sys_icon_calendar.png</file>
+        <file>resources/icons/basic_world.png</file>
+        <file>resources/icons/basic_server2.png</file>
+        <file>resources/icons/basic_server_upload.png</file>
+        <file>resources/icons/basic_server_download.png</file>
+        <file>resources/icons/basic_map.png</file>
+        <file>resources/icons/basic_mail_multiple.png</file>
+        <file>resources/icons/basic_lightbulb.png</file>
+        <file>resources/icons/basic_key.png</file>
+        <file>resources/icons/basic_gunsight.png</file>
+        <file>resources/icons/basic_eye.png</file>
+        <file>resources/icons/basic_eye_closed.png</file>
+        <file>resources/icons/basic_clock.png</file>
+        <file>resources/icons/basic_clessidre.png</file>
+        <file>resources/icons/basic_chronometer.png</file>
     </qresource>
 </RCC>

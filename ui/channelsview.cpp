@@ -2,6 +2,7 @@
 #include "ui_channelsview.h"
 #include <QTableWidgetItem>
 #include <QDebug>
+#include <QScrollBar>
 
 ChannelsView::ChannelsView(QWidget *parent) :
     QWidget(parent),
@@ -9,16 +10,21 @@ ChannelsView::ChannelsView(QWidget *parent) :
 {
     ui->setupUi(this);
     _core = 0;
-    ui->channelsWidget->setColumnCount(6);
-    ui->channelsWidget->setHorizontalHeaderItem(0,new QTableWidgetItem("Name"));
+    ui->channelsWidget->setColumnCount(7);
+    ui->channelsWidget->setHorizontalHeaderItem(0,new QTableWidgetItem("Physical\nChannel"));
     ui->channelsWidget->setHorizontalHeaderItem(1,new QTableWidgetItem("Angle"));
-    ui->channelsWidget->setHorizontalHeaderItem(2,new QTableWidgetItem("Prism time (us)"));
+    ui->channelsWidget->setHorizontalHeaderItem(2,new QTableWidgetItem("\u0394t"));
     ui->channelsWidget->setHorizontalHeaderItem(3,new QTableWidgetItem("Gates"));
-    ui->channelsWidget->setHorizontalHeaderItem(4,new QTableWidgetItem("Freq (MHz)"));
-    ui->channelsWidget->setHorizontalHeaderItem(5,new QTableWidgetItem("Prog #"));
+    ui->channelsWidget->setHorizontalHeaderItem(4,new QTableWidgetItem("X2"));
+    ui->channelsWidget->setHorizontalHeaderItem(5,new QTableWidgetItem("Freqency"));
+    ui->channelsWidget->setHorizontalHeaderItem(6,new QTableWidgetItem("Pulse\nprog"));
 
     ui->channelsWidget->setColumnWidth(0,70);
     ui->channelsWidget->setColumnWidth(1,50);
+    ui->channelsWidget->setColumnWidth(2,45);
+    ui->channelsWidget->setColumnWidth(4,35);
+    ui->channelsWidget->setColumnWidth(5,60);
+    ui->channelsWidget->setColumnWidth(6,60);
 
 
     ui->tactWidget->setColumnCount(5);
@@ -33,10 +39,13 @@ ChannelsView::ChannelsView(QWidget *parent) :
 //    ui->tactWidget->setHorizontalHeaderItem(8,new QTableWidgetItem("Freq. II"));
 
     ui->tactWidget->setColumnWidth(0,50);
-    ui->tactWidget->setColumnWidth(1,50);
-    ui->tactWidget->setColumnWidth(2,50);
-    ui->tactWidget->setColumnWidth(3,50);
-    ui->tactWidget->setColumnWidth(4,50);
+    ui->tactWidget->setColumnWidth(1,40);
+    ui->tactWidget->setColumnWidth(2,40);
+    ui->tactWidget->setColumnWidth(3,40);
+    ui->tactWidget->setColumnWidth(4,40);
+
+
+
 }
 
 ChannelsView::~ChannelsView()
@@ -72,7 +81,7 @@ void ChannelsView::init(ChannelsCalibration *calibrationsSnapshot, const TactTab
         item = new QTableWidgetItem(QString(rxchan->getName().c_str()));
         item->setTextAlignment( Qt::AlignHCenter | Qt::AlignCenter );
         ui->channelsWidget->setItem(i,1,item);
-        item = new QTableWidgetItem(QString::number(rxchan->getPrismTime()));
+        item = new QTableWidgetItem(QString::number(rxchan->getPrismTime()) + QString(" us"));
         item->setTextAlignment( Qt::AlignHCenter | Qt::AlignCenter );
         ui->channelsWidget->setItem(i,2,item);
         std::vector<Gate> gates = rxchan->gates();
@@ -90,15 +99,19 @@ void ChannelsView::init(ChannelsCalibration *calibrationsSnapshot, const TactTab
         item = new QTableWidgetItem(gatesString);
         item->setTextAlignment( Qt::AlignHCenter | Qt::AlignCenter );
         ui->channelsWidget->setItem(i,3,item);
-        item = new QTableWidgetItem(QString(FreqStrings[chan->tx()->freq()].c_str()));
+        item = new QTableWidgetItem(QString((chan->tx()->doubleMode()) ? "yes" : "no"));
         item->setTextAlignment( Qt::AlignHCenter | Qt::AlignCenter );
         ui->channelsWidget->setItem(i,4,item);
-        item = new QTableWidgetItem(QString(ProgStrings[chan->tx()->prog()].c_str()));
+        item = new QTableWidgetItem(QString(FreqStrings[chan->tx()->freq()].c_str()) + QString(" MHz"));
         item->setTextAlignment( Qt::AlignHCenter | Qt::AlignCenter );
         ui->channelsWidget->setItem(i,5,item);
-        ui->channelsWidget->setRowHeight(i,50);
+        item = new QTableWidgetItem(QString(ProgStrings[chan->tx()->prog()].c_str()));
+        item->setTextAlignment( Qt::AlignHCenter | Qt::AlignCenter );
+        ui->channelsWidget->setItem(i,6,item);
+        //ui->channelsWidget->setRowHeight(i,55);
 
     }
+    ui->channelsWidget->resizeRowsToContents();
     QColor disabledChannelsColor = QColor(60,60,60);
 
     std::vector<Tact*> tacts = tactTableSnapshot->getTactTable();

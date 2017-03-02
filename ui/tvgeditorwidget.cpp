@@ -1,6 +1,6 @@
 #include "tvgeditorwidget.h"
 #include "ui_tvgeditorwidget.h"
-
+#include <QDebug>
 #include "device/tvg/tvgsinglepoint.h"
 
 TVGEditorWidget::TVGEditorWidget(QWidget *parent) :
