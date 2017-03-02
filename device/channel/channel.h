@@ -3,12 +3,14 @@
 
 #include "rxchannel.h"
 #include "txchannel.h"
-
+#include "displaychannel.h"
 
 class Channel
 {
     RxChannel * _rx;
     TxChannel * _tx;
+
+    std::vector<DisplayChannel *> _displayChannels;
 
     uint8_t _colorRed;
     uint8_t _colorGreen;

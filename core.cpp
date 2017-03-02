@@ -323,6 +323,7 @@ void Core::searchWork()
     process();
     sync();
     modeswitch();
+    msleep(5);
 }
 
 void Core::addModificator(Modificator *mod)

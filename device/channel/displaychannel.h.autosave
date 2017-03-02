@@ -1,0 +1,13 @@
+#ifndef DISPLAYCHANNEL_H
+#define DISPLAYCHANNEL_H
+
+
+class DisplayChannel
+{
+    double _angle;
+    
+public:
+    DisplayChannel();
+};
+
+#endif // DISPLAYCHANNEL_H
