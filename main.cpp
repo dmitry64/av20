@@ -49,8 +49,9 @@ int main(int argc, char *argv[])
     mainWindow->setCore(core);
     mainWindow->init();
 
-    mainWindow->move(-1000,0);
-    mainWindow->showFullScreen();
+    //mainWindow->move(-1000,0);
+    //mainWindow->showFullScreen();
+    mainWindow->show();
 
     return a.exec();
 }

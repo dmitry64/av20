@@ -48,6 +48,9 @@
      </item>
      <item>
       <widget class="Line" name="line">
+       <property name="frameShadow">
+        <enum>QFrame::Plain</enum>
+       </property>
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
@@ -68,7 +71,7 @@
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_4">
          <item>
-          <widget class="QLabel" name="label_4">
+          <widget class="QLabel" name="operatorLabel">
            <property name="font">
             <font>
              <weight>75</weight>
@@ -121,7 +124,7 @@
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_6">
            <item>
-            <widget class="QLabel" name="label_6">
+            <widget class="QLabel" name="timeLabel">
              <property name="font">
               <font>
                <weight>75</weight>
@@ -158,7 +161,7 @@
             <number>0</number>
            </property>
            <item>
-            <widget class="QLabel" name="label_7">
+            <widget class="QLabel" name="dateLabel">
              <property name="font">
               <font>
                <weight>75</weight>
@@ -208,7 +211,7 @@
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_9">
          <item>
-          <widget class="QLabel" name="label_9">
+          <widget class="QLabel" name="languageLabel">
            <property name="font">
             <font>
              <weight>75</weight>
@@ -254,7 +257,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="label_11">
+        <widget class="QLabel" name="temperatureLabel">
          <property name="font">
           <font>
            <weight>75</weight>
@@ -269,6 +272,16 @@
       </layout>
      </item>
      <item>
+      <widget class="Line" name="line_2">
+       <property name="frameShadow">
+        <enum>QFrame::Plain</enum>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
       <layout class="QHBoxLayout" name="horizontalLayout_11" stretch="1,1">
        <property name="bottomMargin">
         <number>0</number>
@@ -281,12 +294,12 @@
         </widget>
        </item>
        <item>
-        <widget class="QSlider" name="horizontalSlider">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="tickPosition">
-          <enum>QSlider::TicksBothSides</enum>
+        <widget class="TouchSpinBox" name="soundWidget" native="true">
+         <property name="minimumSize">
+          <size>
+           <width>100</width>
+           <height>0</height>
+          </size>
          </property>
         </widget>
        </item>
@@ -300,21 +313,31 @@
        <item>
         <widget class="QLabel" name="label_13">
          <property name="text">
-          <string>Brightness:</string>
+          <string>Screen:</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QSlider" name="horizontalSlider_2">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="tickPosition">
-          <enum>QSlider::TicksBothSides</enum>
+        <widget class="TouchSpinBox" name="brightnessWidget" native="true">
+         <property name="minimumSize">
+          <size>
+           <width>100</width>
+           <height>0</height>
+          </size>
          </property>
         </widget>
        </item>
       </layout>
+     </item>
+     <item>
+      <widget class="Line" name="line_3">
+       <property name="frameShadow">
+        <enum>QFrame::Plain</enum>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
      </item>
      <item>
       <spacer name="verticalSpacer">
@@ -517,6 +540,14 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>TouchSpinBox</class>
+   <extends>QWidget</extends>
+   <header>ui/controls/touchspinbox.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="../resources.qrc"/>
  </resources>
