@@ -292,6 +292,8 @@ void MainWindow::init()
     }
     ui->bScanPage->init(calibration);
     ui->bScanPage->setChannles(infoBscan,calibration);
+
+    ui->channelsWidget->init(calibration,tactTableSnapshot);
     /*
         std::vector< std::vector<Channel*> > channelsTable;
         for(int i=0; i<calibration->getChannelsCount(); i++) {
@@ -302,7 +304,6 @@ void MainWindow::init()
         ui->bScanPage->setChannles(channelsTable);
         ui->bScanPage->init(calibration);
 
-        ui->channelsWidget->init(calibration,tactTableSnapshot);
 
         _calibrationsWidget->init(calibration);*/
 
