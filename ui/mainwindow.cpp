@@ -270,29 +270,26 @@ void MainWindow::init()
 {
     ui->statusWidget->init();
     Q_ASSERT(_core);
-    ChannelsCalibration * calibration = _core->getCalibrationsSnapshot();
-    const TactTable * tactTableSnapshot = _core->getTactTableSnapshot();
-    Q_ASSERT(calibration);
-    Q_ASSERT(tactTableSnapshot);
+    const ChannelsCalibration & calibration = _core->getCalibrationsSnapshot();
+    const TactTable & tactTableSnapshot = _core->getTactTableSnapshot();
 
     ui->aScanPage->init(0,calibration);
     ui->tvgEditorWidget->init(0,calibration);
+    /*
+        std::vector< std::vector<Channel*> > channelsTable;
+        for(int i=0; i<calibration->getChannelsCount(); i++) {
+            std::vector<Channel*> channelsForTape;
+            channelsForTape.push_back(calibration->getChannel(i));
+            channelsTable.push_back(channelsForTape);
+        }
+        ui->bScanPage->setChannles(channelsTable);
+        ui->bScanPage->init(calibration);
 
-    std::vector< std::vector<Channel*> > channelsTable;
-    for(int i=0; i<calibration->getChannelsCount(); i++) {
-        std::vector<Channel*> channelsForTape;
-        channelsForTape.push_back(calibration->getChannel(i));
-        channelsTable.push_back(channelsForTape);
-    }
-    ui->bScanPage->setChannles(channelsTable);
-    ui->bScanPage->init(calibration);
+        ui->channelsWidget->init(calibration,tactTableSnapshot);
 
-    ui->channelsWidget->init(calibration,tactTableSnapshot);
+        _calibrationsWidget->init(calibration);*/
 
-    _calibrationsWidget->init(calibration);
 
-    delete tactTableSnapshot;
-    delete calibration;
 }
 
 void MainWindow::reset()

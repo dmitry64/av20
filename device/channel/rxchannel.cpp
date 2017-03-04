@@ -8,16 +8,6 @@ void RxChannel::setPrismTime(uint8_t prismTime)
     _prismTime = prismTime;
 }
 
-std::vector<Gate> RxChannel::gates() const
-{
-    return _gates;
-}
-
-void RxChannel::setGates(const std::vector<Gate> &gates)
-{
-    _gates = gates;
-}
-
 std::string RxChannel::getName() const
 {
     return _name;
@@ -40,7 +30,7 @@ void RxChannel::setMarkerPos(int markerPos)
 
 const TVGCurve *RxChannel::getTvgCurve() const
 {
-    return _tvgCurve;
+    return _tvgCurve->clone();
 }
 
 void RxChannel::setTvgCurve(const TVGCurve *tvgCurve)
@@ -62,22 +52,9 @@ RxChannel::RxChannel() : _prismTime(0), _tvgCurve(0), _markerPos(0)
 
 }
 
-RxChannel::RxChannel(RxChannel *original)
-{
-    Q_ASSERT(original);
-    _name = original->getName();
-    Q_ASSERT(original->getTvgCurve());
-    _tvgCurve = original->getTvgCurve()->clone();
-    _prismTime = original->getPrismTime();
-    _markerPos = original->getMarkerPos();
-    /*for(size_t i=0; i<original->gates().size(); i++) {
-        _gates.push_back(original->gates().at(i));
-    }*/
-    _gates = original->gates();
-}
 
 RxChannel::~RxChannel()
 {
-    Q_ASSERT(_tvgCurve);
-    delete _tvgCurve;
+    // Q_ASSERT(_tvgCurve);
+    //delete _tvgCurve;
 }

@@ -7,7 +7,7 @@ TVGModificator::TVGModificator(ChannelID channel, const TVGCurve *curve) : _chan
 
 void TVGModificator::apply(Core *core)
 {
-    core->getCalibration()->getChannel(_channel)->rx()->setTvgCurve(_curve);
+    /*core->getCalibration()->getChannel(_channel)->rx()->setTvgCurve(_curve);
     core->applyCurrentCalibrationToDevice();
-    core->notifyChannel((core->getCalibration()->getChannel(_channel)));
+    core->notifyChannel((core->getCalibration()->getChannel(_channel)));*/
 }

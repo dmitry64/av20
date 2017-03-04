@@ -21,7 +21,7 @@ public:
     ~AScanPage();
     void reset();
     void init(const ChannelID channel);
-    void init(const ChannelID channel, const ChannelsCalibration *snapshot);
+    void init(const ChannelID channel, const ChannelsCalibration &snapshot);
     void setCore(Core * core);
     void setAScanChannels(const std::vector<Channel*> channels);
     void setBScanChannels(const std::vector<Channel*> channels);

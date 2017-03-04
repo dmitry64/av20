@@ -36,14 +36,6 @@ TxChannel::TxChannel() : _freq(PulserFreq::Freq_1_0_MHz), _prog(PulserProg::Prog
 
 }
 
-TxChannel::TxChannel(TxChannel *original)
-{
-    Q_ASSERT(original);
-    _doubleMode = original->doubleMode();
-    _freq = original->freq();
-    _prog = original->prog();
-}
-
 TxChannel::~TxChannel()
 {
 

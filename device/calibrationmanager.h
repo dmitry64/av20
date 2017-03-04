@@ -8,17 +8,17 @@
 
 class CalibrationManager
 {
-    std::map<TactID, std::list<ChannelsCalibration*> * > _calibrations;
+    std::map<TactID, std::vector<ChannelsCalibration> > _calibrations;
     void initSearchModeCalibration();
     void initHandModeCalibration();
 public:
     CalibrationManager();
     void init();
-    ChannelsCalibration * getLastCalibrationByTactID(TactID id);
-    std::vector<ChannelsCalibration *> getCalibrationsByTactID(TactID id);
+    ChannelsCalibration getLastCalibrationByTactID(TactID id);
+    std::vector<ChannelsCalibration> getCalibrationsByTactID(TactID id);
     std::vector<CalibrationInfo> getCalibrationsInfoByTactID(TactID id);
-    void addCalibration(ChannelsCalibration * calibration);
-    void removeCalibration(ChannelsCalibration * calibration);
+    void addCalibration(const ChannelsCalibration &calibration);
+    void removeCalibration(ChannelsCalibration calibration);
 };
 
 #endif // CALIBRATIONMANAGER_H

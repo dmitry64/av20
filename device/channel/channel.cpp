@@ -1,26 +1,6 @@
 #include "channel.h"
 #include <QDebug>
 
-RxChannel *Channel::rx() const
-{
-    return _rx;
-}
-
-void Channel::setRx(RxChannel *rx)
-{
-    _rx = rx;
-}
-
-TxChannel *Channel::tx() const
-{
-    return _tx;
-}
-
-void Channel::setTx(TxChannel *tx)
-{
-    _tx = tx;
-}
-
 uint8_t Channel::index() const
 {
     return _index;
@@ -31,30 +11,44 @@ void Channel::setIndex(const uint8_t &index)
     _index = index;
 }
 
-Channel::Channel() : _rx(0), _tx(0), _colorRed(0), _colorGreen(0), _colorBlue(0)
+RxChannel Channel::getRx() const
+{
+    return _rx;
+}
+
+void Channel::setRx(const RxChannel &rx)
+{
+    _rx = rx;
+}
+
+TxChannel Channel::getTx() const
+{
+    return _tx;
+}
+
+void Channel::setTx(const TxChannel &tx)
+{
+    _tx = tx;
+}
+
+std::vector<DisplayChannel> Channel::getDisplayChannels() const
+{
+    return _displayChannels;
+}
+
+void Channel::setDisplayChannels(const std::vector<DisplayChannel> &displayChannels)
+{
+    _displayChannels = displayChannels;
+}
+
+Channel::Channel() : _colorRed(0), _colorGreen(0), _colorBlue(0)
 {
 }
 
 Channel::~Channel()
 {
-    Q_ASSERT(_rx);
-    Q_ASSERT(_tx);
-    delete _rx;
-    delete _tx;
-}
 
-Channel::Channel(Channel *channel)
-{
-    Q_ASSERT(channel);
-    _colorRed = channel->getColorRed();
-    _colorGreen = channel->getColorGreen();
-    _colorBlue = channel->getColorBlue();
-    _index = channel->index();
-    Q_ASSERT(_index<8);
-    _rx = new RxChannel(channel->rx());
-    _tx = new TxChannel(channel->tx());
 }
-
 
 void Channel::setColor(uint8_t red, uint8_t green, uint8_t blue)
 {
@@ -63,17 +57,17 @@ void Channel::setColor(uint8_t red, uint8_t green, uint8_t blue)
     _colorGreen = green;
 }
 
-uint8_t Channel::getColorRed()
+uint8_t Channel::getColorRed() const
 {
     return _colorRed;
 }
 
-uint8_t Channel::getColorGreen()
+uint8_t Channel::getColorGreen() const
 {
     return _colorGreen;
 }
 
-uint8_t Channel::getColorBlue()
+uint8_t Channel::getColorBlue() const
 {
     return _colorBlue;
 }

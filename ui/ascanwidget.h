@@ -23,10 +23,9 @@ class AScanWidget : public QWidget
     uint16_t _markerValue;
     uint16_t _scale;
 
-    //std::vector<QPoint> _points;
     std::vector<QPoint> _polygon;
     std::vector<uint16_t> _samples;
-    std::vector<Channel*> _channels;
+
     QElapsedTimer _fpsTimer;
 
     TVGCurve * _tvgCurve;
@@ -35,6 +34,9 @@ class AScanWidget : public QWidget
     QFont _scaleFont;
     QPen _ascanPen;
     QBrush _ascanBrush;
+
+    Channel _channelData;
+    DisplayChannelID _displayChannelId;
 
 private:
     void setTVGCurve(const TVGCurve *curve);
@@ -51,15 +53,14 @@ public:
     explicit AScanWidget(QWidget *parent = 0);
     ~AScanWidget();
     void paintEvent(QPaintEvent * event);
-    void setChannelsInfo(std::vector<Channel*> channels);
-    //void applyTempCurve();
     void reset();
+    void setChannelInfo(const Channel &channel, DisplayChannelID dispChannelId);
 public slots:
     void onAScan(const AScanDrawData *scan);
     //void onTVG(TVG tvg);
 
 
-    void onChannelChanged(Channel *channel);
+    void onChannelChanged(Channel channel);
 private:
     Ui::AScanWidget *ui;
 };

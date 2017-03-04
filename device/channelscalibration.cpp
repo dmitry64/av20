@@ -12,7 +12,7 @@ void ChannelsCalibration::setTactId(const TactID &tactId)
     _tactId = tactId;
 }
 
-void ChannelsCalibration::setChannels(const std::vector<Channel *> &channels)
+void ChannelsCalibration::setChannels(const std::vector<Channel> &channels)
 {
     _channels = channels;
 }
@@ -36,40 +36,28 @@ ChannelsCalibration::ChannelsCalibration()
 
 ChannelsCalibration::~ChannelsCalibration()
 {
-    qDebug() << "Device calibration deleted";
-
-    for(size_t i=0; i<_channels.size(); i++) {
-        Channel * chan = _channels.at(i);
-        Q_ASSERT(chan);
-        delete chan;
-    }
+    //qDebug() << "Device calibration deleted";
 }
 
 void ChannelsCalibration::init()
 {
 }
 
-ChannelsCalibration::ChannelsCalibration(ChannelsCalibration *original)
+ChannelsCalibration ChannelsCalibration::getSnapshot()
 {
-    Q_ASSERT(original);
-    _tactId = original->getTactId();
-    for(int i=0; i<original->getChannelsCount(); i++) {
-        Channel * ch = new Channel(original->getChannel(i));
-        _channels.push_back(ch);
-    }
-    _info = original->getInfo();
+    return ChannelsCalibration(*this);
 }
 
-ChannelsCalibration * ChannelsCalibration::getSnapshot()
-{
-    return new ChannelsCalibration(this);
-}
-
-Channel *ChannelsCalibration::getChannel(const ChannelID index) const
+const Channel &ChannelsCalibration::getChannel(const ChannelID index) const
 {
     Q_ASSERT(index<8);
     Q_ASSERT(_channels.size() > 0);
     return _channels.at(index);
+}
+
+DisplayChannel &ChannelsCalibration::getDisplayChannel(const ChannelID chan, const DisplayChannelID disp) const
+{
+    Q_ASSERT(false);
 }
 
 uint8_t ChannelsCalibration::getChannelsCount() const

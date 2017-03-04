@@ -6,7 +6,8 @@
 #include "bscanwidget.h"
 #include "core.h"
 
-namespace Ui {
+namespace Ui
+{
 class BScanPage;
 }
 
@@ -22,7 +23,7 @@ public:
     ~BScanPage();
 
     void setCore(Core * core);
-    void init(ChannelsCalibration * snapshot);
+    void init(ChannelsCalibration snapshot);
     void reset();
     void setChannles(std::vector<std::vector<Channel *> > channelsConfiguration);
 public slots:

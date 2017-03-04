@@ -10,7 +10,6 @@ class TxChannel
     bool _doubleMode;
 public:
     TxChannel();
-    TxChannel(TxChannel * original);
     ~TxChannel();
     PulserFreq freq() const;
     void setFreq(const PulserFreq &freq);

@@ -14,11 +14,10 @@ class RxChannel
     uint8_t _prismTime;
     const TVGCurve * _tvgCurve;
     int _markerPos;
-    std::vector<Gate> _gates;
+
 
 public:
     RxChannel();
-    RxChannel(RxChannel * original);
     ~RxChannel();
 
     void setPrismTime(uint8_t prismTime);

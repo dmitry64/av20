@@ -14,32 +14,32 @@ ModeSelectionButton::~ModeSelectionButton()
     delete ui;
 }
 
-void ModeSelectionButton::setMode(DeviceMode *mode, uint8_t index)
+void ModeSelectionButton::setMode(DeviceMode mode, uint8_t index)
 {
     _mode = mode;
     _index = index;
     QString name = "none";
 
-    switch (mode->type()) {
-            case ModeTypes::SearchMode:
-            name = "Search modes:";
-            break;
-            case ModeTypes::HandMode:
-            name = "Hand modes:";
-            break;
-            case ModeTypes::HeadMode:
-            name = "Head scanner modes:";
-            break;
-            case ModeTypes::WheelMode:
-            name = "Wheel modes:";
-            break;
-            case ModeTypes::Unknown:
-            name = "Unknown";
-            break;
+    switch (mode.type()) {
+    case ModeTypes::SearchMode:
+        name = "Search modes:";
+        break;
+    case ModeTypes::HandMode:
+        name = "Hand modes:";
+        break;
+    case ModeTypes::HeadMode:
+        name = "Head scanner modes:";
+        break;
+    case ModeTypes::WheelMode:
+        name = "Wheel modes:";
+        break;
+    case ModeTypes::Unknown:
+        name = "Unknown";
+        break;
     }
 
     ui->submodesBox->setTitle(name);
-    std::vector<TactTable*> tactTables = mode->tactTables();
+    std::vector<TactTable> tactTables = mode.tactTables();
     for(size_t i=0; i<tactTables.size(); i++) {
         SchemeSelectionButton * button = new SchemeSelectionButton();
         button->setText("Scheme #"+QString::number(i + 1));

@@ -11,20 +11,20 @@ class ChannelsCalibration
 {
     TactID _tactId;
     CalibrationInfo _info;
-    std::vector<Channel *> _channels;
+    std::vector<Channel> _channels;
 
 public:
     ChannelsCalibration();
     ~ChannelsCalibration();
     void init();
-    ChannelsCalibration(ChannelsCalibration *original);
-    ChannelsCalibration *getSnapshot();
+    ChannelsCalibration getSnapshot();
     // get/set
-    Channel *getChannel(const ChannelID index) const;
+    const Channel &getChannel(const ChannelID index) const;
+    DisplayChannel & getDisplayChannel(const ChannelID chan, const DisplayChannelID disp) const;
     uint8_t getChannelsCount() const;
     TactID getTactId() const;
     void setTactId(const TactID &tactId);
-    void setChannels(const std::vector<Channel *> &channels);
+    void setChannels(const std::vector<Channel> &channels);
     CalibrationInfo getInfo() const;
     void setInfo(const CalibrationInfo &info);
 };

@@ -6,7 +6,7 @@
 #include "device/modificators/prismtimemodificator.h"
 #include "device/modificators/tvgmodificator.h"
 
-ChannelsCalibration * Core::getCalibrationsSnapshot()
+ChannelsCalibration Core::getCalibrationsSnapshot()
 {
     _calibrationSnapshotRequested.store(true);
     while(_calibrationSnapshotRequested.load()) {
@@ -24,12 +24,12 @@ CalibrationsInfoList Core::getAvailableCalibrationsSnapshot()
     return _calibrationsInfoListSnapshot;
 }
 
-TactTable *Core::getTactTable()
+TactTable Core::getTactTable()
 {
-    return getCurrentDeviceMode()->tactTables().at(_currentScheme);
+    return getCurrentDeviceMode().tactTables().at(_currentScheme);
 }
 
-const TactTable *Core::getTactTableSnapshot()
+TactTable Core::getTactTableSnapshot()
 {
     _tactTableSnapshotRequested.store(true);
     while(_tactTableSnapshotRequested.load()) {
@@ -73,9 +73,7 @@ Core::Core(ModeManager *modeManager, CalibrationManager * calibrationManager) : 
     _line1CurrentAscan = new AScan();
     _line2CurrentAscan = new AScan();
     _calibrationSnapshotRequested.store(false);
-    _calibrationsSnapshot = 0;
     _tactTableSnapshotRequested.store(false);
-    _tactTableSnapshot = 0;
     _modeswitchRequested.store(false);
     _calibrationsInfoSnapshotRequested.store(false);
     _calibrationSwitchRequested.store(false);
@@ -108,12 +106,16 @@ void Core::stopCore()
     this->wait();
 }
 
-ChannelsCalibration *Core::getCalibration()
+ChannelsCalibration Core::getCalibration()
 {
-    return _calibrationManager->getCalibrationsByTactID(getCurrentDeviceMode()->tactTables().at(_currentScheme)->getId()).at(_currentCalibration.load());
+    const DeviceMode & currentMode = getCurrentDeviceMode();
+    const auto & tables = currentMode.tactTables();
+    TactID id = tables.at(_currentScheme).getId();
+    const auto & cals = _calibrationManager->getCalibrationsByTactID(id);
+    return cals.at(_currentCalibration.load());
 }
 
-DeviceMode *Core::getCurrentDeviceMode()
+DeviceMode Core::getCurrentDeviceMode()
 {
     return _modeManager->modes().at(_currentMode.load());
 }
@@ -124,9 +126,8 @@ void Core::init()
     _currentScheme.store(0);
     _currentCalibration.store(0);
     _currentMode.store(0);
-    TactTable * current = getTactTable();
-    Q_ASSERT(current);
-    _currentTact = current->getTactIndexByCounter(_currentTactCounter);
+    TactTable current = getTactTable();
+    _currentTact = current.getTactIndexByCounter(_currentTactCounter);
     Q_ASSERT(_currentTact<8);
     _device->applyCalibration(getCalibration(), current);
 }
@@ -139,15 +140,14 @@ void Core::check()
 
 void Core::trigger()
 {
-    TactTable * table = getTactTable();
-    Q_ASSERT(table);
-    if(Q_LIKELY(table->getMaxTacts() > 0)) {
+    const TactTable & table = getTactTable();
+    if(Q_LIKELY(table.getMaxTacts() > 0)) {
         _device->setProgTrigger(true);
         _currentTactCounter++;
-        if(_currentTactCounter>=table->getMaxTacts()) {
+        if(_currentTactCounter>=table.getMaxTacts()) {
             _currentTactCounter = 0;
         }
-        _currentTact = table->getTactIndexByCounter(_currentTactCounter);
+        _currentTact = table.getTactIndexByCounter(_currentTactCounter);
     }
 }
 
@@ -170,7 +170,7 @@ void Core::status()
 
 void Core::process()
 {
-    const std::vector< uint8_t > & lines = getTactTable()->getTactLines(_currentTact);
+    const std::vector< uint8_t > & lines = getTactTable().getTactLines(_currentTact);
     aScanAll(lines);
     uint8_t count = lines.size();
     for(uint8_t i=0; i<count; i++) {
@@ -212,8 +212,11 @@ void Core::aScanProcess(uint8_t line)
         Q_ASSERT(false);
     }
 
-    dp->ascan._channel = scanptr->_header._channelNo;
-    dp->bscan._channel = scanptr->_header._channelNo;
+    ChannelID chId = scanptr->_header._channelNo;
+    Q_ASSERT(chId < 8);
+
+    dp->ascan._channel = chId;
+    dp->bscan._channel = chId;
 
     uint16_t max = 0;
     uint16_t pos = 0;
@@ -228,34 +231,41 @@ void Core::aScanProcess(uint8_t line)
     dp->ascan._markerPos = pos;
     dp->ascan._markerValue = max;
 
-    const std::vector<Gate> & gates = getCalibration()->getChannel(dp->bscan._channel)->rx()->gates();
+    const ChannelsCalibration & calibration = getCalibration();
+    const Channel & current = calibration.getChannel(chId);
 
-    for(size_t j=0; j<gates.size(); j++) {
-        const Gate & gate = gates[j];
-        uint16_t gateStart = (gate._start) * 4;
-        uint16_t gateEnd = (gate._finish) * 4;
-        uint16_t start = 0;
-        //int end = -1;
-        bool startFound = false;
-        for(uint16_t i=0; i<ASCAN_SAMPLES_SIZE; i++) {
-            uint8_t sample = scanptr->_samples[i];
-            if((sample>gate._level) &&(!startFound) && (i >= gateStart) && (i <= gateEnd)) {
-                start = i;
-                startFound = true;
-            }
-            else if (startFound && (sample<gate._level || (i >= gateEnd))) {
-                BScanDrawSample drawSample;
-                drawSample._begin = start / 0x0004;
-                drawSample._end = i / 0x0004;
-                drawSample._level = gate._level;
-                dp->bscan._samples.push_back(drawSample);
-                startFound = false;
-                start = 0;
+    const std::vector<DisplayChannel> & dispChannels = current.getDisplayChannels();
+    for(size_t k=0; k<dispChannels.size(); k++) {
+        const DisplayChannel & dispChannel = dispChannels[k];
+        const std::vector<Gate> & gates = dispChannel.gates();
+
+        for(size_t j=0; j<gates.size(); j++) {
+            const Gate & gate = gates[j];
+            uint16_t gateStart = (gate._start) * 4;
+            uint16_t gateEnd = (gate._finish) * 4;
+            uint16_t start = 0;
+            //int end = -1;
+            bool startFound = false;
+            for(uint16_t i=0; i<ASCAN_SAMPLES_SIZE; i++) {
+                uint8_t sample = scanptr->_samples[i];
+                if((sample>gate._level) &&(!startFound) && (i >= gateStart) && (i <= gateEnd)) {
+                    start = i;
+                    startFound = true;
+                }
+                else if (startFound && (sample<gate._level || (i >= gateEnd))) {
+                    BScanDrawSample drawSample;
+                    drawSample._begin = start / 0x0004;
+                    drawSample._end = i / 0x0004;
+                    drawSample._level = gate._level;
+                    dp->bscan._samples.push_back(drawSample);
+                    startFound = false;
+                    start = 0;
+                }
             }
         }
-    }
 
-    emit drawDisplayPackage(QSharedPointer<DisplayPackage>(dp));
+        emit drawDisplayPackage(QSharedPointer<DisplayPackage>(dp));
+    }
 }
 
 void Core::sync()
@@ -277,15 +287,15 @@ void Core::sync()
 void Core::snapshot()
 {
     if(_calibrationSnapshotRequested.load()) {
-        _calibrationsSnapshot = getCalibration()->getSnapshot();
+        _calibrationsSnapshot = getCalibration().getSnapshot();
         _calibrationSnapshotRequested.store(false);
     }
     if(_tactTableSnapshotRequested.load()) {
-        _tactTableSnapshot = getTactTable()->getSnapshot();
+        _tactTableSnapshot = getTactTable().getSnapshot();
         _tactTableSnapshotRequested.store(false);
     }
     if(_calibrationsInfoSnapshotRequested.load()) {
-        _calibrationsInfoListSnapshot = _calibrationManager->getCalibrationsInfoByTactID(getCurrentDeviceMode()->tactTables().at(_currentScheme)->getId());
+        _calibrationsInfoListSnapshot = _calibrationManager->getCalibrationsInfoByTactID(getCurrentDeviceMode().tactTables().at(_currentScheme).getId());
         _calibrationsInfoSnapshotRequested.store(false);
     }
 }
@@ -375,9 +385,8 @@ void Core::handleDeviceConnectionError(bool status)
     }
 }
 
-void Core::notifyChannel(Channel *channel)
+void Core::notifyChannel(Channel channel)
 {
-    Q_ASSERT(channel);
     emit channelChanged(channel);
 }
 

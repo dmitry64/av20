@@ -25,25 +25,27 @@ void AScanPage::reset()
 void AScanPage::init(const ChannelID channel)
 {
     Q_ASSERT(_core);
-    ChannelsCalibration * snapshot = _core->getCalibrationsSnapshot();
-    init(channel,snapshot);
-    delete snapshot;
+    //ChannelsCalibration * snapshot = _core->getCalibrationsSnapshot();
+    //init(channel,snapshot);
+    // delete snapshot;
 }
 
-void AScanPage::init(const ChannelID channel,const ChannelsCalibration *snapshot)
+void AScanPage::init(const ChannelID channel,const ChannelsCalibration & snapshot)
 {
     qDebug() << "Ascan init!";
-    Q_ASSERT(snapshot);
-    std::vector<Channel *> channels;
-    Channel * chan = (snapshot->getChannel(channel));
-    Q_ASSERT(chan);
-    channels.push_back(chan);
-    ui->bscanWidget->setChannelsInfo(channels);
-    ui->ascanWidget->setChannelsInfo(channels);
-    ui->controlPanel->setChannel(channel);
-    ui->controlPanel->init(snapshot);
+
+    ui->ascanWidget->setChannelInfo(snapshot.getChannel(channel),0);
+    //Q_ASSERT(snapshot);
+    //std::vector<Channel *> channels;
+    //Channel * chan = (snapshot->getChannel(channel));
+    //Q_ASSERT(chan);
+    //channels.push_back(chan);
+    //ui->bscanWidget->setChannelsInfo(channels);
+    //ui->ascanWidget->setChannelsInfo(channels);
+    //ui->controlPanel->setChannel(channel);
+    //ui->controlPanel->init(snapshot);
     ui->channelSelector->init(snapshot);
-    channels.clear();
+    //channels.clear();
     update();
 }
 
@@ -57,12 +59,12 @@ void AScanPage::setCore(Core *core)
 
 void AScanPage::setAScanChannels(const std::vector<Channel *> channels)
 {
-    ui->ascanWidget->setChannelsInfo(channels);
+    //ui->ascanWidget->setChannelsInfo(channels);
 }
 
 void AScanPage::setBScanChannels(const std::vector<Channel *> channels)
 {
-    ui->bscanWidget->setChannelsInfo(channels);
+    //ui->bscanWidget->setChannelsInfo(channels);
 }
 
 void AScanPage::onDisplayPackage(QSharedPointer<DisplayPackage> package)
@@ -73,22 +75,22 @@ void AScanPage::onDisplayPackage(QSharedPointer<DisplayPackage> package)
 
 void AScanPage::onChannelChanged(Channel * channel)
 {
-    ui->ascanWidget->onChannelChanged(channel);
-    ui->bscanWidget->onChannelChanged(channel);
+    //ui->ascanWidget->onChannelChanged(channel);
+    //ui->bscanWidget->onChannelChanged(channel);
 }
 
 void AScanPage::setChannel(ChannelID channel)
 {
-    const ChannelsCalibration * snapshot = _core->getCalibrationsSnapshot();
+    /*const ChannelsCalibration * snapshot = _core->getCalibrationsSnapshot();
     Q_ASSERT(snapshot);
     std::vector<Channel*> channels;
     Channel * chan = (snapshot->getChannel(channel));
     Q_ASSERT(chan);
     channels.push_back(chan);
     ui->bscanWidget->setChannelsInfo(channels);
-    ui->ascanWidget->setChannelsInfo(channels);
+    //ui->ascanWidget->setChannelsInfo(channels);
     ui->controlPanel->setChannel(channel);
     ui->controlPanel->init(snapshot);
     update();
-    delete snapshot;
+    delete snapshot;*/
 }

@@ -4,19 +4,15 @@
 #include <QLinearGradient>
 #include <QDebug>
 
-std::vector<Channel*> BScanWidget::channels() const
+void BScanWidget::setChannelInfo(const Channel &channel, DisplayChannelID dispChannelId)
 {
-    return _channels;
+    _channelData = channel;
+    _displayChannelId = dispChannelId;
 }
 
-bool BScanWidget::channelSelected(uint8_t chan)
+Channel BScanWidget::channelData() const
 {
-    for(size_t i=0; i<_channels.size(); i++) {
-        if(_channels[i]->index() == chan) {
-            return true;
-        }
-    }
-    return false;
+    return _channelData;
 }
 
 BScanWidget::BScanWidget(QWidget *parent) :
@@ -40,11 +36,7 @@ BScanWidget::BScanWidget(QWidget *parent) :
 
 BScanWidget::~BScanWidget()
 {
-    for(size_t i=0; i<_channels.size(); i++) {
-        delete _channels[i];
-    }
-    _channels.clear();
-    delete ui;
+
 }
 
 void BScanWidget::paintEvent(QPaintEvent *event)
@@ -68,56 +60,43 @@ void BScanWidget::paintEvent(QPaintEvent *event)
     const double step = (w - 64) / static_cast<double>(_width);
     const double hstep = ((h - 1.0) / 200.0);
 
-    uint8_t channelsCount = _channels.size();
+    // uint8_t channelsCount = _channels.size();
 
-    for(uint8_t n=0; n<channelsCount; n++) {
-        const uint8_t chan = _channels[n]->index();
-        const uint16_t elements = std::max(static_cast<int>(_width - _samples[chan].first.size()),0);
-        uint16_t k = (_samples[chan]).second;
+    //for(uint8_t n=0; n<channelsCount; n++) {
+    const uint8_t chan = _channelData.index();
+    const uint16_t elements = std::max(static_cast<int>(_width - _samples[chan].first.size()),0);
+    uint16_t k = (_samples[chan]).second;
 
 
-        for(uint16_t i=elements; i<_width; i++) {
-            const std::vector<BScanDrawSample> & sam = ((_samples[chan]).first)[k];
-            const uint8_t samplesCount = sam.size();
-            if(k == _end ) {
-                k = 0;
-            }
-            else {
-                k++;
-            }
-
-            for(uint16_t y=0; y<samplesCount; y++) {
-                const BScanDrawSample & sample = sam[y];
-                const double y1 = static_cast<double>(sample._begin) * hstep;
-                const double y2 = static_cast<double>(sample._end) * hstep;
-                painter.fillRect(QRectF(static_cast<double>(left) + step*i,1.0 + y1, step, y2 - y1), getColorByLevel(sample._level));
-            }
+    for(uint16_t i=elements; i<_width; i++) {
+        const std::vector<BScanDrawSample> & sam = ((_samples[chan]).first)[k];
+        const uint8_t samplesCount = sam.size();
+        if(k == _end ) {
+            k = 0;
+        }
+        else {
+            k++;
         }
 
-        const std::vector<Gate> & gates = _channels.at(n)->rx()->gates();
-
-        for(size_t i=0; i<gates.size(); i++) {
-            const Gate & gate = gates[i];
-            const uint16_t y1 = static_cast<double>(gate._start) * hstep;
-            const uint16_t y2 = static_cast<double>(gate._finish) * hstep;
-            uint16_t offset = w - 32 + ((gate._level/255.0) *32) + 1;
-            painter.setPen(QPen(getColorByLevel(gate._level),2));
-            painter.drawLine(offset,y1,offset,y2);
+        for(uint16_t y=0; y<samplesCount; y++) {
+            const BScanDrawSample & sample = sam[y];
+            const double y1 = static_cast<double>(sample._begin) * hstep;
+            const double y2 = static_cast<double>(sample._end) * hstep;
+            painter.fillRect(QRectF(static_cast<double>(left) + step*i,1.0 + y1, step, y2 - y1), getColorByLevel(sample._level));
         }
     }
-}
 
-void BScanWidget::setChannelsInfo(std::vector<Channel*> channels)
-{
-    for(size_t i=0; i<_channels.size(); i++) {
-        delete _channels.at(i);
-    }
-    _channels.clear();
-    std::vector<Channel*> result;
-    for(size_t i=0; i<channels.size(); i++) {
-        result.push_back(new Channel(channels.at(i)));
-    }
-    _channels = result;
+    /*const std::vector<Gate> & gates = _channels.at(n)->rx()->gates();
+
+    for(size_t i=0; i<gates.size(); i++) {
+        const Gate & gate = gates[i];
+        const uint16_t y1 = static_cast<double>(gate._start) * hstep;
+        const uint16_t y2 = static_cast<double>(gate._finish) * hstep;
+        uint16_t offset = w - 32 + ((gate._level/255.0) *32) + 1;
+        painter.setPen(QPen(getColorByLevel(gate._level),2));
+        painter.drawLine(offset,y1,offset,y2);
+    }*/
+    //}
 }
 
 void BScanWidget::setRestrictedToChannel(bool flag)
@@ -127,17 +106,14 @@ void BScanWidget::setRestrictedToChannel(bool flag)
 
 void BScanWidget::reset()
 {
-    for(size_t i=0; i<_channels.size(); i++) {
-        delete _channels.at(i);
-    }
-    _channels.clear();
+
 }
 
 void BScanWidget::onBScan(BScanDrawData *scan)
 {
     uint8_t chan = scan->_channel;
     if(_restrictedToChannel) {
-        if(!channelSelected(chan)) {
+        if(chan!=_channelData.index()) {
             return;
         }
     }
@@ -157,9 +133,9 @@ void BScanWidget::onBScan(BScanDrawData *scan)
     }
 }
 
-void BScanWidget::onChannelChanged(Channel * channel)
+void BScanWidget::onChannelChanged(Channel channel)
 {
-    Q_ASSERT(channel);
+    /*Q_ASSERT(channel);
     for(uint8_t j=0; j<_channels.size(); j++) {
         uint8_t chan = channel->index();
         if(chan == _channels[j]->index()) {
@@ -169,5 +145,5 @@ void BScanWidget::onChannelChanged(Channel * channel)
             _channels[j] = new Channel(channel);
         }
     }
-    update();
+    update();*/
 }

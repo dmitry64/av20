@@ -51,21 +51,15 @@ void TVGEditorWidget::reset()
 
 void TVGEditorWidget::init(uint8_t channel)
 {
-    ChannelsCalibration * snapshot =  _core->getCalibrationsSnapshot();
+    const ChannelsCalibration & snapshot = _core->getCalibrationsSnapshot();
     init(channel,snapshot);
-    delete snapshot;
+    //delete snapshot;
 }
 
-void TVGEditorWidget::init(uint8_t channel, ChannelsCalibration *snapshot)
+void TVGEditorWidget::init(uint8_t channel, const ChannelsCalibration & snapshot)
 {
     _currentChannel = channel;
-    std::vector<Channel*> channels;
-    channels.push_back((snapshot->getChannel(channel)));
-    ui->aScanWidget->setChannelsInfo(channels);
-    channels.clear();
-    ui->channelSelector->init(snapshot);
-    const TVGCurve * curve = snapshot->getChannel(channel)->rx()->getTvgCurve();
-    initCurve(curve);
+
     update();
 }
 
@@ -95,22 +89,21 @@ void TVGEditorWidget::onDisplayPackage(QSharedPointer<DisplayPackage> package)
 
 void TVGEditorWidget::onChannelChanged(Channel * channel)
 {
-    ui->aScanWidget->onChannelChanged(channel);
+    //ui->aScanWidget->onChannelChanged(channel);
 }
 
 void TVGEditorWidget::setChannel(ChannelID channel)
 {
     _currentChannel = channel;
-    ChannelsCalibration * snapshot = _core->getCalibrationsSnapshot();
-    Q_ASSERT(snapshot);
-    std::vector<Channel*> channels;
-    Channel * chan = snapshot->getChannel(channel);
-    Q_ASSERT(chan);
-    channels.push_back(chan);
-    ui->aScanWidget->setChannelsInfo(channels);
-    initCurve(snapshot->getChannel(channel)->rx()->getTvgCurve());
+    const ChannelsCalibration & snapshot = _core->getCalibrationsSnapshot();
+
+    //std::vector<Channel*> channels;
+    //Channel * chan = snapshot->getChannel(channel);
+    //Q_ASSERT(chan);
+    // channels.push_back(chan);
+    //ui->aScanWidget->setChannelsInfo(channels);
+    //initCurve(snapshot->getChannel(channel)->rx()->getTvgCurve());
     update();
-    delete snapshot;
 }
 
 void TVGEditorWidget::onSingleOffsetChanged(double value)

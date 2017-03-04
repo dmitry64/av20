@@ -20,7 +20,7 @@ class ChannelSelector : public QWidget
 public:
     explicit ChannelSelector(QWidget *parent = 0);
     ~ChannelSelector();
-    void init(const ChannelsCalibration *snapshot);
+    void init(const ChannelsCalibration snapshot);
     void setCore(Core * core);
 
 public slots:

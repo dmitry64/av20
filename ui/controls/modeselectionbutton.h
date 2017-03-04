@@ -6,7 +6,8 @@
 #include "device/devicemode.h"
 #include "ui/controls/schemeselectionbutton.h"
 
-namespace Ui {
+namespace Ui
+{
 class ModeSelectionButton;
 }
 
@@ -14,12 +15,12 @@ class ModeSelectionButton : public QWidget
 {
     Q_OBJECT
 
-    DeviceMode * _mode;
+    DeviceMode _mode;
     uint8_t _index;
 public:
     explicit ModeSelectionButton(QWidget *parent = 0);
     ~ModeSelectionButton();
-    void setMode(DeviceMode * mode, uint8_t index);
+    void setMode(DeviceMode mode, uint8_t index);
 public slots:
     void onSchemeSelected(uint8_t index);
 signals:

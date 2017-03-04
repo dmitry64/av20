@@ -12,11 +12,8 @@
 class FakeSPI : public DeviceInterface, public QThread
 {
     DeviceState _state;
-
     std::vector<std::atomic_int*> _counters;
-
     uint8_t _currentTact;
-
     uint8_t _specialCounter;
 private:
     uint8_t getNextTact();

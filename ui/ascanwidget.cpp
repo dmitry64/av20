@@ -78,7 +78,7 @@ void AScanWidget::drawTvgCurve(QPainter &painter,int width,int left, int bottom,
         painter.setBrush(QBrush(Qt::green));
         for(size_t i=0; i<referencePoints.size(); i++) {
             QPoint p(left + referencePoints[i].first * width ,bottom - referencePoints[i].second * (height));
-           //painter.fillRect(QRect(p-QPoint(3,3),p+QPoint(3,3)),Qt::black);
+            //painter.fillRect(QRect(p-QPoint(3,3),p+QPoint(3,3)),Qt::black);
             painter.drawEllipse(QRect(p-QPoint(3,3),p+QPoint(3,3)));
         }
     }
@@ -86,26 +86,26 @@ void AScanWidget::drawTvgCurve(QPainter &painter,int width,int left, int bottom,
 
 void AScanWidget::drawGates(QPainter &painter, int width, int height, int left, int bottom)
 {
-    double scaleStep = width/static_cast<double>(_scale);
-    uint8_t channelsCount = _channels.size();
-    Q_ASSERT(channelsCount<8);
-    for(uint8_t i=0; i<channelsCount; i++) {
-        const auto & gates = _channels[i]->rx()->gates();
-        uint8_t gatesCount = gates.size();
-        for(uint8_t j=0; j<gatesCount; j++) {
-            Gate gate = gates[j];
-            int level = bottom - (gate._level * (height/255.0));
-            QPen gatePen = QPen(getColorByLevel(gate._level),3);
-            gatePen.setCapStyle(Qt::RoundCap);
-            painter.setPen(gatePen);
+    /* double scaleStep = width/static_cast<double>(_scale);
+     uint8_t channelsCount = _channels.size();
+     Q_ASSERT(channelsCount<8);
+     for(uint8_t i=0; i<channelsCount; i++) {
+         const auto & gates = _channels[i]->rx()->gates();
+         uint8_t gatesCount = gates.size();
+         for(uint8_t j=0; j<gatesCount; j++) {
+             Gate gate = gates[j];
+             int level = bottom - (gate._level * (height/255.0));
+             QPen gatePen = QPen(getColorByLevel(gate._level),3);
+             gatePen.setCapStyle(Qt::RoundCap);
+             painter.setPen(gatePen);
 
-            painter.drawLine(left + gate._start * scaleStep,level,left + gate._finish* scaleStep, level);
-            painter.drawLine(left + gate._start * scaleStep,level,left + gate._start * scaleStep - 5, level + 5);
-            painter.drawLine(left + gate._start * scaleStep,level,left + gate._start * scaleStep - 5, level - 5);
-            painter.drawLine(left + gate._finish * scaleStep,level,left + gate._finish * scaleStep + 5, level + 5);
-            painter.drawLine(left + gate._finish * scaleStep,level,left + gate._finish * scaleStep + 5, level - 5);
-        }
-    }
+             painter.drawLine(left + gate._start * scaleStep,level,left + gate._finish* scaleStep, level);
+             painter.drawLine(left + gate._start * scaleStep,level,left + gate._start * scaleStep - 5, level + 5);
+             painter.drawLine(left + gate._start * scaleStep,level,left + gate._start * scaleStep - 5, level - 5);
+             painter.drawLine(left + gate._finish * scaleStep,level,left + gate._finish * scaleStep + 5, level + 5);
+             painter.drawLine(left + gate._finish * scaleStep,level,left + gate._finish * scaleStep + 5, level - 5);
+         }
+     }*/
 }
 
 void AScanWidget::drawAscan(QPainter &painter, int width, int height, int left, int bottom, int right)
@@ -126,7 +126,8 @@ void AScanWidget::drawAscan(QPainter &painter, int width, int height, int left, 
             }
             _polygon[currentCount] = QPoint(left + i*step, bottom - height*(_samples[i] / 256.0));
             currentCount++;
-        } else {
+        }
+        else {
             if(currentCount!=0) {
                 _polygon[currentCount] = QPoint(left + (i+1)*step, bottom);
                 currentCount++;
@@ -189,13 +190,9 @@ AScanWidget::AScanWidget(QWidget *parent) :
 
 AScanWidget::~AScanWidget()
 {
-    for(size_t i=0; i<_channels.size(); i++) {
-        delete _channels[i];
-    }
     if(_tvgCurve !=0) {
         delete _tvgCurve;
     }
-    _channels.clear();
     delete ui;
 }
 
@@ -229,38 +226,23 @@ void AScanWidget::paintEvent(QPaintEvent *event)
     drawFps(painter,width - 50, 16);
 }
 
-void AScanWidget::setChannelsInfo(std::vector<Channel *> channels)
+void AScanWidget::setChannelInfo(const Channel & channel, DisplayChannelID dispChannelId)
 {
-    if(_tvgCurve !=0) {
-        delete _tvgCurve;
-    }
-    _tvgCurve = 0;
-    for(size_t i=0; i<_channels.size(); i++) {
-        delete _channels.at(i);
-    }
-    _channels.clear();
-    std::vector<Channel*> result;
-    for(size_t i=0; i<channels.size(); i++) {
-        result.push_back(new Channel(channels.at(i)));
-    }
-    _channels = result;
-    if(channels.size() > 0) {
-        setTVGCurve(channels[0]->rx()->getTvgCurve());
-    }
+    _channelData = channel;
+    _displayChannelId = dispChannelId;
 }
 
 void AScanWidget::onAScan(const AScanDrawData *scan)
 {
     if(isVisible()) {
-        for(uint8_t j=0; j<_channels.size(); j++) {
-            uint8_t chan = scan->_channel;
-            if(chan == _channels[j]->index()) {
-                _samples = scan->_samples;
 
-                _markerPos = scan->_markerPos;
-                _markerValue = scan->_markerValue;
-            }
+        uint8_t chan = scan->_channel;
+        if(chan == _channelData.index()) {
+            _samples = scan->_samples;
+            _markerPos = scan->_markerPos;
+            _markerValue = scan->_markerValue;
         }
+
         update();
     }
 }
@@ -271,16 +253,15 @@ void AScanWidget::reset()
         delete _tvgCurve;
     }
     _tvgCurve = 0;
-    for(size_t i=0; i<_channels.size(); i++) {
-        delete _channels.at(i);
-    }
-    _channels.clear();
+
 }
 
-void AScanWidget::onChannelChanged(Channel * channel)
+void AScanWidget::onChannelChanged(Channel channel)
 {
-    Q_ASSERT(channel);
-    for(uint8_t j=0; j<_channels.size(); j++) {
+    if(_channelData.index() == channel.index()) {
+        _channelData = channel;
+    }
+    /*for(uint8_t j=0; j<_channels.size(); j++) {
         uint8_t chan = channel->index();
         if(chan == _channels[j]->index()) {
             Channel * chan = _channels[j];
@@ -293,6 +274,6 @@ void AScanWidget::onChannelChanged(Channel * channel)
             Q_ASSERT(tvg);
             setTVGCurve(tvg);
         }
-    }
+    }*/
     update();
 }

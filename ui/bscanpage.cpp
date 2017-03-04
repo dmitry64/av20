@@ -6,9 +6,10 @@ std::vector<BScanWidget*> BScanPage::getWidgetsByChannel(uint8_t chan)
 {
     std::vector<BScanWidget*> result;
     for(size_t i=0; i<_bScanWidgets.size(); i++) {
-        std::vector<Channel*> channels = _bScanWidgets[i]->channels();
+        std::vector<Channel> channels ;
+        channels.push_back(_bScanWidgets[i]->channelData());
         for(size_t j=0; j<channels.size(); j++) {
-            if(channels[j]->index() == chan) {
+            if(channels[j].index() == chan) {
                 result.push_back(_bScanWidgets[i]);
             }
         }
@@ -34,7 +35,7 @@ void BScanPage::setCore(Core *core)
     _core = core;
 }
 
-void BScanPage::init(ChannelsCalibration *snapshot)
+void BScanPage::init(ChannelsCalibration snapshot)
 {
     ui->channelSelectionWidget->init(snapshot);
 }
@@ -68,7 +69,7 @@ void BScanPage::setChannles(std::vector<std::vector<Channel*> > channelsConfigur
         BScanWidget * widget = new BScanWidget(this);
         widget->setRestrictedToChannel(true);
         std::vector<Channel*> info = channelsConfiguration[i];
-        widget->setChannelsInfo(info);
+        //widget->setChannelsInfo(info);
         _bScanWidgets.push_back(widget);
         ui->bscanLayout->addWidget(widget);
     }
@@ -88,6 +89,6 @@ void BScanPage::onDisplayPackage(QSharedPointer<DisplayPackage> dp)
 void BScanPage::onChannelChanged(Channel * channel)
 {
     for(size_t i=0; i<_bScanWidgets.size(); i++) {
-        _bScanWidgets[i]->onChannelChanged(channel);
+        //_bScanWidgets[i]->onChannelChanged(channel);
     }
 }

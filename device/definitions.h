@@ -17,6 +17,7 @@
 typedef uint16_t TactID;
 typedef uint8_t TactIndex;
 typedef uint8_t ChannelID;
+typedef uint8_t DisplayChannelID;
 typedef uint8_t DeviceModeIndex;
 typedef uint8_t SchemeIndex;
 typedef uint8_t CalibrationIndex;
@@ -28,6 +29,11 @@ struct CalibrationInfo{
 };
 
 typedef std::vector<CalibrationInfo> CalibrationsInfoList;
+
+struct ChannelsInfo {
+    ChannelID _channel;
+    DisplayChannelID _displayChannel;
+};
 
 enum ModeTypes {
     Unknown,

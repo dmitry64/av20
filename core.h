@@ -51,9 +51,9 @@ private:
     std::atomic<DeviceModeIndex> _currentMode;
 
     // Snapshots
-    ChannelsCalibration * _calibrationsSnapshot;
+    ChannelsCalibration _calibrationsSnapshot;
     CalibrationsInfoList _calibrationsInfoListSnapshot;
-    TactTable * _tactTableSnapshot;
+    TactTable _tactTableSnapshot;
 
     // Sync stuff
     QMutex * _changesMutex;
@@ -70,15 +70,15 @@ public:
     void stopCore();
 
     // Internal
-    ChannelsCalibration *getCalibration();
-    void notifyChannel(Channel * channel);
+    ChannelsCalibration getCalibration();
+    void notifyChannel(Channel channel);
     void applyCurrentCalibrationToDevice();
     const ModeManager *getModeManager() const;
 
     // External
-    ChannelsCalibration *getCalibrationsSnapshot();
+    ChannelsCalibration getCalibrationsSnapshot();
     CalibrationsInfoList getAvailableCalibrationsSnapshot();
-    const TactTable *getTactTableSnapshot();
+    TactTable getTactTableSnapshot();
 
 private:
     void init();
@@ -99,8 +99,8 @@ private:
     void handleDeviceOverheat(bool status);
     void handleDeviceConnectionError(bool status);
 
-    TactTable *getTactTable();
-    DeviceMode * getCurrentDeviceMode();
+    TactTable getTactTable();
+    DeviceMode getCurrentDeviceMode();
 
 public:
     void addGate(const ChannelID channel,const Gate & gate);
@@ -117,7 +117,7 @@ public:
     CalibrationIndex getCurrentCalibration() const;
 signals:
     void drawDisplayPackage(QSharedPointer<DisplayPackage> package);
-    void channelChanged(Channel * channel);
+    void channelChanged(Channel channel);
     void modeChanged();
     void calibrationChanged();
 

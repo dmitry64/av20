@@ -7,21 +7,19 @@
 class TactTable
 {
     uint16_t _id;
-    std::vector<Tact *> _tactTable;
+    std::vector<Tact> _tactTable;
 public:
     TactTable();
-    TactTable(const TactTable * original);
     ~TactTable();
     void init();
-    TactTable * getSnapshot();
+    TactTable getSnapshot();
     TactIndex getTactIndexByCounter(uint8_t counter) const;
     std::vector<uint8_t> getTactLines(const uint8_t tactIndex) const;
-    Tact * getTactByIndex(uint8_t index) const;
     uint8_t getMaxTacts() const;
-    std::vector<Tact *> getTactTable() const;
-    void setTactTable(const std::vector<Tact *> &tactTable);
     uint16_t getId() const;
     void setId(const uint16_t &id);
+    Tact getTactByIndex(const uint8_t index) const;
+    void setTactTable(const std::vector<Tact> &tactTable);
 };
 
 #endif // TACTTABLE_H

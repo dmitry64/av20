@@ -56,11 +56,11 @@ ChannelsView::~ChannelsView()
 void ChannelsView::init()
 {
     Q_ASSERT(_core);
-    ChannelsCalibration * calibration =  _core->getCalibrationsSnapshot();
-    const TactTable * tactTable = _core->getTactTableSnapshot();
-    init(calibration,tactTable);
-    delete calibration;
-    delete tactTable;
+    //ChannelsCalibration * calibration =  _core->getCalibrationsSnapshot();
+    // const TactTable * tactTable = _core->getTactTableSnapshot();
+    //init(calibration,tactTable);
+    // delete calibration;
+    // delete tactTable;
 }
 
 void ChannelsView::init(ChannelsCalibration *calibrationsSnapshot, const TactTable * tactTableSnapshot)
@@ -71,7 +71,7 @@ void ChannelsView::init(ChannelsCalibration *calibrationsSnapshot, const TactTab
     ui->channelsWidget->clearContents();
     ui->tactWidget->clearContents();
 
-    for(int i=0; i<calibrationsSnapshot->getChannelsCount(); i++) {
+    /*for(int i=0; i<calibrationsSnapshot->getChannelsCount(); i++) {
         Channel * chan = calibrationsSnapshot->getChannel(i);
         Q_ASSERT(chan);
         RxChannel * rxchan = chan->rx();
@@ -145,12 +145,7 @@ void ChannelsView::init(ChannelsCalibration *calibrationsSnapshot, const TactTab
                 item->setBackgroundColor(disabledChannelsColor);
             }
             ui->tactWidget->setItem(i,2,item);
-            /*item = new QTableWidgetItem(QString(ProgStrings[calibrationsSnapshot->getChannel(tact->getTx1())->tx()->prog()].c_str()));
-            item->setTextAlignment( Qt::AlignHCenter | Qt::AlignCenter );
-            ui->tactWidget->setItem(i,3,item);
-            item = new QTableWidgetItem(QString(FreqStrings[calibrationsSnapshot->getChannel(tact->getTx1())->tx()->freq()].c_str()));
-            item->setTextAlignment( Qt::AlignHCenter | Qt::AlignCenter );
-            ui->tactWidget->setItem(i,4,item);*/
+
             item = new QTableWidgetItem(QString::number(tact->getRx2()));
             item->setTextAlignment( Qt::AlignHCenter | Qt::AlignCenter );
 
@@ -173,15 +168,8 @@ void ChannelsView::init(ChannelsCalibration *calibrationsSnapshot, const TactTab
                 item->setBackgroundColor(disabledChannelsColor);
             }
             ui->tactWidget->setItem(i,4,item);
-            /*
-            item = new QTableWidgetItem(QString(ProgStrings[calibrationsSnapshot->getChannel(tact->getTx2())->tx()->prog()].c_str()));
-            item->setTextAlignment( Qt::AlignHCenter | Qt::AlignCenter );
-            ui->tactWidget->setItem(i,7,item);
-            item = new QTableWidgetItem(QString(FreqStrings[calibrationsSnapshot->getChannel(tact->getTx2())->tx()->freq()].c_str()));
-            item->setTextAlignment( Qt::AlignHCenter | Qt::AlignCenter );
-            ui->tactWidget->setItem(i,8,item);*/
         }
-    }
+    }*/
 
     update();
 }

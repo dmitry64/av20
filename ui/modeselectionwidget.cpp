@@ -24,7 +24,7 @@ void ModeSelectionWidget::init()
 {
     Q_ASSERT(_core);
     const ModeManager * manager = _core->getModeManager();
-    std::vector<DeviceMode*> modes = manager->modes();
+    std::vector<DeviceMode> modes = manager->modes();
     for(size_t i=0; i<modes.size(); i++) {
         ModeSelectionButton * button = new ModeSelectionButton();
         connect(button,SIGNAL(modeSelected(uint8_t,uint8_t)),this,SLOT(onModeSelected(uint8_t,uint8_t)));

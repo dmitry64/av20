@@ -4,7 +4,6 @@
 ControlPanel::ControlPanel(QWidget *parent) :
     QWidget(parent),
     _core(0),
-    _currentChannel(0),
     ui(new Ui::ControlPanel)
 {
     ui->setupUi(this);
@@ -109,17 +108,11 @@ void ControlPanel::setCore(Core *ptr)
 }
 
 
-void ControlPanel::setChannel(uint8_t channel)
-{
-    _currentChannel = channel;
-    update();
-}
-
 void ControlPanel::init(const ChannelsCalibration * calibration)
 {
     //_sensBaseLevel->setValue(calibration->getChannel(_currentChannel)->rx()->baseSensLevel());
-    _prismTimeSpinbox->setValue(calibration->getChannel(_currentChannel)->rx()->getPrismTime());
-    _markerPositionSpinbox->setValue(calibration->getChannel(_currentChannel)->rx()->getMarkerPos());
+    //_prismTimeSpinbox->setValue(calibration->getChannel()->rx()->getPrismTime());
+    //_markerPositionSpinbox->setValue(calibration->getChannel(_currentChannel)->rx()->getMarkerPos());
 
     _gateCounter = 0;
     for(size_t i=0; i<_gates.size(); i++) {
@@ -128,7 +121,8 @@ void ControlPanel::init(const ChannelsCalibration * calibration)
     }
     _gates.clear();
 
-    std::vector<Gate> gates = calibration->getChannel(_currentChannel)->rx()->gates();
+
+    /*const std::vector<Gate> & gates = ->rx()->gates();
     for(size_t i=0; i<gates.size(); i++) {
         GateController * gateController = new GateController();
         gateController->setGate(gates[i]);
@@ -137,14 +131,14 @@ void ControlPanel::init(const ChannelsCalibration * calibration)
         connect(gateController,SIGNAL(deleteGate(Gate,GateController*)),this,SLOT(onDeleteGate(Gate,GateController*)));
         connect(gateController,SIGNAL(gateChanged(Gate)),this,SLOT(onGateChanged(Gate)));
         _gateCounter++;
-    }
+    }*/
     update();
 }
 
 void ControlPanel::onGateChanged(Gate gate)
 {
     Q_ASSERT(_core);
-    _core->modifyGate(_currentChannel,gate);
+    //_core->modifyGate(_currentChannel,gate);
     update();
 }
 
@@ -161,7 +155,7 @@ void ControlPanel::onDeleteGate(Gate gate, GateController *controller)
         it++;
     }
     _gates.erase(it);
-    _core->removeGate(_currentChannel,gate._id);
+    //_core->removeGate(_currentChannel,gate._id);
     update();
 }
 
@@ -173,7 +167,7 @@ void ControlPanel::onAddGate()
     gate._level = 50;
     gate._id = _gateCounter;
     _gateCounter++;
-    _core->addGate(_currentChannel,gate);
+    //_core->addGate(_currentChannel,gate);
     GateController * gateController = new GateController();
     gateController->setGate(gate);
     _gates.push_back(gateController);
@@ -186,5 +180,5 @@ void ControlPanel::onAddGate()
 void ControlPanel::onPrismTimeChanged(double value)
 {
     Q_ASSERT(_core);
-    _core->setPrismTime(_currentChannel,value);
+    //_core->setPrismTime(_currentChannel,value);
 }

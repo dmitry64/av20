@@ -8,7 +8,8 @@
 #include "device/commonfunctions.h"
 #include "device/channel/channel.h"
 
-namespace Ui {
+namespace Ui
+{
 class BScanWidget;
 }
 
@@ -16,13 +17,14 @@ class BScanWidget : public QWidget
 {
     Q_OBJECT
 
-    std::vector<Channel*> _channels;
     std::vector< std::pair< std::vector< std::vector<BScanDrawSample> > , int> > _samples;
 
     int _width;
     int _end;
 
     bool _restrictedToChannel;
+    Channel _channelData;
+    DisplayChannelID _displayChannelId;
 private:
     bool channelSelected(uint8_t chan);
 
@@ -31,15 +33,16 @@ public:
     ~BScanWidget();
     void paintEvent(QPaintEvent * event);
 
-    void setChannelsInfo(std::vector<Channel *> channels);
+    //void setChannelsInfo(std::vector<Channel *> channels);
     void setRestrictedToChannel(bool flag);
     void reset();
-    std::vector<Channel *> channels() const;
 
+    void setChannelInfo(const Channel &channel, DisplayChannelID dispChannelId);
+    Channel channelData() const;
 
 public slots:
     void onBScan(BScanDrawData * scan);
-    void onChannelChanged(Channel *channel);
+    void onChannelChanged(Channel channel);
 private:
     Ui::BScanWidget *ui;
 };

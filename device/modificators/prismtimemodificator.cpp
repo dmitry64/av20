@@ -7,6 +7,6 @@ PrismTimeModificator::PrismTimeModificator(ChannelID channel, uint8_t value) : _
 
 void PrismTimeModificator::apply(Core *core)
 {
-    core->getCalibration()->getChannel(_channel)->rx()->setPrismTime(_value);
-    core->applyCurrentCalibrationToDevice();
+    /*core->getCalibration()->getChannel(_channel)->rx()->setPrismTime(_value);
+    core->applyCurrentCalibrationToDevice();*/
 }

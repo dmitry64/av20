@@ -22,7 +22,7 @@ public:
     ~TVGEditorWidget();
     void reset();
     void init(uint8_t channel);
-    void init(uint8_t channel, ChannelsCalibration * snapshot);
+    void init(uint8_t channel, const ChannelsCalibration &snapshot);
     void initCurve(const TVGCurve *curve);
     void setCore(Core * core);
 public slots:

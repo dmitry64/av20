@@ -13,7 +13,7 @@ class Device
 {
     DeviceInterface * _spi;
 private:
-    TactRegisters getRegistersByTact(const uint8_t index, const ChannelsCalibration *mode, const TactTable *tactTable);
+    TactRegisters getRegistersByTact(const uint8_t index, const ChannelsCalibration mode, const TactTable tactTable);
     TVG getTVGFromCurve(const TVGCurve *curve) const;
 public:
     Device();
@@ -23,7 +23,7 @@ public:
     void resetTVG();
     void resetChannelsTable();
     void resetDevice();
-    void applyCalibration(const ChannelsCalibration * calibration, const TactTable * tactTable);
+    void applyCalibration(const ChannelsCalibration calibration, const TactTable tactTable);
     void setProgTrigger(bool enabled);
     DeviceStatus getDeviceStatus();
     void setTVG(const ChannelID chIndex, const TVG &tvg);

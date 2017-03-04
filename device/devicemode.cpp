@@ -1,11 +1,11 @@
 #include "devicemode.h"
 
-void DeviceMode::setTactTables(const std::vector<TactTable *> &tactTables)
+void DeviceMode::setTactTables(const std::vector<TactTable> &tactTables)
 {
     _tactTables = tactTables;
 }
 
-std::vector<TactTable *> DeviceMode::tactTables() const
+std::vector<TactTable> DeviceMode::tactTables() const
 {
     return _tactTables;
 }

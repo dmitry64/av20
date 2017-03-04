@@ -2,48 +2,42 @@
 #include <QDebug>
 #define FAKESPI
 
-TactRegisters Device::getRegistersByTact(const uint8_t index, const ChannelsCalibration * mode, const TactTable * tactTable)
+TactRegisters Device::getRegistersByTact(const uint8_t index, const ChannelsCalibration mode, const TactTable tactTable)
 {
     Q_ASSERT(index < 8);
-    Q_ASSERT(mode);
-    Q_ASSERT(tactTable);
-    const Tact * tact = tactTable->getTactByIndex(index);
-    Q_ASSERT(tact);
-
+    const Tact & tact = tactTable.getTactByIndex(index);
     TactRegisters reg;
 
     reg._CR = 0x00;
-    reg._CR |= ((tact->getDiffMode() & 0b00000001) << 1);
-    reg._CR |= (tact->getTactEnabled() & 0b00000001);
+    reg._CR |= ((tact.getDiffMode() & 0b00000001) << 1);
+    reg._CR |= (tact.getTactEnabled() & 0b00000001);
 
     reg._TR1 = 0x00;
-    reg._TR1 |= ((tact->getRx1Enabled() & 0b00000001) << 7);
-    reg._TR1 |= ((tact->getRx1() & 0b00000111) << 4);
-    reg._TR1 |= ((tact->getTx1Enabled() & 0b00000001) << 3);
-    reg._TR1 |= (tact->getTx1() & 0b00000111);
+    reg._TR1 |= ((tact.getRx1Enabled() & 0b00000001) << 7);
+    reg._TR1 |= ((tact.getRx1() & 0b00000111) << 4);
+    reg._TR1 |= ((tact.getTx1Enabled() & 0b00000001) << 3);
+    reg._TR1 |= (tact.getTx1() & 0b00000111);
 
-    TxChannel * firstTx = mode->getChannel(tact->getTx1())->tx();
-    Q_ASSERT(firstTx);
+    const TxChannel & firstTx = mode.getChannel(tact.getTx1()).getTx();
     reg._PULSER1 = 0x00;
-    reg._PULSER1 |= ((firstTx->doubleMode() & 0b00000001) << 7);
-    uint8_t prog1 = firstTx->prog();
+    reg._PULSER1 |= ((firstTx.doubleMode() & 0b00000001) << 7);
+    uint8_t prog1 = firstTx.prog();
     reg._PULSER1 |= ((prog1 & 0b00001111) << 3);
-    uint8_t freq1 = firstTx->prog();
+    uint8_t freq1 = firstTx.prog();
     reg._PULSER1 |= (freq1 & 0b00001111);
 
     reg._TR2 = 0x00;
-    reg._TR2 |= ((tact->getRx2Enabled() & 0b00000001) << 7);
-    reg._TR2 |= ((tact->getRx2() & 0b00000111) << 4);
-    reg._TR2 |= ((tact->getTx2Enabled() & 0b00000001) << 3);
-    reg._TR2 |= (tact->getTx2() & 0b00000111);
+    reg._TR2 |= ((tact.getRx2Enabled() & 0b00000001) << 7);
+    reg._TR2 |= ((tact.getRx2() & 0b00000111) << 4);
+    reg._TR2 |= ((tact.getTx2Enabled() & 0b00000001) << 3);
+    reg._TR2 |= (tact.getTx2() & 0b00000111);
 
-    TxChannel * secondTx = mode->getChannel(tact->getTx2())->tx();
-    Q_ASSERT(secondTx);
+    const TxChannel & secondTx = mode.getChannel(tact.getTx2()).getTx();
     reg._PULSER2 = 0x00;
-    reg._PULSER2 |= ((secondTx->doubleMode() & 0b00000001) << 7);
-    uint8_t prog2 = secondTx->prog();
+    reg._PULSER2 |= ((secondTx.doubleMode() & 0b00000001) << 7);
+    uint8_t prog2 = secondTx.prog();
     reg._PULSER1 |= ((prog2 & 0b00001111) << 3);
-    uint8_t freq2 = secondTx->freq();
+    uint8_t freq2 = secondTx.freq();
     reg._PULSER2 |= (freq2 & 0b00001111);
 
     reg._RESERVED = 0x00;
@@ -165,27 +159,24 @@ void Device::resetDevice()
     resetTVG();
 }
 
-void Device::applyCalibration(const ChannelsCalibration *calibration, const TactTable *tactTable)
+void Device::applyCalibration(const ChannelsCalibration calibration, const TactTable tactTable)
 {
-    Q_ASSERT(calibration);
-    Q_ASSERT(tactTable);
-    uint8_t channelsCount = calibration->getChannelsCount();
+
+    uint8_t channelsCount = calibration.getChannelsCount();
 
     for(uint8_t j=0; j<channelsCount; j++) {
-        const Channel * chan = calibration->getChannel(j);
-        Q_ASSERT(chan);
-        const RxChannel * rxchan = chan->rx();
-        Q_ASSERT(rxchan);
-        const TVGCurve * curve = rxchan->getTvgCurve();
+        const Channel & chan = calibration.getChannel(j);
+        const RxChannel & rxchan = chan.getRx();
+        const TVGCurve * curve = rxchan.getTvgCurve();
         Q_ASSERT(curve);
         const TVG & tvg = getTVGFromCurve(curve);
         _spi->setRegister(0x40+j,TVG_SAMPLES_BYTES,tvg._samples);
     }
 
-    uint8_t tactsCount = tactTable->getMaxTacts();
+    uint8_t tactsCount = tactTable.getMaxTacts();
 
     for(uint8_t k=0; k<tactsCount; k++) {
-        TactIndex j = tactTable->getTactIndexByCounter(k);
+        TactIndex j = tactTable.getTactIndexByCounter(k);
         const TactRegisters & tr = getRegistersByTact(j,calibration,tactTable);
         setTact(tr,j);
     }

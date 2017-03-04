@@ -27,7 +27,7 @@ class ControlPanel : public QWidget
     QVBoxLayout * _gatesLayout;
     AddGateButton * _addGateButton;
     uint8_t _gateCounter;
-    uint8_t _currentChannel;
+    ChannelsInfo _info;
 
 public:
     explicit ControlPanel(QWidget *parent = 0);
