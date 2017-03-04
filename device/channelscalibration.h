@@ -19,8 +19,9 @@ public:
     void init();
     ChannelsCalibration getSnapshot();
     // get/set
-    const Channel &getChannel(const ChannelID index) const;
-    DisplayChannel & getDisplayChannel(const ChannelID chan, const DisplayChannelID disp) const;
+    Channel getChannel(const ChannelID index) const;
+    DisplayChannel getDisplayChannel(const ChannelID chan, const DisplayChannelID disp) const;
+    DisplayChannel getDisplayChannel(const ChannelsInfo info) const;
     uint8_t getChannelsCount() const;
     TactID getTactId() const;
     void setTactId(const TactID &tactId);

@@ -20,14 +20,14 @@ class ChannelSelector : public QWidget
 public:
     explicit ChannelSelector(QWidget *parent = 0);
     ~ChannelSelector();
-    void init(const ChannelsCalibration snapshot);
+    void init(const ChannelsCalibration &snapshot);
     void setCore(Core * core);
 
 public slots:
-    void onChannelSelected(ChannelID channel);
+    void onChannelSelected(ChannelsInfo info);
 
 signals:
-    void channelChanged(ChannelID channel);
+    void channelChanged(ChannelsInfo info);
 private:
     Ui::ChannelSelector *ui;
 };

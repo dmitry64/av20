@@ -197,9 +197,6 @@ void Core::aScanAll(const std::vector<uint8_t> &lines)
 
 void Core::aScanProcess(uint8_t line)
 {
-    DisplayPackage * dp = new DisplayPackage();
-
-    dp->ascan._samples.resize(ASCAN_SAMPLES_SIZE);
     AScan * scanptr = 0;
 
     if(line == 0) {
@@ -215,27 +212,31 @@ void Core::aScanProcess(uint8_t line)
     ChannelID chId = scanptr->_header._channelNo;
     Q_ASSERT(chId < 8);
 
-    dp->ascan._channel = chId;
-    dp->bscan._channel = chId;
-
-    uint16_t max = 0;
-    uint16_t pos = 0;
-    for(uint16_t i=0; i<ASCAN_SAMPLES_SIZE; i++) {
-        uint16_t sample = scanptr->_samples[i];
-        if(sample >= max) {
-            max = sample;
-            pos = i;
-        }
-        dp->ascan._samples[i] = sample;
-    }
-    dp->ascan._markerPos = pos;
-    dp->ascan._markerValue = max;
-
     const ChannelsCalibration & calibration = getCalibration();
     const Channel & current = calibration.getChannel(chId);
 
     const std::vector<DisplayChannel> & dispChannels = current.getDisplayChannels();
     for(size_t k=0; k<dispChannels.size(); k++) {
+        DisplayPackage * dp = new DisplayPackage();
+
+        dp->ascan._samples.resize(ASCAN_SAMPLES_SIZE);
+
+        dp->ascan._channel = chId;
+        dp->bscan._channel = chId;
+
+        uint16_t max = 0;
+        uint16_t pos = 0;
+        for(uint16_t i=0; i<ASCAN_SAMPLES_SIZE; i++) {
+            uint16_t sample = scanptr->_samples[i];
+            if(sample >= max) {
+                max = sample;
+                pos = i;
+            }
+            dp->ascan._samples[i] = sample;
+        }
+        dp->ascan._markerPos = pos;
+        dp->ascan._markerValue = max;
+
         const DisplayChannel & dispChannel = dispChannels[k];
         const std::vector<Gate> & gates = dispChannel.gates();
 
@@ -395,24 +396,24 @@ void Core::applyCurrentCalibrationToDevice()
     _device->applyCalibration(getCalibration(), getTactTable());
 }
 
-void Core::addGate(const ChannelID channel, const Gate & gate)
+void Core::addGate(const ChannelsInfo info, const Gate & gate)
 {
     //qDebug() << "Add gate to channel" <<channel;
-    AddGateModificator * mod = new AddGateModificator(channel,gate);
+    AddGateModificator * mod = new AddGateModificator(info,gate);
     addModificator(mod);
 }
 
-void Core::modifyGate(const ChannelID channel,const Gate & gate)
+void Core::modifyGate(const ChannelsInfo info,const Gate & gate)
 {
     //qDebug() << "Modify gate" << gate._id << "from channel" <<channel;
-    GateModificator * mod = new GateModificator(channel,gate);
+    GateModificator * mod = new GateModificator(info,gate);
     addModificator(mod);
 }
 
-void Core::removeGate(const ChannelID channel,const uint8_t id)
+void Core::removeGate(const ChannelsInfo info,const uint8_t id)
 {
     //qDebug() << "Remove gate" << id << "from channel" <<channel;
-    RemoveGateModificator * mod = new RemoveGateModificator(channel,id);
+    RemoveGateModificator * mod = new RemoveGateModificator(info,id);
     addModificator(mod);
 }
 

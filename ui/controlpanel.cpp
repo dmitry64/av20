@@ -67,6 +67,9 @@ ControlPanel::ControlPanel(QWidget *parent) :
     ui->scrollLayout->addWidget(_addGateButton);
     connect(_addGateButton, SIGNAL(addGate()),this,SLOT(onAddGate()));
 
+
+    _info._channel = 0;
+    _info._displayChannel = 0;
     /*
 
     TouchSpinBox * gateStart = new TouchSpinBox("Gate start");
@@ -107,8 +110,13 @@ void ControlPanel::setCore(Core *ptr)
     _core = ptr;
 }
 
+void ControlPanel::setChannel(ChannelsInfo info)
+{
+    _info = info;
+}
 
-void ControlPanel::init(const ChannelsCalibration * calibration)
+
+void ControlPanel::init(const ChannelsCalibration & calibration)
 {
     //_sensBaseLevel->setValue(calibration->getChannel(_currentChannel)->rx()->baseSensLevel());
     //_prismTimeSpinbox->setValue(calibration->getChannel()->rx()->getPrismTime());
@@ -121,8 +129,8 @@ void ControlPanel::init(const ChannelsCalibration * calibration)
     }
     _gates.clear();
 
-
-    /*const std::vector<Gate> & gates = ->rx()->gates();
+    const auto & dispChannel = calibration.getDisplayChannel(_info);
+    const std::vector<Gate> & gates = dispChannel.gates();
     for(size_t i=0; i<gates.size(); i++) {
         GateController * gateController = new GateController();
         gateController->setGate(gates[i]);
@@ -131,14 +139,14 @@ void ControlPanel::init(const ChannelsCalibration * calibration)
         connect(gateController,SIGNAL(deleteGate(Gate,GateController*)),this,SLOT(onDeleteGate(Gate,GateController*)));
         connect(gateController,SIGNAL(gateChanged(Gate)),this,SLOT(onGateChanged(Gate)));
         _gateCounter++;
-    }*/
+    }
     update();
 }
 
 void ControlPanel::onGateChanged(Gate gate)
 {
     Q_ASSERT(_core);
-    //_core->modifyGate(_currentChannel,gate);
+    _core->modifyGate(_info,gate);
     update();
 }
 

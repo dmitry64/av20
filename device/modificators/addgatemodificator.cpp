@@ -1,9 +1,9 @@
 #include "addgatemodificator.h"
 
-AddGateModificator::AddGateModificator(ChannelID channel, Gate gate)
+AddGateModificator::AddGateModificator(ChannelsInfo info, Gate gate)
 {
     _gate = gate;
-    _channel = channel;
+    _info = info;
 }
 
 void AddGateModificator::apply(Core *core)

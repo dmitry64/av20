@@ -29,14 +29,15 @@ TVGEditorWidget::TVGEditorWidget(QWidget *parent) :
     ui->singleBase->setSuffix("dB");
 
     _core = 0;
-    _currentChannel = 0;
+    _info._channel = 0;
+    _info._displayChannel = 0;
     connect(ui->singleHeight,SIGNAL(valueChanged(double)),this,SLOT(onSingleHeightChanged(double)));
     connect(ui->singleOffset,SIGNAL(valueChanged(double)),this,SLOT(onSingleOffsetChanged(double)));
     connect(ui->singleWidth,SIGNAL(valueChanged(double)),this,SLOT(onSingleWidthChanged(double)));
     connect(ui->singleBase,SIGNAL(valueChanged(double)),this,SLOT(onSingleBaseChanged(double)));
     connect(ui->singleForm,SIGNAL(valueChanged(double)),this,SLOT(onSingleFormChanged(double)));
 
-    connect(ui->channelSelector,SIGNAL(channelChanged(ChannelID)),this,SLOT(setChannel(ChannelID)));
+    connect(ui->channelSelector,SIGNAL(channelChanged(ChannelsInfo)),this,SLOT(setChannel(ChannelsInfo)));
 }
 
 TVGEditorWidget::~TVGEditorWidget()
@@ -49,17 +50,18 @@ void TVGEditorWidget::reset()
     ui->aScanWidget->reset();
 }
 
-void TVGEditorWidget::init(uint8_t channel)
+void TVGEditorWidget::init(ChannelsInfo info)
 {
     const ChannelsCalibration & snapshot = _core->getCalibrationsSnapshot();
-    init(channel,snapshot);
-    //delete snapshot;
+    init(info,snapshot);
 }
 
-void TVGEditorWidget::init(uint8_t channel, const ChannelsCalibration & snapshot)
+void TVGEditorWidget::init(ChannelsInfo info, const ChannelsCalibration & snapshot)
 {
-    _currentChannel = channel;
-
+    _info = info;
+    ui->aScanWidget->setChannelInfo(snapshot.getChannel(_info._channel),_info._displayChannel);
+    initCurve(snapshot.getChannel(_info._channel).getRx().getTvgCurve());
+    ui->channelSelector->init(snapshot);
     update();
 }
 
@@ -87,23 +89,17 @@ void TVGEditorWidget::onDisplayPackage(QSharedPointer<DisplayPackage> package)
     ui->aScanWidget->onAScan(&(package->ascan));
 }
 
-void TVGEditorWidget::onChannelChanged(Channel * channel)
+void TVGEditorWidget::onChannelChanged(Channel channel)
 {
-    //ui->aScanWidget->onChannelChanged(channel);
+    ui->aScanWidget->onChannelChanged(channel);
 }
 
-void TVGEditorWidget::setChannel(ChannelID channel)
+void TVGEditorWidget::setChannel(ChannelsInfo info)
 {
-    _currentChannel = channel;
     const ChannelsCalibration & snapshot = _core->getCalibrationsSnapshot();
-
-    //std::vector<Channel*> channels;
-    //Channel * chan = snapshot->getChannel(channel);
-    //Q_ASSERT(chan);
-    // channels.push_back(chan);
-    //ui->aScanWidget->setChannelsInfo(channels);
-    //initCurve(snapshot->getChannel(channel)->rx()->getTvgCurve());
-    update();
+    _info = info;
+    ui->aScanWidget->setChannelInfo(snapshot.getChannel(_info._channel),_info._displayChannel);
+    initCurve(snapshot.getChannel(_info._channel).getRx().getTvgCurve());
 }
 
 void TVGEditorWidget::onSingleOffsetChanged(double value)
@@ -115,7 +111,7 @@ void TVGEditorWidget::onSingleOffsetChanged(double value)
     double offset = value;
     double form = ui->singleForm->value();
     curve = new TVGSinglePoint(base, offset, width, height, form);
-    _core->setTVG(_currentChannel,curve);
+    _core->setTVG(_info._channel,curve);
     delete curve;
 }
 
@@ -128,7 +124,7 @@ void TVGEditorWidget::onSingleHeightChanged(double value)
     double offset = ui->singleOffset->value();
     double form = ui->singleForm->value();
     curve = new TVGSinglePoint(base, offset, width, height, form);
-    _core->setTVG(_currentChannel,curve);
+    _core->setTVG(_info._channel,curve);
     delete curve;
 }
 
@@ -141,7 +137,7 @@ void TVGEditorWidget::onSingleBaseChanged(double value)
     double offset = ui->singleOffset->value();
     double form = ui->singleForm->value();
     curve = new TVGSinglePoint(base, offset, width, height, form);
-    _core->setTVG(_currentChannel,curve);
+    _core->setTVG(_info._channel,curve);
     delete curve;
 }
 
@@ -154,7 +150,7 @@ void TVGEditorWidget::onSingleWidthChanged(double value)
     double offset = ui->singleOffset->value();
     double form = ui->singleForm->value();
     curve = new TVGSinglePoint(base, offset, width, height, form);
-    _core->setTVG(_currentChannel,curve);
+    _core->setTVG(_info._channel,curve);
     delete curve;
 }
 
@@ -167,6 +163,6 @@ void TVGEditorWidget::onSingleFormChanged(double value)
     double offset = ui->singleOffset->value();
     double form = value;
     curve = new TVGSinglePoint(base, offset, width, height, form);
-    _core->setTVG(_currentChannel,curve);
+    _core->setTVG(_info._channel,curve);
     delete curve;
 }

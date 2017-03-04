@@ -60,7 +60,7 @@ public slots:
     //void onTVG(TVG tvg);
 
 
-    void onChannelChanged(Channel channel);
+    void onChannelChanged(const Channel &channel);
 private:
     Ui::AScanWidget *ui;
 };

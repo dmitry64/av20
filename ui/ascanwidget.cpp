@@ -78,7 +78,6 @@ void AScanWidget::drawTvgCurve(QPainter &painter,int width,int left, int bottom,
         painter.setBrush(QBrush(Qt::green));
         for(size_t i=0; i<referencePoints.size(); i++) {
             QPoint p(left + referencePoints[i].first * width ,bottom - referencePoints[i].second * (height));
-            //painter.fillRect(QRect(p-QPoint(3,3),p+QPoint(3,3)),Qt::black);
             painter.drawEllipse(QRect(p-QPoint(3,3),p+QPoint(3,3)));
         }
     }
@@ -86,26 +85,24 @@ void AScanWidget::drawTvgCurve(QPainter &painter,int width,int left, int bottom,
 
 void AScanWidget::drawGates(QPainter &painter, int width, int height, int left, int bottom)
 {
-    /* double scaleStep = width/static_cast<double>(_scale);
-     uint8_t channelsCount = _channels.size();
-     Q_ASSERT(channelsCount<8);
-     for(uint8_t i=0; i<channelsCount; i++) {
-         const auto & gates = _channels[i]->rx()->gates();
-         uint8_t gatesCount = gates.size();
-         for(uint8_t j=0; j<gatesCount; j++) {
-             Gate gate = gates[j];
-             int level = bottom - (gate._level * (height/255.0));
-             QPen gatePen = QPen(getColorByLevel(gate._level),3);
-             gatePen.setCapStyle(Qt::RoundCap);
-             painter.setPen(gatePen);
+    double scaleStep = width/static_cast<double>(_scale);
+    const auto & dispChans = _channelData.getDisplayChannels();
+    const auto & gates = dispChans[_displayChannelId].gates();
+    uint8_t gatesCount = gates.size();
+    for(uint8_t j=0; j<gatesCount; j++) {
+        Gate gate = gates[j];
+        int level = bottom - (gate._level * (height/255.0));
+        QPen gatePen = QPen(getColorByLevel(gate._level),3);
+        gatePen.setCapStyle(Qt::RoundCap);
+        painter.setPen(gatePen);
 
-             painter.drawLine(left + gate._start * scaleStep,level,left + gate._finish* scaleStep, level);
-             painter.drawLine(left + gate._start * scaleStep,level,left + gate._start * scaleStep - 5, level + 5);
-             painter.drawLine(left + gate._start * scaleStep,level,left + gate._start * scaleStep - 5, level - 5);
-             painter.drawLine(left + gate._finish * scaleStep,level,left + gate._finish * scaleStep + 5, level + 5);
-             painter.drawLine(left + gate._finish * scaleStep,level,left + gate._finish * scaleStep + 5, level - 5);
-         }
-     }*/
+        painter.drawLine(left + gate._start * scaleStep,level,left + gate._finish* scaleStep, level);
+        painter.drawLine(left + gate._start * scaleStep,level,left + gate._start * scaleStep - 5, level + 5);
+        painter.drawLine(left + gate._start * scaleStep,level,left + gate._start * scaleStep - 5, level - 5);
+        painter.drawLine(left + gate._finish * scaleStep,level,left + gate._finish * scaleStep + 5, level + 5);
+        painter.drawLine(left + gate._finish * scaleStep,level,left + gate._finish * scaleStep + 5, level - 5);
+    }
+
 }
 
 void AScanWidget::drawAscan(QPainter &painter, int width, int height, int left, int bottom, int right)
@@ -177,7 +174,7 @@ AScanWidget::AScanWidget(QWidget *parent) :
     //_tempCurvePen = QPen(QColor(10,10,250), 2);
     _ascanBrush = QBrush(QColor(80,80,200));
     _ascanPen = QPen(QColor(10,10,70), 1);
-
+    _displayChannelId = 0;
     _markerPos = 0;
     _markerValue = 0;
     _tvgCurve = 0;
@@ -230,6 +227,10 @@ void AScanWidget::setChannelInfo(const Channel & channel, DisplayChannelID dispC
 {
     _channelData = channel;
     _displayChannelId = dispChannelId;
+    const RxChannel & rx = channel.getRx();
+    const TVGCurve * tvg = rx.getTvgCurve();
+    Q_ASSERT(tvg);
+    setTVGCurve(tvg);
 }
 
 void AScanWidget::onAScan(const AScanDrawData *scan)
@@ -256,10 +257,14 @@ void AScanWidget::reset()
 
 }
 
-void AScanWidget::onChannelChanged(Channel channel)
+void AScanWidget::onChannelChanged(const Channel & channel)
 {
     if(_channelData.index() == channel.index()) {
         _channelData = channel;
+        const RxChannel & rx = channel.getRx();
+        const TVGCurve * tvg = rx.getTvgCurve();
+        Q_ASSERT(tvg);
+        setTVGCurve(tvg);
     }
     /*for(uint8_t j=0; j<_channels.size(); j++) {
         uint8_t chan = channel->index();

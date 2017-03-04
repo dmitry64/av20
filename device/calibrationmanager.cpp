@@ -53,6 +53,7 @@ void CalibrationManager::initSearchModeCalibration()
 
         std::vector<DisplayChannel> dispChans;
         dispChans.push_back(dc1);
+        dispChans.push_back(dc1);
         chTemp.setDisplayChannels(dispChans);
         //rx->setGates(gates);
 

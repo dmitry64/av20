@@ -9,7 +9,8 @@
 #include "ui/controls/gatecontroller.h"
 #include "ui/controls/addgatebutton.h"
 
-namespace Ui {
+namespace Ui
+{
 class ControlPanel;
 }
 
@@ -33,8 +34,8 @@ public:
     explicit ControlPanel(QWidget *parent = 0);
     ~ControlPanel();
     void setCore(Core * ptr);
-    void setChannel(uint8_t channel);
-    void init(const ChannelsCalibration *calibration);
+    void setChannel(ChannelsInfo info);
+    void init(const ChannelsCalibration &calibration);
 
 private:
     void showEvent(QShowEvent *event);

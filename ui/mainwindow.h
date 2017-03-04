@@ -12,7 +12,8 @@
 #include "ui/optionswidget.h"
 #include "ui/systemwidget.h"
 
-namespace Ui {
+namespace Ui
+{
 class MainWindow;
 }
 
@@ -41,7 +42,7 @@ public:
     void reset();
     void setCore(Core * core);
 public slots:
-    void onChannelChanged(Channel * channel);
+    void onChannelChanged(Channel channel);
     void onDisplayPackage(QSharedPointer<DisplayPackage> dp);
     void onModeChangeRequested(uint8_t modeIndex, uint8_t tableIndex);
     void onModeChanged();
@@ -79,7 +80,7 @@ public slots:
 
 signals:
     void drawDisplayPackage(QSharedPointer<DisplayPackage> dp);
-    void channelChanged(Channel * channel);
+    void channelChanged(Channel channel);
     void resetMenu();
 private:
     Ui::MainWindow *ui;

@@ -8,9 +8,9 @@
 class GateModificator : public Modificator
 {
     Gate _gate;
-    ChannelID _channel;
+    ChannelsInfo _info;
 public:
-    GateModificator(ChannelID channel, Gate gate);
+    GateModificator(ChannelsInfo info, Gate gate);
     void apply(Core * core);
 };
 

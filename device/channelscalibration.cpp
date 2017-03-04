@@ -48,16 +48,25 @@ ChannelsCalibration ChannelsCalibration::getSnapshot()
     return ChannelsCalibration(*this);
 }
 
-const Channel &ChannelsCalibration::getChannel(const ChannelID index) const
+Channel ChannelsCalibration::getChannel(const ChannelID index) const
 {
     Q_ASSERT(index<8);
     Q_ASSERT(_channels.size() > 0);
     return _channels.at(index);
 }
 
-DisplayChannel &ChannelsCalibration::getDisplayChannel(const ChannelID chan, const DisplayChannelID disp) const
+DisplayChannel ChannelsCalibration::getDisplayChannel(const ChannelID chan, const DisplayChannelID disp) const
 {
-    Q_ASSERT(false);
+    ChannelsInfo info;
+    info._channel = chan;
+    info._displayChannel = disp;
+    return getDisplayChannel(info);
+}
+
+DisplayChannel ChannelsCalibration::getDisplayChannel(const ChannelsInfo info) const
+{
+    const auto & channels = getChannel(info._channel).getDisplayChannels();
+    return channels.at(info._displayChannel);
 }
 
 uint8_t ChannelsCalibration::getChannelsCount() const

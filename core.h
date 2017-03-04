@@ -103,9 +103,9 @@ private:
     DeviceMode getCurrentDeviceMode();
 
 public:
-    void addGate(const ChannelID channel,const Gate & gate);
-    void modifyGate(const ChannelID channel,const Gate & gate);
-    void removeGate(const ChannelID channel, const uint8_t id);
+    void addGate(const ChannelsInfo info, const Gate & gate);
+    void modifyGate(const ChannelsInfo info, const Gate & gate);
+    void removeGate(const ChannelsInfo info, const uint8_t id);
     void setPrismTime(const ChannelID channel, const uint8_t value);
     void setTVG(const ChannelID channel, const TVGCurve * ptr);
     void setDeviceMode(const DeviceModeIndex modeIndex, const SchemeIndex schemeIndex);

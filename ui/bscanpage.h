@@ -23,12 +23,12 @@ public:
     ~BScanPage();
 
     void setCore(Core * core);
-    void init(ChannelsCalibration snapshot);
+    void init(const ChannelsCalibration &snapshot);
     void reset();
-    void setChannles(std::vector<std::vector<Channel *> > channelsConfiguration);
+    void setChannles(std::vector<ChannelsInfo> channelsConfiguration, const ChannelsCalibration & snapshot);
 public slots:
     void onDisplayPackage(QSharedPointer<DisplayPackage> dp);
-    void onChannelChanged(Channel *channel);
+    void onChannelChanged(Channel channel);
 signals:
     void drawBScan(QSharedPointer<BScanDrawData> scan);
 private:

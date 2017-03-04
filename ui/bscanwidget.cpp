@@ -20,7 +20,9 @@ BScanWidget::BScanWidget(QWidget *parent) :
     ui(new Ui::BScanWidget)
 {
     ui->setupUi(this);
-    _width = 1000;
+    _width = 800;
+
+    _displayChannelId = 0;
 
     for(int i=0; i<MAX_CHANNELS_COUNT; i++) {
         std::pair< std::vector< std::vector<BScanDrawSample> > , int> pair;
@@ -31,7 +33,7 @@ BScanWidget::BScanWidget(QWidget *parent) :
 
     _restrictedToChannel = false;
 
-    _end = 999;
+    _end = 799;
 }
 
 BScanWidget::~BScanWidget()

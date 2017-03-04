@@ -43,9 +43,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(this,SIGNAL(drawDisplayPackage(QSharedPointer<DisplayPackage>)), ui->bScanPage,SLOT(onDisplayPackage(QSharedPointer<DisplayPackage>)));
     connect(this,SIGNAL(drawDisplayPackage(QSharedPointer<DisplayPackage>)), ui->tvgEditorWidget,SLOT(onDisplayPackage(QSharedPointer<DisplayPackage>)));
 
-    connect(this,SIGNAL(channelChanged(Channel*)),ui->aScanPage,SLOT(onChannelChanged(Channel*)));
-    connect(this,SIGNAL(channelChanged(Channel*)),ui->bScanPage,SLOT(onChannelChanged(Channel*)));
-    connect(this,SIGNAL(channelChanged(Channel*)),ui->tvgEditorWidget,SLOT(onChannelChanged(Channel*)));
+    connect(this,SIGNAL(channelChanged(Channel)),ui->aScanPage,SLOT(onChannelChanged(Channel)));
+    connect(this,SIGNAL(channelChanged(Channel)),ui->bScanPage,SLOT(onChannelChanged(Channel)));
+    connect(this,SIGNAL(channelChanged(Channel)),ui->tvgEditorWidget,SLOT(onChannelChanged(Channel)));
 
     connect(this,SIGNAL(resetMenu()),ui->menuWidget,SLOT(resetMenu()));
 
@@ -101,7 +101,7 @@ void MainWindow::setCore(Core *core)
     _calibrationsWidget->setCore(core);
 }
 
-void MainWindow::onChannelChanged(Channel *channel)
+void MainWindow::onChannelChanged(Channel channel)
 {
     emit channelChanged(channel);
 }
@@ -273,8 +273,25 @@ void MainWindow::init()
     const ChannelsCalibration & calibration = _core->getCalibrationsSnapshot();
     const TactTable & tactTableSnapshot = _core->getTactTableSnapshot();
 
-    ui->aScanPage->init(0,calibration);
-    ui->tvgEditorWidget->init(0,calibration);
+    ChannelsInfo defaultChannel;
+    defaultChannel._channel = 0;
+    defaultChannel._displayChannel = 0;
+
+    ui->aScanPage->init(defaultChannel,calibration);
+    ui->tvgEditorWidget->init(defaultChannel,calibration);
+    std::vector<ChannelsInfo> infoBscan;
+    for(int i=0; i<calibration.getChannelsCount(); i++) {
+        const auto & channel = calibration.getChannel(i);
+        const auto & dispChannels = channel.getDisplayChannels();
+        for(int j=0; j<dispChannels.size(); j++) {
+            ChannelsInfo info;
+            info._channel = i;
+            info._displayChannel = j;
+            infoBscan.push_back(info);
+        }
+    }
+    ui->bScanPage->init(calibration);
+    ui->bScanPage->setChannles(infoBscan,calibration);
     /*
         std::vector< std::vector<Channel*> > channelsTable;
         for(int i=0; i<calibration->getChannelsCount(); i++) {

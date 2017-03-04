@@ -15,7 +15,7 @@ ChannelSelector::~ChannelSelector()
     delete ui;
 }
 
-void ChannelSelector::init(const ChannelsCalibration snapshot)
+void ChannelSelector::init(const ChannelsCalibration & snapshot)
 {
     qDebug() << "Selector init!";
 
@@ -23,7 +23,7 @@ void ChannelSelector::init(const ChannelsCalibration snapshot)
         ChannelButton * button = _channelButtons.at(i);
         Q_ASSERT(button);
         ui->channelsLayout->removeWidget(button);
-        QObject::disconnect(button,SIGNAL(channelSelected(ChannelID)),this,SLOT(onChannelSelected(ChannelID)));
+        QObject::disconnect(button,SIGNAL(channelSelected(ChannelsInfo)),this,SLOT(onChannelSelected(ChannelsInfo)));
         delete button;
     }
     int count = snapshot.getChannelsCount();
@@ -33,9 +33,12 @@ void ChannelSelector::init(const ChannelsCalibration snapshot)
         const std::vector<DisplayChannel> & dispchans = chan.getDisplayChannels();
         for(size_t j=0; j<dispchans.size(); j++) {
             const DisplayChannel & dc = dispchans.at(j);
-            ChannelButton * channelButton = new ChannelButton(QString::number(dc.angle()),i,j);
+            ChannelsInfo info;
+            info._channel = i;
+            info._displayChannel = j;
+            ChannelButton * channelButton = new ChannelButton(QString::number(dc.angle()),info);
             channelButton->setColor(chan.getColorRed(),chan.getColorGreen(), chan.getColorBlue());
-            QObject::connect(channelButton,SIGNAL(channelSelected(ChannelID)),this,SLOT(onChannelSelected(ChannelID)));
+            QObject::connect(channelButton,SIGNAL(channelSelected(ChannelsInfo)),this,SLOT(onChannelSelected(ChannelsInfo)));
             ui->channelsLayout->addWidget(channelButton);
             _channelButtons.push_back(channelButton);
         }
@@ -51,12 +54,13 @@ void ChannelSelector::setCore(Core *core)
     update();
 }
 
-void ChannelSelector::onChannelSelected(ChannelID channel)
+void ChannelSelector::onChannelSelected(ChannelsInfo info)
 {
-    /*for(size_t i=0; i<_channelButtons.size(); i++) {
+    qDebug() << "Selector channel selected";
+    for(size_t i=0; i<_channelButtons.size(); i++) {
         ChannelButton * button = _channelButtons.at(i);
         Q_ASSERT(button);
-        button->setActive(i==channel);
+        button->setActive(button->info()._channel == info._channel && button->info()._displayChannel == info._displayChannel);
     }
-    emit channelChanged(channel);*/
+    emit channelChanged(info);
 }

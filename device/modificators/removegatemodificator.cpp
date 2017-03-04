@@ -1,8 +1,8 @@
 #include "removegatemodificator.h"
 
-RemoveGateModificator::RemoveGateModificator(ChannelID channel, GateID gateId)
+RemoveGateModificator::RemoveGateModificator(ChannelsInfo info, GateID gateId)
 {
-    _channel = channel;
+    _info = info;
     _gateId = gateId;
 }
 

@@ -14,24 +14,26 @@ class ChannelButton : public QWidget
     Q_OBJECT
 
     QString _name;
-    ChannelID _channel;
-    DisplayChannelID _displayChannelId;
+    ChannelsInfo _info;
     bool _state;
     uint8_t _colorRed;
     uint8_t _colorGreen;
     uint8_t _colorBlue;
 
 public:
-    explicit ChannelButton(QString name, ChannelID channel, DisplayChannelID disp, QWidget *parent = 0);
+    explicit ChannelButton(QString name, ChannelsInfo info, QWidget *parent = 0);
     ~ChannelButton();
     void setActive(bool state);
     void setColor(uint8_t red,uint8_t green,uint8_t blue);
+
+    ChannelsInfo info() const;
+    void setInfo(const ChannelsInfo &info);
 
 private slots:
     void on_channelButton_released();
 
 signals:
-    void channelSelected(ChannelID);
+    void channelSelected(ChannelsInfo);
 private:
     Ui::ChannelButton *ui;
 };

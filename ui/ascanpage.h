@@ -20,15 +20,13 @@ public:
     explicit AScanPage(QWidget *parent = 0);
     ~AScanPage();
     void reset();
-    void init(const ChannelID channel);
-    void init(const ChannelID channel, const ChannelsCalibration &snapshot);
+    void init(ChannelsInfo info);
+    void init(ChannelsInfo info, const ChannelsCalibration &snapshot);
     void setCore(Core * core);
-    void setAScanChannels(const std::vector<Channel*> channels);
-    void setBScanChannels(const std::vector<Channel*> channels);
 public slots:
     void onDisplayPackage(QSharedPointer<DisplayPackage> package);
-    void onChannelChanged(Channel *channel);
-    void setChannel(ChannelID channel);
+    void onChannelChanged(Channel channel);
+    void setChannel(ChannelsInfo info);
 signals:
     void drawDisplayPackage(QSharedPointer<DisplayPackage> package);
 private:

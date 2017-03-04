@@ -6,10 +6,10 @@
 
 class RemoveGateModificator : public Modificator
 {
-    uint8_t _channel;
+    ChannelsInfo _info;
     GateID _gateId;
 public:
-    RemoveGateModificator(ChannelID channel, GateID gateId);
+    RemoveGateModificator(ChannelsInfo info, GateID gateId);
     void apply(Core *core);
 };
 

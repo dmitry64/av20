@@ -40,7 +40,7 @@
      <property name="minimumSize">
       <size>
        <width>5</width>
-       <height>48</height>
+       <height>12</height>
       </size>
      </property>
      <property name="autoFillBackground">
@@ -59,7 +59,7 @@
      <property name="minimumSize">
       <size>
        <width>48</width>
-       <height>48</height>
+       <height>12</height>
       </size>
      </property>
      <property name="maximumSize">
@@ -73,36 +73,8 @@
      </property>
     </widget>
    </item>
-   <item>
-    <widget class="QPushButton" name="channelMarkerButton">
-     <property name="minimumSize">
-      <size>
-       <width>12</width>
-       <height>48</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>12</width>
-       <height>48</height>
-      </size>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="icon">
-      <iconset resource="../../resources.qrc">
-       <normaloff>:/icons/resources/icons/arrows_right_double-31.png</normaloff>:/icons/resources/icons/arrows_right_double-31.png</iconset>
-     </property>
-     <property name="flat">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
   </layout>
  </widget>
- <resources>
-  <include location="../../resources.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
