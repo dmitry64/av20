@@ -60,7 +60,7 @@ void TVGEditorWidget::init(ChannelsInfo info, const ChannelsCalibration & snapsh
 {
     _info = info;
     ui->aScanWidget->setChannelInfo(snapshot.getChannel(_info._channel),_info._displayChannel);
-    initCurve(snapshot.getChannel(_info._channel).getRx().getTvgCurve());
+    initCurve(snapshot.getChannel(_info._channel).getDisplayChannels()[info._displayChannel].getRx().getTvgCurve());
     ui->channelSelector->init(snapshot);
     update();
 }
@@ -99,7 +99,7 @@ void TVGEditorWidget::setChannel(ChannelsInfo info)
     const ChannelsCalibration & snapshot = _core->getCalibrationsSnapshot();
     _info = info;
     ui->aScanWidget->setChannelInfo(snapshot.getChannel(_info._channel),_info._displayChannel);
-    initCurve(snapshot.getChannel(_info._channel).getRx().getTvgCurve());
+    initCurve(snapshot.getChannel(_info._channel).getDisplayChannels()[info._displayChannel].getRx().getTvgCurve());
 }
 
 void TVGEditorWidget::onSingleOffsetChanged(double value)
@@ -111,7 +111,7 @@ void TVGEditorWidget::onSingleOffsetChanged(double value)
     double offset = value;
     double form = ui->singleForm->value();
     curve = new TVGSinglePoint(base, offset, width, height, form);
-    _core->setTVG(_info._channel,curve);
+    _core->setTVG(_info,curve);
     delete curve;
 }
 
@@ -124,7 +124,7 @@ void TVGEditorWidget::onSingleHeightChanged(double value)
     double offset = ui->singleOffset->value();
     double form = ui->singleForm->value();
     curve = new TVGSinglePoint(base, offset, width, height, form);
-    _core->setTVG(_info._channel,curve);
+    _core->setTVG(_info,curve);
     delete curve;
 }
 
@@ -137,7 +137,7 @@ void TVGEditorWidget::onSingleBaseChanged(double value)
     double offset = ui->singleOffset->value();
     double form = ui->singleForm->value();
     curve = new TVGSinglePoint(base, offset, width, height, form);
-    _core->setTVG(_info._channel,curve);
+    _core->setTVG(_info,curve);
     delete curve;
 }
 
@@ -150,7 +150,7 @@ void TVGEditorWidget::onSingleWidthChanged(double value)
     double offset = ui->singleOffset->value();
     double form = ui->singleForm->value();
     curve = new TVGSinglePoint(base, offset, width, height, form);
-    _core->setTVG(_info._channel,curve);
+    _core->setTVG(_info,curve);
     delete curve;
 }
 
@@ -163,6 +163,6 @@ void TVGEditorWidget::onSingleFormChanged(double value)
     double offset = ui->singleOffset->value();
     double form = value;
     curve = new TVGSinglePoint(base, offset, width, height, form);
-    _core->setTVG(_info._channel,curve);
+    _core->setTVG(_info,curve);
     delete curve;
 }

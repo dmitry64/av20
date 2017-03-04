@@ -11,26 +11,6 @@ void Channel::setIndex(const uint8_t &index)
     _index = index;
 }
 
-RxChannel Channel::getRx() const
-{
-    return _rx;
-}
-
-void Channel::setRx(const RxChannel &rx)
-{
-    _rx = rx;
-}
-
-TxChannel Channel::getTx() const
-{
-    return _tx;
-}
-
-void Channel::setTx(const TxChannel &tx)
-{
-    _tx = tx;
-}
-
 std::vector<DisplayChannel> Channel::getDisplayChannels() const
 {
     return _displayChannels;
@@ -41,7 +21,22 @@ void Channel::setDisplayChannels(const std::vector<DisplayChannel> &displayChann
     _displayChannels = displayChannels;
 }
 
-Channel::Channel() : _colorRed(0), _colorGreen(0), _colorBlue(0)
+uint8_t Channel::getActiveDisplayChannelIndex() const
+{
+    return _activeDisplayChannel;
+}
+
+void Channel::setActiveDisplayChannelIndex(const uint8_t &activeDisplayChannel)
+{
+    _activeDisplayChannel = activeDisplayChannel;
+}
+
+DisplayChannel Channel::getActiveDisplayChannel() const
+{
+    return _displayChannels[_activeDisplayChannel];
+}
+
+Channel::Channel() : _colorRed(0), _colorGreen(0), _colorBlue(0), _activeDisplayChannel(0)
 {
 }
 

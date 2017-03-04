@@ -1,4 +1,5 @@
 #include "displaychannel.h"
+#include "device/tvg/tvgsinglepoint.h"
 
 std::vector<Gate> DisplayChannel::gates() const
 {
@@ -18,6 +19,26 @@ double DisplayChannel::angle() const
 void DisplayChannel::setAngle(double angle)
 {
     _angle = angle;
+}
+
+RxChannel DisplayChannel::getRx() const
+{
+    return _rx;
+}
+
+void DisplayChannel::setRx(const RxChannel &rx)
+{
+    _rx = rx;
+}
+
+TxChannel DisplayChannel::getTx() const
+{
+    return _tx;
+}
+
+void DisplayChannel::setTx(const TxChannel &tx)
+{
+    _tx = tx;
 }
 
 DisplayChannel::DisplayChannel()

@@ -16,20 +16,20 @@ void CalibrationManager::initSearchModeCalibration()
 
         TxChannel tx;
 
-        RxChannel rx;
         tx.setFreq(PulserFreq::Freq_2_5_MHz);
         tx.setProg(PulserProg::Prog_1);
 
         chTemp.setIndex(i);
+        //TVGCurve * curve = ;
+        RxChannel rx = RxChannel();
         rx.setTvgCurve(new TVGSinglePoint(75.0,85.0,70.0,32.0,25.0));
+        //rx.setTvgCurve(curve);
+        //delete curve;
         rx.setPrismTime(0);
         rx.setName("58");
-
-        chTemp.setRx(rx);
-        chTemp.setTx(tx);
-
         DisplayChannel dc1;
-
+        dc1.setRx(rx);
+        dc1.setTx(tx);
 
         std::vector<Gate> gates;
         Gate g1;
@@ -55,7 +55,6 @@ void CalibrationManager::initSearchModeCalibration()
         dispChans.push_back(dc1);
         dispChans.push_back(dc1);
         chTemp.setDisplayChannels(dispChans);
-        //rx->setGates(gates);
 
         switch (i) {
         case 0:
@@ -83,8 +82,6 @@ void CalibrationManager::initSearchModeCalibration()
             chTemp.setColor(30,30,255);
             break;
         }
-
-
 
         channels1.push_back(chTemp);
     }
@@ -168,4 +165,9 @@ void CalibrationManager::addCalibration(const ChannelsCalibration & calibration)
 void CalibrationManager::removeCalibration(ChannelsCalibration calibration)
 {
     Q_ASSERT(false);
+}
+
+void CalibrationManager::applyChannelsModification(TactID id, CalibrationIndex index, ChannelID channelId, Channel channel)
+{
+    _calibrations[id][index].setChannel(channelId,channel);
 }

@@ -8,8 +8,16 @@ AddGateModificator::AddGateModificator(ChannelsInfo info, Gate gate)
 
 void AddGateModificator::apply(Core *core)
 {
-    /*std::vector<Gate> gates = core->getCalibration()->getChannel(_channel)->rx()->gates();
+    auto calibration = core->getCalibration();
+    auto channel = calibration.getChannel(_info._channel);
+    auto displayChannels = channel.getDisplayChannels();
+    auto display = displayChannels[_info._displayChannel];
+    auto gates = display.gates();
     gates.push_back(_gate);
-    core->getCalibration()->getChannel(_channel)->rx()->setGates(gates);
-    core->notifyChannel((core->getCalibration()->getChannel(_channel)));*/
+    display.setGates(gates);
+    displayChannels[_info._displayChannel] = display;
+    channel.setDisplayChannels(displayChannels);
+
+    core->applyChannelsModification(_info._channel,channel);
+    core->notifyChannel(channel);
 }

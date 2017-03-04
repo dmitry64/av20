@@ -15,14 +15,19 @@ void TactTable::setId(const uint16_t &id)
     _id = id;
 }
 
+std::vector<Tact> TactTable::getTactTable() const
+{
+    return _tactTable;
+}
+
 TactTable::TactTable()
 {
-
+    
 }
 
 TactTable::~TactTable()
 {
-
+    
 }
 
 void TactTable::init()

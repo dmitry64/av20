@@ -1,13 +1,23 @@
 #include "tvgmodificator.h"
 
-TVGModificator::TVGModificator(ChannelID channel, const TVGCurve *curve) : _channel(channel), _curve(curve)
+TVGModificator::TVGModificator(ChannelsInfo info, TVGCurve *curve) : _info(info), _curve(curve)
 {
 
 }
 
 void TVGModificator::apply(Core *core)
 {
-    /*core->getCalibration()->getChannel(_channel)->rx()->setTvgCurve(_curve);
+    auto calibration = core->getCalibration();
+    auto channel = calibration.getChannel(_info._channel);
+    auto displayChannels = channel.getDisplayChannels();
+    auto disp = displayChannels[_info._displayChannel];
+    auto rx = disp.getRx();
+    rx.setTvgCurve(_curve);
+    disp.setRx(rx);
+    displayChannels[_info._displayChannel] = disp;
+    channel.setDisplayChannels(displayChannels);
+
+    core->applyChannelsModification(_info._channel,channel);
     core->applyCurrentCalibrationToDevice();
-    core->notifyChannel((core->getCalibration()->getChannel(_channel)));*/
+    core->notifyChannel(channel);
 }

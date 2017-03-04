@@ -6,9 +6,9 @@
 class PrismTimeModificator : public Modificator
 {
     uint8_t _value;
-    ChannelID _channel;
+    ChannelsInfo _info;
 public:
-    PrismTimeModificator(ChannelID channel, uint8_t ms);
+    PrismTimeModificator(ChannelsInfo info, uint8_t ms);
     void apply(Core * core);
 };
 

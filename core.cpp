@@ -391,6 +391,12 @@ void Core::notifyChannel(Channel channel)
     emit channelChanged(channel);
 }
 
+void Core::applyChannelsModification(ChannelID index, Channel channel)
+{
+    const auto & calib = getCalibration();
+    _calibrationManager->applyChannelsModification(calib.getTactId(),_currentCalibration.load(), index, channel);
+}
+
 void Core::applyCurrentCalibrationToDevice()
 {
     _device->applyCalibration(getCalibration(), getTactTable());
@@ -417,18 +423,18 @@ void Core::removeGate(const ChannelsInfo info,const uint8_t id)
     addModificator(mod);
 }
 
-void Core::setPrismTime(const ChannelID channel,const uint8_t value)
+void Core::setPrismTime(const ChannelsInfo info,const uint8_t value)
 {
     //qDebug() << "Changing prism time ch =" << channel << "value =" <<value;
-    PrismTimeModificator * mod = new PrismTimeModificator(channel,value);
+    PrismTimeModificator * mod = new PrismTimeModificator(info,value);
     addModificator(mod);
 }
 
-void Core::setTVG(const ChannelID channel, const TVGCurve *ptr)
+void Core::setTVG(const ChannelsInfo info, const TVGCurve *ptr)
 {
     //qDebug() << "Changing tvg for ch =" <<channel;
     TVGCurve * curve = ptr->clone();
-    TVGModificator * mod = new TVGModificator(channel,curve);
+    TVGModificator * mod = new TVGModificator(info,curve);
     addModificator(mod);
 }
 

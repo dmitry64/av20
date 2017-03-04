@@ -12,12 +12,12 @@ class RxChannel
 
     std::string _name;
     uint8_t _prismTime;
-    const TVGCurve * _tvgCurve;
+    TVGCurve * _tvgCurve;
     int _markerPos;
-
 
 public:
     RxChannel();
+    RxChannel(const RxChannel & original);
     ~RxChannel();
 
     void setPrismTime(uint8_t prismTime);
@@ -29,7 +29,7 @@ public:
     int getMarkerPos() const;
     void setMarkerPos(int markerPos);
     const TVGCurve *getTvgCurve() const;
-    void setTvgCurve(const TVGCurve *tvgCurve);
+    void setTvgCurve(TVGCurve *tvgCurve);
     uint8_t getPrismTime() const;
 };
 

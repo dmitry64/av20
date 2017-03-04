@@ -6,7 +6,7 @@
 
 class TactTable
 {
-    uint16_t _id;
+    TactID _id;
     std::vector<Tact> _tactTable;
 public:
     TactTable();
@@ -20,6 +20,7 @@ public:
     void setId(const uint16_t &id);
     Tact getTactByIndex(const uint8_t index) const;
     void setTactTable(const std::vector<Tact> &tactTable);
+    std::vector<Tact> getTactTable() const;
 };
 
 #endif // TACTTABLE_H

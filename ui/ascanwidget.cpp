@@ -114,7 +114,7 @@ void AScanWidget::drawAscan(QPainter &painter, int width, int height, int left, 
     const double step = width/800.0;
     uint16_t size = _samples.size();
     uint16_t currentCount = 0;
-    uint16_t currentStart = 0;
+    //uint16_t currentStart = 0;
     for(uint16_t i=0; i<size; i++) {
         if(_samples[i] > 0) {
             if(currentCount==0) {
@@ -129,7 +129,7 @@ void AScanWidget::drawAscan(QPainter &painter, int width, int height, int left, 
                 _polygon[currentCount] = QPoint(left + (i+1)*step, bottom);
                 currentCount++;
                 painter.drawPolygon(_polygon.data(),currentCount, Qt::FillRule::OddEvenFill);
-                currentStart = i;
+                //currentStart = i;
                 currentCount = 0;
             }
         }
@@ -227,7 +227,9 @@ void AScanWidget::setChannelInfo(const Channel & channel, DisplayChannelID dispC
 {
     _channelData = channel;
     _displayChannelId = dispChannelId;
-    const RxChannel & rx = channel.getRx();
+    const auto & dispChans = channel.getDisplayChannels();
+    const DisplayChannel & disp = dispChans[_displayChannelId];
+    const RxChannel & rx = disp.getRx();
     const TVGCurve * tvg = rx.getTvgCurve();
     Q_ASSERT(tvg);
     setTVGCurve(tvg);
@@ -261,7 +263,9 @@ void AScanWidget::onChannelChanged(const Channel & channel)
 {
     if(_channelData.index() == channel.index()) {
         _channelData = channel;
-        const RxChannel & rx = channel.getRx();
+        const auto & dispChannels = channel.getDisplayChannels();
+        const DisplayChannel & disp = dispChannels.at(_displayChannelId);
+        const RxChannel & rx = disp.getRx();
         const TVGCurve * tvg = rx.getTvgCurve();
         Q_ASSERT(tvg);
         setTVGCurve(tvg);

@@ -27,6 +27,11 @@ void ChannelsCalibration::setInfo(const CalibrationInfo &info)
     _info = info;
 }
 
+void ChannelsCalibration::setChannel(const ChannelID index, const Channel &channel)
+{
+    _channels[index] = channel;
+}
+
 ChannelsCalibration::ChannelsCalibration()
 {
     _tactId = 0;

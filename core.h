@@ -72,6 +72,7 @@ public:
     // Internal
     ChannelsCalibration getCalibration();
     void notifyChannel(Channel channel);
+    void applyChannelsModification(ChannelID index, Channel channel);
     void applyCurrentCalibrationToDevice();
     const ModeManager *getModeManager() const;
 
@@ -106,8 +107,8 @@ public:
     void addGate(const ChannelsInfo info, const Gate & gate);
     void modifyGate(const ChannelsInfo info, const Gate & gate);
     void removeGate(const ChannelsInfo info, const uint8_t id);
-    void setPrismTime(const ChannelID channel, const uint8_t value);
-    void setTVG(const ChannelID channel, const TVGCurve * ptr);
+    void setPrismTime(const ChannelsInfo info, const uint8_t value);
+    void setTVG(const ChannelsInfo info, const TVGCurve * ptr);
     void setDeviceMode(const DeviceModeIndex modeIndex, const SchemeIndex schemeIndex);
     void switchCalibration(const CalibrationIndex index);
 

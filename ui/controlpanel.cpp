@@ -119,7 +119,8 @@ void ControlPanel::setChannel(ChannelsInfo info)
 void ControlPanel::init(const ChannelsCalibration & calibration)
 {
     //_sensBaseLevel->setValue(calibration->getChannel(_currentChannel)->rx()->baseSensLevel());
-    //_prismTimeSpinbox->setValue(calibration->getChannel()->rx()->getPrismTime());
+    const auto & channel = calibration.getChannel(_info._channel);
+    _prismTimeSpinbox->setValue(channel.getDisplayChannels()[_info._displayChannel].getRx().getPrismTime());
     //_markerPositionSpinbox->setValue(calibration->getChannel(_currentChannel)->rx()->getMarkerPos());
 
     _gateCounter = 0;
@@ -163,7 +164,7 @@ void ControlPanel::onDeleteGate(Gate gate, GateController *controller)
         it++;
     }
     _gates.erase(it);
-    //_core->removeGate(_currentChannel,gate._id);
+    _core->removeGate(_info,gate._id);
     update();
 }
 
@@ -175,7 +176,7 @@ void ControlPanel::onAddGate()
     gate._level = 50;
     gate._id = _gateCounter;
     _gateCounter++;
-    //_core->addGate(_currentChannel,gate);
+    _core->addGate(_info,gate);
     GateController * gateController = new GateController();
     gateController->setGate(gate);
     _gates.push_back(gateController);
@@ -188,5 +189,5 @@ void ControlPanel::onAddGate()
 void ControlPanel::onPrismTimeChanged(double value)
 {
     Q_ASSERT(_core);
-    //_core->setPrismTime(_currentChannel,value);
+    _core->setPrismTime(_info,value);
 }

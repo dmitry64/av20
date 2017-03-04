@@ -8,8 +8,11 @@ GateModificator::GateModificator(ChannelsInfo info, Gate gate)
 
 void GateModificator::apply(Core *core)
 {
-    /*std::vector<Gate> gates = core->getCalibration()->getChannel(_channel)->rx()->gates();
-
+    auto calibration = core->getCalibration();
+    auto channel = calibration.getChannel(_info._channel);
+    auto displayChannels = channel.getDisplayChannels();
+    auto display = displayChannels[_info._displayChannel];
+    auto gates = display.gates();
     for(size_t i=0; i<gates.size(); i++) {
         if(gates[i]._id == _gate._id) {
             gates[i]._start = _gate._start;
@@ -17,8 +20,10 @@ void GateModificator::apply(Core *core)
             gates[i]._level = _gate._level;
         }
     }
+    display.setGates(gates);
+    displayChannels[_info._displayChannel] = display;
+    channel.setDisplayChannels(displayChannels);
 
-    core->getCalibration()->getChannel(_channel)->rx()->setGates(gates);
-
-    core->notifyChannel((core->getCalibration()->getChannel(_channel)));*/
+    core->applyChannelsModification(_info._channel,channel);
+    core->notifyChannel(channel);
 }

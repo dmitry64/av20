@@ -12,6 +12,8 @@ class TVGSinglePoint : public TVGCurve
     double _curve;
 public:
     TVGSinglePoint(double base, double offset, double width, double height, double curve);
+    TVGSinglePoint(const TVGSinglePoint & original);
+    ~TVGSinglePoint();
     virtual TVGSinglePoint * clone() const;
     double getSample(double x) const;
     std::vector< std::pair< double, double > > getReferencePoints();

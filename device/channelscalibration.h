@@ -28,6 +28,7 @@ public:
     void setChannels(const std::vector<Channel> &channels);
     CalibrationInfo getInfo() const;
     void setInfo(const CalibrationInfo &info);
+    void setChannel(const ChannelID index,const Channel & channel);
 };
 
 #endif // CHANNELSCALIBRATION_H

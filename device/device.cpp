@@ -18,7 +18,11 @@ TactRegisters Device::getRegistersByTact(const uint8_t index, const ChannelsCali
     reg._TR1 |= ((tact.getTx1Enabled() & 0b00000001) << 3);
     reg._TR1 |= (tact.getTx1() & 0b00000111);
 
-    const TxChannel & firstTx = mode.getChannel(tact.getTx1()).getTx();
+    const auto & channel = mode.getChannel(tact.getTx1());
+
+    const auto & disp = channel.getActiveDisplayChannel();
+
+    const TxChannel & firstTx = disp.getTx();
     reg._PULSER1 = 0x00;
     reg._PULSER1 |= ((firstTx.doubleMode() & 0b00000001) << 7);
     uint8_t prog1 = firstTx.prog();
@@ -32,7 +36,7 @@ TactRegisters Device::getRegistersByTact(const uint8_t index, const ChannelsCali
     reg._TR2 |= ((tact.getTx2Enabled() & 0b00000001) << 3);
     reg._TR2 |= (tact.getTx2() & 0b00000111);
 
-    const TxChannel & secondTx = mode.getChannel(tact.getTx2()).getTx();
+    const TxChannel & secondTx = disp.getTx();
     reg._PULSER2 = 0x00;
     reg._PULSER2 |= ((secondTx.doubleMode() & 0b00000001) << 7);
     uint8_t prog2 = secondTx.prog();
@@ -166,7 +170,8 @@ void Device::applyCalibration(const ChannelsCalibration calibration, const TactT
 
     for(uint8_t j=0; j<channelsCount; j++) {
         const Channel & chan = calibration.getChannel(j);
-        const RxChannel & rxchan = chan.getRx();
+        const DisplayChannel & disp = chan.getActiveDisplayChannel();
+        const RxChannel & rxchan = disp.getRx();
         const TVGCurve * curve = rxchan.getTvgCurve();
         Q_ASSERT(curve);
         const TVG & tvg = getTVGFromCurve(curve);
