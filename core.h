@@ -27,11 +27,13 @@ private:
     std::atomic_bool _calibrationsInfoSnapshotRequested;
     std::atomic_bool _modeswitchRequested;
     std::atomic_bool _calibrationSwitchRequested;
+    std::atomic_bool _channelSwitchRequested;
 
     // Mode switch values
     DeviceModeIndex _requestedMode;
     SchemeIndex _requestedScheme;
     CalibrationIndex _requestedCalibration;
+    ChannelsInfo _requestedChannelSelection;
 
     // Tact control
     uint8_t _currentTactCounter;
@@ -73,8 +75,10 @@ public:
     ChannelsCalibration getCalibration();
     void notifyChannel(Channel channel);
     void applyChannelsModification(ChannelID index, Channel channel);
+
     void applyCurrentCalibrationToDevice();
     const ModeManager *getModeManager() const;
+
 
     // External
     ChannelsCalibration getCalibrationsSnapshot();
@@ -99,6 +103,7 @@ private:
     void handleDeviceError(bool status);
     void handleDeviceOverheat(bool status);
     void handleDeviceConnectionError(bool status);
+    void handleChannelSelection(const ChannelsInfo info);
 
     TactTable getTactTable();
     DeviceMode getCurrentDeviceMode();
@@ -111,6 +116,8 @@ public:
     void setTVG(const ChannelsInfo info, const TVGCurve * ptr);
     void setDeviceMode(const DeviceModeIndex modeIndex, const SchemeIndex schemeIndex);
     void switchCalibration(const CalibrationIndex index);
+    void switchChannel(const ChannelsInfo info);
+
 
 
     SchemeIndex  getCurrentScheme() const;

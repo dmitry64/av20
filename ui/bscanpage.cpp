@@ -87,7 +87,7 @@ void BScanPage::setChannles(std::vector<ChannelsInfo > channelsConfiguration, co
 
 void BScanPage::onDisplayPackage(QSharedPointer<DisplayPackage> dp)
 {
-    uint8_t channel = dp->bscan._channel;
+    uint8_t channel = dp->bscan._info._channel;
     std::vector<BScanWidget*> widgets = getWidgetsByChannel(channel);
     //qDebug() << "size:"<<widgets.size();
     for(size_t i=0; i<widgets.size(); i++) {

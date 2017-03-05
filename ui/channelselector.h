@@ -17,11 +17,15 @@ class ChannelSelector : public QWidget
 
     Core * _core;
     std::vector<ChannelButton *> _channelButtons;
+    ChannelsInfo _selectedChannel;
 public:
     explicit ChannelSelector(QWidget *parent = 0);
     ~ChannelSelector();
     void init(const ChannelsCalibration &snapshot);
     void setCore(Core * core);
+
+    ChannelsInfo selectedChannel() const;
+    void setSelectedChannel(const ChannelsInfo &selectedChannel);
 
 public slots:
     void onChannelSelected(ChannelsInfo info);

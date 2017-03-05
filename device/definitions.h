@@ -37,8 +37,8 @@ struct ChannelsInfo {
 
 enum ModeTypes {
     Unknown,
-    SearchMode,
-    HandMode,
+    MultiChannelMode,
+    SingleChannelMode,
     HeadMode,
     WheelMode
 };
@@ -88,7 +88,7 @@ struct AScanDrawData {
 };
 
 struct BScanDrawData {
-    uint8_t _channel;
+    ChannelsInfo _info;
     std::vector<BScanDrawSample> _samples;
 };
 

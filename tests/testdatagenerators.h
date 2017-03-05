@@ -10,7 +10,7 @@ static ModeManager * generateManager()
 {
     DeviceMode * mode = new DeviceMode();
 
-    mode->setType(ModeTypes::SearchMode);
+    mode->setType(ModeTypes::MultiChannelMode);
     std::vector<TactTable *> tactTables;
 
     TactTable * table1 = new TactTable();
@@ -40,7 +40,7 @@ static ModeManager * generateManager()
 
 
     mode->setTactTables(tactTables);
-    mode->setType(ModeTypes::SearchMode);
+    mode->setType(ModeTypes::MultiChannelMode);
 
 
     ModeManager * manager = new ModeManager();

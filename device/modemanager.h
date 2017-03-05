@@ -9,12 +9,18 @@ class ModeManager
 {
     std::vector<DeviceMode> _modes;
 private:
-    static DeviceMode generateSearchMode();
+    DeviceMode generateSearchMode();
+    DeviceMode generateHandMode();
+    std::vector<Tact> generateSearchTacts(int tactsNumber);
+
+    TactTable generateSearchTable(TactID tact, int tactsNumber);
+
 public:
     ModeManager();
     void init();
     std::vector<DeviceMode> modes() const;
     void addMode(DeviceMode mode);
+
 };
 
 #endif // MODEMANAGER_H

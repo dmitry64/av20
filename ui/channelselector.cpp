@@ -2,6 +2,16 @@
 #include "ui_channelselector.h"
 #include <QDebug>
 
+ChannelsInfo ChannelSelector::selectedChannel() const
+{
+    return _selectedChannel;
+}
+
+void ChannelSelector::setSelectedChannel(const ChannelsInfo &selectedChannel)
+{
+    _selectedChannel = selectedChannel;
+}
+
 ChannelSelector::ChannelSelector(QWidget *parent) :
     QWidget(parent),
     _core(0),
@@ -44,6 +54,8 @@ void ChannelSelector::init(const ChannelsCalibration & snapshot)
         }
     }
     _channelButtons.at(0)->setActive(true);
+    _selectedChannel._channel = 0;
+    _selectedChannel._displayChannel = 0;
 
     update();
 }
@@ -57,10 +69,12 @@ void ChannelSelector::setCore(Core *core)
 void ChannelSelector::onChannelSelected(ChannelsInfo info)
 {
     qDebug() << "Selector channel selected";
+    _selectedChannel = info;
     for(size_t i=0; i<_channelButtons.size(); i++) {
         ChannelButton * button = _channelButtons.at(i);
         Q_ASSERT(button);
         button->setActive(button->info()._channel == info._channel && button->info()._displayChannel == info._displayChannel);
     }
+
     emit channelChanged(info);
 }

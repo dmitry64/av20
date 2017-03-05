@@ -17,6 +17,8 @@ class TVGEditorWidget : public QWidget
 
     Core * _core;
     ChannelsInfo _info;
+private:
+    void showEvent( QShowEvent* event );
 public:
     explicit TVGEditorWidget(QWidget *parent = 0);
     ~TVGEditorWidget();
@@ -25,6 +27,7 @@ public:
     void init(ChannelsInfo info, const ChannelsCalibration &snapshot);
     void initCurve(const TVGCurve *curve);
     void setCore(Core * core);
+    void switchToSelectedChannel();
 public slots:
     void onDisplayPackage(QSharedPointer<DisplayPackage> package);
     void onChannelChanged(Channel channel);

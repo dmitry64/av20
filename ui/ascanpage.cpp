@@ -2,6 +2,11 @@
 #include "ui_ascanpage.h"
 #include <QDebug>
 
+void AScanPage::showEvent(QShowEvent *event)
+{
+    switchToSelectedChannel();
+}
+
 AScanPage::AScanPage(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::AScanPage)
@@ -59,6 +64,13 @@ void AScanPage::setCore(Core *core)
     ui->channelSelector->setCore(core);
 }
 
+void AScanPage::switchToSelectedChannel()
+{
+    qDebug() << "Ascan switched channel!";
+    const auto & info = ui->channelSelector->selectedChannel();
+    setChannel(info);
+}
+
 void AScanPage::onDisplayPackage(QSharedPointer<DisplayPackage> package)
 {
     ui->ascanWidget->onAScan(&(package->ascan));
@@ -75,6 +87,7 @@ void AScanPage::setChannel(ChannelsInfo info)
 {
     const ChannelsCalibration & snapshot = _core->getCalibrationsSnapshot();
     const Channel & chan = snapshot.getChannel(info._channel);
+    _core->switchChannel(info);
     ui->ascanWidget->setChannelInfo(chan,info._displayChannel);
     ui->controlPanel->setChannel(info);
     ui->controlPanel->init(snapshot);

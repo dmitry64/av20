@@ -113,9 +113,9 @@ void BScanWidget::reset()
 
 void BScanWidget::onBScan(BScanDrawData *scan)
 {
-    uint8_t chan = scan->_channel;
+    uint8_t chan = scan->_info._channel;
     if(_restrictedToChannel) {
-        if(chan!=_channelData.index()) {
+        if(chan!=_channelData.index() || scan->_info._displayChannel != _displayChannelId) {
             return;
         }
     }

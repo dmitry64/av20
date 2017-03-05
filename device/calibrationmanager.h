@@ -10,7 +10,7 @@ class CalibrationManager
 {
     std::map<TactID, std::vector<ChannelsCalibration> > _calibrations;
     void initSearchModeCalibration();
-    //void initHandModeCalibration();
+    void initHandModeCalibration();
 public:
     CalibrationManager();
     void init();
@@ -24,8 +24,8 @@ private:
     std::vector<Gate> generateGates();
     void setColor(Channel &chTemp, int i);
     DisplayChannel generateDisplayChannel(double angle);
-    std::vector<Channel> generateChannels(int dispChansNumber);
-    ChannelsCalibration generateCalibration(TactID tact, CalibrationIndex index, std::__cxx11::string name, int dispChansNumber);
+    std::vector<Channel> generateChannels(int channelsNumber, int dispChansNumber);
+    ChannelsCalibration generateCalibration(TactID tact, CalibrationIndex index, std::__cxx11::string name, int channelsNumber, int dispChansNumber);
 };
 
 #endif // CALIBRATIONMANAGER_H

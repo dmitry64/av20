@@ -12,23 +12,15 @@ void ModeManager::addMode(DeviceMode mode)
     _modes.push_back(mode);
 }
 
-DeviceMode ModeManager::generateSearchMode()
+std::vector<Tact> ModeManager::generateSearchTacts(int tactsNumber)
 {
-    DeviceMode mode;
-
-    mode.setType(ModeTypes::SearchMode);
-    std::vector<TactTable> tactTables;
-
-    TactTable table1;
-    table1.setId(TACT_ID_SEARCH_SCHEME_1);
-
     std::vector<Tact> scheme1;
     for(int i=0; i<8; i++) {
         Tact tact;
         tact.setRx1(i);
         tact.setTx1(i);
 
-        if(i<8) {
+        if(i<tactsNumber) {
             tact.setRx1Enabled(true);
             tact.setTx1Enabled(true);
             tact.setTactEnabled(true);
@@ -36,14 +28,41 @@ DeviceMode ModeManager::generateSearchMode()
         else {
             tact.setRx1Enabled(false);
             tact.setTx1Enabled(false);
-            tact.setRx2Enabled(false);
-            tact.setTx2Enabled(false);
             tact.setTactEnabled(false);
         }
 
         scheme1.push_back(tact);
     }
+
+    return scheme1;
+}
+
+TactTable ModeManager::generateSearchTable(TactID tact, int tactsNumber)
+{
+    TactTable table1;
+    table1.setId(tact);
+
+    const std::vector<Tact> & scheme1 = generateSearchTacts(tactsNumber);
     table1.setTactTable(scheme1);
+
+    return table1;
+}
+
+DeviceMode ModeManager::generateSearchMode()
+{
+    DeviceMode mode;
+
+    mode.setType(ModeTypes::MultiChannelMode);
+    std::vector<TactTable> tactTables;
+
+    const TactTable & table1 = generateSearchTable(TACT_ID_SEARCH_SCHEME_1, 8);
+    const TactTable & table2 = generateSearchTable(TACT_ID_SEARCH_SCHEME_2, 8);
+
+    tactTables.push_back(table1);
+    tactTables.push_back(table2);
+
+    mode.setTactTables(tactTables);
+
     /*
         TactTable * table2 = new TactTable();
         table2->setId(TACT_ID_SEARCH_SCHEME_2);
@@ -72,11 +91,25 @@ DeviceMode ModeManager::generateSearchMode()
         }
         table2->setTactTable(scheme2);
     */
+
+
+    return mode;
+}
+
+DeviceMode ModeManager::generateHandMode()
+{
+    DeviceMode mode;
+
+    mode.setType(ModeTypes::SingleChannelMode);
+    std::vector<TactTable> tactTables;
+
+    const TactTable & table1 = generateSearchTable(TACT_ID_HAND_SCHEME_1, 1);
+    const TactTable & table2 = generateSearchTable(TACT_ID_HAND_SCHEME_2, 1);
+
     tactTables.push_back(table1);
-    //  tactTables.push_back(table2);
+    tactTables.push_back(table2);
 
     mode.setTactTables(tactTables);
-
     return mode;
 }
 
@@ -89,5 +122,5 @@ ModeManager::ModeManager()
 void ModeManager::init()
 {
     _modes.push_back(generateSearchMode());
-    //_modes.push_back(generateHandMode());
+    _modes.push_back(generateHandMode());
 }

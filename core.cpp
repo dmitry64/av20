@@ -89,6 +89,7 @@ Core::Core(ModeManager *modeManager, CalibrationManager * calibrationManager) :
     _modeswitchRequested.store(false);
     _calibrationsInfoSnapshotRequested.store(false);
     _calibrationSwitchRequested.store(false);
+    _channelSwitchRequested.store(false);
 }
 
 Core::~Core()
@@ -224,58 +225,59 @@ void Core::aScanProcess(uint8_t line)
     const ChannelsCalibration & calibration = getCalibration();
     const Channel & current = calibration.getChannel(chId);
 
-    const std::vector<DisplayChannel> & dispChannels = current.getDisplayChannels();
-    for(size_t k=0; k<dispChannels.size(); k++) {
-        DisplayPackage * dp = new DisplayPackage();
+    //const std::vector<DisplayChannel> & dispChannels = current.getDisplayChannels();
+    //for(size_t k=0; k<dispChannels.size(); k++) {
+    DisplayPackage * dp = new DisplayPackage();
 
-        dp->ascan._samples.resize(ASCAN_SAMPLES_SIZE);
+    dp->ascan._samples.resize(ASCAN_SAMPLES_SIZE);
 
-        dp->ascan._channel = chId;
-        dp->bscan._channel = chId;
+    dp->ascan._channel = chId;
+    dp->bscan._info._channel = chId;
+    dp->bscan._info._displayChannel = current.getActiveDisplayChannelIndex();
 
-        uint16_t max = 0;
-        uint16_t pos = 0;
-        for(uint16_t i=0; i<ASCAN_SAMPLES_SIZE; i++) {
-            uint16_t sample = scanptr->_samples[i];
-            if(sample >= max) {
-                max = sample;
-                pos = i;
-            }
-            dp->ascan._samples[i] = sample;
+    uint16_t max = 0;
+    uint16_t pos = 0;
+    for(uint16_t i=0; i<ASCAN_SAMPLES_SIZE; i++) {
+        uint16_t sample = scanptr->_samples[i];
+        if(sample >= max) {
+            max = sample;
+            pos = i;
         }
-        dp->ascan._markerPos = pos;
-        dp->ascan._markerValue = max;
-
-        const DisplayChannel & dispChannel = dispChannels[k];
-        const std::vector<Gate> & gates = dispChannel.gates();
-
-        for(size_t j=0; j<gates.size(); j++) {
-            const Gate & gate = gates[j];
-            uint16_t gateStart = (gate._start) * 4;
-            uint16_t gateEnd = (gate._finish) * 4;
-            uint16_t start = 0;
-            //int end = -1;
-            bool startFound = false;
-            for(uint16_t i=0; i<ASCAN_SAMPLES_SIZE; i++) {
-                uint8_t sample = scanptr->_samples[i];
-                if((sample>gate._level) &&(!startFound) && (i >= gateStart) && (i <= gateEnd)) {
-                    start = i;
-                    startFound = true;
-                }
-                else if (startFound && (sample<gate._level || (i >= gateEnd))) {
-                    BScanDrawSample drawSample;
-                    drawSample._begin = start / 0x0004;
-                    drawSample._end = i / 0x0004;
-                    drawSample._level = gate._level;
-                    dp->bscan._samples.push_back(drawSample);
-                    startFound = false;
-                    start = 0;
-                }
-            }
-        }
-
-        emit drawDisplayPackage(QSharedPointer<DisplayPackage>(dp));
+        dp->ascan._samples[i] = sample;
     }
+    dp->ascan._markerPos = pos;
+    dp->ascan._markerValue = max;
+
+    const DisplayChannel & dispChannel =current.getActiveDisplayChannel();
+    const std::vector<Gate> & gates = dispChannel.gates();
+
+    for(size_t j=0; j<gates.size(); j++) {
+        const Gate & gate = gates[j];
+        uint16_t gateStart = (gate._start) * 4;
+        uint16_t gateEnd = (gate._finish) * 4;
+        uint16_t start = 0;
+        //int end = -1;
+        bool startFound = false;
+        for(uint16_t i=0; i<ASCAN_SAMPLES_SIZE; i++) {
+            uint8_t sample = scanptr->_samples[i];
+            if((sample>gate._level) &&(!startFound) && (i >= gateStart) && (i <= gateEnd)) {
+                start = i;
+                startFound = true;
+            }
+            else if (startFound && (sample<gate._level || (i >= gateEnd))) {
+                BScanDrawSample drawSample;
+                drawSample._begin = start / 0x0004;
+                drawSample._end = i / 0x0004;
+                drawSample._level = gate._level;
+                dp->bscan._samples.push_back(drawSample);
+                startFound = false;
+                start = 0;
+            }
+        }
+    }
+
+    emit drawDisplayPackage(QSharedPointer<DisplayPackage>(dp));
+    //}
 }
 
 void Core::sync()
@@ -326,6 +328,11 @@ void Core::modeswitch()
         _currentCalibration.store(_requestedCalibration);
         applyCurrentCalibrationToDevice();
         _calibrationSwitchRequested.store(false);
+    }
+    if(_channelSwitchRequested.load()) {
+        handleChannelSelection(_requestedChannelSelection);
+
+        _channelSwitchRequested.store(false);
     }
 }
 
@@ -466,4 +473,28 @@ void Core::switchCalibration(const CalibrationIndex index)
         usleep(1);
     }
     emit calibrationChanged();
+}
+
+void Core::switchChannel(const ChannelsInfo info)
+{
+    _requestedChannelSelection = info;
+    _channelSwitchRequested.store(true);
+    while(_channelSwitchRequested.load()) {
+        usleep(1);
+    }
+}
+
+void Core::handleChannelSelection(const ChannelsInfo info)
+{
+    const DeviceMode & currentMode = getCurrentDeviceMode();
+    if(currentMode.type() == ModeTypes::SingleChannelMode) {
+        const auto & calibration = getCalibration();
+        auto channel = calibration.getChannel(info._channel);
+        if(channel.getActiveDisplayChannelIndex()!=info._displayChannel) {
+            channel.setActiveDisplayChannelIndex(info._displayChannel);
+            applyChannelsModification(info._channel,channel);
+            applyCurrentCalibrationToDevice();
+            notifyChannel(channel);
+        }
+    }
 }

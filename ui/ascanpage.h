@@ -15,6 +15,8 @@ class AScanPage : public QWidget
     Q_OBJECT
 
     Core * _core;
+private:
+    void showEvent( QShowEvent* event );
 
 public:
     explicit AScanPage(QWidget *parent = 0);
@@ -23,6 +25,7 @@ public:
     void init(ChannelsInfo info);
     void init(ChannelsInfo info, const ChannelsCalibration &snapshot);
     void setCore(Core * core);
+    void switchToSelectedChannel();
 public slots:
     void onDisplayPackage(QSharedPointer<DisplayPackage> package);
     void onChannelChanged(Channel channel);

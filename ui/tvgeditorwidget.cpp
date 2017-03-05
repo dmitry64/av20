@@ -3,6 +3,11 @@
 #include <QDebug>
 #include "device/tvg/tvgsinglepoint.h"
 
+void TVGEditorWidget::showEvent(QShowEvent *event)
+{
+    switchToSelectedChannel();
+}
+
 TVGEditorWidget::TVGEditorWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::TVGEditorWidget)
@@ -58,6 +63,7 @@ void TVGEditorWidget::init(ChannelsInfo info)
 
 void TVGEditorWidget::init(ChannelsInfo info, const ChannelsCalibration & snapshot)
 {
+    qDebug() << "TVG Editor init";
     _info = info;
     ui->aScanWidget->setChannelInfo(snapshot.getChannel(_info._channel),_info._displayChannel);
     initCurve(snapshot.getChannel(_info._channel).getDisplayChannels()[info._displayChannel].getRx().getTvgCurve());
@@ -84,6 +90,13 @@ void TVGEditorWidget::setCore(Core *core)
     ui->channelSelector->setCore(core);
 }
 
+void TVGEditorWidget::switchToSelectedChannel()
+{
+    qDebug() << "TVG switched channel!";
+    const auto & info = ui->channelSelector->selectedChannel();
+    setChannel(info);
+}
+
 void TVGEditorWidget::onDisplayPackage(QSharedPointer<DisplayPackage> package)
 {
     ui->aScanWidget->onAScan(&(package->ascan));
@@ -98,6 +111,7 @@ void TVGEditorWidget::setChannel(ChannelsInfo info)
 {
     const ChannelsCalibration & snapshot = _core->getCalibrationsSnapshot();
     _info = info;
+    _core->switchChannel(info);
     ui->aScanWidget->setChannelInfo(snapshot.getChannel(_info._channel),_info._displayChannel);
     initCurve(snapshot.getChannel(_info._channel).getDisplayChannels()[info._displayChannel].getRx().getTvgCurve());
 }

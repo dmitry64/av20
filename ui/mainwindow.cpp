@@ -295,20 +295,6 @@ void MainWindow::init()
 
     ui->channelsWidget->init(calibration,tactTableSnapshot);
     _calibrationsWidget->init(calibration);
-    /*
-        std::vector< std::vector<Channel*> > channelsTable;
-        for(int i=0; i<calibration->getChannelsCount(); i++) {
-            std::vector<Channel*> channelsForTape;
-            channelsForTape.push_back(calibration->getChannel(i));
-            channelsTable.push_back(channelsForTape);
-        }
-        ui->bScanPage->setChannles(channelsTable);
-        ui->bScanPage->init(calibration);
-
-
-        */
-
-
 }
 
 void MainWindow::reset()
@@ -317,4 +303,9 @@ void MainWindow::reset()
     ui->aScanPage->reset();
     ui->tvgEditorWidget->reset();
     ui->bScanPage->reset();
+}
+
+void MainWindow::on_centralTabWidget_currentChanged(int index)
+{
+
 }

@@ -21,10 +21,10 @@ void ModeSelectionButton::setMode(DeviceMode mode, uint8_t index)
     QString name = "none";
 
     switch (mode.type()) {
-    case ModeTypes::SearchMode:
+    case ModeTypes::MultiChannelMode:
         name = "Search modes:";
         break;
-    case ModeTypes::HandMode:
+    case ModeTypes::SingleChannelMode:
         name = "Hand modes:";
         break;
     case ModeTypes::HeadMode:
