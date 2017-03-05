@@ -114,7 +114,6 @@ void AScanWidget::drawAscan(QPainter &painter, int width, int height, int left, 
     const double step = width/800.0;
     uint16_t size = _samples.size();
     uint16_t currentCount = 0;
-    //uint16_t currentStart = 0;
     for(uint16_t i=0; i<size; i++) {
         if(_samples[i] > 0) {
             if(currentCount==0) {
@@ -129,7 +128,6 @@ void AScanWidget::drawAscan(QPainter &painter, int width, int height, int left, 
                 _polygon[currentCount] = QPoint(left + (i+1)*step, bottom);
                 currentCount++;
                 painter.drawPolygon(_polygon.data(),currentCount, Qt::FillRule::OddEvenFill);
-                //currentStart = i;
                 currentCount = 0;
             }
         }
@@ -168,10 +166,8 @@ AScanWidget::AScanWidget(QWidget *parent) :
     ui->setupUi(this);
     _fpsTimer.restart();
     _polygon.resize(ASCAN_SAMPLES_SIZE+2);
-    //_points.resize(ASCAN_SAMPLES_SIZE);
     _tvgCurvePen = QPen(QColor(250,10,10), 2);
     _tvgCurvePen.setCapStyle(Qt::RoundCap);
-    //_tempCurvePen = QPen(QColor(10,10,250), 2);
     _ascanBrush = QBrush(QColor(80,80,200));
     _ascanPen = QPen(QColor(10,10,70), 1);
     _displayChannelId = 0;
@@ -180,7 +176,6 @@ AScanWidget::AScanWidget(QWidget *parent) :
     _tvgCurve = 0;
     _scaleFont = QGuiApplication::font();
     _scaleFont.setPixelSize(8);
-    //_tempCurve = 0;
     _scale = 200;
     this->setAttribute(Qt::WA_OpaquePaintEvent);
 }

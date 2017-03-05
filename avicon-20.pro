@@ -91,7 +91,11 @@ SOURCES += core.cpp \
     ui/calibrationswidget.cpp \
     device/modificators/tvgmodificator.cpp \
     ui/controls/calibrationbutton.cpp \
-    device/channel/displaychannel.cpp
+    device/channel/displaychannel.cpp \
+    system/brightnesscontroller.cpp \
+    system/temperature.cpp \
+    system/sound.cpp \
+    system/batterycontroller.cpp
 #    tests/coretest.cpp
 
 HEADERS  += \
@@ -152,7 +156,11 @@ HEADERS  += \
     device/modificators/tvgmodificator.h \
     ui/controls/calibrationbutton.h \
     device/commonfunctions.h \
-    device/channel/displaychannel.h
+    device/channel/displaychannel.h \
+    system/brightnesscontroller.h \
+    system/temperature.h \
+    system/sound.h \
+    system/batterycontroller.h
 #    tests/coretest.h
 
 FORMS    += \

@@ -23,7 +23,7 @@ public:
     void resetTVG();
     void resetChannelsTable();
     void resetDevice();
-    void applyCalibration(const ChannelsCalibration calibration, const TactTable tactTable);
+    void applyCalibration(const ChannelsCalibration & calibration, const TactTable & tactTable);
     void setProgTrigger(bool enabled);
     DeviceStatus getDeviceStatus();
     void setTVG(const ChannelID chIndex, const TVG &tvg);

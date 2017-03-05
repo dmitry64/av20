@@ -2,8 +2,11 @@
 #define STATUSBAR_H
 
 #include <QWidget>
+#include <QDate>
+#include <QTime>
 
-namespace Ui {
+namespace Ui
+{
 class StatusBar;
 }
 
@@ -23,6 +26,15 @@ public slots:
     void onDeviceConnectionErrorEnabled();
     void onDeviceConnectionErrorDisabled();
 
+    void onTemperatureChanged(double value);
+    void onBatteryLevelChanged(int value);
+    void onSoundVolumeChanged(int value);
+    void onBrightnessChanged(int value);
+    void onWiFiSignalLevelChanged(int value);
+
+
+    void onDateChanged(QDate date);
+    void onTimeChanged(QTime time);
 private:
     Ui::StatusBar *ui;
 };

@@ -163,9 +163,8 @@ void Device::resetDevice()
     resetTVG();
 }
 
-void Device::applyCalibration(const ChannelsCalibration calibration, const TactTable tactTable)
+void Device::applyCalibration(const ChannelsCalibration &calibration, const TactTable &tactTable)
 {
-
     uint8_t channelsCount = calibration.getChannelsCount();
 
     for(uint8_t j=0; j<channelsCount; j++) {

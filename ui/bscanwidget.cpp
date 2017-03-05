@@ -32,7 +32,6 @@ BScanWidget::BScanWidget(QWidget *parent) :
     }
 
     _restrictedToChannel = false;
-
     _end = 799;
 }
 
@@ -137,16 +136,6 @@ void BScanWidget::onBScan(BScanDrawData *scan)
 
 void BScanWidget::onChannelChanged(Channel channel)
 {
-
-    /*Q_ASSERT(channel);
-    for(uint8_t j=0; j<_channels.size(); j++) {
-        uint8_t chan = channel->index();
-        if(chan == _channels[j]->index()) {
-            Channel * chan = _channels[j];
-            Q_ASSERT(chan);
-            delete chan;
-            _channels[j] = new Channel(channel);
-        }
-    }
-    update();*/
+    _channelData = channel;
+    update();
 }

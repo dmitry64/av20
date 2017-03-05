@@ -92,47 +92,7 @@ void Tact::setTactEnabled(bool tactEnabled)
 {
     _tactEnabled = tactEnabled;
 }
-/*
-PulserProg Tact::getProg1() const
-{
-    return _prog1;
-}
 
-PulserFreq Tact::getFreq1() const
-{
-    return _freq1;
-}
-
-PulserProg Tact::getProg2() const
-{
-    return _prog2;
-}
-
-PulserFreq Tact::getFreq2() const
-{
-    return _freq2;
-}
-
-void Tact::setProg1(const PulserProg &prog1)
-{
-    _prog1 = prog1;
-}
-
-void Tact::setFreq1(const PulserFreq &freq1)
-{
-    _freq1 = freq1;
-}
-
-void Tact::setProg2(const PulserProg &prog2)
-{
-    _prog2 = prog2;
-}
-
-void Tact::setFreq2(const PulserFreq &freq2)
-{
-    _freq2 = freq2;
-}
-*/
 bool Tact::getDiffMode() const
 {
     return _diffMode;
@@ -145,54 +105,10 @@ Tact::Tact() :
     _tx1(0x00),
     _rx1Enabled(false),
     _rx1(0x00),
-    //_double1(false),
-    //_prog1(PulserProg::Prog_1),
-   // _freq1(PulserFreq::Freq_1_0_MHz),
     _tx2Enabled(false),
     _tx2(0x00),
     _rx2Enabled(false),
     _rx2(0x00)
-   // _double2(false),
-    //_prog2(PulserProg::Prog_1),
-   // _freq2(PulserFreq::Freq_1_0_MHz)
 {
 
 }
-/*
-TactRegisters Tact::getRegisters()
-{
-    TactRegisters reg;
-    reg._CR = 0x00;
-    reg._CR |= ((_diffMode & 0b00000001) << 1);
-    reg._CR |= (_tactEnabled & 0b00000001);
-
-    reg._TR1 = 0x00;
-    reg._TR1 |= ((_rx1Enabled & 0b00000001) << 7);
-    reg._TR1 |= ((_rx1 & 0b00000111) << 4);
-    reg._TR1 |= ((_tx1Enabled & 0b00000001) << 3);
-    reg._TR1 |= (_tx1 & 0b00000111);
-
-    reg._PULSER1 = 0x00;
-    reg._PULSER1 |= ((_double1 & 0b00000001) << 7);
-    uint8_t prog1 = _prog1;
-    reg._PULSER1 |= ((prog1 & 0b00001111) << 3);
-    uint8_t freq1 = _freq1;
-    reg._PULSER1 |= (freq1 & 0b00001111);
-
-    reg._TR2 = 0x00;
-    reg._TR2 |= ((_rx2Enabled & 0b00000001) << 7);
-    reg._TR2 |= ((_rx2 & 0b00000111) << 4);
-    reg._TR2 |= ((_tx2Enabled & 0b00000001) << 3);
-    reg._TR2 |= (_tx2 & 0b00000111);
-
-    reg._PULSER2 = 0x00;
-    reg._PULSER2 |= ((_double2 & 0b00000001) << 7);
-    uint8_t prog2 = _prog2;
-    reg._PULSER1 |= ((prog2 & 0b00001111) << 3);
-    uint8_t freq2 = _freq2;
-    reg._PULSER2 |= (freq2 & 0b00001111);
-
-    reg._RESERVED = 0x00;
-
-    return reg;
-}*/

@@ -28,7 +28,6 @@ ChannelSelector::~ChannelSelector()
 void ChannelSelector::init(const ChannelsCalibration & snapshot)
 {
     qDebug() << "Selector init!";
-
     for(size_t i=0; i<_channelButtons.size(); i++) {
         ChannelButton * button = _channelButtons.at(i);
         Q_ASSERT(button);

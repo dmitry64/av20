@@ -29,6 +29,7 @@ public:
 public slots:
     void onDisplayPackage(QSharedPointer<DisplayPackage> dp);
     void onChannelChanged(Channel channel);
+    void setChannel(ChannelsInfo info);
 signals:
     void drawBScan(QSharedPointer<BScanDrawData> scan);
 private:

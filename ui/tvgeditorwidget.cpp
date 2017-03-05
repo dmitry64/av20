@@ -5,6 +5,7 @@
 
 void TVGEditorWidget::showEvent(QShowEvent *event)
 {
+    Q_UNUSED(event);
     switchToSelectedChannel();
 }
 

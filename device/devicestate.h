@@ -2,13 +2,9 @@
 #define DEVICESTATE_H
 
 #include "definitions.h"
-//#include "device.h"
 
 class DeviceState
 {
-    //Device * _device;
-
-
     // Config registers
     uint8_t _USM_ID;
 
@@ -33,17 +29,9 @@ class DeviceState
     // TVG
     TVG _tvg[8];
 
-    // A-scan
-    /*AScanHeader _headerA;
-    uint8_t * _ascanSamplesA;//[800];
-    AScanHeader _headerB;
-    uint8_t * _ascanSamplesB;//[800];*/
-
 public:
     DeviceState();
     void applyState();
-
-    //uint8_t * getAscanForChannel(uint8_t activeChannel);
 
     void setTVGForChannel(uint8_t index, TVG tvg);
     TVG getTvgForChannel(uint8_t index);
@@ -67,8 +55,6 @@ public:
     void setPWR_CR(const uint8_t &PWR_CR);
     uint8_t ODO_CR() const;
     void setODO_CR(const uint8_t &ODO_CR);
-
-
 };
 
 #endif // DEVICESTATE_H

@@ -22,7 +22,7 @@ BScanPage::BScanPage(QWidget *parent) :
     ui(new Ui::BScanPage)
 {
     ui->setupUi(this);
-
+    connect(ui->channelSelectionWidget,SIGNAL(channelChanged(ChannelsInfo)),this,SLOT(setChannel(ChannelsInfo)));
 }
 
 BScanPage::~BScanPage()
@@ -101,4 +101,9 @@ void BScanPage::onChannelChanged(Channel channel)
     for(size_t i=0; i<_bScanWidgets.size(); i++) {
         _bScanWidgets[i]->onChannelChanged(channel);
     }
+}
+
+void BScanPage::setChannel(ChannelsInfo info)
+{
+    _core->switchChannel(info);
 }

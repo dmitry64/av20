@@ -40,16 +40,68 @@ void FakeSPI::updateCounters()
     }
 }
 
-void FakeSPI::setAScanForLine1(uint8_t *dest)
+unsigned char FakeSPI::sincFunc(TVG tvg, uint8_t chan, int i, int time)
+{
+    double x = (i + sin(time/9.0) * 120.14 + (chan-4.0) * 50.0 - 400.0) / 16.0 ;
+    double res = 127.0;
+    if(x!=0) {
+        res = std::max((((sin(x)/x) + 1)/2.0)*255.0 - 128.0 ,0.0);
+    }
+
+    res *= getTVGSample( tvg._samples, i/4) / 127.0;
+    res *= (2.3 * (time % 255) + 60.0)/255.0 ;
+    int val = round(res);
+    unsigned char sh = val;
+
+    return sh;
+}
+
+unsigned char FakeSPI::sinusFunc(TVG tvg, uint8_t chan, int i, int time)
+{
+    double x = (i + sin(time/9.0) * 120.14 + (chan-4.0) * 50.0 - 400.0) / 16.0 ;
+    double res = 127.0;
+    if(x!=0) {
+        double val = (((sin(x)) + 1)/2.0)*255.0 - 128.0;
+        if(val > 0) {
+            res = val;
+        }
+        else {
+            res = - val;
+        }
+        //res = std::max(val,0.0);
+    }
+
+    res *= getTVGSample( tvg._samples, i/4) / 127.0;
+    res *= (2.3 * (time % 255) + 60.0)/255.0 ;
+    int val = round(res);
+    unsigned char sh = val;
+
+    return sh;
+}
+
+unsigned char FakeSPI::cosinusFunc(TVG tvg, uint8_t chan, int i, int time)
+{
+    double x = (i + (cos(time/9.0) + sin(time/6.0)) * 120.14 + (chan-4.0) * 50.0 - 400.0) / 16.0 ;
+    double res = 127.0;
+    if(x!=0) {
+        res = std::max((((cos(x)) + 1)/2.0)*255.0 - 128.0 ,0.0);
+    }
+
+    res *= getTVGSample( tvg._samples, i/4) / 127.0;
+    res *= (2.3 * (time % 255) + 60.0)/255.0 ;
+    int val = round(res);
+    unsigned char sh = val;
+
+    return sh;
+}
+
+void FakeSPI::generateAscan(uint8_t *dest, bool line)
 {
     TactRegisters tact = _state.getTactByIndex(_currentTact);
     uint8_t chan = ((tact._TR1 & 0b01110000) >> 4);
     int ascanL1Counter = _counters[chan]->load();
-    int ascanL1Counter2 = ascanL1Counter;
 
-    //qDebug() << "Chan: "<<chan << "Tact: " <<tact._TR1;
     TVG tvg = _state.getTvgForChannel(chan);
-    //int last = 0;
     dest[0] = ascanL1Counter;
     dest[1] = 12;
     dest[2] = _currentTact;
@@ -60,50 +112,31 @@ void FakeSPI::setAScanForLine1(uint8_t *dest)
     dest[7] = 0;
 
     for(int i=0; i<ASCAN_SAMPLES_SIZE; i++) {
-        double x = (i + sin(ascanL1Counter2/9.0) * 120.14 + (chan-4.0) * 50.0 - 400.0) / 16.0 ;
-        double res = 127.0;
-        if(x!=0) {
-            res = std::max((((sin(x)/x) + 1)/2.0)*255.0 - 128.0 ,0.0);
+        unsigned char sh = 0;
+        switch (chan) {
+        case 0:
+            sh = sinusFunc(tvg, chan, i, ascanL1Counter);
+            break;
+        case 1:
+            sh = cosinusFunc(tvg, chan, i, ascanL1Counter);
+            break;
+        default:
+            sh = sincFunc(tvg, chan, i, ascanL1Counter);
+            break;
         }
 
-        res *= getTVGSample( tvg._samples, i/4) / 127.0;
-        res *= (2.3 * (ascanL1Counter2 % 255) + 60.0)/255.0 ;
-        int val = round(res);
-        unsigned char sh = val;
         dest[i+ASCAN_HEADER_SIZE] = sh;
     }
 }
 
+void FakeSPI::setAScanForLine1(uint8_t *dest)
+{
+    generateAscan(dest, true);
+}
+
 void FakeSPI::setAScanForLine2(uint8_t *dest)
 {
-    TactRegisters tact = _state.getTactByIndex(_currentTact);
-    uint8_t chan = ((tact._TR2 & 0b01110000) >> 4);
-    int ascanL2Counter = _counters[chan]->load();
-    int ascanL2Counter2 = ascanL2Counter;
-    TVG tvg = _state.getTvgForChannel(chan);
-
-    dest[0] = ascanL2Counter;
-    dest[1] = 12;
-    dest[2] = _currentTact;
-    dest[3] = chan;
-    dest[4] = 0;
-    dest[5] = 8;
-    dest[6] = 0;
-    dest[7] = 0;
-    //int last = 0;
-    for(int i=0; i<ASCAN_SAMPLES_SIZE; i++) {
-        double x = (i + sin(ascanL2Counter2/9.0) * 120.14 + (chan-4.0) * 50.0 - 400.0) / 8.0 ;
-        double res = 127.0;
-        if(x!=0) {
-            res = std::max((((sin(x)/x) + 1)/2.0)*255.0 - 128.0 ,0.0);
-        }
-
-        res *= getTVGSample( tvg._samples, i/4) / 127.0;
-        res *= (1.3 * (ascanL2Counter2 % 255) + 60.0)/255.0 ;
-        int val = round(res);
-        unsigned char sh = val;
-        dest[i+ASCAN_HEADER_SIZE] = sh;
-    }
+    generateAscan(dest, false);
 }
 
 void FakeSPI::run()
@@ -112,11 +145,11 @@ void FakeSPI::run()
         updateCounters();
         usleep(50000);
         if(_specialCounter == 77) {
-            //_state.setUSM_SR(_state.USM_SR() ^ 0b00001000);
+            _state.setUSM_SR(_state.USM_SR() ^ 0b00001000);
         }
 
         if(_specialCounter == 177) {
-            // _state.setUSM_SR(_state.USM_SR() ^ 0b10000000);
+            _state.setUSM_SR(_state.USM_SR() ^ 0b10000000);
         }
 
         _specialCounter++;

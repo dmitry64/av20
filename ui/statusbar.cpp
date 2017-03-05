@@ -25,7 +25,14 @@ void StatusBar::init()
     ui->dateLabel->setText(system->getDate().toString(Qt::DefaultLocaleShortDate));
     ui->batteryButton->setText(QString::number(system->getBatteryPercent()) + "%");
     ui->soundButton->setText(QString::number(system->getSoundVolume()) + "%");
-    ui->tempButton->setText(QString::number(22.3) + "\u2103");
+    ui->tempButton->setText(QString::number(system->getTemperature()) + "\u2103");
+    ui->brightnessButton->setText(QString::number(system->getBrightness()) + "%");
+    ui->wifiButton->setText(QString::number(system->getWifiSignalLevel()) + "%");
+
+    connect(system,SIGNAL(temperatureChanged(double)),this,SLOT(onTemperatureChanged(double)));
+    connect(system,SIGNAL(brightnessChanged(int)),this,SLOT(onBrightnessChanged(int)));
+    connect(system,SIGNAL(soundVolumeChanged(int)),this,SLOT(onSoundVolumeChanged(int)));
+    connect(system,SIGNAL(batteryLevelChanged(int)),this,SLOT(onBatteryLevelChanged(int)));
 }
 
 void StatusBar::onDeviceOverheatEnabled()
@@ -56,4 +63,39 @@ void StatusBar::onDeviceConnectionErrorEnabled()
 void StatusBar::onDeviceConnectionErrorDisabled()
 {
     ui->connectionErrorButton->hide();
+}
+
+void StatusBar::onTemperatureChanged(double value)
+{
+    ui->tempButton->setText(QString::number(value) + "\u2103");
+}
+
+void StatusBar::onBatteryLevelChanged(int value)
+{
+    ui->batteryButton->setText(QString::number(value) + "%");
+}
+
+void StatusBar::onSoundVolumeChanged(int value)
+{
+    ui->soundButton->setText(QString::number(value) + "%");
+}
+
+void StatusBar::onBrightnessChanged(int value)
+{
+    ui->brightnessButton->setText(QString::number(value) + "%");
+}
+
+void StatusBar::onWiFiSignalLevelChanged(int value)
+{
+    ui->wifiButton->setText(QString::number(value) + "%");
+}
+
+void StatusBar::onDateChanged(QDate date)
+{
+    ui->dateLabel->setText(date.toString(Qt::DefaultLocaleShortDate));
+}
+
+void StatusBar::onTimeChanged(QTime time)
+{
+    ui->timeLabel->setText(time.toString(Qt::DefaultLocaleShortDate));
 }

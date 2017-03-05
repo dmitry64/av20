@@ -71,7 +71,6 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(_modeSelectionWidget,SIGNAL(modeSelected(uint8_t,uint8_t)),this,SLOT(onModeChangeRequested(uint8_t,uint8_t)));
     connect(_modeSelectionWidget,SIGNAL(closeWindow()),this,SIGNAL(resetMenu()));
     connect(_calibrationsWidget,SIGNAL(calibrationSelected()),this,SIGNAL(resetMenu()));
-
 }
 
 MainWindow::~MainWindow()
@@ -283,7 +282,7 @@ void MainWindow::init()
     for(int i=0; i<calibration.getChannelsCount(); i++) {
         const auto & channel = calibration.getChannel(i);
         const auto & dispChannels = channel.getDisplayChannels();
-        for(int j=0; j<dispChannels.size(); j++) {
+        for(size_t j=0; j<dispChannels.size(); j++) {
             ChannelsInfo info;
             info._channel = i;
             info._displayChannel = j;
@@ -303,9 +302,4 @@ void MainWindow::reset()
     ui->aScanPage->reset();
     ui->tvgEditorWidget->reset();
     ui->bScanPage->reset();
-}
-
-void MainWindow::on_centralTabWidget_currentChanged(int index)
-{
-
 }

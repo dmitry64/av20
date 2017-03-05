@@ -4,6 +4,7 @@
 
 void AScanPage::showEvent(QShowEvent *event)
 {
+    Q_UNUSED(event);
     switchToSelectedChannel();
 }
 
@@ -32,7 +33,6 @@ void AScanPage::init(ChannelsInfo info)
     Q_ASSERT(_core);
     const ChannelsCalibration & snapshot = _core->getCalibrationsSnapshot();
     init(info,snapshot);
-    // delete snapshot;
 }
 
 void AScanPage::init(ChannelsInfo info,const ChannelsCalibration & snapshot)
@@ -40,19 +40,11 @@ void AScanPage::init(ChannelsInfo info,const ChannelsCalibration & snapshot)
     qDebug() << "Ascan init!";
 
     ui->ascanWidget->setChannelInfo(snapshot.getChannel(info._channel),info._displayChannel);
-    //Q_ASSERT(snapshot);
-    //std::vector<Channel *> channels;
-    //Channel * chan = (snapshot->getChannel(channel));
-    //Q_ASSERT(chan);
-    //channels.push_back(chan);
     ui->bscanWidget->setChannelInfo(snapshot.getChannel(info._channel),info._displayChannel);
-    //ui->ascanWidget->setChannelsInfo(channels);
     ui->controlPanel->setChannel(info);
     ui->controlPanel->init(snapshot);
 
-
     ui->channelSelector->init(snapshot);
-    //channels.clear();
     update();
 }
 

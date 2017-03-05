@@ -57,9 +57,6 @@ public:
     void setChannelInfo(const Channel &channel, DisplayChannelID dispChannelId);
 public slots:
     void onAScan(const AScanDrawData *scan);
-    //void onTVG(TVG tvg);
-
-
     void onChannelChanged(const Channel &channel);
 private:
     Ui::AScanWidget *ui;

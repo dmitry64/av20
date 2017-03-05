@@ -8,12 +8,7 @@ ControlPanel::ControlPanel(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->scrollArea->setWidgetResizable(true);
-    /*
-        _sensBaseLevel = new TouchSpinBox();
-        _sensBaseLevel->setName("Base sens.");
-        _sensBaseLevel->setSuffix("dB");
-        ui->scrollLayout->addWidget(_sensBaseLevel);
-    */
+
     _prismTimeSpinbox = new TouchSpinBox();
     _prismTimeSpinbox->setName("Prism time");
     _prismTimeSpinbox->setMin(0);
@@ -30,35 +25,7 @@ ControlPanel::ControlPanel(QWidget *parent) :
     _markerPositionSpinbox->setValue(0);
     _markerPositionSpinbox->setSuffix("us");
     ui->scrollLayout->addWidget(_markerPositionSpinbox);
-    /*
-        _frequencySpinbox = new TouchSpinBoxString();
-        std::vector<QString> freqvalues;
-        freqvalues.push_back("1.0 MHz");
-        freqvalues.push_back("1.25 MHz");
-        freqvalues.push_back("2.0 MHz");
-        freqvalues.push_back("2.5 MHz");
-        freqvalues.push_back("4.0 MHz");
-        freqvalues.push_back("5.0 MHz");
-        freqvalues.push_back("8.0 MHz");
-        freqvalues.push_back("10.0 MHz");
-        _frequencySpinbox->setValues(freqvalues);
-        _frequencySpinbox->setName("Frequency");
-        ui->scrollLayout->addWidget(_frequencySpinbox);
 
-        _progSpinbox = new TouchSpinBoxString();
-        std::vector<QString> progvalues;
-        progvalues.push_back("Prog 1");
-        progvalues.push_back("Prog 2");
-        progvalues.push_back("Prog 3");
-        progvalues.push_back("Prog 4");
-        progvalues.push_back("Prog 5");
-        progvalues.push_back("Prog 6");
-        progvalues.push_back("Prog 7");
-        progvalues.push_back("Prog 8");
-        _progSpinbox->setValues(progvalues);
-        _progSpinbox->setName("Pulse prog.");
-        ui->scrollLayout->addWidget(_progSpinbox);
-    */
     _gateCounter = 0;
     _gatesLayout = new QVBoxLayout();
     ui->scrollLayout->addLayout(_gatesLayout);
@@ -67,36 +34,13 @@ ControlPanel::ControlPanel(QWidget *parent) :
     ui->scrollLayout->addWidget(_addGateButton);
     connect(_addGateButton, SIGNAL(addGate()),this,SLOT(onAddGate()));
 
-
     _info._channel = 0;
     _info._displayChannel = 0;
-    /*
-
-    TouchSpinBox * gateStart = new TouchSpinBox("Gate start");
-    TouchSpinBox * gateEnd = new TouchSpinBox("Gate end");
-    TouchSpinBox * gateLevel = new TouchSpinBox("Gate level");
-    TouchSpinBox * gateColor = new TouchSpinBox("Gate color");
-
-    gatesLayout->addWidget(gateStart);
-    gatesLayout->addWidget(gateEnd);
-    gatesLayout->addWidget(gateLevel);
-    gatesLayout->addWidget(gateColor);
-
-    ui->scrollLayout->addLayout(gatesLayout);*/
-
-
-    /*for(int i=0; i<30; i++) {
-            TouchSpinBox * wid = new TouchSpinBox("Control #" + QString::number(i));
-            ui->scrollLayout->addWidget(wid);
-    }*/
-    //QObject::connect(_sensBaseLevel,SIGNAL(valueChanged(double)),this,SLOT(sensChanged(double)));
-
 }
 
 void ControlPanel::showEvent(QShowEvent *event)
 {
     QWidget::showEvent( event );
-    //init();
 }
 
 ControlPanel::~ControlPanel()
@@ -118,11 +62,8 @@ void ControlPanel::setChannel(ChannelsInfo info)
 
 void ControlPanel::init(const ChannelsCalibration & calibration)
 {
-    //_sensBaseLevel->setValue(calibration->getChannel(_currentChannel)->rx()->baseSensLevel());
     const auto & channel = calibration.getChannel(_info._channel);
     _prismTimeSpinbox->setValue(channel.getDisplayChannels()[_info._displayChannel].getRx().getPrismTime());
-    //_markerPositionSpinbox->setValue(calibration->getChannel(_currentChannel)->rx()->getMarkerPos());
-
     _gateCounter = 0;
     for(size_t i=0; i<_gates.size(); i++) {
         _gatesLayout->removeWidget(_gates[i]);

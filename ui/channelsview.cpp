@@ -33,21 +33,14 @@ ChannelsView::ChannelsView(QWidget *parent) :
     ui->tactWidget->setHorizontalHeaderItem(0,new QTableWidgetItem("Index"));
     ui->tactWidget->setHorizontalHeaderItem(1,new QTableWidgetItem("Rx I"));
     ui->tactWidget->setHorizontalHeaderItem(2,new QTableWidgetItem("Tx I"));
-//    ui->tactWidget->setHorizontalHeaderItem(3,new QTableWidgetItem("Prog. I"));
-//    ui->tactWidget->setHorizontalHeaderItem(4,new QTableWidgetItem("Freq. I"));
     ui->tactWidget->setHorizontalHeaderItem(3,new QTableWidgetItem("Rx II"));
     ui->tactWidget->setHorizontalHeaderItem(4,new QTableWidgetItem("Tx II"));
-//    ui->tactWidget->setHorizontalHeaderItem(7,new QTableWidgetItem("Prog. II"));
-//    ui->tactWidget->setHorizontalHeaderItem(8,new QTableWidgetItem("Freq. II"));
 
     ui->tactWidget->setColumnWidth(0,50);
     ui->tactWidget->setColumnWidth(1,40);
     ui->tactWidget->setColumnWidth(2,40);
     ui->tactWidget->setColumnWidth(3,40);
     ui->tactWidget->setColumnWidth(4,40);
-
-
-
 }
 
 ChannelsView::~ChannelsView()
@@ -61,8 +54,6 @@ void ChannelsView::init()
     const ChannelsCalibration & calibration =  _core->getCalibrationsSnapshot();
     const TactTable & tactTable = _core->getTactTableSnapshot();
     init(calibration,tactTable);
-    // delete calibration;
-    // delete tactTable;
 }
 
 void ChannelsView::init(const ChannelsCalibration & calibrationsSnapshot, const TactTable & tactTableSnapshot)
@@ -120,8 +111,6 @@ void ChannelsView::init(const ChannelsCalibration & calibrationsSnapshot, const 
             channelsRow++;
             ui->channelsWidget->setRowCount(channelsRow+1);
         }
-        //ui->channelsWidget->setRowHeight(i,55);
-
     }
     ui->channelsWidget->setRowCount(channelsRow);
     ui->channelsWidget->resizeRowsToContents();

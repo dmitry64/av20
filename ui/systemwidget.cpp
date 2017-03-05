@@ -21,6 +21,9 @@ SystemWidget::SystemWidget(QWidget *parent) :
 
     ui->timeLabel->setText(system->getTime().toString(Qt::DefaultLocaleShortDate));
     ui->dateLabel->setText(system->getDate().toString(Qt::DefaultLocaleShortDate));
+
+    connect(ui->brightnessWidget,SIGNAL(valueChanged(double)),this,SLOT(onBrightnessChanged(double)));
+    connect(ui->soundWidget,SIGNAL(valueChanged(double)),this,SLOT(onSoundVolumeChanged(double)));
 }
 
 SystemWidget::~SystemWidget()
@@ -42,4 +45,21 @@ void SystemWidget::on_rebootButton_released()
 void SystemWidget::on_pauseButton_released()
 {
     emit pause();
+}
+
+void SystemWidget::onBrightnessChanged(double value)
+{
+    System * system = System::getInstance();
+    system->setBrightness(qRound(value));
+}
+
+void SystemWidget::onSoundVolumeChanged(double value)
+{
+    System * system = System::getInstance();
+    system->setSoundVolume(qRound(value));
+}
+
+void SystemWidget::onUSMVersionChanged(QString string)
+{
+
 }

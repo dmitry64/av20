@@ -82,8 +82,6 @@ signals:
     void drawDisplayPackage(QSharedPointer<DisplayPackage> dp);
     void channelChanged(Channel channel);
     void resetMenu();
-private slots:
-    void on_centralTabWidget_currentChanged(int index);
 
 private:
     Ui::MainWindow *ui;

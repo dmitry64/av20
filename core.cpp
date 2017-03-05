@@ -90,6 +90,9 @@ Core::Core(ModeManager *modeManager, CalibrationManager * calibrationManager) :
     _calibrationsInfoSnapshotRequested.store(false);
     _calibrationSwitchRequested.store(false);
     _channelSwitchRequested.store(false);
+
+    _requestedChannelSelection._channel = 0;
+    _requestedChannelSelection._displayChannel = 0;
 }
 
 Core::~Core()
@@ -225,8 +228,6 @@ void Core::aScanProcess(uint8_t line)
     const ChannelsCalibration & calibration = getCalibration();
     const Channel & current = calibration.getChannel(chId);
 
-    //const std::vector<DisplayChannel> & dispChannels = current.getDisplayChannels();
-    //for(size_t k=0; k<dispChannels.size(); k++) {
     DisplayPackage * dp = new DisplayPackage();
 
     dp->ascan._samples.resize(ASCAN_SAMPLES_SIZE);
@@ -277,7 +278,6 @@ void Core::aScanProcess(uint8_t line)
     }
 
     emit drawDisplayPackage(QSharedPointer<DisplayPackage>(dp));
-    //}
 }
 
 void Core::sync()
@@ -331,7 +331,6 @@ void Core::modeswitch()
     }
     if(_channelSwitchRequested.load()) {
         handleChannelSelection(_requestedChannelSelection);
-
         _channelSwitchRequested.store(false);
     }
 }

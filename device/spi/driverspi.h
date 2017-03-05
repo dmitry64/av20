@@ -21,7 +21,7 @@ private:
     void sendData(uint8_t length, const uint8_t * bufPtr);
     void recvData(uint32_t length, uint8_t * bufPtr);
 public:
-    DriverSPI(QString device);
+    DriverSPI(QString & device);
     void init();
     void getRegister(uint8_t reg, const uint32_t length, uint8_t * dest);
     void setRegister(uint8_t reg, const uint32_t length, const uint8_t * src);

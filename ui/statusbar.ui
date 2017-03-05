@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>959</width>
+    <width>1031</width>
     <height>26</height>
    </rect>
   </property>
@@ -1886,11 +1886,11 @@ color: rgb(0, 0, 0);</string>
 color: rgb(0, 0, 0);</string>
      </property>
      <property name="text">
-      <string>25.3 C</string>
+      <string>22.3 C</string>
      </property>
      <property name="icon">
       <iconset resource="../resources.qrc">
-       <normaloff>:/icons/resources/icons/sys_icon_indicators.png</normaloff>:/icons/resources/icons/sys_icon_indicators.png</iconset>
+       <normaloff>:/icons/resources/icons/Temperature-icon.png</normaloff>:/icons/resources/icons/Temperature-icon.png</iconset>
      </property>
      <property name="flat">
       <bool>false</bool>
@@ -1924,6 +1924,30 @@ color: rgb(0, 0, 0);</string>
      <property name="icon">
       <iconset resource="../resources.qrc">
        <normaloff>:/icons/resources/icons/sys_icon_wifi.png</normaloff>:/icons/resources/icons/sys_icon_wifi.png</iconset>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="brightnessButton">
+     <property name="minimumSize">
+      <size>
+       <width>70</width>
+       <height>24</height>
+      </size>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);</string>
+     </property>
+     <property name="text">
+      <string>50%</string>
+     </property>
+     <property name="icon">
+      <iconset resource="../resources.qrc">
+       <normaloff>:/icons/resources/icons/sys_icon_light.png</normaloff>:/icons/resources/icons/sys_icon_light.png</iconset>
      </property>
     </widget>
    </item>
