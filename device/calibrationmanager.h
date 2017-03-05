@@ -10,7 +10,7 @@ class CalibrationManager
 {
     std::map<TactID, std::vector<ChannelsCalibration> > _calibrations;
     void initSearchModeCalibration();
-    void initHandModeCalibration();
+    //void initHandModeCalibration();
 public:
     CalibrationManager();
     void init();

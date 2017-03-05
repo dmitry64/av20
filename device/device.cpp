@@ -2,7 +2,7 @@
 #include <QDebug>
 #define FAKESPI
 
-TactRegisters Device::getRegistersByTact(const uint8_t index, const ChannelsCalibration mode, const TactTable tactTable)
+TactRegisters Device::getRegistersByTact(const uint8_t index, const ChannelsCalibration &mode, const TactTable &tactTable)
 {
     Q_ASSERT(index < 8);
     const Tact & tact = tactTable.getTactByIndex(index);

@@ -11,8 +11,9 @@ class DeviceState
 
     // Config registers
     uint8_t _USM_ID;
-    uint8_t _USM_SR;
+
     uint8_t _USM_CR;
+    uint8_t _USM_SR;
     uint8_t _TRG_CR;
     uint8_t _TRG_DS;
     uint8_t _TRG_TS;

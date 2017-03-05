@@ -14,11 +14,9 @@ CONFIG(testconf) {
     SOURCES += main.cpp
 }
 
-
-
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-CONFIG += c++11
+CONFIG += c++14
 
 TARGET = avicon-20
 TEMPLATE = app

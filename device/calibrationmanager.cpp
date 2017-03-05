@@ -91,10 +91,10 @@ void CalibrationManager::initSearchModeCalibration()
     addCalibration(cal1);
 }
 
-void CalibrationManager::initHandModeCalibration()
+/*void CalibrationManager::initHandModeCalibration()
 {
 
-}
+}*/
 
 CalibrationManager::CalibrationManager()
 {

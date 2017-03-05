@@ -88,7 +88,7 @@ void BScanWidget::paintEvent(QPaintEvent *event)
         }
     }
 
-    /*const std::vector<Gate> & gates = _channels.at(n)->rx()->gates();
+    const std::vector<Gate> & gates = _channelData.getDisplayChannels().at(_displayChannelId).gates();
 
     for(size_t i=0; i<gates.size(); i++) {
         const Gate & gate = gates[i];
@@ -97,7 +97,7 @@ void BScanWidget::paintEvent(QPaintEvent *event)
         uint16_t offset = w - 32 + ((gate._level/255.0) *32) + 1;
         painter.setPen(QPen(getColorByLevel(gate._level),2));
         painter.drawLine(offset,y1,offset,y2);
-    }*/
+    }
     //}
 }
 
@@ -137,6 +137,7 @@ void BScanWidget::onBScan(BScanDrawData *scan)
 
 void BScanWidget::onChannelChanged(Channel channel)
 {
+
     /*Q_ASSERT(channel);
     for(uint8_t j=0; j<_channels.size(); j++) {
         uint8_t chan = channel->index();
