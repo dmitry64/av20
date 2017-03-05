@@ -81,7 +81,7 @@ unsigned char FakeSPI::sinusFunc(TVG tvg, uint8_t chan, int i, int time)
 
 unsigned char FakeSPI::cosinusFunc(TVG tvg, uint8_t chan, int i, int time)
 {
-    double x = (i + (cos(time/9.0) + sin(time/6.0)) * 120.14 + (chan-4.0) * 50.0 - 400.0) / 16.0 ;
+    double x = (i + (cos(time/9.0) + sin(time/6.0)) * 120.14 + (chan-4.0) * 50.0 - 400.0) / 20.0 ;
     double res = 127.0;
     if(x!=0) {
         res = std::max((((cos(x)) + 1)/2.0)*255.0 - 128.0 ,0.0);
