@@ -9,7 +9,6 @@
 
 class RxChannel
 {
-
     std::string _name;
     uint8_t _prismTime;
     TVGCurve * _tvgCurve;
@@ -19,7 +18,7 @@ public:
     RxChannel();
     RxChannel(const RxChannel & original);
     ~RxChannel();
-
+    RxChannel & operator=(const RxChannel &L);
     void setPrismTime(uint8_t prismTime);
     std::vector<Gate> gates() const;
     void setGates(const std::vector<Gate> &gates);

@@ -35,8 +35,10 @@ const TVGCurve *RxChannel::getTvgCurve() const
 
 void RxChannel::setTvgCurve(TVGCurve *tvgCurve)
 {
-    qDebug() << "Set";
-    _tvgCurve = tvgCurve;
+    if(_tvgCurve!=0) {
+        delete _tvgCurve;
+    }
+    _tvgCurve = tvgCurve->clone();
 }
 
 uint8_t RxChannel::getPrismTime() const
@@ -46,24 +48,35 @@ uint8_t RxChannel::getPrismTime() const
 
 RxChannel::RxChannel() : _prismTime(0), _tvgCurve(0), _markerPos(0)
 {
-    qDebug() << "Created";
-
 }
 
-RxChannel::RxChannel(const RxChannel &original)
+RxChannel::RxChannel(const RxChannel &original) : _name(original._name), _prismTime(original._prismTime), _tvgCurve(original._tvgCurve->clone()), _markerPos(original._markerPos)
 {
-    _name = original._name;
-    _prismTime = original._prismTime;
-    TVGCurve * tvgCurve = original._tvgCurve->clone();
-    _tvgCurve = tvgCurve;
 
-    _markerPos = original._markerPos;
 }
 
 RxChannel::~RxChannel()
 {
-    qDebug() << "Deleted";
     if(_tvgCurve!=0) {
-        //delete _tvgCurve;
+        delete _tvgCurve;
     }
+}
+
+RxChannel &RxChannel::operator=(const RxChannel &L)
+{
+    if (this == &L) {
+        return *this;
+    }
+    else {
+        _name = L._name;
+        _prismTime = L._prismTime;
+        TVGCurve * newTvgCurve = L._tvgCurve->clone();
+        if(_tvgCurve!=0) {
+            delete _tvgCurve;
+        }
+        _tvgCurve = newTvgCurve;
+        _markerPos = L._markerPos;
+        return *this;
+    }
+
 }

@@ -58,16 +58,28 @@ CalibrationIndex Core::getCurrentCalibration() const
     return _currentCalibration.load();
 }
 
-Core::Core(ModeManager *modeManager, CalibrationManager * calibrationManager) : _active(true), _changesMutex(new QMutex())
+Core::Core(ModeManager *modeManager, CalibrationManager * calibrationManager) :
+    _active(true),
+    _requestedMode(0),
+    _requestedScheme(0),
+    _requestedCalibration(0),
+    _currentTactCounter(0),
+    _currentTact(0),
+    _device(new Device()),
+    _modeManager(modeManager),
+    _calibrationManager(calibrationManager),
+    _deviceOverheat(false),
+    _deviceError(false),
+    _deviceConnectionError(false),
+    _changesMutex(new QMutex())
+
 {
     Q_ASSERT(modeManager);
     Q_ASSERT(calibrationManager);
-    _modeManager = modeManager;
-    _device = new Device();
+
     _currentScheme.store(0);
     _currentCalibration.store(0);
     _currentMode.store(0);
-    _calibrationManager = calibrationManager;
     _currentTactCounter = 0;
     _currentTact = 0;
     _line1CurrentAscan = new AScan();
@@ -77,9 +89,6 @@ Core::Core(ModeManager *modeManager, CalibrationManager * calibrationManager) : 
     _modeswitchRequested.store(false);
     _calibrationsInfoSnapshotRequested.store(false);
     _calibrationSwitchRequested.store(false);
-    _deviceOverheat = false;
-    _deviceError = false;
-    _deviceConnectionError = false;
 }
 
 Core::~Core()

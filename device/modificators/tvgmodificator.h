@@ -10,6 +10,8 @@ class TVGModificator : public Modificator
     TVGCurve * _curve;
 public:
     TVGModificator(ChannelsInfo info, TVGCurve *curve);
+    ~TVGModificator();
+
     void apply(Core * core);
 };
 

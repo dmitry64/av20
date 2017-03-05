@@ -5,6 +5,11 @@ TVGModificator::TVGModificator(ChannelsInfo info, TVGCurve *curve) : _info(info)
 
 }
 
+TVGModificator::~TVGModificator()
+{
+    delete _curve;
+}
+
 void TVGModificator::apply(Core *core)
 {
     auto calibration = core->getCalibration();

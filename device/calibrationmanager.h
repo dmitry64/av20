@@ -18,7 +18,7 @@ public:
     std::vector<ChannelsCalibration> getCalibrationsByTactID(TactID id);
     std::vector<CalibrationInfo> getCalibrationsInfoByTactID(TactID id);
     void addCalibration(const ChannelsCalibration &calibration);
-    void removeCalibration(ChannelsCalibration calibration);
+    void removeCalibration(const ChannelsCalibration &calibration);
     void applyChannelsModification(TactID id, CalibrationIndex index, ChannelID channelId, Channel channel);
 };
 

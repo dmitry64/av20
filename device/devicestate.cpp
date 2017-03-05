@@ -82,16 +82,22 @@ void DeviceState::setUSM_SR(const uint8_t &USM_SR)
     _USM_SR = USM_SR;
 }
 
-DeviceState::DeviceState()
+DeviceState::DeviceState():
+    _USM_ID(0),
+    _USM_CR(0),
+    _USM_SR(0),
+    _TRG_CR(0),
+    _TRG_DS(0),
+    _TRG_TS(0),
+    _PWR_CR(0),
+    _ODO_CR(0),
+    _RESERVED_0A(0),
+    _RESERVED_0B(0),
+    _RESERVED_0C(0),
+    _RESERVED_0D(0),
+    _RESERVED_0E(0),
+    _RESERVED_0F(0)
 {
-    _USM_ID = 0;
-    _USM_CR = 0;
-    _USM_SR = 0;
-    _TRG_CR = 0;
-    _TRG_DS = 0;
-    _TRG_TS = 0;
-    _PWR_CR = 0;
-    _ODO_CR = 0;
 }
 
 void DeviceState::applyState()
@@ -125,22 +131,22 @@ void DeviceState::setChannelsTableRegister(uint8_t reg, uint8_t value)
 {
 
     switch((reg-0x10) % 6) {
-        case 0x00:
+    case 0x00:
         _tactTable[(reg-0x10) / 6]._CR = value;
         break;
-        case 0x01:
+    case 0x01:
         _tactTable[(reg-0x10) / 6]._TR1 = value;
         break;
-        case 0x02:
+    case 0x02:
         _tactTable[(reg-0x10) / 6]._PULSER1 = value;
         break;
-        case 0x03:
+    case 0x03:
         _tactTable[(reg-0x10) / 6]._TR2 = value;
         break;
-        case 0x04:
+    case 0x04:
         _tactTable[(reg-0x10) / 6]._PULSER2 = value;
         break;
-        case 0x05:
+    case 0x05:
         _tactTable[(reg-0x10) / 6]._RESERVED = value;
         break;
     }
@@ -151,5 +157,4 @@ TactRegisters DeviceState::getTactByIndex(uint8_t index)
     Q_ASSERT(index < 8);
     return _tactTable[index];
 }
-
 

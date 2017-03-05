@@ -36,7 +36,7 @@ DisplayChannel Channel::getActiveDisplayChannel() const
     return _displayChannels[_activeDisplayChannel];
 }
 
-Channel::Channel() : _colorRed(0), _colorGreen(0), _colorBlue(0), _activeDisplayChannel(0)
+Channel::Channel() : _colorRed(0), _colorGreen(0), _colorBlue(0), _index(0), _activeDisplayChannel(0)
 {
 }
 

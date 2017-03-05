@@ -9,7 +9,7 @@ class ModeManager
 {
     std::vector<DeviceMode> _modes;
 private:
-    DeviceMode generateSearchMode();
+    static DeviceMode generateSearchMode();
 public:
     ModeManager();
     void init();

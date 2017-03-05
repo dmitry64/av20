@@ -22,7 +22,9 @@ void CalibrationManager::initSearchModeCalibration()
         chTemp.setIndex(i);
         //TVGCurve * curve = ;
         RxChannel rx = RxChannel();
-        rx.setTvgCurve(new TVGSinglePoint(75.0,85.0,70.0,32.0,25.0));
+        TVGCurve * curve = new TVGSinglePoint(75.0,85.0,70.0,32.0,25.0);
+        rx.setTvgCurve(curve);
+        delete curve;
         //rx.setTvgCurve(curve);
         //delete curve;
         rx.setPrismTime(0);
@@ -53,7 +55,7 @@ void CalibrationManager::initSearchModeCalibration()
 
         std::vector<DisplayChannel> dispChans;
         dispChans.push_back(dc1);
-        dispChans.push_back(dc1);
+        //dispChans.push_back(dc1);
         chTemp.setDisplayChannels(dispChans);
 
         switch (i) {
@@ -162,7 +164,7 @@ void CalibrationManager::addCalibration(const ChannelsCalibration & calibration)
 
 }
 
-void CalibrationManager::removeCalibration(ChannelsCalibration calibration)
+void CalibrationManager::removeCalibration(const ChannelsCalibration & calibration)
 {
     Q_ASSERT(false);
 }

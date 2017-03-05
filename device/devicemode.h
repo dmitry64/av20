@@ -10,6 +10,7 @@ class DeviceMode
     std::vector<TactTable> _tactTables;
 public:
     DeviceMode();
+    ~DeviceMode();
     void setTactTables(const std::vector<TactTable> &tactTables);
     std::vector<TactTable> tactTables() const;
     ModeTypes type() const;

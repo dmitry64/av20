@@ -16,7 +16,7 @@ class ChannelsCalibration
 public:
     ChannelsCalibration();
     ~ChannelsCalibration();
-    void init();
+    //void init();
     ChannelsCalibration getSnapshot();
     // get/set
     Channel getChannel(const ChannelID index) const;

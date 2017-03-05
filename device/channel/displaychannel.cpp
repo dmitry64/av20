@@ -41,7 +41,7 @@ void DisplayChannel::setTx(const TxChannel &tx)
     _tx = tx;
 }
 
-DisplayChannel::DisplayChannel()
+DisplayChannel::DisplayChannel() : _angle(0)
 {
 
 }

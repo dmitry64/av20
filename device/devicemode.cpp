@@ -20,7 +20,11 @@ void DeviceMode::setType(const ModeTypes &type)
     _type = type;
 }
 
-DeviceMode::DeviceMode()
+DeviceMode::DeviceMode(): _type(ModeTypes::Unknown)
 {
-    _type = Unknown;
+}
+
+DeviceMode::~DeviceMode()
+{
+    _tactTables.clear();
 }

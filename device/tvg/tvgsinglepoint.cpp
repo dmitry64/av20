@@ -31,7 +31,6 @@ TVGSinglePoint::TVGSinglePoint(double base, double offset, double width, double 
 {
 
 }
-
 TVGSinglePoint::TVGSinglePoint(const TVGSinglePoint &original)
 {
     _yBase = original._yBase;
@@ -42,14 +41,23 @@ TVGSinglePoint::TVGSinglePoint(const TVGSinglePoint &original)
 
 }
 
+TVGSinglePoint::TVGSinglePoint(const TVGSinglePoint *original)
+{
+    _yBase = original->_yBase;
+    _xOffset = original->_xOffset;
+    _yHeight = original->_yHeight;
+    _xWidth = original->_xWidth;
+    _curve = original->_curve;
+}
+
 TVGSinglePoint::~TVGSinglePoint()
 {
 
 }
 
-TVGSinglePoint *TVGSinglePoint::clone() const
+TVGCurve *TVGSinglePoint::clone() const
 {
-    return new TVGSinglePoint(*this);
+    return new TVGSinglePoint(this);
 }
 
 double TVGSinglePoint::getSample(double x) const

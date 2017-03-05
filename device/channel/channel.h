@@ -12,7 +12,7 @@ class Channel
     uint8_t _colorGreen;
     uint8_t _colorBlue;
 
-    uint8_t _index;
+    ChannelID _index;
     uint8_t _activeDisplayChannel;
 public:
     Channel();

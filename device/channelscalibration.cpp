@@ -44,10 +44,10 @@ ChannelsCalibration::~ChannelsCalibration()
     //qDebug() << "Device calibration deleted";
 }
 
-void ChannelsCalibration::init()
+/*void ChannelsCalibration::init()
 {
 }
-
+*/
 ChannelsCalibration ChannelsCalibration::getSnapshot()
 {
     return ChannelsCalibration(*this);
