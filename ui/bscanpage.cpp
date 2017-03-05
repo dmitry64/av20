@@ -27,6 +27,14 @@ BScanPage::BScanPage(QWidget *parent) :
 
 BScanPage::~BScanPage()
 {
+    for(size_t i=0; i<_bScanWidgets.size(); i++) {
+        BScanWidget * widget = _bScanWidgets.at(i);
+        Q_ASSERT(widget);
+        ui->bscanLayout->removeWidget(widget);
+        delete widget;
+    }
+
+    _bScanWidgets.clear();
     delete ui;
 }
 

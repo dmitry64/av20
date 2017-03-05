@@ -20,11 +20,11 @@ typedef uint8_t ChannelID;
 typedef uint8_t DisplayChannelID;
 typedef uint8_t DeviceModeIndex;
 typedef uint8_t SchemeIndex;
-typedef uint8_t CalibrationIndex;
+typedef uint16_t CalibrationIndex;
 typedef uint8_t GateID;
 
-struct CalibrationInfo{
-    uint16_t _id;
+struct CalibrationInfo {
+    CalibrationIndex _id;
     std::string _name;
 };
 
@@ -117,7 +117,7 @@ struct DeviceStatus {
     bool ready;
 };
 
-enum TriggerMode{
+enum TriggerMode {
     PathTRG,
     TimeTRG,
     ExtTRG,

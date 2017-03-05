@@ -8,7 +8,7 @@ CalibrationsWidget::CalibrationsWidget(QWidget *parent) :
     ui->setupUi(this);
 }
 
-void CalibrationsWidget::init(const ChannelsCalibration * calibration)
+void CalibrationsWidget::init(const ChannelsCalibration & calibration)
 {
     Q_ASSERT(_core);
 
@@ -38,7 +38,7 @@ void CalibrationsWidget::init(const ChannelsCalibration * calibration)
         connect(button,SIGNAL(calibrationSelected(CalibrationIndex)),this,SLOT(onCalibrationSelected(CalibrationIndex)));
         CalibrationInfo calibInfo = info.at(i);
         button->setCalibrationInfo(calibInfo);
-        if(calibration->getInfo()._id == calibInfo._id) {
+        if(calibration.getInfo()._id == calibInfo._id) {
             button->setActive(true);
         }
         else {
@@ -48,7 +48,7 @@ void CalibrationsWidget::init(const ChannelsCalibration * calibration)
         ui->calibrationsLayout->addWidget(button);
         _buttons.push_back(button);
     }
-    _selectedIndex = calibration->getInfo()._id;
+    _selectedIndex = calibration.getInfo()._id;
 
 }
 

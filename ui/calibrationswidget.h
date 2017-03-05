@@ -20,7 +20,7 @@ class CalibrationsWidget : public QWidget
     CalibrationIndex _selectedIndex;
 public:
     explicit CalibrationsWidget(QWidget *parent = 0);
-    void init(const ChannelsCalibration *calibration);
+    void init(const ChannelsCalibration &calibration);
     void setCore(Core * core);
     ~CalibrationsWidget();
 

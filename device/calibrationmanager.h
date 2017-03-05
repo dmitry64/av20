@@ -20,6 +20,12 @@ public:
     void addCalibration(const ChannelsCalibration &calibration);
     void removeCalibration(const ChannelsCalibration &calibration);
     void applyChannelsModification(TactID id, CalibrationIndex index, ChannelID channelId, Channel channel);
+private:
+    std::vector<Gate> generateGates();
+    void setColor(Channel &chTemp, int i);
+    DisplayChannel generateDisplayChannel(double angle);
+    std::vector<Channel> generateChannels(int dispChansNumber);
+    ChannelsCalibration generateCalibration(TactID tact, CalibrationIndex index, std::__cxx11::string name, int dispChansNumber);
 };
 
 #endif // CALIBRATIONMANAGER_H
