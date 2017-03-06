@@ -92,9 +92,7 @@ void BScanWidget::paintEvent(QPaintEvent *event)
     }
 
     if(index != -1) {
-
         uint16_t k = _samplesArray[index].second._index;
-
 
         for(uint16_t i=elements; i<_width; i++) {
             const std::vector<BScanDrawSample> & sam = (_samplesArray[index].second._samples)[k];
