@@ -80,6 +80,11 @@ struct BScanDrawSample {
     uint8_t _level;
 };
 
+struct BScanDrawArray {
+    std::vector<BScanDrawSample> _samples[800];
+    uint16_t _index;
+};
+
 struct AScanDrawData {
     uint8_t _channel;
     uint16_t _markerPos;

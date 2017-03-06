@@ -7,6 +7,7 @@
 #include "device/definitions.h"
 #include "device/commonfunctions.h"
 #include "device/channel/channel.h"
+#include <map>
 
 namespace Ui
 {
@@ -17,27 +18,26 @@ class BScanWidget : public QWidget
 {
     Q_OBJECT
 
-    std::vector< std::pair< std::vector< std::vector<BScanDrawSample> > , int> > _samples;
-
+    //std::vector< std::pair< std::vector< std::vector<BScanDrawSample> > , uint8_t> > _samples;
+    std::vector< std::pair< ChannelsInfo, BScanDrawArray > > _samplesArray;
     int _width;
     int _end;
 
     bool _restrictedToChannel;
     Channel _channelData;
-    DisplayChannelID _displayChannelId;
+    ChannelsInfo _info;
 private:
-    bool channelSelected(uint8_t chan);
 
 public:
     explicit BScanWidget(QWidget *parent = 0);
     ~BScanWidget();
     void paintEvent(QPaintEvent * event);
 
-    //void setChannelsInfo(std::vector<Channel *> channels);
     void setRestrictedToChannel(bool flag);
     void reset();
 
-    void setChannelInfo(const Channel &channel, DisplayChannelID dispChannelId);
+    void setChannelsInfo(std::vector<ChannelsInfo> selectedChannels);
+    void setActiveChannelData(const Channel &channel, ChannelsInfo info);
     Channel channelData() const;
 
 public slots:

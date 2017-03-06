@@ -117,27 +117,27 @@ ChannelsCalibration CalibrationManager::generateCalibration(TactID tact, Calibra
 
 void CalibrationManager::initSearchModeCalibration()
 {
-    ChannelsCalibration cal1s1 = generateCalibration(TACT_ID_SEARCH_SCHEME_1, 0, "Default calibration scheme 1", 8, 1);
+    ChannelsCalibration cal1s1 = generateCalibration(TACT_ID_SEARCH_SCHEME_1, 0, "Default search calibration scheme 1", 8, 1);
     addCalibration(cal1s1);
-    ChannelsCalibration cal2s1 = generateCalibration(TACT_ID_SEARCH_SCHEME_1, 1, "Alt calibration scheme 1", 8, 1);
+    ChannelsCalibration cal2s1 = generateCalibration(TACT_ID_SEARCH_SCHEME_1, 1, "Alt search calibration scheme 1", 8, 1);
     addCalibration(cal2s1);
 
-    ChannelsCalibration cal1s2 = generateCalibration(TACT_ID_SEARCH_SCHEME_2, 0, "Default calibration scheme 2", 8, 1);
+    ChannelsCalibration cal1s2 = generateCalibration(TACT_ID_SEARCH_SCHEME_2, 0, "Default search calibration scheme 2", 8, 1);
     addCalibration(cal1s2);
-    ChannelsCalibration cal2s2 = generateCalibration(TACT_ID_SEARCH_SCHEME_2, 1, "Alt calibration scheme 2", 8, 1);
+    ChannelsCalibration cal2s2 = generateCalibration(TACT_ID_SEARCH_SCHEME_2, 1, "Alt search calibration scheme 2", 8, 1);
     addCalibration(cal2s2);
 }
 
 void CalibrationManager::initHandModeCalibration()
 {
-    ChannelsCalibration cal1s1 = generateCalibration(TACT_ID_HAND_SCHEME_1, 0, "Default calibration scheme 1", 1, 8);
+    ChannelsCalibration cal1s1 = generateCalibration(TACT_ID_HAND_SCHEME_1, 0, "Default hand calibration scheme 1", 1, 8);
     addCalibration(cal1s1);
-    ChannelsCalibration cal2s1 = generateCalibration(TACT_ID_HAND_SCHEME_1, 1, "Alt calibration scheme 1", 1, 8);
+    ChannelsCalibration cal2s1 = generateCalibration(TACT_ID_HAND_SCHEME_1, 1, "Alt hand calibration scheme 1", 1, 8);
     addCalibration(cal2s1);
 
-    ChannelsCalibration cal1s2 = generateCalibration(TACT_ID_HAND_SCHEME_2, 0, "Default calibration scheme 2", 1, 8);
+    ChannelsCalibration cal1s2 = generateCalibration(TACT_ID_HAND_SCHEME_2, 0, "Default hand calibration scheme 2", 1, 8);
     addCalibration(cal1s2);
-    ChannelsCalibration cal2s2 = generateCalibration(TACT_ID_HAND_SCHEME_2, 1, "Alt calibration scheme 2", 1, 8);
+    ChannelsCalibration cal2s2 = generateCalibration(TACT_ID_HAND_SCHEME_2, 1, "Alt hand calibration scheme 2", 1, 8);
     addCalibration(cal2s2);
 }
 
@@ -195,7 +195,6 @@ std::vector<CalibrationInfo> CalibrationManager::getCalibrationsInfoByTactID(Tac
 
 void CalibrationManager::addCalibration(const ChannelsCalibration & calibration)
 {
-
     uint16_t id = calibration.getTactId();
     if(_calibrations.find(id) != _calibrations.end()) {
         auto list = _calibrations.at(id);

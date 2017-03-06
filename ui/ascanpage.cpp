@@ -40,7 +40,20 @@ void AScanPage::init(ChannelsInfo info,const ChannelsCalibration & snapshot)
     qDebug() << "Ascan init!";
 
     ui->ascanWidget->setChannelInfo(snapshot.getChannel(info._channel),info._displayChannel);
-    ui->bscanWidget->setChannelInfo(snapshot.getChannel(info._channel),info._displayChannel);
+    std::vector<ChannelsInfo> infoList;
+    for(uint8_t i=0; i<snapshot.getChannelsCount(); i++) {
+        const Channel & chan = snapshot.getChannel(i);
+        const auto & dispChannels = chan.getDisplayChannels();
+        for(uint8_t j=0; j<dispChannels.size(); j++) {
+            ChannelsInfo temp;
+            temp._channel = i;
+            temp._displayChannel = j;
+            infoList.push_back(temp);
+        }
+    }
+
+    ui->bscanWidget->setChannelsInfo(infoList);
+    ui->bscanWidget->setActiveChannelData(snapshot.getChannel(info._channel),info);
     ui->controlPanel->setChannel(info);
     ui->controlPanel->init(snapshot);
 
@@ -81,7 +94,10 @@ void AScanPage::setChannel(ChannelsInfo info)
     const Channel & chan = snapshot.getChannel(info._channel);
     _core->switchChannel(info);
     ui->ascanWidget->setChannelInfo(chan,info._displayChannel);
-    ui->bscanWidget->setChannelInfo(chan,info._displayChannel);
+    // std::vector<ChannelsInfo> infoList;
+    //infoList.push_back(info);
+    //ui->bscanWidget->setChannelsInfo(infoList);
+    ui->bscanWidget->setActiveChannelData(snapshot.getChannel(info._channel),info);
     ui->controlPanel->setChannel(info);
     ui->controlPanel->init(snapshot);
 }

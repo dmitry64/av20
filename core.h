@@ -118,8 +118,6 @@ public:
     void switchCalibration(const CalibrationIndex index);
     void switchChannel(const ChannelsInfo info);
 
-
-
     SchemeIndex  getCurrentScheme() const;
     DeviceModeIndex getCurrentMode() const;
     CalibrationIndex getCurrentCalibration() const;
