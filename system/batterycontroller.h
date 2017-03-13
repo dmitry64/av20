@@ -4,6 +4,8 @@
 #include <QObject>
 #include <QTimer>
 
+#include "device/commonfunctions.h"
+
 class BatteryController : public QObject
 {
     Q_OBJECT

@@ -32,6 +32,7 @@ int main(int argc, char *argv[])
     Core * core = new Core(modeManager, calibrationManager);
     MainWindow * mainWindow = new MainWindow();
 
+    QObject::connect(core,SIGNAL(displayVersion(QString)),system, SLOT(onDeviceVersionReady(QString)));
     QObject::connect(core,SIGNAL(channelChanged(Channel)),mainWindow, SLOT(onChannelChanged(Channel)));
     QObject::connect(core,SIGNAL(modeChanged()),mainWindow, SLOT(onModeChanged()));
     QObject::connect(core,SIGNAL(calibrationChanged()),mainWindow, SLOT(onCalibrationChanged()));

@@ -135,7 +135,7 @@ DeviceMode Core::getCurrentDeviceMode()
 
 void Core::init()
 {
-    _device->init();
+    _device->init(&_deviceVersion);
     _currentScheme.store(0);
     _currentCalibration.store(0);
     _currentMode.store(0);
@@ -143,6 +143,8 @@ void Core::init()
     _currentTact = current.getTactIndexByCounter(_currentTactCounter);
     Q_ASSERT(_currentTact<8);
     _device->applyCalibration(getCalibration(), current);
+    logEvent("Core","Core initialized!");
+    emit displayVersion(getVersionString(_deviceVersion));
 }
 
 void Core::check()
@@ -337,7 +339,7 @@ void Core::modeswitch()
 
 void Core::finish()
 {
-    qDebug() << "Disconnected!";
+    logEvent("Core","Disconnected!");
 }
 
 void Core::searchWork()
@@ -419,35 +421,35 @@ void Core::applyCurrentCalibrationToDevice()
 
 void Core::addGate(const ChannelsInfo info, const Gate & gate)
 {
-    //qDebug() << "Add gate to channel" <<channel;
+    logEvent("Core","Add gate to channel #" + QString::number(info._channel));
     AddGateModificator * mod = new AddGateModificator(info,gate);
     addModificator(mod);
 }
 
 void Core::modifyGate(const ChannelsInfo info,const Gate & gate)
 {
-    //qDebug() << "Modify gate" << gate._id << "from channel" <<channel;
+    logEvent("Core","Modify gate to channel #" + QString::number(info._channel));
     GateModificator * mod = new GateModificator(info,gate);
     addModificator(mod);
 }
 
 void Core::removeGate(const ChannelsInfo info,const uint8_t id)
 {
-    //qDebug() << "Remove gate" << id << "from channel" <<channel;
+    logEvent("Core","Remove gate to channel #" + QString::number(info._channel));
     RemoveGateModificator * mod = new RemoveGateModificator(info,id);
     addModificator(mod);
 }
 
 void Core::setPrismTime(const ChannelsInfo info,const uint8_t value)
 {
-    //qDebug() << "Changing prism time ch =" << channel << "value =" <<value;
+    logEvent("Core","Set prism time to channel #" + QString::number(info._channel));
     PrismTimeModificator * mod = new PrismTimeModificator(info,value);
     addModificator(mod);
 }
 
 void Core::setTVG(const ChannelsInfo info, const TVGCurve *ptr)
 {
-    //qDebug() << "Changing tvg for ch =" <<channel;
+    logEvent("Core","Set TVG to channel #" + QString::number(info._channel));
     TVGCurve * curve = ptr->clone();
     TVGModificator * mod = new TVGModificator(info,curve);
     addModificator(mod);
@@ -485,6 +487,7 @@ void Core::switchChannel(const ChannelsInfo info)
 
 void Core::handleChannelSelection(const ChannelsInfo info)
 {
+    logEvent("Core","Handling channel selection - new channel #" + QString::number(info._channel));
     const DeviceMode & currentMode = getCurrentDeviceMode();
     if(currentMode.type() == ModeTypes::SingleChannelMode) {
         const auto & calibration = getCalibration();

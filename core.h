@@ -45,6 +45,7 @@ private:
     CalibrationManager * _calibrationManager;
 
     // Internal state
+    uint8_t _deviceVersion;
     bool _deviceOverheat;
     bool _deviceError;
     bool _deviceConnectionError;
@@ -122,6 +123,7 @@ public:
     DeviceModeIndex getCurrentMode() const;
     CalibrationIndex getCurrentCalibration() const;
 signals:
+    void displayVersion(QString version);
     void drawDisplayPackage(QSharedPointer<DisplayPackage> package);
     void channelChanged(Channel channel);
     void modeChanged();

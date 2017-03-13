@@ -5,6 +5,21 @@ Filesystem *System::getFilesystem() const
     return _filesystem;
 }
 
+void System::shutdown()
+{
+    logEvent("System","Shutdown");
+}
+
+void System::reboot()
+{
+    logEvent("System","Reboot");
+}
+
+void System::onDeviceVersionReady(QString version)
+{
+    emit deviceVersionReady(version);
+}
+
 System::System()
 {
     _filesystem = new Filesystem();
@@ -18,11 +33,23 @@ System::System()
 
 void System::init()
 {
+    logEvent("System","Initializing");
     _filesystem->initFilesystem();
     _brightness->init();
     _temperature->init();
     _sound->init();
     _battery->init();
+    logEvent("System","Ready");
+}
+
+QString System::getSoftwareVersion()
+{
+    return "3.14";
+}
+
+QString System::getOSVersion()
+{
+    return "12345";
 }
 
 void System::setDate(QDate date)

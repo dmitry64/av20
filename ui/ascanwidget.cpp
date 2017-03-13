@@ -102,7 +102,6 @@ void AScanWidget::drawGates(QPainter &painter, int width, int height, int left, 
         painter.drawLine(left + gate._finish * scaleStep,level,left + gate._finish * scaleStep + 5, level + 5);
         painter.drawLine(left + gate._finish * scaleStep,level,left + gate._finish * scaleStep + 5, level - 5);
     }
-
 }
 
 void AScanWidget::drawAscan(QPainter &painter, int width, int height, int left, int bottom, int right)
@@ -137,7 +136,6 @@ void AScanWidget::drawAscan(QPainter &painter, int width, int height, int left, 
         currentCount++;
         painter.drawPolygon(_polygon.data(),currentCount, Qt::FillRule::OddEvenFill);
     }
-
 }
 
 void AScanWidget::drawMarker(QPainter &painter, int width, int height, int left, int bottom)
@@ -233,14 +231,12 @@ void AScanWidget::setChannelInfo(const Channel & channel, DisplayChannelID dispC
 void AScanWidget::onAScan(const AScanDrawData *scan)
 {
     if(isVisible()) {
-
         uint8_t chan = scan->_channel;
         if(chan == _channelData.index()) {
             _samples = scan->_samples;
             _markerPos = scan->_markerPos;
             _markerValue = scan->_markerValue;
         }
-
         update();
     }
 }
@@ -265,19 +261,5 @@ void AScanWidget::onChannelChanged(const Channel & channel)
         Q_ASSERT(tvg);
         setTVGCurve(tvg);
     }
-    /*for(uint8_t j=0; j<_channels.size(); j++) {
-        uint8_t chan = channel->index();
-        if(chan == _channels[j]->index()) {
-            Channel * chan = _channels[j];
-            Q_ASSERT(chan);
-            delete chan;
-            _channels[j] = new Channel(channel);
-            RxChannel * rx = channel->rx();
-            Q_ASSERT(rx);
-            const TVGCurve * tvg = rx->getTvgCurve();
-            Q_ASSERT(tvg);
-            setTVGCurve(tvg);
-        }
-    }*/
     update();
 }

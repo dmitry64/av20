@@ -58,7 +58,7 @@ void ChannelsView::init()
 
 void ChannelsView::init(const ChannelsCalibration & calibrationsSnapshot, const TactTable & tactTableSnapshot)
 {
-    qDebug() << "Channels view init";
+    logEvent("ChannelsView","Initializing");
     Q_ASSERT(_core);
     ui->channelsWidget->clearContents();
     ui->tactWidget->clearContents();

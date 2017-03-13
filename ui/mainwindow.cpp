@@ -251,12 +251,14 @@ void MainWindow::onDeviceConnectionErrorDisable()
 void MainWindow::onShutdown()
 {
     _core->stopCore();
+    System::getInstance()->shutdown();
     QApplication::exit(0);
 }
 
 void MainWindow::onReboot()
 {
     _core->stopCore();
+    System::getInstance()->reboot();
     QApplication::exit(0);
 }
 

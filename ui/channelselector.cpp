@@ -27,7 +27,7 @@ ChannelSelector::~ChannelSelector()
 
 void ChannelSelector::init(const ChannelsCalibration & snapshot)
 {
-    qDebug() << "Selector init!";
+    logEvent("ChanSelector","Initializing");
     for(size_t i=0; i<_channelButtons.size(); i++) {
         ChannelButton * button = _channelButtons.at(i);
         Q_ASSERT(button);
@@ -67,7 +67,7 @@ void ChannelSelector::setCore(Core *core)
 
 void ChannelSelector::onChannelSelected(ChannelsInfo info)
 {
-    qDebug() << "Selector channel selected";
+    logEvent("ChanSelector","Selected channel #"+QString::number(info._channel)+" display #"+QString::number(info._displayChannel));
     _selectedChannel = info;
     for(size_t i=0; i<_channelButtons.size(); i++) {
         ChannelButton * button = _channelButtons.at(i);

@@ -4,6 +4,8 @@
 #include <QObject>
 #include <QTimer>
 
+#include "device/commonfunctions.h"
+
 class Temperature : public QObject
 {
     Q_OBJECT

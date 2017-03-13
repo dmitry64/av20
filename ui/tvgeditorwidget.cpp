@@ -64,7 +64,7 @@ void TVGEditorWidget::init(ChannelsInfo info)
 
 void TVGEditorWidget::init(ChannelsInfo info, const ChannelsCalibration & snapshot)
 {
-    qDebug() << "TVG Editor init";
+    logEvent("TVGEditor","Initializing");
     _info = info;
     ui->aScanWidget->setChannelInfo(snapshot.getChannel(_info._channel),_info._displayChannel);
     initCurve(snapshot.getChannel(_info._channel).getDisplayChannels()[info._displayChannel].getRx().getTvgCurve());
@@ -93,7 +93,6 @@ void TVGEditorWidget::setCore(Core *core)
 
 void TVGEditorWidget::switchToSelectedChannel()
 {
-    qDebug() << "TVG switched channel!";
     const auto & info = ui->channelSelector->selectedChannel();
     setChannel(info);
 }

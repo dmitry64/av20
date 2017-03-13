@@ -11,6 +11,7 @@
 #include "ui/memorywidget.h"
 #include "ui/optionswidget.h"
 #include "ui/systemwidget.h"
+#include "system/system.h"
 
 namespace Ui
 {

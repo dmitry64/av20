@@ -10,6 +10,7 @@ CalibrationsWidget::CalibrationsWidget(QWidget *parent) :
 
 void CalibrationsWidget::init(const ChannelsCalibration & calibration)
 {
+    logEvent("CalibWidget","Initializing");
     Q_ASSERT(_core);
 
     const ModeManager * manager = _core->getModeManager();

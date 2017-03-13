@@ -84,14 +84,16 @@ Device::Device()
     Q_ASSERT(_spi);
 }
 
-void Device::init()
+void Device::init(uint8_t * version)
 {
+    logEvent("Device","Initializing");
     _spi->init();
+    logEvent("Device","SPI Ready");
     bool status = checkConnection();
-
+    logEvent("Device","Connection is " + QString((status ? "ok!" : "not ok!")));
     if(status) {
-        uint8_t version = getVersion();
-        qDebug() << "Device version:" << QString::number(static_cast<unsigned int>(version),16).toUpper();
+        *version = getVersion();
+        logEvent("Device","Version:" + getVersionString(*version));
         fillRegisters();
     }
     else {
@@ -141,7 +143,7 @@ void Device::resetChannelsTable()
         for(uint8_t i=0; i<6; i++) {
             uint8_t temp = 0;
             if(_spi->setAndTestRegister(0x10+j*6+i,1,&temp)) {
-                qDebug() << "Channels table for ch #" << j + 1 << "not initialized!";
+                logEvent("Device","Channels table for ch #" + QString::number(j + 1) + "not initialized!");
                 qFatal("Initialization failed!");
             }
         }

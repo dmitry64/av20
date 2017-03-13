@@ -18,4 +18,5 @@ Sound::Sound() :_volume(0)
 void Sound::init()
 {
     _volume = 100;
+    logEvent("Sound","Ready");
 }

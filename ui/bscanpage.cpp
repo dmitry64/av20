@@ -46,12 +46,14 @@ void BScanPage::setCore(Core *core)
 
 void BScanPage::init(const ChannelsCalibration & snapshot)
 {
+    logEvent("BScanPage","Initializing");
     ui->channelSelectionWidget->init(snapshot);
     update();
 }
 
 void BScanPage::reset()
 {
+    logEvent("BScanPage","Reset");
     for(size_t i=0; i<_bScanWidgets.size(); i++) {
         BScanWidget * widget = _bScanWidgets.at(i);
         Q_ASSERT(widget);
@@ -64,7 +66,7 @@ void BScanPage::reset()
 
 void BScanPage::setChannles(std::vector<ChannelsInfo > channelsConfiguration, const ChannelsCalibration & snapshot)
 {
-    qDebug() << "BScan page setChannels";
+    logEvent("BScanPage","Set channels");
 
     for(size_t i=0; i<_bScanWidgets.size(); i++) {
         BScanWidget * widget = _bScanWidgets.at(i);

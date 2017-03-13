@@ -20,11 +20,8 @@ private slots:
     void on_shutdownButton_released();
     void on_rebootButton_released();
     void on_pauseButton_released();
-
     void onBrightnessChanged(double value);
     void onSoundVolumeChanged(double value);
-
-
     void onUSMVersionChanged(QString string);
 signals:
     void pause();

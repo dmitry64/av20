@@ -5,6 +5,7 @@
 #include <QTime>
 #include <QDate>
 
+#include "device/commonfunctions.h"
 #include "filesystem.h"
 #include "brightnesscontroller.h"
 #include "temperature.h"
@@ -36,6 +37,8 @@ public:
     }
 
     void init();
+    QString getSoftwareVersion();
+    QString getOSVersion();
     void setDate(QDate date);
     void setTime(QTime time);
     void setBrightness(int percent);
@@ -51,7 +54,14 @@ public:
 
     Filesystem *getFilesystem() const;
 
+    void shutdown();
+    void reboot();
+
+public slots:
+    void onDeviceVersionReady(QString version);
+
 signals:
+    void deviceVersionReady(QString version);
     void dateChanged(QDate date);
     void timeChanged(QTime date);
     void temperatureChanged(double);

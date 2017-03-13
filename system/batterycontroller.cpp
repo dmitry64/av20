@@ -27,4 +27,5 @@ void BatteryController::init()
     _updateTimer.setInterval(5000);
     connect(&_updateTimer,SIGNAL(timeout()),this,SLOT(updateValue()));
     _updateTimer.start();
+    logEvent("Battery","Ready");
 }

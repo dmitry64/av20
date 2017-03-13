@@ -6,6 +6,7 @@ void Temperature::init()
     _updateTimer.setInterval(2000);
     connect(&_updateTimer,SIGNAL(timeout()),this,SLOT(updateValue()));
     _updateTimer.start();
+    logEvent("Temperature","Ready");
 }
 
 double Temperature::getTemperature()

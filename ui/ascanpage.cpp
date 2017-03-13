@@ -37,7 +37,7 @@ void AScanPage::init(ChannelsInfo info)
 
 void AScanPage::init(ChannelsInfo info,const ChannelsCalibration & snapshot)
 {
-    qDebug() << "Ascan init!";
+    logEvent("AScanPage","Initializing");
 
     ui->ascanWidget->setChannelInfo(snapshot.getChannel(info._channel),info._displayChannel);
     std::vector<ChannelsInfo> infoList;
@@ -71,7 +71,7 @@ void AScanPage::setCore(Core *core)
 
 void AScanPage::switchToSelectedChannel()
 {
-    qDebug() << "Ascan switched channel!";
+    logEvent("AScanPage","Switched channel");
     const auto & info = ui->channelSelector->selectedChannel();
     setChannel(info);
 }

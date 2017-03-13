@@ -22,8 +22,13 @@ SystemWidget::SystemWidget(QWidget *parent) :
     ui->timeLabel->setText(system->getTime().toString(Qt::DefaultLocaleShortDate));
     ui->dateLabel->setText(system->getDate().toString(Qt::DefaultLocaleShortDate));
 
+    ui->softwareVersionLabel->setText(system->getSoftwareVersion());
+    ui->osVersionLabel->setText(system->getOSVersion());
+
     connect(ui->brightnessWidget,SIGNAL(valueChanged(double)),this,SLOT(onBrightnessChanged(double)));
     connect(ui->soundWidget,SIGNAL(valueChanged(double)),this,SLOT(onSoundVolumeChanged(double)));
+
+    connect(system,SIGNAL(deviceVersionReady(QString)),this,SLOT(onUSMVersionChanged(QString)));
 }
 
 SystemWidget::~SystemWidget()
@@ -61,5 +66,5 @@ void SystemWidget::onSoundVolumeChanged(double value)
 
 void SystemWidget::onUSMVersionChanged(QString string)
 {
-
+    ui->versionLabel->setText(string);
 }

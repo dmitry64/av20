@@ -7,7 +7,7 @@ Filesystem::Filesystem()
 
 void Filesystem::initFilesystem()
 {
-
+    logEvent("Filesystem","Ready");
 }
 
 QString Filesystem::getRootPath()

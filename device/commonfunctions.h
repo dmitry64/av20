@@ -1,8 +1,13 @@
 #ifndef COMMONFUNCTIONS_H
 #define COMMONFUNCTIONS_H
 
+#include <iostream>
+#include <iomanip>
+
 #include "definitions.h"
+
 #include <QColor>
+#include <QDebug>
 
 static inline QColor getColorByLevel(const uint8_t level)
 {
@@ -28,6 +33,19 @@ static inline void setBit(uint8_t * ptr, const int bit, const uint8_t val)
 static inline uint8_t getBitFromByteArray(const uint8_t * ptr, const int bit)
 {
     return (ptr[bit / 8] >> (bit % 8)) & 0b00000001;
+}
+
+static QString getVersionString(uint8_t version)
+{
+    return QString::number(static_cast<unsigned int>(version),16).toUpper();
+}
+
+static void logEvent(QString category, QString text)
+{
+    QString cat = ("["+category+"] ");
+    // qDebug(output.toStdString().c_str());
+
+    std::cout << std::setw(15) << cat.toStdString() << text.toStdString() << std::endl;
 }
 
 

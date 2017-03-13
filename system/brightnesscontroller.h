@@ -1,6 +1,7 @@
 #ifndef BRIGHTNESSCONTROLLER_H
 #define BRIGHTNESSCONTROLLER_H
 
+#include "device/commonfunctions.h"
 
 class BrightnessController
 {
