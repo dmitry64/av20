@@ -153,7 +153,7 @@ void AScanWidget::drawFps(QPainter &painter, int posx, int posy)
 {
     quint64 time = _fpsTimer.nsecsElapsed();
     _fpsTimer.start();
-    double fps = 1/(static_cast<double>(time) / 1000000000.0);
+    double fps = 1/(static_cast<double>(time) / 100000000.0);
     painter.drawText(QPoint(posx, posy),"fps: " + QString::number(fps,'f', 3));
 }
 
@@ -214,6 +214,7 @@ void AScanWidget::paintEvent(QPaintEvent *event)
     drawGates(painter,width,height,left,bottom);
     drawMarker(painter,width,height,left,bottom);
     drawFps(painter,width - 50, 16);
+
 }
 
 void AScanWidget::setChannelInfo(const Channel & channel, DisplayChannelID dispChannelId)

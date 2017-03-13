@@ -7,6 +7,7 @@ int Sound::volume() const
 
 void Sound::setVolume(int volume)
 {
+    logEvent("Sound","Volume set to " + QString::number(volume) + "%");
     _volume = volume;
 }
 

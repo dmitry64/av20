@@ -51,8 +51,8 @@ int main(int argc, char *argv[])
     mainWindow->init();
 
     //mainWindow->move(-1000,0);
-    //mainWindow->showFullScreen();
-    mainWindow->show();
+    mainWindow->showFullScreen();
+    // mainWindow->show();
 
     return a.exec();
 }

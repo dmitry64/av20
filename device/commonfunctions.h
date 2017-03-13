@@ -37,7 +37,7 @@ static inline uint8_t getBitFromByteArray(const uint8_t * ptr, const int bit)
 
 static QString getVersionString(uint8_t version)
 {
-    return QString::number(static_cast<unsigned int>(version),16).toUpper();
+    return "0x" + QString::number(static_cast<unsigned int>(version),16).toUpper() + " [" +QString::number(version)+"]";
 }
 
 static void logEvent(const QString & category,const QString & text)

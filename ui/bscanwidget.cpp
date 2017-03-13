@@ -38,15 +38,6 @@ BScanWidget::BScanWidget(QWidget *parent) :
 
     reset();
 
-    //for(uint8_t i=0; i<MAX_CHANNELS_COUNT; i++) {
-    //   _samplesMap[i] = std::map< DisplayChannelID, BScanDrawArray >();
-
-    //std::pair< std::vector< std::vector<BScanDrawSample> > , uint8_t> pair;
-    //pair.first.resize(_width);
-    //pair.second = 0;
-    //_samples.push_back(pair);
-    //}
-
     _restrictedToChannel = false;
     _end = _width - 1;
 }

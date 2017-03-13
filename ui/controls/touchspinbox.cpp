@@ -34,6 +34,7 @@ TouchSpinBox::TouchSpinBox(QWidget *parent) :
     _max = 255;
     _step = 1;
     _value = 0;
+    _prev = 0;
     _suffix = QString("");
 }
 
@@ -45,6 +46,7 @@ TouchSpinBox::~TouchSpinBox()
 void TouchSpinBox::setValue(double value)
 {
     _value = value;
+    _prev = value;
     ui->valueLabel->setText(QString::number(value) + " " + _suffix);
     update();
 }
@@ -74,19 +76,24 @@ void TouchSpinBox::setStep(double step)
 void TouchSpinBox::setSuffix(QString suf)
 {
     _suffix = suf;
+    ui->valueLabel->setText(QString::number(_value) + " " + _suffix);
     update();
 }
 
 void TouchSpinBox::onTimer()
 {
+    _prev = _value;
     if(_direction) {
         dec();
-    } else {
+    }
+    else {
         inc();
     }
-    ui->valueLabel->setText(QString::number(_value) + " " + _suffix);
-    update();
-    emit valueChanged(_value);
+    if(_prev!=_value) {
+        ui->valueLabel->setText(QString::number(_value) + " " + _suffix);
+        update();
+        emit valueChanged(_value);
+    }
 }
 
 void TouchSpinBox::on_leftButton_pressed()

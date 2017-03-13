@@ -4,7 +4,8 @@
 #include <QWidget>
 #include <QTimer>
 
-namespace Ui {
+namespace Ui
+{
 class TouchSpinBox;
 }
 
@@ -12,6 +13,7 @@ class TouchSpinBox : public QWidget
 {
     Q_OBJECT
 
+    double _prev;
     double _value;
     bool _direction;
     QString _name;

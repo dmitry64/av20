@@ -7,12 +7,12 @@ int BrightnessController::currentBrightness() const
 
 void BrightnessController::setCurrentBrightness(int currentBrightness)
 {
+    logEvent("Brightness","Brightness changed to "+QString::number(currentBrightness) + "%");
     _currentBrightness = currentBrightness;
 }
 
 void BrightnessController::init()
 {
-
     _currentBrightness = 100;
     logEvent("Brightness","Ready");
 }

@@ -254,12 +254,11 @@ void Core::aScanProcess(uint8_t line)
     const DisplayChannel & dispChannel =current.getActiveDisplayChannel();
     const std::vector<Gate> & gates = dispChannel.gates();
 
-    for(size_t j=0; j<gates.size(); j++) {
+    for(uint8_t j=0; j<gates.size(); j++) {
         const Gate & gate = gates[j];
         uint16_t gateStart = (gate._start) * 4;
         uint16_t gateEnd = (gate._finish) * 4;
         uint16_t start = 0;
-        //int end = -1;
         bool startFound = false;
         for(uint16_t i=0; i<ASCAN_SAMPLES_SIZE; i++) {
             uint8_t sample = scanptr->_samples[i];
@@ -351,7 +350,7 @@ void Core::searchWork()
     process();
     sync();
     modeswitch();
-    msleep(5);
+    //msleep(2);
 }
 
 void Core::addModificator(Modificator *mod)

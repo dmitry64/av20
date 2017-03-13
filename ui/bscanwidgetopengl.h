@@ -4,7 +4,8 @@
 #include <QWidget>
 #include <QOpenGLWidget>
 
-namespace Ui {
+namespace Ui
+{
 class BScanWidgetOpenGL;
 }
 

@@ -52,7 +52,7 @@ QString System::getSoftwareVersion()
 
 QString System::getOSVersion()
 {
-    return "12345";
+    return "1.0.0";
 }
 
 void System::setDate(QDate date)

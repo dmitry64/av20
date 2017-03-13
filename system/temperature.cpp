@@ -2,8 +2,9 @@
 
 void Temperature::init()
 {
+    _current = 21.0;
     _current = readTemperature();
-    _updateTimer.setInterval(2000);
+    _updateTimer.setInterval(6000);
     connect(&_updateTimer,SIGNAL(timeout()),this,SLOT(updateValue()));
     _updateTimer.start();
     logEvent("Temperature","Ready");
@@ -16,13 +17,17 @@ double Temperature::getTemperature()
 
 void Temperature::updateValue()
 {
-    _current = readTemperature();
-    emit temperatureChanged(_current);
+    double temp = readTemperature();
+    if(temp!=_current) {
+        logEvent("Temperature","Temperature changed to " + QString::number(temp));
+        _current = temp;
+        emit temperatureChanged(_current);
+    }
 }
 
 double Temperature::readTemperature()
 {
-    return 21.0 + (random() % 10) * 0.1;
+    return _current + (random() % 3 - 1) * 0.1;
 }
 
 Temperature::Temperature(QObject *parent) : QObject(parent), _current(0)

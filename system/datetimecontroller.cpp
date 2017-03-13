@@ -40,5 +40,6 @@ void DateTimeController::update()
     if(_lastTime.time().minute()!=temp.time().minute()) {
         _lastTime = temp;
         emit timeChanged(_lastTime);
+        logEvent("DateTime","Time changed: " + temp.toString());
     }
 }
