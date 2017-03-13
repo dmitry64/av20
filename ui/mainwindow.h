@@ -78,7 +78,6 @@ public slots:
     void onReboot();
     void onPause();
 
-
 signals:
     void drawDisplayPackage(QSharedPointer<DisplayPackage> dp);
     void channelChanged(Channel channel);

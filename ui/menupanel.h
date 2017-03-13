@@ -3,7 +3,8 @@
 
 #include <QWidget>
 
-namespace Ui {
+namespace Ui
+{
 class MenuPanel;
 }
 
@@ -11,7 +12,7 @@ class MenuPanel : public QWidget
 {
     Q_OBJECT
 
-    enum MenuState{
+    enum MenuState {
         DefaultState,
         HelpMenuState,
         ModeMenuState,
@@ -42,7 +43,6 @@ private slots:
     void on_memoryButton_released();
     void on_optionsButton_released();
     void on_systemButton_released();
-
     void on_calibrationButton_released();
 
 signals:

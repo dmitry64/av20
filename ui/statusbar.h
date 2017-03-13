@@ -32,9 +32,7 @@ public slots:
     void onBrightnessChanged(int value);
     void onWiFiSignalLevelChanged(int value);
 
-
-    void onDateChanged(QDate date);
-    void onTimeChanged(QTime time);
+    void onDateTimeChanged(QDateTime time);
 private:
     Ui::StatusBar *ui;
 };

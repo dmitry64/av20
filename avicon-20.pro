@@ -95,7 +95,8 @@ SOURCES += core.cpp \
     system/brightnesscontroller.cpp \
     system/temperature.cpp \
     system/sound.cpp \
-    system/batterycontroller.cpp
+    system/batterycontroller.cpp \
+    system/datetimecontroller.cpp
 #    tests/coretest.cpp
 
 HEADERS  += \
@@ -160,7 +161,8 @@ HEADERS  += \
     system/brightnesscontroller.h \
     system/temperature.h \
     system/sound.h \
-    system/batterycontroller.h
+    system/batterycontroller.h \
+    system/datetimecontroller.h
 #    tests/coretest.h
 
 FORMS    += \

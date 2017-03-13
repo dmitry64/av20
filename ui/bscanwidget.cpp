@@ -80,7 +80,7 @@ void BScanWidget::paintEvent(QPaintEvent *event)
     // uint8_t channelsCount = _channels.size();
 
     //for(uint8_t n=0; n<channelsCount; n++) {
-    const ChannelID chan = _channelData.index();
+    //const ChannelID chan = _channelData.index();
     const uint16_t elements = 0;//std::max(static_cast<int>(_width - _samplesArray._index),0);
 
     int index = -1;

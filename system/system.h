@@ -11,6 +11,7 @@
 #include "temperature.h"
 #include "sound.h"
 #include "batterycontroller.h"
+#include "datetimecontroller.h"
 
 class System : public QObject
 {
@@ -21,6 +22,7 @@ class System : public QObject
     Temperature * _temperature;
     Sound * _sound;
     BatteryController * _battery;
+    DateTimeController * _dateTime;
 private:
     System();
     System( const System &);
@@ -62,8 +64,7 @@ public slots:
 
 signals:
     void deviceVersionReady(QString version);
-    void dateChanged(QDate date);
-    void timeChanged(QTime date);
+    void dateTimeChanged(QDateTime date);
     void temperatureChanged(double);
     void brightnessChanged(int);
     void soundVolumeChanged(int);

@@ -27,8 +27,10 @@ System::System()
     _temperature = new Temperature();
     _sound = new Sound();
     _battery = new BatteryController();
+    _dateTime = new DateTimeController();
     connect(_temperature,SIGNAL(temperatureChanged(double)),this,SIGNAL(temperatureChanged(double)));
     connect(_battery,SIGNAL(batteryLevelChanged(int)),this,SIGNAL(batteryLevelChanged(int)));
+    connect(_dateTime,SIGNAL(timeChanged(QDateTime)),this,SIGNAL(dateTimeChanged(QDateTime)));
 }
 
 void System::init()
@@ -39,6 +41,7 @@ void System::init()
     _temperature->init();
     _sound->init();
     _battery->init();
+    _dateTime->init();
     logEvent("System","Ready");
 }
 
@@ -54,12 +57,12 @@ QString System::getOSVersion()
 
 void System::setDate(QDate date)
 {
-
+    _dateTime->setDate(date);
 }
 
 void System::setTime(QTime time)
 {
-
+    _dateTime->setTime(time);
 }
 
 void System::setBrightness(int percent)
@@ -76,12 +79,12 @@ void System::setSoundVolume(int percent)
 
 QDate System::getDate()
 {
-    return QDate::currentDate();
+    return _dateTime->getDate();
 }
 
 QTime System::getTime()
 {
-    return QTime::currentTime();
+    return _dateTime->getTime();
 }
 
 int System::getBrightness()

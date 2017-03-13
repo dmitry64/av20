@@ -39,7 +39,6 @@ public slots:
     void onSingleWidthChanged(double value);
     void onSingleFormChanged(double value);
 
-
 private:
     Ui::TVGEditorWidget *ui;
 };

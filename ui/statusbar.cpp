@@ -33,6 +33,7 @@ void StatusBar::init()
     connect(system,SIGNAL(brightnessChanged(int)),this,SLOT(onBrightnessChanged(int)));
     connect(system,SIGNAL(soundVolumeChanged(int)),this,SLOT(onSoundVolumeChanged(int)));
     connect(system,SIGNAL(batteryLevelChanged(int)),this,SLOT(onBatteryLevelChanged(int)));
+    connect(system,SIGNAL(dateTimeChanged(QDateTime)),this,SLOT(onDateTimeChanged(QDateTime)));
 }
 
 void StatusBar::onDeviceOverheatEnabled()
@@ -90,12 +91,8 @@ void StatusBar::onWiFiSignalLevelChanged(int value)
     ui->wifiButton->setText(QString::number(value) + "%");
 }
 
-void StatusBar::onDateChanged(QDate date)
+void StatusBar::onDateTimeChanged(QDateTime time)
 {
-    ui->dateLabel->setText(date.toString(Qt::DefaultLocaleShortDate));
-}
-
-void StatusBar::onTimeChanged(QTime time)
-{
-    ui->timeLabel->setText(time.toString(Qt::DefaultLocaleShortDate));
+    ui->dateLabel->setText(time.date().toString(Qt::DefaultLocaleShortDate));
+    ui->timeLabel->setText(time.time().toString(Qt::DefaultLocaleShortDate));
 }
