@@ -40,13 +40,17 @@ static QString getVersionString(uint8_t version)
     return QString::number(static_cast<unsigned int>(version),16).toUpper();
 }
 
-static void logEvent(QString category, QString text)
+static void logEvent(const QString & category,const QString & text)
 {
     QString cat = ("["+category+"] ");
-    // qDebug(output.toStdString().c_str());
-
     std::cout << std::setw(15) << cat.toStdString() << text.toStdString() << std::endl;
 }
+
+static bool gateSorter(const Gate & a,const Gate & b)
+{
+    return (a._level<b._level);
+}
+
 
 
 #endif // COMMONFUNCTIONS_H

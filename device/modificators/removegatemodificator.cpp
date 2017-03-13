@@ -19,6 +19,7 @@ void RemoveGateModificator::apply(Core *core)
             result.push_back(gates[i]);
         }
     }
+    std::sort(result.begin(),result.end(),gateSorter);
     display.setGates(result);
     displayChannels[_info._displayChannel] = display;
     channel.setDisplayChannels(displayChannels);

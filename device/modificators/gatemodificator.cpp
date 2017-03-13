@@ -20,6 +20,7 @@ void GateModificator::apply(Core *core)
             gates[i]._level = _gate._level;
         }
     }
+    std::sort(gates.begin(),gates.end(),gateSorter);
     display.setGates(gates);
     displayChannels[_info._displayChannel] = display;
     channel.setDisplayChannels(displayChannels);
