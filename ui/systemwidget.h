@@ -2,6 +2,7 @@
 #define SYSTEMWIDGET_H
 
 #include <QWidget>
+#include <QDateTime>
 
 namespace Ui
 {
@@ -23,6 +24,7 @@ private slots:
     void onBrightnessChanged(double value);
     void onSoundVolumeChanged(double value);
     void onUSMVersionChanged(QString string);
+    void onDateTimeChanged(QDateTime time);
 signals:
     void pause();
     void reboot();

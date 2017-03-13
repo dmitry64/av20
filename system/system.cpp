@@ -47,7 +47,7 @@ void System::init()
 
 QString System::getSoftwareVersion()
 {
-    return "3.14";
+    return APP_VERSION;
 }
 
 QString System::getOSVersion()

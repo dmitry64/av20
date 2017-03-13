@@ -17,7 +17,6 @@ CONFIG(testconf) {
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++14
-
 TARGET = avicon-20
 TEMPLATE = app
 
@@ -37,6 +36,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 target.path = /home/root
 INSTALLS += target
+
+include(./version/version.pri)
 
 SOURCES += core.cpp \
     device/device.cpp \
