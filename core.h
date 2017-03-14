@@ -74,7 +74,7 @@ public:
 
     // Internal
     ChannelsCalibration getCalibration();
-    void notifyChannel(Channel channel);
+    void notifyChannel(const Channel &channel);
     void applyChannelsModification(ChannelID index, Channel channel);
 
     void applyCurrentCalibrationToDevice();

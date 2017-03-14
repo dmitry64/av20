@@ -35,18 +35,18 @@ static inline uint8_t getBitFromByteArray(const uint8_t * ptr, const int bit)
     return (ptr[bit / 8] >> (bit % 8)) & 0b00000001;
 }
 
-static QString getVersionString(uint8_t version)
+static inline QString getVersionString(uint8_t version)
 {
     return "0x" + QString::number(static_cast<unsigned int>(version),16).toUpper() + " [" +QString::number(version)+"]";
 }
 
-static void logEvent(const QString & category,const QString & text)
+static inline void logEvent(const QString & category,const QString & text)
 {
     QString cat = ("["+category+"] ");
     std::cout << std::setw(15) << cat.toStdString() << text.toStdString() << std::endl;
 }
 
-static bool gateSorter(const Gate & a,const Gate & b)
+static inline bool gateSorter(const Gate & a,const Gate & b)
 {
     return (a._level<b._level);
 }

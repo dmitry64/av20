@@ -163,6 +163,7 @@ FakeSPI::FakeSPI() : DeviceInterface()
         _counters.push_back(a);
     }
     _specialCounter = 0;
+    _currentTact = 0;
 }
 
 void FakeSPI::init()

@@ -68,6 +68,7 @@ Core::Core(ModeManager *modeManager, CalibrationManager * calibrationManager) :
     _device(new Device()),
     _modeManager(modeManager),
     _calibrationManager(calibrationManager),
+    _deviceVersion(0),
     _deviceOverheat(false),
     _deviceError(false),
     _deviceConnectionError(false),
@@ -402,7 +403,7 @@ void Core::handleDeviceConnectionError(bool status)
     }
 }
 
-void Core::notifyChannel(Channel channel)
+void Core::notifyChannel(const Channel &channel)
 {
     emit channelChanged(channel);
 }
