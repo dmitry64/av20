@@ -2149,7 +2149,7 @@
                          <object>{018e011e-8fab-48c8-817c-d8910ff73dfe}</object>
                          <context>Spi</context>
                          <name>DriverSPI</name>
-                         <pos>x:1490;y:1030</pos>
+                         <pos>x:1450;y:1230</pos>
                          <rect>x:-85;y:-55;w:170;h:110</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -2171,7 +2171,7 @@
                          <object>{d35374e9-8310-4570-a543-1a2edd26f566}</object>
                          <context>Spi</context>
                          <name>FakeSPI</name>
-                         <pos>x:1680;y:1030</pos>
+                         <pos>x:1640;y:1230</pos>
                          <rect>x:-80;y:-55;w:160;h:110</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -2193,7 +2193,7 @@
                          <object>{bb0cc6b1-5224-4e1f-b78d-fc83faac1e2f}</object>
                          <context>Spi</context>
                          <name>DeviceInterface</name>
-                         <pos>x:1590;y:910</pos>
+                         <pos>x:1550;y:1110</pos>
                          <rect>x:-95;y:-45;w:190;h:90</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -2251,12 +2251,13 @@
                          <object>{b9c20d78-aeeb-4d59-b8f5-7ad6ecc3fc10}</object>
                          <context>Av20</context>
                          <name>Core</name>
-                         <pos>x:1025;y:920</pos>
-                         <rect>x:-280;y:-120;w:560;h:240</rect>
+                         <pos>x:930;y:915</pos>
+                         <rect>x:-200;y:-100;w:400;h:200</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
                         </DObject>
                        </base-DObject>
+                       <show-all-members>true</show-all-members>
                       </DClass>
                      </instance>
                     </item>
@@ -2296,12 +2297,13 @@
                          <object>{183b09e7-b31c-431b-8b22-5614c47d621f}</object>
                          <context>Channel</context>
                          <name>Channel</name>
-                         <pos>x:1145;y:480</pos>
-                         <rect>x:-60;y:-50;w:120;h:100</rect>
+                         <pos>x:1160;y:420</pos>
+                         <rect>x:-145;y:-60;w:290;h:120</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
                         </DObject>
                        </base-DObject>
+                       <show-all-members>true</show-all-members>
                       </DClass>
                      </instance>
                     </item>
@@ -2318,12 +2320,13 @@
                          <object>{0782a746-05b5-4c44-bdcb-4c93aee48793}</object>
                          <context>Channel</context>
                          <name>RxChannel</name>
-                         <pos>x:1495;y:435</pos>
-                         <rect>x:-70;y:-40;w:140;h:80</rect>
+                         <pos>x:1420;y:430</pos>
+                         <rect>x:-75;y:-60;w:150;h:120</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
                         </DObject>
                        </base-DObject>
+                       <show-all-members>true</show-all-members>
                       </DClass>
                      </instance>
                     </item>
@@ -2340,12 +2343,13 @@
                          <object>{e9ed76b0-3d6c-4eb0-ab28-ea52b4dab2aa}</object>
                          <context>Channel</context>
                          <name>TxChannel</name>
-                         <pos>x:1495;y:530</pos>
-                         <rect>x:-70;y:-45;w:140;h:90</rect>
+                         <pos>x:1420;y:560</pos>
+                         <rect>x:-75;y:-55;w:150;h:110</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
                         </DObject>
                        </base-DObject>
+                       <show-all-members>true</show-all-members>
                       </DClass>
                      </instance>
                     </item>
@@ -2362,12 +2366,13 @@
                          <object>{68b702e5-398f-4667-a141-da73de6f34bd}</object>
                          <context>Channel</context>
                          <name>DisplayChannel</name>
-                         <pos>x:1325;y:480</pos>
-                         <rect>x:-55;y:-55;w:110;h:110</rect>
+                         <pos>x:1155;y:565</pos>
+                         <rect>x:-140;y:-60;w:280;h:120</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
                         </DObject>
                        </base-DObject>
+                       <show-all-members>true</show-all-members>
                       </DClass>
                      </instance>
                     </item>
@@ -2384,12 +2389,13 @@
                          <object>{cee2a0e5-8ad3-44f8-8e76-8d483cb35bc8}</object>
                          <context>Device</context>
                          <name>ChannelsCalibration</name>
-                         <pos>x:885;y:485</pos>
-                         <rect>x:-65;y:-50;w:130;h:100</rect>
+                         <pos>x:850;y:480</pos>
+                         <rect>x:-105;y:-55;w:210;h:110</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
                         </DObject>
                        </base-DObject>
+                       <show-all-members>true</show-all-members>
                       </DClass>
                      </instance>
                     </item>
@@ -2522,7 +2528,7 @@
                          <object>{30a2e366-2911-4bd1-9689-7fdbce15429d}</object>
                          <context>Device</context>
                          <name>Spi</name>
-                         <pos>x:1585;y:955</pos>
+                         <pos>x:1545;y:1155</pos>
                          <rect>x:-200;y:-145;w:400;h:290</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>6</visual-role>
@@ -2544,8 +2550,8 @@
                          <object>{e52f87c5-daba-4cda-b882-edeb3bea646a}</object>
                          <context>Device</context>
                          <name>Channel</name>
-                         <pos>x:1305;y:470</pos>
-                         <rect>x:-270;y:-120;w:540;h:240</rect>
+                         <pos>x:1245;y:470</pos>
+                         <rect>x:-260;y:-165;w:520;h:330</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>6</visual-role>
                         </DObject>
@@ -2565,8 +2571,8 @@
                          </base-DElement>
                          <object>{e1038c4a-5c7d-4f6b-b634-e8f6ee0ffd19}</object>
                          <name>Device</name>
-                         <pos>x:1270;y:805</pos>
-                         <rect>x:-540;y:-540;w:1080;h:1080</rect>
+                         <pos>x:1370;y:790</pos>
+                         <rect>x:-655;y:-525;w:1310;h:1050</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
                         </DObject>
@@ -2587,7 +2593,7 @@
                          <object>{a787cdac-a7f6-4690-919c-4d6c7e67c467}</object>
                          <context>Modificators</context>
                          <name>Modificator</name>
-                         <pos>x:1040;y:1155</pos>
+                         <pos>x:1025;y:1125</pos>
                          <rect>x:-65;y:-30;w:130;h:60</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -2609,7 +2615,7 @@
                          <object>{d61080cf-c101-487a-b846-77fd87c3e871}</object>
                          <context>Device</context>
                          <name>Modificators</name>
-                         <pos>x:1040;y:1195</pos>
+                         <pos>x:1025;y:1165</pos>
                          <rect>x:-295;y:-135;w:590;h:270</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>6</visual-role>
@@ -2631,7 +2637,7 @@
                          <object>{6d3db2be-f0bd-4103-8fde-680490819ec4}</object>
                          <context>Modificators</context>
                          <name>AddGateModificator</name>
-                         <pos>x:840;y:1155</pos>
+                         <pos>x:825;y:1125</pos>
                          <rect>x:-70;y:-35;w:140;h:70</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -2653,7 +2659,7 @@
                          <object>{a4287833-59c4-4653-9e1e-9376147ed786}</object>
                          <context>Modificators</context>
                          <name>GateModificator</name>
-                         <pos>x:835;y:1265</pos>
+                         <pos>x:820;y:1235</pos>
                          <rect>x:-60;y:-35;w:120;h:70</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -2675,7 +2681,7 @@
                          <object>{152ec528-36a5-4cfc-a51c-58ab2f6df07d}</object>
                          <context>Modificators</context>
                          <name>PrismTimeModificator</name>
-                         <pos>x:1035;y:1265</pos>
+                         <pos>x:1020;y:1235</pos>
                          <rect>x:-75;y:-35;w:150;h:70</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -2697,7 +2703,7 @@
                          <object>{30d4c072-9ad9-4a02-b483-5df6b840ee16}</object>
                          <context>Modificators</context>
                          <name>RemoveGateModificator</name>
-                         <pos>x:1235;y:1270</pos>
+                         <pos>x:1220;y:1240</pos>
                          <rect>x:-80;y:-35;w:160;h:70</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -2719,7 +2725,7 @@
                          <object>{9a539904-436a-4ccc-abd6-618d28f1a3a0}</object>
                          <context>Modificators</context>
                          <name>TVGModificator</name>
-                         <pos>x:1230;y:1155</pos>
+                         <pos>x:1215;y:1125</pos>
                          <rect>x:-70;y:-35;w:140;h:70</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -2860,12 +2866,13 @@
                          <object>{f3456065-6d68-4372-87e2-04f9817246fd}</object>
                          <context>Device</context>
                          <name>CalibrationManager</name>
-                         <pos>x:830;y:700</pos>
-                         <rect>x:-80;y:-55;w:160;h:110</rect>
+                         <pos>x:930;y:715</pos>
+                         <rect>x:-200;y:-55;w:400;h:110</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
                         </DObject>
                        </base-DObject>
+                       <show-all-members>true</show-all-members>
                       </DClass>
                      </instance>
                     </item>
@@ -2911,12 +2918,13 @@
                          <object>{13f5ccb0-6236-4369-a7ed-e1d034a1a1e1}</object>
                          <context>Tact</context>
                          <name>Tact</name>
-                         <pos>x:1710;y:710</pos>
-                         <rect>x:-60;y:-40;w:120;h:80</rect>
+                         <pos>x:1755;y:795</pos>
+                         <rect>x:-65;y:-105;w:130;h:210</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
                         </DObject>
                        </base-DObject>
+                       <show-all-members>true</show-all-members>
                       </DClass>
                      </instance>
                     </item>
@@ -2933,8 +2941,8 @@
                          <object>{77702c68-5bf0-42f6-bc7d-c1c7284639b2}</object>
                          <context>Device</context>
                          <name>Tact</name>
-                         <pos>x:1595;y:690</pos>
-                         <rect>x:-190;y:-75;w:380;h:150</rect>
+                         <pos>x:1650;y:780</pos>
+                         <rect>x:-190;y:-130;w:380;h:260</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>6</visual-role>
                         </DObject>
@@ -2955,12 +2963,13 @@
                          <object>{b6e73739-8f88-467e-9158-e70181280f3e}</object>
                          <context>Tact</context>
                          <name>TactTable</name>
-                         <pos>x:1510;y:710</pos>
-                         <rect>x:-75;y:-35;w:150;h:70</rect>
+                         <pos>x:1570;y:745</pos>
+                         <rect>x:-95;y:-50;w:190;h:100</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
                         </DObject>
                        </base-DObject>
+                       <show-all-members>true</show-all-members>
                       </DClass>
                      </instance>
                     </item>
@@ -3006,12 +3015,13 @@
                          <object>{3f7be03e-e657-4640-89f8-ff3c671d96ad}</object>
                          <context>Device</context>
                          <name>DeviceMode</name>
-                         <pos>x:1315;y:700</pos>
-                         <rect>x:-60;y:-45;w:120;h:90</rect>
+                         <pos>x:1290;y:710</pos>
+                         <rect>x:-115;y:-50;w:230;h:100</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
                         </DObject>
                        </base-DObject>
+                       <show-all-members>true</show-all-members>
                       </DClass>
                      </instance>
                     </item>
@@ -3057,12 +3067,13 @@
                          <object>{c9858df8-e8a9-4af5-bb36-fd7c8cf4b23e}</object>
                          <context>Device</context>
                          <name>ModeManager</name>
-                         <pos>x:1015;y:695</pos>
-                         <rect>x:-80;y:-50;w:160;h:100</rect>
+                         <pos>x:1295;y:900</pos>
+                         <rect>x:-110;y:-50;w:220;h:100</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
                         </DObject>
                        </base-DObject>
+                       <show-all-members>true</show-all-members>
                       </DClass>
                      </instance>
                     </item>
@@ -3125,35 +3136,6 @@
                      </instance>
                     </item>
                     <item>
-                     <instance type="DAssociation">
-                      <DAssociation>
-                       <base-DRelation>
-                        <DRelation>
-                         <base-DElement>
-                          <DElement>
-                           <uid>{65beab69-3fbd-400e-b1a0-9dd58c1dc99a}</uid>
-                          </DElement>
-                         </base-DElement>
-                         <object>{d85edf0b-826e-4292-b780-7f4a1998bdc9}</object>
-                         <a>{ec8a473c-bb39-4fcc-b5c9-fe811235baba}</a>
-                         <b>{311cf9a6-c5fe-4075-bf1c-59e9baddf0f0}</b>
-                        </DRelation>
-                       </base-DRelation>
-                       <a>
-                        <DAssociationEnd>
-                         <cradinality>1</cradinality>
-                        </DAssociationEnd>
-                       </a>
-                       <b>
-                        <DAssociationEnd>
-                         <cradinality>1</cradinality>
-                         <kind>1</kind>
-                        </DAssociationEnd>
-                       </b>
-                      </DAssociation>
-                     </instance>
-                    </item>
-                    <item>
                      <instance type="DClass">
                       <DClass>
                        <base-DObject>
@@ -3166,12 +3148,13 @@
                          <object>{5ff3a734-d79f-494c-9176-4184f7f2af00}</object>
                          <context>Tvg</context>
                          <name>TVGCurve</name>
-                         <pos>x:1700;y:435</pos>
-                         <rect>x:-70;y:-45;w:140;h:90</rect>
+                         <pos>x:1780;y:430</pos>
+                         <rect>x:-225;y:-75;w:450;h:150</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
                         </DObject>
                        </base-DObject>
+                       <show-all-members>true</show-all-members>
                       </DClass>
                      </instance>
                     </item>
@@ -3188,8 +3171,8 @@
                          <object>{edaf5905-a907-42f1-b5ed-ba02bb1b3519}</object>
                          <context>Device</context>
                          <name>Tvg</name>
-                         <pos>x:1700;y:485</pos>
-                         <rect>x:-90;y:-135;w:180;h:270</rect>
+                         <pos>x:1780;y:475</pos>
+                         <rect>x:-235;y:-155;w:470;h:310</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>6</visual-role>
                         </DObject>
@@ -3210,7 +3193,7 @@
                          <object>{59508bef-6e7d-46df-9cd3-6a9b3de46f69}</object>
                          <context>Tvg</context>
                          <name>TVGSinglePoint</name>
-                         <pos>x:1700;y:565</pos>
+                         <pos>x:1775;y:575</pos>
                          <rect>x:-70;y:-40;w:140;h:80</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -3280,11 +3263,12 @@
                          <context>System</context>
                          <name>System</name>
                          <pos>x:355;y:435</pos>
-                         <rect>x:-70;y:-50;w:140;h:100</rect>
+                         <rect>x:-110;y:-70;w:220;h:140</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
                         </DObject>
                        </base-DObject>
+                       <show-all-members>true</show-all-members>
                       </DClass>
                      </instance>
                     </item>
@@ -3300,8 +3284,8 @@
                          </base-DElement>
                          <object>{70c4a36a-e21b-4882-857c-a19e73d13e4d}</object>
                          <name>System</name>
-                         <pos>x:375;y:430</pos>
-                         <rect>x:-345;y:-165;w:690;h:330</rect>
+                         <pos>x:365;y:430</pos>
+                         <rect>x:-335;y:-165;w:670;h:330</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>5</visual-role>
                         </DObject>
@@ -3613,8 +3597,8 @@
                          </base-DElement>
                          <object>{c9249c7f-4381-49e1-8dc6-38fd66d77c3f}</object>
                          <name>Ui</name>
-                         <pos>x:375;y:980</pos>
-                         <rect>x:-345;y:-365;w:690;h:730</rect>
+                         <pos>x:370;y:980</pos>
+                         <rect>x:-340;y:-365;w:680;h:730</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>9</visual-role>
                         </DObject>
@@ -4474,9 +4458,38 @@
                       </DAssociation>
                      </instance>
                     </item>
+                    <item>
+                     <instance type="DAssociation">
+                      <DAssociation>
+                       <base-DRelation>
+                        <DRelation>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{a1a94843-357c-4a1f-8660-945984672317}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{2fe5a7a6-c07c-44ba-b213-61fc0c9d99aa}</object>
+                         <a>{ec8a473c-bb39-4fcc-b5c9-fe811235baba}</a>
+                         <b>{311cf9a6-c5fe-4075-bf1c-59e9baddf0f0}</b>
+                        </DRelation>
+                       </base-DRelation>
+                       <a>
+                        <DAssociationEnd>
+                         <cradinality>1</cradinality>
+                        </DAssociationEnd>
+                       </a>
+                       <b>
+                        <DAssociationEnd>
+                         <cradinality>1</cradinality>
+                         <kind>1</kind>
+                        </DAssociationEnd>
+                       </b>
+                      </DAssociation>
+                     </instance>
+                    </item>
                    </qlist>
                   </elements>
-                  <last-modified>1489540890157</last-modified>
+                  <last-modified>1489542151221</last-modified>
                   <toolbarid>Classes</toolbarid>
                  </MDiagram>
                 </base-MDiagram>
@@ -4876,6 +4889,26 @@
                                         </relations>
                                        </MObject>
                                       </base-MObject>
+                                      <members>
+                                       <qlist>
+                                        <item>
+                                         <MClassMember>
+                                          <uid>{282309ad-6014-4af9-a279-f37024ccc061}</uid>
+                                          <visibility>3</visibility>
+                                          <type>1</type>
+                                          <declaration>ChannelID _index</declaration>
+                                         </MClassMember>
+                                        </item>
+                                        <item>
+                                         <MClassMember>
+                                          <uid>{fb852889-c569-4294-ade4-914eac35e7a5}</uid>
+                                          <visibility>3</visibility>
+                                          <type>1</type>
+                                          <declaration>std::vector&lt;DisplayChannel&gt; _displayChannels</declaration>
+                                         </MClassMember>
+                                        </item>
+                                       </qlist>
+                                      </members>
                                      </MClass>
                                     </instance>
                                    </target>
@@ -4972,6 +5005,42 @@
                                         </relations>
                                        </MObject>
                                       </base-MObject>
+                                      <members>
+                                       <qlist>
+                                        <item>
+                                         <MClassMember>
+                                          <uid>{08017e57-9144-4df9-9d6b-7b6344781c33}</uid>
+                                          <visibility>3</visibility>
+                                          <type>1</type>
+                                          <declaration>std::string _name</declaration>
+                                         </MClassMember>
+                                        </item>
+                                        <item>
+                                         <MClassMember>
+                                          <uid>{65513485-3886-42be-b888-3340b0f2aaad}</uid>
+                                          <visibility>3</visibility>
+                                          <type>1</type>
+                                          <declaration>uint8_t _prismTime</declaration>
+                                         </MClassMember>
+                                        </item>
+                                        <item>
+                                         <MClassMember>
+                                          <uid>{b5d4daeb-51ed-4968-93ff-b5c66c6a9903}</uid>
+                                          <visibility>3</visibility>
+                                          <type>1</type>
+                                          <declaration>TVGCurve * _tvgCurve</declaration>
+                                         </MClassMember>
+                                        </item>
+                                        <item>
+                                         <MClassMember>
+                                          <uid>{332971e6-0f7b-4d4e-93f5-4c0e99a3be39}</uid>
+                                          <visibility>3</visibility>
+                                          <type>1</type>
+                                          <declaration>int _markerPos</declaration>
+                                         </MClassMember>
+                                        </item>
+                                       </qlist>
+                                      </members>
                                      </MClass>
                                     </instance>
                                    </target>
@@ -5069,6 +5138,34 @@
                                         </relations>
                                        </MObject>
                                       </base-MObject>
+                                      <members>
+                                       <qlist>
+                                        <item>
+                                         <MClassMember>
+                                          <uid>{ff401df8-e9b8-4c2f-abc8-b9653918856f}</uid>
+                                          <visibility>3</visibility>
+                                          <type>1</type>
+                                          <declaration>PulserFreq _freq</declaration>
+                                         </MClassMember>
+                                        </item>
+                                        <item>
+                                         <MClassMember>
+                                          <uid>{25818dd0-6be1-4972-86c1-b30b40b64a06}</uid>
+                                          <visibility>3</visibility>
+                                          <type>1</type>
+                                          <declaration>PulserProg _prog</declaration>
+                                         </MClassMember>
+                                        </item>
+                                        <item>
+                                         <MClassMember>
+                                          <uid>{0afbb80a-b441-4e3d-b2a1-0bdba786841b}</uid>
+                                          <visibility>3</visibility>
+                                          <type>1</type>
+                                          <declaration>bool _doubleMode</declaration>
+                                         </MClassMember>
+                                        </item>
+                                       </qlist>
+                                      </members>
                                      </MClass>
                                     </instance>
                                    </target>
@@ -5252,6 +5349,42 @@
                                         </relations>
                                        </MObject>
                                       </base-MObject>
+                                      <members>
+                                       <qlist>
+                                        <item>
+                                         <MClassMember>
+                                          <uid>{41ae83f6-0b12-49e3-bb91-02ec948f25d6}</uid>
+                                          <visibility>3</visibility>
+                                          <type>1</type>
+                                          <declaration>RxChannel _rx</declaration>
+                                         </MClassMember>
+                                        </item>
+                                        <item>
+                                         <MClassMember>
+                                          <uid>{d7798e77-9770-4db0-95d9-9c512ca55541}</uid>
+                                          <visibility>3</visibility>
+                                          <type>1</type>
+                                          <declaration>TxChannel _tx</declaration>
+                                         </MClassMember>
+                                        </item>
+                                        <item>
+                                         <MClassMember>
+                                          <uid>{6249f2af-90f2-428c-b052-9b9690080023}</uid>
+                                          <visibility>3</visibility>
+                                          <type>1</type>
+                                          <declaration>std::vector&lt;Gate&gt; _gates</declaration>
+                                         </MClassMember>
+                                        </item>
+                                        <item>
+                                         <MClassMember>
+                                          <uid>{5eefc138-2ce5-4bc9-b8cf-70f064743dda}</uid>
+                                          <visibility>3</visibility>
+                                          <type>1</type>
+                                          <declaration>double _angle</declaration>
+                                         </MClassMember>
+                                        </item>
+                                       </qlist>
+                                      </members>
                                      </MClass>
                                     </instance>
                                    </target>
@@ -5326,6 +5459,34 @@
                              </relations>
                             </MObject>
                            </base-MObject>
+                           <members>
+                            <qlist>
+                             <item>
+                              <MClassMember>
+                               <uid>{09e5f996-64e6-4323-bbd1-32b5743a333d}</uid>
+                               <visibility>3</visibility>
+                               <type>1</type>
+                               <declaration>TactID _tactId</declaration>
+                              </MClassMember>
+                             </item>
+                             <item>
+                              <MClassMember>
+                               <uid>{da813002-2edf-4f9a-a015-7b2bfc9f7c93}</uid>
+                               <visibility>3</visibility>
+                               <type>1</type>
+                               <declaration>CalibrationInfo _info</declaration>
+                              </MClassMember>
+                             </item>
+                             <item>
+                              <MClassMember>
+                               <uid>{ca835252-ece9-470b-9fcb-c48775bed007}</uid>
+                               <visibility>3</visibility>
+                               <type>1</type>
+                               <declaration>std::vector&lt;Channel&gt; _channels</declaration>
+                              </MClassMember>
+                             </item>
+                            </qlist>
+                           </members>
                           </MClass>
                          </instance>
                         </target>
@@ -5796,12 +5957,57 @@
                                    </target>
                                   </handle>
                                  </item>
+                                 <item>
+                                  <handle>
+                                   <uid>{2fe5a7a6-c07c-44ba-b213-61fc0c9d99aa}</uid>
+                                   <target>
+                                    <instance type="MAssociation">
+                                     <MAssociation>
+                                      <base-MRelation>
+                                       <MRelation>
+                                        <base-MElement>
+                                         <MElement>
+                                          <uid>{2fe5a7a6-c07c-44ba-b213-61fc0c9d99aa}</uid>
+                                         </MElement>
+                                        </base-MElement>
+                                        <a>{f3456065-6d68-4372-87e2-04f9817246fd}</a>
+                                        <b>{b9c20d78-aeeb-4d59-b8f5-7ad6ecc3fc10}</b>
+                                       </MRelation>
+                                      </base-MRelation>
+                                      <a>
+                                       <MAssociationEnd>
+                                        <cardinality>1</cardinality>
+                                       </MAssociationEnd>
+                                      </a>
+                                      <b>
+                                       <MAssociationEnd>
+                                        <cardinality>1</cardinality>
+                                        <kind>1</kind>
+                                       </MAssociationEnd>
+                                      </b>
+                                     </MAssociation>
+                                    </instance>
+                                   </target>
+                                  </handle>
+                                 </item>
                                 </qlist>
                                </handles>
                               </handles>
                              </relations>
                             </MObject>
                            </base-MObject>
+                           <members>
+                            <qlist>
+                             <item>
+                              <MClassMember>
+                               <uid>{5c4fd1a8-0b82-4477-a84a-ac977410ef75}</uid>
+                               <visibility>3</visibility>
+                               <type>1</type>
+                               <declaration>std::map&lt;TactID, std::vector&lt;ChannelsCalibration&gt; &gt; _calibrations</declaration>
+                              </MClassMember>
+                             </item>
+                            </qlist>
+                           </members>
                           </MClass>
                          </instance>
                         </target>
@@ -5884,6 +6090,90 @@
                                         </relations>
                                        </MObject>
                                       </base-MObject>
+                                      <members>
+                                       <qlist>
+                                        <item>
+                                         <MClassMember>
+                                          <uid>{78bdd80b-d2ee-4d24-b81c-f7aae7c809fc}</uid>
+                                          <visibility>3</visibility>
+                                          <type>1</type>
+                                          <declaration>bool _tactEnabled</declaration>
+                                         </MClassMember>
+                                        </item>
+                                        <item>
+                                         <MClassMember>
+                                          <uid>{a7b64060-40d0-498d-ad5b-72abfa5cd0f3}</uid>
+                                          <visibility>3</visibility>
+                                          <type>1</type>
+                                          <declaration>bool _diffMode</declaration>
+                                         </MClassMember>
+                                        </item>
+                                        <item>
+                                         <MClassMember>
+                                          <uid>{9d5db33d-13d1-4f09-8607-1b5dc4e2bf2c}</uid>
+                                          <visibility>3</visibility>
+                                          <type>1</type>
+                                          <declaration>bool _tx1Enabled</declaration>
+                                         </MClassMember>
+                                        </item>
+                                        <item>
+                                         <MClassMember>
+                                          <uid>{05a43fd2-e075-431d-9c11-81216851864b}</uid>
+                                          <visibility>3</visibility>
+                                          <type>1</type>
+                                          <declaration>uint8_t _tx1</declaration>
+                                         </MClassMember>
+                                        </item>
+                                        <item>
+                                         <MClassMember>
+                                          <uid>{22ddf193-75b7-4af6-8208-c997f4966dd9}</uid>
+                                          <visibility>3</visibility>
+                                          <type>1</type>
+                                          <declaration>bool _rx1Enabled</declaration>
+                                         </MClassMember>
+                                        </item>
+                                        <item>
+                                         <MClassMember>
+                                          <uid>{28a5381c-dbb2-4a3d-972c-7d1380ba582a}</uid>
+                                          <visibility>3</visibility>
+                                          <type>1</type>
+                                          <declaration>uint8_t _rx1</declaration>
+                                         </MClassMember>
+                                        </item>
+                                        <item>
+                                         <MClassMember>
+                                          <uid>{fab04700-6d60-4fbb-8f1c-926fb045bff2}</uid>
+                                          <visibility>3</visibility>
+                                          <type>1</type>
+                                          <declaration>bool _tx2Enabled</declaration>
+                                         </MClassMember>
+                                        </item>
+                                        <item>
+                                         <MClassMember>
+                                          <uid>{a1bcee35-6b84-45ba-bbe9-98881c231a39}</uid>
+                                          <visibility>3</visibility>
+                                          <type>1</type>
+                                          <declaration>uint8_t _tx2</declaration>
+                                         </MClassMember>
+                                        </item>
+                                        <item>
+                                         <MClassMember>
+                                          <uid>{d2221563-2278-4d94-946b-43416ad08aa1}</uid>
+                                          <visibility>3</visibility>
+                                          <type>1</type>
+                                          <declaration>bool _rx2Enabled</declaration>
+                                         </MClassMember>
+                                        </item>
+                                        <item>
+                                         <MClassMember>
+                                          <uid>{dbf14b02-6faa-4817-9d85-1f6d6641ba57}</uid>
+                                          <visibility>3</visibility>
+                                          <type>1</type>
+                                          <declaration>uint8_t _rx2</declaration>
+                                         </MClassMember>
+                                        </item>
+                                       </qlist>
+                                      </members>
                                      </MClass>
                                     </instance>
                                    </target>
@@ -5969,6 +6259,26 @@
                                         </relations>
                                        </MObject>
                                       </base-MObject>
+                                      <members>
+                                       <qlist>
+                                        <item>
+                                         <MClassMember>
+                                          <uid>{89029029-05a1-438c-bb27-4f3ce60aafab}</uid>
+                                          <visibility>3</visibility>
+                                          <type>1</type>
+                                          <declaration>TactID _id</declaration>
+                                         </MClassMember>
+                                        </item>
+                                        <item>
+                                         <MClassMember>
+                                          <uid>{b08a64a1-46fe-4d4a-b767-442df0e7437d}</uid>
+                                          <visibility>3</visibility>
+                                          <type>1</type>
+                                          <declaration>std::vector&lt;Tact&gt; _tactTable</declaration>
+                                         </MClassMember>
+                                        </item>
+                                       </qlist>
+                                      </members>
                                      </MClass>
                                     </instance>
                                    </target>
@@ -6043,6 +6353,26 @@
                              </relations>
                             </MObject>
                            </base-MObject>
+                           <members>
+                            <qlist>
+                             <item>
+                              <MClassMember>
+                               <uid>{95afa151-1a6a-4d9b-8a8e-a7fd3897ad75}</uid>
+                               <visibility>3</visibility>
+                               <type>1</type>
+                               <declaration>ModeTypes _type</declaration>
+                              </MClassMember>
+                             </item>
+                             <item>
+                              <MClassMember>
+                               <uid>{f425d3e8-3d87-4e1d-ba4b-e2f6924d12a8}</uid>
+                               <visibility>3</visibility>
+                               <type>1</type>
+                               <declaration>std::vector&lt;TactTable&gt; _tactTables</declaration>
+                              </MClassMember>
+                             </item>
+                            </qlist>
+                           </members>
                           </MClass>
                          </instance>
                         </target>
@@ -6106,6 +6436,18 @@
                              </relations>
                             </MObject>
                            </base-MObject>
+                           <members>
+                            <qlist>
+                             <item>
+                              <MClassMember>
+                               <uid>{9ac06f60-6639-44a0-8756-446a8c527f4a}</uid>
+                               <visibility>3</visibility>
+                               <type>1</type>
+                               <declaration>std::vector&lt;DeviceMode&gt; _modes</declaration>
+                              </MClassMember>
+                             </item>
+                            </qlist>
+                           </members>
                           </MClass>
                          </instance>
                         </target>
@@ -6188,6 +6530,63 @@
                                         </relations>
                                        </MObject>
                                       </base-MObject>
+                                      <members>
+                                       <qlist>
+                                        <item>
+                                         <MClassMember>
+                                          <uid>{61363762-f3af-40bf-b5ff-002e6aea508c}</uid>
+                                          <visibility>1</visibility>
+                                          <type>2</type>
+                                          <declaration>TVGCurve()</declaration>
+                                         </MClassMember>
+                                        </item>
+                                        <item>
+                                         <MClassMember>
+                                          <uid>{53271ca5-6ddf-494f-bf27-594bf11d01e0}</uid>
+                                          <visibility>1</visibility>
+                                          <type>2</type>
+                                          <properties>7</properties>
+                                          <declaration>TVGCurve * clone()</declaration>
+                                         </MClassMember>
+                                        </item>
+                                        <item>
+                                         <MClassMember>
+                                          <uid>{e49c3607-2150-4293-8e3d-eecac66f253e}</uid>
+                                          <visibility>1</visibility>
+                                          <type>2</type>
+                                          <properties>1</properties>
+                                          <declaration>~TVGCurve()</declaration>
+                                         </MClassMember>
+                                        </item>
+                                        <item>
+                                         <MClassMember>
+                                          <uid>{1a88b403-881d-4597-b3ba-23d200e5d9f4}</uid>
+                                          <visibility>1</visibility>
+                                          <type>2</type>
+                                          <properties>7</properties>
+                                          <declaration>double getSample(double x)</declaration>
+                                         </MClassMember>
+                                        </item>
+                                        <item>
+                                         <MClassMember>
+                                          <uid>{9ac8bd1a-fd2a-42dd-8378-fc930fab311e}</uid>
+                                          <visibility>1</visibility>
+                                          <type>2</type>
+                                          <properties>3</properties>
+                                          <declaration>std::vector&lt; std::pair&lt; double, double &gt; &gt; getReferencePoints()</declaration>
+                                         </MClassMember>
+                                        </item>
+                                        <item>
+                                         <MClassMember>
+                                          <uid>{0bf93e1f-418a-41db-bfb9-597e289152df}</uid>
+                                          <visibility>1</visibility>
+                                          <type>2</type>
+                                          <properties>7</properties>
+                                          <declaration>TVGType getType()</declaration>
+                                         </MClassMember>
+                                        </item>
+                                       </qlist>
+                                      </members>
                                      </MClass>
                                     </instance>
                                    </target>
@@ -6338,6 +6737,34 @@
                              </relations>
                             </MObject>
                            </base-MObject>
+                           <members>
+                            <qlist>
+                             <item>
+                              <MClassMember>
+                               <uid>{1f55b866-cbfc-40e8-aeb2-971b0ab50489}</uid>
+                               <visibility>3</visibility>
+                               <type>1</type>
+                               <declaration>Device * _device</declaration>
+                              </MClassMember>
+                             </item>
+                             <item>
+                              <MClassMember>
+                               <uid>{067906fc-43f4-427d-ad46-5815131b3aea}</uid>
+                               <visibility>3</visibility>
+                               <type>1</type>
+                               <declaration>ModeManager * _modeManager</declaration>
+                              </MClassMember>
+                             </item>
+                             <item>
+                              <MClassMember>
+                               <uid>{68361ed1-6835-43b1-a3a0-dbde284624ae}</uid>
+                               <visibility>3</visibility>
+                               <type>1</type>
+                               <declaration>CalibrationManager * _calibrationManager</declaration>
+                              </MClassMember>
+                             </item>
+                            </qlist>
+                           </members>
                           </MClass>
                          </instance>
                         </target>
@@ -6390,6 +6817,58 @@
                              <name>System</name>
                             </MObject>
                            </base-MObject>
+                           <members>
+                            <qlist>
+                             <item>
+                              <MClassMember>
+                               <uid>{881ab076-9ae2-4fc4-8fde-ae03219d2059}</uid>
+                               <visibility>3</visibility>
+                               <type>1</type>
+                               <declaration>Filesystem * _filesystem</declaration>
+                              </MClassMember>
+                             </item>
+                             <item>
+                              <MClassMember>
+                               <uid>{d104cabc-2773-4258-9e94-a2e09b211a69}</uid>
+                               <visibility>3</visibility>
+                               <type>1</type>
+                               <declaration>BrightnessController * _brightness</declaration>
+                              </MClassMember>
+                             </item>
+                             <item>
+                              <MClassMember>
+                               <uid>{af8a5ff7-b7fd-4f73-bc91-b45bb7f7584a}</uid>
+                               <visibility>3</visibility>
+                               <type>1</type>
+                               <declaration>Temperature * _temperature</declaration>
+                              </MClassMember>
+                             </item>
+                             <item>
+                              <MClassMember>
+                               <uid>{5ac7db6e-72b9-4568-b6c7-1f0b47a48c91}</uid>
+                               <visibility>3</visibility>
+                               <type>1</type>
+                               <declaration>Sound * _sound</declaration>
+                              </MClassMember>
+                             </item>
+                             <item>
+                              <MClassMember>
+                               <uid>{e292a942-7362-40a3-aa30-9f41105f9304}</uid>
+                               <visibility>3</visibility>
+                               <type>1</type>
+                               <declaration>BatteryController * _battery</declaration>
+                              </MClassMember>
+                             </item>
+                             <item>
+                              <MClassMember>
+                               <uid>{a86c282e-005c-4f2a-87f6-55352cb38cc0}</uid>
+                               <visibility>3</visibility>
+                               <type>1</type>
+                               <declaration>DateTimeController * _dateTime</declaration>
+                              </MClassMember>
+                             </item>
+                            </qlist>
+                           </members>
                           </MClass>
                          </instance>
                         </target>

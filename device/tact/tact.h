@@ -12,13 +12,10 @@ class Tact
     bool _tactEnabled;
     bool _diffMode;
 
-    // First line
     bool _tx1Enabled;
     uint8_t _tx1;
     bool _rx1Enabled;
     uint8_t _rx1;
-
-    // Second line
 
     bool _tx2Enabled;
     uint8_t _tx2;
