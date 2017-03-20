@@ -9,7 +9,7 @@ class RemoveGateModificator : public Modificator
     ChannelsInfo _info;
     GateID _gateId;
 public:
-    RemoveGateModificator(ChannelsInfo info, GateID gateId);
+    RemoveGateModificator(const ChannelsInfo & info, GateID gateId);
     void apply(Core *core);
 };
 

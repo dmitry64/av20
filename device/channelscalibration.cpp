@@ -32,22 +32,28 @@ void ChannelsCalibration::setChannel(const ChannelID index, const Channel &chann
     _channels[index] = channel;
 }
 
+bool ChannelsCalibration::getActive() const
+{
+    return _active;
+}
+
+void ChannelsCalibration::setActive(bool active)
+{
+    _active = active;
+}
+
 ChannelsCalibration::ChannelsCalibration()
 {
     _tactId = 0;
     _info._id = 0;
     _info._name = "none";
+    _active = true;
 }
 
 ChannelsCalibration::~ChannelsCalibration()
 {
-    //qDebug() << "Device calibration deleted";
 }
 
-/*void ChannelsCalibration::init()
-{
-}
-*/
 ChannelsCalibration ChannelsCalibration::getSnapshot()
 {
     return ChannelsCalibration(*this);
@@ -68,7 +74,7 @@ DisplayChannel ChannelsCalibration::getDisplayChannel(const ChannelID chan, cons
     return getDisplayChannel(info);
 }
 
-DisplayChannel ChannelsCalibration::getDisplayChannel(const ChannelsInfo info) const
+DisplayChannel ChannelsCalibration::getDisplayChannel(const ChannelsInfo &info) const
 {
     const auto & channels = getChannel(info._channel).getDisplayChannels();
     return channels.at(info._displayChannel);

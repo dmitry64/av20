@@ -35,9 +35,11 @@ void CalibrationsWidget::init(const ChannelsCalibration & calibration)
     _buttons.clear();
 
     for(size_t i=0; i<info.size(); i++) {
+        CalibrationInfo calibInfo = info.at(i);
+
         CalibrationButton * button = new CalibrationButton();
         connect(button,SIGNAL(calibrationSelected(CalibrationIndex)),this,SLOT(onCalibrationSelected(CalibrationIndex)));
-        CalibrationInfo calibInfo = info.at(i);
+
         button->setCalibrationInfo(calibInfo);
         if(calibration.getInfo()._id == calibInfo._id) {
             button->setActive(true);
@@ -79,12 +81,13 @@ void CalibrationsWidget::onCalibrationSelected(CalibrationIndex index)
 
 void CalibrationsWidget::on_newButton_released()
 {
-
+    QString name = "new";
+    _core->createCalibration(0,name);
 }
 
 void CalibrationsWidget::on_removeButton_released()
 {
-
+    _core->removeCalibration(_selectedIndex);
 }
 
 void CalibrationsWidget::on_selectButton_2_released()

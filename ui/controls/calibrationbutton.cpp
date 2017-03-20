@@ -23,7 +23,7 @@ void CalibrationButton::setCalibrationInfo(CalibrationInfo info)
 {
     _info = info;
     ui->idLabel->setText(QString::number(info._id));
-    ui->calibrationButton->setText(info._name.c_str());
+    ui->calibrationButton->setText(info._name);
     _status = false;
 }
 
@@ -34,7 +34,8 @@ void CalibrationButton::setActive(bool status)
         QPalette palette = ui->calibrationButton->palette();
         palette.setColor(QPalette::Button, QColor(100,100,100));
         ui->calibrationButton->setPalette(palette);
-    } else {
+    }
+    else {
         QPalette palette = ui->calibrationButton->palette();
         palette.setColor(QPalette::Button, QColor(108,189,64));
         ui->calibrationButton->setPalette(palette);

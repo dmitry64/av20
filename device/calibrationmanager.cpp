@@ -101,7 +101,7 @@ std::vector<Channel> CalibrationManager::generateChannels(int channelsNumber, in
     return channels1;
 }
 
-ChannelsCalibration CalibrationManager::generateCalibration(TactID tact, CalibrationIndex index, std::string name, int channelsNumber, int dispChansNumber)
+ChannelsCalibration CalibrationManager::generateCalibration(TactID tact, CalibrationIndex index, QString name, int channelsNumber, int dispChansNumber)
 {
     ChannelsCalibration cal1;
     cal1.setTactId(tact);
@@ -168,6 +168,12 @@ std::vector<ChannelsCalibration> CalibrationManager::getCalibrationsByTactID(Tac
 {
     if(_calibrations.find(id) != _calibrations.end()) {
         auto list = _calibrations.at(id);
+//        std::vector<ChannelsCalibration> result;
+//        for(size_t i=0; i<list.size(); i++) {
+//            if(list[i].getActive()) {
+//                result.push_back(list[i]);
+//            }
+//        }
 
         return list;
     }
@@ -183,6 +189,7 @@ std::vector<CalibrationInfo> CalibrationManager::getCalibrationsInfoByTactID(Tac
         auto list = _calibrations.at(id);
         std::vector<CalibrationInfo> result;
         for(auto it = list.begin(); it!=list.end(); it++) {
+            const ChannelsCalibration & cal = it.operator *();
             result.push_back(it.operator*().getInfo());
         }
         return result;
@@ -209,9 +216,37 @@ void CalibrationManager::addCalibration(const ChannelsCalibration & calibration)
 
 }
 
-void CalibrationManager::removeCalibration(const ChannelsCalibration & calibration)
+void CalibrationManager::removeCalibration(TactID id, const CalibrationIndex index)
 {
-    Q_ASSERT(false);
+    if(_calibrations.find(id) != _calibrations.end()) {
+        for(size_t i=0; i<_calibrations[id].size(); i++) {
+            if(i==index) {
+                _calibrations[id][i].setActive(false);
+                break;
+            }
+        }
+    }
+    else {
+        logEvent("CalibMan","Cannot find calibration #" + QString::number(index));
+        Q_ASSERT(false);
+    }
+}
+
+void CalibrationManager::createCopyCalibration(TactID id, CalibrationIndex index, QString name)
+{
+    const auto & calibrations = getCalibrationsByTactID(id);
+    for(size_t i=0; i<calibrations.size(); i++) {
+        const ChannelsCalibration & cal = calibrations.at(i);
+        if(i==index) {
+            ChannelsCalibration newCal = ChannelsCalibration(cal);
+            CalibrationInfo info = newCal.getInfo();
+            info._id = calibrations.size();
+            info._name = name;
+            newCal.setInfo(info);
+            addCalibration(newCal);
+            break;
+        }
+    }
 }
 
 void CalibrationManager::applyChannelsModification(TactID id, CalibrationIndex index, ChannelID channelId, Channel channel)

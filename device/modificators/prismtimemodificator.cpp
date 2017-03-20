@@ -1,6 +1,6 @@
 #include "prismtimemodificator.h"
 
-PrismTimeModificator::PrismTimeModificator(ChannelsInfo info, uint8_t value) : _value(value), _info(info)
+PrismTimeModificator::PrismTimeModificator(const ChannelsInfo &info, uint8_t value) : _value(value), _info(info)
 {
 
 }

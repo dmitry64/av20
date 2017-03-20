@@ -5,6 +5,8 @@
 #include "device/modificators/removegatemodificator.h"
 #include "device/modificators/prismtimemodificator.h"
 #include "device/modificators/tvgmodificator.h"
+#include "device/modificators/createcalibrationmodificator.h"
+#include "device/modificators/removecalibrationmodificator.h"
 
 ChannelsCalibration Core::getCalibrationsSnapshot()
 {
@@ -56,6 +58,11 @@ DeviceModeIndex Core::getCurrentMode() const
 CalibrationIndex Core::getCurrentCalibration() const
 {
     return _currentCalibration.load();
+}
+
+CalibrationManager *Core::getCalibrationManager() const
+{
+    return _calibrationManager;
 }
 
 Core::Core(ModeManager *modeManager, CalibrationManager * calibrationManager) :
@@ -408,6 +415,11 @@ void Core::notifyChannel(const Channel &channel)
     emit channelChanged(channel);
 }
 
+void Core::notifyCalibration()
+{
+    emit calibrationChanged();
+}
+
 void Core::applyChannelsModification(ChannelID index, Channel channel)
 {
     const auto & calib = getCalibration();
@@ -419,35 +431,35 @@ void Core::applyCurrentCalibrationToDevice()
     _device->applyCalibration(getCalibration(), getTactTable());
 }
 
-void Core::addGate(const ChannelsInfo info, const Gate & gate)
+void Core::addGate(const ChannelsInfo & info, const Gate & gate)
 {
     logEvent("Core","Add gate to channel #" + QString::number(info._channel));
     AddGateModificator * mod = new AddGateModificator(info,gate);
     addModificator(mod);
 }
 
-void Core::modifyGate(const ChannelsInfo info,const Gate & gate)
+void Core::modifyGate(const ChannelsInfo & info,const Gate & gate)
 {
     logEvent("Core","Modify gate to channel #" + QString::number(info._channel));
     GateModificator * mod = new GateModificator(info,gate);
     addModificator(mod);
 }
 
-void Core::removeGate(const ChannelsInfo info,const uint8_t id)
+void Core::removeGate(const ChannelsInfo & info,const uint8_t id)
 {
     logEvent("Core","Remove gate to channel #" + QString::number(info._channel));
     RemoveGateModificator * mod = new RemoveGateModificator(info,id);
     addModificator(mod);
 }
 
-void Core::setPrismTime(const ChannelsInfo info,const uint8_t value)
+void Core::setPrismTime(const ChannelsInfo & info,const uint8_t value)
 {
     logEvent("Core","Set prism time to channel #" + QString::number(info._channel));
     PrismTimeModificator * mod = new PrismTimeModificator(info,value);
     addModificator(mod);
 }
 
-void Core::setTVG(const ChannelsInfo info, const TVGCurve *ptr)
+void Core::setTVG(const ChannelsInfo & info, const TVGCurve *ptr)
 {
     logEvent("Core","Set TVG to channel #" + QString::number(info._channel));
     TVGCurve * curve = ptr->clone();
@@ -476,7 +488,7 @@ void Core::switchCalibration(const CalibrationIndex index)
     emit calibrationChanged();
 }
 
-void Core::switchChannel(const ChannelsInfo info)
+void Core::switchChannel(const ChannelsInfo & info)
 {
     _requestedChannelSelection = info;
     _channelSwitchRequested.store(true);
@@ -485,7 +497,21 @@ void Core::switchChannel(const ChannelsInfo info)
     }
 }
 
-void Core::handleChannelSelection(const ChannelsInfo info)
+void Core::createCalibration(const CalibrationIndex baseIndex,const QString & name)
+{
+    logEvent("Core","Creating new calibration from #" + QString::number(baseIndex)+" name: "+name);
+    CreateCalibrationModificator * mod = new CreateCalibrationModificator(baseIndex,name);
+    addModificator(mod);
+}
+
+void Core::removeCalibration(const CalibrationIndex index)
+{
+    logEvent("Core","Removing calibration #" + QString::number(index));
+    RemoveCalibrationModificator * mod = new RemoveCalibrationModificator(index);
+    addModificator(mod);
+}
+
+void Core::handleChannelSelection(const ChannelsInfo & info)
 {
     logEvent("Core","Handling channel selection - new channel #" + QString::number(info._channel));
     const DeviceMode & currentMode = getCurrentDeviceMode();

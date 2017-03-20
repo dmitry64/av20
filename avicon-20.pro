@@ -97,7 +97,9 @@ SOURCES += core.cpp \
     system/temperature.cpp \
     system/sound.cpp \
     system/batterycontroller.cpp \
-    system/datetimecontroller.cpp
+    system/datetimecontroller.cpp \
+    device/modificators/createcalibrationmodificator.cpp \
+    device/modificators/removecalibrationmodificator.cpp
 #    tests/coretest.cpp
 
 HEADERS  += \
@@ -163,7 +165,9 @@ HEADERS  += \
     system/temperature.h \
     system/sound.h \
     system/batterycontroller.h \
-    system/datetimecontroller.h
+    system/datetimecontroller.h \
+    device/modificators/createcalibrationmodificator.h \
+    device/modificators/removecalibrationmodificator.h
 #    tests/coretest.h
 
 FORMS    += \

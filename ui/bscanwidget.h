@@ -18,7 +18,6 @@ class BScanWidget : public QWidget
 {
     Q_OBJECT
 
-    //std::vector< std::pair< std::vector< std::vector<BScanDrawSample> > , uint8_t> > _samples;
     std::vector< std::pair< ChannelsInfo, BScanDrawArray > > _samplesArray;
     int _width;
     int _end;

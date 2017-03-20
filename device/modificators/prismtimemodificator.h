@@ -8,7 +8,7 @@ class PrismTimeModificator : public Modificator
     uint8_t _value;
     ChannelsInfo _info;
 public:
-    PrismTimeModificator(ChannelsInfo info, uint8_t ms);
+    PrismTimeModificator(const ChannelsInfo & info, uint8_t ms);
     void apply(Core * core);
 };
 

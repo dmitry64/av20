@@ -10,7 +10,7 @@ class GateModificator : public Modificator
     Gate _gate;
     ChannelsInfo _info;
 public:
-    GateModificator(ChannelsInfo info, Gate gate);
+    GateModificator(const ChannelsInfo &info, const Gate &gate);
     void apply(Core * core);
 };
 

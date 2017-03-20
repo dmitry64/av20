@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 #include <vector>
-#include <string>
+#include <QString>
 
 #define MAX_CHANNELS_COUNT 8
 #define MAX_TACTS_COUNT 8
@@ -25,7 +25,7 @@ typedef uint8_t GateID;
 
 struct CalibrationInfo {
     CalibrationIndex _id;
-    std::string _name;
+    QString _name;
 };
 
 typedef std::vector<CalibrationInfo> CalibrationsInfoList;

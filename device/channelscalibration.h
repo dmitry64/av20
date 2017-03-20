@@ -12,7 +12,7 @@ class ChannelsCalibration
     TactID _tactId;
     CalibrationInfo _info;
     std::vector<Channel> _channels;
-
+    bool _active;
 public:
     ChannelsCalibration();
     ~ChannelsCalibration();
@@ -21,7 +21,7 @@ public:
     // get/set
     Channel getChannel(const ChannelID index) const;
     DisplayChannel getDisplayChannel(const ChannelID chan, const DisplayChannelID disp) const;
-    DisplayChannel getDisplayChannel(const ChannelsInfo info) const;
+    DisplayChannel getDisplayChannel(const ChannelsInfo & info) const;
     uint8_t getChannelsCount() const;
     TactID getTactId() const;
     void setTactId(const TactID &tactId);
@@ -29,6 +29,8 @@ public:
     CalibrationInfo getInfo() const;
     void setInfo(const CalibrationInfo &info);
     void setChannel(const ChannelID index,const Channel & channel);
+    bool getActive() const;
+    void setActive(bool active);
 };
 
 #endif // CHANNELSCALIBRATION_H
