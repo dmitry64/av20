@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui opengl
+QT       += core gui xml
 
 CONFIG(testconf) {
     message(Test configuration)

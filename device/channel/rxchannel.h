@@ -7,6 +7,8 @@
 #include "device/tvg/tvgcurve.h"
 #include "device/definitions.h"
 
+#include <QtXml/QDomElement>
+
 class RxChannel
 {
     std::string _name;
@@ -18,6 +20,7 @@ public:
     RxChannel();
     RxChannel(const RxChannel & original);
     ~RxChannel();
+    QDomElement generateXML(QDomDocument & doc) const;
     RxChannel & operator=(const RxChannel &L);
     void setPrismTime(uint8_t prismTime);
     std::vector<Gate> gates() const;

@@ -45,6 +45,32 @@ Channel::~Channel()
 
 }
 
+QDomElement Channel::generateXML(QDomDocument &doc) const
+{
+    QDomElement channel = doc.createElement("channel");
+
+    QDomElement index = doc.createElement("id");
+    index.appendChild(doc.createTextNode(QString::number(_index)));
+    channel.appendChild(index);
+
+    QDomElement color = doc.createElement("color");
+    color.appendChild(doc.createElement("red")).appendChild(doc.createTextNode(QString::number(_colorRed)));
+    color.appendChild(doc.createElement("green")).appendChild(doc.createTextNode(QString::number(_colorGreen)));
+    color.appendChild(doc.createElement("blue")).appendChild(doc.createTextNode(QString::number(_colorBlue)));
+    channel.appendChild(color);
+
+    QDomElement dispChannels = doc.createElement("displayChannels");
+    for(auto it = _displayChannels.begin(); it!=_displayChannels.end(); it++) {
+        const DisplayChannel & dc = it.operator *();
+        QDomElement dispChan = dc.generateXML(doc);
+        dispChannels.appendChild(dispChan);
+    }
+    channel.appendChild(dispChannels);
+
+
+    return channel;
+}
+
 void Channel::setColor(uint8_t red, uint8_t green, uint8_t blue)
 {
     _colorRed = red;

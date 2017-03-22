@@ -1,6 +1,7 @@
 #ifndef RXCHANNEL_H
 #define RXCHANNEL_H
 
+#include <QtXml/QDomElement>
 
 #include "displaychannel.h"
 
@@ -17,6 +18,7 @@ class Channel
 public:
     Channel();
     ~Channel();
+    QDomElement generateXML(QDomDocument & doc) const;
 
     void setColor(uint8_t red, uint8_t green, uint8_t blue);
     uint8_t getColorRed() const;

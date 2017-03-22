@@ -40,3 +40,10 @@ TxChannel::~TxChannel()
 {
 
 }
+
+QDomElement TxChannel::generateXML(QDomDocument &doc) const
+{
+    QDomElement tx = doc.createElement("tx");
+
+    return tx;
+}

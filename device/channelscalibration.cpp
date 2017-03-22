@@ -1,6 +1,8 @@
 #include "channelscalibration.h"
 #include <QDebug>
-
+#include <QFile>
+#include <QDir>
+#include <QTextStream>
 
 TactID ChannelsCalibration::getTactId() const
 {
@@ -48,10 +50,53 @@ ChannelsCalibration::ChannelsCalibration()
     _info._id = 0;
     _info._name = "none";
     _active = true;
+
+
 }
 
 ChannelsCalibration::~ChannelsCalibration()
 {
+    QFile outFile( QDir::homePath() + "/av20/test.xml");
+    outFile.open(QIODevice::WriteOnly | QIODevice::Text);
+    QDomDocument doc = generateXML();
+    QTextStream stream(&outFile);
+    stream << doc.toString();
+    outFile.close();
+}
+
+QDomDocument ChannelsCalibration::generateXML()
+{
+    QDomDocument doc;
+
+    QDomNode xmlNode = doc.createProcessingInstruction("xml",
+                       "version=\"1.0\" encoding=\"UTF-8\"");
+    doc.insertBefore(xmlNode, doc.firstChild());
+    QDomElement calibration = doc.createElement("calibration");
+    doc.appendChild(calibration);
+
+    QDomElement tact = doc.createElement("tact");
+    tact.appendChild(doc.createTextNode(QString::number(_tactId)));
+    calibration.appendChild(tact);
+
+    QDomElement info = doc.createElement("info");
+    QDomElement idElement = doc.createElement("id");
+    idElement.appendChild(doc.createTextNode(QString::number(_info._id)));
+    QDomElement nameElement = doc.createElement("name");
+    nameElement.appendChild(doc.createTextNode(_info._name));
+    info.appendChild(idElement);
+    info.appendChild(nameElement);
+    calibration.appendChild(info);
+
+    QDomElement channelsElement = doc.createElement("channels");
+    for(auto it = _channels.begin(); it!=_channels.end(); it++) {
+        const Channel & chan = it.operator *();
+        QDomElement element = chan.generateXML(doc);
+        channelsElement.appendChild(element);
+    }
+
+    calibration.appendChild(channelsElement);
+
+    return doc;
 }
 
 ChannelsCalibration ChannelsCalibration::getSnapshot()

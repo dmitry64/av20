@@ -2,6 +2,7 @@
 #define CHANNELSCALIBRATION_H
 
 #include <vector>
+#include <QtXml/QDomDocument>
 #include "tact/tact.h"
 #include "device/definitions.h"
 #include "device/channel/channel.h"
@@ -16,6 +17,7 @@ class ChannelsCalibration
 public:
     ChannelsCalibration();
     ~ChannelsCalibration();
+    QDomDocument generateXML();
     //void init();
     ChannelsCalibration getSnapshot();
     // get/set

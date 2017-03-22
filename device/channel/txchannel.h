@@ -3,6 +3,8 @@
 
 #include "device/definitions.h"
 
+#include <QtXml/QDomElement>
+
 class TxChannel
 {
     PulserFreq _freq;
@@ -11,6 +13,7 @@ class TxChannel
 public:
     TxChannel();
     ~TxChannel();
+    QDomElement generateXML(QDomDocument & doc) const;
     PulserFreq freq() const;
     void setFreq(const PulserFreq &freq);
     PulserProg prog() const;

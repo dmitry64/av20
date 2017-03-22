@@ -62,6 +62,13 @@ RxChannel::~RxChannel()
     }
 }
 
+QDomElement RxChannel::generateXML(QDomDocument &doc) const
+{
+    QDomElement rx = doc.createElement("rx");
+
+    return rx;
+}
+
 RxChannel &RxChannel::operator=(const RxChannel &L)
 {
     if (this == &L) {

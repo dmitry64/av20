@@ -84,6 +84,11 @@ Device::Device()
     Q_ASSERT(_spi);
 }
 
+Device::~Device()
+{
+
+}
+
 void Device::init(uint8_t * version)
 {
     logEvent("Device","Initializing");

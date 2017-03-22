@@ -17,6 +17,7 @@ private:
     TVG getTVGFromCurve(const TVGCurve *curve) const;
 public:
     Device();
+    ~Device();
     void init(uint8_t * version);
     void fillRegisters();
     void resetConfigRegisters();
