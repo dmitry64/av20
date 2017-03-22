@@ -3,7 +3,8 @@
 
 #include <QWidget>
 
-namespace Ui {
+namespace Ui
+{
 class MemoryWidget;
 }
 
@@ -14,6 +15,7 @@ class MemoryWidget : public QWidget
 public:
     explicit MemoryWidget(QWidget *parent = 0);
     ~MemoryWidget();
+    void update();
 
 private:
     Ui::MemoryWidget *ui;
