@@ -39,6 +39,7 @@ public:
     }
 
     void init();
+    QString getCurrentOperator();
     QString getSoftwareVersion();
     QString getOSVersion();
     void setDate(QDate date);

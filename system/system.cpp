@@ -45,6 +45,11 @@ void System::init()
     logEvent("System","Ready");
 }
 
+QString System::getCurrentOperator()
+{
+    return "Ivanov A.A.";
+}
+
 QString System::getSoftwareVersion()
 {
     return APP_VERSION;
