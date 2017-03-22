@@ -143,6 +143,7 @@ DeviceMode Core::getCurrentDeviceMode()
 
 void Core::init()
 {
+    logEvent("Core","Core initializing");
     _device->init(&_deviceVersion);
     _currentScheme.store(0);
     _currentCalibration.store(0);

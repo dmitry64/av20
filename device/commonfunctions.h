@@ -7,6 +7,7 @@
 #include "definitions.h"
 
 #include <QColor>
+#include <QTime>
 #include <QDebug>
 
 static inline QColor getColorByLevel(const uint8_t level)
@@ -43,7 +44,8 @@ static inline QString getVersionString(uint8_t version)
 static inline void logEvent(const QString & category,const QString & text)
 {
     QString cat = ("["+category+"] ");
-    std::cout << std::setw(15) << cat.toStdString() << text.toStdString() << std::endl;
+    QString time = "["+QTime::currentTime().toString("HH:mm:ss")+"]";
+    std::cout << std::setw(10) << time.toStdString() << std::setw(15) << cat.toStdString() << text.toStdString() << std::endl;
 }
 
 static inline bool gateSorter(const Gate & a,const Gate & b)
