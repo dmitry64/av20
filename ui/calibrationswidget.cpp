@@ -43,9 +43,11 @@ void CalibrationsWidget::init(const ChannelsCalibration & calibration)
         button->setCalibrationInfo(calibInfo);
         if(calibration.getInfo()._id == calibInfo._id) {
             button->setActive(true);
+            button->setCurrentCalibration(true);
         }
         else {
             button->setActive(false);
+            button->setCurrentCalibration(false);
         }
 
         ui->calibrationsLayout->addWidget(button);

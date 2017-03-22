@@ -6,7 +6,8 @@
 #include "device/definitions.h"
 
 
-namespace Ui {
+namespace Ui
+{
 class CalibrationButton;
 }
 
@@ -15,12 +16,14 @@ class CalibrationButton : public QWidget
     Q_OBJECT
 
     CalibrationInfo _info;
-    bool _status;
+    bool _active;
+    bool _current;
 public:
     explicit CalibrationButton(QWidget *parent = 0);
     ~CalibrationButton();
     void setCalibrationInfo(CalibrationInfo info);
     void setActive(bool status);
+    void setCurrentCalibration(bool status);
     CalibrationInfo info() const;
 
 signals:

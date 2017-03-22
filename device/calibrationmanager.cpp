@@ -190,7 +190,9 @@ std::vector<CalibrationInfo> CalibrationManager::getCalibrationsInfoByTactID(Tac
         std::vector<CalibrationInfo> result;
         for(auto it = list.begin(); it!=list.end(); it++) {
             const ChannelsCalibration & cal = it.operator *();
-            result.push_back(it.operator*().getInfo());
+            if(cal.getActive()) {
+                result.push_back(it.operator*().getInfo());
+            }
         }
         return result;
     }
