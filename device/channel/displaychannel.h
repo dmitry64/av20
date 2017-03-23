@@ -15,7 +15,7 @@ public:
     DisplayChannel();
     ~DisplayChannel();
     QDomElement generateXML(QDomDocument & doc) const;
-
+    void loadXML(const QDomNode & node);
     std::vector<Gate> gates() const;
     void setGates(const std::vector<Gate> &gates);
     double angle() const;

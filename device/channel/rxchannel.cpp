@@ -8,12 +8,12 @@ void RxChannel::setPrismTime(uint8_t prismTime)
     _prismTime = prismTime;
 }
 
-std::string RxChannel::getName() const
+QString RxChannel::getName() const
 {
     return _name;
 }
 
-void RxChannel::setName(const std::string &name)
+void RxChannel::setName(const QString &name)
 {
     _name = name;
 }
@@ -46,7 +46,7 @@ uint8_t RxChannel::getPrismTime() const
     return _prismTime;
 }
 
-RxChannel::RxChannel() : _prismTime(0), _tvgCurve(0), _markerPos(0)
+RxChannel::RxChannel() : _name("none"),_prismTime(0), _tvgCurve(0), _markerPos(0)
 {
 }
 
@@ -66,7 +66,26 @@ QDomElement RxChannel::generateXML(QDomDocument &doc) const
 {
     QDomElement rx = doc.createElement("rx");
 
+    QDomElement name = doc.createElement("name");
+    name.appendChild(doc.createTextNode(_name));
+    rx.appendChild(name);
+
+    QDomElement prismTime = doc.createElement("prismTime");
+    prismTime.appendChild(doc.createTextNode(QString::number(_prismTime)));
+    rx.appendChild(prismTime);
+
+    QDomElement tvg = _tvgCurve->generateXML(doc);
+    rx.appendChild(tvg);
+
     return rx;
+}
+
+void RxChannel::loadXML(const QDomNode &node)
+{
+    qDebug() << "rx";
+    _tvgCurve = generateTVGFromXML(node.firstChildElement("tvg"));
+    _prismTime = node.firstChildElement("prismTime").text().toUInt();
+    _name = node.firstChildElement("name").text().toUInt();
 }
 
 RxChannel &RxChannel::operator=(const RxChannel &L)

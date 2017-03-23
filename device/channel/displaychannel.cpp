@@ -92,3 +92,29 @@ QDomElement DisplayChannel::generateXML(QDomDocument &doc) const
 
     return dispChannel;
 }
+
+void DisplayChannel::loadXML(const QDomNode &node)
+{
+    _angle = node.firstChildElement("angle").text().toDouble();
+
+    RxChannel rx;
+    rx.loadXML(node.firstChildElement("rx"));
+    _rx = rx;
+
+    TxChannel tx;
+    tx.loadXML(node.firstChildElement("tx"));
+    _tx = tx;
+
+    QDomElement gatesElement = node.firstChildElement("gates");
+    auto gates = gatesElement.elementsByTagName("gate");
+    for(int i=0; i<gates.size(); i++) {
+        Gate gate;
+        auto gateElement = gates.at(i);
+        gate._id = gateElement.firstChildElement("id").text().toUInt();
+        gate._start = gateElement.firstChildElement("start").text().toUInt();
+        gate._finish = gateElement.firstChildElement("finish").text().toUInt();
+        gate._level = gateElement.firstChildElement("level").text().toUInt();
+        _gates.push_back(gate);
+    }
+
+}

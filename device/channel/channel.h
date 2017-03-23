@@ -19,6 +19,7 @@ public:
     Channel();
     ~Channel();
     QDomElement generateXML(QDomDocument & doc) const;
+    void loadXML(const QDomNode & node);
 
     void setColor(uint8_t red, uint8_t green, uint8_t blue);
     uint8_t getColorRed() const;

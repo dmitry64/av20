@@ -60,6 +60,35 @@ TVGCurve *TVGSinglePoint::clone() const
     return new TVGSinglePoint(this);
 }
 
+QDomElement TVGSinglePoint::generateXML(QDomDocument &doc)
+{
+    QDomElement tvg = doc.createElement("tvg");
+
+    tvg.setAttribute("type","single");
+
+    QDomElement yBase = doc.createElement("yBase");
+    yBase.appendChild(doc.createTextNode(QString::number(_yBase)));
+    tvg.appendChild(yBase);
+
+    QDomElement xOffset = doc.createElement("xOffset");
+    xOffset.appendChild(doc.createTextNode(QString::number(_xOffset)));
+    tvg.appendChild(xOffset);
+
+    QDomElement yHeight = doc.createElement("yHeight");
+    yHeight.appendChild(doc.createTextNode(QString::number(_yHeight)));
+    tvg.appendChild(yHeight);
+
+    QDomElement xWidth = doc.createElement("xWidth");
+    xWidth.appendChild(doc.createTextNode(QString::number(_xWidth)));
+    tvg.appendChild(xWidth);
+
+    QDomElement curve = doc.createElement("curve");
+    curve.appendChild(doc.createTextNode(QString::number(_curve)));
+    tvg.appendChild(curve);
+
+    return tvg;
+}
+
 double TVGSinglePoint::getSample(double x) const
 {
     double Xms = x * 200.0;

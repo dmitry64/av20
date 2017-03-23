@@ -50,21 +50,52 @@ ChannelsCalibration::ChannelsCalibration()
     _info._id = 0;
     _info._name = "none";
     _active = true;
-
-
 }
 
 ChannelsCalibration::~ChannelsCalibration()
 {
-    QFile outFile( QDir::homePath() + "/av20/test.xml");
+
+}
+
+void ChannelsCalibration::saveToFile(QString path, size_t saveIndex) const
+{
+    QFile outFile(path);
     outFile.open(QIODevice::WriteOnly | QIODevice::Text);
-    QDomDocument doc = generateXML();
+    QDomDocument doc = generateXML(saveIndex);
     QTextStream stream(&outFile);
     stream << doc.toString();
     outFile.close();
 }
 
-QDomDocument ChannelsCalibration::generateXML()
+void ChannelsCalibration::loadFromFile(QString path)
+{
+    QDomDocument doc;
+    QFile inputFile(path);
+    if (!inputFile.open(QIODevice::ReadOnly) || !doc.setContent(&inputFile)) {
+        qDebug() << "Cannot read file";
+        return;
+    }
+    QDomNode calibration = doc.elementsByTagName("calibration").at(0);
+    QDomElement tact = calibration.firstChildElement("tact");
+    _tactId = tact.text().toUInt();
+    QDomElement info = calibration.firstChildElement("info");
+    _info._id = info.firstChildElement("id").text().toUInt();
+    _info._name = info.firstChildElement("name").text();
+    _active = true;
+
+    _channels.clear();
+    QDomElement channels = calibration.firstChildElement("channels");
+    QDomNodeList chans = channels.elementsByTagName("channel");
+    for(int i=0; i<chans.size(); i++) {
+        QDomNode channel = chans.at(i);
+        Channel newChannel;
+        newChannel.loadXML(channel);
+        _channels.push_back(newChannel);
+    }
+
+}
+
+QDomDocument ChannelsCalibration::generateXML(size_t newIndex) const
 {
     QDomDocument doc;
 
@@ -80,7 +111,7 @@ QDomDocument ChannelsCalibration::generateXML()
 
     QDomElement info = doc.createElement("info");
     QDomElement idElement = doc.createElement("id");
-    idElement.appendChild(doc.createTextNode(QString::number(_info._id)));
+    idElement.appendChild(doc.createTextNode(QString::number(newIndex)));
     QDomElement nameElement = doc.createElement("name");
     nameElement.appendChild(doc.createTextNode(_info._name));
     info.appendChild(idElement);

@@ -14,6 +14,7 @@ public:
     TxChannel();
     ~TxChannel();
     QDomElement generateXML(QDomDocument & doc) const;
+    void loadXML(const QDomNode & node);
     PulserFreq freq() const;
     void setFreq(const PulserFreq &freq);
     PulserProg prog() const;

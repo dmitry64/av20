@@ -45,5 +45,24 @@ QDomElement TxChannel::generateXML(QDomDocument &doc) const
 {
     QDomElement tx = doc.createElement("tx");
 
+    QDomElement freq = doc.createElement("freq");
+    freq.appendChild(doc.createTextNode(QString::number(_freq)));
+    tx.appendChild(freq);
+
+    QDomElement prog = doc.createElement("prog");
+    prog.appendChild(doc.createTextNode(QString::number(_prog)));
+    tx.appendChild(prog);
+
+    QDomElement doubleMode = doc.createElement("doubleMode");
+    doubleMode.appendChild(doc.createTextNode(QString::number(_doubleMode)));
+    tx.appendChild(doubleMode);
+
     return tx;
+}
+
+void TxChannel::loadXML(const QDomNode &node)
+{
+    _freq = static_cast<PulserFreq>(node.firstChildElement("freq").text().toUInt());
+    _prog = static_cast<PulserProg>(node.firstChildElement("prog").text().toUInt());
+    _doubleMode = node.firstChildElement("doubleMode").text().toUInt();
 }

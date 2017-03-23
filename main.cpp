@@ -26,6 +26,10 @@ int main(int argc, char *argv[])
     CalibrationManager * calibrationManager = new CalibrationManager();
     calibrationManager->init();
 
+    calibrationManager->setSavePath(system->getFilesystem()->getCalibrationsPath());
+    calibrationManager->loadAll();
+    //calibrationManager->saveAll();
+
     ModeManager * modeManager = new ModeManager();
     modeManager->init();
 
@@ -53,6 +57,8 @@ int main(int argc, char *argv[])
     //mainWindow->move(-1000,0);
     //mainWindow->showFullScreen();
     mainWindow->show();
+
+
 
     return a.exec();
 }

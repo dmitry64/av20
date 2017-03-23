@@ -1,6 +1,8 @@
 #include "calibrationmanager.h"
 #include "tvg/tvgsinglepoint.h"
 #include <QDebug>
+#include <QDir>
+#include <QDirIterator>
 
 std::vector<Gate> CalibrationManager::generateGates()
 {
@@ -141,9 +143,76 @@ void CalibrationManager::initHandModeCalibration()
     addCalibration(cal2s2);
 }
 
+void CalibrationManager::syncWithFile(const ChannelsCalibration & calib)
+{
+    QString filePath = _savePath+"/"+QString::number(calib.getTactId())+"/"+QString::number(calib.getInfo()._id)+".xml";
+    calib.saveToFile(filePath,calib.getInfo()._id);
+}
+
 CalibrationManager::CalibrationManager()
 {
 
+}
+
+CalibrationManager::~CalibrationManager()
+{
+
+}
+
+void CalibrationManager::saveAll()
+{
+    logEvent("CalibMan","Saving all calibrations...");
+    for(auto it=_calibrations.begin(); it!=_calibrations.end(); it++) {
+        TactID id = it.operator *().first;
+        QDir dir(_savePath);
+
+        QDir tactPath(_savePath+"/"+QString::number(id));
+        if(tactPath.exists()) {
+            tactPath.removeRecursively();
+        }
+
+        dir.mkdir(QString::number(id));
+        const std::vector<ChannelsCalibration> & channels = it.operator *().second;
+        size_t activeCounter = 0;
+        for(size_t i=0; i<channels.size(); i++) {
+            if(channels.at(i).getActive()) {
+                QString filePath = _savePath+"/"+QString::number(id)+"/"+QString::number(activeCounter)+".xml";
+                if(QFile(filePath).exists()) {
+                    QFile(filePath).remove();
+                }
+                channels.at(i).saveToFile(filePath,activeCounter);
+                activeCounter++;
+            }
+        }
+    }
+}
+
+void CalibrationManager::loadAll()
+{
+    _calibrations.clear();
+    QDirIterator it(_savePath,QStringList() << "*",QDir::Dirs | QDir::NoDotAndDotDot);
+    while (it.hasNext()) {
+        auto dir = it.next();
+        qDebug() << dir;
+        QDir tactDir(dir);
+        QString tactStr = tactDir.dirName();
+        TactID id = tactStr.toUInt();
+
+        QDirIterator calibIterator(dir,QStringList() << "*",QDir::Files);
+        while(calibIterator.hasNext()) {
+            auto calibFile = calibIterator.next();
+            qDebug() << calibFile;
+            ChannelsCalibration tempCal;
+            tempCal.loadFromFile(calibFile);
+            addCalibration(tempCal);
+        }
+
+    }
+}
+
+void CalibrationManager::setSavePath(QString path)
+{
+    _savePath = path;
 }
 
 void CalibrationManager::init()
@@ -168,13 +237,6 @@ std::vector<ChannelsCalibration> CalibrationManager::getCalibrationsByTactID(Tac
 {
     if(_calibrations.find(id) != _calibrations.end()) {
         auto list = _calibrations.at(id);
-//        std::vector<ChannelsCalibration> result;
-//        for(size_t i=0; i<list.size(); i++) {
-//            if(list[i].getActive()) {
-//                result.push_back(list[i]);
-//            }
-//        }
-
         return list;
     }
     else {
@@ -254,4 +316,5 @@ void CalibrationManager::createCopyCalibration(TactID id, CalibrationIndex index
 void CalibrationManager::applyChannelsModification(TactID id, CalibrationIndex index, ChannelID channelId, Channel channel)
 {
     _calibrations[id][index].setChannel(channelId,channel);
+    syncWithFile(_calibrations[id][index]);
 }

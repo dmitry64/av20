@@ -71,6 +71,28 @@ QDomElement Channel::generateXML(QDomDocument &doc) const
     return channel;
 }
 
+void Channel::loadXML(const QDomNode &node)
+{
+    _index = node.firstChildElement("id").text().toUInt();
+    _activeDisplayChannel = 0;
+
+    QDomNode color = node.firstChildElement("color");
+    _colorRed = color.firstChildElement("red").text().toUShort();
+    _colorGreen = color.firstChildElement("green").text().toUShort();
+    _colorBlue = color.firstChildElement("blue").text().toUShort();
+
+    QDomNode dispChans = node.firstChildElement("displayChannels");
+    QDomNodeList list = dispChans.childNodes();
+    for(int i=0; i<list.size(); i++) {
+        qDebug() << "channel";
+        QDomNode dc = list.at(i);
+        DisplayChannel chan;
+        chan.loadXML(dc);
+        _displayChannels.push_back(chan);
+    }
+
+}
+
 void Channel::setColor(uint8_t red, uint8_t green, uint8_t blue)
 {
     _colorRed = red;

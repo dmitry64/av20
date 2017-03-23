@@ -348,6 +348,8 @@ void Core::modeswitch()
 void Core::finish()
 {
     logEvent("Core","Disconnected!");
+
+    _calibrationManager->saveAll();
 }
 
 void Core::searchWork()
