@@ -7,17 +7,16 @@
 
 class Filesystem
 {
-
-    QStringList getFilesList(QString path);
-    void createStructure();
+    static QStringList getFilesList(QString path);
+    static void createStructure();
 public:
     Filesystem();
     void initFilesystem();
-    QString getRootPath();
+    static QString getRootPath();
 
-    QString getDataPath();
-    QString getMediaPath();
-    QString getCalibrationsPath();
+    static QString getDataPath();
+    static QString getMediaPath();
+    static QString getCalibrationsPath();
 
     QStringList getDataList();
     QStringList getCalibrationsList();

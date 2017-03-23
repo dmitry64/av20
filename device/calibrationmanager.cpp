@@ -87,16 +87,13 @@ std::vector<Channel> CalibrationManager::generateChannels(int channelsNumber, in
         Channel chTemp;
         chTemp.setIndex(i);
         std::vector<DisplayChannel> dispChans;
-
         for(int j=0; j<dispChansNumber; j++) {
             DisplayChannel dc1 = generateDisplayChannel(i*10 +j);
             dispChans.push_back(dc1);
         }
 
         chTemp.setDisplayChannels(dispChans);
-
         setColor(chTemp, i);
-
         channels1.push_back(chTemp);
     }
 
@@ -143,7 +140,7 @@ void CalibrationManager::initHandModeCalibration()
     addCalibration(cal2s2);
 }
 
-void CalibrationManager::syncWithFile(const ChannelsCalibration & calib)
+void CalibrationManager::syncWithFile(const ChannelsCalibration & calib) const
 {
     logEvent("CalibMan","Sync");
     QString filePath = _savePath+"/"+QString::number(calib.getTactId())+"/"+QString::number(calib.getInfo()._id)+".xml";

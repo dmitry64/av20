@@ -14,7 +14,7 @@ class Device
     DeviceInterface * _spi;
 private:
     TactRegisters getRegistersByTact(const uint8_t index, const ChannelsCalibration & mode, const TactTable & tactTable);
-    TVG getTVGFromCurve(const TVGCurve *curve) const;
+    static TVG getTVGFromCurve(const TVGCurve *curve);
 public:
     Device();
     ~Device();

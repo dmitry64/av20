@@ -49,7 +49,7 @@ TactRegisters Device::getRegistersByTact(const uint8_t index, const ChannelsCali
     return reg;
 }
 
-TVG Device::getTVGFromCurve(const TVGCurve *curve) const
+TVG Device::getTVGFromCurve(const TVGCurve *curve)
 {
     Q_ASSERT(curve);
 

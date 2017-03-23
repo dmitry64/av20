@@ -20,14 +20,14 @@ std::vector<Tact> TactTable::getTactTable() const
     return _tactTable;
 }
 
-TactTable::TactTable()
+TactTable::TactTable() : _id(0)
 {
-    
+
 }
 
 TactTable::~TactTable()
 {
-    
+
 }
 
 void TactTable::init()

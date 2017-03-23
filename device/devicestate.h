@@ -34,7 +34,7 @@ public:
     void applyState();
 
     void setTVGForChannel(uint8_t index, TVG tvg);
-    TVG getTvgForChannel(uint8_t index);
+    TVG getTvgForChannel(uint8_t index) const;
     void setChannelsTableTact(uint8_t index, TactRegisters tact);
     void setChannelsTableRegister(uint8_t reg, uint8_t value);
     TactRegisters getTactByIndex(uint8_t index);

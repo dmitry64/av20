@@ -8,7 +8,7 @@ class RemoveCalibrationModificator : public Modificator
 {
     CalibrationIndex _index;
 public:
-    RemoveCalibrationModificator(const CalibrationIndex index);
+    explicit RemoveCalibrationModificator(const CalibrationIndex index);
     void apply(Core * core);
 };
 

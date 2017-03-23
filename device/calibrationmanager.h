@@ -15,7 +15,7 @@ class CalibrationManager
     QString _savePath;
     void initSearchModeCalibration();
     void initHandModeCalibration();
-    void syncWithFile(const ChannelsCalibration &calib);
+    void syncWithFile(const ChannelsCalibration &calib) const;
     void sortCalibrations();
 public:
     CalibrationManager();
@@ -33,8 +33,8 @@ public:
     void createCopyCalibration(TactID id, CalibrationIndex index, QString name);
     void applyChannelsModification(TactID id, CalibrationIndex index, ChannelID channelId, Channel channel);
 private:
-    std::vector<Gate> generateGates();
-    void setColor(Channel &chTemp, int i);
+    static std::vector<Gate> generateGates();
+    static void setColor(Channel &chTemp, int i);
     DisplayChannel generateDisplayChannel(double angle);
     std::vector<Channel> generateChannels(int channelsNumber, int dispChansNumber);
     ChannelsCalibration generateCalibration(TactID tact, CalibrationIndex index, QString name, int channelsNumber, int dispChansNumber);
