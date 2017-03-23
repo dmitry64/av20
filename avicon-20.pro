@@ -99,14 +99,14 @@ SOURCES += core.cpp \
     system/batterycontroller.cpp \
     system/datetimecontroller.cpp \
     device/modificators/createcalibrationmodificator.cpp \
-    device/modificators/removecalibrationmodificator.cpp
+    device/modificators/removecalibrationmodificator.cpp \
+    common/commonfunctions.cpp
 #    tests/coretest.cpp
 
 HEADERS  += \
     core.h \
     device/device.h \
     device/spi/driverspi.h \
-    device/definitions.h \
     device/devicestate.h \
     ui/ascanwidget.h \
     ui/controls/touchspinbox.h \
@@ -159,7 +159,6 @@ HEADERS  += \
     ui/calibrationswidget.h \
     device/modificators/tvgmodificator.h \
     ui/controls/calibrationbutton.h \
-    device/commonfunctions.h \
     device/channel/displaychannel.h \
     system/brightnesscontroller.h \
     system/temperature.h \
@@ -167,7 +166,9 @@ HEADERS  += \
     system/batterycontroller.h \
     system/datetimecontroller.h \
     device/modificators/createcalibrationmodificator.h \
-    device/modificators/removecalibrationmodificator.h
+    device/modificators/removecalibrationmodificator.h \
+    common/commonfunctions.h \
+    common/definitions.h
 #    tests/coretest.h
 
 FORMS    += \

@@ -4,8 +4,8 @@
 #include <QWidget>
 #include <queue>
 #include <map>
-#include "device/definitions.h"
-#include "device/commonfunctions.h"
+#include "common/definitions.h"
+#include "common/commonfunctions.h"
 #include "device/channel/channel.h"
 #include <map>
 

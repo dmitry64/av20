@@ -3,10 +3,11 @@
 
 #include <QWidget>
 
-#include "device/definitions.h"
-#include "device/commonfunctions.h"
+#include "common/definitions.h"
+#include "common/commonfunctions.h"
 
-namespace Ui {
+namespace Ui
+{
 class GateController;
 }
 

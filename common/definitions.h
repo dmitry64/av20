@@ -1,6 +1,7 @@
 #ifndef DEFINITIONS_H
 #define DEFINITIONS_H
 
+
 #include <stdint.h>
 #include <vector>
 #include <QString>

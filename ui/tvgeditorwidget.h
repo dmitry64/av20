@@ -2,7 +2,7 @@
 #define TVGEDITORWIDGET_H
 
 #include <QWidget>
-#include "device/definitions.h"
+#include "common/definitions.h"
 #include "device/channelscalibration.h"
 #include "core.h"
 

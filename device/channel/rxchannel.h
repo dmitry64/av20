@@ -5,8 +5,8 @@
 #include "stdint.h"
 
 #include "device/tvg/tvgcurve.h"
-#include "device/definitions.h"
-#include "device/commonfunctions.h"
+#include "common/definitions.h"
+#include "common/commonfunctions.h"
 
 #include <QtXml/QDomElement>
 

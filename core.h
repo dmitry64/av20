@@ -7,7 +7,7 @@
 #include <atomic>
 #include <queue>
 #include "device/modificators/modificator.h"
-#include "device/definitions.h"
+#include "common/definitions.h"
 #include "device/channelscalibration.h"
 #include "device/devicestate.h"
 #include "device/device.h"

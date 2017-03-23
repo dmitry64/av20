@@ -1,7 +1,7 @@
 #ifndef DATETIMECONTROLLER_H
 #define DATETIMECONTROLLER_H
 
-#include "device/commonfunctions.h"
+#include "common/commonfunctions.h"
 #include <QObject>
 
 #include <QDateTime>

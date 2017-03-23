@@ -3,7 +3,7 @@
 #include <QObject>
 #include <QThread>
 #include <core.h>
-#include "device/definitions.h"
+#include "common/definitions.h"
 #include "system/system.h"
 #include "device/calibrationmanager.h"
 #define DEFAULT_MODE

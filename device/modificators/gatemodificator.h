@@ -1,7 +1,7 @@
 #ifndef GATEMODIFICATOR_H
 #define GATEMODIFICATOR_H
 
-#include "device/definitions.h"
+#include "common/definitions.h"
 #include "modificator.h"
 #include "core.h"
 

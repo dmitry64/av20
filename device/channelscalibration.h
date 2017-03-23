@@ -4,7 +4,7 @@
 #include <vector>
 #include <QtXml/QDomDocument>
 #include "tact/tact.h"
-#include "device/definitions.h"
+#include "common/definitions.h"
 #include "device/channel/channel.h"
 #include "device/tact/tacttable.h"
 

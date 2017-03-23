@@ -4,7 +4,7 @@
 #include "spi/deviceinterface.h"
 #include "spi/driverspi.h"
 #include "spi/fakespi.h"
-#include "commonfunctions.h"
+#include "common/commonfunctions.h"
 #include <vector>
 #include "channelscalibration.h"
 #include "tvg/tvgcurve.h"

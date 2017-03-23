@@ -5,7 +5,7 @@
 #include <QThread>
 #include <atomic>
 #include <vector>
-#include "device/commonfunctions.h"
+#include "common/commonfunctions.h"
 #include "device/devicestate.h"
 #include "deviceinterface.h"
 

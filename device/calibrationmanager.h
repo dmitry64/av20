@@ -3,7 +3,7 @@
 
 #include "channelscalibration.h"
 #include "tactid.h"
-#include "commonfunctions.h"
+#include "common/commonfunctions.h"
 #include <map>
 #include <list>
 

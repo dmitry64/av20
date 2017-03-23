@@ -2,7 +2,7 @@
 #define TVGCURVE_H
 
 #include <vector>
-#include "device/definitions.h"
+#include "common/definitions.h"
 
 #include <QDomElement>
 

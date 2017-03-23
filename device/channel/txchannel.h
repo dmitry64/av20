@@ -1,7 +1,7 @@
 #ifndef TXCHANNEL_H
 #define TXCHANNEL_H
 
-#include "device/definitions.h"
+#include "common/definitions.h"
 
 #include <QtXml/QDomElement>
 

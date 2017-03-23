@@ -178,10 +178,6 @@ void CalibrationManager::saveAll()
         for(size_t i=0; i<channels.size(); i++) {
             if(channels.at(i).getActive()) {
                 QString filePath = _savePath+"/"+QString::number(id)+"/"+QString::number(activeCounter)+".xml";
-                QFile oldFile(filePath);
-                /*if(oldFile.exists()) {
-                    oldFile.
-                }*/
                 channels.at(i).saveToFile(filePath,activeCounter);
                 activeCounter++;
             }
@@ -206,11 +202,11 @@ void CalibrationManager::loadAll()
             auto calibFile = calibIterator.next();
             qDebug() << calibFile;
             ChannelsCalibration tempCal;
+            tempCal.setTactId(id);
             tempCal.loadFromFile(calibFile,index);
             addCalibration(tempCal);
             index++;
         }
-
     }
 }
 

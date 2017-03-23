@@ -3,7 +3,7 @@
 
 #include <QWidget>
 
-#include "device/definitions.h"
+#include "common/definitions.h"
 
 
 namespace Ui

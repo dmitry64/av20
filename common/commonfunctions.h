@@ -5,7 +5,7 @@
 #include <iomanip>
 
 #include "definitions.h"
-#include "tvg/tvgsinglepoint.h"
+#include "device/tvg/tvgsinglepoint.h"
 
 #include <QColor>
 #include <QTime>

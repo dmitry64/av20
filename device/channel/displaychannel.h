@@ -2,7 +2,7 @@
 #define DISPLAYCHANNEL_H
 #include "rxchannel.h"
 #include "txchannel.h"
-#include "device/definitions.h"
+#include "common/definitions.h"
 #include <QtXml/QDomElement>
 
 class DisplayChannel

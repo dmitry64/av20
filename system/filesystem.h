@@ -3,7 +3,7 @@
 
 #include <QString>
 #include <QDir>
-#include "device/commonfunctions.h"
+#include "common/commonfunctions.h"
 
 class Filesystem
 {

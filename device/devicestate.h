@@ -1,7 +1,7 @@
 #ifndef DEVICESTATE_H
 #define DEVICESTATE_H
 
-#include "definitions.h"
+#include "common/definitions.h"
 
 class DeviceState
 {

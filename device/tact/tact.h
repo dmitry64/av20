@@ -5,7 +5,7 @@
 #include <vector>
 
 #include "device/channel/rxchannel.h"
-#include "device/definitions.h"
+#include "common/definitions.h"
 
 class Tact
 {
