@@ -67,7 +67,7 @@ void ChannelsCalibration::saveToFile(QString path, size_t saveIndex) const
     outFile.close();
 }
 
-void ChannelsCalibration::loadFromFile(QString path)
+void ChannelsCalibration::loadFromFile(QString path, size_t index)
 {
     QDomDocument doc;
     QFile inputFile(path);
@@ -80,7 +80,7 @@ void ChannelsCalibration::loadFromFile(QString path)
     QDomElement tact = calibration.firstChildElement("tact");
     _tactId = tact.text().toUInt();
     QDomElement info = calibration.firstChildElement("info");
-    _info._id = info.firstChildElement("id").text().toUInt();
+    _info._id = index;
     _info._name = info.firstChildElement("name").text();
     _active = true;
 

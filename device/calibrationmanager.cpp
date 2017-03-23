@@ -201,12 +201,14 @@ void CalibrationManager::loadAll()
         TactID id = tactStr.toUInt();
 
         QDirIterator calibIterator(dir,QStringList() << "*",QDir::Files);
+        size_t index = 0;
         while(calibIterator.hasNext()) {
             auto calibFile = calibIterator.next();
             qDebug() << calibFile;
             ChannelsCalibration tempCal;
-            tempCal.loadFromFile(calibFile);
+            tempCal.loadFromFile(calibFile,index);
             addCalibration(tempCal);
+            index++;
         }
 
     }

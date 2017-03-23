@@ -24,7 +24,7 @@ void CalibrationsWidget::init(const ChannelsCalibration & calibration)
     ui->modeLabel->setText(QString::number(modeType));
     ui->schemeLabel->setText(QString::number(tactid));
 
-    CalibrationsInfoList info =  _core->getAvailableCalibrationsSnapshot();
+    CalibrationsInfoList info = _core->getAvailableCalibrationsSnapshot();
 
     for(size_t i=0; i<_buttons.size(); i++) {
         CalibrationButton * button = _buttons.at(i);
