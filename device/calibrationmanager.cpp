@@ -150,6 +150,19 @@ void CalibrationManager::syncWithFile(const ChannelsCalibration & calib)
     calib.saveToFile(filePath,calib.getInfo()._id);
 }
 
+static inline bool calibrationSorter(const ChannelsCalibration & a,const ChannelsCalibration & b)
+{
+    return (a.getInfo()._id<b.getInfo()._id);
+}
+
+void CalibrationManager::sortCalibrations()
+{
+    for(auto it=_calibrations.begin(); it!=_calibrations.end(); it++) {
+        std::sort(it.operator *().second.begin(),it.operator *().second.end(),calibrationSorter);
+
+    }
+}
+
 CalibrationManager::CalibrationManager()
 {
 
@@ -191,23 +204,20 @@ void CalibrationManager::loadAll()
     QDirIterator it(_savePath,QStringList() << "*",QDir::Dirs | QDir::NoDotAndDotDot);
     while (it.hasNext()) {
         auto dir = it.next();
-        qDebug() << dir;
         QDir tactDir(dir);
         QString tactStr = tactDir.dirName();
         TactID id = tactStr.toUInt();
 
         QDirIterator calibIterator(dir,QStringList() << "*",QDir::Files);
-        size_t index = 0;
         while(calibIterator.hasNext()) {
             auto calibFile = calibIterator.next();
-            qDebug() << calibFile;
             ChannelsCalibration tempCal;
             tempCal.setTactId(id);
-            tempCal.loadFromFile(calibFile,index);
+            tempCal.loadFromFile(calibFile);
             addCalibration(tempCal);
-            index++;
         }
     }
+    sortCalibrations();
 }
 
 void CalibrationManager::setSavePath(QString path)

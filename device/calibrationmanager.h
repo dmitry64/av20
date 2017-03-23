@@ -16,12 +16,14 @@ class CalibrationManager
     void initSearchModeCalibration();
     void initHandModeCalibration();
     void syncWithFile(const ChannelsCalibration &calib);
+    void sortCalibrations();
 public:
     CalibrationManager();
     ~CalibrationManager();
     void saveAll();
     void loadAll();
     void setSavePath(QString path);
+
     void init();
     ChannelsCalibration getLastCalibrationByTactID(TactID id);
     std::vector<ChannelsCalibration> getCalibrationsByTactID(TactID id);

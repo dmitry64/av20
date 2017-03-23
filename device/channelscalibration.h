@@ -18,7 +18,7 @@ public:
     ChannelsCalibration();
     ~ChannelsCalibration();
     void saveToFile(QString path,size_t saveIndex) const;
-    void loadFromFile(QString path, size_t index);
+    void loadFromFile(QString path);
     QDomDocument generateXML(size_t newIndex) const;
     //void init();
     ChannelsCalibration getSnapshot();

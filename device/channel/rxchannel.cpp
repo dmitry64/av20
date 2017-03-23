@@ -82,7 +82,6 @@ QDomElement RxChannel::generateXML(QDomDocument &doc) const
 
 void RxChannel::loadXML(const QDomNode &node)
 {
-    qDebug() << "rx";
     _tvgCurve = generateTVGFromXML(node.firstChildElement("tvg"));
     _prismTime = node.firstChildElement("prismTime").text().toUInt();
     _name = node.firstChildElement("name").text();

@@ -55,4 +55,6 @@ static inline bool gateSorter(const Gate & a,const Gate & b)
     return (a._level<b._level);
 }
 
+
+
 #endif // COMMONFUNCTIONS_H

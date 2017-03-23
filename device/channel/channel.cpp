@@ -84,7 +84,6 @@ void Channel::loadXML(const QDomNode &node)
     QDomNode dispChans = node.firstChildElement("displayChannels");
     QDomNodeList list = dispChans.childNodes();
     for(int i=0; i<list.size(); i++) {
-        qDebug() << "channel";
         QDomNode dc = list.at(i);
         DisplayChannel chan;
         chan.loadXML(dc);
