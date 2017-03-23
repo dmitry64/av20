@@ -16,9 +16,7 @@ class RxChannel
     uint8_t _prismTime;
     TVGCurve * _tvgCurve;
     int _markerPos;
-
     TVGCurve * generateTVGFromXML(const QDomNode &tvg);
-
 public:
     RxChannel();
     RxChannel(const RxChannel & original);

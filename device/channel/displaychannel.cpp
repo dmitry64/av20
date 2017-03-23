@@ -96,7 +96,7 @@ QDomElement DisplayChannel::generateXML(QDomDocument &doc) const
 void DisplayChannel::loadXML(const QDomNode &node)
 {
     _angle = node.firstChildElement("angle").text().toDouble();
-
+    _gates.clear();
     RxChannel rx;
     rx.loadXML(node.firstChildElement("rx"));
     _rx = rx;
@@ -116,5 +116,6 @@ void DisplayChannel::loadXML(const QDomNode &node)
         gate._level = gateElement.firstChildElement("level").text().toUInt();
         _gates.push_back(gate);
     }
+    std::sort(_gates.begin(),_gates.end(),gateSorter);
 
 }

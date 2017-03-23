@@ -111,19 +111,18 @@ TVGCurve *RxChannel::generateTVGFromXML(const QDomNode &tvg)
 {
     TVGCurve * result = 0;
     QDomElement element = tvg.toElement();
-    qDebug() << "TVG";
+
     auto attribs = tvg.attributes();
     if(attribs.contains("type")) {
-        qDebug() << "Contains!";
+
         QDomNode type = attribs.namedItem("type");
-        qDebug() << type.toAttr().value();
+
         if(type.toAttr().value().compare("single") == 0) {
             double yBase = element.firstChildElement("yBase").text().toDouble();
             double xOffset = element.firstChildElement("xOffset").text().toDouble();
             double yHeight = element.firstChildElement("yHeight").text().toDouble();
             double xWidth = element.firstChildElement("xWidth").text().toDouble();
             double curve = element.firstChildElement("curve").text().toDouble();
-
 
             result = new TVGSinglePoint(yBase,xOffset,xWidth,yHeight,curve);
         }
