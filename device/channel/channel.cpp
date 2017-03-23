@@ -90,7 +90,6 @@ void Channel::loadXML(const QDomNode &node)
         chan.loadXML(dc);
         _displayChannels.push_back(chan);
     }
-
 }
 
 void Channel::setColor(uint8_t red, uint8_t green, uint8_t blue)

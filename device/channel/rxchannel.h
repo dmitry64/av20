@@ -17,6 +17,8 @@ class RxChannel
     TVGCurve * _tvgCurve;
     int _markerPos;
 
+    TVGCurve * generateTVGFromXML(const QDomNode &tvg);
+
 public:
     RxChannel();
     RxChannel(const RxChannel & original);
@@ -36,5 +38,7 @@ public:
     void setTvgCurve(TVGCurve *tvgCurve);
     uint8_t getPrismTime() const;
 };
+
+
 
 #endif // CHANNEL_H

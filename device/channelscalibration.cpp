@@ -75,6 +75,7 @@ void ChannelsCalibration::loadFromFile(QString path)
         qDebug() << "Cannot read file";
         return;
     }
+    inputFile.close();
     QDomNode calibration = doc.elementsByTagName("calibration").at(0);
     QDomElement tact = calibration.firstChildElement("tact");
     _tactId = tact.text().toUInt();
@@ -93,6 +94,7 @@ void ChannelsCalibration::loadFromFile(QString path)
         _channels.push_back(newChannel);
     }
 
+
 }
 
 QDomDocument ChannelsCalibration::generateXML(size_t newIndex) const
@@ -100,7 +102,7 @@ QDomDocument ChannelsCalibration::generateXML(size_t newIndex) const
     QDomDocument doc;
 
     QDomNode xmlNode = doc.createProcessingInstruction("xml",
-                       "version=\"1.0\" encoding=\"UTF-8\"");
+                       "version=\"1.0\" encoding=\"UTF-8\" ");
     doc.insertBefore(xmlNode, doc.firstChild());
     QDomElement calibration = doc.createElement("calibration");
     doc.appendChild(calibration);

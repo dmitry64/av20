@@ -145,6 +145,7 @@ void CalibrationManager::initHandModeCalibration()
 
 void CalibrationManager::syncWithFile(const ChannelsCalibration & calib)
 {
+    logEvent("CalibMan","Sync");
     QString filePath = _savePath+"/"+QString::number(calib.getTactId())+"/"+QString::number(calib.getInfo()._id)+".xml";
     calib.saveToFile(filePath,calib.getInfo()._id);
 }
@@ -177,9 +178,10 @@ void CalibrationManager::saveAll()
         for(size_t i=0; i<channels.size(); i++) {
             if(channels.at(i).getActive()) {
                 QString filePath = _savePath+"/"+QString::number(id)+"/"+QString::number(activeCounter)+".xml";
-                if(QFile(filePath).exists()) {
-                    QFile(filePath).remove();
-                }
+                QFile oldFile(filePath);
+                /*if(oldFile.exists()) {
+                    oldFile.
+                }*/
                 channels.at(i).saveToFile(filePath,activeCounter);
                 activeCounter++;
             }
