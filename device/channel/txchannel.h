@@ -1,7 +1,9 @@
 #ifndef TXCHANNEL_H
 #define TXCHANNEL_H
 
-#include "device/definitions.h"
+#include "common/definitions.h"
+
+#include <QtXml/QDomElement>
 
 class TxChannel
 {
@@ -11,6 +13,8 @@ class TxChannel
 public:
     TxChannel();
     ~TxChannel();
+    QDomElement generateXML(QDomDocument & doc) const;
+    void loadXML(const QDomNode & node);
     PulserFreq freq() const;
     void setFreq(const PulserFreq &freq);
     PulserProg prog() const;

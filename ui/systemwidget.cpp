@@ -9,6 +9,7 @@ SystemWidget::SystemWidget(QWidget *parent) :
 {
     ui->setupUi(this);
     System * system = System::getInstance();
+    ui->operatorLabel->setText(system->getCurrentOperator());
     ui->soundWidget->setName("Volume");
     ui->soundWidget->setSuffix("%");
     ui->soundWidget->setMax(100);

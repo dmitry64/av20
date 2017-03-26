@@ -3,7 +3,7 @@
 #include <QObject>
 #include <QThread>
 #include <core.h>
-#include "device/definitions.h"
+#include "common/definitions.h"
 #include "system/system.h"
 #include "device/calibrationmanager.h"
 #define DEFAULT_MODE
@@ -25,6 +25,10 @@ int main(int argc, char *argv[])
 
     CalibrationManager * calibrationManager = new CalibrationManager();
     calibrationManager->init();
+
+    calibrationManager->setSavePath(system->getFilesystem()->getCalibrationsPath());
+    calibrationManager->loadAll();
+    //calibrationManager->saveAll();
 
     ModeManager * modeManager = new ModeManager();
     modeManager->init();
@@ -53,6 +57,8 @@ int main(int argc, char *argv[])
     //mainWindow->move(-1000,0);
     //mainWindow->showFullScreen();
     mainWindow->show();
+
+
 
     return a.exec();
 }

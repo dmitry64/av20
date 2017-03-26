@@ -35,14 +35,19 @@ System::System()
 
 void System::init()
 {
-    logEvent("System","Initializing");
+    logEvent("System","System initializing");
     _filesystem->initFilesystem();
     _brightness->init();
     _temperature->init();
     _sound->init();
     _battery->init();
     _dateTime->init();
-    logEvent("System","Ready");
+    logEvent("System","System initialized!");
+}
+
+QString System::getCurrentOperator()
+{
+    return "Ivanov A.A.";
 }
 
 QString System::getSoftwareVersion()

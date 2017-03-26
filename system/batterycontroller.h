@@ -4,7 +4,7 @@
 #include <QObject>
 #include <QTimer>
 
-#include "device/commonfunctions.h"
+#include "common/commonfunctions.h"
 
 class BatteryController : public QObject
 {

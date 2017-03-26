@@ -2,7 +2,7 @@
 #define ASCANPAGE_H
 
 #include <QWidget>
-#include "device/definitions.h"
+#include "common/definitions.h"
 #include "core.h"
 
 namespace Ui

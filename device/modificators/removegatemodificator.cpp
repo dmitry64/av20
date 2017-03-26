@@ -1,9 +1,7 @@
 #include "removegatemodificator.h"
 
-RemoveGateModificator::RemoveGateModificator(ChannelsInfo info, GateID gateId)
+RemoveGateModificator::RemoveGateModificator(const ChannelsInfo &info, GateID gateId) : _info(info), _gateId(gateId)
 {
-    _info = info;
-    _gateId = gateId;
 }
 
 void RemoveGateModificator::apply(Core *core)

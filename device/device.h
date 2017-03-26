@@ -4,7 +4,7 @@
 #include "spi/deviceinterface.h"
 #include "spi/driverspi.h"
 #include "spi/fakespi.h"
-#include "commonfunctions.h"
+#include "common/commonfunctions.h"
 #include <vector>
 #include "channelscalibration.h"
 #include "tvg/tvgcurve.h"
@@ -14,9 +14,10 @@ class Device
     DeviceInterface * _spi;
 private:
     TactRegisters getRegistersByTact(const uint8_t index, const ChannelsCalibration & mode, const TactTable & tactTable);
-    TVG getTVGFromCurve(const TVGCurve *curve) const;
+    static TVG getTVGFromCurve(const TVGCurve *curve);
 public:
     Device();
+    ~Device();
     void init(uint8_t * version);
     void fillRegisters();
     void resetConfigRegisters();

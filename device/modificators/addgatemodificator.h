@@ -9,7 +9,7 @@ class AddGateModificator : public Modificator
     Gate _gate;
     ChannelsInfo _info;
 public:
-    AddGateModificator(ChannelsInfo info, Gate gate);
+    AddGateModificator(const ChannelsInfo &info, const Gate &gate);
     void apply(Core * core);
 };
 

@@ -24,7 +24,7 @@ void CalibrationsWidget::init(const ChannelsCalibration & calibration)
     ui->modeLabel->setText(QString::number(modeType));
     ui->schemeLabel->setText(QString::number(tactid));
 
-    CalibrationsInfoList info =  _core->getAvailableCalibrationsSnapshot();
+    CalibrationsInfoList info = _core->getAvailableCalibrationsSnapshot();
 
     for(size_t i=0; i<_buttons.size(); i++) {
         CalibrationButton * button = _buttons.at(i);
@@ -35,15 +35,19 @@ void CalibrationsWidget::init(const ChannelsCalibration & calibration)
     _buttons.clear();
 
     for(size_t i=0; i<info.size(); i++) {
+        CalibrationInfo calibInfo = info.at(i);
+
         CalibrationButton * button = new CalibrationButton();
         connect(button,SIGNAL(calibrationSelected(CalibrationIndex)),this,SLOT(onCalibrationSelected(CalibrationIndex)));
-        CalibrationInfo calibInfo = info.at(i);
+
         button->setCalibrationInfo(calibInfo);
         if(calibration.getInfo()._id == calibInfo._id) {
             button->setActive(true);
+            button->setCurrentCalibration(true);
         }
         else {
             button->setActive(false);
+            button->setCurrentCalibration(false);
         }
 
         ui->calibrationsLayout->addWidget(button);
@@ -79,12 +83,13 @@ void CalibrationsWidget::onCalibrationSelected(CalibrationIndex index)
 
 void CalibrationsWidget::on_newButton_released()
 {
-
+    QString name = "new";
+    _core->createCalibration(0,name);
 }
 
 void CalibrationsWidget::on_removeButton_released()
 {
-
+    _core->removeCalibration(_selectedIndex);
 }
 
 void CalibrationsWidget::on_selectButton_2_released()

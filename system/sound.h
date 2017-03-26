@@ -1,7 +1,7 @@
 #ifndef SOUND_H
 #define SOUND_H
 
-#include "device/commonfunctions.h"
+#include "common/commonfunctions.h"
 
 class Sound
 {

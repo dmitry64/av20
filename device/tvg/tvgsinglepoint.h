@@ -16,6 +16,9 @@ public:
     explicit TVGSinglePoint(const TVGSinglePoint * original);
     ~TVGSinglePoint();
     virtual TVGCurve * clone() const;
+
+    QDomElement generateXML(QDomDocument &doc);
+
     double getSample(double x) const;
     std::vector< std::pair< double, double > > getReferencePoints();
     TVGType getType() const;

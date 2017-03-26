@@ -2,7 +2,8 @@
 #define DISPLAYCHANNEL_H
 #include "rxchannel.h"
 #include "txchannel.h"
-#include "device/definitions.h"
+#include "common/definitions.h"
+#include <QtXml/QDomElement>
 
 class DisplayChannel
 {
@@ -13,6 +14,8 @@ class DisplayChannel
 public:
     DisplayChannel();
     ~DisplayChannel();
+    QDomElement generateXML(QDomDocument & doc) const;
+    void loadXML(const QDomNode & node);
     std::vector<Gate> gates() const;
     void setGates(const std::vector<Gate> &gates);
     double angle() const;

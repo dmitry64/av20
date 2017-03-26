@@ -1,6 +1,8 @@
 #include "channelscalibration.h"
 #include <QDebug>
-
+#include <QFile>
+#include <QDir>
+#include <QTextStream>
 
 TactID ChannelsCalibration::getTactId() const
 {
@@ -32,22 +34,104 @@ void ChannelsCalibration::setChannel(const ChannelID index, const Channel &chann
     _channels[index] = channel;
 }
 
+bool ChannelsCalibration::getActive() const
+{
+    return _active;
+}
+
+void ChannelsCalibration::setActive(bool active)
+{
+    _active = active;
+}
+
 ChannelsCalibration::ChannelsCalibration()
 {
     _tactId = 0;
     _info._id = 0;
     _info._name = "none";
+    _active = true;
 }
 
 ChannelsCalibration::~ChannelsCalibration()
 {
-    //qDebug() << "Device calibration deleted";
+
 }
 
-/*void ChannelsCalibration::init()
+void ChannelsCalibration::saveToFile(QString path, size_t saveIndex) const
 {
+    QFile outFile(path);
+    outFile.open(QIODevice::WriteOnly | QIODevice::Text);
+    QDomDocument doc = generateXML(saveIndex);
+    QTextStream stream(&outFile);
+    stream << doc.toString();
+    outFile.close();
 }
-*/
+
+void ChannelsCalibration::loadFromFile(QString path)
+{
+    QDomDocument doc;
+    QFile inputFile(path);
+    if (!inputFile.open(QIODevice::ReadOnly) || !doc.setContent(&inputFile)) {
+        qDebug() << "Cannot read file";
+        return;
+    }
+    inputFile.close();
+    QDomNode calibration = doc.elementsByTagName("calibration").at(0);
+    QDomElement tact = calibration.firstChildElement("tact");
+    _tactId = tact.text().toUInt();
+    QDomElement info = calibration.firstChildElement("info");
+    _info._id = info.firstChildElement("id").text().toUInt();
+    _info._name = info.firstChildElement("name").text();
+    _active = true;
+
+    _channels.clear();
+    QDomElement channels = calibration.firstChildElement("channels");
+    QDomNodeList chans = channels.elementsByTagName("channel");
+    for(int i=0; i<chans.size(); i++) {
+        QDomNode channel = chans.at(i);
+        Channel newChannel;
+        newChannel.loadXML(channel);
+        _channels.push_back(newChannel);
+    }
+
+
+}
+
+QDomDocument ChannelsCalibration::generateXML(size_t newIndex) const
+{
+    QDomDocument doc;
+
+    QDomNode xmlNode = doc.createProcessingInstruction("xml",
+                       "version=\"1.0\" encoding=\"UTF-8\" ");
+    doc.insertBefore(xmlNode, doc.firstChild());
+    QDomElement calibration = doc.createElement("calibration");
+    doc.appendChild(calibration);
+
+    QDomElement tact = doc.createElement("tact");
+    tact.appendChild(doc.createTextNode(QString::number(_tactId)));
+    calibration.appendChild(tact);
+
+    QDomElement info = doc.createElement("info");
+    QDomElement idElement = doc.createElement("id");
+    idElement.appendChild(doc.createTextNode(QString::number(newIndex)));
+    QDomElement nameElement = doc.createElement("name");
+    nameElement.appendChild(doc.createTextNode(_info._name));
+    info.appendChild(idElement);
+    info.appendChild(nameElement);
+    calibration.appendChild(info);
+
+    QDomElement channelsElement = doc.createElement("channels");
+    for(auto it = _channels.begin(); it!=_channels.end(); it++) {
+        const Channel & chan = it.operator *();
+        QDomElement element = chan.generateXML(doc);
+        channelsElement.appendChild(element);
+    }
+
+    calibration.appendChild(channelsElement);
+
+    return doc;
+}
+
 ChannelsCalibration ChannelsCalibration::getSnapshot()
 {
     return ChannelsCalibration(*this);
@@ -68,7 +152,7 @@ DisplayChannel ChannelsCalibration::getDisplayChannel(const ChannelID chan, cons
     return getDisplayChannel(info);
 }
 
-DisplayChannel ChannelsCalibration::getDisplayChannel(const ChannelsInfo info) const
+DisplayChannel ChannelsCalibration::getDisplayChannel(const ChannelsInfo &info) const
 {
     const auto & channels = getChannel(info._channel).getDisplayChannels();
     return channels.at(info._displayChannel);

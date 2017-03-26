@@ -1,9 +1,10 @@
 #ifndef DEFINITIONS_H
 #define DEFINITIONS_H
 
+
 #include <stdint.h>
 #include <vector>
-#include <string>
+#include <QString>
 
 #define MAX_CHANNELS_COUNT 8
 #define MAX_TACTS_COUNT 8
@@ -25,7 +26,7 @@ typedef uint8_t GateID;
 
 struct CalibrationInfo {
     CalibrationIndex _id;
-    std::string _name;
+    QString _name;
 };
 
 typedef std::vector<CalibrationInfo> CalibrationsInfoList;
@@ -123,21 +124,21 @@ struct DeviceStatus {
 };
 
 enum TriggerMode {
-    PathTRG,
-    TimeTRG,
-    ExtTRG,
-    ProgTRG
+    PathTRG = 0,
+    TimeTRG = 1,
+    ExtTRG = 2,
+    ProgTRG = 3
 };
 
 enum PulserFreq {
-    Freq_1_0_MHz,
-    Freq_1_25_MHz,
-    Freq_2_0_MHz,
-    Freq_2_5_MHz,
-    Freq_4_0_MHz,
-    Freq_5_0_MHz,
-    Freq_8_0_MHz,
-    Freq_10_0_MHz
+    Freq_1_0_MHz = 0,
+    Freq_1_25_MHz = 1,
+    Freq_2_0_MHz = 2,
+    Freq_2_5_MHz = 3,
+    Freq_4_0_MHz = 4,
+    Freq_5_0_MHz = 5,
+    Freq_8_0_MHz = 6,
+    Freq_10_0_MHz = 7
 };
 
 static std::string FreqStrings[8] = {

@@ -45,6 +45,52 @@ Channel::~Channel()
 
 }
 
+QDomElement Channel::generateXML(QDomDocument &doc) const
+{
+    QDomElement channel = doc.createElement("channel");
+
+    QDomElement index = doc.createElement("id");
+    index.appendChild(doc.createTextNode(QString::number(_index)));
+    channel.appendChild(index);
+
+    QDomElement color = doc.createElement("color");
+    color.appendChild(doc.createElement("red")).appendChild(doc.createTextNode(QString::number(_colorRed)));
+    color.appendChild(doc.createElement("green")).appendChild(doc.createTextNode(QString::number(_colorGreen)));
+    color.appendChild(doc.createElement("blue")).appendChild(doc.createTextNode(QString::number(_colorBlue)));
+    channel.appendChild(color);
+
+    QDomElement dispChannels = doc.createElement("displayChannels");
+    for(auto it = _displayChannels.begin(); it!=_displayChannels.end(); it++) {
+        const DisplayChannel & dc = it.operator *();
+        QDomElement dispChan = dc.generateXML(doc);
+        dispChannels.appendChild(dispChan);
+    }
+    channel.appendChild(dispChannels);
+
+
+    return channel;
+}
+
+void Channel::loadXML(const QDomNode &node)
+{
+    _index = node.firstChildElement("id").text().toUInt();
+    _activeDisplayChannel = 0;
+
+    QDomNode color = node.firstChildElement("color");
+    _colorRed = color.firstChildElement("red").text().toUShort();
+    _colorGreen = color.firstChildElement("green").text().toUShort();
+    _colorBlue = color.firstChildElement("blue").text().toUShort();
+
+    QDomNode dispChans = node.firstChildElement("displayChannels");
+    QDomNodeList list = dispChans.childNodes();
+    for(int i=0; i<list.size(); i++) {
+        QDomNode dc = list.at(i);
+        DisplayChannel chan;
+        chan.loadXML(dc);
+        _displayChannels.push_back(chan);
+    }
+}
+
 void Channel::setColor(uint8_t red, uint8_t green, uint8_t blue)
 {
     _colorRed = red;

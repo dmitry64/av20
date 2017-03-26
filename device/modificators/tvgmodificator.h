@@ -9,7 +9,9 @@ class TVGModificator : public Modificator
     ChannelsInfo _info;
     TVGCurve * _curve;
 public:
-    TVGModificator(ChannelsInfo info, TVGCurve *curve);
+    TVGModificator(const ChannelsInfo & info, TVGCurve *curve);
+    TVGModificator(const TVGModificator &) = delete;
+    void operator =(const TVGModificator&) = delete;
     ~TVGModificator();
 
     void apply(Core * core);

@@ -223,7 +223,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_4">
+          <widget class="QPushButton" name="operatorChangeButton">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -244,7 +244,7 @@
       </layout>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_5">
+      <layout class="QHBoxLayout" name="horizontalLayout_5" stretch="2,1,1">
        <property name="spacing">
         <number>1</number>
        </property>
@@ -284,23 +284,6 @@
              </property>
             </widget>
            </item>
-           <item>
-            <widget class="QPushButton" name="pushButton_5">
-             <property name="minimumSize">
-              <size>
-               <width>32</width>
-               <height>32</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>Change</string>
-             </property>
-             <property name="icon">
-              <iconset resource="../resources.qrc">
-               <normaloff>:/icons/resources/icons/sys_icon_clock.png</normaloff>:/icons/resources/icons/sys_icon_clock.png</iconset>
-             </property>
-            </widget>
-           </item>
           </layout>
          </item>
          <item>
@@ -324,26 +307,26 @@
              </property>
             </widget>
            </item>
-           <item>
-            <widget class="QPushButton" name="pushButton_6">
-             <property name="minimumSize">
-              <size>
-               <width>32</width>
-               <height>32</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>Change</string>
-             </property>
-             <property name="icon">
-              <iconset resource="../resources.qrc">
-               <normaloff>:/icons/resources/icons/sys_icon_calendar.png</normaloff>:/icons/resources/icons/sys_icon_calendar.png</iconset>
-             </property>
-            </widget>
-           </item>
           </layout>
          </item>
         </layout>
+       </item>
+       <item>
+        <widget class="QPushButton" name="timeChangeButton">
+         <property name="minimumSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Change</string>
+         </property>
+         <property name="icon">
+          <iconset resource="../resources.qrc">
+           <normaloff>:/icons/resources/icons/sys_icon_clock.png</normaloff>:/icons/resources/icons/sys_icon_clock.png</iconset>
+         </property>
+        </widget>
        </item>
       </layout>
      </item>
@@ -381,7 +364,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_7">
+          <widget class="QPushButton" name="languageChangeButton">
            <property name="minimumSize">
             <size>
              <width>32</width>

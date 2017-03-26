@@ -24,10 +24,10 @@ ChannelsView::ChannelsView(QWidget *parent) :
     ui->channelsWidget->setColumnWidth(1,50);
     ui->channelsWidget->setColumnWidth(2,50);
     ui->channelsWidget->setColumnWidth(3,50);
-    ui->channelsWidget->setColumnWidth(4,90);
-    ui->channelsWidget->setColumnWidth(5,50);
-    ui->channelsWidget->setColumnWidth(6,50);
-    ui->channelsWidget->setColumnWidth(7,50);
+    ui->channelsWidget->setColumnWidth(4,120);
+    ui->channelsWidget->setColumnWidth(5,60);
+    ui->channelsWidget->setColumnWidth(6,60);
+    ui->channelsWidget->setColumnWidth(7,60);
 
     ui->tactWidget->setColumnCount(5);
     ui->tactWidget->setHorizontalHeaderItem(0,new QTableWidgetItem("Index"));

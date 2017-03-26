@@ -11,9 +11,9 @@ class ModeManager
 private:
     DeviceMode generateSearchMode();
     DeviceMode generateHandMode();
-    std::vector<Tact> generateSearchTacts(int tactsNumber);
+    static std::vector<Tact> generateSearchTacts(int tactsNumber);
 
-    TactTable generateSearchTable(TactID tact, int tactsNumber);
+    static TactTable generateSearchTable(TactID tact, int tactsNumber);
 
 public:
     ModeManager();

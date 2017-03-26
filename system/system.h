@@ -5,7 +5,7 @@
 #include <QTime>
 #include <QDate>
 
-#include "device/commonfunctions.h"
+#include "common/commonfunctions.h"
 #include "filesystem.h"
 #include "brightnesscontroller.h"
 #include "temperature.h"
@@ -39,6 +39,7 @@ public:
     }
 
     void init();
+    QString getCurrentOperator();
     QString getSoftwareVersion();
     QString getOSVersion();
     void setDate(QDate date);

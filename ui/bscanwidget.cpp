@@ -44,7 +44,7 @@ BScanWidget::BScanWidget(QWidget *parent) :
 
 BScanWidget::~BScanWidget()
 {
-
+    delete ui;
 }
 
 void BScanWidget::paintEvent(QPaintEvent *event)

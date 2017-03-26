@@ -112,7 +112,7 @@ void DeviceState::setTVGForChannel(uint8_t index, TVG tvg)
     }
 }
 
-TVG DeviceState::getTvgForChannel(uint8_t index)
+TVG DeviceState::getTvgForChannel(uint8_t index) const
 {
     return _tvg[index];
 }
@@ -157,4 +157,3 @@ TactRegisters DeviceState::getTactByIndex(uint8_t index)
     Q_ASSERT(index < 8);
     return _tactTable[index];
 }
-

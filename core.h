@@ -7,7 +7,7 @@
 #include <atomic>
 #include <queue>
 #include "device/modificators/modificator.h"
-#include "device/definitions.h"
+#include "common/definitions.h"
 #include "device/channelscalibration.h"
 #include "device/devicestate.h"
 #include "device/device.h"
@@ -75,11 +75,12 @@ public:
     // Internal
     ChannelsCalibration getCalibration();
     void notifyChannel(const Channel &channel);
+    void notifyCalibration();
     void applyChannelsModification(ChannelID index, Channel channel);
 
     void applyCurrentCalibrationToDevice();
     const ModeManager *getModeManager() const;
-
+    CalibrationManager *getCalibrationManager() const;
 
     // External
     ChannelsCalibration getCalibrationsSnapshot();
@@ -104,24 +105,28 @@ private:
     void handleDeviceError(bool status);
     void handleDeviceOverheat(bool status);
     void handleDeviceConnectionError(bool status);
-    void handleChannelSelection(const ChannelsInfo info);
+    void handleChannelSelection(const ChannelsInfo &info);
 
     TactTable getTactTable();
     DeviceMode getCurrentDeviceMode();
 
 public:
-    void addGate(const ChannelsInfo info, const Gate & gate);
-    void modifyGate(const ChannelsInfo info, const Gate & gate);
-    void removeGate(const ChannelsInfo info, const uint8_t id);
-    void setPrismTime(const ChannelsInfo info, const uint8_t value);
-    void setTVG(const ChannelsInfo info, const TVGCurve * ptr);
+    void addGate(const ChannelsInfo &info, const Gate & gate);
+    void modifyGate(const ChannelsInfo &info, const Gate & gate);
+    void removeGate(const ChannelsInfo &info, const uint8_t id);
+    void setPrismTime(const ChannelsInfo &info, const uint8_t value);
+    void setTVG(const ChannelsInfo &info, const TVGCurve * ptr);
     void setDeviceMode(const DeviceModeIndex modeIndex, const SchemeIndex schemeIndex);
     void switchCalibration(const CalibrationIndex index);
-    void switchChannel(const ChannelsInfo info);
+    void switchChannel(const ChannelsInfo &info);
+    void createCalibration(const CalibrationIndex baseIndex, const QString &name);
+    void removeCalibration(const CalibrationIndex index);
 
     SchemeIndex  getCurrentScheme() const;
     DeviceModeIndex getCurrentMode() const;
     CalibrationIndex getCurrentCalibration() const;
+
+
 signals:
     void displayVersion(QString version);
     void drawDisplayPackage(QSharedPointer<DisplayPackage> package);

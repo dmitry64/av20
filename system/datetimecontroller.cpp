@@ -12,6 +12,7 @@ void DateTimeController::init()
     connect(&_timer,SIGNAL(timeout()),this,SLOT(update()));
     _timer.start();
     logEvent("DateTime","Ready");
+    logEvent("DateTime","Current date: "+_lastTime.toString("yyyy-MM-dd HH:mm:ss"));
 }
 
 void DateTimeController::setDate(QDate date)
