@@ -15,6 +15,7 @@ void Filesystem::createStructure()
     av20.mkdir("data");
     av20.mkdir("media");
     av20.mkdir("calibrations");
+    av20.mkdir("help");
 }
 
 Filesystem::Filesystem()
@@ -52,6 +53,11 @@ QString Filesystem::getCalibrationsPath()
     return getRootPath() + "/calibrations";
 }
 
+QString Filesystem::getHelpPath()
+{
+    return getRootPath() + "/help";
+}
+
 QStringList Filesystem::getDataList()
 {
     return getFilesList(getDataPath());
@@ -65,4 +71,9 @@ QStringList Filesystem::getCalibrationsList()
 QStringList Filesystem::getMediaList()
 {
     return getFilesList(getMediaPath());
+}
+
+QStringList Filesystem::getHelpList()
+{
+    return getFilesList(getHelpPath());
 }

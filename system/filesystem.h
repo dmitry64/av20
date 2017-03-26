@@ -17,11 +17,12 @@ public:
     static QString getDataPath();
     static QString getMediaPath();
     static QString getCalibrationsPath();
+    static QString getHelpPath();
 
     QStringList getDataList();
     QStringList getCalibrationsList();
     QStringList getMediaList();
-
+    QStringList getHelpList();
 };
 
 #endif // FILESYSTEM_H

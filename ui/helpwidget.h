@@ -3,7 +3,8 @@
 
 #include <QWidget>
 
-namespace Ui {
+namespace Ui
+{
 class HelpWidget;
 }
 
@@ -14,6 +15,10 @@ class HelpWidget : public QWidget
 public:
     explicit HelpWidget(QWidget *parent = 0);
     ~HelpWidget();
+    void updateFiles();
+
+private slots:
+    void on_listWidget_itemSelectionChanged();
 
 private:
     Ui::HelpWidget *ui;

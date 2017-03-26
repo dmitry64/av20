@@ -22,6 +22,5 @@ void MemoryWidget::update()
 {
     Filesystem * fs = System::getInstance()->getFilesystem();
     ui->dataList->insertItems(0,fs->getDataList());
-    ui->calibList->insertItems(0,fs->getCalibrationsList());
     ui->mediaList->insertItems(0,fs->getMediaList());
 }
