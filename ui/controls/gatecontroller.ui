@@ -10,6 +10,11 @@
     <height>235</height>
    </rect>
   </property>
+  <property name="font">
+   <font>
+    <pointsize>10</pointsize>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
@@ -88,7 +93,7 @@
         <string/>
        </property>
        <property name="icon">
-        <iconset>
+        <iconset resource="../../resources.qrc">
          <normaloff>:/icons/resources/icons/sys_icon_delete_all.png</normaloff>:/icons/resources/icons/sys_icon_delete_all.png</iconset>
        </property>
        <property name="iconSize">
@@ -126,6 +131,8 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="../../resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

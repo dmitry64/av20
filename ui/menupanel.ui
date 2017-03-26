@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>755</width>
+    <width>937</width>
     <height>52</height>
    </rect>
   </property>
@@ -15,6 +15,11 @@
     <width>16777215</width>
     <height>52</height>
    </size>
+  </property>
+  <property name="font">
+   <font>
+    <pointsize>10</pointsize>
+   </font>
   </property>
   <property name="windowTitle">
    <string>Form</string>
@@ -37,7 +42,7 @@
      <property name="minimumSize">
       <size>
        <width>48</width>
-       <height>48</height>
+       <height>42</height>
       </size>
      </property>
      <property name="text">
@@ -49,8 +54,8 @@
      </property>
      <property name="iconSize">
       <size>
-       <width>48</width>
-       <height>48</height>
+       <width>32</width>
+       <height>32</height>
       </size>
      </property>
      <property name="autoDefault">
@@ -66,7 +71,7 @@
      <property name="minimumSize">
       <size>
        <width>48</width>
-       <height>48</height>
+       <height>42</height>
       </size>
      </property>
      <property name="text">
@@ -89,7 +94,7 @@
      <property name="minimumSize">
       <size>
        <width>48</width>
-       <height>48</height>
+       <height>42</height>
       </size>
      </property>
      <property name="text">
@@ -112,7 +117,7 @@
      <property name="minimumSize">
       <size>
        <width>48</width>
-       <height>48</height>
+       <height>42</height>
       </size>
      </property>
      <property name="text">
@@ -138,7 +143,7 @@
      <property name="minimumSize">
       <size>
        <width>48</width>
-       <height>48</height>
+       <height>42</height>
       </size>
      </property>
      <property name="text">
@@ -150,8 +155,8 @@
      </property>
      <property name="iconSize">
       <size>
-       <width>48</width>
-       <height>48</height>
+       <width>32</width>
+       <height>32</height>
       </size>
      </property>
     </widget>
@@ -161,7 +166,7 @@
      <property name="minimumSize">
       <size>
        <width>48</width>
-       <height>48</height>
+       <height>42</height>
       </size>
      </property>
      <property name="text">
@@ -173,8 +178,8 @@
      </property>
      <property name="iconSize">
       <size>
-       <width>48</width>
-       <height>48</height>
+       <width>32</width>
+       <height>32</height>
       </size>
      </property>
     </widget>
@@ -184,7 +189,7 @@
      <property name="minimumSize">
       <size>
        <width>48</width>
-       <height>48</height>
+       <height>42</height>
       </size>
      </property>
      <property name="text">
@@ -196,8 +201,8 @@
      </property>
      <property name="iconSize">
       <size>
-       <width>48</width>
-       <height>48</height>
+       <width>32</width>
+       <height>32</height>
       </size>
      </property>
     </widget>

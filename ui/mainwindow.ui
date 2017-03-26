@@ -431,6 +431,12 @@
     </disabled>
    </palette>
   </property>
+  <property name="font">
+   <font>
+    <family>Liberation Sans</family>
+    <pointsize>12</pointsize>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>Avicon-20</string>
   </property>
@@ -473,7 +479,7 @@
         </property>
         <property name="font">
          <font>
-          <pointsize>9</pointsize>
+          <pointsize>12</pointsize>
          </font>
         </property>
         <property name="styleSheet">
