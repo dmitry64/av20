@@ -20,7 +20,17 @@ void DeviceMode::setType(const ModeTypes &type)
     _type = type;
 }
 
-DeviceMode::DeviceMode(): _type(ModeTypes::Unknown)
+QString DeviceMode::name() const
+{
+    return _name;
+}
+
+void DeviceMode::setName(const QString &name)
+{
+    _name = name;
+}
+
+DeviceMode::DeviceMode(): _type(ModeTypes::Unknown), _name("Unknown mode")
 {
 }
 

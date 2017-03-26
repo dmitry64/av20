@@ -41,8 +41,9 @@ void ModeSelectionButton::setMode(DeviceMode mode, uint8_t index)
     ui->submodesBox->setTitle(name);
     std::vector<TactTable> tactTables = mode.tactTables();
     for(size_t i=0; i<tactTables.size(); i++) {
+        const TactTable & tactTable = tactTables.at(i);
         SchemeSelectionButton * button = new SchemeSelectionButton();
-        button->setText("Scheme #"+QString::number(i + 1));
+        button->setText(tactTable.getName());
         button->setIndex(i);
         button->setMinimumSize(QSize(48,48));
         connect(button,SIGNAL(schemeSelected(uint8_t)),this,SLOT(onSchemeSelected(uint8_t)));

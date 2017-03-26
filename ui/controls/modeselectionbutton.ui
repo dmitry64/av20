@@ -31,6 +31,11 @@
    </property>
    <item>
     <widget class="QGroupBox" name="submodesBox">
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
      <property name="title">
       <string>Sub-modes</string>
      </property>

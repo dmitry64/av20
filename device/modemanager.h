@@ -13,7 +13,7 @@ private:
     DeviceMode generateHandMode();
     static std::vector<Tact> generateSearchTacts(int tactsNumber);
 
-    static TactTable generateSearchTable(TactID tact, int tactsNumber);
+    static TactTable generateSearchTable(TactID tact, int tactsNumber, QString name);
 
 public:
     ModeManager();

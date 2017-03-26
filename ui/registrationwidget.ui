@@ -24,6 +24,11 @@
      </property>
      <item>
       <widget class="QGroupBox" name="groupBox">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
        <property name="title">
         <string>Operator</string>
        </property>
@@ -40,6 +45,11 @@
      </item>
      <item>
       <widget class="QGroupBox" name="groupBox_4">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
        <property name="title">
         <string>Date</string>
        </property>
@@ -58,6 +68,11 @@
    </item>
    <item>
     <widget class="QGroupBox" name="groupBox_2">
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
      <property name="title">
       <string>Description</string>
      </property>
@@ -93,6 +108,11 @@
          <width>48</width>
          <height>48</height>
         </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
        </property>
        <property name="text">
         <string>Start registration</string>

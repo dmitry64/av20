@@ -18,11 +18,11 @@ void CalibrationsWidget::init(const ChannelsCalibration & calibration)
     DeviceModeIndex mode = _core->getCurrentMode();
     SchemeIndex scheme = _core->getCurrentScheme();
 
-    ModeTypes modeType = manager->modes().at(mode).type();
-    TactID tactid = manager->modes().at(mode).tactTables().at(scheme).getId();
+    QString modeName = manager->modes().at(mode).name();
+    QString tactName = manager->modes().at(mode).tactTables().at(scheme).getName();
 
-    ui->modeLabel->setText(QString::number(modeType));
-    ui->schemeLabel->setText(QString::number(tactid));
+    ui->modeLabel->setText(modeName);
+    ui->schemeLabel->setText(tactName);
 
     CalibrationsInfoList info = _core->getAvailableCalibrationsSnapshot();
 

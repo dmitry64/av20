@@ -21,6 +21,7 @@
     <widget class="QTabWidget" name="tabWidget">
      <property name="font">
       <font>
+       <pointsize>12</pointsize>
        <weight>50</weight>
        <bold>false</bold>
       </font>
@@ -98,6 +99,11 @@
          <height>48</height>
         </size>
        </property>
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
        <property name="text">
         <string>Remove</string>
        </property>
@@ -120,6 +126,11 @@
          <width>48</width>
          <height>48</height>
         </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
        </property>
        <property name="text">
         <string>Copy</string>
@@ -144,6 +155,11 @@
          <height>48</height>
         </size>
        </property>
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
        <property name="text">
         <string>Sync</string>
        </property>
@@ -166,6 +182,11 @@
          <width>48</width>
          <height>48</height>
         </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
        </property>
        <property name="text">
         <string>Upload</string>

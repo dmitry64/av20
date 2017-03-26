@@ -3,10 +3,12 @@
 
 #include "tact.h"
 #include <vector>
+#include <QString>
 
 class TactTable
 {
     TactID _id;
+    QString _name;
     std::vector<Tact> _tactTable;
 public:
     TactTable();
@@ -21,6 +23,8 @@ public:
     Tact getTactByIndex(const uint8_t index) const;
     void setTactTable(const std::vector<Tact> &tactTable);
     std::vector<Tact> getTactTable() const;
+    QString getName() const;
+    void setName(const QString &name);
 };
 
 #endif // TACTTABLE_H

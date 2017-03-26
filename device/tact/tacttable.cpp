@@ -20,7 +20,17 @@ std::vector<Tact> TactTable::getTactTable() const
     return _tactTable;
 }
 
-TactTable::TactTable() : _id(0)
+QString TactTable::getName() const
+{
+    return _name;
+}
+
+void TactTable::setName(const QString &name)
+{
+    _name = name;
+}
+
+TactTable::TactTable() : _id(0), _name("none")
 {
 
 }

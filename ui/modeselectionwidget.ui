@@ -35,8 +35,13 @@
        </property>
        <item>
         <widget class="QLabel" name="label">
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
          <property name="text">
-          <string>Select mode:</string>
+          <string>Select mode</string>
          </property>
         </widget>
        </item>
