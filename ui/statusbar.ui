@@ -967,6 +967,8 @@
      <property name="font">
       <font>
        <pointsize>8</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
       </font>
      </property>
      <property name="text">
@@ -1404,6 +1406,8 @@
      <property name="font">
       <font>
        <pointsize>8</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
       </font>
      </property>
      <property name="text">
@@ -1841,6 +1845,8 @@
      <property name="font">
       <font>
        <pointsize>8</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
       </font>
      </property>
      <property name="autoFillBackground">
@@ -1872,6 +1878,8 @@
      <property name="font">
       <font>
        <pointsize>8</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
       </font>
      </property>
      <property name="autoFillBackground">
@@ -1901,6 +1909,8 @@ color: rgb(0, 0, 0);</string>
      <property name="font">
       <font>
        <pointsize>8</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
       </font>
      </property>
      <property name="autoFillBackground">
@@ -1939,6 +1949,8 @@ color: rgb(0, 0, 0);</string>
      <property name="font">
       <font>
        <pointsize>8</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
       </font>
      </property>
      <property name="autoFillBackground">
@@ -1968,6 +1980,8 @@ color: rgb(0, 0, 0);</string>
      <property name="font">
       <font>
        <pointsize>8</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
       </font>
      </property>
      <property name="autoFillBackground">
@@ -2003,6 +2017,9 @@ color: rgb(0, 0, 0);</string>
      <property name="font">
       <font>
        <pointsize>8</pointsize>
+       <weight>75</weight>
+       <italic>false</italic>
+       <bold>true</bold>
       </font>
      </property>
      <property name="autoFillBackground">
@@ -2038,9 +2055,9 @@ color: rgb(0, 0, 0);</string>
      <property name="font">
       <font>
        <pointsize>8</pointsize>
-       <weight>50</weight>
+       <weight>75</weight>
        <italic>false</italic>
-       <bold>false</bold>
+       <bold>true</bold>
        <strikeout>false</strikeout>
        <kerning>true</kerning>
       </font>
