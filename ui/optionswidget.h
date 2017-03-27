@@ -3,7 +3,8 @@
 
 #include <QWidget>
 
-namespace Ui {
+namespace Ui
+{
 class OptionsWidget;
 }
 
@@ -14,6 +15,12 @@ class OptionsWidget : public QWidget
 public:
     explicit OptionsWidget(QWidget *parent = 0);
     ~OptionsWidget();
+    void init();
+public slots:
+    void onBrightnessChanged(double value);
+    void onSoundVolumeChanged(double value);
+signals:
+    void colorSchemeChanged(QString scheme);
 
 private:
     Ui::OptionsWidget *ui;

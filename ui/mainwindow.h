@@ -33,7 +33,11 @@ class MainWindow : public QMainWindow
     SystemWidget * _systemWidget;
     QPushButton * _backgroundWidget;
 
-private:
+    QPalette _defaultPalette;
+    QPalette _alternativePalette;
+
+private slots:
+    void setColorScheme(QString name);
 
 public:
     explicit MainWindow(QWidget *parent = 0);

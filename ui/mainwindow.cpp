@@ -2,11 +2,30 @@
 #include "ui_mainwindow.h"
 #include <QDebug>
 
+void MainWindow::setColorScheme(QString name)
+{
+    if(name.compare("Default")==0) {
+        this->setPalette(_defaultPalette);
+    }
+    else if (name.compare("Alternative")==0) {
+        this->setPalette(_alternativePalette);
+    }
+}
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    _defaultPalette = this->palette();
+    _alternativePalette = this->palette();
+    _alternativePalette.setColor(QPalette::Window,QColor(30,60,90));
+    _alternativePalette.setColor(QPalette::Base,QColor(30,60,90));
+    _alternativePalette.setColor(QPalette::AlternateBase,QColor(30,60,90));
+    _alternativePalette.setColor(QPalette::Button,QColor(30,60,90));
+    _alternativePalette.setColor(QPalette::ButtonText,QColor(200,200,200));
+    _alternativePalette.setColor(QPalette::WindowText,QColor(200,200,200));
+
 
     _backgroundWidget = new QPushButton(ui->centralTabWidget);
     _backgroundWidget->setFlat(true);
@@ -63,6 +82,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->menuWidget,SIGNAL(optionsMenuClosed()),this,SLOT(onOptionsMenuClosed()));
     connect(ui->menuWidget,SIGNAL(systemMenuOpened()),this,SLOT(onSystemMenuOpened()));
     connect(ui->menuWidget,SIGNAL(systemMenuClosed()),this,SLOT(onSystemMenuClosed()));
+
+    connect(_optionsWidget,SIGNAL(colorSchemeChanged(QString)),this,SLOT(setColorScheme(QString)));
 
     connect(_systemWidget,SIGNAL(shutdown()),this,SLOT(onShutdown()));
     connect(_systemWidget,SIGNAL(reboot()),this,SLOT(onReboot()));
@@ -296,6 +317,8 @@ void MainWindow::init()
 
     ui->channelsWidget->init(calibration,tactTableSnapshot);
     _calibrationsWidget->init(calibration);
+    _memoryWidget->init();
+    _optionsWidget->init();
 }
 
 void MainWindow::reset()

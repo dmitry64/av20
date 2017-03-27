@@ -6,21 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>193</width>
-    <height>117</height>
+    <width>272</width>
+    <height>57</height>
    </rect>
   </property>
   <property name="sizePolicy">
-   <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
-  </property>
-  <property name="minimumSize">
-   <size>
-    <width>120</width>
-    <height>50</height>
-   </size>
   </property>
   <property name="font">
    <font>
@@ -32,7 +26,7 @@
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
    <property name="spacing">
-    <number>0</number>
+    <number>1</number>
    </property>
    <property name="leftMargin">
     <number>0</number>
@@ -102,18 +96,6 @@
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
-       <property name="minimumSize">
-        <size>
-         <width>80</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>200</width>
-         <height>200</height>
-        </size>
-       </property>
        <property name="font">
         <font>
          <pointsize>10</pointsize>
@@ -134,18 +116,6 @@
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>80</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>200</width>
-         <height>200</height>
-        </size>
        </property>
        <property name="font">
         <font>

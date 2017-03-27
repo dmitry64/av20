@@ -3,7 +3,8 @@
 
 #include <QWidget>
 
-namespace Ui {
+namespace Ui
+{
 class TouchSpinBoxString;
 }
 
@@ -32,6 +33,8 @@ private slots:
     void on_leftButton_released();
 
     void on_rightButton_released();
+signals:
+    void valueChanged(QString value);
 
 private:
     Ui::TouchSpinBoxString *ui;

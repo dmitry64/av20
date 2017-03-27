@@ -10,15 +10,6 @@ SystemWidget::SystemWidget(QWidget *parent) :
     ui->setupUi(this);
     System * system = System::getInstance();
     ui->operatorLabel->setText(system->getCurrentOperator());
-    ui->soundWidget->setName("Volume");
-    ui->soundWidget->setSuffix("%");
-    ui->soundWidget->setMax(100);
-    ui->soundWidget->setValue(system->getSoundVolume());
-
-    ui->brightnessWidget->setName("Brightness");
-    ui->brightnessWidget->setSuffix("%");
-    ui->brightnessWidget->setMax(100);
-    ui->brightnessWidget->setValue(system->getBrightness());
 
     ui->timeLabel->setText(system->getTime().toString(Qt::DefaultLocaleShortDate));
     ui->dateLabel->setText(system->getDate().toString(Qt::DefaultLocaleShortDate));
@@ -26,8 +17,7 @@ SystemWidget::SystemWidget(QWidget *parent) :
     ui->softwareVersionLabel->setText(system->getSoftwareVersion());
     ui->osVersionLabel->setText(system->getOSVersion());
 
-    connect(ui->brightnessWidget,SIGNAL(valueChanged(double)),this,SLOT(onBrightnessChanged(double)));
-    connect(ui->soundWidget,SIGNAL(valueChanged(double)),this,SLOT(onSoundVolumeChanged(double)));
+
     connect(system,SIGNAL(deviceVersionReady(QString)),this,SLOT(onUSMVersionChanged(QString)));
     connect(system,SIGNAL(dateTimeChanged(QDateTime)),this,SLOT(onDateTimeChanged(QDateTime)));
 }
@@ -51,18 +41,6 @@ void SystemWidget::on_rebootButton_released()
 void SystemWidget::on_pauseButton_released()
 {
     emit pause();
-}
-
-void SystemWidget::onBrightnessChanged(double value)
-{
-    System * system = System::getInstance();
-    system->setBrightness(qRound(value));
-}
-
-void SystemWidget::onSoundVolumeChanged(double value)
-{
-    System * system = System::getInstance();
-    system->setSoundVolume(qRound(value));
 }
 
 void SystemWidget::onUSMVersionChanged(QString string)

@@ -31,7 +31,7 @@
    <item>
     <layout class="QVBoxLayout" name="verticalLayout">
      <property name="spacing">
-      <number>1</number>
+      <number>5</number>
      </property>
      <property name="leftMargin">
       <number>0</number>
@@ -70,7 +70,104 @@
       </layout>
      </item>
      <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_13">
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QLabel" name="label_6">
+         <property name="text">
+          <string>S/N:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="serialNumber">
+         <property name="font">
+          <font>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>17001</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
       <widget class="Line" name="line_4">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>10</height>
+        </size>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Plain</enum>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_8">
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QLabel" name="label_8">
+         <property name="text">
+          <string>Organization:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="orgName">
+         <property name="font">
+          <font>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Radioavionica</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_9">
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QLabel" name="label_9">
+         <property name="text">
+          <string>Validation date:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_11">
+         <property name="font">
+          <font>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>20.01.2017</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="Line" name="line_3">
        <property name="minimumSize">
         <size>
          <width>0</width>
@@ -227,29 +324,12 @@
            </property>
           </widget>
          </item>
-         <item>
-          <widget class="QPushButton" name="operatorChangeButton">
-           <property name="minimumSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>Change</string>
-           </property>
-           <property name="icon">
-            <iconset resource="../resources.qrc">
-             <normaloff>:/icons/resources/icons/sys_icon_user.png</normaloff>:/icons/resources/icons/sys_icon_user.png</iconset>
-           </property>
-          </widget>
-         </item>
         </layout>
        </item>
       </layout>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_5" stretch="2,1,1">
+      <layout class="QHBoxLayout" name="horizontalLayout_5" stretch="0,0">
        <property name="spacing">
         <number>1</number>
        </property>
@@ -264,99 +344,9 @@
         </widget>
        </item>
        <item>
-        <layout class="QVBoxLayout" name="verticalLayout_3">
-         <property name="spacing">
-          <number>1</number>
-         </property>
-         <property name="bottomMargin">
-          <number>0</number>
-         </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_6">
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_6">
-           <property name="spacing">
-            <number>1</number>
-           </property>
-           <item>
-            <widget class="QLabel" name="timeLabel">
-             <property name="font">
-              <font>
-               <weight>75</weight>
-               <bold>true</bold>
-              </font>
-             </property>
-             <property name="text">
-              <string>11:20</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_7">
-           <property name="spacing">
-            <number>1</number>
-           </property>
-           <property name="bottomMargin">
-            <number>0</number>
-           </property>
-           <item>
-            <widget class="QLabel" name="dateLabel">
-             <property name="font">
-              <font>
-               <weight>75</weight>
-               <bold>true</bold>
-              </font>
-             </property>
-             <property name="text">
-              <string>01.02.2017</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <widget class="QPushButton" name="timeChangeButton">
-         <property name="minimumSize">
-          <size>
-           <width>32</width>
-           <height>32</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>Change</string>
-         </property>
-         <property name="icon">
-          <iconset resource="../resources.qrc">
-           <normaloff>:/icons/resources/icons/sys_icon_clock.png</normaloff>:/icons/resources/icons/sys_icon_clock.png</iconset>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_8">
-       <property name="spacing">
-        <number>1</number>
-       </property>
-       <property name="bottomMargin">
-        <number>0</number>
-       </property>
-       <item>
-        <widget class="QLabel" name="label_8">
-         <property name="text">
-          <string>Language:</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_9">
-         <property name="spacing">
-          <number>1</number>
-         </property>
-         <item>
-          <widget class="QLabel" name="languageLabel">
+          <widget class="QLabel" name="timeLabel">
            <property name="font">
             <font>
              <weight>75</weight>
@@ -364,24 +354,26 @@
             </font>
            </property>
            <property name="text">
-            <string>English</string>
+            <string>11:20</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="languageChangeButton">
-           <property name="minimumSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
+          <widget class="QLabel" name="dateLabel">
+           <property name="font">
+            <font>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
            </property>
            <property name="text">
-            <string>Change</string>
+            <string>01.02.2017</string>
            </property>
-           <property name="icon">
-            <iconset resource="../resources.qrc">
-             <normaloff>:/icons/resources/icons/basic_flag1.png</normaloff>:/icons/resources/icons/basic_flag1.png</iconset>
+           <property name="alignment">
+            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
            </property>
           </widget>
          </item>
@@ -391,76 +383,6 @@
      </item>
      <item>
       <widget class="Line" name="line_2">
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>10</height>
-        </size>
-       </property>
-       <property name="frameShadow">
-        <enum>QFrame::Plain</enum>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_11" stretch="1,1">
-       <property name="spacing">
-        <number>1</number>
-       </property>
-       <property name="bottomMargin">
-        <number>0</number>
-       </property>
-       <item>
-        <widget class="QLabel" name="label_12">
-         <property name="text">
-          <string>Sound:</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="TouchSpinBox" name="soundWidget" native="true">
-         <property name="minimumSize">
-          <size>
-           <width>100</width>
-           <height>0</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_12" stretch="1,1">
-       <property name="spacing">
-        <number>1</number>
-       </property>
-       <property name="bottomMargin">
-        <number>0</number>
-       </property>
-       <item>
-        <widget class="QLabel" name="label_13">
-         <property name="text">
-          <string>Screen:</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="TouchSpinBox" name="brightnessWidget" native="true">
-         <property name="minimumSize">
-          <size>
-           <width>100</width>
-           <height>0</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <widget class="Line" name="line_3">
        <property name="minimumSize">
         <size>
          <width>0</width>
@@ -679,14 +601,6 @@
    </item>
   </layout>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>TouchSpinBox</class>
-   <extends>QWidget</extends>
-   <header>ui/controls/touchspinbox.h</header>
-   <container>1</container>
-  </customwidget>
- </customwidgets>
  <resources>
   <include location="../resources.qrc"/>
  </resources>

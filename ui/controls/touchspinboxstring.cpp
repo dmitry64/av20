@@ -6,6 +6,7 @@ void TouchSpinBoxString::next()
     if(_current<_values.size()-1) {
         _current++;
     }
+    emit valueChanged(_values.at(_current));
     updateValue();
 }
 
@@ -14,6 +15,7 @@ void TouchSpinBoxString::prev()
     if(_current>0) {
         _current--;
     }
+    emit valueChanged(_values.at(_current));
     updateValue();
 }
 
