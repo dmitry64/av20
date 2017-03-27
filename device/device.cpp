@@ -77,11 +77,11 @@ TVG Device::getTVGFromCurve(const TVGCurve *curve)
 Device::Device()
 {
 #ifdef FAKESPI
-    _spi = new FakeSPI();
+    _interface = new FakeSPI();
 #else
     _spi = new DriverSPI("/dev/spidev0.0");
 #endif
-    Q_ASSERT(_spi);
+    Q_ASSERT(_interface);
 }
 
 Device::~Device()
@@ -92,7 +92,7 @@ Device::~Device()
 void Device::init(uint8_t * version)
 {
     logEvent("Device","Initializing");
-    _spi->init();
+    _interface->init();
     logEvent("Device","SPI Ready");
     bool status = checkConnection();
     logEvent("Device","Connection is " + QString((status ? "ok!" : "not ok!")));
@@ -116,17 +116,17 @@ void Device::fillRegisters()
 void Device::resetConfigRegisters()
 {
     uint8_t trg_cr_send = 0b00000001;
-    if(_spi->setAndTestRegister(0x05, 1, &trg_cr_send)) {
+    if(_interface->setAndTestRegister(0x05, 1, &trg_cr_send)) {
         qFatal("TRG_CR Initialization failed!");
     }
 
     uint8_t trg_ds_send = 0b00000000;
-    if(_spi->setAndTestRegister(0x06, 1, &trg_ds_send)) {
+    if(_interface->setAndTestRegister(0x06, 1, &trg_ds_send)) {
         qFatal("TRG_DS Initialization failed!");
     }
 
     uint8_t trg_ts_send = 0b00000000;
-    if(_spi->setAndTestRegister(0x07, 1, &trg_ts_send)) {
+    if(_interface->setAndTestRegister(0x07, 1, &trg_ts_send)) {
         qFatal("TRG_TS Initialization failed!");
     }
 }
@@ -138,7 +138,7 @@ void Device::resetTVG()
         for(uint8_t i=0; i<TVG_SAMPLES_BYTES; i++) {
             tvg[i] = 0x00;
         }
-        _spi->setRegister(0x40+j,TVG_SAMPLES_BYTES,tvg);
+        _interface->setRegister(0x40+j,TVG_SAMPLES_BYTES,tvg);
     }
 }
 
@@ -147,7 +147,7 @@ void Device::resetChannelsTable()
     for(uint8_t j=0; j<8; j++) {
         for(uint8_t i=0; i<6; i++) {
             uint8_t temp = 0;
-            if(_spi->setAndTestRegister(0x10+j*6+i,1,&temp)) {
+            if(_interface->setAndTestRegister(0x10+j*6+i,1,&temp)) {
                 logEvent("Device","Channels table for ch #" + QString::number(j + 1) + "not initialized!");
                 qFatal("Initialization failed!");
             }
@@ -181,7 +181,7 @@ void Device::applyCalibration(const ChannelsCalibration &calibration, const Tact
         const TVGCurve * curve = rxchan.getTvgCurve();
         Q_ASSERT(curve);
         const TVG & tvg = getTVGFromCurve(curve);
-        _spi->setRegister(0x40+j,TVG_SAMPLES_BYTES,tvg._samples);
+        _interface->setRegister(0x40+j,TVG_SAMPLES_BYTES,tvg._samples);
     }
 
     uint8_t tactsCount = tactTable.getMaxTacts();
@@ -202,14 +202,14 @@ void Device::setProgTrigger(bool enabled)
     else {
         val = 0b00000000;
     }
-    _spi->setRegister(0x05,1,&val);
+    _interface->setRegister(0x05,1,&val);
 }
 
 DeviceStatus Device::getDeviceStatus()
 {
     DeviceStatus st;
     uint8_t stReg;
-    _spi->getRegister(0x03,1,&stReg);
+    _interface->getRegister(0x03,1,&stReg);
     st.error = (stReg & 0b10000000) != 0;
     st.thsd = (stReg & 0b00001000) != 0;
     st.ready = (stReg & 0b00000001) != 0;
@@ -219,29 +219,29 @@ DeviceStatus Device::getDeviceStatus()
 void Device::setTVG(const ChannelID chIndex, const TVG &tvg)
 {
     Q_ASSERT(chIndex < 8);
-    _spi->setRegister(0x40 + chIndex,TVG_SAMPLES_BYTES,tvg._samples);
+    _interface->setRegister(0x40 + chIndex,TVG_SAMPLES_BYTES,tvg._samples);
     //_state->setTVGForChannel(chIndex,tvg);
 }
 
 void Device::setTact(const TactRegisters & reg, const TactIndex index)
 {
     Q_ASSERT(index<8);
-    if(_spi->setAndTestRegister(0x10+index*6,1,&reg._CR)) {
+    if(_interface->setAndTestRegister(0x10+index*6,1,&reg._CR)) {
         Q_ASSERT(false);
     }
-    if(_spi->setAndTestRegister(0x10+index*6+1,1,&reg._TR1)) {
+    if(_interface->setAndTestRegister(0x10+index*6+1,1,&reg._TR1)) {
         Q_ASSERT(false);
     }
-    if(_spi->setAndTestRegister(0x10+index*6+2,1,&reg._PULSER1)) {
+    if(_interface->setAndTestRegister(0x10+index*6+2,1,&reg._PULSER1)) {
         Q_ASSERT(false);
     }
-    if(_spi->setAndTestRegister(0x10+index*6+3,1,&reg._TR2)) {
+    if(_interface->setAndTestRegister(0x10+index*6+3,1,&reg._TR2)) {
         Q_ASSERT(false);
     }
-    if(_spi->setAndTestRegister(0x10+index*6+4,1,&reg._PULSER2)) {
+    if(_interface->setAndTestRegister(0x10+index*6+4,1,&reg._PULSER2)) {
         Q_ASSERT(false);
     }
-    if(_spi->setAndTestRegister(0x10+index*6+5,1,&reg._RESERVED)) {
+    if(_interface->setAndTestRegister(0x10+index*6+5,1,&reg._RESERVED)) {
         Q_ASSERT(false);
     }
 
@@ -252,7 +252,7 @@ AScan Device::getAscanForLine(const uint8_t line, AScan * output)
     Q_ASSERT(output);
     Q_ASSERT(line==0 || line==1);
     uint8_t * buf = reinterpret_cast<uint8_t*>(output);
-    _spi->getRegister((line == 0) ? 0x7C : 0x7D, ASCAN_SAMPLES_SIZE + ASCAN_HEADER_SIZE, buf);
+    _interface->getRegister((line == 0) ? 0x7C : 0x7D, ASCAN_SAMPLES_SIZE + ASCAN_HEADER_SIZE, buf);
 
     if(!checkConnection()) {
         qFatal("Connection lost after Ascan request!");
@@ -264,7 +264,7 @@ AScan Device::getAscanForLine(const uint8_t line, AScan * output)
 uint8_t Device::getVersion()
 {
     uint8_t version = 0;
-    _spi->getRegister(0x02,1,&version);
+    _interface->getRegister(0x02,1,&version);
     return version;
 }
 
@@ -272,12 +272,12 @@ bool Device::checkConnection()
 {
     uint8_t zero = 0;
     uint8_t ff = 0;
-    _spi->getRegister(0x00,1,&zero);
-    _spi->getRegister(0x01,1,&ff);
+    _interface->getRegister(0x00,1,&zero);
+    _interface->getRegister(0x01,1,&ff);
     return (ff == 0xff) && (zero == 0x00);
 }
 
 bool Device::getErrorFlag() const
 {
-    return _spi->getErrorFlag();
+    return _interface->getErrorFlag();
 }

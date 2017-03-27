@@ -1,9 +1,9 @@
 #ifndef DEVICE_H
 #define DEVICE_H
 
-#include "spi/deviceinterface.h"
-#include "spi/driverspi.h"
-#include "spi/fakespi.h"
+#include "driver/deviceinterface.h"
+#include "driver/driverspi.h"
+#include "driver/fakespi.h"
 #include "common/commonfunctions.h"
 #include <vector>
 #include "channelscalibration.h"
@@ -11,7 +11,7 @@
 
 class Device
 {
-    DeviceInterface * _spi;
+    DeviceInterface * _interface;
 private:
     TactRegisters getRegistersByTact(const uint8_t index, const ChannelsCalibration & mode, const TactTable & tactTable);
     static TVG getTVGFromCurve(const TVGCurve *curve);

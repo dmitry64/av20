@@ -41,14 +41,12 @@ include(./version/version.pri)
 
 SOURCES += core.cpp \
     device/device.cpp \
-    device/spi/driverspi.cpp \
     device/devicestate.cpp \
     ui/ascanwidget.cpp \
     ui/controls/touchspinbox.cpp \
     ui/controlpanel.cpp \
     device/modificators/modificator.cpp \
     ui/statusbar.cpp \
-    device/spi/fakespi.cpp \
     ui/bscanwidget.cpp \
     ui/channelselector.cpp \
     ui/controls/channelbutton.cpp \
@@ -100,21 +98,20 @@ SOURCES += core.cpp \
     system/datetimecontroller.cpp \
     device/modificators/createcalibrationmodificator.cpp \
     device/modificators/removecalibrationmodificator.cpp \
-    common/commonfunctions.cpp
+    common/commonfunctions.cpp \
+    driver/driverspi.cpp \
+    driver/fakespi.cpp
 #    tests/coretest.cpp
 
 HEADERS  += \
     core.h \
     device/device.h \
-    device/spi/driverspi.h \
     device/devicestate.h \
     ui/ascanwidget.h \
     ui/controls/touchspinbox.h \
     ui/controlpanel.h \
     device/modificators/modificator.h \
     ui/statusbar.h \
-    device/spi/deviceinterface.h \
-    device/spi/fakespi.h \
     ui/bscanwidget.h \
     ui/channelselector.h \
     ui/controls/channelbutton.h \
@@ -168,7 +165,10 @@ HEADERS  += \
     device/modificators/createcalibrationmodificator.h \
     device/modificators/removecalibrationmodificator.h \
     common/commonfunctions.h \
-    common/definitions.h
+    common/definitions.h \
+    driver/deviceinterface.h \
+    driver/driverspi.h \
+    driver/fakespi.h
 #    tests/coretest.h
 
 FORMS    += \
