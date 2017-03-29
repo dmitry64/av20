@@ -24,6 +24,10 @@ ChannelButton::ChannelButton(QString name, ChannelsInfo info, QWidget *parent) :
     _colorBlue = 255;
     setActive(false);
     _info = info;
+    _defaultPalette = ui->channelButton->palette();
+    _activePalette = _defaultPalette;
+    _activePalette.setColor(QPalette::Button,QColor(230,230,70));
+    _activePalette.setColor(QPalette::ButtonText,Qt::black);
     //  ui->channelMarkerButton->hide();
 }
 
@@ -35,14 +39,21 @@ ChannelButton::~ChannelButton()
 void ChannelButton::setActive(bool state)
 {
     _state = state;
-    if(state) {
+    /*if(state) {
         ui->channelButton->setStyleSheet("background-color: rgb(90,90,90); color: white;");
         ui->colorWidget->setStyleSheet("background-color: rgb("+QString::number(_colorRed)+","+QString::number(_colorGreen)+","+QString::number(_colorBlue)+")");
     }
     else {
         ui->channelButton->setStyleSheet("background-color: white; color: black;");
         ui->colorWidget->setStyleSheet("background-color: rgb("+QString::number(_colorRed)+","+QString::number(_colorGreen)+","+QString::number(_colorBlue)+")");
+    }*/
+    if(state) {
+        ui->channelButton->setPalette(_activePalette);
     }
+    else {
+        ui->channelButton->setPalette(_defaultPalette);
+    }
+    ui->colorWidget->setStyleSheet("background-color: rgb("+QString::number(_colorRed)+","+QString::number(_colorGreen)+","+QString::number(_colorBlue)+")");
     ui->channelButton->update();
 }
 

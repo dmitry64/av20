@@ -59,9 +59,13 @@ void BScanWidget::paintEvent(QPaintEvent *event)
     const int bottom = h -1;
     const int left = 32;
 
-    painter.fillRect(0,0,32,bottom,Qt::white);
-    painter.fillRect(w - 32,0,w,bottom,Qt::white);
-    painter.fillRect(left,0,w - 32,bottom,Qt::white);
+    const QPalette & pal = this->palette();
+    QColor bgColor = pal.color(QPalette::Window);
+    bgColor = bgColor.lighter(170.0f);
+
+    painter.fillRect(0,0,32,bottom,bgColor);
+    painter.fillRect(w - 32,0,w,bottom,bgColor);
+    painter.fillRect(left,0,w - 32,bottom,bgColor);
     painter.drawRect(left,0,w - 32 - 1,bottom-1);
     painter.drawRect(0,0,w - 32,bottom-1);
 

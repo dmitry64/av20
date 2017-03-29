@@ -966,9 +966,9 @@
      </property>
      <property name="font">
       <font>
-       <pointsize>8</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
+       <pointsize>10</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
       </font>
      </property>
      <property name="text">
@@ -1405,9 +1405,9 @@
      </property>
      <property name="font">
       <font>
-       <pointsize>8</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
+       <pointsize>10</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
       </font>
      </property>
      <property name="text">
@@ -1844,9 +1844,9 @@
      </property>
      <property name="font">
       <font>
-       <pointsize>8</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
+       <pointsize>10</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
       </font>
      </property>
      <property name="autoFillBackground">
@@ -1877,9 +1877,9 @@
      </property>
      <property name="font">
       <font>
-       <pointsize>8</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
+       <pointsize>10</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
       </font>
      </property>
      <property name="autoFillBackground">
@@ -1908,9 +1908,9 @@ color: rgb(0, 0, 0);</string>
      </property>
      <property name="font">
       <font>
-       <pointsize>8</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
+       <pointsize>10</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
       </font>
      </property>
      <property name="autoFillBackground">
@@ -1948,9 +1948,9 @@ color: rgb(0, 0, 0);</string>
      </property>
      <property name="font">
       <font>
-       <pointsize>8</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
+       <pointsize>10</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
       </font>
      </property>
      <property name="autoFillBackground">
@@ -1979,9 +1979,9 @@ color: rgb(0, 0, 0);</string>
      </property>
      <property name="font">
       <font>
-       <pointsize>8</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
+       <pointsize>10</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
       </font>
      </property>
      <property name="autoFillBackground">
@@ -2016,10 +2016,10 @@ color: rgb(0, 0, 0);</string>
      </property>
      <property name="font">
       <font>
-       <pointsize>8</pointsize>
-       <weight>75</weight>
+       <pointsize>10</pointsize>
+       <weight>50</weight>
        <italic>false</italic>
-       <bold>true</bold>
+       <bold>false</bold>
       </font>
      </property>
      <property name="autoFillBackground">
@@ -2054,10 +2054,10 @@ color: rgb(0, 0, 0);</string>
      </property>
      <property name="font">
       <font>
-       <pointsize>8</pointsize>
-       <weight>75</weight>
+       <pointsize>10</pointsize>
+       <weight>50</weight>
        <italic>false</italic>
-       <bold>true</bold>
+       <bold>false</bold>
        <strikeout>false</strikeout>
        <kerning>true</kerning>
       </font>

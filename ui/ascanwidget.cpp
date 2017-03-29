@@ -192,6 +192,13 @@ void AScanWidget::paintEvent(QPaintEvent *event)
 
     QPainter painter(this);
     painter.setCompositionMode(QPainter::CompositionMode_Source);
+    const QPalette & pal = this->palette();
+    QColor bgColor = pal.color(QPalette::Window);
+    QColor inverted(255-bgColor.red(),255-bgColor.green(),bgColor.blue());
+    _ascanBrush.setColor(inverted);
+    bgColor = bgColor.lighter(170.0f);
+
+
     const int w = width();
     const int h = height();
     const int width = w - 64;
@@ -201,7 +208,7 @@ void AScanWidget::paintEvent(QPaintEvent *event)
     const int left = 32;
     const int top = 8;
     const int bottom = h - 32;
-    painter.fillRect(0,0,w,h,Qt::white);
+    painter.fillRect(0,0,w,h,bgColor);
 
     painter.setPen(Qt::black);
     painter.drawRect(0,0,w-1,h-1);

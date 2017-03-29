@@ -19,6 +19,8 @@ class ChannelButton : public QWidget
     uint8_t _colorRed;
     uint8_t _colorGreen;
     uint8_t _colorBlue;
+    QPalette _activePalette;
+    QPalette _defaultPalette;
 
 public:
     explicit ChannelButton(QString name, ChannelsInfo info, QWidget *parent = 0);

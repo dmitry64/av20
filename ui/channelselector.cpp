@@ -45,7 +45,7 @@ void ChannelSelector::init(const ChannelsCalibration & snapshot)
             ChannelsInfo info;
             info._channel = i;
             info._displayChannel = j;
-            ChannelButton * channelButton = new ChannelButton(QString::number(dc.angle()),info);
+            ChannelButton * channelButton = new ChannelButton(QString::number(dc.angle())+"°",info);
             channelButton->setColor(chan.getColorRed(),chan.getColorGreen(), chan.getColorBlue());
             QObject::connect(channelButton,SIGNAL(channelSelected(ChannelsInfo)),this,SLOT(onChannelSelected(ChannelsInfo)));
             ui->channelsLayout->addWidget(channelButton);

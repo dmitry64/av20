@@ -24,6 +24,7 @@ public:
     ~TouchSpinBoxString();
     void setValues(std::vector<QString> values);
     void setName(QString name);
+    void setIndex(size_t index);
 
 private slots:
     void on_leftButton_pressed();

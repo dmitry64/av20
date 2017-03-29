@@ -7,6 +7,7 @@ OptionsWidget::OptionsWidget(QWidget *parent) :
     ui(new Ui::OptionsWidget)
 {
     ui->setupUi(this);
+    _colorSchemeIndex = 0;
 }
 
 OptionsWidget::~OptionsWidget()
@@ -40,8 +41,9 @@ void OptionsWidget::init()
     colorSchemes.push_back(QString("Default"));
     colorSchemes.push_back(QString("Alternative"));
     ui->colorSchemeWidget->setValues(colorSchemes);
+    ui->colorSchemeWidget->setIndex(_colorSchemeIndex);
     ui->colorSchemeWidget->setName("Color scheme");
-    connect(ui->colorSchemeWidget,SIGNAL(valueChanged(QString)),this,SIGNAL(colorSchemeChanged(QString)));
+    connect(ui->colorSchemeWidget,SIGNAL(valueChanged(QString)),this,SLOT(onColorSchemeChanged(QString)));
 }
 
 void OptionsWidget::onBrightnessChanged(double value)
@@ -54,4 +56,15 @@ void OptionsWidget::onSoundVolumeChanged(double value)
 {
     System * system = System::getInstance();
     system->setSoundVolume(qRound(value));
+}
+
+void OptionsWidget::onColorSchemeChanged(QString str)
+{
+    if(str.compare("Default") == 0) {
+        _colorSchemeIndex = 0;
+    }
+    else {
+        _colorSchemeIndex = 1;
+    }
+    emit colorSchemeChanged(str);
 }

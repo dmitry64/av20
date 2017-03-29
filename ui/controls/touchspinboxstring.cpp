@@ -53,6 +53,13 @@ void TouchSpinBoxString::setName(QString name)
     update();
 }
 
+void TouchSpinBoxString::setIndex(size_t index)
+{
+    _current = index;
+    ui->valueLabel->setText(_values.at(_current));
+    update();
+}
+
 void TouchSpinBoxString::on_leftButton_pressed()
 {
     prev();

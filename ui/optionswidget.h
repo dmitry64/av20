@@ -12,6 +12,7 @@ class OptionsWidget : public QWidget
 {
     Q_OBJECT
 
+    size_t _colorSchemeIndex;
 public:
     explicit OptionsWidget(QWidget *parent = 0);
     ~OptionsWidget();
@@ -19,6 +20,7 @@ public:
 public slots:
     void onBrightnessChanged(double value);
     void onSoundVolumeChanged(double value);
+    void onColorSchemeChanged(QString str);
 signals:
     void colorSchemeChanged(QString scheme);
 

@@ -437,6 +437,15 @@
             </color>
            </brush>
           </colorrole>
+          <colorrole role="ButtonText">
+           <brush brushstyle="SolidPattern">
+            <color alpha="255">
+             <red>0</red>
+             <green>0</green>
+             <blue>0</blue>
+            </color>
+           </brush>
+          </colorrole>
          </active>
          <inactive>
           <colorrole role="Button">
@@ -444,6 +453,15 @@
             <color alpha="255">
              <red>255</red>
              <green>170</green>
+             <blue>0</blue>
+            </color>
+           </brush>
+          </colorrole>
+          <colorrole role="ButtonText">
+           <brush brushstyle="SolidPattern">
+            <color alpha="255">
+             <red>0</red>
+             <green>0</green>
              <blue>0</blue>
             </color>
            </brush>
@@ -459,8 +477,20 @@
             </color>
            </brush>
           </colorrole>
+          <colorrole role="ButtonText">
+           <brush brushstyle="SolidPattern">
+            <color alpha="255">
+             <red>208</red>
+             <green>208</green>
+             <blue>208</blue>
+            </color>
+           </brush>
+          </colorrole>
          </disabled>
         </palette>
+       </property>
+       <property name="focusPolicy">
+        <enum>Qt::NoFocus</enum>
        </property>
        <property name="text">
         <string>Pause</string>
@@ -497,6 +527,15 @@
             </color>
            </brush>
           </colorrole>
+          <colorrole role="ButtonText">
+           <brush brushstyle="SolidPattern">
+            <color alpha="255">
+             <red>0</red>
+             <green>0</green>
+             <blue>0</blue>
+            </color>
+           </brush>
+          </colorrole>
          </active>
          <inactive>
           <colorrole role="Button">
@@ -505,6 +544,15 @@
              <red>31</red>
              <green>78</green>
              <blue>152</blue>
+            </color>
+           </brush>
+          </colorrole>
+          <colorrole role="ButtonText">
+           <brush brushstyle="SolidPattern">
+            <color alpha="255">
+             <red>0</red>
+             <green>0</green>
+             <blue>0</blue>
             </color>
            </brush>
           </colorrole>
@@ -519,8 +567,20 @@
             </color>
            </brush>
           </colorrole>
+          <colorrole role="ButtonText">
+           <brush brushstyle="SolidPattern">
+            <color alpha="255">
+             <red>208</red>
+             <green>208</green>
+             <blue>208</blue>
+            </color>
+           </brush>
+          </colorrole>
          </disabled>
         </palette>
+       </property>
+       <property name="focusPolicy">
+        <enum>Qt::NoFocus</enum>
        </property>
        <property name="text">
         <string>Reboot</string>
@@ -557,12 +617,30 @@
             </color>
            </brush>
           </colorrole>
+          <colorrole role="ButtonText">
+           <brush brushstyle="SolidPattern">
+            <color alpha="255">
+             <red>0</red>
+             <green>0</green>
+             <blue>0</blue>
+            </color>
+           </brush>
+          </colorrole>
          </active>
          <inactive>
           <colorrole role="Button">
            <brush brushstyle="SolidPattern">
             <color alpha="255">
              <red>152</red>
+             <green>0</green>
+             <blue>0</blue>
+            </color>
+           </brush>
+          </colorrole>
+          <colorrole role="ButtonText">
+           <brush brushstyle="SolidPattern">
+            <color alpha="255">
+             <red>0</red>
              <green>0</green>
              <blue>0</blue>
             </color>
@@ -579,8 +657,20 @@
             </color>
            </brush>
           </colorrole>
+          <colorrole role="ButtonText">
+           <brush brushstyle="SolidPattern">
+            <color alpha="255">
+             <red>208</red>
+             <green>208</green>
+             <blue>208</blue>
+            </color>
+           </brush>
+          </colorrole>
          </disabled>
         </palette>
+       </property>
+       <property name="focusPolicy">
+        <enum>Qt::NoFocus</enum>
        </property>
        <property name="text">
         <string>Shutdown</string>
