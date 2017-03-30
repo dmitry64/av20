@@ -7,7 +7,8 @@ void TouchSpinBoxString::next()
         _current++;
     }
     emit valueChanged(_values.at(_current));
-    updateValue();
+    emit indexChanged(_current);
+    sync();
 }
 
 void TouchSpinBoxString::prev()
@@ -16,12 +17,15 @@ void TouchSpinBoxString::prev()
         _current--;
     }
     emit valueChanged(_values.at(_current));
-    updateValue();
+    emit indexChanged(_current);
+    sync();
 }
 
-void TouchSpinBoxString::updateValue()
+void TouchSpinBoxString::sync()
 {
     ui->valueLabel->setText(_values.at(_current));
+    ui->leftButton->setEnabled(_current>0);
+    ui->rightButton->setEnabled(_current<_values.size()-1);
     update();
 }
 
@@ -49,15 +53,13 @@ void TouchSpinBoxString::setValues(std::vector<QString> values)
 void TouchSpinBoxString::setName(QString name)
 {
     _name = name;
-    ui->nameLabel->setText(name);
-    update();
+    sync();
 }
 
 void TouchSpinBoxString::setIndex(size_t index)
 {
     _current = index;
-    ui->valueLabel->setText(_values.at(_current));
-    update();
+    sync();
 }
 
 void TouchSpinBoxString::on_leftButton_pressed()

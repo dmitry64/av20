@@ -26,6 +26,7 @@ class TouchSpinBox : public QWidget
 private:
     void inc();
     void dec();
+    void sync();
 public:
     explicit TouchSpinBox( QWidget *parent = 0);
     ~TouchSpinBox();

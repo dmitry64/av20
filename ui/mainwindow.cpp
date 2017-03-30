@@ -2,13 +2,15 @@
 #include "ui_mainwindow.h"
 #include <QDebug>
 
-void MainWindow::setColorScheme(QString name)
+void MainWindow::setColorScheme(UiTheme theme)
 {
-    if(name.compare("Default")==0) {
+    switch(theme) {
+    case UiTheme::Default:
         this->setPalette(_defaultPalette);
-    }
-    else if (name.compare("Alternative")==0) {
+        break;
+    case UiTheme::Alternative:
         this->setPalette(_alternativePalette);
+        break;
     }
 }
 
@@ -26,6 +28,7 @@ MainWindow::MainWindow(QWidget *parent) :
     _alternativePalette.setColor(QPalette::ButtonText,QColor(200,200,200));
     _alternativePalette.setColor(QPalette::WindowText,QColor(200,200,200));
 
+    this->setColorScheme(System::getInstance()->getSettings()->getGlobalUiTheme());
 
     _backgroundWidget = new QPushButton(ui->centralTabWidget);
     _backgroundWidget->setFlat(true);
@@ -83,7 +86,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->menuWidget,SIGNAL(systemMenuOpened()),this,SLOT(onSystemMenuOpened()));
     connect(ui->menuWidget,SIGNAL(systemMenuClosed()),this,SLOT(onSystemMenuClosed()));
 
-    connect(_optionsWidget,SIGNAL(colorSchemeChanged(QString)),this,SLOT(setColorScheme(QString)));
+    connect(_optionsWidget,SIGNAL(colorSchemeChanged(UiTheme)),this,SLOT(setColorScheme(UiTheme)));
 
     connect(_systemWidget,SIGNAL(shutdown()),this,SLOT(onShutdown()));
     connect(_systemWidget,SIGNAL(reboot()),this,SLOT(onReboot()));

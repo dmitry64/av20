@@ -21,7 +21,7 @@ void StatusBar::init()
 {
     System * system = System::getInstance();
     Q_ASSERT(system);
-    ui->operatorLabel->setText("Operator: " + system->getCurrentOperator());
+    ui->operatorLabel->setText("Operator: " + system->getCurrentOperatorName());
     ui->timeLabel->setText(system->getTime().toString(Qt::DefaultLocaleShortDate));
     ui->dateLabel->setText(system->getDate().toString(Qt::DefaultLocaleShortDate));
     ui->batteryButton->setText(QString::number(system->getBatteryPercent()) + "%");

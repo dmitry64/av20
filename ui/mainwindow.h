@@ -37,7 +37,7 @@ class MainWindow : public QMainWindow
     QPalette _alternativePalette;
 
 private slots:
-    void setColorScheme(QString name);
+    void setColorScheme(UiTheme theme);
 
 public:
     explicit MainWindow(QWidget *parent = 0);

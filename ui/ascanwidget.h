@@ -8,6 +8,7 @@
 #include "common/commonfunctions.h"
 #include "device/channel/channel.h"
 #include <QElapsedTimer>
+#include "system/system.h"
 
 namespace Ui
 {
@@ -38,6 +39,8 @@ class AScanWidget : public QWidget
     Channel _channelData;
     DisplayChannelID _displayChannelId;
 
+    bool _drawFPS;
+
 private:
     void setTVGCurve(const TVGCurve *curve);
     void drawTimeScale(QPainter & painter, int width, int bottom, int left);
@@ -58,6 +61,8 @@ public:
 public slots:
     void onAScan(const AScanDrawData *scan);
     void onChannelChanged(const Channel &channel);
+private slots:
+    void onFPSEnabledChanged(bool value);
 private:
     Ui::AScanWidget *ui;
 };

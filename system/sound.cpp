@@ -16,8 +16,8 @@ Sound::Sound() :_volume(0)
 
 }
 
-void Sound::init()
+void Sound::init(Settings *settings)
 {
-    _volume = 100;
+    _volume = settings->getSystemSoundVolume();
     logEvent("Sound","Ready");
 }

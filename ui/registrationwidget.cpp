@@ -10,7 +10,7 @@ RegistrationWidget::RegistrationWidget(QWidget *parent) :
     ui->setupUi(this);
     System * system = System::getInstance();
     ui->dateLabel->setText(system->getDate().toString(Qt::DefaultLocaleShortDate));
-    ui->operatorLabel->setText(system->getCurrentOperator());
+    ui->operatorLabel->setText(system->getCurrentOperatorName());
 }
 
 RegistrationWidget::~RegistrationWidget()

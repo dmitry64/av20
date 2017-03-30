@@ -20,6 +20,9 @@ CONFIG += c++14
 TARGET = avicon-20
 TEMPLATE = app
 
+DEFINES += DEVICE_NAME=\\\"Avicon-20\\\"
+DEFINES += ORGANIZATION_NAME=\\\"Radioavionica\\\"
+
 #QMAKE_CXXFLAGS_DEBUG *= -pg
 #QMAKE_LFLAGS_DEBUG *= -pg
 
@@ -100,7 +103,9 @@ SOURCES += core.cpp \
     device/modificators/removecalibrationmodificator.cpp \
     common/commonfunctions.cpp \
     driver/driverspi.cpp \
-    driver/fakespi.cpp
+    driver/fakespi.cpp \
+    system/settings.cpp \
+    system/operators.cpp
 #    tests/coretest.cpp
 
 HEADERS  += \
@@ -168,7 +173,9 @@ HEADERS  += \
     common/definitions.h \
     driver/deviceinterface.h \
     driver/driverspi.h \
-    driver/fakespi.h
+    driver/fakespi.h \
+    system/settings.h \
+    system/operators.h
 #    tests/coretest.h
 
 FORMS    += \

@@ -1,13 +1,26 @@
 #include "optionswidget.h"
 #include "ui_optionswidget.h"
-#include "system/system.h"
+
+
+void OptionsWidget::initOperators(System * system)
+{
+    ui->operatorsListWidget->clear();
+    ui->operatorsListWidget->addItem("Unknown operator");
+
+    auto names = system->getOperators()->names();
+
+    for(auto it=names.begin(); it!=names.end(); it++) {
+        ui->operatorsListWidget->addItem(it.operator*());
+    }
+}
 
 OptionsWidget::OptionsWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::OptionsWidget)
 {
     ui->setupUi(this);
-    _colorSchemeIndex = 0;
+    System * system = System::getInstance();
+    connect(system->getOperators(),SIGNAL(operatorsListChanged()),this,SLOT(onOperatorsListChanged()));
 }
 
 OptionsWidget::~OptionsWidget()
@@ -18,6 +31,7 @@ OptionsWidget::~OptionsWidget()
 void OptionsWidget::init()
 {
     System * system = System::getInstance();
+    const Settings * settings = system->getSettings();
 
     ui->soundWidget->setName("Volume");
     ui->soundWidget->setSuffix("%");
@@ -41,9 +55,13 @@ void OptionsWidget::init()
     colorSchemes.push_back(QString("Default"));
     colorSchemes.push_back(QString("Alternative"));
     ui->colorSchemeWidget->setValues(colorSchemes);
-    ui->colorSchemeWidget->setIndex(_colorSchemeIndex);
+    ui->colorSchemeWidget->setIndex(static_cast<size_t>(settings->getGlobalUiTheme()));
     ui->colorSchemeWidget->setName("Color scheme");
-    connect(ui->colorSchemeWidget,SIGNAL(valueChanged(QString)),this,SLOT(onColorSchemeChanged(QString)));
+    connect(ui->colorSchemeWidget,SIGNAL(indexChanged(size_t)),this,SLOT(onColorSchemeIndexChanged(size_t)));
+
+    ui->showFps->setChecked(settings->getAscanFPSEnabled());
+
+    initOperators(system);
 }
 
 void OptionsWidget::onBrightnessChanged(double value)
@@ -58,13 +76,42 @@ void OptionsWidget::onSoundVolumeChanged(double value)
     system->setSoundVolume(qRound(value));
 }
 
-void OptionsWidget::onColorSchemeChanged(QString str)
+void OptionsWidget::onColorSchemeIndexChanged(size_t index)
 {
-    if(str.compare("Default") == 0) {
-        _colorSchemeIndex = 0;
+    UiTheme theme = static_cast<UiTheme>(index);
+    System::getInstance()->getSettings()->setGlobalUiTheme(theme);
+    emit colorSchemeChanged(theme);
+}
+
+void OptionsWidget::on_showFps_toggled(bool checked)
+{
+    System::getInstance()->getSettings()->setAscanFPSEnabled(checked);
+}
+
+void OptionsWidget::on_selectOperatorButton_released()
+{
+    const QString name = ui->operatorsListWidget->selectedItems().first()->data(0).toString();
+
+    System::getInstance()->setCurrentOperatorName(name);
+}
+
+void OptionsWidget::on_removeOperatorButton_released()
+{
+    const QString name = ui->operatorsListWidget->selectedItems().first()->data(0).toString();
+    if(name.compare("Unknown operator") != 0) {
+        System::getInstance()->getOperators()->remove(name);
     }
-    else {
-        _colorSchemeIndex = 1;
+}
+
+void OptionsWidget::on_addOperatorButton_released()
+{
+    QString name = "new";
+    if(name.compare("Unknown operator") != 0) {
+        System::getInstance()->getOperators()->add(name);
     }
-    emit colorSchemeChanged(str);
+}
+
+void OptionsWidget::onOperatorsListChanged()
+{
+    initOperators(System::getInstance());
 }

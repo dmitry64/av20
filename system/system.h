@@ -12,6 +12,8 @@
 #include "sound.h"
 #include "batterycontroller.h"
 #include "datetimecontroller.h"
+#include "settings.h"
+#include "operators.h"
 
 class System : public QObject
 {
@@ -23,6 +25,8 @@ class System : public QObject
     Sound * _sound;
     BatteryController * _battery;
     DateTimeController * _dateTime;
+    Settings * _settings;
+    Operators * _operators;
 private:
     System();
     System( const System &);
@@ -39,7 +43,8 @@ public:
     }
 
     void init();
-    QString getCurrentOperator();
+    QString getCurrentOperatorName();
+    void setCurrentOperatorName(QString name);
     QString getSoftwareVersion();
     QString getOSVersion();
     void setDate(QDate date);
@@ -59,6 +64,10 @@ public:
 
     void shutdown();
     void reboot();
+
+    Settings *getSettings() const;
+
+    Operators *getOperators() const;
 
 public slots:
     void onDeviceVersionReady(QString version);

@@ -13,12 +13,12 @@ class TouchSpinBoxString : public QWidget
     Q_OBJECT
 
     std::vector<QString> _values;
-    unsigned int _current;
+    size_t _current;
     QString _name;
 private:
     void next();
     void prev();
-    void updateValue();
+    void sync();
 public:
     explicit TouchSpinBoxString(QWidget *parent = 0);
     ~TouchSpinBoxString();
@@ -28,14 +28,12 @@ public:
 
 private slots:
     void on_leftButton_pressed();
-
     void on_rightButton_pressed();
-
     void on_leftButton_released();
-
     void on_rightButton_released();
 signals:
     void valueChanged(QString value);
+    void indexChanged(size_t index);
 
 private:
     Ui::TouchSpinBoxString *ui;

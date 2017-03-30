@@ -2,13 +2,14 @@
 #define SOUND_H
 
 #include "common/commonfunctions.h"
+#include "settings.h"
 
 class Sound
 {
     int _volume;
 public:
     Sound();
-    void init();
+    void init(Settings * settings);
     int volume() const;
     void setVolume(int volume);
 };

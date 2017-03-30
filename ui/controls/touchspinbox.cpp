@@ -20,6 +20,14 @@ void TouchSpinBox::dec()
     }
 }
 
+void TouchSpinBox::sync()
+{
+    ui->valueLabel->setText(QString::number(_value) + " " + _suffix);
+    ui->leftButton->setEnabled(_value > _min);
+    ui->rightButton->setEnabled(_value < _max);
+    update();
+}
+
 TouchSpinBox::TouchSpinBox(QWidget *parent) :
     QWidget(parent),
     _value(0),
@@ -47,15 +55,14 @@ void TouchSpinBox::setValue(double value)
 {
     _value = value;
     _prev = value;
-    ui->valueLabel->setText(QString::number(value) + " " + _suffix);
-    update();
+    sync();
 }
 
 void TouchSpinBox::setName(QString name)
 {
     _name = name;
     ui->nameLabel->setText(name);
-    update();
+    sync();
 }
 
 void TouchSpinBox::setMax(double max)
@@ -76,8 +83,7 @@ void TouchSpinBox::setStep(double step)
 void TouchSpinBox::setSuffix(QString suf)
 {
     _suffix = suf;
-    ui->valueLabel->setText(QString::number(_value) + " " + _suffix);
-    update();
+    sync();
 }
 
 void TouchSpinBox::onTimer()
@@ -90,8 +96,7 @@ void TouchSpinBox::onTimer()
         inc();
     }
     if(_prev!=_value) {
-        ui->valueLabel->setText(QString::number(_value) + " " + _suffix);
-        update();
+        sync();
         emit valueChanged(_value);
     }
 }
@@ -99,31 +104,29 @@ void TouchSpinBox::onTimer()
 void TouchSpinBox::on_leftButton_pressed()
 {
     dec();
-    ui->valueLabel->setText(QString::number(_value) + " " + _suffix);
+    sync();
     _direction = true;
     _timer.start();
-    update();
     emit valueChanged(_value);
 }
 
 void TouchSpinBox::on_rightButton_pressed()
 {
     inc();
-    ui->valueLabel->setText(QString::number(_value) + " " + _suffix);
+    sync();
     _timer.start();
     _direction = false;
-    update();
     emit valueChanged(_value);
 }
 
 void TouchSpinBox::on_leftButton_released()
 {
     _timer.stop();
-    update();
+    sync();
 }
 
 void TouchSpinBox::on_rightButton_released()
 {
     _timer.stop();
-    update();
+    sync();
 }

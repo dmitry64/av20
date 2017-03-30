@@ -11,9 +11,9 @@ void BrightnessController::setCurrentBrightness(int currentBrightness)
     _currentBrightness = currentBrightness;
 }
 
-void BrightnessController::init()
+void BrightnessController::init(Settings *settings)
 {
-    _currentBrightness = 100;
+    _currentBrightness = settings->getSystemScreenBrightness();
     logEvent("Brightness","Ready");
 }
 

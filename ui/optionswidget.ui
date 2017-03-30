@@ -34,7 +34,7 @@
         <enum>QTabWidget::North</enum>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>1</number>
        </property>
        <property name="iconSize">
         <size>
@@ -45,7 +45,7 @@
        <property name="elideMode">
         <enum>Qt::ElideMiddle</enum>
        </property>
-       <widget class="QWidget" name="device">
+       <widget class="QWidget" name="deviceTab">
         <attribute name="icon">
          <iconset resource="../resources.qrc">
           <normaloff>:/icons/resources/icons/sys_icon_options.png</normaloff>:/icons/resources/icons/sys_icon_options.png</iconset>
@@ -64,8 +64,8 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>945</width>
-              <height>418</height>
+              <width>949</width>
+              <height>422</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -232,7 +232,1383 @@
          </item>
         </layout>
        </widget>
-       <widget class="QWidget" name="tab">
+       <widget class="QWidget" name="operatorTab">
+        <attribute name="icon">
+         <iconset resource="../resources.qrc">
+          <normaloff>:/icons/resources/icons/sys_icon_user.png</normaloff>:/icons/resources/icons/sys_icon_user.png</iconset>
+        </attribute>
+        <attribute name="title">
+         <string>Operator</string>
+        </attribute>
+        <layout class="QVBoxLayout" name="verticalLayout_7">
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_7">
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QListWidget" name="operatorsListWidget">
+             <property name="font">
+              <font>
+               <pointsize>20</pointsize>
+              </font>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_11">
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QPushButton" name="addOperatorButton">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>48</height>
+                </size>
+               </property>
+               <property name="palette">
+                <palette>
+                 <active>
+                  <colorrole role="WindowText">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>0</red>
+                     <green>0</green>
+                     <blue>0</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Button">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>108</red>
+                     <green>189</green>
+                     <blue>64</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Light">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>164</red>
+                     <green>255</green>
+                     <blue>115</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Midlight">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>136</red>
+                     <green>222</green>
+                     <blue>89</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Dark">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>54</red>
+                     <green>94</green>
+                     <blue>32</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Mid">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>72</red>
+                     <green>126</green>
+                     <blue>42</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Text">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>0</red>
+                     <green>0</green>
+                     <blue>0</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="BrightText">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>255</red>
+                     <green>255</green>
+                     <blue>255</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="ButtonText">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>0</red>
+                     <green>0</green>
+                     <blue>0</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Base">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>255</red>
+                     <green>255</green>
+                     <blue>255</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Window">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>108</red>
+                     <green>189</green>
+                     <blue>64</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Shadow">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>0</red>
+                     <green>0</green>
+                     <blue>0</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="AlternateBase">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>181</red>
+                     <green>222</green>
+                     <blue>159</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="ToolTipBase">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>255</red>
+                     <green>255</green>
+                     <blue>220</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="ToolTipText">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>0</red>
+                     <green>0</green>
+                     <blue>0</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                 </active>
+                 <inactive>
+                  <colorrole role="WindowText">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>0</red>
+                     <green>0</green>
+                     <blue>0</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Button">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>108</red>
+                     <green>189</green>
+                     <blue>64</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Light">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>164</red>
+                     <green>255</green>
+                     <blue>115</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Midlight">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>136</red>
+                     <green>222</green>
+                     <blue>89</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Dark">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>54</red>
+                     <green>94</green>
+                     <blue>32</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Mid">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>72</red>
+                     <green>126</green>
+                     <blue>42</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Text">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>0</red>
+                     <green>0</green>
+                     <blue>0</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="BrightText">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>255</red>
+                     <green>255</green>
+                     <blue>255</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="ButtonText">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>0</red>
+                     <green>0</green>
+                     <blue>0</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Base">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>255</red>
+                     <green>255</green>
+                     <blue>255</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Window">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>108</red>
+                     <green>189</green>
+                     <blue>64</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Shadow">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>0</red>
+                     <green>0</green>
+                     <blue>0</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="AlternateBase">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>181</red>
+                     <green>222</green>
+                     <blue>159</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="ToolTipBase">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>255</red>
+                     <green>255</green>
+                     <blue>220</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="ToolTipText">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>0</red>
+                     <green>0</green>
+                     <blue>0</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                 </inactive>
+                 <disabled>
+                  <colorrole role="WindowText">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>54</red>
+                     <green>94</green>
+                     <blue>32</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Button">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>108</red>
+                     <green>189</green>
+                     <blue>64</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Light">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>164</red>
+                     <green>255</green>
+                     <blue>115</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Midlight">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>136</red>
+                     <green>222</green>
+                     <blue>89</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Dark">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>54</red>
+                     <green>94</green>
+                     <blue>32</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Mid">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>72</red>
+                     <green>126</green>
+                     <blue>42</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Text">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>54</red>
+                     <green>94</green>
+                     <blue>32</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="BrightText">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>255</red>
+                     <green>255</green>
+                     <blue>255</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="ButtonText">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>54</red>
+                     <green>94</green>
+                     <blue>32</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Base">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>108</red>
+                     <green>189</green>
+                     <blue>64</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Window">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>108</red>
+                     <green>189</green>
+                     <blue>64</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Shadow">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>0</red>
+                     <green>0</green>
+                     <blue>0</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="AlternateBase">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>108</red>
+                     <green>189</green>
+                     <blue>64</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="ToolTipBase">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>255</red>
+                     <green>255</green>
+                     <blue>220</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="ToolTipText">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>0</red>
+                     <green>0</green>
+                     <blue>0</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                 </disabled>
+                </palette>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>12</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Add operator</string>
+               </property>
+               <property name="icon">
+                <iconset resource="../resources.qrc">
+                 <normaloff>:/icons/resources/icons/arrows_plus.png</normaloff>:/icons/resources/icons/arrows_plus.png</iconset>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>24</width>
+                 <height>24</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="removeOperatorButton">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>48</height>
+                </size>
+               </property>
+               <property name="palette">
+                <palette>
+                 <active>
+                  <colorrole role="WindowText">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>0</red>
+                     <green>0</green>
+                     <blue>0</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Button">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>203</red>
+                     <green>47</green>
+                     <blue>16</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Light">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>255</red>
+                     <green>100</green>
+                     <blue>69</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Midlight">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>229</red>
+                     <green>73</green>
+                     <blue>42</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Dark">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>101</red>
+                     <green>23</green>
+                     <blue>8</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Mid">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>135</red>
+                     <green>31</green>
+                     <blue>10</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Text">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>0</red>
+                     <green>0</green>
+                     <blue>0</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="BrightText">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>255</red>
+                     <green>255</green>
+                     <blue>255</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="ButtonText">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>0</red>
+                     <green>0</green>
+                     <blue>0</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Base">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>255</red>
+                     <green>255</green>
+                     <blue>255</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Window">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>203</red>
+                     <green>47</green>
+                     <blue>16</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Shadow">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>0</red>
+                     <green>0</green>
+                     <blue>0</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="AlternateBase">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>229</red>
+                     <green>151</green>
+                     <blue>135</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="ToolTipBase">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>255</red>
+                     <green>255</green>
+                     <blue>220</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="ToolTipText">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>0</red>
+                     <green>0</green>
+                     <blue>0</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                 </active>
+                 <inactive>
+                  <colorrole role="WindowText">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>0</red>
+                     <green>0</green>
+                     <blue>0</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Button">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>203</red>
+                     <green>47</green>
+                     <blue>16</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Light">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>255</red>
+                     <green>100</green>
+                     <blue>69</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Midlight">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>229</red>
+                     <green>73</green>
+                     <blue>42</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Dark">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>101</red>
+                     <green>23</green>
+                     <blue>8</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Mid">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>135</red>
+                     <green>31</green>
+                     <blue>10</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Text">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>0</red>
+                     <green>0</green>
+                     <blue>0</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="BrightText">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>255</red>
+                     <green>255</green>
+                     <blue>255</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="ButtonText">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>0</red>
+                     <green>0</green>
+                     <blue>0</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Base">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>255</red>
+                     <green>255</green>
+                     <blue>255</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Window">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>203</red>
+                     <green>47</green>
+                     <blue>16</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Shadow">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>0</red>
+                     <green>0</green>
+                     <blue>0</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="AlternateBase">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>229</red>
+                     <green>151</green>
+                     <blue>135</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="ToolTipBase">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>255</red>
+                     <green>255</green>
+                     <blue>220</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="ToolTipText">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>0</red>
+                     <green>0</green>
+                     <blue>0</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                 </inactive>
+                 <disabled>
+                  <colorrole role="WindowText">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>101</red>
+                     <green>23</green>
+                     <blue>8</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Button">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>203</red>
+                     <green>47</green>
+                     <blue>16</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Light">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>255</red>
+                     <green>100</green>
+                     <blue>69</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Midlight">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>229</red>
+                     <green>73</green>
+                     <blue>42</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Dark">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>101</red>
+                     <green>23</green>
+                     <blue>8</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Mid">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>135</red>
+                     <green>31</green>
+                     <blue>10</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Text">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>101</red>
+                     <green>23</green>
+                     <blue>8</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="BrightText">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>255</red>
+                     <green>255</green>
+                     <blue>255</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="ButtonText">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>101</red>
+                     <green>23</green>
+                     <blue>8</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Base">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>203</red>
+                     <green>47</green>
+                     <blue>16</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Window">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>203</red>
+                     <green>47</green>
+                     <blue>16</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Shadow">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>0</red>
+                     <green>0</green>
+                     <blue>0</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="AlternateBase">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>203</red>
+                     <green>47</green>
+                     <blue>16</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="ToolTipBase">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>255</red>
+                     <green>255</green>
+                     <blue>220</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="ToolTipText">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>0</red>
+                     <green>0</green>
+                     <blue>0</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                 </disabled>
+                </palette>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>12</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Remove operator</string>
+               </property>
+               <property name="icon">
+                <iconset resource="../resources.qrc">
+                 <normaloff>:/icons/resources/icons/arrows_remove.png</normaloff>:/icons/resources/icons/arrows_remove.png</iconset>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>24</width>
+                 <height>24</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="selectOperatorButton">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>48</height>
+                </size>
+               </property>
+               <property name="palette">
+                <palette>
+                 <active>
+                  <colorrole role="WindowText">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>0</red>
+                     <green>0</green>
+                     <blue>0</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Button">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>52</red>
+                     <green>52</green>
+                     <blue>182</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Light">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>91</red>
+                     <green>91</green>
+                     <blue>255</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Midlight">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>71</red>
+                     <green>71</green>
+                     <blue>218</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Dark">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>26</red>
+                     <green>26</green>
+                     <blue>91</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Mid">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>34</red>
+                     <green>34</green>
+                     <blue>121</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Text">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>0</red>
+                     <green>0</green>
+                     <blue>0</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="BrightText">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>255</red>
+                     <green>255</green>
+                     <blue>255</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="ButtonText">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>0</red>
+                     <green>0</green>
+                     <blue>0</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Base">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>255</red>
+                     <green>255</green>
+                     <blue>255</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Window">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>52</red>
+                     <green>52</green>
+                     <blue>182</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Shadow">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>0</red>
+                     <green>0</green>
+                     <blue>0</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="AlternateBase">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>153</red>
+                     <green>153</green>
+                     <blue>218</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="ToolTipBase">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>255</red>
+                     <green>255</green>
+                     <blue>220</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="ToolTipText">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>0</red>
+                     <green>0</green>
+                     <blue>0</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                 </active>
+                 <inactive>
+                  <colorrole role="WindowText">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>0</red>
+                     <green>0</green>
+                     <blue>0</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Button">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>52</red>
+                     <green>52</green>
+                     <blue>182</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Light">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>91</red>
+                     <green>91</green>
+                     <blue>255</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Midlight">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>71</red>
+                     <green>71</green>
+                     <blue>218</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Dark">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>26</red>
+                     <green>26</green>
+                     <blue>91</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Mid">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>34</red>
+                     <green>34</green>
+                     <blue>121</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Text">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>0</red>
+                     <green>0</green>
+                     <blue>0</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="BrightText">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>255</red>
+                     <green>255</green>
+                     <blue>255</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="ButtonText">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>0</red>
+                     <green>0</green>
+                     <blue>0</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Base">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>255</red>
+                     <green>255</green>
+                     <blue>255</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Window">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>52</red>
+                     <green>52</green>
+                     <blue>182</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Shadow">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>0</red>
+                     <green>0</green>
+                     <blue>0</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="AlternateBase">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>153</red>
+                     <green>153</green>
+                     <blue>218</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="ToolTipBase">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>255</red>
+                     <green>255</green>
+                     <blue>220</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="ToolTipText">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>0</red>
+                     <green>0</green>
+                     <blue>0</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                 </inactive>
+                 <disabled>
+                  <colorrole role="WindowText">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>26</red>
+                     <green>26</green>
+                     <blue>91</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Button">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>52</red>
+                     <green>52</green>
+                     <blue>182</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Light">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>91</red>
+                     <green>91</green>
+                     <blue>255</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Midlight">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>71</red>
+                     <green>71</green>
+                     <blue>218</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Dark">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>26</red>
+                     <green>26</green>
+                     <blue>91</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Mid">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>34</red>
+                     <green>34</green>
+                     <blue>121</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Text">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>26</red>
+                     <green>26</green>
+                     <blue>91</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="BrightText">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>255</red>
+                     <green>255</green>
+                     <blue>255</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="ButtonText">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>26</red>
+                     <green>26</green>
+                     <blue>91</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Base">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>52</red>
+                     <green>52</green>
+                     <blue>182</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Window">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>52</red>
+                     <green>52</green>
+                     <blue>182</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="Shadow">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>0</red>
+                     <green>0</green>
+                     <blue>0</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="AlternateBase">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>52</red>
+                     <green>52</green>
+                     <blue>182</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="ToolTipBase">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>255</red>
+                     <green>255</green>
+                     <blue>220</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="ToolTipText">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>0</red>
+                     <green>0</green>
+                     <blue>0</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                 </disabled>
+                </palette>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>12</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Select operator</string>
+               </property>
+               <property name="icon">
+                <iconset resource="../resources.qrc">
+                 <normaloff>:/icons/resources/icons/arrows_check.png</normaloff>:/icons/resources/icons/arrows_check.png</iconset>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>24</width>
+                 <height>24</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="verticalSpacer_3">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="debugTab">
         <attribute name="icon">
          <iconset resource="../resources.qrc">
           <normaloff>:/icons/resources/icons/sys_icon_command_line.png</normaloff>:/icons/resources/icons/sys_icon_command_line.png</iconset>
@@ -251,38 +1627,92 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>945</width>
-              <height>418</height>
+              <width>949</width>
+              <height>422</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_3">
              <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_2">
-               <property name="bottomMargin">
-                <number>0</number>
+              <widget class="QGroupBox" name="groupBox_3">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
                </property>
-               <item>
-                <widget class="QCheckBox" name="showFps">
-                 <property name="font">
-                  <font>
-                   <pointsize>12</pointsize>
-                  </font>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">QCheckBox::indicator {
+               <property name="title">
+                <string>A-Scan</string>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout_6">
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_2">
+                  <property name="bottomMargin">
+                   <number>0</number>
+                  </property>
+                  <item>
+                   <widget class="QCheckBox" name="showFps">
+                    <property name="palette">
+                     <palette>
+                      <active>
+                       <colorrole role="WindowText">
+                        <brush brushstyle="SolidPattern">
+                         <color alpha="255">
+                          <red>0</red>
+                          <green>0</green>
+                          <blue>0</blue>
+                         </color>
+                        </brush>
+                       </colorrole>
+                      </active>
+                      <inactive>
+                       <colorrole role="WindowText">
+                        <brush brushstyle="SolidPattern">
+                         <color alpha="255">
+                          <red>0</red>
+                          <green>0</green>
+                          <blue>0</blue>
+                         </color>
+                        </brush>
+                       </colorrole>
+                      </inactive>
+                      <disabled>
+                       <colorrole role="WindowText">
+                        <brush brushstyle="SolidPattern">
+                         <color alpha="96">
+                          <red>164</red>
+                          <green>166</green>
+                          <blue>168</blue>
+                         </color>
+                        </brush>
+                       </colorrole>
+                      </disabled>
+                     </palette>
+                    </property>
+                    <property name="font">
+                     <font>
+                      <pointsize>12</pointsize>
+                     </font>
+                    </property>
+                    <property name="focusPolicy">
+                     <enum>Qt::NoFocus</enum>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">QCheckBox::indicator {
      width: 20px;
      height: 20px;
 }</string>
-                 </property>
-                 <property name="text">
-                  <string>Show A-Scan FPS</string>
-                 </property>
-                 <property name="tristate">
-                  <bool>false</bool>
-                 </property>
-                </widget>
-               </item>
-              </layout>
+                    </property>
+                    <property name="text">
+                     <string>Show A-Scan FPS</string>
+                    </property>
+                    <property name="tristate">
+                     <bool>false</bool>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+               </layout>
+              </widget>
              </item>
              <item>
               <spacer name="verticalSpacer">
@@ -307,8 +1737,8 @@
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>925</width>
-                  <height>181</height>
+                  <width>931</width>
+                  <height>208</height>
                  </rect>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_10">

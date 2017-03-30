@@ -175,6 +175,9 @@ AScanWidget::AScanWidget(QWidget *parent) :
     _scaleFont = QGuiApplication::font();
     _scaleFont.setPixelSize(8);
     _scale = 200;
+    const Settings * settings = System::getInstance()->getSettings();
+    _drawFPS = settings->getAscanFPSEnabled();
+    connect(settings,SIGNAL(ascanFPSEnabledChanged(bool)),this,SLOT(onFPSEnabledChanged(bool)));
     this->setAttribute(Qt::WA_OpaquePaintEvent);
 }
 
@@ -220,8 +223,9 @@ void AScanWidget::paintEvent(QPaintEvent *event)
     drawTvgCurve(painter,width,left,bottom,height);
     drawGates(painter,width,height,left,bottom);
     drawMarker(painter,width,height,left,bottom);
-    drawFps(painter,width - 50, 16);
-
+    if(_drawFPS) {
+        drawFps(painter,width - 50, 16);
+    }
 }
 
 void AScanWidget::setChannelInfo(const Channel & channel, DisplayChannelID dispChannelId)
@@ -270,4 +274,9 @@ void AScanWidget::onChannelChanged(const Channel & channel)
         setTVGCurve(tvg);
     }
     update();
+}
+
+void AScanWidget::onFPSEnabledChanged(bool value)
+{
+    _drawFPS = value;
 }

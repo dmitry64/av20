@@ -9,7 +9,7 @@ SystemWidget::SystemWidget(QWidget *parent) :
 {
     ui->setupUi(this);
     System * system = System::getInstance();
-    ui->operatorLabel->setText(system->getCurrentOperator());
+    ui->operatorLabel->setText(system->getCurrentOperatorName());
 
     ui->timeLabel->setText(system->getTime().toString(Qt::DefaultLocaleShortDate));
     ui->dateLabel->setText(system->getDate().toString(Qt::DefaultLocaleShortDate));

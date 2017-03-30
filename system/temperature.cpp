@@ -4,7 +4,7 @@ void Temperature::init()
 {
     _current = 21.0;
     _current = readTemperature();
-    _updateTimer.setInterval(6000);
+    _updateTimer.setInterval(10000);
     connect(&_updateTimer,SIGNAL(timeout()),this,SLOT(updateValue()));
     _updateTimer.start();
     logEvent("Temperature","Ready");

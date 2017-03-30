@@ -36,6 +36,11 @@ struct ChannelsInfo {
     DisplayChannelID _displayChannel;
 };
 
+enum UiTheme {
+    Default = 0,
+    Alternative = 1
+};
+
 enum ModeTypes {
     Unknown,
     MultiChannelMode,
