@@ -23,13 +23,15 @@ void Operators::add(QString name)
 
 void Operators::remove(QString name)
 {
-    auto remove = _names.end();
-    for(auto it=_names.begin(); it!=_names.end(); it++) {
-        QString op = it.operator*();
-        if(name.compare(op) == 0) {
-            remove = it;
+    if(!_names.empty()) {
+        auto remove = _names.end();
+        for(auto it=_names.begin(); it!=_names.end(); it++) {
+            QString op = it.operator*();
+            if(name.compare(op) == 0) {
+                remove = it;
+            }
         }
+        _names.erase(remove);
+        emit operatorsListChanged();
     }
-    _names.erase(remove);
-    emit operatorsListChanged();
 }

@@ -1,6 +1,6 @@
 #include "optionswidget.h"
 #include "ui_optionswidget.h"
-
+#include "keyboards/keyboard.h"
 
 void OptionsWidget::initOperators(System * system)
 {
@@ -11,6 +11,13 @@ void OptionsWidget::initOperators(System * system)
 
     for(auto it=names.begin(); it!=names.end(); it++) {
         ui->operatorsListWidget->addItem(it.operator*());
+    }
+}
+
+void OptionsWidget::addOperatorWithName(QString name)
+{
+    if(name.compare("Unknown operator") != 0) {
+        System::getInstance()->getOperators()->add(name);
     }
 }
 
@@ -105,10 +112,9 @@ void OptionsWidget::on_removeOperatorButton_released()
 
 void OptionsWidget::on_addOperatorButton_released()
 {
-    QString name = "new";
-    if(name.compare("Unknown operator") != 0) {
-        System::getInstance()->getOperators()->add(name);
-    }
+    Keyboard * keyboard = new Keyboard(this);
+    connect(keyboard,SIGNAL(textReady(QString)),this,SLOT(addOperatorWithName(QString)));
+    keyboard->show();
 }
 
 void OptionsWidget::onOperatorsListChanged()

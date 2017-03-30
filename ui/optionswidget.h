@@ -17,6 +17,7 @@ class OptionsWidget : public QWidget
 
 private:
     void initOperators(System *system);
+
 public:
     explicit OptionsWidget(QWidget *parent = 0);
     ~OptionsWidget();
@@ -29,6 +30,7 @@ signals:
     void colorSchemeChanged(UiTheme);
 
 private slots:
+    void addOperatorWithName(QString name);
     void on_showFps_toggled(bool checked);
     void on_selectOperatorButton_released();
     void on_removeOperatorButton_released();

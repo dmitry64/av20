@@ -105,7 +105,10 @@ SOURCES += core.cpp \
     driver/driverspi.cpp \
     driver/fakespi.cpp \
     system/settings.cpp \
-    system/operators.cpp
+    system/operators.cpp \
+    ui/keyboards/keyboard.cpp \
+    ui/keyboards/englishkeyboard.cpp \
+    ui/keyboards/numberkeypad.cpp
 #    tests/coretest.cpp
 
 HEADERS  += \
@@ -175,7 +178,10 @@ HEADERS  += \
     driver/driverspi.h \
     driver/fakespi.h \
     system/settings.h \
-    system/operators.h
+    system/operators.h \
+    ui/keyboards/keyboard.h \
+    ui/keyboards/englishkeyboard.h \
+    ui/keyboards/numberkeypad.h
 #    tests/coretest.h
 
 FORMS    += \
@@ -207,7 +213,10 @@ FORMS    += \
     ui/controls/modeselectionbutton.ui \
     ui/controls/schemeselectionbutton.ui \
     ui/calibrationswidget.ui \
-    ui/controls/calibrationbutton.ui
+    ui/controls/calibrationbutton.ui \
+    ui/keyboards/keyboard.ui \
+    ui/keyboards/englishkeyboard.ui \
+    ui/keyboards/numberkeypad.ui
 
 RESOURCES += \
     resources.qrc
