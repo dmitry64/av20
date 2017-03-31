@@ -49,15 +49,13 @@ void System::init()
 {
     logEvent("System","System initializing");
     _settings->init();
-
     _filesystem->initFilesystem();
     _brightness->init(_settings);
     _temperature->init();
     _sound->init(_settings);
     _battery->init();
     _dateTime->init();
-    _operators->init();
-
+    _operators->init(_filesystem);
     logEvent("System","System initialized!");
 }
 

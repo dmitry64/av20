@@ -18,6 +18,7 @@ public:
     static QString getMediaPath();
     static QString getCalibrationsPath();
     static QString getHelpPath();
+    static QString getOperatorsPath();
 
     QStringList getDataList();
     QStringList getCalibrationsList();

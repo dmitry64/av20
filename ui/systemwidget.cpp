@@ -20,6 +20,7 @@ SystemWidget::SystemWidget(QWidget *parent) :
 
     connect(system,SIGNAL(deviceVersionReady(QString)),this,SLOT(onUSMVersionChanged(QString)));
     connect(system,SIGNAL(dateTimeChanged(QDateTime)),this,SLOT(onDateTimeChanged(QDateTime)));
+    connect(system->getSettings(),SIGNAL(operatorNameChanged(QString)),this,SLOT(onOperatorChanged(QString)));
 }
 
 SystemWidget::~SystemWidget()
@@ -52,4 +53,9 @@ void SystemWidget::onDateTimeChanged(QDateTime time)
 {
     ui->timeLabel->setText(time.time().toString(Qt::DefaultLocaleShortDate));
     ui->dateLabel->setText(time.date().toString(Qt::DefaultLocaleShortDate));
+}
+
+void SystemWidget::onOperatorChanged(QString name)
+{
+    ui->operatorLabel->setText(name);
 }

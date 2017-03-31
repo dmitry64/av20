@@ -35,6 +35,7 @@ void StatusBar::init()
     connect(system,SIGNAL(soundVolumeChanged(int)),this,SLOT(onSoundVolumeChanged(int)));
     connect(system,SIGNAL(batteryLevelChanged(int)),this,SLOT(onBatteryLevelChanged(int)));
     connect(system,SIGNAL(dateTimeChanged(QDateTime)),this,SLOT(onDateTimeChanged(QDateTime)));
+    connect(system->getSettings(),SIGNAL(operatorNameChanged(QString)),this,SLOT(onOperatorChanged(QString)));
 }
 
 void StatusBar::onDeviceOverheatEnabled()
@@ -65,6 +66,11 @@ void StatusBar::onDeviceConnectionErrorEnabled()
 void StatusBar::onDeviceConnectionErrorDisabled()
 {
     ui->connectionErrorButton->hide();
+}
+
+void StatusBar::onOperatorChanged(QString name)
+{
+    ui->operatorLabel->setText("Operator: " +name);
 }
 
 void StatusBar::onTemperatureChanged(double value)

@@ -23,6 +23,7 @@ private slots:
     void on_pauseButton_released();
     void onUSMVersionChanged(QString string);
     void onDateTimeChanged(QDateTime time);
+    void onOperatorChanged(QString name);
 signals:
     void pause();
     void reboot();

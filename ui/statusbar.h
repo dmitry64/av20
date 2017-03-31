@@ -25,6 +25,7 @@ public slots:
     void onDeviceErrorDisabled();
     void onDeviceConnectionErrorEnabled();
     void onDeviceConnectionErrorDisabled();
+    void onOperatorChanged(QString name);
 
     void onTemperatureChanged(double value);
     void onBatteryLevelChanged(int value);

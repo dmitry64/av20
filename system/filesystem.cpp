@@ -16,6 +16,7 @@ void Filesystem::createStructure()
     av20.mkdir("media");
     av20.mkdir("calibrations");
     av20.mkdir("help");
+    av20.mkdir("operators");
 }
 
 Filesystem::Filesystem()
@@ -56,6 +57,11 @@ QString Filesystem::getCalibrationsPath()
 QString Filesystem::getHelpPath()
 {
     return getRootPath() + "/help";
+}
+
+QString Filesystem::getOperatorsPath()
+{
+    return getRootPath() + "/operators";
 }
 
 QStringList Filesystem::getDataList()

@@ -98,7 +98,6 @@ void OptionsWidget::on_showFps_toggled(bool checked)
 void OptionsWidget::on_selectOperatorButton_released()
 {
     const QString name = ui->operatorsListWidget->selectedItems().first()->data(0).toString();
-
     System::getInstance()->setCurrentOperatorName(name);
 }
 
