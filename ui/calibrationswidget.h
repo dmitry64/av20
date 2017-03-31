@@ -4,7 +4,7 @@
 #include <QWidget>
 #include "core.h"
 #include "controls/calibrationbutton.h"
-
+#include "keyboards/keyboard.h"
 
 namespace Ui
 {
@@ -26,6 +26,7 @@ public:
 
 private slots:
     void onCalibrationSelected(CalibrationIndex index);
+    void addCalibrationWithName(QString str);
     void on_newButton_released();
     void on_removeButton_released();
     void on_selectButton_2_released();

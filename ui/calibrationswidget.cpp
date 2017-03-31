@@ -81,10 +81,16 @@ void CalibrationsWidget::onCalibrationSelected(CalibrationIndex index)
     }
 }
 
+void CalibrationsWidget::addCalibrationWithName(QString str)
+{
+    _core->createCalibration(0,str);
+}
+
 void CalibrationsWidget::on_newButton_released()
 {
-    QString name = "new";
-    _core->createCalibration(0,name);
+    Keyboard * keyboard = new Keyboard(this);
+    connect(keyboard,SIGNAL(textReady(QString)),this,SLOT(addCalibrationWithName(QString)));
+    keyboard->show();
 }
 
 void CalibrationsWidget::on_removeButton_released()
