@@ -141,7 +141,6 @@ void MainWindow::onModeChangeRequested(uint8_t modeIndex, uint8_t tableIndex)
 {
     reset();
     _core->setDeviceMode(modeIndex,tableIndex);
-    //init();
 }
 
 void MainWindow::onModeChanged()
@@ -153,7 +152,6 @@ void MainWindow::onCalibrationChanged()
 {
     init();
 }
-
 
 void MainWindow::onHelpMenuOpened()
 {
