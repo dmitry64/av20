@@ -3,7 +3,8 @@
 
 #include <QWidget>
 
-namespace Ui {
+namespace Ui
+{
 class RegistrationWidget;
 }
 
@@ -14,6 +15,9 @@ class RegistrationWidget : public QWidget
 public:
     explicit RegistrationWidget(QWidget *parent = 0);
     ~RegistrationWidget();
+
+private slots:
+    void on_startButton_released();
 
 private:
     Ui::RegistrationWidget *ui;

@@ -17,3 +17,8 @@ RegistrationWidget::~RegistrationWidget()
 {
     delete ui;
 }
+
+void RegistrationWidget::on_startButton_released()
+{
+
+}
