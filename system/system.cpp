@@ -113,6 +113,11 @@ QTime System::getTime()
     return _dateTime->getTime();
 }
 
+QString System::getTimestamp()
+{
+    return QString(_dateTime->getDate().toString("dd_MM_yyyy")+"-"+_dateTime->getTime().toString("hh_mm_ss"));
+}
+
 int System::getBrightness()
 {
     return _brightness->currentBrightness();

@@ -54,6 +54,7 @@ public:
 
     QDate getDate();
     QTime getTime();
+    QString getTimestamp();
     int getBrightness();
     double getTemperature();
     int getSoundVolume();

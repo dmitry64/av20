@@ -98,7 +98,10 @@ Core::Core(ModeManager *modeManager, CalibrationManager * calibrationManager) :
     _calibrationsInfoSnapshotRequested.store(false);
     _calibrationSwitchRequested.store(false);
     _channelSwitchRequested.store(false);
+    _registrationRequested.store(false);
+    _registrationState = false;
 
+    _registrationFileHandle = 0;
     _requestedChannelSelection._channel = 0;
     _requestedChannelSelection._displayChannel = 0;
 }
@@ -106,7 +109,7 @@ Core::Core(ModeManager *modeManager, CalibrationManager * calibrationManager) :
 Core::~Core()
 {
     _active.store(false);
-    this->wait();
+    wait();
     delete _device;
     delete _line1CurrentAscan;
     delete _line2CurrentAscan;
@@ -124,7 +127,7 @@ void Core::run()
 void Core::stopCore()
 {
     _active.store(false);
-    this->wait();
+    wait();
 }
 
 ChannelsCalibration Core::getCalibration()
@@ -349,6 +352,11 @@ void Core::finish()
 {
     logEvent("Core","Disconnected!");
 
+    if(_registrationFileHandle!=0) {
+        delete _registrationFileHandle;
+        _registrationFileHandle = 0;
+    }
+
     _calibrationManager->saveAll();
 }
 
@@ -359,9 +367,39 @@ void Core::searchWork()
     trigger();
     status();
     process();
+    registration();
     sync();
     modeswitch();
     //msleep(2);
+}
+
+void Core::registration()
+{
+    if(_registrationRequested.load()) {
+        if(!_registrationState) {
+            // start
+            Q_ASSERT(_registrationOutputPath.length() > 0);
+            _registrationFileHandle = new QFile(_registrationOutputPath);
+            _registrationFileHandle->open(QIODevice::WriteOnly);
+            _registrationState = true;
+            emit registrationStateChanged(true);
+        }
+        else {
+            // continue
+            _registrationFileHandle->write(reinterpret_cast<char*>(_line1CurrentAscan),sizeof(AScan));
+            _registrationFileHandle->write(reinterpret_cast<char*>(_line2CurrentAscan),sizeof(AScan));
+        }
+    }
+    else {
+        if(_registrationState) {
+            //stop
+            _registrationFileHandle->close();
+            _registrationState = false;
+            delete _registrationFileHandle;
+            _registrationFileHandle = 0;
+            emit registrationStateChanged(false);
+        }
+    }
 }
 
 void Core::addModificator(Modificator *mod)
@@ -512,6 +550,17 @@ void Core::removeCalibration(const CalibrationIndex index)
     logEvent("Core","Removing calibration #" + QString::number(index));
     RemoveCalibrationModificator * mod = new RemoveCalibrationModificator(index);
     addModificator(mod);
+}
+
+void Core::startRegistration(const QString & outputFile)
+{
+    _registrationOutputPath = outputFile;
+    _registrationRequested.store(true);
+}
+
+void Core::stopRegistration()
+{
+    _registrationRequested.store(false);
 }
 
 void Core::handleChannelSelection(const ChannelsInfo & info)

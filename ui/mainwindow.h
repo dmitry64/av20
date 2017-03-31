@@ -85,6 +85,7 @@ public slots:
 signals:
     void drawDisplayPackage(QSharedPointer<DisplayPackage> dp);
     void channelChanged(Channel channel);
+    void registrationStateChanged(bool);
     void resetMenu();
 
 private:

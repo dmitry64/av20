@@ -28,6 +28,7 @@ private:
     std::atomic_bool _modeswitchRequested;
     std::atomic_bool _calibrationSwitchRequested;
     std::atomic_bool _channelSwitchRequested;
+    std::atomic_bool _registrationRequested;
 
     // Mode switch values
     DeviceModeIndex _requestedMode;
@@ -49,6 +50,7 @@ private:
     bool _deviceOverheat;
     bool _deviceError;
     bool _deviceConnectionError;
+    bool _registrationState;
     std::atomic<SchemeIndex> _currentScheme;
     std::atomic<CalibrationIndex> _currentCalibration;
     std::atomic<DeviceModeIndex> _currentMode;
@@ -64,6 +66,9 @@ private:
 
     AScan * _line1CurrentAscan;
     AScan * _line2CurrentAscan;
+
+    QString _registrationOutputPath;
+    QFile * _registrationFileHandle;
 public:
     Core(ModeManager * modeManager, CalibrationManager * calibrationManager);
     ~Core();
@@ -100,6 +105,7 @@ private:
     void modeswitch();
     void finish();
     void searchWork();
+    void registration();
 
     void addModificator(Modificator *mod);
     void handleDeviceError(bool status);
@@ -122,6 +128,9 @@ public:
     void createCalibration(const CalibrationIndex baseIndex, const QString &name);
     void removeCalibration(const CalibrationIndex index);
 
+    void startRegistration(const QString &outputFile);
+    void stopRegistration();
+
     SchemeIndex  getCurrentScheme() const;
     DeviceModeIndex getCurrentMode() const;
     CalibrationIndex getCurrentCalibration() const;
@@ -133,6 +142,8 @@ signals:
     void channelChanged(Channel channel);
     void modeChanged();
     void calibrationChanged();
+
+    void registrationStateChanged(bool);
 
     void deviceErrorEnable();
     void deviceErrorDisable();

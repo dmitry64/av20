@@ -10,6 +10,7 @@ StatusBar::StatusBar(QWidget *parent) :
     ui->overheatButton->hide();
     ui->errorButton->hide();
     ui->connectionErrorButton->hide();
+    ui->registrationButton->hide();
 }
 
 StatusBar::~StatusBar()
@@ -71,6 +72,16 @@ void StatusBar::onDeviceConnectionErrorDisabled()
 void StatusBar::onOperatorChanged(QString name)
 {
     ui->operatorLabel->setText("Operator: " +name);
+}
+
+void StatusBar::onRegistrationStatusChanged(bool status)
+{
+    if(status) {
+        ui->registrationButton->show();
+    }
+    else {
+        ui->registrationButton->hide();
+    }
 }
 
 void StatusBar::onTemperatureChanged(double value)

@@ -27,6 +27,8 @@ public slots:
     void onDeviceConnectionErrorDisabled();
     void onOperatorChanged(QString name);
 
+    void onRegistrationStatusChanged(bool status);
+
     void onTemperatureChanged(double value);
     void onBatteryLevelChanged(int value);
     void onSoundVolumeChanged(int value);

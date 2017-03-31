@@ -95,6 +95,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(_modeSelectionWidget,SIGNAL(modeSelected(uint8_t,uint8_t)),this,SLOT(onModeChangeRequested(uint8_t,uint8_t)));
     connect(_modeSelectionWidget,SIGNAL(closeWindow()),this,SIGNAL(resetMenu()));
     connect(_calibrationsWidget,SIGNAL(calibrationSelected()),this,SIGNAL(resetMenu()));
+
+    connect(this,SIGNAL(registrationStateChanged(bool)),ui->statusWidget,SLOT(onRegistrationStatusChanged(bool)));
 }
 
 MainWindow::~MainWindow()
@@ -122,6 +124,7 @@ void MainWindow::setCore(Core *core)
     _modeSelectionWidget->setCore(core);
     _modeSelectionWidget->init();
     _calibrationsWidget->setCore(core);
+    _registrationWidget->setCore(core);
 }
 
 void MainWindow::onChannelChanged(Channel channel)
@@ -150,6 +153,7 @@ void MainWindow::onCalibrationChanged()
 {
     init();
 }
+
 
 void MainWindow::onHelpMenuOpened()
 {
@@ -322,6 +326,7 @@ void MainWindow::init()
     _calibrationsWidget->init(calibration);
     _memoryWidget->init();
     _optionsWidget->init();
+    _registrationWidget->init();
 }
 
 void MainWindow::reset()
