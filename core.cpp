@@ -289,7 +289,6 @@ void Core::aScanProcess(uint8_t line)
             }
         }
     }
-
     emit drawDisplayPackage(QSharedPointer<DisplayPackage>(dp));
 }
 

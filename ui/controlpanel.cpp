@@ -24,6 +24,7 @@ ControlPanel::ControlPanel(QWidget *parent) :
     _markerPositionSpinbox->setMax(800);
     _markerPositionSpinbox->setValue(0);
     _markerPositionSpinbox->setSuffix("us");
+    _markerPositionSpinbox->hide();
     ui->scrollLayout->addWidget(_markerPositionSpinbox);
 
     _gateCounter = 0;
