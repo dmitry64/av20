@@ -9,7 +9,12 @@ public:
     {
 
     }
+    virtual ~DeviceInterface()
+    {
+
+    }
     virtual void init() = 0;
+    virtual void finish() = 0;
     virtual void getRegister(uint8_t reg, const uint32_t length, uint8_t * dest) = 0;
     virtual void setRegister(uint8_t reg, const uint32_t length, const uint8_t * src) = 0;
     virtual bool setAndTestRegister(uint8_t reg, const uint32_t length, const uint8_t * src) = 0;
@@ -18,3 +23,4 @@ public:
 
 
 #endif // DEVICEINTERFACE_H
+

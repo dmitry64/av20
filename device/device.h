@@ -19,6 +19,7 @@ public:
     Device();
     ~Device();
     void init(uint8_t * version);
+    void finish();
     void fillRegisters();
     void resetConfigRegisters();
     void resetTVG();

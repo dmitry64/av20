@@ -58,8 +58,8 @@ int main(int argc, char *argv[])
     //connect(core, SIGNAL(error(QString)), this, SLOT(errorString(QString)));
     QObject::connect(thread, SIGNAL(started()), core, SLOT(work()));
     QObject::connect(core, SIGNAL(finished()), thread, SLOT(quit()));
-    QObject::connect(core, SIGNAL(finished()), core, SLOT(deleteLater()));
-    QObject::connect(thread, SIGNAL(finished()), thread, SLOT(deleteLater()));
+    //QObject::connect(core, SIGNAL(finished()), core, SLOT(deleteLater()));
+    //QObject::connect(thread, SIGNAL(finished()), thread, SLOT(deleteLater()));
     thread->start();
     thread->setPriority(QThread::HighPriority);
 
@@ -70,8 +70,8 @@ int main(int argc, char *argv[])
     //mainWindow->showFullScreen();
     mainWindow->show();
 
+    int retcode = a.exec();
 
-
-    return a.exec();
+    return retcode;
 }
 #endif

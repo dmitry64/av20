@@ -93,8 +93,6 @@ void ChannelsCalibration::loadFromFile(QString path)
         newChannel.loadXML(channel);
         _channels.push_back(newChannel);
     }
-
-
 }
 
 QDomDocument ChannelsCalibration::generateXML(size_t newIndex) const
@@ -160,7 +158,7 @@ DisplayChannel ChannelsCalibration::getDisplayChannel(const ChannelsInfo &info) 
 
 uint8_t ChannelsCalibration::getChannelsCount() const
 {
-    size_t size = _channels.size();
+    uint8_t size = _channels.size();
     Q_ASSERT(size <= 8);
     return size;
 }

@@ -36,6 +36,8 @@ class MainWindow : public QMainWindow
     QPalette _defaultPalette;
     QPalette _alternativePalette;
 
+private:
+    void closeEvent(QCloseEvent *event);
 private slots:
     void setColorScheme(UiTheme theme);
 

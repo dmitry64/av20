@@ -145,9 +145,9 @@ void AScanPlot::drawGates(QPainter &painter, int width, int height)
     double scaleStep = width/static_cast<double>(_scale);
     const auto & dispChans = _channelData.getDisplayChannels();
     const auto & gates = dispChans[_displayChannelId].gates();
-    uint8_t gatesCount = gates.size();
-    for(uint8_t j=0; j<gatesCount; j++) {
-        Gate gate = gates[j];
+
+    for(auto it=gates.begin(); it!=gates.end(); it++) {
+        const Gate & gate = it.operator*();
         int level = height - (gate._level * (height/255.0));
         QPen gatePen = QPen(getColorByLevel(gate._level),3);
         gatePen.setCapStyle(Qt::RoundCap);

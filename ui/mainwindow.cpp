@@ -1,6 +1,13 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QDebug>
+#include <QCloseEvent>
+
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    _core->stopCore();
+    QWidget::closeEvent(event);
+}
 
 void MainWindow::setColorScheme(UiTheme theme)
 {
@@ -19,6 +26,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    setAttribute(Qt::WA_QuitOnClose);
+
     _defaultPalette = this->palette();
     _alternativePalette = this->palette();
     _alternativePalette.setColor(QPalette::Window,QColor(30,60,90));

@@ -94,10 +94,11 @@ void BScanPage::onDisplayPackage(QSharedPointer<DisplayPackage> dp)
 {
     uint8_t channel = dp->bscan._info._channel;
     std::vector<BScanWidget*> widgets = getWidgetsByChannel(channel);
-    //qDebug() << "size:"<<widgets.size();
-    for(size_t i=0; i<widgets.size(); i++) {
-        Q_ASSERT(widgets[i]);
-        widgets[i]->onBScan(&(dp->bscan));
+
+    for(auto it=widgets.begin(); it!=widgets.end(); it++) {
+        BScanWidget * wid = it.operator*();
+        Q_ASSERT(wid);
+        wid->onBScan(&(dp->bscan));
     }
 }
 

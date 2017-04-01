@@ -67,8 +67,6 @@ TactTable TactTable::getSnapshot()
     return TactTable(*this);
 }
 
-
-
 TactIndex TactTable::getTactIndexByCounter(uint8_t counter) const
 {
     uint8_t num = 0;
@@ -106,8 +104,8 @@ Tact TactTable::getTactByIndex(const uint8_t index) const
 uint8_t TactTable::getMaxTacts() const
 {
     uint8_t num = 0;
-    for(size_t i=0; i<_tactTable.size(); i++) {
-        if(_tactTable[i].getTactEnabled()) {
+    for(auto it=_tactTable.begin(); it!=_tactTable.end(); it++) {
+        if(it.operator*().getTactEnabled()) {
             num++;
         }
     }

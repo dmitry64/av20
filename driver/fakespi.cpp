@@ -141,7 +141,7 @@ void FakeSPI::setAScanForLine2(uint8_t *dest)
 
 void FakeSPI::run()
 {
-    while(true) {
+    while(_active.load()) {
         updateCounters();
         usleep(50000);
         if(_specialCounter == 77) {
@@ -166,10 +166,22 @@ FakeSPI::FakeSPI() : DeviceInterface()
     _currentTact = 0;
 }
 
+FakeSPI::~FakeSPI()
+{
+
+}
+
 void FakeSPI::init()
 {
     _currentTact = -1;
+    _active.store(true);
     start();
+}
+
+void FakeSPI::finish()
+{
+    _active.store(false);
+    wait();
 }
 
 void FakeSPI::getRegister(uint8_t reg, const uint32_t length, uint8_t *dest)

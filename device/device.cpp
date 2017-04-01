@@ -86,7 +86,8 @@ Device::Device()
 
 Device::~Device()
 {
-
+    _interface->finish();
+    delete _interface;
 }
 
 void Device::init(uint8_t * version)
@@ -104,6 +105,11 @@ void Device::init(uint8_t * version)
     else {
         qFatal("Cannot initialize device!");
     }
+}
+
+void Device::finish()
+{
+    _interface->finish();
 }
 
 void Device::fillRegisters()

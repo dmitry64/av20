@@ -22,7 +22,9 @@ private:
     void recvData(uint32_t length, uint8_t * bufPtr);
 public:
     explicit DriverSPI(QString & device);
+    ~DriverSPI();
     void init();
+    void finish();
     void getRegister(uint8_t reg, const uint32_t length, uint8_t * dest);
     void setRegister(uint8_t reg, const uint32_t length, const uint8_t * src);
     bool setAndTestRegister(uint8_t reg, const uint32_t length, const uint8_t * src);

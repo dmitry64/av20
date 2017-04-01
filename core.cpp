@@ -109,7 +109,10 @@ Core::Core(ModeManager *modeManager, CalibrationManager * calibrationManager) : 
 
 Core::~Core()
 {
+    stopCore();
     delete _device;
+    _changesMutex->unlock();
+    delete _changesMutex;
     delete _line1CurrentAscan;
     delete _line2CurrentAscan;
 }
@@ -122,7 +125,7 @@ void Core::work()
         //timer.start();
         searchWork();
         //qDebug() << timer.nsecsElapsed()/1000 << "ms";
-        //QThread::msleep(1);
+        //QThread::msleep(2);
     }
     finish();
 }
@@ -131,7 +134,6 @@ void Core::stopCore()
 {
     _active.store(false);
     while(!_finished.load()) {
-        QThread::yieldCurrentThread();
     }
 }
 
@@ -204,21 +206,21 @@ void Core::process()
 {
     const std::vector< uint8_t > & lines = getTactTable().getTactLines(_currentTact);
     aScanAll(lines);
-    uint8_t count = lines.size();
-    for(uint8_t i=0; i<count; i++) {
-        aScanProcess(lines[i]);
+    for(auto it=lines.begin(); it!=lines.end(); it++) {
+        aScanProcess(it.operator*());
     }
 }
 
 void Core::aScanAll(const std::vector<uint8_t> &lines)
 {
     if(Q_LIKELY(!lines.empty())) {
-        for(size_t i=0; i<lines.size(); i++) {
-            if(lines[i] == 0) {
-                _device->getAscanForLine(lines[i],_line1CurrentAscan);
+        for(auto it=lines.begin(); it!=lines.end(); it++) {
+            auto val = it.operator*();
+            if(val == 0) {
+                _device->getAscanForLine(val,_line1CurrentAscan);
             }
-            else if(lines[i] == 1) {
-                _device->getAscanForLine(lines[i],_line2CurrentAscan);
+            else if(val == 1) {
+                _device->getAscanForLine(val,_line2CurrentAscan);
             }
             else {
                 Q_ASSERT(false);
@@ -268,11 +270,11 @@ void Core::aScanProcess(uint8_t line)
     dp->ascan._markerPos = pos;
     dp->ascan._markerValue = max;
 
-    const DisplayChannel & dispChannel =current.getActiveDisplayChannel();
+    const DisplayChannel & dispChannel = current.getActiveDisplayChannel();
     const std::vector<Gate> & gates = dispChannel.gates();
 
-    for(uint8_t j=0; j<gates.size(); j++) {
-        const Gate & gate = gates[j];
+    for(auto it=gates.begin(); it!=gates.end(); it++) {
+        const Gate & gate = it.operator*();
         uint16_t gateStart = (gate._start) * 4;
         uint16_t gateEnd = (gate._finish) * 4;
         uint16_t start = 0;
@@ -362,6 +364,7 @@ void Core::finish()
     }
 
     _calibrationManager->saveAll();
+    _device->finish();
     _finished.store(true);
     emit finished();
 }
@@ -376,7 +379,6 @@ void Core::searchWork()
     registration();
     sync();
     modeswitch();
-    //msleep(2);
 }
 
 void Core::registration()

@@ -30,6 +30,11 @@ DriverSPI::DriverSPI(QString &device) : DeviceInterface(),
     //_mode |= SPI_CS_HIGH;
 }
 
+DriverSPI::~DriverSPI()
+{
+
+}
+
 void DriverSPI::init()
 {
     qDebug("Initializing SPI driver...");
@@ -70,6 +75,11 @@ void DriverSPI::init()
     }
 
     qDebug("SPI driver initialized.");
+}
+
+void DriverSPI::finish()
+{
+
 }
 
 void DriverSPI::sendCommand(uint8_t commandByte, uint8_t length)
