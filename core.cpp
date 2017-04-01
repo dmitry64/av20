@@ -12,7 +12,7 @@ ChannelsCalibration Core::getCalibrationsSnapshot()
 {
     _calibrationSnapshotRequested.store(true);
     while(_calibrationSnapshotRequested.load()) {
-        usleep(1);
+        QThread::yieldCurrentThread();
     }
     return _calibrationsSnapshot;
 }
@@ -21,7 +21,7 @@ CalibrationsInfoList Core::getAvailableCalibrationsSnapshot()
 {
     _calibrationsInfoSnapshotRequested.store(true);
     while(_calibrationsInfoSnapshotRequested.load()) {
-        usleep(1);
+        QThread::yieldCurrentThread();
     }
     return _calibrationsInfoListSnapshot;
 }
@@ -35,7 +35,7 @@ TactTable Core::getTactTableSnapshot()
 {
     _tactTableSnapshotRequested.store(true);
     while(_tactTableSnapshotRequested.load()) {
-        usleep(1);
+        QThread::yieldCurrentThread();
     }
     return _tactTableSnapshot;
 }
@@ -65,7 +65,7 @@ CalibrationManager *Core::getCalibrationManager() const
     return _calibrationManager;
 }
 
-Core::Core(ModeManager *modeManager, CalibrationManager * calibrationManager) :
+Core::Core(ModeManager *modeManager, CalibrationManager * calibrationManager) : QObject(0),
     _active(true),
     _requestedMode(0),
     _requestedScheme(0),
@@ -100,6 +100,7 @@ Core::Core(ModeManager *modeManager, CalibrationManager * calibrationManager) :
     _channelSwitchRequested.store(false);
     _registrationRequested.store(false);
     _registrationState = false;
+    _finished.store(false);
 
     _registrationFileHandle = 0;
     _requestedChannelSelection._channel = 0;
@@ -108,18 +109,20 @@ Core::Core(ModeManager *modeManager, CalibrationManager * calibrationManager) :
 
 Core::~Core()
 {
-    _active.store(false);
-    wait();
     delete _device;
     delete _line1CurrentAscan;
     delete _line2CurrentAscan;
 }
 
-void Core::run()
+void Core::work()
 {
     init();
+    QElapsedTimer timer;
     while(_active) {
+        //timer.start();
         searchWork();
+        //qDebug() << timer.nsecsElapsed()/1000 << "ms";
+        //QThread::msleep(1);
     }
     finish();
 }
@@ -127,7 +130,9 @@ void Core::run()
 void Core::stopCore()
 {
     _active.store(false);
-    wait();
+    while(!_finished.load()) {
+        QThread::yieldCurrentThread();
+    }
 }
 
 ChannelsCalibration Core::getCalibration()
@@ -187,7 +192,7 @@ void Core::status()
 
     DeviceStatus current = status;
     while(!current.ready) {
-        usleep(1);
+        //usleep(1);
         current = _device->getDeviceStatus();
         handleDeviceError(current.error);
         handleDeviceOverheat(current.thsd);
@@ -357,6 +362,8 @@ void Core::finish()
     }
 
     _calibrationManager->saveAll();
+    _finished.store(true);
+    emit finished();
 }
 
 void Core::searchWork()
@@ -414,10 +421,12 @@ void Core::handleDeviceError(bool status)
         if(_deviceError == false) {
             _deviceError = true;
             emit deviceErrorEnable();
+            logEvent("Core","Device error!");
         }
         else {
             _deviceError = false;
             emit deviceErrorDisable();
+            logEvent("Core","Device restored!");
         }
     }
 }
@@ -428,10 +437,12 @@ void Core::handleDeviceOverheat(bool status)
         if(_deviceOverheat == false) {
             _deviceOverheat = true;
             emit deviceOverheatEnable();
+            logEvent("Core","Device overheat!");
         }
         else {
             _deviceOverheat = false;
             emit deviceOverheatDisable();
+            logEvent("Core","Device cooled!");
         }
     }
 }
@@ -442,10 +453,12 @@ void Core::handleDeviceConnectionError(bool status)
         if(_deviceConnectionError == false) {
             _deviceConnectionError = true;
             emit deviceConnectionErrorEnable();
+            logEvent("Core","Connection error!");
         }
         else {
             _deviceConnectionError = false;
             emit deviceConnectionErrorDisable();
+            logEvent("Core","Connection restored!");
         }
     }
 }
@@ -513,7 +526,7 @@ void Core::setDeviceMode(const DeviceModeIndex modeIndex,const SchemeIndex schem
     _requestedScheme = schemeIndex;
     _modeswitchRequested.store(true);
     while(_modeswitchRequested.load()) {
-        usleep(1);
+        QThread::yieldCurrentThread();
     }
     emit modeChanged();
 }
@@ -523,7 +536,7 @@ void Core::switchCalibration(const CalibrationIndex index)
     _requestedCalibration = index;
     _calibrationSwitchRequested.store(true);
     while(_calibrationSwitchRequested.load()) {
-        usleep(1);
+        QThread::yieldCurrentThread();
     }
     emit calibrationChanged();
 }
@@ -533,7 +546,7 @@ void Core::switchChannel(const ChannelsInfo & info)
     _requestedChannelSelection = info;
     _channelSwitchRequested.store(true);
     while(_channelSwitchRequested.load()) {
-        usleep(1);
+        QThread::yieldCurrentThread();
     }
 }
 

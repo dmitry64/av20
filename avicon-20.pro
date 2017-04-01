@@ -108,7 +108,8 @@ SOURCES += core.cpp \
     system/operators.cpp \
     ui/keyboards/keyboard.cpp \
     ui/keyboards/englishkeyboard.cpp \
-    ui/keyboards/numberkeypad.cpp
+    ui/keyboards/numberkeypad.cpp \
+    ui/ascanplot.cpp
 #    tests/coretest.cpp
 
 HEADERS  += \
@@ -181,7 +182,8 @@ HEADERS  += \
     system/operators.h \
     ui/keyboards/keyboard.h \
     ui/keyboards/englishkeyboard.h \
-    ui/keyboards/numberkeypad.h
+    ui/keyboards/numberkeypad.h \
+    ui/ascanplot.h
 #    tests/coretest.h
 
 FORMS    += \

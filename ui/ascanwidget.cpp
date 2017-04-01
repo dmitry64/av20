@@ -5,10 +5,7 @@
 
 void AScanWidget::setTVGCurve(const TVGCurve *curve)
 {
-    if(_tvgCurve !=0) {
-        delete _tvgCurve;
-    }
-    _tvgCurve = curve->clone();
+    _plot->setTvgCurve(curve);
 }
 
 void AScanWidget::drawTimeScale(QPainter &painter, int width, int bottom, int left)
@@ -58,149 +55,53 @@ void AScanWidget::drawTvgScale(QPainter &painter, int right, int bottom, int top
     }
 }
 
-void AScanWidget::drawTvgCurve(QPainter &painter,int width,int left, int bottom, int height)
-{
-    if(_tvgCurve!=0) {
-        int scale = 200;
-        double tvgStep = width/static_cast<double>(scale);
-        QPoint tvgStart(left, bottom - _tvgCurve->getSample(0)*height);
-        painter.setPen(_tvgCurvePen);
-        for(uint8_t i=0; i<scale; i++) {
-            int x = i*tvgStep + left;
-            int y = bottom - _tvgCurve->getSample(static_cast<double>(i) / scale) * (height) ;
-            QPoint tvgNext = QPoint(x,y);
-            painter.drawLine(tvgStart,tvgNext);
-            tvgStart = tvgNext;
-        }
 
-        auto referencePoints = _tvgCurve->getReferencePoints();
-        painter.setPen(Qt::black);
-        painter.setBrush(QBrush(Qt::green));
-        for(size_t i=0; i<referencePoints.size(); i++) {
-            QPoint p(left + referencePoints[i].first * width ,bottom - referencePoints[i].second * (height));
-            painter.drawEllipse(QRect(p-QPoint(3,3),p+QPoint(3,3)));
-        }
-    }
-}
-
-void AScanWidget::drawGates(QPainter &painter, int width, int height, int left, int bottom)
-{
-    double scaleStep = width/static_cast<double>(_scale);
-    const auto & dispChans = _channelData.getDisplayChannels();
-    const auto & gates = dispChans[_displayChannelId].gates();
-    uint8_t gatesCount = gates.size();
-    for(uint8_t j=0; j<gatesCount; j++) {
-        Gate gate = gates[j];
-        int level = bottom - (gate._level * (height/255.0));
-        QPen gatePen = QPen(getColorByLevel(gate._level),3);
-        gatePen.setCapStyle(Qt::RoundCap);
-        painter.setPen(gatePen);
-
-        painter.drawLine(left + gate._start * scaleStep,level,left + gate._finish* scaleStep, level);
-        painter.drawLine(left + gate._start * scaleStep,level,left + gate._start * scaleStep - 5, level + 5);
-        painter.drawLine(left + gate._start * scaleStep,level,left + gate._start * scaleStep - 5, level - 5);
-        painter.drawLine(left + gate._finish * scaleStep,level,left + gate._finish * scaleStep + 5, level + 5);
-        painter.drawLine(left + gate._finish * scaleStep,level,left + gate._finish * scaleStep + 5, level - 5);
-    }
-}
-
-void AScanWidget::drawAscan(QPainter &painter, int width, int height, int left, int bottom, int right)
-{
-    painter.setPen(_ascanPen);
-    painter.setBrush(_ascanBrush);
-
-    painter.drawLine(left,bottom,right,bottom);
-    const double step = width/800.0;
-    uint16_t size = _samples.size();
-    uint16_t currentCount = 0;
-    for(uint16_t i=0; i<size; i++) {
-        if(_samples[i] > 0) {
-            if(currentCount==0) {
-                _polygon[currentCount] = QPoint(left + (i-1)*step, bottom);
-                currentCount++;
-            }
-            _polygon[currentCount] = QPoint(left + i*step, bottom - height*(_samples[i] / 256.0));
-            currentCount++;
-        }
-        else {
-            if(currentCount!=0) {
-                _polygon[currentCount] = QPoint(left + (i+1)*step, bottom);
-                currentCount++;
-                painter.drawPolygon(_polygon.data(),currentCount, Qt::FillRule::OddEvenFill);
-                currentCount = 0;
-            }
-        }
-    }
-    if(currentCount!=0) {
-        _polygon[currentCount] = QPoint(left + 800*step, bottom - height*(_samples[size-1] / 256.0));
-        currentCount++;
-        painter.drawPolygon(_polygon.data(),currentCount, Qt::FillRule::OddEvenFill);
-    }
-}
-
-void AScanWidget::drawMarker(QPainter &painter, int width, int height, int left, int bottom)
-{
-    painter.setPen(QPen(Qt::black, 1, Qt::PenStyle::DotLine));
-    int markerHeight = (bottom) -  (_markerValue / 255.0) * height ;
-    int markerPos = left + (_markerPos / 800.0) * width;
-    painter.drawLine(left, markerHeight,markerPos, markerHeight);
-    painter.drawLine(markerPos,markerHeight,markerPos,bottom);
-    painter.setPen(Qt::red);
-    painter.drawLine(markerPos,bottom,markerPos,bottom+16);
-}
-
-void AScanWidget::drawFps(QPainter &painter, int posx, int posy)
-{
-    quint64 time = _fpsTimer.nsecsElapsed();
-    _fpsTimer.start();
-    double fps = 1/(static_cast<double>(time) / 100000000.0);
-    painter.drawText(QPoint(posx, posy),"fps: " + QString::number(fps,'f', 3));
-}
 
 AScanWidget::AScanWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::AScanWidget)
 {
     ui->setupUi(this);
-    _fpsTimer.restart();
-    _polygon.resize(ASCAN_SAMPLES_SIZE+2);
+
+
     _tvgCurvePen = QPen(QColor(250,10,10), 2);
     _tvgCurvePen.setCapStyle(Qt::RoundCap);
     _ascanBrush = QBrush(QColor(80,80,200));
     _ascanPen = QPen(QColor(10,10,70), 1);
-    _displayChannelId = 0;
-    _markerPos = 0;
-    _markerValue = 0;
-    _tvgCurve = 0;
+
+
     _scaleFont = QGuiApplication::font();
     _scaleFont.setPixelSize(8);
     _scale = 200;
     const Settings * settings = System::getInstance()->getSettings();
-    _drawFPS = settings->getAscanFPSEnabled();
+
+    _plot = new AScanPlot(this);
+    _plot->onFPSEnabledChanged(settings->getAscanFPSEnabled());
+    _plot->show();
     connect(settings,SIGNAL(ascanFPSEnabledChanged(bool)),this,SLOT(onFPSEnabledChanged(bool)));
     this->setAttribute(Qt::WA_OpaquePaintEvent);
 }
 
 AScanWidget::~AScanWidget()
 {
-    if(_tvgCurve !=0) {
-        delete _tvgCurve;
-    }
+
     delete ui;
 }
 
 void AScanWidget::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event);
+    //QElapsedTimer timer;
+    //timer.start();
 
     QPainter painter(this);
     painter.setCompositionMode(QPainter::CompositionMode_Source);
     const QPalette & pal = this->palette();
     QColor bgColor = pal.color(QPalette::Window);
-    QColor inverted(255-bgColor.red(),255-bgColor.green(),bgColor.blue());
+    const QColor inverted(255-bgColor.red(),255-bgColor.green(),bgColor.blue());
     _ascanBrush.setColor(inverted);
     bgColor = bgColor.lighter(170.0f);
-
+    _plot->setBgColor(bgColor);
 
     const int w = width();
     const int h = height();
@@ -216,67 +117,44 @@ void AScanWidget::paintEvent(QPaintEvent *event)
     painter.setPen(Qt::black);
     painter.drawRect(0,0,w-1,h-1);
 
+    _plot->setGeometry(left+1,top,width-1,height);
+
+    //qint64 before = timer.nsecsElapsed();
     drawTimeScale(painter,width,bottom,left);
+    // qint64 after = timer.nsecsElapsed();
     drawScanScale(painter,left,bottom,top,height);
     drawTvgScale(painter,right,bottom,top,height);
-    drawAscan(painter,width,height,left,bottom,right);
-    drawTvgCurve(painter,width,left,bottom,height);
-    drawGates(painter,width,height,left,bottom);
-    drawMarker(painter,width,height,left,bottom);
-    if(_drawFPS) {
-        drawFps(painter,width - 50, 16);
-    }
+
+    //drawAscan(painter,width,height,left,bottom,right);
+
+
+    //drawMarker(painter,width,height,left,bottom);
+
+
+    // qDebug() << "A - " <<timer.nsecsElapsed()/1000 << "ms" << "scan" <<(after-before)/1000<<"ms";
 }
 
 void AScanWidget::setChannelInfo(const Channel & channel, DisplayChannelID dispChannelId)
 {
-    _channelData = channel;
-    _displayChannelId = dispChannelId;
-    const auto & dispChans = channel.getDisplayChannels();
-    const DisplayChannel & disp = dispChans[_displayChannelId];
-    const RxChannel & rx = disp.getRx();
-    const TVGCurve * tvg = rx.getTvgCurve();
-    Q_ASSERT(tvg);
-    setTVGCurve(tvg);
+    _plot->setChannelInfo(channel,dispChannelId);
 }
 
 void AScanWidget::onAScan(const AScanDrawData *scan)
 {
-    if(isVisible()) {
-        uint8_t chan = scan->_channel;
-        if(chan == _channelData.index()) {
-            _samples = scan->_samples;
-            _markerPos = scan->_markerPos;
-            _markerValue = scan->_markerValue;
-        }
-        update();
-    }
+    _plot->onAScan(scan);
 }
 
 void AScanWidget::reset()
 {
-    if(_tvgCurve !=0) {
-        delete _tvgCurve;
-    }
-    _tvgCurve = 0;
-
+    _plot->reset();
 }
 
 void AScanWidget::onChannelChanged(const Channel & channel)
 {
-    if(_channelData.index() == channel.index()) {
-        _channelData = channel;
-        const auto & dispChannels = channel.getDisplayChannels();
-        const DisplayChannel & disp = dispChannels.at(_displayChannelId);
-        const RxChannel & rx = disp.getRx();
-        const TVGCurve * tvg = rx.getTvgCurve();
-        Q_ASSERT(tvg);
-        setTVGCurve(tvg);
-    }
-    update();
+    _plot->onChannelChanged(channel);
 }
 
 void AScanWidget::onFPSEnabledChanged(bool value)
 {
-    _drawFPS = value;
+    _plot->onFPSEnabledChanged(value);
 }

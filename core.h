@@ -16,12 +16,13 @@
 #include "device/calibrationmanager.h"
 #include <QMutex>
 
-class Core : public QThread
+class Core : public QObject
 {
     Q_OBJECT
 private:
     // Atomic flags
     std::atomic_bool _active;
+    std::atomic_bool _finished;
     std::atomic_bool _calibrationSnapshotRequested;
     std::atomic_bool _tactTableSnapshotRequested;
     std::atomic_bool _calibrationsInfoSnapshotRequested;
@@ -69,13 +70,17 @@ private:
 
     QString _registrationOutputPath;
     QFile * _registrationFileHandle;
+
+public slots:
+    // System
+    void work();
+    void stopCore();
 public:
     Core(ModeManager * modeManager, CalibrationManager * calibrationManager);
     ~Core();
 
-    // System
-    void run();
-    void stopCore();
+
+
 
     // Internal
     ChannelsCalibration getCalibration();
@@ -153,6 +158,8 @@ signals:
 
     void deviceConnectionErrorEnable();
     void deviceConnectionErrorDisable();
+
+    void finished();
 };
 
 #endif // CORE_H
