@@ -55,20 +55,16 @@ void AScanWidget::drawTvgScale(QPainter &painter, int right, int bottom, int top
     }
 }
 
-
-
 AScanWidget::AScanWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::AScanWidget)
 {
     ui->setupUi(this);
 
-
     _tvgCurvePen = QPen(QColor(250,10,10), 2);
     _tvgCurvePen.setCapStyle(Qt::RoundCap);
     _ascanBrush = QBrush(QColor(80,80,200));
     _ascanPen = QPen(QColor(10,10,70), 1);
-
 
     _scaleFont = QGuiApplication::font();
     _scaleFont.setPixelSize(8);
@@ -91,8 +87,6 @@ AScanWidget::~AScanWidget()
 void AScanWidget::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event);
-    //QElapsedTimer timer;
-    //timer.start();
 
     QPainter painter(this);
     painter.setCompositionMode(QPainter::CompositionMode_Source);
@@ -119,19 +113,9 @@ void AScanWidget::paintEvent(QPaintEvent *event)
 
     _plot->setGeometry(left+1,top,width-1,height);
 
-    //qint64 before = timer.nsecsElapsed();
     drawTimeScale(painter,width,bottom,left);
-    // qint64 after = timer.nsecsElapsed();
     drawScanScale(painter,left,bottom,top,height);
     drawTvgScale(painter,right,bottom,top,height);
-
-    //drawAscan(painter,width,height,left,bottom,right);
-
-
-    //drawMarker(painter,width,height,left,bottom);
-
-
-    // qDebug() << "A - " <<timer.nsecsElapsed()/1000 << "ms" << "scan" <<(after-before)/1000<<"ms";
 }
 
 void AScanWidget::setChannelInfo(const Channel & channel, DisplayChannelID dispChannelId)

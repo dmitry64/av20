@@ -29,6 +29,7 @@ void AScanPlot::setScale(const uint16_t &scale)
 
 void AScanPlot::paintEvent(QPaintEvent *event)
 {
+    Q_UNUSED(event);
     QPainter painter(this);
     painter.setCompositionMode(QPainter::CompositionMode_Source);
 
