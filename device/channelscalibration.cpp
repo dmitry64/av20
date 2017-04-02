@@ -60,7 +60,7 @@ ChannelsCalibration::~ChannelsCalibration()
 void ChannelsCalibration::saveToFile(QString path, size_t saveIndex) const
 {
     QFile outFile(path);
-    outFile.open(QIODevice::WriteOnly | QIODevice::Text);
+    Q_ASSERT(outFile.open(QIODevice::WriteOnly | QIODevice::Text));
     QDomDocument doc = generateXML(saveIndex);
     QTextStream stream(&outFile);
     stream << doc.toString();
@@ -73,6 +73,7 @@ void ChannelsCalibration::loadFromFile(QString path)
     QFile inputFile(path);
     if (!inputFile.open(QIODevice::ReadOnly) || !doc.setContent(&inputFile)) {
         qDebug() << "Cannot read file";
+        Q_ASSERT(false);
         return;
     }
     inputFile.close();

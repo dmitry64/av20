@@ -285,15 +285,19 @@ void MainWindow::onDeviceConnectionErrorDisable()
 
 void MainWindow::onShutdown()
 {
+    logEvent("MainWindow","Shutdown started...");
     _core->stopCore();
     System::getInstance()->shutdown();
+    logEvent("MainWindow","Exit");
     QApplication::exit(0);
 }
 
 void MainWindow::onReboot()
 {
+    logEvent("MainWindow","Reboot started...");
     _core->stopCore();
     System::getInstance()->reboot();
+    logEvent("MainWindow","Exit");
     QApplication::exit(0);
 }
 

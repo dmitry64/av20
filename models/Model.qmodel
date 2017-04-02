@@ -2193,8 +2193,8 @@
                          <object>{bb0cc6b1-5224-4e1f-b78d-fc83faac1e2f}</object>
                          <context>Spi</context>
                          <name>DeviceInterface</name>
-                         <pos>x:1750;y:1130</pos>
-                         <rect>x:-255;y:-75;w:510;h:150</rect>
+                         <pos>x:1750;y:1115</pos>
+                         <rect>x:-255;y:-65;w:510;h:130</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
                         </DObject>
@@ -4490,7 +4490,7 @@
                     </item>
                    </qlist>
                   </elements>
-                  <last-modified>1489590076645</last-modified>
+                  <last-modified>1491062359847</last-modified>
                   <toolbarid>Classes</toolbarid>
                  </MDiagram>
                 </base-MDiagram>
@@ -4746,7 +4746,7 @@
                                        <qlist>
                                         <item>
                                          <MClassMember>
-                                          <uid>{50ae507e-80f5-4402-8d62-8af3a4da146b}</uid>
+                                          <uid>{4f73bc8c-1402-4cad-b7fa-b78b8775071e}</uid>
                                           <visibility>1</visibility>
                                           <type>2</type>
                                           <properties>1</properties>
@@ -4755,7 +4755,7 @@
                                         </item>
                                         <item>
                                          <MClassMember>
-                                          <uid>{6346d228-5e4f-4529-8586-032b06adf2e7}</uid>
+                                          <uid>{d7294541-bf20-4527-9c27-d57a4e86680c}</uid>
                                           <visibility>1</visibility>
                                           <type>2</type>
                                           <properties>1</properties>
@@ -4764,7 +4764,7 @@
                                         </item>
                                         <item>
                                          <MClassMember>
-                                          <uid>{b5e50fdc-834d-486e-9202-1da705a9aebb}</uid>
+                                          <uid>{635ed30b-e7d4-4b0c-8919-2b52dcba3d58}</uid>
                                           <visibility>1</visibility>
                                           <type>2</type>
                                           <properties>1</properties>
@@ -4773,7 +4773,7 @@
                                         </item>
                                         <item>
                                          <MClassMember>
-                                          <uid>{cf4059cd-c979-4be1-822c-b06240117970}</uid>
+                                          <uid>{0f1cbebb-7426-49de-85b8-645b52b9a168}</uid>
                                           <visibility>1</visibility>
                                           <type>2</type>
                                           <properties>1</properties>
@@ -4782,7 +4782,7 @@
                                         </item>
                                         <item>
                                          <MClassMember>
-                                          <uid>{0c5f375a-9397-45fc-8b32-077c342e387c}</uid>
+                                          <uid>{b9a21beb-b74e-4459-8ec9-42896d56eb90}</uid>
                                           <visibility>1</visibility>
                                           <type>2</type>
                                           <properties>5</properties>
@@ -8491,6 +8491,151 @@
                  </MObject>
                 </base-MObject>
                </MPackage>
+              </instance>
+             </target>
+            </handle>
+           </item>
+           <item>
+            <handle>
+             <uid>{9ddda3b4-1529-4b12-b951-129f4c515e45}</uid>
+             <target>
+              <instance type="MCanvasDiagram">
+               <MCanvasDiagram>
+                <base-MDiagram>
+                 <MDiagram>
+                  <base-MObject>
+                   <MObject>
+                    <base-MElement>
+                     <MElement>
+                      <uid>{9ddda3b4-1529-4b12-b951-129f4c515e45}</uid>
+                     </MElement>
+                    </base-MElement>
+                    <name>Component</name>
+                   </MObject>
+                  </base-MObject>
+                  <elements>
+                   <qlist>
+                    <item>
+                     <instance type="DComponent">
+                      <DComponent>
+                       <base-DObject>
+                        <DObject>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{851a6751-ed7e-4933-b29a-9ef15d93973b}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{fd515fab-2fd5-49fc-bdbd-ade7a59a8fb0}</object>
+                         <name>Core</name>
+                         <pos>x:555;y:340</pos>
+                         <rect>x:-110;y:-55;w:220;h:110</rect>
+                         <auto-sized>false</auto-sized>
+                         <visual-role>0</visual-role>
+                        </DObject>
+                       </base-DObject>
+                      </DComponent>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DComponent">
+                      <DComponent>
+                       <base-DObject>
+                        <DObject>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{7e71fc0f-c9b2-46bf-8a60-9fa5706925bc}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{679e0373-1b4f-4568-b38a-2464c6db042c}</object>
+                         <stereotypes>
+                          <qlist>
+                           <item>database</item>
+                          </qlist>
+                         </stereotypes>
+                         <name>Хранилище дефектограмм</name>
+                         <pos>x:620;y:105</pos>
+                         <rect>x:-20;y:-20;w:40;h:40</rect>
+                         <visual-role>0</visual-role>
+                        </DObject>
+                       </base-DObject>
+                      </DComponent>
+                     </instance>
+                    </item>
+                   </qlist>
+                  </elements>
+                  <last-modified>1491064589537</last-modified>
+                  <toolbarid>Components</toolbarid>
+                 </MDiagram>
+                </base-MDiagram>
+               </MCanvasDiagram>
+              </instance>
+             </target>
+            </handle>
+           </item>
+           <item>
+            <handle>
+             <uid>{fd515fab-2fd5-49fc-bdbd-ade7a59a8fb0}</uid>
+             <target>
+              <instance type="MComponent">
+               <MComponent>
+                <base-MObject>
+                 <MObject>
+                  <base-MElement>
+                   <MElement>
+                    <uid>{fd515fab-2fd5-49fc-bdbd-ade7a59a8fb0}</uid>
+                   </MElement>
+                  </base-MElement>
+                  <name>Core</name>
+                 </MObject>
+                </base-MObject>
+               </MComponent>
+              </instance>
+             </target>
+            </handle>
+           </item>
+           <item>
+            <handle>
+             <uid>{5de5f330-35f2-4e28-8bfa-a84e3d8da59c}</uid>
+             <target>
+              <instance type="MComponent">
+               <MComponent>
+                <base-MObject>
+                 <MObject>
+                  <base-MElement>
+                   <MElement>
+                    <uid>{5de5f330-35f2-4e28-8bfa-a84e3d8da59c}</uid>
+                   </MElement>
+                  </base-MElement>
+                  <name>New Component</name>
+                 </MObject>
+                </base-MObject>
+               </MComponent>
+              </instance>
+             </target>
+            </handle>
+           </item>
+           <item>
+            <handle>
+             <uid>{679e0373-1b4f-4568-b38a-2464c6db042c}</uid>
+             <target>
+              <instance type="MComponent">
+               <MComponent>
+                <base-MObject>
+                 <MObject>
+                  <base-MElement>
+                   <MElement>
+                    <uid>{679e0373-1b4f-4568-b38a-2464c6db042c}</uid>
+                    <stereotypes>
+                     <qlist>
+                      <item>database</item>
+                     </qlist>
+                    </stereotypes>
+                   </MElement>
+                  </base-MElement>
+                  <name>Хранилище дефектограмм</name>
+                 </MObject>
+                </base-MObject>
+               </MComponent>
               </instance>
              </target>
             </handle>

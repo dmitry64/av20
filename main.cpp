@@ -6,12 +6,14 @@
 #include "common/definitions.h"
 #include "system/system.h"
 #include "device/calibrationmanager.h"
+#include "common/commonfunctions.h"
 #define DEFAULT_MODE
 
 #ifdef DEFAULT_MODE
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+    logEvent("Main","Avicon-20 starting...");
     //QWidget splashsceen;
     //splashsceen.setGeometry(0,0,1024,600);
     //splashsceen.show();
@@ -70,8 +72,9 @@ int main(int argc, char *argv[])
     //mainWindow->showFullScreen();
     mainWindow->show();
 
+    logEvent("Main","Starting exec loop");
     int retcode = a.exec();
-
+    logEvent("Main","Exit");
     return retcode;
 }
 #endif

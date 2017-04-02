@@ -132,9 +132,13 @@ void Core::work()
 
 void Core::stopCore()
 {
+    logEvent("Core","Stopping core...");
     _active.store(false);
-    while(!_finished.load()) {
+    while(!(_finished.load())) {
     }
+    _device->finish();
+    emit finished();
+    logEvent("Core","Core exited");
 }
 
 ChannelsCalibration Core::getCalibration()
@@ -366,7 +370,7 @@ void Core::finish()
     _calibrationManager->saveAll();
     _device->finish();
     _finished.store(true);
-    emit finished();
+
 }
 
 void Core::searchWork()
