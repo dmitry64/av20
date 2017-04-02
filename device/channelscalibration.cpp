@@ -60,39 +60,56 @@ ChannelsCalibration::~ChannelsCalibration()
 void ChannelsCalibration::saveToFile(QString path, size_t saveIndex) const
 {
     QFile outFile(path);
-    Q_ASSERT(outFile.open(QIODevice::WriteOnly | QIODevice::Text));
-    QDomDocument doc = generateXML(saveIndex);
-    QTextStream stream(&outFile);
-    stream << doc.toString();
-    outFile.close();
+    logEvent("ChanCalib","Saving to file:"+path);
+    if(outFile.open(QIODevice::WriteOnly | QIODevice::Text)) {
+        QDomDocument doc = generateXML(saveIndex);
+        QTextStream stream(&outFile);
+        stream << doc.toString();
+        outFile.close();
+    }
+    else {
+        qDebug() << "Cannot save to file"<<path;
+        Q_ASSERT(false);
+    }
 }
 
 void ChannelsCalibration::loadFromFile(QString path)
 {
     QDomDocument doc;
+    logEvent("ChanCalib","Loading from file:"+path);
     QFile inputFile(path);
     if (!inputFile.open(QIODevice::ReadOnly) || !doc.setContent(&inputFile)) {
-        qDebug() << "Cannot read file";
+        qDebug() << "Cannot load from file";
         Q_ASSERT(false);
         return;
     }
     inputFile.close();
     QDomNode calibration = doc.elementsByTagName("calibration").at(0);
-    QDomElement tact = calibration.firstChildElement("tact");
-    _tactId = tact.text().toUInt();
-    QDomElement info = calibration.firstChildElement("info");
-    _info._id = info.firstChildElement("id").text().toUInt();
-    _info._name = info.firstChildElement("name").text();
-    _active = true;
+    if(!calibration.isNull()) {
+        QDomElement tact = calibration.firstChildElement("tact");
+        _tactId = tact.text().toUInt();
+        QDomElement info = calibration.firstChildElement("info");
+        _info._id = info.firstChildElement("id").text().toUInt();
+        _info._name = info.firstChildElement("name").text();
+        _active = true;
 
-    _channels.clear();
-    QDomElement channels = calibration.firstChildElement("channels");
-    QDomNodeList chans = channels.elementsByTagName("channel");
-    for(int i=0; i<chans.size(); i++) {
-        QDomNode channel = chans.at(i);
-        Channel newChannel;
-        newChannel.loadXML(channel);
-        _channels.push_back(newChannel);
+        _channels.clear();
+        QDomElement channels = calibration.firstChildElement("channels");
+        QDomNodeList chans = channels.elementsByTagName("channel");
+        for(int i=0; i<chans.size(); i++) {
+            QDomNode channel = chans.at(i);
+            if(!channel.isNull()) {
+                Channel newChannel;
+                newChannel.loadXML(channel);
+                _channels.push_back(newChannel);
+            }
+            else {
+                qDebug() << "Cannot read channel";
+            }
+        }
+    }
+    else {
+        qDebug() << "Cannot read calibration";
     }
 }
 

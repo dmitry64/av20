@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>735</width>
-    <height>446</height>
+    <height>511</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -56,29 +56,7 @@
         </sizepolicy>
        </property>
        <property name="styleSheet">
-        <string notr="true">QScrollBar:vertical { width: 35px; }
-QScrollBar {
-	background-color: rgb(149, 149, 149);
-}
-QTableWidget{
-	background-color: rgb(255, 255, 255);
-	color: rgb(0, 0, 0);
-	
-	border-color: rgb(0, 0, 0);
-	alternate-background-color: rgb(255, 255, 255);
-	gridline-color: rgb(0, 0, 0);
-	selection-background-color: rgb(86, 64, 255);
-}
-
-QHeaderView {
-background-color: rgb(255, 255, 255);
-	color: rgb(0, 0, 0);
-	border-color: rgb(255, 255, 255);
-	alternate-background-color: rgb(255, 255, 255);
-	gridline-color: rgb(0, 0, 0);
-	selection-background-color: rgb(86, 64, 255);
-}
-</string>
+        <string notr="true"/>
        </property>
        <property name="verticalScrollBarPolicy">
         <enum>Qt::ScrollBarAlwaysOn</enum>

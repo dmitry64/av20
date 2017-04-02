@@ -63,6 +63,9 @@
          <height>48</height>
         </size>
        </property>
+       <property name="focusPolicy">
+        <enum>Qt::NoFocus</enum>
+       </property>
        <property name="text">
         <string>Gate: 56-87
  Level: 32</string>
@@ -88,6 +91,9 @@
          <width>48</width>
          <height>48</height>
         </size>
+       </property>
+       <property name="focusPolicy">
+        <enum>Qt::NoFocus</enum>
        </property>
        <property name="text">
         <string/>

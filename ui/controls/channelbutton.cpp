@@ -1,5 +1,6 @@
 #include "channelbutton.h"
 #include "ui_channelbutton.h"
+#include <QDebug>
 
 ChannelsInfo ChannelButton::info() const
 {

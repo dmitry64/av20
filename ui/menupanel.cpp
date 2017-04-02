@@ -54,6 +54,8 @@ MenuPanel::MenuPanel(QWidget *parent) :
     _defaultPalette = ui->helpButton->palette();
     _activePalette.setColor(QPalette::Button, QColor(120,190,10));
     _activePalette.setColor(QPalette::ButtonText,Qt::black);
+
+    //ui->helpButton->setStyle()
 }
 
 MenuPanel::~MenuPanel()

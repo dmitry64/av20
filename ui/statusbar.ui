@@ -2282,6 +2282,9 @@
        <bold>false</bold>
       </font>
      </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
      <property name="autoFillBackground">
       <bool>false</bool>
      </property>
@@ -2315,6 +2318,9 @@ color: rgb(0, 0, 0);</string>
        <weight>50</weight>
        <bold>false</bold>
       </font>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
      </property>
      <property name="autoFillBackground">
       <bool>false</bool>
@@ -2356,6 +2362,9 @@ color: rgb(0, 0, 0);</string>
        <bold>false</bold>
       </font>
      </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
      <property name="autoFillBackground">
       <bool>false</bool>
      </property>
@@ -2386,6 +2395,9 @@ color: rgb(0, 0, 0);</string>
        <weight>50</weight>
        <bold>false</bold>
       </font>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
      </property>
      <property name="autoFillBackground">
       <bool>false</bool>
@@ -2424,6 +2436,9 @@ color: rgb(0, 0, 0);</string>
        <italic>false</italic>
        <bold>false</bold>
       </font>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
      </property>
      <property name="autoFillBackground">
       <bool>false</bool>
@@ -2464,6 +2479,9 @@ color: rgb(0, 0, 0);</string>
        <strikeout>false</strikeout>
        <kerning>true</kerning>
       </font>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
      </property>
      <property name="autoFillBackground">
       <bool>false</bool>

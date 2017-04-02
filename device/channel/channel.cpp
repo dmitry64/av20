@@ -77,17 +77,32 @@ void Channel::loadXML(const QDomNode &node)
     _activeDisplayChannel = 0;
 
     QDomNode color = node.firstChildElement("color");
-    _colorRed = color.firstChildElement("red").text().toUShort();
-    _colorGreen = color.firstChildElement("green").text().toUShort();
-    _colorBlue = color.firstChildElement("blue").text().toUShort();
+    if(!color.isNull()) {
+        _colorRed = color.firstChildElement("red").text().toUShort();
+        _colorGreen = color.firstChildElement("green").text().toUShort();
+        _colorBlue = color.firstChildElement("blue").text().toUShort();
+    }
+    else {
+        qDebug() << "No color info";
+    }
 
     QDomNode dispChans = node.firstChildElement("displayChannels");
-    QDomNodeList list = dispChans.childNodes();
-    for(int i=0; i<list.size(); i++) {
-        QDomNode dc = list.at(i);
-        DisplayChannel chan;
-        chan.loadXML(dc);
-        _displayChannels.push_back(chan);
+    if(!dispChans.isNull()) {
+        QDomNodeList list = dispChans.childNodes();
+        for(int i=0; i<list.size(); i++) {
+            QDomNode dc = list.at(i);
+            if(!dc.isNull()) {
+                DisplayChannel chan;
+                chan.loadXML(dc);
+                _displayChannels.push_back(chan);
+            }
+            else {
+                qDebug() << "Null display channel";
+            }
+        }
+    }
+    else {
+        qDebug() << "No display channels found";
     }
 }
 

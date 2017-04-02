@@ -82,9 +82,14 @@ QDomElement RxChannel::generateXML(QDomDocument &doc) const
 
 void RxChannel::loadXML(const QDomNode &node)
 {
-    _tvgCurve = generateTVGFromXML(node.firstChildElement("tvg"));
-    _prismTime = node.firstChildElement("prismTime").text().toUInt();
-    _name = node.firstChildElement("name").text();
+    if(!node.isNull()) {
+        _tvgCurve = generateTVGFromXML(node.firstChildElement("tvg"));
+        _prismTime = node.firstChildElement("prismTime").text().toUInt();
+        _name = node.firstChildElement("name").text();
+    }
+    else {
+        qDebug() << "RxChannel null";
+    }
 }
 
 RxChannel &RxChannel::operator=(const RxChannel &L)

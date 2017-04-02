@@ -198,6 +198,7 @@ void CalibrationManager::saveAll()
 void CalibrationManager::loadAll()
 {
     _calibrations.clear();
+    logEvent("CalibMan","Loading all calibrations...");
     QDirIterator it(_savePath,QStringList() << "*",QDir::Dirs | QDir::NoDotAndDotDot);
     while (it.hasNext()) {
         auto dir = it.next();

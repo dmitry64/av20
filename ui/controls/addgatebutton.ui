@@ -48,6 +48,9 @@
        <pointsize>10</pointsize>
       </font>
      </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
      <property name="text">
       <string>Add gate</string>
      </property>

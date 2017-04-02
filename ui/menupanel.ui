@@ -24,6 +24,9 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
    <property name="leftMargin">
     <number>2</number>
@@ -44,6 +47,9 @@
        <width>48</width>
        <height>42</height>
       </size>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
      </property>
      <property name="text">
       <string>Help</string>
@@ -74,6 +80,9 @@
        <height>42</height>
       </size>
      </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
      <property name="text">
       <string>Mode</string>
      </property>
@@ -97,6 +106,9 @@
        <height>42</height>
       </size>
      </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
      <property name="text">
       <string>Calibration</string>
      </property>
@@ -119,6 +131,9 @@
        <width>48</width>
        <height>42</height>
       </size>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
      </property>
      <property name="text">
       <string>Registration</string>
@@ -146,6 +161,9 @@
        <height>42</height>
       </size>
      </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
      <property name="text">
       <string>Memory</string>
      </property>
@@ -168,6 +186,9 @@
        <width>48</width>
        <height>42</height>
       </size>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
      </property>
      <property name="text">
       <string>Options</string>
