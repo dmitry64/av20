@@ -100,7 +100,7 @@ DeviceState::DeviceState():
 {
 }
 
-void DeviceState::setTVGForChannel(uint8_t index, TVG tvg)
+void DeviceState::setTVGForChannel(uint8_t index,const TVG & tvg)
 {
     for(int y=0; y<TVG_SAMPLES_BYTES; y++) {
         _tvg[index]._samples[y] = tvg._samples[y];
@@ -112,7 +112,7 @@ TVG DeviceState::getTvgForChannel(uint8_t index) const
     return _tvg[index];
 }
 
-void DeviceState::setChannelsTableTact(uint8_t index, TactRegisters tact)
+void DeviceState::setChannelsTableTact(uint8_t index,const TactRegisters & tact)
 {
     _tactTable[index]._CR = tact._CR;
     _tactTable[index]._PULSER1 = tact._PULSER1;
@@ -147,7 +147,7 @@ void DeviceState::setChannelsTableRegister(uint8_t reg, uint8_t value)
     }
 }
 
-TactRegisters DeviceState::getTactByIndex(uint8_t index)
+TactRegisters DeviceState::getTactByIndex(uint8_t index) const
 {
     Q_ASSERT(index < 8);
     return _tactTable[index];

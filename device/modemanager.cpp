@@ -37,7 +37,7 @@ std::vector<Tact> ModeManager::generateSearchTacts(int tactsNumber)
     return scheme1;
 }
 
-TactTable ModeManager::generateSearchTable(TactID tact, int tactsNumber, QString name)
+TactTable ModeManager::generateSearchTable(TactID tact, int tactsNumber,const QString & name)
 {
     TactTable table1;
     table1.setName(name);
@@ -64,36 +64,6 @@ DeviceMode ModeManager::generateSearchMode()
     tactTables.push_back(table2);
 
     mode.setTactTables(tactTables);
-
-    /*
-        TactTable * table2 = new TactTable();
-        table2->setId(TACT_ID_SEARCH_SCHEME_2);
-
-        std::vector<Tact*> scheme2;
-        for(int i=0;i<4; i++) {
-            Tact * tact = new Tact();
-            tact->setRx1(i);
-            tact->setTx1(i);
-            tact->setRx2(4+i);
-            tact->setTx2(4+i);
-
-            if(i<4) {
-            tact->setRx1Enabled(true);
-            tact->setTx1Enabled(true);
-            tact->setRx2Enabled(true);
-            tact->setTx2Enabled(true);
-            tact->setTactEnabled(true);
-            } else {
-                tact->setRx1Enabled(false);
-                tact->setTx1Enabled(false);
-                tact->setTactEnabled(false);
-            }
-
-            scheme2.push_back(tact);
-        }
-        table2->setTactTable(scheme2);
-    */
-
 
     return mode;
 }

@@ -17,7 +17,7 @@ bool DriverSPI::getErrorFlag() const
     return _errorFlag;
 }
 
-DriverSPI::DriverSPI(QString &device) : DeviceInterface(),
+DriverSPI::DriverSPI(const QString &device) : DeviceInterface(),
     _device(device),
     _deviceFD(0),
     _mode(0x00),

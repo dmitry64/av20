@@ -22,7 +22,7 @@ public:
     ~CalibrationManager();
     void saveAll();
     void loadAll();
-    void setSavePath(QString path);
+    void setSavePath(const QString & path);
 
     void init();
     ChannelsCalibration getLastCalibrationByTactID(TactID id);
@@ -30,14 +30,14 @@ public:
     std::vector<CalibrationInfo> getCalibrationsInfoByTactID(TactID id);
     void addCalibration(const ChannelsCalibration &calibration);
     void removeCalibration(TactID id, const CalibrationIndex index);
-    void createCopyCalibration(TactID id, CalibrationIndex index, QString name);
-    void applyChannelsModification(TactID id, CalibrationIndex index, ChannelID channelId, Channel channel);
+    void createCopyCalibration(TactID id, CalibrationIndex index, const QString &name);
+    void applyChannelsModification(TactID id, CalibrationIndex index, ChannelID channelId,const Channel & channel);
 private:
     static std::vector<Gate> generateGates();
     static void setColor(Channel &chTemp, int i);
     DisplayChannel generateDisplayChannel(const double angle);
     std::vector<Channel> generateChannels(int channelsNumber, int dispChansNumber);
-    ChannelsCalibration generateCalibration(TactID tact, CalibrationIndex index, QString name, int channelsNumber, int dispChansNumber);
+    ChannelsCalibration generateCalibration(TactID tact, CalibrationIndex index, const QString &name, int channelsNumber, int dispChansNumber);
 };
 
 #endif // CALIBRATIONMANAGER_H

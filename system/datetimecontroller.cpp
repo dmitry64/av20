@@ -15,12 +15,12 @@ void DateTimeController::init()
     logEvent("DateTime","Current date: "+_lastTime.toString("yyyy-MM-dd HH:mm:ss"));
 }
 
-void DateTimeController::setDate(QDate date)
+void DateTimeController::setDate(const QDate &date)
 {
     logEvent("DateTime","Set date");
 }
 
-void DateTimeController::setTime(QTime time)
+void DateTimeController::setTime(const QTime &time)
 {
     logEvent("DateTime","Set time");
 }

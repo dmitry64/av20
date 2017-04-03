@@ -57,7 +57,7 @@ ChannelsCalibration::~ChannelsCalibration()
 
 }
 
-void ChannelsCalibration::saveToFile(QString path, size_t saveIndex) const
+void ChannelsCalibration::saveToFile(const QString &path, size_t saveIndex) const
 {
     QFile outFile(path);
     logEvent("ChanCalib","Saving to file:"+path);
@@ -73,7 +73,7 @@ void ChannelsCalibration::saveToFile(QString path, size_t saveIndex) const
     }
 }
 
-void ChannelsCalibration::loadFromFile(QString path)
+void ChannelsCalibration::loadFromFile(const QString &path)
 {
     QDomDocument doc;
     logEvent("ChanCalib","Loading from file:"+path);

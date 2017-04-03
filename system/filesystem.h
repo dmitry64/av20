@@ -20,10 +20,10 @@ public:
     static QString getHelpPath();
     static QString getOperatorsPath();
 
-    QStringList getDataList();
-    QStringList getCalibrationsList();
-    QStringList getMediaList();
-    QStringList getHelpList();
+    static QStringList getDataList();
+    static QStringList getCalibrationsList();
+    static QStringList getMediaList();
+    static QStringList getHelpList();
 };
 
 #endif // FILESYSTEM_H

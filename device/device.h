@@ -13,7 +13,7 @@ class Device
 {
     DeviceInterface * _interface;
 private:
-    TactRegisters getRegistersByTact(const uint8_t index, const ChannelsCalibration & mode, const TactTable & tactTable);
+    static TactRegisters getRegistersByTact(const uint8_t index, const ChannelsCalibration & mode, const TactTable & tactTable);
     static TVG getTVGFromCurve(const TVGCurve *curve);
 public:
     Device();

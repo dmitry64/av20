@@ -21,7 +21,7 @@ private:
     void sendData(uint8_t length, const uint8_t * bufPtr);
     void recvData(uint32_t length, uint8_t * bufPtr);
 public:
-    explicit DriverSPI(QString & device);
+    explicit DriverSPI(const QString & device);
     ~DriverSPI();
     void init();
     void finish();

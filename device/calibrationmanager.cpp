@@ -100,7 +100,7 @@ std::vector<Channel> CalibrationManager::generateChannels(int channelsNumber, in
     return channels1;
 }
 
-ChannelsCalibration CalibrationManager::generateCalibration(TactID tact, CalibrationIndex index, QString name, int channelsNumber, int dispChansNumber)
+ChannelsCalibration CalibrationManager::generateCalibration(TactID tact, CalibrationIndex index,const QString & name, int channelsNumber, int dispChansNumber)
 {
     ChannelsCalibration cal1;
     cal1.setTactId(tact);
@@ -218,7 +218,7 @@ void CalibrationManager::loadAll()
     sortCalibrations();
 }
 
-void CalibrationManager::setSavePath(QString path)
+void CalibrationManager::setSavePath(const QString & path)
 {
     _savePath = path;
 }
@@ -304,7 +304,7 @@ void CalibrationManager::removeCalibration(TactID id, const CalibrationIndex ind
     }
 }
 
-void CalibrationManager::createCopyCalibration(TactID id, CalibrationIndex index, QString name)
+void CalibrationManager::createCopyCalibration(TactID id, CalibrationIndex index,const QString & name)
 {
     const auto & calibrations = getCalibrationsByTactID(id);
     for(size_t i=0; i<calibrations.size(); i++) {
@@ -321,7 +321,7 @@ void CalibrationManager::createCopyCalibration(TactID id, CalibrationIndex index
     }
 }
 
-void CalibrationManager::applyChannelsModification(TactID id, CalibrationIndex index, ChannelID channelId, Channel channel)
+void CalibrationManager::applyChannelsModification(TactID id, CalibrationIndex index, ChannelID channelId,const Channel & channel)
 {
     _calibrations[id][index].setChannel(channelId,channel);
     syncWithFile(_calibrations[id][index]);

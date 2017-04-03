@@ -26,8 +26,10 @@ TactRegisters Device::getRegistersByTact(const uint8_t index, const ChannelsCali
     reg._PULSER1 = 0x00;
     reg._PULSER1 |= ((firstTx.doubleMode() & 0b00000001) << 7);
     uint8_t prog1 = firstTx.prog();
+    Q_ASSERT(prog1<16);
     reg._PULSER1 |= ((prog1 & 0b00001111) << 3);
     uint8_t freq1 = firstTx.prog();
+    Q_ASSERT(freq1<16);
     reg._PULSER1 |= (freq1 & 0b00001111);
 
     reg._TR2 = 0x00;
@@ -40,8 +42,10 @@ TactRegisters Device::getRegistersByTact(const uint8_t index, const ChannelsCali
     reg._PULSER2 = 0x00;
     reg._PULSER2 |= ((secondTx.doubleMode() & 0b00000001) << 7);
     uint8_t prog2 = secondTx.prog();
+    Q_ASSERT(prog2<16);
     reg._PULSER1 |= ((prog2 & 0b00001111) << 3);
     uint8_t freq2 = secondTx.freq();
+    Q_ASSERT(freq2<16);
     reg._PULSER2 |= (freq2 & 0b00001111);
 
     reg._RESERVED = 0x00;

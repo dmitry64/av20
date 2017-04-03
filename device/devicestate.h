@@ -32,11 +32,11 @@ class DeviceState
 public:
     DeviceState();
 
-    void setTVGForChannel(uint8_t index, TVG tvg);
+    void setTVGForChannel(uint8_t index, const TVG &tvg);
     TVG getTvgForChannel(uint8_t index) const;
-    void setChannelsTableTact(uint8_t index, TactRegisters tact);
+    void setChannelsTableTact(uint8_t index, const TactRegisters &tact);
     void setChannelsTableRegister(uint8_t reg, uint8_t value);
-    TactRegisters getTactByIndex(uint8_t index);
+    TactRegisters getTactByIndex(uint8_t index) const;
 
     uint8_t USM_ID() const;
     void setUSM_ID(const uint8_t &USM_ID);

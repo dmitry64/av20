@@ -18,8 +18,8 @@ public:
     explicit DateTimeController(QObject *parent = 0);
 
     void init();
-    void setDate(QDate date);
-    void setTime(QTime time);
+    void setDate(const QDate & date);
+    void setTime(const QTime & time);
     QDate getDate();
     QTime getTime();
 
