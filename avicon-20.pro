@@ -14,6 +14,13 @@ CONFIG(testconf) {
     SOURCES += main.cpp
 }
 
+CONFIG(device) {
+message(Device build)
+DEFINES += DEVICE_BUILD=true
+} else {
+DEFINES += DEVICE_BUILD=false
+}
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++14

@@ -13,7 +13,7 @@ SchemeSelectionButton::~SchemeSelectionButton()
     delete ui;
 }
 
-void SchemeSelectionButton::setText(QString text)
+void SchemeSelectionButton::setText(const QString &text)
 {
     ui->mainButton->setText(text);
 }

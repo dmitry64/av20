@@ -41,6 +41,7 @@ ChannelsView::ChannelsView(QWidget *parent) :
     ui->tactWidget->setColumnWidth(2,40);
     ui->tactWidget->setColumnWidth(3,40);
     ui->tactWidget->setColumnWidth(4,40);
+    _disabledChannelsColor = QColor(60,60,60);
 }
 
 ChannelsView::~ChannelsView()
@@ -54,6 +55,64 @@ void ChannelsView::init()
     const ChannelsCalibration & calibration =  _core->getCalibrationsSnapshot();
     const TactTable & tactTable = _core->getTactTableSnapshot();
     init(calibration,tactTable);
+}
+
+void ChannelsView::fillTactsTable(const std::vector<Tact>& tacts, const ChannelsCalibration& calibrationsSnapshot)
+{
+    const size_t tactsSize= tacts.size();
+    for(size_t i=0; i<tactsSize; i++) {
+        const Tact & tact = tacts.at(i);
+        if(tact.getTactEnabled()) {
+            QTableWidgetItem * item = new QTableWidgetItem("#" + QString::number(i));
+            item->setTextAlignment( Qt::AlignHCenter | Qt::AlignCenter );
+            ui->tactWidget->setItem(i,0,item);
+            item = new QTableWidgetItem(QString::number(tact.getRx1()));
+            item->setTextAlignment( Qt::AlignHCenter | Qt::AlignCenter );
+
+            if(tact.getRx1Enabled()) {
+                const Channel & chan = calibrationsSnapshot.getChannel(tact.getRx1());
+                item->setBackgroundColor(QColor(chan.getColorRed(),chan.getColorGreen(),chan.getColorBlue()));
+            }
+            else {
+                item->setBackgroundColor(_disabledChannelsColor);
+            }
+            ui->tactWidget->setItem(i,1,item);
+            item = new QTableWidgetItem(QString::number(tact.getTx1()));
+            item->setTextAlignment( Qt::AlignHCenter | Qt::AlignCenter );
+
+            if(tact.getTx1Enabled()) {
+                const Channel & chan = calibrationsSnapshot.getChannel(tact.getTx1());
+                item->setBackgroundColor(QColor(chan.getColorRed(),chan.getColorGreen(),chan.getColorBlue()));
+            }
+            else {
+                item->setBackgroundColor(_disabledChannelsColor);
+            }
+            ui->tactWidget->setItem(i,2,item);
+
+            item = new QTableWidgetItem(QString::number(tact.getRx2()));
+            item->setTextAlignment( Qt::AlignHCenter | Qt::AlignCenter );
+
+            if(tact.getRx2Enabled()) {
+                const Channel & chan = calibrationsSnapshot.getChannel(tact.getRx2());
+                item->setBackgroundColor(QColor(chan.getColorRed(),chan.getColorGreen(),chan.getColorBlue()));
+            }
+            else {
+                item->setBackgroundColor(_disabledChannelsColor);
+            }
+            ui->tactWidget->setItem(i,3,item);
+            item = new QTableWidgetItem(QString::number(tact.getTx2()));
+            item->setTextAlignment( Qt::AlignHCenter | Qt::AlignCenter );
+
+            if(tact.getTx2Enabled()) {
+                const Channel & chan = calibrationsSnapshot.getChannel(tact.getTx2());
+                item->setBackgroundColor(QColor(chan.getColorRed(),chan.getColorGreen(),chan.getColorBlue()));
+            }
+            else {
+                item->setBackgroundColor(_disabledChannelsColor);
+            }
+            ui->tactWidget->setItem(i,4,item);
+        }
+    }
 }
 
 void ChannelsView::init(const ChannelsCalibration & calibrationsSnapshot, const TactTable & tactTableSnapshot)
@@ -114,63 +173,10 @@ void ChannelsView::init(const ChannelsCalibration & calibrationsSnapshot, const 
     }
     ui->channelsWidget->setRowCount(channelsRow);
     ui->channelsWidget->resizeRowsToContents();
-    QColor disabledChannelsColor = QColor(60,60,60);
+
 
     const std::vector<Tact> & tacts = tactTableSnapshot.getTactTable();
-
-    for(size_t i=0; i<tacts.size(); i++) {
-        const Tact & tact = tacts.at(i);
-        if(tact.getTactEnabled()) {
-            QTableWidgetItem * item = new QTableWidgetItem("#" + QString::number(i));
-            item->setTextAlignment( Qt::AlignHCenter | Qt::AlignCenter );
-            ui->tactWidget->setItem(i,0,item);
-            item = new QTableWidgetItem(QString::number(tact.getRx1()));
-            item->setTextAlignment( Qt::AlignHCenter | Qt::AlignCenter );
-
-            if(tact.getRx1Enabled()) {
-                const Channel & chan = calibrationsSnapshot.getChannel(tact.getRx1());
-                item->setBackgroundColor(QColor(chan.getColorRed(),chan.getColorGreen(),chan.getColorBlue()));
-            }
-            else {
-                item->setBackgroundColor(disabledChannelsColor);
-            }
-            ui->tactWidget->setItem(i,1,item);
-            item = new QTableWidgetItem(QString::number(tact.getTx1()));
-            item->setTextAlignment( Qt::AlignHCenter | Qt::AlignCenter );
-
-            if(tact.getTx1Enabled()) {
-                const Channel & chan = calibrationsSnapshot.getChannel(tact.getTx1());
-                item->setBackgroundColor(QColor(chan.getColorRed(),chan.getColorGreen(),chan.getColorBlue()));
-            }
-            else {
-                item->setBackgroundColor(disabledChannelsColor);
-            }
-            ui->tactWidget->setItem(i,2,item);
-
-            item = new QTableWidgetItem(QString::number(tact.getRx2()));
-            item->setTextAlignment( Qt::AlignHCenter | Qt::AlignCenter );
-
-            if(tact.getRx2Enabled()) {
-                const Channel & chan = calibrationsSnapshot.getChannel(tact.getRx2());
-                item->setBackgroundColor(QColor(chan.getColorRed(),chan.getColorGreen(),chan.getColorBlue()));
-            }
-            else {
-                item->setBackgroundColor(disabledChannelsColor);
-            }
-            ui->tactWidget->setItem(i,3,item);
-            item = new QTableWidgetItem(QString::number(tact.getTx2()));
-            item->setTextAlignment( Qt::AlignHCenter | Qt::AlignCenter );
-
-            if(tact.getTx2Enabled()) {
-                const Channel & chan = calibrationsSnapshot.getChannel(tact.getTx2());
-                item->setBackgroundColor(QColor(chan.getColorRed(),chan.getColorGreen(),chan.getColorBlue()));
-            }
-            else {
-                item->setBackgroundColor(disabledChannelsColor);
-            }
-            ui->tactWidget->setItem(i,4,item);
-        }
-    }
+    fillTactsTable(tacts, calibrationsSnapshot);
 
     update();
 }

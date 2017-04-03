@@ -31,7 +31,6 @@ class DeviceState
 
 public:
     DeviceState();
-    void applyState();
 
     void setTVGForChannel(uint8_t index, TVG tvg);
     TVG getTvgForChannel(uint8_t index) const;

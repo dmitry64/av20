@@ -35,8 +35,8 @@ public:
     void setRestrictedToChannel(bool flag);
     void reset();
 
-    void setChannelsInfo(std::vector<ChannelsInfo> selectedChannels);
-    void setActiveChannelData(const Channel &channel, ChannelsInfo info);
+    void setChannelsInfo(const std::vector<ChannelsInfo> &selectedChannels);
+    void setActiveChannelData(const Channel &channel, const ChannelsInfo &info);
     Channel channelData() const;
 
 public slots:
@@ -44,6 +44,7 @@ public slots:
     void onChannelChanged(Channel channel);
 private:
     Ui::BScanWidget *ui;
+    void drawGates(const double hstep, QPainter &painter, const int right);
 };
 
 #endif // BSCANWIDGET_H

@@ -17,7 +17,6 @@ SystemWidget::SystemWidget(QWidget *parent) :
     ui->softwareVersionLabel->setText(system->getSoftwareVersion());
     ui->osVersionLabel->setText(system->getOSVersion());
 
-
     connect(system,SIGNAL(deviceVersionReady(QString)),this,SLOT(onUSMVersionChanged(QString)));
     connect(system,SIGNAL(dateTimeChanged(QDateTime)),this,SLOT(onDateTimeChanged(QDateTime)));
     connect(system->getSettings(),SIGNAL(operatorNameChanged(QString)),this,SLOT(onOperatorChanged(QString)));

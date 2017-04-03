@@ -11,7 +11,7 @@ class Filesystem
     static void createStructure();
 public:
     Filesystem();
-    void initFilesystem();
+    static void initFilesystem();
     static QString getRootPath();
 
     static QString getDataPath();

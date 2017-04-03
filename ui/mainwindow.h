@@ -92,6 +92,10 @@ signals:
 
 private:
     Ui::MainWindow *ui;
+    void createMenuWidgets();
+    void generateUiThemes();
+    void createBackgroundWidget();
+    void connectMenuWidgets();
 };
 
 #endif // MAINWINDOW_H

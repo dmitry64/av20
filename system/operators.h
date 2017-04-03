@@ -14,15 +14,15 @@ class Operators : public QObject
     QString _filePath;
     std::vector<QString> _names;
     QDomDocument generateXML();
-    void parseXML(QDomDocument doc);
+    void parseXML(const QDomDocument &doc);
     void saveToFile();
     void loadFromFile();
 public:
-    Operators(QObject *parent = 0);
+    explicit Operators(QObject *parent = 0);
     ~Operators();
     void init(Filesystem *fs);
-    void add(QString name);
-    void remove(QString name);
+    void add(const QString & name);
+    void remove(const QString & name);
     std::vector<QString> names() const;
 signals:
     void operatorsListChanged();

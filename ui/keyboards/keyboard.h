@@ -32,6 +32,7 @@ private slots:
 
 signals:
     void textReady(QString);
+    void closed();
 
 private:
     Ui::Keyboard *ui;

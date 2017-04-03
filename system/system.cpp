@@ -1,4 +1,5 @@
 #include "system.h"
+#include <QProcess>
 
 Filesystem *System::getFilesystem() const
 {
@@ -8,6 +9,10 @@ Filesystem *System::getFilesystem() const
 void System::shutdown()
 {
     logEvent("System","Shutdown");
+    if(DEVICE_BUILD) {
+        QProcess *myProcess = new QProcess(this);
+        myProcess->start("shutdown -h -n -t 3 now");
+    }
 }
 
 void System::reboot()
@@ -64,7 +69,7 @@ QString System::getCurrentOperatorName()
     return _settings->getCurrentOperator();
 }
 
-void System::setCurrentOperatorName(QString name)
+void System::setCurrentOperatorName(const QString & name)
 {
     _settings->setCurrentOperator(name);
 }
@@ -79,12 +84,12 @@ QString System::getOSVersion()
     return "1.0.0";
 }
 
-void System::setDate(QDate date)
+void System::setDate(const QDate &date)
 {
     _dateTime->setDate(date);
 }
 
-void System::setTime(QTime time)
+void System::setTime(const QTime &time)
 {
     _dateTime->setTime(time);
 }

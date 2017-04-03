@@ -12,7 +12,6 @@ class Temperature : public QObject
 
     double _current;
     QTimer _updateTimer;
-
     double readTemperature();
 private slots:
     void updateValue();
@@ -21,10 +20,7 @@ signals:
 public:
     void init();
     double getTemperature();
-
     explicit Temperature(QObject *parent = 0);
-
-
 };
 
 #endif // TEMPERATURE_H

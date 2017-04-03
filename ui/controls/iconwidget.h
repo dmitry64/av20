@@ -4,7 +4,8 @@
 #include <QWidget>
 #include <QIcon>
 
-namespace Ui {
+namespace Ui
+{
 class IconWidget;
 }
 
@@ -20,8 +21,8 @@ private:
 public:
     explicit IconWidget(QWidget *parent = 0);
     ~IconWidget();
-    void setIcon(QIcon icon);
-    void setColor(QColor color);
+    void setIcon(const QIcon &icon);
+    void setColor(const QColor & color);
 
 private:
     Ui::IconWidget *ui;

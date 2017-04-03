@@ -21,7 +21,7 @@ class CalibrationButton : public QWidget
 public:
     explicit CalibrationButton(QWidget *parent = 0);
     ~CalibrationButton();
-    void setCalibrationInfo(CalibrationInfo info);
+    void setCalibrationInfo(const CalibrationInfo & info);
     void setActive(bool status);
     void setCurrentCalibration(bool status);
     CalibrationInfo info() const;

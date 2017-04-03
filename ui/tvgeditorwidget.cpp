@@ -37,6 +37,7 @@ TVGEditorWidget::TVGEditorWidget(QWidget *parent) :
     _core = 0;
     _info._channel = 0;
     _info._displayChannel = 0;
+
     connect(ui->singleHeight,SIGNAL(valueChanged(double)),this,SLOT(onSingleHeightChanged(double)));
     connect(ui->singleOffset,SIGNAL(valueChanged(double)),this,SLOT(onSingleOffsetChanged(double)));
     connect(ui->singleWidth,SIGNAL(valueChanged(double)),this,SLOT(onSingleWidthChanged(double)));

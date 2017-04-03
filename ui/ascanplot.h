@@ -47,6 +47,7 @@ public:
     void reset();
 
     void setBgColor(const QColor &bgColor);
+    void setAScanColor(const QColor &ascanColor);
     void setChannelInfo(const Channel &channel, DisplayChannelID dispChannelId);
     void setScale(const uint16_t &scale);
 

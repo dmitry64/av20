@@ -2,6 +2,8 @@
 #include "ui_mainwindow.h"
 #include <QDebug>
 #include <QCloseEvent>
+#include <QWidget>
+
 
 void MainWindow::closeEvent(QCloseEvent *event)
 {
@@ -21,34 +23,8 @@ void MainWindow::setColorScheme(UiTheme theme)
     }
 }
 
-MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::MainWindow)
+void MainWindow::createMenuWidgets()
 {
-    ui->setupUi(this);
-    setAttribute(Qt::WA_QuitOnClose);
-
-    _defaultPalette = this->palette();
-    _alternativePalette = this->palette();
-    _alternativePalette.setColor(QPalette::Window,QColor(30,60,90));
-    _alternativePalette.setColor(QPalette::Base,QColor(30,60,90));
-    _alternativePalette.setColor(QPalette::AlternateBase,QColor(30,60,90));
-    _alternativePalette.setColor(QPalette::Button,QColor(30,60,90));
-    _alternativePalette.setColor(QPalette::ButtonText,QColor(200,200,200));
-    _alternativePalette.setColor(QPalette::WindowText,QColor(200,200,200));
-
-    this->setColorScheme(System::getInstance()->getSettings()->getGlobalUiTheme());
-
-    _backgroundWidget = new QPushButton(ui->centralTabWidget);
-    _backgroundWidget->setFlat(true);
-    _backgroundWidget->setAutoFillBackground(true);
-    QPalette palette;
-    palette.setColor(QPalette::Button, QColor(100,100,100,200));
-    _backgroundWidget->setPalette(palette);
-    _backgroundWidget->setGeometry(0,0,2048,2048);
-    _backgroundWidget->hide();
-    connect(_backgroundWidget,SIGNAL(pressed()),ui->menuWidget,SLOT(resetMenu()));
-
     _helpWidget = new HelpWidget(ui->centralTabWidget);
     _helpWidget->hide();
 
@@ -69,15 +45,34 @@ MainWindow::MainWindow(QWidget *parent) :
 
     _systemWidget = new SystemWidget(ui->centralTabWidget);
     _systemWidget->hide();
+}
 
-    connect(this,SIGNAL(drawDisplayPackage(QSharedPointer<DisplayPackage>)), ui->aScanPage,SLOT(onDisplayPackage(QSharedPointer<DisplayPackage>)));
-    connect(this,SIGNAL(drawDisplayPackage(QSharedPointer<DisplayPackage>)), ui->bScanPage,SLOT(onDisplayPackage(QSharedPointer<DisplayPackage>)));
-    connect(this,SIGNAL(drawDisplayPackage(QSharedPointer<DisplayPackage>)), ui->tvgEditorWidget,SLOT(onDisplayPackage(QSharedPointer<DisplayPackage>)));
+void MainWindow::generateUiThemes()
+{
+    _defaultPalette = QWidget::palette();
+    _alternativePalette = QWidget::palette();
+    _alternativePalette.setColor(QPalette::Window,QColor(30,60,90));
+    _alternativePalette.setColor(QPalette::Base,QColor(30,60,90));
+    _alternativePalette.setColor(QPalette::AlternateBase,QColor(30,60,90));
+    _alternativePalette.setColor(QPalette::Button,QColor(30,60,90));
+    _alternativePalette.setColor(QPalette::ButtonText,QColor(200,200,200));
+    _alternativePalette.setColor(QPalette::WindowText,QColor(200,200,200));
+}
 
-    connect(this,SIGNAL(channelChanged(Channel)),ui->aScanPage,SLOT(onChannelChanged(Channel)));
-    connect(this,SIGNAL(channelChanged(Channel)),ui->bScanPage,SLOT(onChannelChanged(Channel)));
-    connect(this,SIGNAL(channelChanged(Channel)),ui->tvgEditorWidget,SLOT(onChannelChanged(Channel)));
+void MainWindow::createBackgroundWidget()
+{
+    _backgroundWidget = new QPushButton(ui->centralTabWidget);
+    _backgroundWidget->setFlat(true);
+    _backgroundWidget->setAutoFillBackground(true);
+    QPalette backgroundPalette;
+    backgroundPalette.setColor(QPalette::Button, QColor(100,100,100,200));
+    _backgroundWidget->setPalette(backgroundPalette);
+    _backgroundWidget->setGeometry(0,0,2048,2048);
+    _backgroundWidget->hide();
+}
 
+void MainWindow::connectMenuWidgets()
+{
     connect(this,SIGNAL(resetMenu()),ui->menuWidget,SLOT(resetMenu()));
 
     connect(ui->menuWidget,SIGNAL(helpMenuOpened()),this,SLOT(onHelpMenuOpened()));
@@ -94,6 +89,33 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->menuWidget,SIGNAL(optionsMenuClosed()),this,SLOT(onOptionsMenuClosed()));
     connect(ui->menuWidget,SIGNAL(systemMenuOpened()),this,SLOT(onSystemMenuOpened()));
     connect(ui->menuWidget,SIGNAL(systemMenuClosed()),this,SLOT(onSystemMenuClosed()));
+}
+
+MainWindow::MainWindow(QWidget *parent) :
+    QMainWindow(parent),
+    ui(new Ui::MainWindow)
+{
+    ui->setupUi(this);
+    setAttribute(Qt::WA_QuitOnClose);
+
+    generateUiThemes();
+
+    this->setColorScheme(System::getInstance()->getSettings()->getGlobalUiTheme());
+
+    createBackgroundWidget();
+    connect(_backgroundWidget,SIGNAL(pressed()),ui->menuWidget,SLOT(resetMenu()));
+
+    createMenuWidgets();
+
+    connect(this,SIGNAL(drawDisplayPackage(QSharedPointer<DisplayPackage>)), ui->aScanPage,SLOT(onDisplayPackage(QSharedPointer<DisplayPackage>)));
+    connect(this,SIGNAL(drawDisplayPackage(QSharedPointer<DisplayPackage>)), ui->bScanPage,SLOT(onDisplayPackage(QSharedPointer<DisplayPackage>)));
+    connect(this,SIGNAL(drawDisplayPackage(QSharedPointer<DisplayPackage>)), ui->tvgEditorWidget,SLOT(onDisplayPackage(QSharedPointer<DisplayPackage>)));
+
+    connect(this,SIGNAL(channelChanged(Channel)),ui->aScanPage,SLOT(onChannelChanged(Channel)));
+    connect(this,SIGNAL(channelChanged(Channel)),ui->bScanPage,SLOT(onChannelChanged(Channel)));
+    connect(this,SIGNAL(channelChanged(Channel)),ui->tvgEditorWidget,SLOT(onChannelChanged(Channel)));
+
+    connectMenuWidgets();
 
     connect(_optionsWidget,SIGNAL(colorSchemeChanged(UiTheme)),this,SLOT(setColorScheme(UiTheme)));
 
@@ -303,7 +325,7 @@ void MainWindow::onReboot()
 
 void MainWindow::onPause()
 {
-
+    logEvent("MainWindow","Pause pressed");
 }
 
 void MainWindow::init()
@@ -320,7 +342,7 @@ void MainWindow::init()
     ui->aScanPage->init(defaultChannel,calibration);
     ui->tvgEditorWidget->init(defaultChannel,calibration);
     std::vector<ChannelsInfo> infoBscan;
-    for(int i=0; i<calibration.getChannelsCount(); i++) {
+    for(uint8_t i=0; i<calibration.getChannelsCount(); i++) {
         const auto & channel = calibration.getChannel(i);
         const auto & dispChannels = channel.getDisplayChannels();
         for(size_t j=0; j<dispChannels.size(); j++) {
@@ -332,7 +354,6 @@ void MainWindow::init()
     }
     ui->bScanPage->init(calibration);
     ui->bScanPage->setChannles(infoBscan,calibration);
-
     ui->channelsWidget->init(calibration,tactTableSnapshot);
     _calibrationsWidget->init(calibration);
     _memoryWidget->init();

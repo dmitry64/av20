@@ -32,12 +32,11 @@ void AScanWidget::drawScanScale(QPainter &painter, int left, int bottom, int top
     painter.setPen(_ascanBrush.color());
     painter.drawLine(left,bottom,left,top);
 
-    int scanScale = 10;
-    double scanScaleStep = height / static_cast<double>(scanScale);
+    const double scanScaleStep = height / static_cast<double>(_scanScale);
 
-    for(uint16_t i=0; i<=scanScale; i++) {
+    for(uint16_t i=0; i<=_scanScale; i++) {
         painter.drawLine(left-4,bottom - i * scanScaleStep,left,bottom - i * scanScaleStep);
-        painter.drawText(left-30,bottom - i * scanScaleStep + 4,QString::number(i * 1.2/scanScale) + " V");
+        painter.drawText(left-30,bottom - i * scanScaleStep + 4,QString::number(i * 1.2/_scanScale) + " V");
     }
 }
 
@@ -46,12 +45,12 @@ void AScanWidget::drawTvgScale(QPainter &painter, int right, int bottom, int top
     painter.setPen(_tvgCurvePen.color());
     painter.drawLine(right,bottom,right,top);
 
-    int tvgScale = 10;
-    double tvgScaleStep = height / static_cast<double>(tvgScale);
 
-    for(uint16_t i=0; i<=tvgScale; i++) {
+    const double tvgScaleStep = height / static_cast<double>(_tvgScale);
+
+    for(uint16_t i=0; i<=_tvgScale; i++) {
         painter.drawLine(right+4,bottom - i * tvgScaleStep,right,bottom - i * tvgScaleStep);
-        painter.drawText(right+6,bottom - i * tvgScaleStep + 4,QString::number(i * 80/tvgScale) + " dB");
+        painter.drawText(right+6,bottom - i * tvgScaleStep + 4,QString::number(i * 80/_tvgScale) + " dB");
     }
 }
 
@@ -69,6 +68,8 @@ AScanWidget::AScanWidget(QWidget *parent) :
     _scaleFont = QGuiApplication::font();
     _scaleFont.setPixelSize(8);
     _scale = 200;
+    _scanScale = 10;
+    _tvgScale = 10;
     const Settings * settings = System::getInstance()->getSettings();
 
     _plot = new AScanPlot(this);
@@ -94,6 +95,7 @@ void AScanWidget::paintEvent(QPaintEvent *event)
     QColor bgColor = pal.color(QPalette::Window);
     const QColor inverted(255-bgColor.red(),255-bgColor.green(),bgColor.blue());
     _ascanBrush.setColor(inverted);
+    _plot->setAScanColor(inverted);
     bgColor = bgColor.lighter(170.0f);
     _plot->setBgColor(bgColor);
 

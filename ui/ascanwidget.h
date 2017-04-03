@@ -26,29 +26,19 @@ class AScanWidget : public QWidget
 
     AScanPlot * _plot;
 
-
-
-
-
     QPen _tvgCurvePen;
     QFont _scaleFont;
     QPen _ascanPen;
     QBrush _ascanBrush;
 
-
-
-
-
+    int _scanScale;
+    int _tvgScale;
 
 private:
     void setTVGCurve(const TVGCurve *curve);
     void drawTimeScale(QPainter & painter, int width, int bottom, int left);
     void drawScanScale(QPainter & painter, int left, int bottom, int top, int height);
     void drawTvgScale(QPainter & painter, int right, int bottom, int top, int height);
-    //void drawTvgCurve(QPainter & painter, int width, int left, int bottom, int height);
-    //void drawGates(QPainter &painter, int width, int height, int left, int bottom);
-    //void drawAscan(QPainter &painter, int width, int height, int left, int bottom, int right);
-    //void drawMarker(QPainter &painter, int width, int height, int left, int bottom);
     void drawFps(QPainter &painter, int posx, int posy);
 
 public:

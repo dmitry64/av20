@@ -23,7 +23,7 @@ class ChannelButton : public QWidget
     QPalette _defaultPalette;
 
 public:
-    explicit ChannelButton(QString name, ChannelsInfo info, QWidget *parent = 0);
+    explicit ChannelButton(const QString & name,const ChannelsInfo & info, QWidget *parent = 0);
     ~ChannelButton();
     void setActive(bool state);
     void setColor(uint8_t red,uint8_t green,uint8_t blue);

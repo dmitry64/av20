@@ -4,7 +4,7 @@
 #include <QLinearGradient>
 #include <QDebug>
 
-void BScanWidget::setChannelsInfo(std::vector<ChannelsInfo> selectedChannels)
+void BScanWidget::setChannelsInfo(const std::vector<ChannelsInfo> & selectedChannels)
 {
     _samplesArray.clear();
 
@@ -15,7 +15,7 @@ void BScanWidget::setChannelsInfo(std::vector<ChannelsInfo> selectedChannels)
     }
 }
 
-void BScanWidget::setActiveChannelData(const Channel & channel, ChannelsInfo info)
+void BScanWidget::setActiveChannelData(const Channel & channel, const ChannelsInfo & info)
 {
     _channelData = channel;
     _info = info;
@@ -45,6 +45,20 @@ BScanWidget::BScanWidget(QWidget *parent) :
 BScanWidget::~BScanWidget()
 {
     delete ui;
+}
+
+void BScanWidget::drawGates(const double hstep, QPainter & painter, const int right)
+{
+    const std::vector<Gate> &gates = _channelData.getDisplayChannels().at(_info._displayChannel).gates();
+
+    for(auto it=gates.begin(); it!=gates.end(); it++) {
+        const Gate &gate = it.operator*();
+        const uint16_t y1 = static_cast<double>(gate._start) * hstep;
+        const uint16_t y2 = static_cast<double>(gate._finish) * hstep;
+        uint16_t offset = right + ((gate._level/255.0) *32) + 1;
+        painter.setPen(QPen(getColorByLevel(gate._level),2));
+        painter.drawLine(offset,y1,offset,y2);
+    }
 }
 
 void BScanWidget::paintEvent(QPaintEvent *event)
@@ -108,16 +122,7 @@ void BScanWidget::paintEvent(QPaintEvent *event)
             }
         }
 
-        const std::vector<Gate> & gates = _channelData.getDisplayChannels().at(_info._displayChannel).gates();
-
-        for(auto it=gates.begin(); it!=gates.end(); it++) {
-            const Gate & gate = it.operator*();
-            const uint16_t y1 = static_cast<double>(gate._start) * hstep;
-            const uint16_t y2 = static_cast<double>(gate._finish) * hstep;
-            uint16_t offset = right + ((gate._level/255.0) *32) + 1;
-            painter.setPen(QPen(getColorByLevel(gate._level),2));
-            painter.drawLine(offset,y1,offset,y2);
-        }
+        drawGates(hstep, painter, right);
     }
 }
 
@@ -133,6 +138,7 @@ void BScanWidget::reset()
 
 void BScanWidget::onBScan(BScanDrawData *scan)
 {
+    Q_ASSERT(scan);
     ChannelsInfo info = scan->_info;
     if(_restrictedToChannel) {
         if(info._channel != _info._channel || info._displayChannel != _info._displayChannel) {

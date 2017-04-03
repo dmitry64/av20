@@ -74,9 +74,9 @@ void ControlPanel::init(const ChannelsCalibration & calibration)
 
     const auto & dispChannel = calibration.getDisplayChannel(_info);
     const std::vector<Gate> & gates = dispChannel.gates();
-    for(size_t i=0; i<gates.size(); i++) {
+    for(auto it=gates.begin(); it!=gates.end(); it++) {
         GateController * gateController = new GateController();
-        gateController->setGate(gates[i]);
+        gateController->setGate(it.operator*());
         _gates.push_back(gateController);
         _gatesLayout->addWidget(gateController);
         connect(gateController,SIGNAL(deleteGate(Gate,GateController*)),this,SLOT(onDeleteGate(Gate,GateController*)));

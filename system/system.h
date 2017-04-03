@@ -44,11 +44,11 @@ public:
 
     void init();
     QString getCurrentOperatorName();
-    void setCurrentOperatorName(QString name);
+    void setCurrentOperatorName(const QString & name);
     QString getSoftwareVersion();
     QString getOSVersion();
-    void setDate(QDate date);
-    void setTime(QTime time);
+    void setDate(const QDate & date);
+    void setTime(const QTime & time);
     void setBrightness(int percent);
     void setSoundVolume(int percent);
 

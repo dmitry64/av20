@@ -17,7 +17,7 @@ public:
     explicit MemoryWidget(QWidget *parent = 0);
     ~MemoryWidget();
     void init();
-    void update();
+    void updateList();
 
 
 private slots:

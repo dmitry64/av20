@@ -14,7 +14,7 @@ void OptionsWidget::initOperators(System * system)
     }
 }
 
-void OptionsWidget::addOperatorWithName(QString name)
+void OptionsWidget::addOperatorWithName(const QString &name)
 {
     if(name.compare("Unknown operator") != 0 && name.compare("") != 0) {
         System::getInstance()->getOperators()->add(name);

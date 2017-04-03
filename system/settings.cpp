@@ -57,7 +57,7 @@ UiTheme Settings::getGlobalUiTheme() const
     return static_cast<UiTheme>(_settings.value("Ui/Theme",0).toInt());
 }
 
-void Settings::setCurrentOperator(QString name)
+void Settings::setCurrentOperator(const QString &name)
 {
     _settings.setValue("Operator/Current_operator",name);
     emit operatorNameChanged(name);

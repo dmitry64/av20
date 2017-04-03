@@ -94,9 +94,6 @@ void AScanPage::setChannel(ChannelsInfo info)
     const Channel & chan = snapshot.getChannel(info._channel);
     _core->switchChannel(info);
     ui->ascanWidget->setChannelInfo(chan,info._displayChannel);
-    // std::vector<ChannelsInfo> infoList;
-    //infoList.push_back(info);
-    //ui->bscanWidget->setChannelsInfo(infoList);
     ui->bscanWidget->setActiveChannelData(snapshot.getChannel(info._channel),info);
     ui->controlPanel->setChannel(info);
     ui->controlPanel->init(snapshot);

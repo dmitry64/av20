@@ -21,7 +21,7 @@ private:
 public:
     explicit GateController(QWidget *parent = 0);
     ~GateController();
-    void setGate(Gate gate);
+    void setGate(const Gate &gate);
 
 private slots:
     void on_gateButton_released();

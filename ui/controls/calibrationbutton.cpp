@@ -20,7 +20,7 @@ CalibrationButton::~CalibrationButton()
     delete ui;
 }
 
-void CalibrationButton::setCalibrationInfo(CalibrationInfo info)
+void CalibrationButton::setCalibrationInfo(const CalibrationInfo &info)
 {
     _info = info;
     ui->idLabel->setText(QString::number(info._id));

@@ -42,7 +42,7 @@ TouchSpinBoxString::~TouchSpinBoxString()
     delete ui;
 }
 
-void TouchSpinBoxString::setValues(std::vector<QString> values)
+void TouchSpinBoxString::setValues(const std::vector<QString> &values)
 {
     _values = values;
     ui->valueLabel->setText(values.at(0));
@@ -50,7 +50,7 @@ void TouchSpinBoxString::setValues(std::vector<QString> values)
     update();
 }
 
-void TouchSpinBoxString::setName(QString name)
+void TouchSpinBoxString::setName(const QString &name)
 {
     _name = name;
     sync();

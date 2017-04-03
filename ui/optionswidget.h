@@ -30,7 +30,7 @@ signals:
     void colorSchemeChanged(UiTheme);
 
 private slots:
-    void addOperatorWithName(QString name);
+    void addOperatorWithName(const QString & name);
     void on_showFps_toggled(bool checked);
     void on_selectOperatorButton_released();
     void on_removeOperatorButton_released();

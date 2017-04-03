@@ -100,11 +100,6 @@ DeviceState::DeviceState():
 {
 }
 
-void DeviceState::applyState()
-{
-
-}
-
 void DeviceState::setTVGForChannel(uint8_t index, TVG tvg)
 {
     for(int y=0; y<TVG_SAMPLES_BYTES; y++) {

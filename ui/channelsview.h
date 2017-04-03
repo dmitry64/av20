@@ -15,6 +15,7 @@ class ChannelsView : public QWidget
     Q_OBJECT
 
     Core * _core;
+    QColor _disabledChannelsColor;
 public:
     explicit ChannelsView(QWidget *parent = 0);
     ~ChannelsView();
@@ -25,6 +26,7 @@ public:
     void showEvent( QShowEvent* event );
 private:
     Ui::ChannelsView *ui;
+    void fillTactsTable(const std::vector<Tact>& tacts, const ChannelsCalibration& calibrationsSnapshot);
 };
 
 #endif // CHANNELSVIEW_H

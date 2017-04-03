@@ -57,7 +57,7 @@ void CalibrationManager::setColor(Channel & chTemp, int i)
     }
 }
 
-DisplayChannel CalibrationManager::generateDisplayChannel(double angle)
+DisplayChannel CalibrationManager::generateDisplayChannel(const double angle)
 {
     TxChannel tx;
     tx.setFreq(PulserFreq::Freq_2_5_MHz);

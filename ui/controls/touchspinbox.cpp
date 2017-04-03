@@ -58,7 +58,7 @@ void TouchSpinBox::setValue(double value)
     sync();
 }
 
-void TouchSpinBox::setName(QString name)
+void TouchSpinBox::setName(const QString &name)
 {
     _name = name;
     ui->nameLabel->setText(name);
@@ -80,7 +80,7 @@ void TouchSpinBox::setStep(double step)
     _step = step;
 }
 
-void TouchSpinBox::setSuffix(QString suf)
+void TouchSpinBox::setSuffix(const QString & suf)
 {
     _suffix = suf;
     sync();

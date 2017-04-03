@@ -22,6 +22,11 @@ void AScanPlot::setBgColor(const QColor &bgColor)
     _bgColor = bgColor;
 }
 
+void AScanPlot::setAScanColor(const QColor &ascanColor)
+{
+    _ascanBrush.setColor(ascanColor);
+}
+
 void AScanPlot::setScale(const uint16_t &scale)
 {
     _scale = scale;
@@ -59,6 +64,7 @@ AScanPlot::AScanPlot(QWidget *parent) : QWidget(parent)
     _bgColor = this->palette().color(QPalette::Window);
     _scale = 200;
     _displayChannelId = 0;
+    _drawFPS = false;
 }
 
 AScanPlot::~AScanPlot()
@@ -164,7 +170,7 @@ void AScanPlot::drawGates(QPainter &painter, int width, int height)
 
 void AScanPlot::drawFps(QPainter &painter, int posx, int posy)
 {
-    quint64 time = _fpsTimer.nsecsElapsed();
+    const quint64 time = _fpsTimer.nsecsElapsed();
     _fpsTimer.start();
     double fps = 1/(static_cast<double>(time) / 100000000.0);
     painter.drawText(QPoint(posx, posy),"fps: " + QString::number(fps,'f', 3));

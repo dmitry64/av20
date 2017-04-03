@@ -41,7 +41,7 @@ GateController::~GateController()
     delete ui;
 }
 
-void GateController::setGate(Gate gate)
+void GateController::setGate(const Gate &gate)
 {
     _gate = gate;
     updateGate();
@@ -53,7 +53,8 @@ void GateController::on_gateButton_released()
         ui->gateStart->hide();
         ui->gateFinish->hide();
         ui->gateLevel->hide();
-    } else {
+    }
+    else {
         ui->gateStart->show();
         ui->gateFinish->show();
         ui->gateLevel->show();

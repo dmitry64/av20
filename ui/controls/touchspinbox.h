@@ -32,11 +32,11 @@ public:
     ~TouchSpinBox();
 
     void setValue(double value);
-    void setName(QString name);
+    void setName(const QString & name);
     void setMax(double max);
     void setMin(double min);
     void setStep(double step);
-    void setSuffix(QString suf);
+    void setSuffix(const QString & suf);
     double value() const;
 
 private:

@@ -3,7 +3,8 @@
 
 #include <QWidget>
 
-namespace Ui {
+namespace Ui
+{
 class SchemeSelectionButton;
 }
 
@@ -15,7 +16,7 @@ class SchemeSelectionButton : public QWidget
 public:
     explicit SchemeSelectionButton(QWidget *parent = 0);
     ~SchemeSelectionButton();
-    void setText(QString text);
+    void setText(const QString &text);
     void setIndex(uint8_t index);
 private slots:
     void on_mainButton_released();

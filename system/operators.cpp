@@ -26,7 +26,7 @@ QDomDocument Operators::generateXML()
     return doc;
 }
 
-void Operators::parseXML(QDomDocument doc)
+void Operators::parseXML(const QDomDocument & doc)
 {
     QDomNode operators = doc.firstChildElement("operators");
     auto ops = operators.childNodes();
@@ -81,14 +81,14 @@ void Operators::init(Filesystem * fs)
 
 }
 
-void Operators::add(QString name)
+void Operators::add(const QString &name)
 {
     _names.push_back(name);
     saveToFile();
     emit operatorsListChanged();
 }
 
-void Operators::remove(QString name)
+void Operators::remove(const QString &name)
 {
     if(!_names.empty()) {
         auto remove = _names.end();

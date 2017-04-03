@@ -5,7 +5,8 @@
 
 void MemoryWidget::showEvent(QShowEvent *event)
 {
-    update();
+    updateList();
+    QWidget::showEvent(event);
 }
 
 MemoryWidget::MemoryWidget(QWidget *parent) :
@@ -22,14 +23,15 @@ MemoryWidget::~MemoryWidget()
 
 void MemoryWidget::init()
 {
-    update();
+    updateList();
 }
 
-void MemoryWidget::update()
+void MemoryWidget::updateList()
 {
     ui->dataList->clear();
     ui->mediaList->clear();
     Filesystem * fs = System::getInstance()->getFilesystem();
+    Q_ASSERT(fs);
     ui->dataList->insertItems(0,fs->getDataList());
     ui->mediaList->insertItems(0,fs->getMediaList());
 }
@@ -37,6 +39,7 @@ void MemoryWidget::update()
 void MemoryWidget::on_removeButton_released()
 {
     Filesystem * fs = System::getInstance()->getFilesystem();
+    Q_ASSERT(fs);
     switch(ui->tabWidget->currentIndex()) {
     case 0: {
         auto dataItems = ui->dataList->selectedItems();
@@ -62,10 +65,10 @@ void MemoryWidget::on_removeButton_released()
         break;
 
     }
-    update();
+    updateList();
 }
 
 void MemoryWidget::on_refreshButton_released()
 {
-    update();
+    updateList();
 }

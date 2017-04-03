@@ -28,13 +28,13 @@ IconWidget::~IconWidget()
     delete ui;
 }
 
-void IconWidget::setIcon(QIcon icon)
+void IconWidget::setIcon(const QIcon &icon)
 {
     _icon = icon;
     update();
 }
 
-void IconWidget::setColor(QColor color)
+void IconWidget::setColor(const QColor &color)
 {
     _color = color;
     update();

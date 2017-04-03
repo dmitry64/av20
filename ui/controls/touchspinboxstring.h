@@ -22,8 +22,8 @@ private:
 public:
     explicit TouchSpinBoxString(QWidget *parent = 0);
     ~TouchSpinBoxString();
-    void setValues(std::vector<QString> values);
-    void setName(QString name);
+    void setValues(const std::vector<QString> & values);
+    void setName(const QString & name);
     void setIndex(size_t index);
 
 private slots:

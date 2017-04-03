@@ -12,7 +12,7 @@ void ChannelButton::setInfo(const ChannelsInfo &info)
     _info = info;
 }
 
-ChannelButton::ChannelButton(QString name, ChannelsInfo info, QWidget *parent) :
+ChannelButton::ChannelButton(const QString &name, const ChannelsInfo &info, QWidget *parent) :
     QWidget(parent),
     _name(name),
     _state(false),

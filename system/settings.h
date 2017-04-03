@@ -17,21 +17,15 @@ public:
 public slots:
     void setAscanFPSEnabled(bool value);
     bool getAscanFPSEnabled() const;
-
     void setSystemSoundVolume(int value);
     int getSystemSoundVolume() const;
-
     void setSystemScreenBrightness(int value);
     int getSystemScreenBrightness() const;
-
     void setGlobalUiTheme(UiTheme value);
     UiTheme getGlobalUiTheme() const;
-
-    void setCurrentOperator(QString name);
+    void setCurrentOperator(const QString & name);
     QString getCurrentOperator();
-
 signals:
-
     void ascanFPSEnabledChanged(bool value);
     void operatorNameChanged(QString);
 public slots:

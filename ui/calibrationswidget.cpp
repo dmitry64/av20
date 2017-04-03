@@ -6,6 +6,7 @@ CalibrationsWidget::CalibrationsWidget(QWidget *parent) :
     ui(new Ui::CalibrationsWidget)
 {
     ui->setupUi(this);
+    _keyboard = 0;
 }
 
 void CalibrationsWidget::init(const ChannelsCalibration & calibration)
@@ -14,28 +15,30 @@ void CalibrationsWidget::init(const ChannelsCalibration & calibration)
     Q_ASSERT(_core);
 
     const ModeManager * manager = _core->getModeManager();
+    Q_ASSERT(manager);
 
-    DeviceModeIndex mode = _core->getCurrentMode();
-    SchemeIndex scheme = _core->getCurrentScheme();
+    const DeviceModeIndex mode = _core->getCurrentMode();
+    const SchemeIndex scheme = _core->getCurrentScheme();
 
-    QString modeName = manager->modes().at(mode).name();
-    QString tactName = manager->modes().at(mode).tactTables().at(scheme).getName();
+    const QString modeName = manager->modes().at(mode).name();
+    const QString tactName = manager->modes().at(mode).tactTables().at(scheme).getName();
 
     ui->modeLabel->setText(modeName);
     ui->schemeLabel->setText(tactName);
 
-    CalibrationsInfoList info = _core->getAvailableCalibrationsSnapshot();
+    const CalibrationsInfoList & info = _core->getAvailableCalibrationsSnapshot();
 
-    for(size_t i=0; i<_buttons.size(); i++) {
-        CalibrationButton * button = _buttons.at(i);
+    for(auto it=_buttons.begin(); it!=_buttons.end(); it++) {
+        CalibrationButton * button = it.operator*();
+        Q_ASSERT(button);
         disconnect(button,SIGNAL(calibrationSelected(CalibrationIndex)),this,SLOT(onCalibrationSelected(CalibrationIndex)));
         ui->calibrationsLayout->removeWidget(button);
         delete button;
     }
     _buttons.clear();
 
-    for(size_t i=0; i<info.size(); i++) {
-        CalibrationInfo calibInfo = info.at(i);
+    for(auto it=info.begin(); it!=info.end(); it++) {
+        const CalibrationInfo & calibInfo = it.operator*();
 
         CalibrationButton * button = new CalibrationButton();
         connect(button,SIGNAL(calibrationSelected(CalibrationIndex)),this,SLOT(onCalibrationSelected(CalibrationIndex)));
@@ -54,11 +57,11 @@ void CalibrationsWidget::init(const ChannelsCalibration & calibration)
         _buttons.push_back(button);
     }
     _selectedIndex = calibration.getInfo()._id;
-
 }
 
 void CalibrationsWidget::setCore(Core *core)
 {
+    Q_ASSERT(core);
     _core = core;
 }
 
@@ -70,8 +73,10 @@ CalibrationsWidget::~CalibrationsWidget()
 void CalibrationsWidget::onCalibrationSelected(CalibrationIndex index)
 {
     _selectedIndex = index;
-    for(size_t i=0; i<_buttons.size(); i++) {
-        CalibrationButton * button = _buttons.at(i);
+
+    for(auto it=_buttons.begin(); it!=_buttons.end(); it++) {
+        CalibrationButton * button = it.operator*();
+        Q_ASSERT(button);
         if(button->info()._id == index) {
             button->setActive(true);
         }
@@ -81,16 +86,16 @@ void CalibrationsWidget::onCalibrationSelected(CalibrationIndex index)
     }
 }
 
-void CalibrationsWidget::addCalibrationWithName(QString str)
+void CalibrationsWidget::addCalibrationWithName(const QString &str)
 {
     _core->createCalibration(0,str);
 }
 
 void CalibrationsWidget::on_newButton_released()
 {
-    Keyboard * keyboard = new Keyboard(this);
-    connect(keyboard,SIGNAL(textReady(QString)),this,SLOT(addCalibrationWithName(QString)));
-    keyboard->show();
+    _keyboard = new Keyboard(this);
+    connect(_keyboard,SIGNAL(textReady(QString)),this,SLOT(addCalibrationWithName(QString)));
+    _keyboard->show();
 }
 
 void CalibrationsWidget::on_removeButton_released()
