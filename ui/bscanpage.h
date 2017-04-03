@@ -25,7 +25,7 @@ public:
     void setCore(Core * core);
     void init(const ChannelsCalibration &snapshot);
     void reset();
-    void setChannles(std::vector<ChannelsInfo> channelsConfiguration, const ChannelsCalibration & snapshot);
+    void setChannles(const std::vector<ChannelsInfo> & channelsConfiguration, const ChannelsCalibration & snapshot);
 public slots:
     void onDisplayPackage(QSharedPointer<DisplayPackage> dp);
     void onChannelChanged(Channel channel);

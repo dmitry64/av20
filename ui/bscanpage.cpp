@@ -64,7 +64,7 @@ void BScanPage::reset()
     _bScanWidgets.clear();
 }
 
-void BScanPage::setChannles(std::vector<ChannelsInfo > channelsConfiguration, const ChannelsCalibration & snapshot)
+void BScanPage::setChannles(const std::vector<ChannelsInfo > &channelsConfiguration, const ChannelsCalibration & snapshot)
 {
     logEvent("BScanPage","Set channels");
 
