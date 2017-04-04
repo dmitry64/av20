@@ -2,6 +2,7 @@
 #include <QDebug>
 #include "math.h"
 
+
 uint8_t getTVGSample(uint8_t * ptr, int sampleNum)
 {
     int bit = sampleNum * 7;
@@ -33,23 +34,26 @@ uint8_t FakeSPI::getNextTact()
 
 void FakeSPI::updateCounters()
 {
-    for(int i=0; i<8; i++) {
+    double time = _timer.elapsed();
+    _timer.restart();
+    for(uint8_t i=0; i<8; i++) {
         int cur = _counters[i]->load();
-        cur++;
+        cur+= time;
         _counters[i]->store(cur);
     }
+
 }
 
 unsigned char FakeSPI::sincFunc(TVG tvg, uint8_t chan, int i, int time)
 {
-    double x = (i + sin(time/9.0) * 120.14 + (chan-4.0) * 50.0 - 400.0) / 16.0 ;
+    double x = (i + sin(time/999.0) * 120.14 + (chan-4.0) * 50.0 - 400.0) / 16.0 ;
     double res = 127.0;
     if(x!=0) {
         res = std::max((((sin(x)/x) + 1)/2.0)*255.0 - 128.0 ,0.0);
     }
 
     res *= getTVGSample( tvg._samples, i/4) / 127.0;
-    res *= (2.3 * (time % 255) + 60.0)/255.0 ;
+    //res *= (2.3 * (time % 255) + 60.0)/255.0 ;
     int val = round(res);
     unsigned char sh = val;
 
@@ -58,10 +62,10 @@ unsigned char FakeSPI::sincFunc(TVG tvg, uint8_t chan, int i, int time)
 
 unsigned char FakeSPI::sinusFunc(TVG tvg, uint8_t chan, int i, int time)
 {
-    double x = (i + sin(time/9.0) * 120.14 + (chan-4.0) * 50.0 - 400.0) / 16.0 ;
+    double x = (i + sin(time/999.0) * 120.14 + (chan-4.0) * 50.0 - 400.0) / 16.0 ;
     double res = 127.0;
     if(x!=0) {
-        double val = (((sin(x)) + 1)/2.0)*255.0 - 128.0;
+        double val = (((sin(x +time/700.0)) + 1)/2.0)*255.0;
         if(val > 0) {
             res = val;
         }
@@ -72,7 +76,7 @@ unsigned char FakeSPI::sinusFunc(TVG tvg, uint8_t chan, int i, int time)
     }
 
     res *= getTVGSample( tvg._samples, i/4) / 127.0;
-    res *= (2.3 * (time % 255) + 60.0)/255.0 ;
+    //res *= (2.3 * (time % 255) + 60.0)/255.0 ;
     int val = round(res);
     unsigned char sh = val;
 
@@ -81,14 +85,14 @@ unsigned char FakeSPI::sinusFunc(TVG tvg, uint8_t chan, int i, int time)
 
 unsigned char FakeSPI::cosinusFunc(TVG tvg, uint8_t chan, int i, int time)
 {
-    double x = (i + (cos(time/9.0) + sin(time/6.0)) * 120.14 + (chan-4.0) * 50.0 - 400.0) / 20.0 ;
+    double x = (i + (cos(time/999.0) + sin(time/599.0)) * 120.14 + (chan-4.0) * 50.0 - 400.0) / 20.0 ;
     double res = 127.0;
     if(x!=0) {
-        res = std::max((((cos(x)) + 1)/2.0)*255.0 - 128.0 ,0.0);
+        res = std::max((((cos(x)) + 1)/2.0)*255.0 - 128.0*(sin(time/1000.0)+1)/2.0 ,0.0);
     }
 
     res *= getTVGSample( tvg._samples, i/4) / 127.0;
-    res *= (2.3 * (time % 255) + 60.0)/255.0 ;
+    res *= 2.3;
     int val = round(res);
     unsigned char sh = val;
 
@@ -115,10 +119,10 @@ void FakeSPI::generateAscan(uint8_t *dest, bool line)
         unsigned char sh = 0;
         switch (chan) {
         case 0:
-            sh = sinusFunc(tvg, chan, i, ascanL1Counter);
+            sh = cosinusFunc(tvg, chan, i, ascanL1Counter);
             break;
         case 1:
-            sh = cosinusFunc(tvg, chan, i, ascanL1Counter);
+            sh = sinusFunc(tvg, chan, i, ascanL1Counter);
             break;
         default:
             sh = sincFunc(tvg, chan, i, ascanL1Counter);
@@ -141,6 +145,7 @@ void FakeSPI::setAScanForLine2(uint8_t *dest)
 
 void FakeSPI::run()
 {
+    _timer.restart();
     while(_active.load()) {
         updateCounters();
         usleep(50000);

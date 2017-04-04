@@ -8,6 +8,7 @@
 #include "common/commonfunctions.h"
 #include "device/devicestate.h"
 #include "deviceinterface.h"
+#include <QElapsedTimer>
 
 class FakeSPI : public DeviceInterface, public QThread
 {
@@ -16,6 +17,7 @@ class FakeSPI : public DeviceInterface, public QThread
     uint8_t _currentTact;
     uint8_t _specialCounter;
     std::atomic_bool _active;
+    QElapsedTimer _timer;
 private:
     uint8_t getNextTact();
     void updateCounters();
