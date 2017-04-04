@@ -49,7 +49,7 @@ unsigned char FakeSPI::sincFunc(TVG tvg, uint8_t chan, int i, int time)
     double x = (i + sin(time/999.0) * 120.14 + (chan-4.0) * 50.0 - 400.0) / 16.0 ;
     double res = 127.0;
     if(x!=0) {
-        res = std::max((((sin(x)/x) + 1)/2.0)*255.0 - 128.0 ,0.0);
+        res = std::max((((sin(x)/(x)) + 1)/2.0)*500.0 - 250.0 ,0.0);
     }
 
     res *= getTVGSample( tvg._samples, i/4) / 127.0;
