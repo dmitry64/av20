@@ -31,7 +31,7 @@ BScanWidget::BScanWidget(QWidget *parent) :
     ui(new Ui::BScanWidget)
 {
     ui->setupUi(this);
-    _width = 650;
+    _width = 800;
 
     _info._channel = 0;
     _info._displayChannel = 0;
@@ -118,7 +118,8 @@ void BScanWidget::paintEvent(QPaintEvent *event)
                 const BScanDrawSample & sample = it.operator*();
                 const double y1 = sample._begin * hstep;
                 const double y2 = sample._end * hstep;
-                painter.fillRect(QRectF(stepOffset,1.0 + y1, step, y2 - y1), getColorByLevel(sample._level));
+                QRectF rect(stepOffset,1.0 + y1, step, y2 - y1);
+                painter.fillRect(rect, getColorByLevel(sample._level));
             }
         }
 
