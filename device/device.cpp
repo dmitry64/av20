@@ -81,7 +81,7 @@ TVG Device::getTVGFromCurve(const TVGCurve *curve)
 Device::Device()
 {
 #ifdef FAKESPI
-    _interface = new FakeSPI();
+    _interface = new Emulator();
 #else
     _spi = new DriverSPI("/dev/spidev0.0");
 #endif

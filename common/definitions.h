@@ -104,8 +104,8 @@ struct BScanDrawData {
 };
 
 struct DisplayPackage {
-    AScanDrawData ascan;
-    BScanDrawData bscan;
+    AScanDrawData _ascan;
+    BScanDrawData _bscan;
 };
 
 #pragma pack(push, 1)

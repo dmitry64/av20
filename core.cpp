@@ -255,11 +255,11 @@ void Core::aScanProcess(uint8_t line)
 
     DisplayPackage * dp = new DisplayPackage();
 
-    dp->ascan._samples.resize(ASCAN_SAMPLES_SIZE);
+    dp->_ascan._samples.resize(ASCAN_SAMPLES_SIZE);
 
-    dp->ascan._channel = chId;
-    dp->bscan._info._channel = chId;
-    dp->bscan._info._displayChannel = current.getActiveDisplayChannelIndex();
+    dp->_ascan._channel = chId;
+    dp->_bscan._info._channel = chId;
+    dp->_bscan._info._displayChannel = current.getActiveDisplayChannelIndex();
 
     uint16_t max = 0;
     uint16_t pos = 0;
@@ -269,10 +269,10 @@ void Core::aScanProcess(uint8_t line)
             max = sample;
             pos = i;
         }
-        dp->ascan._samples[i] = sample;
+        dp->_ascan._samples[i] = sample;
     }
-    dp->ascan._markerPos = pos;
-    dp->ascan._markerValue = max;
+    dp->_ascan._markerPos = pos;
+    dp->_ascan._markerValue = max;
 
     const DisplayChannel & dispChannel = current.getActiveDisplayChannel();
     const std::vector<Gate> & gates = dispChannel.gates();
@@ -294,7 +294,7 @@ void Core::aScanProcess(uint8_t line)
                 drawSample._begin = start / 0x0004;
                 drawSample._end = i / 0x0004;
                 drawSample._level = gate._level;
-                dp->bscan._samples.push_back(drawSample);
+                dp->_bscan._samples.push_back(drawSample);
                 startFound = false;
                 start = 0;
             }

@@ -92,13 +92,13 @@ void BScanPage::setChannles(const std::vector<ChannelsInfo > &channelsConfigurat
 
 void BScanPage::onDisplayPackage(QSharedPointer<DisplayPackage> dp)
 {
-    uint8_t channel = dp->bscan._info._channel;
+    uint8_t channel = dp->_bscan._info._channel;
     Q_ASSERT(channel<8);
     const std::vector<BScanWidget*> & widgets = getWidgetsByChannel(channel);
     for(auto it=widgets.begin(); it!=widgets.end(); it++) {
         BScanWidget * wid = it.operator*();
         Q_ASSERT(wid);
-        wid->onBScan(&(dp->bscan));
+        wid->onBScan(&(dp->_bscan));
     }
 }
 

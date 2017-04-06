@@ -3,7 +3,7 @@
 
 #include "driver/deviceinterface.h"
 #include "driver/driverspi.h"
-#include "driver/fakespi.h"
+#include "driver/emulator.h"
 #include "common/commonfunctions.h"
 #include <vector>
 #include "channelscalibration.h"

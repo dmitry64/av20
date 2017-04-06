@@ -1,4 +1,4 @@
-#include "fakespi.h"
+#include "emulator.h"
 #include <QDebug>
 #include "math.h"
 
@@ -17,7 +17,7 @@ uint8_t getTVGSample(uint8_t * ptr, int sampleNum)
     return res;
 }
 
-uint8_t FakeSPI::getNextTact()
+uint8_t Emulator::getNextTact()
 {
     for(int i=_currentTact+1; i<MAX_TACTS_COUNT; i++) {
         if(_state.getTactByIndex(i)._CR & 0b00000001) {
@@ -32,7 +32,7 @@ uint8_t FakeSPI::getNextTact()
     return -1;
 }
 
-void FakeSPI::updateCounters()
+void Emulator::updateCounters()
 {
     double time = _timer.elapsed();
     _timer.restart();
@@ -44,7 +44,7 @@ void FakeSPI::updateCounters()
 
 }
 
-unsigned char FakeSPI::sincFunc(TVG tvg, uint8_t chan, int i, int time)
+unsigned char Emulator::sincFunc(TVG tvg, uint8_t chan, int i, int time)
 {
     double x = (i + sin(time/999.0) * 120.14 + (chan-4.0) * 50.0 - 400.0) / 16.0 ;
     double res = 127.0;
@@ -60,7 +60,7 @@ unsigned char FakeSPI::sincFunc(TVG tvg, uint8_t chan, int i, int time)
     return sh;
 }
 
-unsigned char FakeSPI::sinusFunc(TVG tvg, uint8_t chan, int i, int time)
+unsigned char Emulator::sinusFunc(TVG tvg, uint8_t chan, int i, int time)
 {
     double x = (i + sin(time/999.0) * 120.14 + (chan-4.0) * 50.0 - 400.0) / 16.0 ;
     double res = 127.0;
@@ -83,7 +83,7 @@ unsigned char FakeSPI::sinusFunc(TVG tvg, uint8_t chan, int i, int time)
     return sh;
 }
 
-unsigned char FakeSPI::cosinusFunc(TVG tvg, uint8_t chan, int i, int time)
+unsigned char Emulator::cosinusFunc(TVG tvg, uint8_t chan, int i, int time)
 {
     double x = (i + (cos(time/999.0) + sin(time/599.0)) * 120.14 + (chan-4.0) * 50.0 - 400.0) / 20.0 ;
     double res = 127.0;
@@ -99,7 +99,7 @@ unsigned char FakeSPI::cosinusFunc(TVG tvg, uint8_t chan, int i, int time)
     return sh;
 }
 
-void FakeSPI::generateAscan(uint8_t *dest, bool line)
+void Emulator::generateAscan(uint8_t *dest, bool line)
 {
     TactRegisters tact = _state.getTactByIndex(_currentTact);
     uint8_t chan = ((tact._TR1 & 0b01110000) >> 4);
@@ -133,17 +133,17 @@ void FakeSPI::generateAscan(uint8_t *dest, bool line)
     }
 }
 
-void FakeSPI::setAScanForLine1(uint8_t *dest)
+void Emulator::setAScanForLine1(uint8_t *dest)
 {
     generateAscan(dest, true);
 }
 
-void FakeSPI::setAScanForLine2(uint8_t *dest)
+void Emulator::setAScanForLine2(uint8_t *dest)
 {
     generateAscan(dest, false);
 }
 
-void FakeSPI::run()
+void Emulator::run()
 {
     _timer.restart();
     while(_active.load()) {
@@ -161,7 +161,7 @@ void FakeSPI::run()
     }
 }
 
-FakeSPI::FakeSPI() : DeviceInterface()
+Emulator::Emulator() : DeviceInterface()
 {
     for (int i=0; i<8; i++) {
         std::atomic_int * a = new std::atomic_int(1);
@@ -171,25 +171,25 @@ FakeSPI::FakeSPI() : DeviceInterface()
     _currentTact = 0;
 }
 
-FakeSPI::~FakeSPI()
+Emulator::~Emulator()
 {
 
 }
 
-void FakeSPI::init()
+void Emulator::init()
 {
     _currentTact = -1;
     _active.store(true);
     start();
 }
 
-void FakeSPI::finish()
+void Emulator::finish()
 {
     _active.store(false);
     wait();
 }
 
-void FakeSPI::getRegister(uint8_t reg, const uint32_t length, uint8_t *dest)
+void Emulator::getRegister(uint8_t reg, const uint32_t length, uint8_t *dest)
 {
     switch(reg) {
     case 0x00:
@@ -247,7 +247,7 @@ void FakeSPI::getRegister(uint8_t reg, const uint32_t length, uint8_t *dest)
     usleep(10);
 }
 
-void FakeSPI::setRegister(uint8_t reg, const uint32_t length, const uint8_t *src)
+void Emulator::setRegister(uint8_t reg, const uint32_t length, const uint8_t *src)
 {
     switch(reg) {
     case 0x05:
@@ -291,14 +291,14 @@ void FakeSPI::setRegister(uint8_t reg, const uint32_t length, const uint8_t *src
     usleep(10);
 }
 
-bool FakeSPI::setAndTestRegister(uint8_t reg, const uint32_t length, const uint8_t *src)
+bool Emulator::setAndTestRegister(uint8_t reg, const uint32_t length, const uint8_t *src)
 {
     setRegister(reg,length,src);
     usleep(10);
     return false;
 }
 
-bool FakeSPI::getErrorFlag() const
+bool Emulator::getErrorFlag() const
 {
     return false;
 }

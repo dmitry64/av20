@@ -78,8 +78,8 @@ void AScanPage::switchToSelectedChannel()
 
 void AScanPage::onDisplayPackage(QSharedPointer<DisplayPackage> package)
 {
-    ui->ascanWidget->onAScan(&(package->ascan));
-    ui->bscanWidget->onBScan(&(package->bscan));
+    ui->ascanWidget->onAScan(&(package->_ascan));
+    ui->bscanWidget->onBScan(&(package->_bscan));
 }
 
 void AScanPage::onChannelChanged(Channel channel)

@@ -1,5 +1,5 @@
-#ifndef FAKESPI_H
-#define FAKESPI_H
+#ifndef EMULATOR_H
+#define EMULATOR_H
 
 #include <stdint.h>
 #include <QThread>
@@ -10,7 +10,7 @@
 #include "deviceinterface.h"
 #include <QElapsedTimer>
 
-class FakeSPI : public DeviceInterface, public QThread
+class Emulator : public DeviceInterface, public QThread
 {
     DeviceState _state;
     std::vector<std::atomic_int*> _counters;
@@ -31,8 +31,8 @@ private:
     unsigned char cosinusFunc(TVG tvg, uint8_t chan, int i, int time);
 
 public:
-    FakeSPI();
-    ~FakeSPI();
+    Emulator();
+    ~Emulator();
     void init();
     void finish();
     void getRegister(uint8_t reg, const uint32_t length, uint8_t * dest);
@@ -41,4 +41,4 @@ public:
     bool getErrorFlag() const;
 };
 
-#endif // FAKESPI_H
+#endif // EMULATOR_H

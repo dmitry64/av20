@@ -184,13 +184,13 @@ HEADERS  += \
     common/definitions.h \
     driver/deviceinterface.h \
     driver/driverspi.h \
-    driver/fakespi.h \
     system/settings.h \
     system/operators.h \
     ui/keyboards/keyboard.h \
     ui/keyboards/englishkeyboard.h \
     ui/keyboards/numberkeypad.h \
-    ui/ascanplot.h
+    ui/ascanplot.h \
+    driver/emulator.h
 #    tests/coretest.h
 
 FORMS    += \
