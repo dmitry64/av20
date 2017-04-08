@@ -1,5 +1,5 @@
 #include "displaychannel.h"
-#include "device/tvg/tvgsinglepoint.h"
+#include "device/tvg/tvgtwopoints.h"
 
 std::vector<Gate> DisplayChannel::gates() const
 {

@@ -126,9 +126,9 @@ void AScanPlot::drawTvgCurve(QPainter &painter,int width, int height)
         auto referencePoints = _tvgCurve->getReferencePoints();
         painter.setPen(Qt::black);
         painter.setBrush(QBrush(Qt::green));
-        uint8_t refSize = referencePoints.size();
-        for(uint8_t i=0; i<refSize; i++) {
-            QPoint p(referencePoints[i].first * width ,height - referencePoints[i].second * (height));
+        for(auto it=referencePoints.begin(); it!=referencePoints.end(); it++) {
+            const std::pair<double,double> & pair = it.operator*();
+            QPoint p(pair.first * width ,height - pair.second * (height));
             painter.drawEllipse(QRect(p-QPoint(3,3),p+QPoint(3,3)));
         }
     }

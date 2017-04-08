@@ -1,5 +1,5 @@
 #include "calibrationmanager.h"
-#include "tvg/tvgsinglepoint.h"
+#include "tvg/tvgtwopoints.h"
 #include <QDebug>
 #include <QDir>
 #include <QDirIterator>
@@ -64,7 +64,7 @@ DisplayChannel CalibrationManager::generateDisplayChannel(const double angle)
     tx.setProg(PulserProg::Prog_1);
 
     RxChannel rx = RxChannel();
-    TVGCurve * curve = new TVGSinglePoint(75.0,85.0,70.0,32.0,25.0);
+    TVGCurve * curve = new TVGTwoPoints(75.0,85.0,70.0,32.0,25.0);
     rx.setTvgCurve(curve);
     delete curve;
     rx.setPrismTime(0);

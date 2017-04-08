@@ -5,6 +5,8 @@
 #include "stdint.h"
 
 #include "device/tvg/tvgcurve.h"
+#include "device/tvg/tvgtwopoints.h"
+#include "device/tvg/tvgnpoints.h"
 #include "common/definitions.h"
 #include "common/commonfunctions.h"
 

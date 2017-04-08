@@ -50,7 +50,8 @@ enum ModeTypes {
 };
 
 enum TVGType {
-    TVGSimple
+    TVG2PointType = 0,
+    TVGNPointType = 1
 };
 
 struct TactRegisters {

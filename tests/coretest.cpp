@@ -1,5 +1,5 @@
 #include "coretest.h"
-#include "device/tvg/tvgsinglepoint.h"
+#include "device/tvg/tvgtwopoints.h"
 #include "testdatagenerators.h"
 
 CoreTest::CoreTest(QObject *parent) : QObject(parent)
@@ -61,7 +61,7 @@ void CoreTest::coreCommunicationSimple()
     gate._start = 20;
     gate._level = 99;
     core->modifyGate(0,gate);
-    TVGSinglePoint * simple = new TVGSinglePoint(65.0,35.0,70.0,32.0,25.0);
+    TVGTwoPoints * simple = new TVGTwoPoints(65.0,35.0,70.0,32.0,25.0);
     core->setTVG(0,simple);
     delete simple;
 
@@ -165,7 +165,7 @@ void CoreTest::coreGateSetup()
     QThread::usleep(500);
 
     core->modifyGate(0,gate);
-    TVGSinglePoint * simple = new TVGSinglePoint(65.0,35.0,70.0,32.0,25.0);
+    TVGTwoPoints * simple = new TVGTwoPoints(65.0,35.0,70.0,32.0,25.0);
     core->setTVG(0,simple);
     delete simple;
 
@@ -190,7 +190,7 @@ void CoreTest::coreTvgSetup()
 
     for(int i=0; i<10; i++) {
         for(int j=0; j<8; j++) {
-            TVGSinglePoint * simple = new TVGSinglePoint(8.0 * i,35.0,70.0,32.0,25.0);
+            TVGTwoPoints * simple = new TVGTwoPoints(8.0 * i,35.0,70.0,32.0,25.0);
             core->setTVG(j,simple);
             delete simple;
         }
@@ -199,7 +199,7 @@ void CoreTest::coreTvgSetup()
 
     for(int i=0; i<10; i++) {
         for(int j=0; j<8; j++) {
-            TVGSinglePoint * simple = new TVGSinglePoint(65,35.0,70.0,8.0 * i,25.0);
+            TVGTwoPoints * simple = new TVGTwoPoints(65,35.0,70.0,8.0 * i,25.0);
             core->setTVG(j,simple);
             delete simple;
         }
@@ -208,7 +208,7 @@ void CoreTest::coreTvgSetup()
 
     for(int i=0; i<10; i++) {
         for(int j=0; j<8; j++) {
-            TVGSinglePoint * simple = new TVGSinglePoint(10.0 * j,20.0 * i,20.0 * i,30.0,25.0);
+            TVGTwoPoints * simple = new TVGTwoPoints(10.0 * j,20.0 * i,20.0 * i,30.0,25.0);
             core->setTVG(j,simple);
             delete simple;
         }

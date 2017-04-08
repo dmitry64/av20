@@ -3,7 +3,7 @@
 
 #include "device/definitions.h"
 #include "core.h"
-#include "device/tvg/tvgsinglepoint.h"
+#include "device/tvg/tvgtwopoints.h"
 
 
 static ModeManager * generateManager()
@@ -65,7 +65,7 @@ static CalibrationManager * generateCalibration()
         tx->setProg(PulserProg::Prog_6);
 
         chTemp->setIndex(i);
-        rx->setTvgCurve(new TVGSinglePoint(65.0,35.0,70.0,32.0,25.0));
+        rx->setTvgCurve(new TVGTwoPoints(65.0,35.0,70.0,32.0,25.0));
         rx->setPrismTime(0);
         std::vector<Gate> gates;
         Gate g1;

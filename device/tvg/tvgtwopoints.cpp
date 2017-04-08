@@ -1,37 +1,37 @@
-#include "tvgsinglepoint.h"
+#include "tvgtwopoints.h"
 #include "math.h"
 #include <QDebug>
 
-double TVGSinglePoint::getXOffset() const
+double TVGTwoPoints::getXOffset() const
 {
     return _xOffset;
 }
 
-double TVGSinglePoint::getYHeight() const
+double TVGTwoPoints::getYHeight() const
 {
     return _yHeight;
 }
 
-double TVGSinglePoint::getYBase() const
+double TVGTwoPoints::getYBase() const
 {
     return _yBase;
 }
 
-double TVGSinglePoint::getXWidth() const
+double TVGTwoPoints::getXWidth() const
 {
     return _xWidth;
 }
 
-double TVGSinglePoint::getCurve() const
+double TVGTwoPoints::getCurve() const
 {
     return _curve;
 }
 
-TVGSinglePoint::TVGSinglePoint(double base, double offset, double width, double height, double curve) : _yBase(base), _xOffset(offset), _yHeight(height), _xWidth(width), _curve(curve)
+TVGTwoPoints::TVGTwoPoints(double base, double offset, double width, double height, double curve) : _yBase(base), _xOffset(offset), _yHeight(height), _xWidth(width), _curve(curve)
 {
 
 }
-TVGSinglePoint::TVGSinglePoint(const TVGSinglePoint &original)
+TVGTwoPoints::TVGTwoPoints(const TVGTwoPoints &original)
 {
     _yBase = original._yBase;
     _xOffset = original._xOffset;
@@ -40,8 +40,8 @@ TVGSinglePoint::TVGSinglePoint(const TVGSinglePoint &original)
     _curve = original._curve;
 
 }
-
-TVGSinglePoint::TVGSinglePoint(const TVGSinglePoint *original)
+/*
+TVGTwoPoints::TVGTwoPoints(const TVGTwoPoints *original)
 {
     _yBase = original->_yBase;
     _xOffset = original->_xOffset;
@@ -49,18 +49,18 @@ TVGSinglePoint::TVGSinglePoint(const TVGSinglePoint *original)
     _xWidth = original->_xWidth;
     _curve = original->_curve;
 }
-
-TVGSinglePoint::~TVGSinglePoint()
+*/
+TVGTwoPoints::~TVGTwoPoints()
 {
 
 }
 
-TVGCurve *TVGSinglePoint::clone() const
+TVGCurve *TVGTwoPoints::clone() const
 {
-    return new TVGSinglePoint(this);
+    return new TVGTwoPoints(*this);
 }
 
-QDomElement TVGSinglePoint::generateXML(QDomDocument &doc)
+QDomElement TVGTwoPoints::generateXML(QDomDocument &doc)
 {
     QDomElement tvg = doc.createElement("tvg");
 
@@ -89,7 +89,7 @@ QDomElement TVGSinglePoint::generateXML(QDomDocument &doc)
     return tvg;
 }
 
-double TVGSinglePoint::getSample(double x) const
+double TVGTwoPoints::getSample(double x) const
 {
     double Xms = x * 200.0;
     if(Xms<=_xOffset) {
@@ -125,7 +125,7 @@ double TVGSinglePoint::getSample(double x) const
     }*/
 }
 
-std::vector<std::pair<double, double> > TVGSinglePoint::getReferencePoints()
+std::vector<std::pair<double, double> > TVGTwoPoints::getReferencePoints() const
 {
     std::vector<std::pair<double, double> > result;
     result.push_back(std::pair<double, double>(_xOffset/200.0,(_yBase - _yHeight)/80.0));
@@ -133,7 +133,7 @@ std::vector<std::pair<double, double> > TVGSinglePoint::getReferencePoints()
     return result;
 }
 
-TVGType TVGSinglePoint::getType() const
+TVGType TVGTwoPoints::getType() const
 {
-    return TVGType::TVGSimple;
+    return TVGType::TVG2PointType;
 }

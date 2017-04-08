@@ -5,7 +5,8 @@
 #include "common/definitions.h"
 #include "device/channelscalibration.h"
 #include "core.h"
-
+#include "device/tvg/tvgtwopoints.h"
+#include "controls/verticaltouchspinbox.h"
 namespace Ui
 {
 class TVGEditorWidget;
@@ -17,8 +18,14 @@ class TVGEditorWidget : public QWidget
 
     Core * _core;
     ChannelsInfo _info;
+    int _npointNumber;
+    std::vector<VerticalTouchSpinBox*> _npointsControls;
+    std::vector<std::pair<double, double> > _npointsValues;
 private:
     void showEvent( QShowEvent* event );
+    TVGTwoPoints * createTVGTwoPointsFromValues();
+    void initNPointButtons();
+    void updateNPointsTVG();
 public:
     explicit TVGEditorWidget(QWidget *parent = 0);
     ~TVGEditorWidget();
@@ -39,8 +46,15 @@ public slots:
     void onSingleWidthChanged(double value);
     void onSingleFormChanged(double value);
 
+    void onNPointNumberChanged(double value);
+    void onNPointValueChanged(double value);
+
+private slots:
+    void on_tabWidget_currentChanged(int index);
+
 private:
     Ui::TVGEditorWidget *ui;
+    void setupTwoPoint();
 };
 
 #endif // TVGEDITORWIDGET_H

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>889</width>
-    <height>503</height>
+    <width>1070</width>
+    <height>789</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -40,7 +40,7 @@
     </widget>
    </item>
    <item>
-    <layout class="QVBoxLayout" name="verticalLayout_2" stretch="2,0">
+    <layout class="QVBoxLayout" name="verticalLayout_2" stretch="9,0">
      <property name="topMargin">
       <number>0</number>
      </property>
@@ -84,8 +84,8 @@
            </property>
            <property name="iconSize">
             <size>
-             <width>24</width>
-             <height>24</height>
+             <width>32</width>
+             <height>32</height>
             </size>
            </property>
            <widget class="QWidget" name="singlePointTab">
@@ -97,25 +97,43 @@
              <string>Two points</string>
             </attribute>
             <layout class="QVBoxLayout" name="verticalLayout_6">
+             <property name="spacing">
+              <number>5</number>
+             </property>
              <property name="leftMargin">
-              <number>0</number>
+              <number>5</number>
              </property>
              <property name="topMargin">
               <number>5</number>
              </property>
              <property name="rightMargin">
-              <number>0</number>
+              <number>5</number>
              </property>
              <property name="bottomMargin">
               <number>5</number>
              </property>
              <item>
               <layout class="QHBoxLayout" name="horizontalLayout_4">
+               <property name="spacing">
+                <number>10</number>
+               </property>
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <property name="topMargin">
+                <number>0</number>
+               </property>
                <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
                 <number>0</number>
                </property>
                <item>
                 <layout class="QVBoxLayout" name="verticalLayout_4">
+                 <property name="spacing">
+                  <number>10</number>
+                 </property>
                  <item>
                   <widget class="TouchSpinBox" name="singleBase" native="true"/>
                  </item>
@@ -139,6 +157,9 @@
                </item>
                <item>
                 <layout class="QVBoxLayout" name="verticalLayout_5">
+                 <property name="spacing">
+                  <number>10</number>
+                 </property>
                  <item>
                   <widget class="TouchSpinBox" name="singleHeight" native="true"/>
                  </item>
@@ -162,6 +183,9 @@
                </item>
                <item>
                 <layout class="QVBoxLayout" name="verticalLayout_7">
+                 <property name="spacing">
+                  <number>10</number>
+                 </property>
                  <item>
                   <widget class="TouchSpinBox" name="singleForm" native="true"/>
                  </item>
@@ -192,6 +216,55 @@
             <attribute name="title">
              <string>Multi-point</string>
             </attribute>
+            <layout class="QHBoxLayout" name="horizontalLayout_6" stretch="0,0,3">
+             <property name="spacing">
+              <number>2</number>
+             </property>
+             <property name="leftMargin">
+              <number>5</number>
+             </property>
+             <property name="topMargin">
+              <number>5</number>
+             </property>
+             <property name="rightMargin">
+              <number>5</number>
+             </property>
+             <property name="bottomMargin">
+              <number>5</number>
+             </property>
+             <item>
+              <widget class="VerticalTouchSpinBox" name="npointNumber" native="true"/>
+             </item>
+             <item>
+              <widget class="Line" name="line">
+               <property name="frameShadow">
+                <enum>QFrame::Plain</enum>
+               </property>
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="npointLayout">
+               <property name="spacing">
+                <number>2</number>
+               </property>
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
+                <number>0</number>
+               </property>
+              </layout>
+             </item>
+            </layout>
            </widget>
            <widget class="QWidget" name="tab">
             <attribute name="icon">
@@ -245,6 +318,12 @@
    <class>ChannelSelector</class>
    <extends>QWidget</extends>
    <header>ui/channelselector.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>VerticalTouchSpinBox</class>
+   <extends>QWidget</extends>
+   <header>ui/controls/verticaltouchspinbox.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

@@ -88,7 +88,6 @@ SOURCES += core.cpp \
     device/channel/txchannel.cpp \
     device/channel/channel.cpp \
     device/tvg/tvgcurve.cpp \
-    device/tvg/tvgsinglepoint.cpp \
     device/tact/tacttable.cpp \
     device/modificators/prismtimemodificator.cpp \
     device/channelscalibration.cpp \
@@ -116,7 +115,10 @@ SOURCES += core.cpp \
     ui/keyboards/keyboard.cpp \
     ui/keyboards/englishkeyboard.cpp \
     ui/keyboards/numberkeypad.cpp \
-    ui/ascanplot.cpp
+    ui/ascanplot.cpp \
+    device/tvg/tvgnpoints.cpp \
+    device/tvg/tvgtwopoints.cpp \
+    ui/controls/verticaltouchspinbox.cpp
 #    tests/coretest.cpp
 
 HEADERS  += \
@@ -159,7 +161,6 @@ HEADERS  += \
     device/channel/txchannel.h \
     device/channel/channel.h \
     device/tvg/tvgcurve.h \
-    device/tvg/tvgsinglepoint.h \
     device/tact/tacttable.h \
     device/modificators/prismtimemodificator.h \
     device/channelscalibration.h \
@@ -190,7 +191,10 @@ HEADERS  += \
     ui/keyboards/englishkeyboard.h \
     ui/keyboards/numberkeypad.h \
     ui/ascanplot.h \
-    driver/emulator.h
+    driver/emulator.h \
+    device/tvg/tvgtwopoints.h \
+    device/tvg/tvgnpoints.h \
+    ui/controls/verticaltouchspinbox.h
 #    tests/coretest.h
 
 FORMS    += \
@@ -225,7 +229,8 @@ FORMS    += \
     ui/controls/calibrationbutton.ui \
     ui/keyboards/keyboard.ui \
     ui/keyboards/englishkeyboard.ui \
-    ui/keyboards/numberkeypad.ui
+    ui/keyboards/numberkeypad.ui \
+    ui/controls/verticaltouchspinbox.ui
 
 RESOURCES += \
     resources.qrc
