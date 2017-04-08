@@ -118,7 +118,8 @@ SOURCES += core.cpp \
     device/tvg/tvgnpoints.cpp \
     device/tvg/tvgtwopoints.cpp \
     ui/controls/verticaltouchspinbox.cpp \
-    driver/emulator.cpp
+    driver/emulator.cpp \
+    ui/splashscreen.cpp
 #    tests/coretest.cpp
 
 HEADERS  += \
@@ -194,7 +195,8 @@ HEADERS  += \
     driver/emulator.h \
     device/tvg/tvgtwopoints.h \
     device/tvg/tvgnpoints.h \
-    ui/controls/verticaltouchspinbox.h
+    ui/controls/verticaltouchspinbox.h \
+    ui/splashscreen.h
 #    tests/coretest.h
 
 FORMS    += \
@@ -230,7 +232,8 @@ FORMS    += \
     ui/keyboards/keyboard.ui \
     ui/keyboards/englishkeyboard.ui \
     ui/keyboards/numberkeypad.ui \
-    ui/controls/verticaltouchspinbox.ui
+    ui/controls/verticaltouchspinbox.ui \
+    ui/splashscreen.ui
 
 RESOURCES += \
     resources.qrc

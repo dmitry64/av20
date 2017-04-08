@@ -46,7 +46,7 @@ double TVGNPoints::getSample(double x) const
     }
     double val = m * (x - begin.operator*().first) + begin.operator*().second;
 
-    return val;
+    return std::min(std::max(val,0.0),1.0);
 }
 
 std::vector<std::pair<double, double> > TVGNPoints::getReferencePoints() const

@@ -102,13 +102,8 @@ double TVGTwoPoints::getSample(double x) const
     }
     else if (Xms>_xOffset && Xms<(_xOffset + _xWidth)) {
         double ti = (Xms - _xOffset);
-
         double b = 0.0001 * exp(_curve / 7.0);
-
         double ki = _yHeight * (1.0 - ti / _xWidth) - b * ti*(_xWidth - ti);
-        //double m = _yHeight / _xWidth;
-        //double inter =
-        //double ki = m * (Xms - _xOffset) + _yBase;
 
         return std::max(std::min(_yBase - ki,_yBase),std::max(0.0,(_yBase - _yHeight))) / 80.0;
     }
@@ -116,18 +111,6 @@ double TVGTwoPoints::getSample(double x) const
         return _yBase / 80.0;
     }
 
-    // return (sin(x * 30) + 1.0)/2.0;
-    /*double voff = (_yHeight == 0.0) ? 0.001 : _yHeight;
-    double hoff = (_xOffset == 0.0) ? 0.001 : _xOffset;
-
-    double m = voff / hoff;
-
-    return std::min(1.0, std::min(m * x,voff));*/
-    /*if(x>off) {
-        return y;
-    } else {
-        return std::min(x * 10,y);
-    }*/
 }
 
 std::vector<std::pair<double, double> > TVGTwoPoints::getReferencePoints() const

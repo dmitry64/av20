@@ -255,13 +255,13 @@ void TVGEditorWidget::onNPointNumberChanged(double value)
     int i = 0;
     for(auto it=_npointsValues.begin(); it!=_npointsValues.end(); it++) {
         if(i<value) {
-            values.push_back(std::pair<double,double>(i*step,it.operator*().second));
+            values.push_back(std::pair<double,double>(std::min(1.0,i*step),it.operator*().second));
             i++;
         }
     }
 
     while(i<value) {
-        values.push_back(std::pair<double,double>(i*step,0.6));
+        values.push_back(std::pair<double,double>(std::min(1.0,i*step),0.6));
         i++;
     }
     Q_ASSERT(i<=16);
@@ -275,7 +275,8 @@ void TVGEditorWidget::onNPointNumberChanged(double value)
 void TVGEditorWidget::onNPointValueChanged(double value)
 {
     VerticalTouchSpinBox * control = qobject_cast<VerticalTouchSpinBox*>(sender());
-    _npointsValues[control->index()].second = value/80.0;
+    Q_ASSERT(control);
+    _npointsValues[control->index()].second = std::max(std::min(value/80.0,1.0),0.0);
     updateNPointsTVG();
 }
 
@@ -285,6 +286,7 @@ void TVGEditorWidget::on_tabWidget_currentChanged(int index)
     switch(index) {
     case 0: {
         TVGCurve * curve = createTVGTwoPointsFromValues();
+        Q_ASSERT(curve);
         _core->setTVG(_info,curve);
         initCurve(curve);
         delete curve;
@@ -292,6 +294,7 @@ void TVGEditorWidget::on_tabWidget_currentChanged(int index)
     break;
     case 1: {
         TVGCurve * curve = createTVGNPointsFromValues();
+        Q_ASSERT(curve);
         _core->setTVG(_info,curve);
         initCurve(curve);
         delete curve;
