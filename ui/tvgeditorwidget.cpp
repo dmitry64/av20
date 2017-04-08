@@ -19,6 +19,13 @@ TVGTwoPoints *TVGEditorWidget::createTVGTwoPointsFromValues()
     return new TVGTwoPoints(base, offset, width, height, form);
 }
 
+TVGNPoints *TVGEditorWidget::createTVGNPointsFromValues()
+{
+    TVGNPoints * tvg = new TVGNPoints();
+    tvg->setPoints(_npointsValues);
+    return tvg;
+}
+
 void TVGEditorWidget::initNPointButtons()
 {
     for(auto it=_npointsControls.begin(); it!=_npointsControls.end(); it++) {
@@ -36,7 +43,7 @@ void TVGEditorWidget::initNPointButtons()
         control->setIndex(i);
         control->setMin(0);
         control->setMax(80);
-        control->setName("#"+QString::number(i));
+        control->setName(QString::number(qRound(point.first * 200.0))+"us");
         control->setStep(1);
         control->setValue((point.second)*80.0);
         control->setSuffix("dB");
@@ -101,8 +108,10 @@ TVGEditorWidget::TVGEditorWidget(QWidget *parent) :
     ui->npointNumber->setValue(0);
     ui->npointNumber->setStep(1);
 
-    connect(ui->npointNumber,SIGNAL(valueChanged(double)),this,SLOT(onNPointNumberChanged(double)));
+    _npointsValues.push_back(std::pair<double,double>(0.0,0.6));
+    _npointsValues.push_back(std::pair<double,double>(1.0,0.6));
 
+    connect(ui->npointNumber,SIGNAL(valueChanged(double)),this,SLOT(onNPointNumberChanged(double)));
     connect(ui->channelSelector,SIGNAL(channelChanged(ChannelsInfo)),this,SLOT(setChannel(ChannelsInfo)));
 }
 
@@ -157,12 +166,12 @@ void TVGEditorWidget::initCurve(const TVGCurve *curve)
     }
     break;
     case TVGType::TVGNPointType: {
-        ui->tabWidget->setCurrentIndex(1);
         const std::vector<std::pair<double,double> > & pairs = curve->getReferencePoints();
         ui->npointNumber->setValue(pairs.size());
         _npointNumber = pairs.size();
         _npointsValues = pairs;
         initNPointButtons();
+        ui->tabWidget->setCurrentIndex(1);
     }
     break;
     }
@@ -282,7 +291,7 @@ void TVGEditorWidget::on_tabWidget_currentChanged(int index)
     }
     break;
     case 1: {
-        TVGCurve * curve = new TVGNPoints();
+        TVGCurve * curve = createTVGNPointsFromValues();
         _core->setTVG(_info,curve);
         initCurve(curve);
         delete curve;

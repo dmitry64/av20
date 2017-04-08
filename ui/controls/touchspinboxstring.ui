@@ -62,7 +62,7 @@
      </property>
      <property name="icon">
       <iconset resource="../../resources.qrc">
-       <normaloff>:/icons/resources/icons/arrows_left.png</normaloff>:/icons/resources/icons/arrows_left.png</iconset>
+       <normaloff>:/icons/resources/icons/arrows_square_left.png</normaloff>:/icons/resources/icons/arrows_square_left.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -132,7 +132,7 @@
      </property>
      <property name="icon">
       <iconset resource="../../resources.qrc">
-       <normaloff>:/icons/resources/icons/arrows_right.png</normaloff>:/icons/resources/icons/arrows_right.png</iconset>
+       <normaloff>:/icons/resources/icons/arrows_square_right.png</normaloff>:/icons/resources/icons/arrows_square_right.png</iconset>
      </property>
      <property name="iconSize">
       <size>

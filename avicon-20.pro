@@ -109,7 +109,6 @@ SOURCES += core.cpp \
     device/modificators/removecalibrationmodificator.cpp \
     common/commonfunctions.cpp \
     driver/driverspi.cpp \
-    driver/fakespi.cpp \
     system/settings.cpp \
     system/operators.cpp \
     ui/keyboards/keyboard.cpp \
@@ -118,7 +117,8 @@ SOURCES += core.cpp \
     ui/ascanplot.cpp \
     device/tvg/tvgnpoints.cpp \
     device/tvg/tvgtwopoints.cpp \
-    ui/controls/verticaltouchspinbox.cpp
+    ui/controls/verticaltouchspinbox.cpp \
+    driver/emulator.cpp
 #    tests/coretest.cpp
 
 HEADERS  += \

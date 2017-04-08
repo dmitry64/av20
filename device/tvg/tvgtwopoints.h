@@ -11,6 +11,7 @@ class TVGTwoPoints : public TVGCurve
     double _xWidth;
     double _curve;
 public:
+    TVGTwoPoints();
     TVGTwoPoints(double base, double offset, double width, double height, double curve);
     explicit TVGTwoPoints(const TVGTwoPoints & original);
     ~TVGTwoPoints();
@@ -28,6 +29,7 @@ public:
     virtual TVGCurve * clone() const;
     QDomElement generateXML(QDomDocument &doc);
     TVGType getType() const;
+    void fillTVGFromXML(const QDomNode &tvg);
 };
 
 #endif // TVGTWOPOINTS_H

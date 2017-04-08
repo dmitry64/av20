@@ -88,11 +88,11 @@ unsigned char Emulator::cosinusFunc(TVG tvg, uint8_t chan, int i, int time)
     double x = (i + (cos(time/999.0) + sin(time/599.0)) * 120.14 + (chan-4.0) * 50.0 - 400.0) / 20.0 ;
     double res = 127.0;
     if(x!=0) {
-        res = std::max((((cos(x)) + 1)/2.0)*255.0 - 128.0*(sin(time/1000.0)+1)/2.0 ,0.0);
+        res = std::max((((cos(x)) + 1)/2.0)*255.0 - 128.0 ,0.0);
     }
 
     res *= getTVGSample( tvg._samples, i/4) / 127.0;
-    res *= 2.3;
+    res *= 2.0;
     int val = round(res);
     unsigned char sh = val;
 

@@ -27,6 +27,11 @@ double TVGTwoPoints::getCurve() const
     return _curve;
 }
 
+TVGTwoPoints::TVGTwoPoints()
+{
+
+}
+
 TVGTwoPoints::TVGTwoPoints(double base, double offset, double width, double height, double curve) : _yBase(base), _xOffset(offset), _yHeight(height), _xWidth(width), _curve(curve)
 {
 
@@ -136,4 +141,14 @@ std::vector<std::pair<double, double> > TVGTwoPoints::getReferencePoints() const
 TVGType TVGTwoPoints::getType() const
 {
     return TVGType::TVG2PointType;
+}
+
+void TVGTwoPoints::fillTVGFromXML(const QDomNode &tvg)
+{
+    QDomElement element = tvg.toElement();
+    _yBase = element.firstChildElement("yBase").text().toDouble();
+    _xOffset = element.firstChildElement("xOffset").text().toDouble();
+    _yHeight = element.firstChildElement("yHeight").text().toDouble();
+    _xWidth = element.firstChildElement("xWidth").text().toDouble();
+    _curve = element.firstChildElement("curve").text().toDouble();
 }

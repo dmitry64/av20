@@ -16,6 +16,7 @@ public:
     virtual std::vector< std::pair< double, double > > getReferencePoints() const = 0;
     virtual TVGType getType() const = 0;
     virtual QDomElement generateXML(QDomDocument &doc) = 0;
+    virtual void fillTVGFromXML(const QDomNode &tvg) = 0;
 };
 
 #endif // TVGCURVE_H

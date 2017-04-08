@@ -21,13 +21,13 @@ ChannelsView::ChannelsView(QWidget *parent) :
     ui->channelsWidget->setHorizontalHeaderItem(7,new QTableWidgetItem("Pulse\nprog"));
 
     ui->channelsWidget->setColumnWidth(0,70);
-    ui->channelsWidget->setColumnWidth(1,50);
-    ui->channelsWidget->setColumnWidth(2,50);
-    ui->channelsWidget->setColumnWidth(3,50);
-    ui->channelsWidget->setColumnWidth(4,120);
+    ui->channelsWidget->setColumnWidth(1,60);
+    ui->channelsWidget->setColumnWidth(2,60);
+    ui->channelsWidget->setColumnWidth(3,60);
+    ui->channelsWidget->setColumnWidth(4,150);
     ui->channelsWidget->setColumnWidth(5,60);
-    ui->channelsWidget->setColumnWidth(6,60);
-    ui->channelsWidget->setColumnWidth(7,60);
+    ui->channelsWidget->setColumnWidth(6,80);
+    ui->channelsWidget->setColumnWidth(7,80);
 
     ui->tactWidget->setColumnCount(5);
     ui->tactWidget->setHorizontalHeaderItem(0,new QTableWidgetItem("Index"));

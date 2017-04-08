@@ -80,7 +80,7 @@
          <item>
           <widget class="QTabWidget" name="tabWidget">
            <property name="currentIndex">
-            <number>0</number>
+            <number>1</number>
            </property>
            <property name="iconSize">
             <size>
@@ -216,7 +216,7 @@
             <attribute name="title">
              <string>Multi-point</string>
             </attribute>
-            <layout class="QHBoxLayout" name="horizontalLayout_6" stretch="0,0,3">
+            <layout class="QHBoxLayout" name="horizontalLayout_6" stretch="0,0,0,3,0">
              <property name="spacing">
               <number>2</number>
              </property>
@@ -246,23 +246,52 @@
               </widget>
              </item>
              <item>
+              <spacer name="horizontalSpacer">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
               <layout class="QHBoxLayout" name="npointLayout">
                <property name="spacing">
                 <number>2</number>
                </property>
+               <property name="sizeConstraint">
+                <enum>QLayout::SetDefaultConstraint</enum>
+               </property>
                <property name="leftMargin">
-                <number>0</number>
+                <number>2</number>
                </property>
                <property name="topMargin">
                 <number>0</number>
                </property>
                <property name="rightMargin">
-                <number>0</number>
+                <number>2</number>
                </property>
                <property name="bottomMargin">
                 <number>0</number>
                </property>
               </layout>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_2">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
              </item>
             </layout>
            </widget>

@@ -17,7 +17,7 @@ public:
     std::vector<std::pair<double, double> > getReferencePoints() const;
     TVGType getType() const;
     QDomElement generateXML(QDomDocument &doc);
-
+    void fillTVGFromXML(const QDomNode &tvg);
 };
 
 #endif // TVGNPOINTS_H

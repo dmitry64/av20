@@ -16,6 +16,7 @@ TVGNPoints::TVGNPoints()
 TVGNPoints::TVGNPoints(const TVGNPoints & original)
 {
     _points = original._points;
+    Q_ASSERT(_points.size()>1);
 }
 
 TVGCurve *TVGNPoints::clone() const
@@ -25,8 +26,9 @@ TVGCurve *TVGNPoints::clone() const
 
 double TVGNPoints::getSample(double x) const
 {
+    Q_ASSERT(_points.size()>1);
     auto begin = _points.begin();
-    auto end = _points.end();
+    auto end = --(_points.end());
     for(auto it=_points.begin(); it!=_points.end(); it++) {
         if(it.operator*().first>=x) {
             end = it;
@@ -34,7 +36,14 @@ double TVGNPoints::getSample(double x) const
             break;
         }
     }
-    double m = (end.operator*().second - begin.operator*().second) / (end.operator*().first - begin.operator*().first);
+    double deltax = (end.operator*().first - begin.operator*().first);
+    double m;
+    if(deltax!=0.0) {
+        m = (end.operator*().second - begin.operator*().second) / deltax;
+    }
+    else {
+        m = 0;
+    }
     double val = m * (x - begin.operator*().first) + begin.operator*().second;
 
     return val;
@@ -52,6 +61,7 @@ TVGType TVGNPoints::getType() const
 
 QDomElement TVGNPoints::generateXML(QDomDocument &doc)
 {
+    Q_ASSERT(_points.size()>1);
     QDomElement tvg = doc.createElement("tvg");
 
     tvg.setAttribute("type","npoint");
@@ -71,4 +81,19 @@ QDomElement TVGNPoints::generateXML(QDomDocument &doc)
     tvg.appendChild(points);
 
     return tvg;
+}
+
+void TVGNPoints::fillTVGFromXML(const QDomNode &tvg)
+{
+    _points.clear();
+    QDomNode points = tvg.firstChildElement("points");
+    auto pointsList = points.childNodes();
+    for(int i=0; i<pointsList.size(); i++) {
+        QDomNode point = pointsList.at(i);
+        QString xStr = point.firstChildElement("x").text();
+        QString yStr = point.firstChildElement("y").text();
+        std::pair<double,double> pair(xStr.toDouble(),yStr.toDouble());
+        _points.push_back(pair);
+    }
+    Q_ASSERT(_points.size()>1);
 }

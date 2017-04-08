@@ -24,6 +24,7 @@ class TVGEditorWidget : public QWidget
 private:
     void showEvent( QShowEvent* event );
     TVGTwoPoints * createTVGTwoPointsFromValues();
+    TVGNPoints * createTVGNPointsFromValues();
     void initNPointButtons();
     void updateNPointsTVG();
 public:
