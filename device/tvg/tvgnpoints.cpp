@@ -7,8 +7,8 @@ void TVGNPoints::setPoints(const std::vector<std::pair<double, double> > &points
 
 TVGNPoints::TVGNPoints()
 {
-    for(int i=0; i<=10; i++) {
-        std::pair<double,double> point(i/10.0,(20+i) / 40.0);
+    for(int i=0; i<2; i++) {
+        std::pair<double,double> point(i,0.6);
         _points.push_back(point);
     }
 }
