@@ -10,8 +10,9 @@ void System::shutdown()
 {
     logEvent("System","Shutdown");
     if(DEVICE_BUILD) {
+        logEvent("System","Sending shutdown command");
         QProcess *myProcess = new QProcess(this);
-        myProcess->start("shutdown -h -n -t 3 now");
+        myProcess->start("shutdown -h -n -t 1 now");
     }
 }
 

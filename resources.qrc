@@ -138,4 +138,7 @@
         <file>resources/icons/basic_chronometer.png</file>
         <file>resources/icons/Temperature-icon.png</file>
     </qresource>
+    <qresource prefix="/images">
+        <file>resources/images/radioav2.png</file>
+    </qresource>
 </RCC>
