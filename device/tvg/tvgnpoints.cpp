@@ -27,6 +27,10 @@ TVGCurve *TVGNPoints::clone() const
 double TVGNPoints::getSample(double x) const
 {
     Q_ASSERT(_points.size()>1);
+    if(x==0.0) {
+        return _points.begin().operator*().second;
+    }
+
     auto begin = _points.begin();
     auto end = --(_points.end());
     for(auto it=_points.begin(); it!=_points.end(); it++) {

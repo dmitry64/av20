@@ -53,7 +53,9 @@ void TouchSpinBoxString::setValues(const std::vector<QString> &values)
 void TouchSpinBoxString::setName(const QString &name)
 {
     _name = name;
+    ui->nameLabel->setText(name);
     sync();
+    update();
 }
 
 void TouchSpinBoxString::setIndex(size_t index)

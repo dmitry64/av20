@@ -160,10 +160,10 @@ void ChannelsView::init(const ChannelsCalibration & calibrationsSnapshot, const 
             item = new QTableWidgetItem(QString((txchan.doubleMode()) ? "yes" : "no"));
             item->setTextAlignment( Qt::AlignHCenter | Qt::AlignCenter );
             ui->channelsWidget->setItem(channelsRow,5,item);
-            item = new QTableWidgetItem(QString(FreqStrings[txchan.freq()].c_str()) + QString(" MHz"));
+            item = new QTableWidgetItem(QString(FreqStrings[txchan.freq()]));
             item->setTextAlignment( Qt::AlignHCenter | Qt::AlignCenter );
             ui->channelsWidget->setItem(channelsRow,6,item);
-            item = new QTableWidgetItem(QString(ProgStrings[txchan.prog()].c_str()));
+            item = new QTableWidgetItem(ProgStrings[txchan.prog()]);
             item->setTextAlignment( Qt::AlignHCenter | Qt::AlignCenter );
             ui->channelsWidget->setItem(channelsRow,7,item);
 

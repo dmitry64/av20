@@ -147,15 +147,15 @@ enum PulserFreq {
     Freq_10_0_MHz = 7
 };
 
-static std::string FreqStrings[8] = {
-    "1.0",
-    "1.25",
-    "2.0",
-    "2.5",
-    "4.0",
-    "5.0",
-    "8.0",
-    "10.0"
+static std::vector<QString> FreqStrings = {
+    "1.0 MHz",
+    "1.25 MHz",
+    "2.0 MHz",
+    "2.5 MHz",
+    "4.0 MHz",
+    "5.0 MHz",
+    "8.0 MHz",
+    "10.0 MHz"
 };
 
 enum PulserProg {
@@ -169,7 +169,7 @@ enum PulserProg {
     Prog_8 = 0b0111
 };
 
-static std::string ProgStrings[8] = {
+static std::vector<QString> ProgStrings  = {
     "Prog 1",
     "Prog 2",
     "Prog 3",

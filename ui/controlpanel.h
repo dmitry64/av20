@@ -8,6 +8,7 @@
 #include "ui/controls/touchspinboxstring.h"
 #include "ui/controls/gatecontroller.h"
 #include "ui/controls/addgatebutton.h"
+#include "common/definitions.h"
 
 namespace Ui
 {
@@ -21,8 +22,8 @@ class ControlPanel : public QWidget
     Core * _core;
 
     TouchSpinBox * _prismTimeSpinbox;
-    //TouchSpinBoxString * _frequencySpinbox;
-    //TouchSpinBoxString * _progSpinbox;
+    TouchSpinBoxString * _frequencySpinbox;
+    TouchSpinBoxString * _progSpinbox;
     TouchSpinBox * _markerPositionSpinbox;
     std::vector<GateController*> _gates;
     QVBoxLayout * _gatesLayout;

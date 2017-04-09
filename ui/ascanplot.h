@@ -7,6 +7,7 @@
 #include <QBrush>
 #include "device/tvg/tvgcurve.h"
 #include "device/channel/channel.h"
+#include <vector>
 
 class AScanPlot : public QWidget
 {
@@ -15,7 +16,7 @@ class AScanPlot : public QWidget
     QPen _ascanPen;
     QBrush _ascanBrush;
     QPen _tvgCurvePen;
-    TVGCurve * _tvgCurve;
+    //TVGCurve * _tvgCurve;
     uint16_t _scale;
 
     QColor _bgColor;
@@ -27,6 +28,8 @@ class AScanPlot : public QWidget
 
     std::vector<QPoint> _polygon;
     std::vector<uint16_t> _samples;
+    std::vector<double> _tvgSamples;
+    std::vector<std::pair<double,double> > _tvgReferencePoints;
 
     QElapsedTimer _fpsTimer;
 

@@ -27,6 +27,18 @@ ControlPanel::ControlPanel(QWidget *parent) :
     _markerPositionSpinbox->hide();
     ui->scrollLayout->addWidget(_markerPositionSpinbox);
 
+    _frequencySpinbox = new TouchSpinBoxString();
+    _frequencySpinbox->setValues(FreqStrings);
+    _frequencySpinbox->setName("Frequency");
+    ui->scrollLayout->addWidget(_frequencySpinbox);
+
+    _progSpinbox = new TouchSpinBoxString();
+    _progSpinbox->setValues(ProgStrings);
+    _progSpinbox->setName("Program");
+    ui->scrollLayout->addWidget(_progSpinbox);
+
+
+
     _gateCounter = 0;
     _gatesLayout = new QVBoxLayout();
     ui->scrollLayout->addLayout(_gatesLayout);

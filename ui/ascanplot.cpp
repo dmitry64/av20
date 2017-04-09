@@ -3,18 +3,24 @@
 
 void AScanPlot::setTvgCurve(const TVGCurve *curve)
 {
-    if(_tvgCurve !=0) {
-        delete _tvgCurve;
+    /* if(_tvgCurve !=0) {
+         delete _tvgCurve;
+     }
+     _tvgCurve = curve->clone();*/
+    _tvgSamples.clear();
+    for(int i=0; i<200; i++) {
+        double val = curve->getSample(i/200.0);
+        _tvgSamples.push_back(val);
     }
-    _tvgCurve = curve->clone();
+    _tvgReferencePoints = curve->getReferencePoints();
 }
 
 void AScanPlot::reset()
 {
-    if(_tvgCurve !=0) {
-        delete _tvgCurve;
-    }
-    _tvgCurve = 0;
+    /* if(_tvgCurve !=0) {
+         delete _tvgCurve;
+     }
+     _tvgCurve = 0;*/
 }
 
 void AScanPlot::setBgColor(const QColor &bgColor)
@@ -58,7 +64,7 @@ AScanPlot::AScanPlot(QWidget *parent) : QWidget(parent)
     _ascanPen = QPen(QColor(10,10,70), 1);
     _tvgCurvePen = QPen(QColor(250,10,10), 2);
     _tvgCurvePen.setCapStyle(Qt::RoundCap);
-    _tvgCurve = 0;
+    //_tvgCurve = 0;
     _markerPos = 0;
     _markerValue = 0;
     _bgColor = this->palette().color(QPalette::Window);
@@ -69,9 +75,9 @@ AScanPlot::AScanPlot(QWidget *parent) : QWidget(parent)
 
 AScanPlot::~AScanPlot()
 {
-    if(_tvgCurve !=0) {
+    /*if(_tvgCurve !=0) {
         delete _tvgCurve;
-    }
+    }*/
 }
 
 void AScanPlot::drawAscan(QPainter &painter, int width, int height)
@@ -110,23 +116,22 @@ void AScanPlot::drawAscan(QPainter &painter, int width, int height)
 
 void AScanPlot::drawTvgCurve(QPainter &painter,int width, int height)
 {
-    if(_tvgCurve!=0) {
-        int scale = 200;
-        double tvgStep = width/static_cast<double>(scale);
-        QPoint tvgStart(0, height - _tvgCurve->getSample(0)*height);
+    if(!_tvgSamples.empty()) {
+        double tvgStep = width/200.0;
+        QPoint tvgStart(0, height - _tvgSamples.at(0) *height);
+        int i=0;
         painter.setPen(_tvgCurvePen);
-        for(uint8_t i=0; i<scale; i++) {
+        for(auto it=_tvgSamples.begin(); it!=_tvgSamples.end(); it++) {
             int x = i*tvgStep;
-            int y = height - _tvgCurve->getSample(static_cast<double>(i) / scale) * (height) ;
+            int y = height - it.operator*() * (height) ;
             QPoint tvgNext = QPoint(x,y);
             painter.drawLine(tvgStart,tvgNext);
             tvgStart = tvgNext;
+            i++;
         }
-
-        auto referencePoints = _tvgCurve->getReferencePoints();
         painter.setPen(Qt::black);
         painter.setBrush(QBrush(Qt::green));
-        for(auto it=referencePoints.begin(); it!=referencePoints.end(); it++) {
+        for(auto it=_tvgReferencePoints.begin(); it!=_tvgReferencePoints.end(); it++) {
             const std::pair<double,double> & pair = it.operator*();
             QPoint p(pair.first * width ,height - pair.second * (height));
             painter.drawEllipse(QRect(p-QPoint(3,3),p+QPoint(3,3)));
@@ -172,7 +177,7 @@ void AScanPlot::drawFps(QPainter &painter, int posx, int posy)
 {
     const quint64 time = _fpsTimer.nsecsElapsed();
     _fpsTimer.start();
-    double fps = 1/(static_cast<double>(time) / 100000000.0);
+    double fps = 1/(static_cast<double>(time) / 1000000000.0);
     painter.drawText(QPoint(posx, posy),"fps: " + QString::number(fps,'f', 3));
 }
 
