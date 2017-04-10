@@ -50,7 +50,7 @@ ControlPanel::ControlPanel(QWidget *parent) :
 
     _prevGatesCount = 0;
 
-    //_gateCounter = 0;
+    _oldChannel = 0;
     _info._channel = 0;
     _info._displayChannel = 0;
 }
@@ -77,8 +77,33 @@ void ControlPanel::setChannel(ChannelsInfo info)
 }
 
 
+void ControlPanel::fillGates(const std::vector<Gate>& gates)
+{
+    _prevGatesCount = gates.size();
+
+    for(size_t i=0; i<_gates.size(); i++) {
+        _gatesLayout->removeWidget(_gates[i]);
+        disconnect(_gates[i],SIGNAL(deleteGate(Gate,GateController*)),this,SLOT(onDeleteGate(Gate,GateController*)));
+        disconnect(_gates[i],SIGNAL(gateChanged(Gate)),this,SLOT(onGateChanged(Gate)));
+        delete _gates[i];
+    }
+    _gates.clear();
+
+
+    for(auto it=gates.begin(); it!=gates.end(); it++) {
+        GateController * gateController = new GateController();
+        gateController->setGate(it.operator*());
+        _gates.push_back(gateController);
+        _gatesLayout->addWidget(gateController);
+        connect(gateController,SIGNAL(deleteGate(Gate,GateController*)),this,SLOT(onDeleteGate(Gate,GateController*)));
+        connect(gateController,SIGNAL(gateChanged(Gate)),this,SLOT(onGateChanged(Gate)));
+    }
+    update();
+}
+
 void ControlPanel::init(const Channel & channel)
 {
+    qDebug() << "init"<< channel.index() << _info._channel;
     //const auto & channel = calibration.getChannel(_info._channel);
     _prismTimeSpinbox->setValue(channel.getDisplayChannels()[_info._displayChannel].getRx().getPrismTime());
 
@@ -86,27 +111,9 @@ void ControlPanel::init(const Channel & channel)
     const DisplayChannel & dc = dispChannels.at(_info._displayChannel);
 
     const std::vector<Gate> & gates = dc.gates();
-    if(_prevGatesCount!=gates.size()) {
-        _prevGatesCount = gates.size();
-
-        for(size_t i=0; i<_gates.size(); i++) {
-            _gatesLayout->removeWidget(_gates[i]);
-            disconnect(_gates[i],SIGNAL(deleteGate(Gate,GateController*)),this,SLOT(onDeleteGate(Gate,GateController*)));
-            disconnect(_gates[i],SIGNAL(gateChanged(Gate)),this,SLOT(onGateChanged(Gate)));
-            delete _gates[i];
-        }
-        _gates.clear();
-
-
-        for(auto it=gates.begin(); it!=gates.end(); it++) {
-            GateController * gateController = new GateController();
-            gateController->setGate(it.operator*());
-            _gates.push_back(gateController);
-            _gatesLayout->addWidget(gateController);
-            connect(gateController,SIGNAL(deleteGate(Gate,GateController*)),this,SLOT(onDeleteGate(Gate,GateController*)));
-            connect(gateController,SIGNAL(gateChanged(Gate)),this,SLOT(onGateChanged(Gate)));
-        }
-        update();
+    if(_prevGatesCount!=gates.size() || _oldChannel!=channel.index()) {
+        _oldChannel = channel.index();
+        fillGates(gates);
     }
 }
 

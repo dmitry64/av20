@@ -29,6 +29,7 @@ class ControlPanel : public QWidget
     QVBoxLayout * _gatesLayout;
     AddGateButton * _addGateButton;
     size_t _prevGatesCount;
+    ChannelID _oldChannel;
     ChannelsInfo _info;
 
 public:
@@ -52,6 +53,7 @@ public slots:
 
 private:
     Ui::ControlPanel *ui;
+    void fillGates(const std::vector<Gate>& gates);
 };
 
 #endif // CONTROLPANEL_H
