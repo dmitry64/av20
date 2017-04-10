@@ -3,6 +3,7 @@
 #include <QTableWidgetItem>
 #include <QDebug>
 #include <QScrollBar>
+#include "controls/widescrollbar.h"
 
 ChannelsView::ChannelsView(QWidget *parent) :
     QWidget(parent),
@@ -20,7 +21,7 @@ ChannelsView::ChannelsView(QWidget *parent) :
     ui->channelsWidget->setHorizontalHeaderItem(6,new QTableWidgetItem("Freqency"));
     ui->channelsWidget->setHorizontalHeaderItem(7,new QTableWidgetItem("Pulse\nprog"));
 
-    ui->channelsWidget->setColumnWidth(0,70);
+    ui->channelsWidget->setColumnWidth(0,90);
     ui->channelsWidget->setColumnWidth(1,60);
     ui->channelsWidget->setColumnWidth(2,60);
     ui->channelsWidget->setColumnWidth(3,60);
@@ -28,6 +29,14 @@ ChannelsView::ChannelsView(QWidget *parent) :
     ui->channelsWidget->setColumnWidth(5,60);
     ui->channelsWidget->setColumnWidth(6,80);
     ui->channelsWidget->setColumnWidth(7,80);
+
+    WideScrollBar * sb = new WideScrollBar();
+
+    ui->channelsWidget->setVerticalScrollBar(sb);
+
+    ui->channelsWidget->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+
+
 
     ui->tactWidget->setColumnCount(5);
     ui->tactWidget->setHorizontalHeaderItem(0,new QTableWidgetItem("Index"));
@@ -160,7 +169,7 @@ void ChannelsView::init(const ChannelsCalibration & calibrationsSnapshot, const 
             item = new QTableWidgetItem(QString((txchan.doubleMode()) ? "yes" : "no"));
             item->setTextAlignment( Qt::AlignHCenter | Qt::AlignCenter );
             ui->channelsWidget->setItem(channelsRow,5,item);
-            item = new QTableWidgetItem(QString(FreqStrings[txchan.freq()]));
+            item = new QTableWidgetItem(FreqStrings[txchan.freq()]);
             item->setTextAlignment( Qt::AlignHCenter | Qt::AlignCenter );
             ui->channelsWidget->setItem(channelsRow,6,item);
             item = new QTableWidgetItem(ProgStrings[txchan.prog()]);

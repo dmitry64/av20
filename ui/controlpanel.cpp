@@ -1,5 +1,6 @@
 #include "controlpanel.h"
 #include "ui_controlpanel.h"
+#include "controls/widescrollbar.h"
 
 ControlPanel::ControlPanel(QWidget *parent) :
     QWidget(parent),
@@ -46,6 +47,9 @@ ControlPanel::ControlPanel(QWidget *parent) :
     _addGateButton = new AddGateButton();
     ui->scrollLayout->addWidget(_addGateButton);
     connect(_addGateButton, SIGNAL(addGate()),this,SLOT(onAddGate()));
+
+    WideScrollBar * sb = new WideScrollBar();
+    ui->scrollArea->setVerticalScrollBar(sb);
 
     _info._channel = 0;
     _info._displayChannel = 0;

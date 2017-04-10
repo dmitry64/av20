@@ -5,6 +5,7 @@
 
 #include "common/definitions.h"
 #include "common/commonfunctions.h"
+#include "ui/dialogs/deletedialog.h"
 
 namespace Ui
 {
@@ -16,6 +17,7 @@ class GateController : public QWidget
     Q_OBJECT
 
     Gate _gate;
+    DeleteDialog * _dialog;
 private:
     void updateGate();
 public:
@@ -30,6 +32,9 @@ private slots:
     void onStartChanged(double value);
     void onFinishChanged(double value);
     void onLevelChanged(double value);
+
+    void onDeleteGate();
+
 
 signals:
     void deleteGate(Gate gate, GateController * controller);

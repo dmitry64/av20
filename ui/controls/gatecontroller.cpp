@@ -9,7 +9,7 @@ void GateController::updateGate()
     ui->gateLevel->setValue(_gate._level);
     ui->gateButton->setText("Gate: "+QString::number(_gate._start)+"-"+QString::number(_gate._finish)+"\n"+
                             "Level: "+QString::number(_gate._level));
-    ui->gateIcon->setColor(getColorByLevel(_gate._level));//QColor( _gate._level ,255 - _gate._level, 0 ));
+    ui->gateIcon->setColor(getColorByLevel(_gate._level));
     update();
 }
 
@@ -63,7 +63,10 @@ void GateController::on_gateButton_released()
 
 void GateController::on_deleteButton_released()
 {
-    emit deleteGate(_gate,this);
+    _dialog = new DeleteDialog();
+    _dialog->open();
+    connect(_dialog,SIGNAL(doDelete()),this,SLOT(onDeleteGate()));
+    connect(_dialog,SIGNAL(doCancel()),_dialog,SLOT(deleteLater()));
 }
 
 void GateController::onStartChanged(double value)
@@ -85,4 +88,10 @@ void GateController::onLevelChanged(double value)
     _gate._level = value;
     emit gateChanged(_gate);
     updateGate();
+}
+
+void GateController::onDeleteGate()
+{
+    _dialog->deleteLater();
+    emit deleteGate(_gate,this);
 }

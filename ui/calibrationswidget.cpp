@@ -1,11 +1,16 @@
 #include "calibrationswidget.h"
 #include "ui_calibrationswidget.h"
+#include "controls/widescrollbar.h"
 
 CalibrationsWidget::CalibrationsWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::CalibrationsWidget)
 {
     ui->setupUi(this);
+    WideScrollBar * sb = new WideScrollBar();
+
+    ui->scrollArea->setVerticalScrollBar(sb);
+    ui->scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
     _keyboard = 0;
 }
 
