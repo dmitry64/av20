@@ -48,6 +48,8 @@ ControlPanel::ControlPanel(QWidget *parent) :
     WideScrollBar * sb = new WideScrollBar();
     ui->scrollArea->setVerticalScrollBar(sb);
 
+    _prevGatesCount = 0;
+
     //_gateCounter = 0;
     _info._channel = 0;
     _info._displayChannel = 0;
@@ -80,27 +82,32 @@ void ControlPanel::init(const Channel & channel)
     //const auto & channel = calibration.getChannel(_info._channel);
     _prismTimeSpinbox->setValue(channel.getDisplayChannels()[_info._displayChannel].getRx().getPrismTime());
 
-    for(size_t i=0; i<_gates.size(); i++) {
-        _gatesLayout->removeWidget(_gates[i]);
-        disconnect(_gates[i],SIGNAL(deleteGate(Gate,GateController*)),this,SLOT(onDeleteGate(Gate,GateController*)));
-        disconnect(_gates[i],SIGNAL(gateChanged(Gate)),this,SLOT(onGateChanged(Gate)));
-        delete _gates[i];
-    }
-    _gates.clear();
-
     const auto & dispChannels = channel.getDisplayChannels();
     const DisplayChannel & dc = dispChannels.at(_info._displayChannel);
 
     const std::vector<Gate> & gates = dc.gates();
-    for(auto it=gates.begin(); it!=gates.end(); it++) {
-        GateController * gateController = new GateController();
-        gateController->setGate(it.operator*());
-        _gates.push_back(gateController);
-        _gatesLayout->addWidget(gateController);
-        connect(gateController,SIGNAL(deleteGate(Gate,GateController*)),this,SLOT(onDeleteGate(Gate,GateController*)));
-        connect(gateController,SIGNAL(gateChanged(Gate)),this,SLOT(onGateChanged(Gate)));
+    if(_prevGatesCount!=gates.size()) {
+        _prevGatesCount = gates.size();
+
+        for(size_t i=0; i<_gates.size(); i++) {
+            _gatesLayout->removeWidget(_gates[i]);
+            disconnect(_gates[i],SIGNAL(deleteGate(Gate,GateController*)),this,SLOT(onDeleteGate(Gate,GateController*)));
+            disconnect(_gates[i],SIGNAL(gateChanged(Gate)),this,SLOT(onGateChanged(Gate)));
+            delete _gates[i];
+        }
+        _gates.clear();
+
+
+        for(auto it=gates.begin(); it!=gates.end(); it++) {
+            GateController * gateController = new GateController();
+            gateController->setGate(it.operator*());
+            _gates.push_back(gateController);
+            _gatesLayout->addWidget(gateController);
+            connect(gateController,SIGNAL(deleteGate(Gate,GateController*)),this,SLOT(onDeleteGate(Gate,GateController*)));
+            connect(gateController,SIGNAL(gateChanged(Gate)),this,SLOT(onGateChanged(Gate)));
+        }
+        update();
     }
-    update();
 }
 
 void ControlPanel::onGateChanged(Gate gate)
@@ -123,13 +130,6 @@ void ControlPanel::onAddGate()
     gate._level = 50;
     gate._id = 0;
     _core->addGate(_info,gate);
-    //    GateController * gateController = new GateController();
-    //    gateController->setGate(gate);
-    //    _gates.push_back(gateController);
-    //    _gatesLayout->addWidget(gateController);
-    //    connect(gateController,SIGNAL(deleteGate(Gate,GateController*)),this,SLOT(onDeleteGate(Gate,GateController*)));
-    //    connect(gateController,SIGNAL(gateChanged(Gate)),this,SLOT(onGateChanged(Gate)));
-    //    update();
 }
 
 void ControlPanel::onPrismTimeChanged(double value)

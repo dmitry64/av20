@@ -28,7 +28,7 @@ class ControlPanel : public QWidget
     std::vector<GateController*> _gates;
     QVBoxLayout * _gatesLayout;
     AddGateButton * _addGateButton;
-    // uint8_t _gateCounter;
+    size_t _prevGatesCount;
     ChannelsInfo _info;
 
 public:
