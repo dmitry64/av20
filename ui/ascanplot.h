@@ -45,7 +45,7 @@ private:
 public:
     explicit AScanPlot(QWidget *parent = 0);
     ~AScanPlot();
-    void onAScan(const AScanDrawData *scan);
+    void onAScan(const AScanDrawData &scan);
     void setTvgCurve(const TVGCurve *curve);
     void reset();
 

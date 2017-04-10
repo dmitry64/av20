@@ -40,7 +40,7 @@ public:
     Channel channelData() const;
 
 public slots:
-    void onBScan(BScanDrawData * scan);
+    void onBScan(const BScanDrawData &scan);
     void onChannelChanged(Channel channel);
 private:
     Ui::BScanWidget *ui;

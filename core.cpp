@@ -124,8 +124,10 @@ void Core::work()
     while(_active) {
         //timer.start();
         searchWork();
+
+
         //qDebug() << timer.nsecsElapsed()/1000 << "ms";
-        //QThread::msleep(2);
+        //QThread::msleep(20);
     }
     finish();
 }
@@ -492,21 +494,21 @@ void Core::applyCurrentCalibrationToDevice()
 
 void Core::addGate(const ChannelsInfo & info, const Gate & gate)
 {
-    logEvent("Core","Add gate to channel #" + QString::number(info._channel));
+    logEvent("Core","Add gate to channel #" + QString::number(info._channel) + " Gate id="+QString::number(gate._id));
     AddGateModificator * mod = new AddGateModificator(info,gate);
     addModificator(mod);
 }
 
 void Core::modifyGate(const ChannelsInfo & info,const Gate & gate)
 {
-    logEvent("Core","Modify gate to channel #" + QString::number(info._channel));
+    logEvent("Core","Modify gate on channel #" + QString::number(info._channel) + " Gate id="+QString::number(gate._id));
     GateModificator * mod = new GateModificator(info,gate);
     addModificator(mod);
 }
 
 void Core::removeGate(const ChannelsInfo & info,const uint8_t id)
 {
-    logEvent("Core","Remove gate to channel #" + QString::number(info._channel));
+    logEvent("Core","Remove gate on channel #" + QString::number(info._channel) + " Gate id="+QString::number(id));
     RemoveGateModificator * mod = new RemoveGateModificator(info,id);
     addModificator(mod);
 }

@@ -28,7 +28,7 @@ class ControlPanel : public QWidget
     std::vector<GateController*> _gates;
     QVBoxLayout * _gatesLayout;
     AddGateButton * _addGateButton;
-    uint8_t _gateCounter;
+    // uint8_t _gateCounter;
     ChannelsInfo _info;
 
 public:
@@ -36,7 +36,7 @@ public:
     ~ControlPanel();
     void setCore(Core * ptr);
     void setChannel(ChannelsInfo info);
-    void init(const ChannelsCalibration &calibration);
+    void init(const Channel & channel);
 
 private:
     void showEvent(QShowEvent *event);

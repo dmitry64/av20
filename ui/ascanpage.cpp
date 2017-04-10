@@ -14,7 +14,9 @@ AScanPage::AScanPage(QWidget *parent) :
 {
     ui->setupUi(this);
     connect(ui->channelSelector,SIGNAL(channelChanged(ChannelsInfo)),this,SLOT(setChannel(ChannelsInfo)));
-    ui->aScanInfoWidget->hide();
+    _current._channel = 0;
+    _current._displayChannel = 0;
+    //ui->aScanInfoWidget->hide();
 }
 
 AScanPage::~AScanPage()
@@ -53,9 +55,10 @@ void AScanPage::init(ChannelsInfo info,const ChannelsCalibration & snapshot)
     }
 
     ui->bscanWidget->setChannelsInfo(infoList);
-    ui->bscanWidget->setActiveChannelData(snapshot.getChannel(info._channel),info);
+    const Channel & ch = snapshot.getChannel(info._channel);
+    ui->bscanWidget->setActiveChannelData(ch,info);
     ui->controlPanel->setChannel(info);
-    ui->controlPanel->init(snapshot);
+    ui->controlPanel->init(ch);
 
     ui->channelSelector->init(snapshot);
     update();
@@ -78,23 +81,35 @@ void AScanPage::switchToSelectedChannel()
 
 void AScanPage::onDisplayPackage(QSharedPointer<DisplayPackage> package)
 {
-    ui->ascanWidget->onAScan(&(package->_ascan));
-    ui->bscanWidget->onBScan(&(package->_bscan));
+    const auto & bscan = package->_bscan;
+    ui->bscanWidget->onBScan(bscan);
+    if(package->_ascan._channel==_current._channel) {
+        const auto & ascan = package->_ascan;
+        ui->ascanWidget->onAScan(ascan);
+        int marker = qRound((static_cast<double>(ascan._markerPos)/800.0) * 200.0);
+        ui->aScanInfoWidget->setHValue(marker);
+    }
 }
 
 void AScanPage::onChannelChanged(Channel channel)
 {
-    ui->ascanWidget->onChannelChanged(channel);
     ui->bscanWidget->onChannelChanged(channel);
+    if(channel.index()==_current._channel) {
+        ui->ascanWidget->onChannelChanged(channel);
+    }
+    ui->controlPanel->init(channel);
 }
 
 void AScanPage::setChannel(ChannelsInfo info)
 {
+    _current = info;
     const ChannelsCalibration & snapshot = _core->getCalibrationsSnapshot();
     const Channel & chan = snapshot.getChannel(info._channel);
+
     _core->switchChannel(info);
     ui->ascanWidget->setChannelInfo(chan,info._displayChannel);
     ui->bscanWidget->setActiveChannelData(snapshot.getChannel(info._channel),info);
+    ui->aScanInfoWidget->setChannel(chan, _current._displayChannel);
     ui->controlPanel->setChannel(info);
-    ui->controlPanel->init(snapshot);
+    ui->controlPanel->init(chan);
 }

@@ -98,7 +98,7 @@ void BScanPage::onDisplayPackage(QSharedPointer<DisplayPackage> dp)
     for(auto it=widgets.begin(); it!=widgets.end(); it++) {
         BScanWidget * wid = it.operator*();
         Q_ASSERT(wid);
-        wid->onBScan(&(dp->_bscan));
+        wid->onBScan(dp->_bscan);
     }
 }
 

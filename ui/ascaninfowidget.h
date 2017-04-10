@@ -2,8 +2,10 @@
 #define ASCANINFOWIDGET_H
 
 #include <QWidget>
+#include <device/channel/channel.h>
 
-namespace Ui {
+namespace Ui
+{
 class AScanInfoWidget;
 }
 
@@ -14,6 +16,8 @@ class AScanInfoWidget : public QWidget
 public:
     explicit AScanInfoWidget(QWidget *parent = 0);
     ~AScanInfoWidget();
+    void setHValue(int value);
+    void setChannel(const Channel & chan, DisplayChannelID dispIndex);
 
 private:
     Ui::AScanInfoWidget *ui;

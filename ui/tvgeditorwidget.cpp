@@ -192,7 +192,7 @@ void TVGEditorWidget::switchToSelectedChannel()
 
 void TVGEditorWidget::onDisplayPackage(QSharedPointer<DisplayPackage> package)
 {
-    ui->aScanWidget->onAScan(&(package->_ascan));
+    ui->aScanWidget->onAScan(package->_ascan);
 }
 
 void TVGEditorWidget::onChannelChanged(Channel channel)

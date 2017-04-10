@@ -48,7 +48,7 @@ public:
     void reset();
     void setChannelInfo(const Channel &channel, DisplayChannelID dispChannelId);
 public slots:
-    void onAScan(const AScanDrawData *scan);
+    void onAScan(const AScanDrawData &scan);
     void onChannelChanged(const Channel &channel);
 private slots:
     void onFPSEnabledChanged(bool value);

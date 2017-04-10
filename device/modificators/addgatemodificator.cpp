@@ -12,6 +12,14 @@ void AddGateModificator::apply(Core *core)
     auto displayChannels = channel.getDisplayChannels();
     auto display = displayChannels[_info._displayChannel];
     auto gates = display.gates();
+    uint8_t id = 0;
+    for(auto it=gates.begin(); it!=gates.end(); it++) {
+        Gate & gate = it.operator*();
+        gate._id = id;
+        id++;
+    }
+    _gate._id = gates.size() + 1;
+    qDebug() << "Adding gate" <<_gate._id;
     gates.push_back(_gate);
     std::sort(gates.begin(),gates.end(),gateSorter);
     display.setGates(gates);

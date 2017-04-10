@@ -12,3 +12,14 @@ AScanInfoWidget::~AScanInfoWidget()
 {
     delete ui;
 }
+
+void AScanInfoWidget::setHValue(int value)
+{
+    ui->hLabel->setText(QString::number(value)+" us");
+}
+
+void AScanInfoWidget::setChannel(const Channel &chan, DisplayChannelID dispIndex)
+{
+    ui->channelNameLabel->setText(chan.getDisplayChannels().at(dispIndex).getRx().getName());
+    ui->angleLabel->setText(QString::number(chan.getDisplayChannels().at(dispIndex).angle())+"°");
+}

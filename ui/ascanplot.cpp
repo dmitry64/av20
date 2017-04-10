@@ -193,14 +193,14 @@ void AScanPlot::setChannelInfo(const Channel & channel, DisplayChannelID dispCha
     setTvgCurve(tvg);
 }
 
-void AScanPlot::onAScan(const AScanDrawData *scan)
+void AScanPlot::onAScan(const AScanDrawData & scan)
 {
     if(isVisible()) {
-        uint8_t chan = scan->_channel;
+        uint8_t chan = scan._channel;
         if(chan == _channelData.index()) {
-            _samples = scan->_samples;
-            _markerPos = scan->_markerPos;
-            _markerValue = scan->_markerValue;
+            _samples = scan._samples;
+            _markerPos = scan._markerPos;
+            _markerValue = scan._markerValue;
         }
         update();
     }

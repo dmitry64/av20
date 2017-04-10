@@ -137,10 +137,9 @@ void BScanWidget::reset()
     _samplesArray.clear();
 }
 
-void BScanWidget::onBScan(BScanDrawData *scan)
+void BScanWidget::onBScan(const BScanDrawData & scan)
 {
-    Q_ASSERT(scan);
-    ChannelsInfo info = scan->_info;
+    ChannelsInfo info = scan._info;
     if(_restrictedToChannel) {
         if(info._channel != _info._channel || info._displayChannel != _info._displayChannel) {
             return;
@@ -151,7 +150,7 @@ void BScanWidget::onBScan(BScanDrawData *scan)
         BScanDrawArray & curArray = it.operator*().second;
         if(curInfo._channel == info._channel && curInfo._displayChannel == info._displayChannel) {
             int oldStart = curArray._index;
-            curArray._samples[oldStart] = scan->_samples;
+            curArray._samples[oldStart] = scan._samples;
             curArray._index++;
 
             if(curArray._index == _width) {

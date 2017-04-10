@@ -17,7 +17,7 @@ class AScanPage : public QWidget
     Core * _core;
 private:
     void showEvent( QShowEvent* event );
-
+    ChannelsInfo _current;
 public:
     explicit AScanPage(QWidget *parent = 0);
     ~AScanPage();

@@ -125,7 +125,7 @@ void AScanWidget::setChannelInfo(const Channel & channel, DisplayChannelID dispC
     _plot->setChannelInfo(channel,dispChannelId);
 }
 
-void AScanWidget::onAScan(const AScanDrawData *scan)
+void AScanWidget::onAScan(const AScanDrawData & scan)
 {
     _plot->onAScan(scan);
 }

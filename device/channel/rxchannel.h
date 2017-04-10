@@ -27,8 +27,6 @@ public:
     void loadXML(const QDomNode & node);
     RxChannel & operator=(const RxChannel &L);
     void setPrismTime(uint8_t prismTime);
-    std::vector<Gate> gates() const;
-    void setGates(const std::vector<Gate> &gates);
 
     QString getName() const;
     void setName(const QString &name);
