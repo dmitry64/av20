@@ -14,25 +14,8 @@ CalibrationsWidget::CalibrationsWidget(QWidget *parent) :
     _keyboard = 0;
 }
 
-void CalibrationsWidget::init(const ChannelsCalibration & calibration)
+void CalibrationsWidget::clearButtons()
 {
-    logEvent("CalibWidget","Initializing");
-    Q_ASSERT(_core);
-
-    const ModeManager * manager = _core->getModeManager();
-    Q_ASSERT(manager);
-
-    const DeviceModeIndex mode = _core->getCurrentMode();
-    const SchemeIndex scheme = _core->getCurrentScheme();
-
-    const QString modeName = manager->modes().at(mode).name();
-    const QString tactName = manager->modes().at(mode).tactTables().at(scheme).getName();
-
-    ui->modeLabel->setText(modeName);
-    ui->schemeLabel->setText(tactName);
-
-    const CalibrationsInfoList & info = _core->getAvailableCalibrationsSnapshot();
-
     for(auto it=_buttons.begin(); it!=_buttons.end(); it++) {
         CalibrationButton * button = it.operator*();
         Q_ASSERT(button);
@@ -41,7 +24,10 @@ void CalibrationsWidget::init(const ChannelsCalibration & calibration)
         delete button;
     }
     _buttons.clear();
+}
 
+void CalibrationsWidget::initButtons(const ChannelsCalibration& calibration, const CalibrationsInfoList& info)
+{
     for(auto it=info.begin(); it!=info.end(); it++) {
         const CalibrationInfo & calibInfo = it.operator*();
 
@@ -61,6 +47,30 @@ void CalibrationsWidget::init(const ChannelsCalibration & calibration)
         ui->calibrationsLayout->addWidget(button);
         _buttons.push_back(button);
     }
+}
+
+void CalibrationsWidget::init(const ChannelsCalibration & calibration)
+{
+    logEvent("CalibWidget","Initializing");
+    Q_ASSERT(_core);
+
+    const ModeManager * manager = _core->getModeManager();
+    Q_ASSERT(manager);
+
+    const DeviceModeIndex mode = _core->getCurrentMode();
+    const SchemeIndex scheme = _core->getCurrentScheme();
+
+    const QString modeName = manager->modes().at(mode).name();
+    const QString tactName = manager->modes().at(mode).tactTables().at(scheme).getName();
+
+    ui->modeLabel->setText(modeName);
+    ui->schemeLabel->setText(tactName);
+
+    const CalibrationsInfoList & info = _core->getAvailableCalibrationsSnapshot();
+
+    clearButtons();
+    initButtons(calibration, info);
+
     _selectedIndex = calibration.getInfo()._id;
 }
 

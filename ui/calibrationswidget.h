@@ -37,6 +37,8 @@ signals:
 
 private:
     Ui::CalibrationsWidget *ui;
+    void clearButtons();
+    void initButtons(const ChannelsCalibration& calibration, const CalibrationsInfoList& info);
 };
 
 #endif // CALIBRATIONSWIDGET_H

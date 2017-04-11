@@ -5,12 +5,8 @@
 #include <QScrollBar>
 #include "controls/widescrollbar.h"
 
-ChannelsView::ChannelsView(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::ChannelsView)
+void ChannelsView::initChannelsWidget()
 {
-    ui->setupUi(this);
-    _core = 0;
     ui->channelsWidget->setColumnCount(8);
     ui->channelsWidget->setHorizontalHeaderItem(0,new QTableWidgetItem("Physical\nChannel"));
     ui->channelsWidget->setHorizontalHeaderItem(1,new QTableWidgetItem("Active"));
@@ -35,9 +31,10 @@ ChannelsView::ChannelsView(QWidget *parent) :
     ui->channelsWidget->setVerticalScrollBar(sb);
 
     ui->channelsWidget->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+}
 
-
-
+void ChannelsView::initTactWidget()
+{
     ui->tactWidget->setColumnCount(5);
     ui->tactWidget->setHorizontalHeaderItem(0,new QTableWidgetItem("Index"));
     ui->tactWidget->setHorizontalHeaderItem(1,new QTableWidgetItem("Rx I"));
@@ -50,6 +47,17 @@ ChannelsView::ChannelsView(QWidget *parent) :
     ui->tactWidget->setColumnWidth(2,40);
     ui->tactWidget->setColumnWidth(3,40);
     ui->tactWidget->setColumnWidth(4,40);
+}
+
+ChannelsView::ChannelsView(QWidget *parent) :
+    QWidget(parent),
+    ui(new Ui::ChannelsView)
+{
+    ui->setupUi(this);
+    _core = 0;
+    initChannelsWidget();
+
+    initTactWidget();
     _disabledChannelsColor = QColor(60,60,60);
 }
 

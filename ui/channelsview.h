@@ -27,6 +27,8 @@ public:
 private:
     Ui::ChannelsView *ui;
     void fillTactsTable(const std::vector<Tact>& tacts, const ChannelsCalibration& calibrationsSnapshot);
+    void initChannelsWidget();
+    void initTactWidget();
 };
 
 #endif // CHANNELSVIEW_H
