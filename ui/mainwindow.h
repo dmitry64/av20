@@ -96,6 +96,7 @@ private:
     void generateUiThemes();
     void createBackgroundWidget();
     void connectMenuWidgets();
+    void initBScanPage(const ChannelsCalibration& calibration);
 };
 
 #endif // MAINWINDOW_H

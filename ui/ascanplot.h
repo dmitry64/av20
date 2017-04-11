@@ -16,7 +16,6 @@ class AScanPlot : public QWidget
     QPen _ascanPen;
     QBrush _ascanBrush;
     QPen _tvgCurvePen;
-    //TVGCurve * _tvgCurve;
     uint16_t _scale;
 
     QColor _bgColor;

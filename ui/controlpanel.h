@@ -60,6 +60,8 @@ private:
     void initFreqency();
     void initPulseProg();
     void clearGates();
+    void initGates();
+    void initScrollbar();
 };
 
 #endif // CONTROLPANEL_H

@@ -3,10 +3,6 @@
 
 void AScanPlot::setTvgCurve(const TVGCurve *curve)
 {
-    /* if(_tvgCurve !=0) {
-         delete _tvgCurve;
-     }
-     _tvgCurve = curve->clone();*/
     _tvgSamples.clear();
     for(int i=0; i<200; i++) {
         double val = curve->getSample(i/200.0);
@@ -17,10 +13,7 @@ void AScanPlot::setTvgCurve(const TVGCurve *curve)
 
 void AScanPlot::reset()
 {
-    /* if(_tvgCurve !=0) {
-         delete _tvgCurve;
-     }
-     _tvgCurve = 0;*/
+
 }
 
 void AScanPlot::setBgColor(const QColor &bgColor)
@@ -75,9 +68,7 @@ AScanPlot::AScanPlot(QWidget *parent) : QWidget(parent)
 
 AScanPlot::~AScanPlot()
 {
-    /*if(_tvgCurve !=0) {
-        delete _tvgCurve;
-    }*/
+
 }
 
 void AScanPlot::drawAscan(QPainter &painter, int width, int height)
@@ -85,7 +76,6 @@ void AScanPlot::drawAscan(QPainter &painter, int width, int height)
     painter.setPen(_ascanPen);
     painter.setBrush(_ascanBrush);
 
-    //painter.drawLine(0,0,width,0);
     const double step = width/800.0;
     uint16_t size = _samples.size();
     uint16_t currentCount = 0;
@@ -150,7 +140,6 @@ void AScanPlot::drawMarker(QPainter &painter, int width, int height)
     painter.drawLine(markerPos,height,markerPos,height-16);
 }
 
-
 void AScanPlot::drawGates(QPainter &painter, int width, int height)
 {
     double scaleStep = width/static_cast<double>(_scale);
@@ -171,7 +160,6 @@ void AScanPlot::drawGates(QPainter &painter, int width, int height)
         painter.drawLine(gate._finish * scaleStep,level,gate._finish * scaleStep + 5, level - 5);
     }
 }
-
 
 void AScanPlot::drawFps(QPainter &painter, int posx, int posy)
 {
@@ -204,7 +192,6 @@ void AScanPlot::onAScan(const AScanDrawData & scan)
         }
         update();
     }
-
 }
 
 void AScanPlot::onChannelChanged(const Channel & channel)

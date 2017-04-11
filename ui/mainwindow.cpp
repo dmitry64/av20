@@ -328,19 +328,8 @@ void MainWindow::onPause()
     logEvent("MainWindow","Pause pressed");
 }
 
-void MainWindow::init()
+void MainWindow::initBScanPage(const ChannelsCalibration& calibration)
 {
-    ui->statusWidget->init();
-    Q_ASSERT(_core);
-    const ChannelsCalibration & calibration = _core->getCalibrationsSnapshot();
-    const TactTable & tactTableSnapshot = _core->getTactTableSnapshot();
-
-    ChannelsInfo defaultChannel;
-    defaultChannel._channel = 0;
-    defaultChannel._displayChannel = 0;
-
-    ui->aScanPage->init(defaultChannel,calibration);
-    ui->tvgEditorWidget->init(defaultChannel,calibration);
     std::vector<ChannelsInfo> infoBscan;
     for(uint8_t i=0; i<calibration.getChannelsCount(); i++) {
         const auto & channel = calibration.getChannel(i);
@@ -354,6 +343,22 @@ void MainWindow::init()
     }
     ui->bScanPage->init(calibration);
     ui->bScanPage->setChannles(infoBscan,calibration);
+}
+
+void MainWindow::init()
+{
+    ui->statusWidget->init();
+    Q_ASSERT(_core);
+    const ChannelsCalibration & calibration = _core->getCalibrationsSnapshot();
+    const TactTable & tactTableSnapshot = _core->getTactTableSnapshot();
+
+    ChannelsInfo defaultChannel;
+    defaultChannel._channel = 0;
+    defaultChannel._displayChannel = 0;
+
+    ui->aScanPage->init(defaultChannel,calibration);
+    ui->tvgEditorWidget->init(defaultChannel,calibration);
+    initBScanPage(calibration);
     ui->channelsWidget->init(calibration,tactTableSnapshot);
     _calibrationsWidget->init(calibration);
     _memoryWidget->init();

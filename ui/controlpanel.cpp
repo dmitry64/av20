@@ -42,6 +42,24 @@ void ControlPanel::initPulseProg()
     ui->scrollLayout->addWidget(_progSpinbox);
 }
 
+void ControlPanel::initGates()
+{
+    _gatesLayout = new QVBoxLayout();
+    ui->scrollLayout->addLayout(_gatesLayout);
+
+    _addGateButton = new AddGateButton();
+    ui->scrollLayout->addWidget(_addGateButton);
+    connect(_addGateButton, SIGNAL(addGate()),this,SLOT(onAddGate()));
+
+    _prevGatesCount = 0;
+}
+
+void ControlPanel::initScrollbar()
+{
+    WideScrollBar * sb = new WideScrollBar();
+    ui->scrollArea->setVerticalScrollBar(sb);
+}
+
 ControlPanel::ControlPanel(QWidget *parent) :
     QWidget(parent),
     _core(0),
@@ -54,18 +72,8 @@ ControlPanel::ControlPanel(QWidget *parent) :
     initMerkerPos();
     initFreqency();
     initPulseProg();
-
-    _gatesLayout = new QVBoxLayout();
-    ui->scrollLayout->addLayout(_gatesLayout);
-
-    _addGateButton = new AddGateButton();
-    ui->scrollLayout->addWidget(_addGateButton);
-    connect(_addGateButton, SIGNAL(addGate()),this,SLOT(onAddGate()));
-
-    WideScrollBar * sb = new WideScrollBar();
-    ui->scrollArea->setVerticalScrollBar(sb);
-
-    _prevGatesCount = 0;
+    initGates();
+    initScrollbar();
 
     _oldChannel = 0;
     _info._channel = 0;
@@ -97,6 +105,7 @@ void ControlPanel::clearGates()
 {
     for(auto it=_gates.begin(); it!=_gates.end(); it++) {
         GateController * gateController = it.operator*();
+        Q_ASSERT(gateController);
         _gatesLayout->removeWidget(gateController);
         disconnect(gateController,SIGNAL(deleteGate(Gate,GateController*)),this,SLOT(onDeleteGate(Gate,GateController*)));
         disconnect(gateController,SIGNAL(gateChanged(Gate)),this,SLOT(onGateChanged(Gate)));

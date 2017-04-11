@@ -16,7 +16,6 @@ AScanPage::AScanPage(QWidget *parent) :
     connect(ui->channelSelector,SIGNAL(channelChanged(ChannelsInfo)),this,SLOT(setChannel(ChannelsInfo)));
     _current._channel = 0;
     _current._displayChannel = 0;
-    //ui->aScanInfoWidget->hide();
 }
 
 AScanPage::~AScanPage()
