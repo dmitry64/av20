@@ -39,6 +39,8 @@ public:
     void setChannel(ChannelsInfo info);
     void init(const Channel & channel);
 
+    void initMerkerPos();
+    
 private:
     void showEvent(QShowEvent *event);
 
@@ -54,6 +56,10 @@ public slots:
 private:
     Ui::ControlPanel *ui;
     void fillGates(const std::vector<Gate>& gates);
+    void initPrismTime();
+    void initFreqency();
+    void initPulseProg();
+    void clearGates();
 };
 
 #endif // CONTROLPANEL_H
