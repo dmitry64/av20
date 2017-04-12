@@ -99,7 +99,7 @@ unsigned char Emulator::cosinusFunc(TVG tvg, uint8_t chan, int i, int time)
     return sh;
 }
 
-void Emulator::generateAscan(uint8_t *dest, bool line)
+void Emulator::generateAscan(uint8_t *dest)
 {
     TactRegisters tact = _state.getTactByIndex(_currentTact);
     uint8_t chan = ((tact._TR1 & 0b01110000) >> 4);
@@ -135,12 +135,12 @@ void Emulator::generateAscan(uint8_t *dest, bool line)
 
 void Emulator::setAScanForLine1(uint8_t *dest)
 {
-    generateAscan(dest, true);
+    generateAscan(dest);
 }
 
 void Emulator::setAScanForLine2(uint8_t *dest)
 {
-    generateAscan(dest, false);
+    generateAscan(dest);
 }
 
 void Emulator::run()

@@ -16,12 +16,12 @@ class DeviceState
     uint8_t _PWR_CR;
     uint8_t _ODO_CR;
 
-    uint8_t _RESERVED_0A;
+    /*uint8_t _RESERVED_0A;
     uint8_t _RESERVED_0B;
     uint8_t _RESERVED_0C;
     uint8_t _RESERVED_0D;
     uint8_t _RESERVED_0E;
-    uint8_t _RESERVED_0F;
+    uint8_t _RESERVED_0F;*/
 
     // Channels table
     TactRegisters _tactTable[8];

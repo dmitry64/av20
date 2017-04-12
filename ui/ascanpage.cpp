@@ -36,11 +36,8 @@ void AScanPage::init(ChannelsInfo info)
     init(info,snapshot);
 }
 
-void AScanPage::init(ChannelsInfo info,const ChannelsCalibration & snapshot)
+void AScanPage::initBScan(ChannelsInfo info, const Channel& ch, const ChannelsCalibration& snapshot)
 {
-    logEvent("AScanPage","Initializing");
-    _current = info;
-    ui->ascanWidget->setChannelInfo(snapshot.getChannel(info._channel),info._displayChannel);
     std::vector<ChannelsInfo> infoList;
     for(uint8_t i=0; i<snapshot.getChannelsCount(); i++) {
         const Channel & chan = snapshot.getChannel(i);
@@ -52,13 +49,19 @@ void AScanPage::init(ChannelsInfo info,const ChannelsCalibration & snapshot)
             infoList.push_back(temp);
         }
     }
-
     ui->bscanWidget->setChannelsInfo(infoList);
-    const Channel & ch = snapshot.getChannel(info._channel);
     ui->bscanWidget->setActiveChannelData(ch,info);
+}
+
+void AScanPage::init(ChannelsInfo info,const ChannelsCalibration & snapshot)
+{
+    logEvent("AScanPage","Initializing");
+    const Channel & ch = snapshot.getChannel(info._channel);
+    _current = info;
+    ui->ascanWidget->setChannelInfo(snapshot.getChannel(info._channel),info._displayChannel);
+    initBScan(info, ch, snapshot);
     ui->controlPanel->setChannel(info);
     ui->controlPanel->init(ch);
-
     ui->channelSelector->init(snapshot);
     update();
 }

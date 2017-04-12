@@ -13,9 +13,8 @@ TVGNPoints::TVGNPoints()
     }
 }
 
-TVGNPoints::TVGNPoints(const TVGNPoints & original)
+TVGNPoints::TVGNPoints(const TVGNPoints & original) : _points(original._points)
 {
-    _points = original._points;
     Q_ASSERT(_points.size()>1);
 }
 

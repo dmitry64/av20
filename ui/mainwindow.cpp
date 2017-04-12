@@ -331,7 +331,8 @@ void MainWindow::onPause()
 void MainWindow::initBScanPage(const ChannelsCalibration& calibration)
 {
     std::vector<ChannelsInfo> infoBscan;
-    for(uint8_t i=0; i<calibration.getChannelsCount(); i++) {
+    uint8_t size= calibration.getChannelsCount();
+    for(uint8_t i=0; i<size; i++) {
         const auto & channel = calibration.getChannel(i);
         const auto & dispChannels = channel.getDisplayChannels();
         for(size_t j=0; j<dispChannels.size(); j++) {

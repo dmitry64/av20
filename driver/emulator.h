@@ -24,7 +24,7 @@ private:
     void setAScanForLine1(uint8_t * dest);
     void setAScanForLine2(uint8_t * dest);
     void run();
-    void generateAscan(uint8_t *dest, bool line);
+    void generateAscan(uint8_t *dest);
 
     unsigned char sincFunc(TVG tvg, uint8_t chan, int i, int time);
     unsigned char sinusFunc(TVG tvg, uint8_t chan, int i, int time);

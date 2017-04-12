@@ -7,7 +7,7 @@ std::vector<DeviceMode> ModeManager::modes() const
     return _modes;
 }
 
-void ModeManager::addMode(DeviceMode mode)
+void ModeManager::addMode(const DeviceMode &mode)
 {
     _modes.push_back(mode);
 }

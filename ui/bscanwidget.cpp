@@ -139,7 +139,7 @@ void BScanWidget::reset()
 
 void BScanWidget::onBScan(const BScanDrawData & scan)
 {
-    ChannelsInfo info = scan._info;
+    const ChannelsInfo & info = scan._info;
     if(_restrictedToChannel) {
         if(info._channel != _info._channel || info._displayChannel != _info._displayChannel) {
             return;

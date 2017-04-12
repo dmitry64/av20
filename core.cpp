@@ -92,6 +92,7 @@ Core::Core(ModeManager *modeManager, CalibrationManager * calibrationManager) : 
     _currentTact = 0;
     _line1CurrentAscan = new AScan();
     _line2CurrentAscan = new AScan();
+
     _calibrationSnapshotRequested.store(false);
     _tactTableSnapshotRequested.store(false);
     _modeswitchRequested.store(false);
@@ -200,7 +201,6 @@ void Core::status()
 
     DeviceStatus current = status;
     while(!current.ready) {
-        //usleep(1);
         current = _device->getDeviceStatus();
         handleDeviceError(current.error);
         handleDeviceOverheat(current.thsd);
@@ -524,6 +524,7 @@ void Core::setTVG(const ChannelsInfo & info, const TVGCurve *ptr)
 {
     logEvent("Core","Set TVG to channel #" + QString::number(info._channel));
     TVGCurve * curve = ptr->clone();
+    Q_ASSERT(curve);
     TVGModificator * mod = new TVGModificator(info,curve);
     addModificator(mod);
 }

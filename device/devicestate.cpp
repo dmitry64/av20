@@ -90,13 +90,13 @@ DeviceState::DeviceState():
     _TRG_DS(0),
     _TRG_TS(0),
     _PWR_CR(0),
-    _ODO_CR(0),
+    _ODO_CR(0)/*,
     _RESERVED_0A(0),
     _RESERVED_0B(0),
     _RESERVED_0C(0),
     _RESERVED_0D(0),
     _RESERVED_0E(0),
-    _RESERVED_0F(0)
+    _RESERVED_0F(0)*/
 {
 }
 

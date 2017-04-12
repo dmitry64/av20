@@ -211,6 +211,7 @@ void TVGEditorWidget::setChannel(ChannelsInfo info)
 
 void TVGEditorWidget::onSingleOffsetChanged(double value)
 {
+    Q_UNUSED(value);
     TVGCurve * curve = createTVGTwoPointsFromValues();
 
     _core->setTVG(_info,curve);
@@ -219,6 +220,7 @@ void TVGEditorWidget::onSingleOffsetChanged(double value)
 
 void TVGEditorWidget::onSingleHeightChanged(double value)
 {
+    Q_UNUSED(value);
     TVGCurve * curve = createTVGTwoPointsFromValues();
     _core->setTVG(_info,curve);
     delete curve;
@@ -226,6 +228,7 @@ void TVGEditorWidget::onSingleHeightChanged(double value)
 
 void TVGEditorWidget::onSingleBaseChanged(double value)
 {
+    Q_UNUSED(value);
     TVGCurve * curve = createTVGTwoPointsFromValues();
     _core->setTVG(_info,curve);
     delete curve;
@@ -233,6 +236,7 @@ void TVGEditorWidget::onSingleBaseChanged(double value)
 
 void TVGEditorWidget::onSingleWidthChanged(double value)
 {
+    Q_UNUSED(value);
     TVGCurve * curve =  createTVGTwoPointsFromValues();
     _core->setTVG(_info,curve);
     delete curve;
@@ -240,6 +244,7 @@ void TVGEditorWidget::onSingleWidthChanged(double value)
 
 void TVGEditorWidget::onSingleFormChanged(double value)
 {
+    Q_UNUSED(value);
     TVGCurve * curve = createTVGTwoPointsFromValues();
     _core->setTVG(_info,curve);
     delete curve;

@@ -57,7 +57,6 @@ AScanPlot::AScanPlot(QWidget *parent) : QWidget(parent)
     _ascanPen = QPen(QColor(10,10,70), 1);
     _tvgCurvePen = QPen(QColor(250,10,10), 2);
     _tvgCurvePen.setCapStyle(Qt::RoundCap);
-    //_tvgCurve = 0;
     _markerPos = 0;
     _markerValue = 0;
     _bgColor = this->palette().color(QPalette::Window);
@@ -148,7 +147,7 @@ void AScanPlot::drawGates(QPainter &painter, int width, int height)
 
     for(auto it=gates.begin(); it!=gates.end(); it++) {
         const Gate & gate = it.operator*();
-        int level = height - (gate._level * (height/255.0));
+        const int level = height - (gate._level * (height/255.0));
         QPen gatePen = QPen(getColorByLevel(gate._level),3);
         gatePen.setCapStyle(Qt::RoundCap);
         painter.setPen(gatePen);

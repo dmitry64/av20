@@ -156,6 +156,7 @@ void ControlPanel::onGateChanged(Gate gate)
 
 void ControlPanel::onDeleteGate(Gate gate, GateController *controller)
 {
+    Q_UNUSED(controller);
     _core->removeGate(_info,gate._id);
 }
 

@@ -282,6 +282,7 @@ bool Device::checkConnection()
     uint8_t ff = 0;
     _interface->getRegister(0x00,1,&zero);
     _interface->getRegister(0x01,1,&ff);
+    Q_ASSERT((ff == 0xff) && (zero == 0x00));
     return (ff == 0xff) && (zero == 0x00);
 }
 

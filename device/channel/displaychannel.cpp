@@ -107,7 +107,8 @@ void DisplayChannel::loadXML(const QDomNode &node)
 
     QDomElement gatesElement = node.firstChildElement("gates");
     auto gates = gatesElement.elementsByTagName("gate");
-    for(int i=0; i<gates.size(); i++) {
+    int size= gates.size();
+    for(int i=0; i<size; i++) {
         Gate gate;
         auto gateElement = gates.at(i);
         gate._id = gateElement.firstChildElement("id").text().toUInt();

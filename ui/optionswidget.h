@@ -39,6 +39,11 @@ private slots:
     void onOperatorsListChanged();
 private:
     Ui::OptionsWidget *ui;
+    void initColorSchemes(const Settings* settings);
+    void initLanguages();
+    void initBrightness(System* system);
+    void initSound(System* system);
+    void initDebug(const Settings* settings);
 };
 
 #endif // OPTIONSWIDGET_H

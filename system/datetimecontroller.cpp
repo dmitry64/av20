@@ -17,11 +17,13 @@ void DateTimeController::init()
 
 void DateTimeController::setDate(const QDate &date)
 {
+    Q_UNUSED(date);
     logEvent("DateTime","Set date");
 }
 
 void DateTimeController::setTime(const QTime &time)
 {
+    Q_UNUSED(time);
     logEvent("DateTime","Set time");
 }
 

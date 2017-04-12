@@ -42,7 +42,6 @@ Channel::Channel() : _colorRed(0), _colorGreen(0), _colorBlue(0), _index(0), _ac
 
 Channel::~Channel()
 {
-
 }
 
 QDomElement Channel::generateXML(QDomDocument &doc) const
@@ -66,7 +65,6 @@ QDomElement Channel::generateXML(QDomDocument &doc) const
         dispChannels.appendChild(dispChan);
     }
     channel.appendChild(dispChannels);
-
 
     return channel;
 }

@@ -52,7 +52,6 @@ RxChannel::RxChannel() : _name("none"),_prismTime(0), _tvgCurve(0), _markerPos(0
 
 RxChannel::RxChannel(const RxChannel &original) : _name(original._name), _prismTime(original._prismTime), _tvgCurve(original._tvgCurve->clone()), _markerPos(original._markerPos)
 {
-
 }
 
 RxChannel::~RxChannel()
@@ -108,7 +107,6 @@ RxChannel &RxChannel::operator=(const RxChannel &L)
         _markerPos = L._markerPos;
         return *this;
     }
-
 }
 
 TVGCurve *RxChannel::generateTVGFromXML(const QDomNode &tvg)
@@ -131,8 +129,6 @@ TVGCurve *RxChannel::generateTVGFromXML(const QDomNode &tvg)
     else {
         Q_ASSERT(false);
     }
-
     Q_ASSERT(result);
-
     return result;
 }

@@ -75,6 +75,7 @@ void ChannelsCalibration::saveToFile(const QString &path, size_t saveIndex) cons
 
 void ChannelsCalibration::loadFromFile(const QString &path)
 {
+    Q_ASSERT(path.length()>0);
     QDomDocument doc;
     logEvent("ChanCalib","Loading from file:"+path);
     QFile inputFile(path);

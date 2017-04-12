@@ -77,10 +77,10 @@ void BScanPage::setChannles(const std::vector<ChannelsInfo > &channelsConfigurat
 
     _bScanWidgets.clear();
 
-    for(size_t i=0; i<channelsConfiguration.size(); i++) {
+    for(auto it=channelsConfiguration.begin(); it!=channelsConfiguration.end(); it++) {
         BScanWidget * widget = new BScanWidget(this);
         widget->setRestrictedToChannel(true);
-        auto info = channelsConfiguration[i];
+        const ChannelsInfo & info = it.operator*();
         std::vector<ChannelsInfo> infoList;
         infoList.push_back(info);
         widget->setChannelsInfo(infoList);

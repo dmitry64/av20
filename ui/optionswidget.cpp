@@ -35,29 +35,8 @@ OptionsWidget::~OptionsWidget()
     delete ui;
 }
 
-void OptionsWidget::init()
+void OptionsWidget::initColorSchemes(const Settings* settings)
 {
-    System * system = System::getInstance();
-    const Settings * settings = system->getSettings();
-
-    ui->soundWidget->setName("Volume");
-    ui->soundWidget->setSuffix("%");
-    ui->soundWidget->setMax(100);
-    ui->soundWidget->setValue(system->getSoundVolume());
-
-    ui->brightnessWidget->setName("Brightness");
-    ui->brightnessWidget->setSuffix("%");
-    ui->brightnessWidget->setMax(100);
-    ui->brightnessWidget->setValue(system->getBrightness());
-
-    connect(ui->brightnessWidget,SIGNAL(valueChanged(double)),this,SLOT(onBrightnessChanged(double)));
-    connect(ui->soundWidget,SIGNAL(valueChanged(double)),this,SLOT(onSoundVolumeChanged(double)));
-
-    std::vector<QString> languages;
-    languages.push_back(QString("English"));
-    ui->languageWidget->setValues(languages);
-    ui->languageWidget->setName("Language");
-
     std::vector<QString> colorSchemes;
     colorSchemes.push_back(QString("Default"));
     colorSchemes.push_back(QString("Alternative"));
@@ -65,8 +44,49 @@ void OptionsWidget::init()
     ui->colorSchemeWidget->setIndex(static_cast<size_t>(settings->getGlobalUiTheme()));
     ui->colorSchemeWidget->setName("Color scheme");
     connect(ui->colorSchemeWidget,SIGNAL(indexChanged(size_t)),this,SLOT(onColorSchemeIndexChanged(size_t)));
+}
 
+void OptionsWidget::initLanguages()
+{
+    std::vector<QString> languages;
+    languages.push_back(QString("English"));
+    ui->languageWidget->setValues(languages);
+    ui->languageWidget->setName("Language");
+}
+
+void OptionsWidget::initBrightness(System* system)
+{
+    ui->brightnessWidget->setName("Brightness");
+    ui->brightnessWidget->setSuffix("%");
+    ui->brightnessWidget->setMax(100);
+    ui->brightnessWidget->setValue(system->getBrightness());
+    connect(ui->brightnessWidget,SIGNAL(valueChanged(double)),this,SLOT(onBrightnessChanged(double)));
+}
+
+void OptionsWidget::initSound(System* system)
+{
+    ui->soundWidget->setName("Volume");
+    ui->soundWidget->setSuffix("%");
+    ui->soundWidget->setMax(100);
+    ui->soundWidget->setValue(system->getSoundVolume());
+    connect(ui->soundWidget,SIGNAL(valueChanged(double)),this,SLOT(onSoundVolumeChanged(double)));
+}
+
+void OptionsWidget::initDebug(const Settings* settings)
+{
     ui->showFps->setChecked(settings->getAscanFPSEnabled());
+}
+
+void OptionsWidget::init()
+{
+    System * system = System::getInstance();
+    const Settings * settings = system->getSettings();
+
+    initSound(system);
+    initBrightness(system);
+    initLanguages();
+    initColorSchemes(settings);
+    initDebug(settings);
 
     initOperators(system);
 }

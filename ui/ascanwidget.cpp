@@ -81,7 +81,6 @@ AScanWidget::AScanWidget(QWidget *parent) :
 
 AScanWidget::~AScanWidget()
 {
-
     delete ui;
 }
 

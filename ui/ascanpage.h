@@ -34,6 +34,7 @@ signals:
     void drawDisplayPackage(QSharedPointer<DisplayPackage> package);
 private:
     Ui::AScanPage *ui;
+    void initBScan(ChannelsInfo info, const Channel& ch, const ChannelsCalibration& snapshot);
 };
 
 #endif // ASCANPAGE_H
