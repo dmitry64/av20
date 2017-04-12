@@ -40,7 +40,7 @@ public:
     void init(const Channel & channel);
 
     void initMerkerPos();
-    
+
 private:
     void showEvent(QShowEvent *event);
 
@@ -52,6 +52,8 @@ public slots:
     void onDeleteGate(Gate gate, GateController * controller);
     void onAddGate();
     void onPrismTimeChanged(double value);
+    void onFrequencyChanged(size_t index);
+    void onPulseProgChanged(size_t index);
 
 private:
     Ui::ControlPanel *ui;

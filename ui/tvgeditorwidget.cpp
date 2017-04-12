@@ -125,13 +125,13 @@ void TVGEditorWidget::reset()
     ui->aScanWidget->reset();
 }
 
-void TVGEditorWidget::init(ChannelsInfo info)
+void TVGEditorWidget::init(const ChannelsInfo &info)
 {
     const ChannelsCalibration & snapshot = _core->getCalibrationsSnapshot();
     init(info,snapshot);
 }
 
-void TVGEditorWidget::init(ChannelsInfo info, const ChannelsCalibration & snapshot)
+void TVGEditorWidget::init(const ChannelsInfo & info, const ChannelsCalibration & snapshot)
 {
     logEvent("TVGEditor","Initializing");
 

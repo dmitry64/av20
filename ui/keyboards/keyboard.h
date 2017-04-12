@@ -30,6 +30,8 @@ private slots:
 
     void on_shiftButton_released();
 
+    void on_backspaceButton_released();
+
 signals:
     void textReady(QString);
     void closed();

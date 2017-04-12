@@ -31,8 +31,8 @@ public:
     explicit TVGEditorWidget(QWidget *parent = 0);
     ~TVGEditorWidget();
     void reset();
-    void init(ChannelsInfo info);
-    void init(ChannelsInfo info, const ChannelsCalibration &snapshot);
+    void init(const ChannelsInfo &info);
+    void init(const ChannelsInfo &info, const ChannelsCalibration &snapshot);
     void initCurve(const TVGCurve *curve);
     void setCore(Core * core);
     void switchToSelectedChannel();

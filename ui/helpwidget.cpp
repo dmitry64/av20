@@ -13,7 +13,6 @@ HelpWidget::HelpWidget(QWidget *parent) :
     ui->setupUi(this);
     ui->listWidget->setSelectionMode(QAbstractItemView::SingleSelection);
     updateFiles();
-
 }
 
 HelpWidget::~HelpWidget()

@@ -27,6 +27,7 @@ OptionsWidget::OptionsWidget(QWidget *parent) :
 {
     ui->setupUi(this);
     System * system = System::getInstance();
+    Q_ASSERT(system);
     connect(system->getOperators(),SIGNAL(operatorsListChanged()),this,SLOT(onOperatorsListChanged()));
 }
 
@@ -80,7 +81,9 @@ void OptionsWidget::initDebug(const Settings* settings)
 void OptionsWidget::init()
 {
     System * system = System::getInstance();
+    Q_ASSERT(system);
     const Settings * settings = system->getSettings();
+    Q_ASSERT(settings);
 
     initSound(system);
     initBrightness(system);
@@ -94,12 +97,14 @@ void OptionsWidget::init()
 void OptionsWidget::onBrightnessChanged(double value)
 {
     System * system = System::getInstance();
+    Q_ASSERT(system);
     system->setBrightness(qRound(value));
 }
 
 void OptionsWidget::onSoundVolumeChanged(double value)
 {
     System * system = System::getInstance();
+    Q_ASSERT(system);
     system->setSoundVolume(qRound(value));
 }
 
@@ -117,7 +122,7 @@ void OptionsWidget::on_showFps_toggled(bool checked)
 
 void OptionsWidget::on_selectOperatorButton_released()
 {
-    const QString name = ui->operatorsListWidget->selectedItems().first()->data(0).toString();
+    const QString & name = ui->operatorsListWidget->selectedItems().first()->data(0).toString();
     if(name.length()>0) {
         System::getInstance()->setCurrentOperatorName(name);
     }

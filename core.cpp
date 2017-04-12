@@ -4,6 +4,8 @@
 #include "device/modificators/addgatemodificator.h"
 #include "device/modificators/removegatemodificator.h"
 #include "device/modificators/prismtimemodificator.h"
+#include "device/modificators/pulserfreqmodificator.h"
+#include "device/modificators/pulserprogmodificator.h"
 #include "device/modificators/tvgmodificator.h"
 #include "device/modificators/createcalibrationmodificator.h"
 #include "device/modificators/removecalibrationmodificator.h"
@@ -125,8 +127,6 @@ void Core::work()
     while(_active) {
         //timer.start();
         searchWork();
-
-
         //qDebug() << timer.nsecsElapsed()/1000 << "ms";
         //QThread::msleep(20);
     }
@@ -517,6 +517,20 @@ void Core::setPrismTime(const ChannelsInfo & info,const uint8_t value)
 {
     logEvent("Core","Set prism time to channel #" + QString::number(info._channel));
     PrismTimeModificator * mod = new PrismTimeModificator(info,value);
+    addModificator(mod);
+}
+
+void Core::setPulserFreq(const ChannelsInfo &info, const PulserFreq value)
+{
+    logEvent("Core","Set pulser freq to channel #" + QString::number(info._channel));
+    PulserFreqModificator * mod = new PulserFreqModificator(info,value);
+    addModificator(mod);
+}
+
+void Core::setPulserProg(const ChannelsInfo &info, const PulserProg value)
+{
+    logEvent("Core","Set pulser prog to channel #" + QString::number(info._channel));
+    PulserProgModificator * mod = new PulserProgModificator(info,value);
     addModificator(mod);
 }
 

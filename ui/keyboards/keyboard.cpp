@@ -55,3 +55,10 @@ void Keyboard::on_shiftButton_released()
         ui->shiftButton->setText("");
     }
 }
+
+void Keyboard::on_backspaceButton_released()
+{
+    QString newString = ui->textField->text();
+    newString.chop(1);
+    ui->textField->setText(newString);
+}

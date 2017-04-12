@@ -121,7 +121,9 @@ SOURCES += core.cpp \
     driver/emulator.cpp \
     ui/splashscreen.cpp \
     ui/dialogs/deletedialog.cpp \
-    ui/controls/widescrollbar.cpp
+    ui/controls/widescrollbar.cpp \
+    device/modificators/pulserfreqmodificator.cpp \
+    device/modificators/pulserprogmodificator.cpp
 #    tests/coretest.cpp
 
 HEADERS  += \
@@ -200,7 +202,9 @@ HEADERS  += \
     ui/controls/verticaltouchspinbox.h \
     ui/splashscreen.h \
     ui/dialogs/deletedialog.h \
-    ui/controls/widescrollbar.h
+    ui/controls/widescrollbar.h \
+    device/modificators/pulserfreqmodificator.h \
+    device/modificators/pulserprogmodificator.h
 #    tests/coretest.h
 
 FORMS    += \

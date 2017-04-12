@@ -28,8 +28,9 @@ ChannelSelector::~ChannelSelector()
 void ChannelSelector::init(const ChannelsCalibration & snapshot)
 {
     logEvent("ChanSelector","Initializing");
-    for(size_t i=0; i<_channelButtons.size(); i++) {
-        ChannelButton * button = _channelButtons.at(i);
+
+    for(auto it=_channelButtons.begin(); it!=_channelButtons.end(); it++) {
+        ChannelButton * button = it.operator*();
         Q_ASSERT(button);
         ui->channelsLayout->removeWidget(button);
         QObject::disconnect(button,SIGNAL(channelSelected(ChannelsInfo)),this,SLOT(onChannelSelected(ChannelsInfo)));
@@ -75,6 +76,5 @@ void ChannelSelector::onChannelSelected(ChannelsInfo info)
         Q_ASSERT(button);
         button->setActive(button->info()._channel == info._channel && button->info()._displayChannel == info._displayChannel);
     }
-
     emit channelChanged(info);
 }

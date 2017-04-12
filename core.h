@@ -123,6 +123,8 @@ public:
     void modifyGate(const ChannelsInfo &info, const Gate & gate);
     void removeGate(const ChannelsInfo &info, const uint8_t id);
     void setPrismTime(const ChannelsInfo &info, const uint8_t value);
+    void setPulserFreq(const ChannelsInfo &info, const PulserFreq value);
+    void setPulserProg(const ChannelsInfo &info, const PulserProg value);
     void setTVG(const ChannelsInfo &info, const TVGCurve * ptr);
     void setDeviceMode(const DeviceModeIndex modeIndex, const SchemeIndex schemeIndex);
     void switchCalibration(const CalibrationIndex index);

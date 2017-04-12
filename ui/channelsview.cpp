@@ -27,7 +27,6 @@ void ChannelsView::initChannelsWidget()
     ui->channelsWidget->setColumnWidth(7,80);
 
     WideScrollBar * sb = new WideScrollBar();
-
     ui->channelsWidget->setVerticalScrollBar(sb);
 
     ui->channelsWidget->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);

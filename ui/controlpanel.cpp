@@ -32,6 +32,7 @@ void ControlPanel::initFreqency()
     _frequencySpinbox->setValues(FreqStrings);
     _frequencySpinbox->setName("Frequency");
     ui->scrollLayout->addWidget(_frequencySpinbox);
+    connect(_frequencySpinbox,SIGNAL(indexChanged(size_t)),this,SLOT(onFrequencyChanged(size_t)));
 }
 
 void ControlPanel::initPulseProg()
@@ -40,6 +41,7 @@ void ControlPanel::initPulseProg()
     _progSpinbox->setValues(ProgStrings);
     _progSpinbox->setName("Program");
     ui->scrollLayout->addWidget(_progSpinbox);
+    connect(_progSpinbox,SIGNAL(indexChanged(size_t)),this,SLOT(onPulseProgChanged(size_t)));
 }
 
 void ControlPanel::initGates()
@@ -136,7 +138,10 @@ void ControlPanel::init(const Channel & channel)
     const auto & dispChannels = channel.getDisplayChannels();
 
     _prismTimeSpinbox->setValue(dispChannels.at(_info._displayChannel).getRx().getPrismTime());
-
+    const PulserFreq & freq = dispChannels.at(_info._displayChannel).getTx().freq();
+    _frequencySpinbox->setIndex(static_cast<size_t>(freq));
+    const PulserProg & prog = dispChannels.at(_info._displayChannel).getTx().prog();
+    _progSpinbox->setIndex(static_cast<size_t>(prog));
 
     const DisplayChannel & dc = dispChannels.at(_info._displayChannel);
 
@@ -174,4 +179,16 @@ void ControlPanel::onPrismTimeChanged(double value)
 {
     Q_ASSERT(_core);
     _core->setPrismTime(_info,value);
+}
+
+void ControlPanel::onFrequencyChanged(size_t index)
+{
+    PulserFreq freq = static_cast<PulserFreq>(index);
+    _core->setPulserFreq(_info,freq);
+}
+
+void ControlPanel::onPulseProgChanged(size_t index)
+{
+    PulserProg prog = static_cast<PulserProg>(index);
+    _core->setPulserProg(_info,prog);
 }
