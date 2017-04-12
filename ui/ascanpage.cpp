@@ -39,7 +39,7 @@ void AScanPage::init(ChannelsInfo info)
 void AScanPage::init(ChannelsInfo info,const ChannelsCalibration & snapshot)
 {
     logEvent("AScanPage","Initializing");
-
+    _current = info;
     ui->ascanWidget->setChannelInfo(snapshot.getChannel(info._channel),info._displayChannel);
     std::vector<ChannelsInfo> infoList;
     for(uint8_t i=0; i<snapshot.getChannelsCount(); i++) {

@@ -133,13 +133,15 @@ void ControlPanel::fillGates(const std::vector<Gate>& gates)
 
 void ControlPanel::init(const Channel & channel)
 {
-    _prismTimeSpinbox->setValue(channel.getDisplayChannels()[_info._displayChannel].getRx().getPrismTime());
-
     const auto & dispChannels = channel.getDisplayChannels();
+
+    _prismTimeSpinbox->setValue(dispChannels.at(_info._displayChannel).getRx().getPrismTime());
+
+
     const DisplayChannel & dc = dispChannels.at(_info._displayChannel);
 
     const std::vector<Gate> & gates = dc.gates();
-    if(_prevGatesCount!=gates.size() || _oldChannel!=channel.index()) {
+    if(_prevGatesCount!=gates.size() || _oldChannel!=channel.index() || _info._displayChannel != channel.getActiveDisplayChannelIndex()) {
         _oldChannel = channel.index();
         fillGates(gates);
     }

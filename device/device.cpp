@@ -230,7 +230,6 @@ void Device::setTVG(const ChannelID chIndex, const TVG &tvg)
 {
     Q_ASSERT(chIndex < 8);
     _interface->setRegister(0x40 + chIndex,TVG_SAMPLES_BYTES,tvg._samples);
-    //_state->setTVGForChannel(chIndex,tvg);
 }
 
 void Device::setTact(const TactRegisters & reg, const TactIndex index)
@@ -254,7 +253,6 @@ void Device::setTact(const TactRegisters & reg, const TactIndex index)
     if(_interface->setAndTestRegister(0x10+index*6+5,1,&reg._RESERVED)) {
         Q_ASSERT(false);
     }
-
 }
 
 AScan Device::getAscanForLine(const uint8_t line, AScan * output)

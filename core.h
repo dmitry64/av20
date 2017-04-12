@@ -79,9 +79,6 @@ public:
     Core(ModeManager * modeManager, CalibrationManager * calibrationManager);
     ~Core();
 
-
-
-
     // Internal
     ChannelsCalibration getCalibration();
     void notifyChannel(const Channel &channel);
