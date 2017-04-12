@@ -35,8 +35,8 @@ private:
     static std::vector<Gate> generateGates();
     static void setColor(Channel &chTemp, int i);
     static DisplayChannel generateDisplayChannel(const double angle);
-    std::vector<Channel> generateChannels(int channelsNumber, int dispChansNumber);
-    ChannelsCalibration generateCalibration(TactID tact, CalibrationIndex index, const QString &name, int channelsNumber, int dispChansNumber);
+    static std::vector<Channel> generateChannels(int channelsNumber, int dispChansNumber);
+    static ChannelsCalibration generateCalibration(TactID tact, CalibrationIndex index, const QString &name, int channelsNumber, int dispChansNumber);
 };
 
 #endif // CALIBRATIONMANAGER_H

@@ -22,7 +22,7 @@ void StatusBar::init()
 {
     System * system = System::getInstance();
     Q_ASSERT(system);
-    ui->operatorLabel->setText("Operator: " + system->getCurrentOperatorName());
+    ui->operatorLabel->setText(tr("Operator: ") + system->getCurrentOperatorName());
     ui->timeLabel->setText(system->getTime().toString(Qt::DefaultLocaleShortDate));
     ui->dateLabel->setText(system->getDate().toString(Qt::DefaultLocaleShortDate));
     ui->batteryButton->setText(QString::number(system->getBatteryPercent()) + "%");
@@ -71,7 +71,7 @@ void StatusBar::onDeviceConnectionErrorDisabled()
 
 void StatusBar::onOperatorChanged(QString name)
 {
-    ui->operatorLabel->setText("Operator: " +name);
+    ui->operatorLabel->setText(tr("Operator: ") +name);
 }
 
 void StatusBar::onRegistrationStatusChanged(bool status)

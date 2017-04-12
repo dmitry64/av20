@@ -43,10 +43,10 @@ void TVGEditorWidget::initNPointButtons()
         control->setIndex(i);
         control->setMin(0);
         control->setMax(80);
-        control->setName(QString::number(qRound(point.first * 200.0))+"us");
+        control->setName(QString::number(qRound(point.first * 200.0))+tr("us"));
         control->setStep(1);
         control->setValue((point.second)*80.0);
-        control->setSuffix("dB");
+        control->setSuffix(tr("dB"));
         ui->npointLayout->addWidget(control);
         _npointsControls.push_back(control);
         connect(control,SIGNAL(valueChanged(double)),this,SLOT(onNPointValueChanged(double)));
@@ -64,22 +64,22 @@ void TVGEditorWidget::updateNPointsTVG()
 
 void TVGEditorWidget::setupTwoPoint()
 {
-    ui->singleOffset->setName("Offset - To (us)");
+    ui->singleOffset->setName(tr("Offset - To (us)"));
     ui->singleOffset->setValue(100);
     ui->singleOffset->setMax(200.0);
     ui->singleOffset->setSuffix("us");
-    ui->singleHeight->setName("Height - A (dB)");
+    ui->singleHeight->setName(tr("Height - A (dB)"));
     ui->singleHeight->setValue(30);
     ui->singleHeight->setMax(80.0);
     ui->singleHeight->setSuffix("dB");
-    ui->singleForm->setName("Form - Ki (0 - 50)");
+    ui->singleForm->setName(tr("Form - Ki (0 - 50)"));
     ui->singleForm->setValue(15);
     ui->singleForm->setMax(50);
-    ui->singleWidth->setName("Width - T (us)");
+    ui->singleWidth->setName(tr("Width - T (us)"));
     ui->singleWidth->setValue(60);
     ui->singleWidth->setMax(200.0);
     ui->singleWidth->setSuffix("us");
-    ui->singleBase->setName("Base - B (dB)");
+    ui->singleBase->setName(tr("Base - B (dB)"));
     ui->singleBase->setValue(70);
     ui->singleBase->setMax(80.0);
     ui->singleBase->setSuffix("dB");

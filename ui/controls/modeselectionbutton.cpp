@@ -22,19 +22,19 @@ void ModeSelectionButton::setMode(DeviceMode mode, uint8_t index)
 
     switch (mode.type()) {
     case ModeTypes::MultiChannelMode:
-        name = "Search modes:";
+        name = tr("Search modes:");
         break;
     case ModeTypes::SingleChannelMode:
-        name = "Hand modes:";
+        name = tr("Hand modes:");
         break;
     case ModeTypes::HeadMode:
-        name = "Head scanner modes:";
+        name = tr("Head scanner modes:");
         break;
     case ModeTypes::WheelMode:
-        name = "Wheel modes:";
+        name = tr("Wheel modes:");
         break;
     case ModeTypes::Unknown:
-        name = "Unknown";
+        name = tr("Unknown");
         break;
     }
 

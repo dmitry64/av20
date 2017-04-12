@@ -8,12 +8,21 @@
 #include "device/calibrationmanager.h"
 #include "common/commonfunctions.h"
 #include "ui/splashscreen.h"
+#include <QTranslator>
+#include <QDebug>
+
+
 #define DEFAULT_MODE
 
 #ifdef DEFAULT_MODE
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+
+    QTranslator myappTranslator;
+    myappTranslator.load(":/translations/translations/translation_ru");
+    a.installTranslator(&myappTranslator);
+
     SplashScreen * splashScreen = new SplashScreen();
     splashScreen->show();
     QApplication::processEvents();

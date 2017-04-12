@@ -39,25 +39,25 @@ OptionsWidget::~OptionsWidget()
 void OptionsWidget::initColorSchemes(const Settings* settings)
 {
     std::vector<QString> colorSchemes;
-    colorSchemes.push_back(QString("Default"));
-    colorSchemes.push_back(QString("Alternative"));
+    colorSchemes.push_back(QString(tr("Default")));
+    colorSchemes.push_back(QString(tr("Alternative")));
     ui->colorSchemeWidget->setValues(colorSchemes);
     ui->colorSchemeWidget->setIndex(static_cast<size_t>(settings->getGlobalUiTheme()));
-    ui->colorSchemeWidget->setName("Color scheme");
+    ui->colorSchemeWidget->setName(tr("Color scheme"));
     connect(ui->colorSchemeWidget,SIGNAL(indexChanged(size_t)),this,SLOT(onColorSchemeIndexChanged(size_t)));
 }
 
 void OptionsWidget::initLanguages()
 {
     std::vector<QString> languages;
-    languages.push_back(QString("English"));
+    languages.push_back(QString(tr("English")));
     ui->languageWidget->setValues(languages);
-    ui->languageWidget->setName("Language");
+    ui->languageWidget->setName(tr("Language"));
 }
 
 void OptionsWidget::initBrightness(System* system)
 {
-    ui->brightnessWidget->setName("Brightness");
+    ui->brightnessWidget->setName(tr("Brightness"));
     ui->brightnessWidget->setSuffix("%");
     ui->brightnessWidget->setMax(100);
     ui->brightnessWidget->setValue(system->getBrightness());
@@ -66,7 +66,7 @@ void OptionsWidget::initBrightness(System* system)
 
 void OptionsWidget::initSound(System* system)
 {
-    ui->soundWidget->setName("Volume");
+    ui->soundWidget->setName(tr("Volume"));
     ui->soundWidget->setSuffix("%");
     ui->soundWidget->setMax(100);
     ui->soundWidget->setValue(system->getSoundVolume());

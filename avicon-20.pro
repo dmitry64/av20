@@ -245,7 +245,10 @@ FORMS    += \
     ui/dialogs/deletedialog.ui
 
 RESOURCES += \
-    resources.qrc
+    resources.qrc \
+    translations.qrc
 
 DISTFILES += \
     style.astylerc
+
+TRANSLATIONS += translations/translation_ru.ts

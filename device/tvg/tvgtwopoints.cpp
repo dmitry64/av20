@@ -27,7 +27,7 @@ double TVGTwoPoints::getCurve() const
     return _curve;
 }
 
-TVGTwoPoints::TVGTwoPoints()
+TVGTwoPoints::TVGTwoPoints() : _yBase(60), _xOffset(50), _yHeight(20), _xWidth(50), _curve(25)
 {
 
 }

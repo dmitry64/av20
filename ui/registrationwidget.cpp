@@ -33,12 +33,12 @@ void RegistrationWidget::on_startButton_released()
 {
     _registrationEnabled = !_registrationEnabled;
     if(_registrationEnabled) {
-        ui->startButton->setText("Stop registration");
+        ui->startButton->setText(tr("Stop registration"));
         QString filePath = System::getInstance()->getFilesystem()->getDataPath() + "/" + System::getInstance()->getTimestamp()+".dat";
         _core->startRegistration(filePath);
     }
     else {
-        ui->startButton->setText("Start registration");
+        ui->startButton->setText(tr("Start registration"));
         _core->stopRegistration();
     }
 }

@@ -5,7 +5,7 @@
 void ControlPanel::initPrismTime()
 {
     _prismTimeSpinbox = new TouchSpinBox();
-    _prismTimeSpinbox->setName("Prism time");
+    _prismTimeSpinbox->setName(tr("Prism time"));
     _prismTimeSpinbox->setMin(0);
     _prismTimeSpinbox->setMax(50);
     _prismTimeSpinbox->setValue(0);
@@ -17,7 +17,7 @@ void ControlPanel::initPrismTime()
 void ControlPanel::initMerkerPos()
 {
     _markerPositionSpinbox = new TouchSpinBox();
-    _markerPositionSpinbox->setName("Marker");
+    _markerPositionSpinbox->setName(tr("Marker"));
     _markerPositionSpinbox->setMin(0);
     _markerPositionSpinbox->setMax(800);
     _markerPositionSpinbox->setValue(0);
@@ -30,7 +30,7 @@ void ControlPanel::initFreqency()
 {
     _frequencySpinbox = new TouchSpinBoxString();
     _frequencySpinbox->setValues(FreqStrings);
-    _frequencySpinbox->setName("Frequency");
+    _frequencySpinbox->setName(tr("Frequency"));
     ui->scrollLayout->addWidget(_frequencySpinbox);
     connect(_frequencySpinbox,SIGNAL(indexChanged(size_t)),this,SLOT(onFrequencyChanged(size_t)));
 }
@@ -39,7 +39,7 @@ void ControlPanel::initPulseProg()
 {
     _progSpinbox = new TouchSpinBoxString();
     _progSpinbox->setValues(ProgStrings);
-    _progSpinbox->setName("Program");
+    _progSpinbox->setName(tr("Program"));
     ui->scrollLayout->addWidget(_progSpinbox);
     connect(_progSpinbox,SIGNAL(indexChanged(size_t)),this,SLOT(onPulseProgChanged(size_t)));
 }

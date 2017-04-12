@@ -372,7 +372,6 @@ void Core::finish()
     _calibrationManager->saveAll();
     _device->finish();
     _finished.store(true);
-
 }
 
 void Core::searchWork()

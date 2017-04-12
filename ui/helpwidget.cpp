@@ -44,7 +44,7 @@ void HelpWidget::on_listWidget_itemSelectionChanged()
             ui->textBrowser->setHtml(html);
         }
         else {
-            ui->textBrowser->setText("Error! Cannot open file!");
+            ui->textBrowser->setText(tr("Error! Cannot open file!"));
             qDebug() << "Error reading help file";
         }
     }
