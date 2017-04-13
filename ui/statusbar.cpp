@@ -22,6 +22,8 @@ void StatusBar::changeEvent(QEvent *event)
 {
     if (event->type() == QEvent::LanguageChange) {
         ui->retranslateUi(this);
+        System * system = System::getInstance();
+        ui->operatorLabel->setText(tr("Operator: ") + system->getCurrentOperatorName());
     }
     QWidget::changeEvent(event);
 }

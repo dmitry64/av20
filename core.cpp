@@ -123,7 +123,7 @@ Core::~Core()
 void Core::work()
 {
     init();
-    QElapsedTimer timer;
+    //QElapsedTimer timer;
     while(_active) {
         //timer.start();
         searchWork();

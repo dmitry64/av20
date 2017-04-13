@@ -42,10 +42,10 @@ void ChannelsView::initTactWidget()
     ui->tactWidget->setHorizontalHeaderItem(4,new QTableWidgetItem(tr("Tx II")));
 
     ui->tactWidget->setColumnWidth(0,50);
-    ui->tactWidget->setColumnWidth(1,40);
-    ui->tactWidget->setColumnWidth(2,40);
-    ui->tactWidget->setColumnWidth(3,40);
-    ui->tactWidget->setColumnWidth(4,40);
+    ui->tactWidget->setColumnWidth(1,60);
+    ui->tactWidget->setColumnWidth(2,60);
+    ui->tactWidget->setColumnWidth(3,60);
+    ui->tactWidget->setColumnWidth(4,60);
 }
 
 ChannelsView::ChannelsView(QWidget *parent) :

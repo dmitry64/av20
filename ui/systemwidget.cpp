@@ -31,6 +31,10 @@ void SystemWidget::changeEvent(QEvent *event)
 {
     if (event->type() == QEvent::LanguageChange) {
         ui->retranslateUi(this);
+        System * system = System::getInstance();
+        ui->softwareVersionLabel->setText(system->getSoftwareVersion());
+        ui->osVersionLabel->setText(system->getOSVersion());
+        ui->versionLabel->setText(_usmVersion);
     }
     QWidget::changeEvent(event);
 }
@@ -53,6 +57,7 @@ void SystemWidget::on_pauseButton_released()
 
 void SystemWidget::onUSMVersionChanged(QString string)
 {
+    _usmVersion = string;
     ui->versionLabel->setText(string);
 }
 

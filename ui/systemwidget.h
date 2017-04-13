@@ -13,6 +13,7 @@ class SystemWidget : public QWidget
 {
     Q_OBJECT
 
+    QString _usmVersion;
 public:
     explicit SystemWidget(QWidget *parent = 0);
     ~SystemWidget();
