@@ -10,7 +10,7 @@
 #include "ui/splashscreen.h"
 #include <QTranslator>
 #include <QDebug>
-
+#include "localization/localization.h"
 
 #define DEFAULT_MODE
 
@@ -18,10 +18,8 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-
-    QTranslator myappTranslator;
-    myappTranslator.load(":/translations/translations/translation_ru");
-    a.installTranslator(&myappTranslator);
+    Localization * localization = Localization::getInstance();
+    localization->init(a);
 
     SplashScreen * splashScreen = new SplashScreen();
     splashScreen->show();

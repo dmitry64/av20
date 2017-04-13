@@ -34,6 +34,7 @@ signals:
     void drawBScan(QSharedPointer<BScanDrawData> scan);
 private:
     Ui::BScanPage *ui;
+    void changeEvent(QEvent *event);
 };
 
 #endif // BSCANPAGE_H

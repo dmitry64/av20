@@ -34,6 +34,7 @@ private slots:
 
 private:
     Ui::CalibrationButton *ui;
+    void changeEvent(QEvent *event);
 };
 
 #endif // CALIBRATIONBUTTON_H

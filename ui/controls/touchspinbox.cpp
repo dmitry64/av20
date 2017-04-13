@@ -51,6 +51,11 @@ TouchSpinBox::~TouchSpinBox()
     delete ui;
 }
 
+void TouchSpinBox::changeEvent(QEvent *event)
+{
+    QWidget::changeEvent(event);
+}
+
 void TouchSpinBox::setValue(double value)
 {
     _value = value;

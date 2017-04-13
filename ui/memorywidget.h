@@ -13,6 +13,7 @@ class MemoryWidget : public QWidget
     Q_OBJECT
 
     void showEvent( QShowEvent* event );
+    void changeEvent(QEvent *event);
 public:
     explicit MemoryWidget(QWidget *parent = 0);
     ~MemoryWidget();

@@ -374,3 +374,14 @@ void MainWindow::reset()
     ui->tvgEditorWidget->reset();
     ui->bScanPage->reset();
 }
+
+void MainWindow::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange) {
+        ui->retranslateUi(this);
+        init();
+    }
+    //else {
+    QWidget::changeEvent(event);
+    //}
+}

@@ -70,6 +70,11 @@ AScanPlot::~AScanPlot()
 
 }
 
+void AScanPlot::changeEvent(QEvent *event)
+{
+    QWidget::changeEvent(event);
+}
+
 void AScanPlot::drawAscan(QPainter &painter, int width, int height)
 {
     painter.setPen(_ascanPen);

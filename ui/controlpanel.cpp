@@ -87,6 +87,18 @@ void ControlPanel::showEvent(QShowEvent *event)
     QWidget::showEvent( event );
 }
 
+void ControlPanel::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange) {
+        _prismTimeSpinbox->setName(tr("Prism time"));
+        _markerPositionSpinbox->setName(tr("Marker"));
+        _frequencySpinbox->setName(tr("Frequency"));
+        _progSpinbox->setName(tr("Program"));
+        ui->retranslateUi(this);
+    }
+    QWidget::changeEvent(event);
+}
+
 ControlPanel::~ControlPanel()
 {
     delete ui;

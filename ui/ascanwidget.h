@@ -54,6 +54,7 @@ private slots:
     void onFPSEnabledChanged(bool value);
 private:
     Ui::AScanWidget *ui;
+    void changeEvent(QEvent *event);
 };
 
 #endif // ASCANWIDGET_H

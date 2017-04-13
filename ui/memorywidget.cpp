@@ -9,6 +9,14 @@ void MemoryWidget::showEvent(QShowEvent *event)
     QWidget::showEvent(event);
 }
 
+void MemoryWidget::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange) {
+        ui->retranslateUi(this);
+    }
+    QWidget::changeEvent(event);
+}
+
 MemoryWidget::MemoryWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::MemoryWidget)

@@ -3,7 +3,8 @@
 
 #include <QWidget>
 
-namespace Ui {
+namespace Ui
+{
 class AddGateButton;
 }
 
@@ -21,6 +22,7 @@ signals:
     void addGate();
 private:
     Ui::AddGateButton *ui;
+    void changeEvent(QEvent *event);
 };
 
 #endif // ADDGATEBUTTON_H

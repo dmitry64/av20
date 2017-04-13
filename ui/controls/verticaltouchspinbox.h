@@ -54,6 +54,7 @@ private slots:
 
 private:
     Ui::VerticalTouchSpinBox *ui;
+    void changeEvent(QEvent *event);
 };
 
 #endif // VERTICALTOUCHSPINBOX_H

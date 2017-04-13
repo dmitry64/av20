@@ -62,6 +62,7 @@ signals:
     void systemMenuClosed();
 private:
     Ui::MenuPanel *ui;
+    void changeEvent(QEvent *event);
 };
 
 #endif // MENUPANEL_H

@@ -20,6 +20,14 @@ HelpWidget::~HelpWidget()
     delete ui;
 }
 
+void HelpWidget::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange) {
+        ui->retranslateUi(this);
+    }
+    QWidget::changeEvent(event);
+}
+
 void HelpWidget::updateFiles()
 {
     System * system = System::getInstance();

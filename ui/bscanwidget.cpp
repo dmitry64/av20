@@ -47,6 +47,14 @@ BScanWidget::~BScanWidget()
     delete ui;
 }
 
+void BScanWidget::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange) {
+        ui->retranslateUi(this);
+    }
+    QWidget::changeEvent(event);
+}
+
 void BScanWidget::drawGates(const double hstep, QPainter & painter, const int right)
 {
     const std::vector<Gate> &gates = _channelData.getDisplayChannels().at(_info._displayChannel).gates();

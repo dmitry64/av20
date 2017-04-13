@@ -56,6 +56,7 @@ private slots:
 private:
     Ui::TVGEditorWidget *ui;
     void setupTwoPoint();
+    void changeEvent(QEvent *event);
 };
 
 #endif // TVGEDITORWIDGET_H

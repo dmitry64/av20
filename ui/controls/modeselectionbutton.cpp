@@ -14,6 +14,14 @@ ModeSelectionButton::~ModeSelectionButton()
     delete ui;
 }
 
+void ModeSelectionButton::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange) {
+        ui->retranslateUi(this);
+    }
+    QWidget::changeEvent(event);
+}
+
 void ModeSelectionButton::setMode(DeviceMode mode, uint8_t index)
 {
     _mode = mode;

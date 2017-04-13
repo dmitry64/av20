@@ -23,6 +23,11 @@ VerticalTouchSpinBox::~VerticalTouchSpinBox()
     delete ui;
 }
 
+void VerticalTouchSpinBox::changeEvent(QEvent *event)
+{
+    QWidget::changeEvent(event);
+}
+
 int VerticalTouchSpinBox::index() const
 {
     return _index;

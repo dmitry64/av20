@@ -15,6 +15,14 @@ ModeSelectionWidget::~ModeSelectionWidget()
     delete ui;
 }
 
+void ModeSelectionWidget::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange) {
+        ui->retranslateUi(this);
+    }
+    QWidget::changeEvent(event);
+}
+
 void ModeSelectionWidget::setCore(Core *core)
 {
     Q_ASSERT(core);

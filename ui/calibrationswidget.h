@@ -39,6 +39,7 @@ private:
     Ui::CalibrationsWidget *ui;
     void clearButtons();
     void initButtons(const ChannelsCalibration& calibration, const CalibrationsInfoList& info);
+    void changeEvent(QEvent *event);
 };
 
 #endif // CALIBRATIONSWIDGET_H

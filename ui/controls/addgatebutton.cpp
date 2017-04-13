@@ -13,6 +13,14 @@ AddGateButton::~AddGateButton()
     delete ui;
 }
 
+void AddGateButton::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange) {
+        ui->retranslateUi(this);
+    }
+    QWidget::changeEvent(event);
+}
+
 void AddGateButton::on_addButton_released()
 {
     emit addGate();

@@ -18,6 +18,14 @@ StatusBar::~StatusBar()
     delete ui;
 }
 
+void StatusBar::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange) {
+        ui->retranslateUi(this);
+    }
+    QWidget::changeEvent(event);
+}
+
 void StatusBar::init()
 {
     System * system = System::getInstance();

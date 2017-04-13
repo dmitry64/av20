@@ -13,6 +13,11 @@ SchemeSelectionButton::~SchemeSelectionButton()
     delete ui;
 }
 
+void SchemeSelectionButton::changeEvent(QEvent *event)
+{
+    QWidget::changeEvent(event);
+}
+
 void SchemeSelectionButton::setText(const QString &text)
 {
     ui->mainButton->setText(text);

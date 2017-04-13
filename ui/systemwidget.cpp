@@ -27,6 +27,14 @@ SystemWidget::~SystemWidget()
     delete ui;
 }
 
+void SystemWidget::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange) {
+        ui->retranslateUi(this);
+    }
+    QWidget::changeEvent(event);
+}
+
 
 void SystemWidget::on_shutdownButton_released()
 {

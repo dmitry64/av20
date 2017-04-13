@@ -32,6 +32,7 @@ signals:
 
 private:
     Ui::SystemWidget *ui;
+    void changeEvent(QEvent *event);
 };
 
 #endif // SYSTEMWIDGET_H

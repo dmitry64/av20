@@ -63,6 +63,14 @@ MenuPanel::~MenuPanel()
     delete ui;
 }
 
+void MenuPanel::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange) {
+        ui->retranslateUi(this);
+    }
+    QWidget::changeEvent(event);
+}
+
 void MenuPanel::resetMenu()
 {
     closeCurrent();

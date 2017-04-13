@@ -45,6 +45,7 @@ public slots:
 private:
     Ui::BScanWidget *ui;
     void drawGates(const double hstep, QPainter &painter, const int right);
+    void changeEvent(QEvent *event);
 };
 
 #endif // BSCANWIDGET_H

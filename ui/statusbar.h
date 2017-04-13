@@ -38,6 +38,7 @@ public slots:
     void onDateTimeChanged(QDateTime time);
 private:
     Ui::StatusBar *ui;
+    void changeEvent(QEvent *event);
 };
 
 #endif // STATUSBAR_H

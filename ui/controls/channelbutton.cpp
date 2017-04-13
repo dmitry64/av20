@@ -36,6 +36,11 @@ ChannelButton::~ChannelButton()
     delete ui;
 }
 
+void ChannelButton::changeEvent(QEvent *event)
+{
+    QWidget::changeEvent(event);
+}
+
 void ChannelButton::setActive(bool state)
 {
     _state = state;

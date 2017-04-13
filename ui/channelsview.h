@@ -29,6 +29,7 @@ private:
     void fillTactsTable(const std::vector<Tact>& tacts, const ChannelsCalibration& calibrationsSnapshot);
     void initChannelsWidget();
     void initTactWidget();
+    void changeEvent(QEvent *event);
 };
 
 #endif // CHANNELSVIEW_H

@@ -123,7 +123,8 @@ SOURCES += core.cpp \
     ui/dialogs/deletedialog.cpp \
     ui/controls/widescrollbar.cpp \
     device/modificators/pulserfreqmodificator.cpp \
-    device/modificators/pulserprogmodificator.cpp
+    device/modificators/pulserprogmodificator.cpp \
+    localization/localization.cpp
 #    tests/coretest.cpp
 
 HEADERS  += \
@@ -204,7 +205,8 @@ HEADERS  += \
     ui/dialogs/deletedialog.h \
     ui/controls/widescrollbar.h \
     device/modificators/pulserfreqmodificator.h \
-    device/modificators/pulserprogmodificator.h
+    device/modificators/pulserprogmodificator.h \
+    localization/localization.h
 #    tests/coretest.h
 
 FORMS    += \
@@ -252,3 +254,4 @@ DISTFILES += \
     style.astylerc
 
 TRANSLATIONS += translations/translation_ru.ts
+TRANSLATIONS += translations/translation_en.ts

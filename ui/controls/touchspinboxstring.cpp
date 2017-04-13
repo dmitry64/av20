@@ -42,6 +42,11 @@ TouchSpinBoxString::~TouchSpinBoxString()
     delete ui;
 }
 
+void TouchSpinBoxString::changeEvent(QEvent *event)
+{
+    QWidget::changeEvent(event);
+}
+
 void TouchSpinBoxString::setValues(const std::vector<QString> &values)
 {
     _values = values;

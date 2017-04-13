@@ -37,6 +37,7 @@ signals:
 
 private:
     Ui::TouchSpinBoxString *ui;
+    void changeEvent(QEvent *event);
 };
 
 #endif // TOUCHSPINBOXSTRING_H

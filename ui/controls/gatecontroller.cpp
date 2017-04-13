@@ -41,6 +41,21 @@ GateController::~GateController()
     delete ui;
 }
 
+void GateController::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange) {
+        ui->gateStart->setName(tr("Gate start"));
+        ui->gateStart->setSuffix(tr("us"));
+        ui->gateFinish->setName(tr("Gate end"));
+        ui->gateFinish->setSuffix(tr("us"));
+        ui->gateLevel->setName(tr("Gate level"));
+        ui->gateLevel->setSuffix(tr("mV"));
+        ui->gateButton->setText(tr("Gate: ")+QString::number(_gate._start)+"-"+QString::number(_gate._finish)+"\n"+
+                                tr("Level: ")+QString::number(_gate._level));
+    }
+    QWidget::changeEvent(event);
+}
+
 void GateController::setGate(const Gate &gate)
 {
     _gate = gate;

@@ -13,6 +13,14 @@ DeleteDialog::~DeleteDialog()
     delete ui;
 }
 
+void DeleteDialog::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange) {
+        ui->retranslateUi(this);
+    }
+    QWidget::changeEvent(event);
+}
+
 void DeleteDialog::on_deleteButton_released()
 {
     emit doDelete();

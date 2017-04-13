@@ -38,6 +38,8 @@ class MainWindow : public QMainWindow
 
 private:
     void closeEvent(QCloseEvent *event);
+    void changeEvent(QEvent *event);
+
 private slots:
     void setColorScheme(UiTheme theme);
 
@@ -98,5 +100,7 @@ private:
     void connectMenuWidgets();
     void initBScanPage(const ChannelsCalibration& calibration);
 };
+
+
 
 #endif // MAINWINDOW_H

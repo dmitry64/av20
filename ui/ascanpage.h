@@ -35,6 +35,7 @@ signals:
 private:
     Ui::AScanPage *ui;
     void initBScan(ChannelsInfo info, const Channel& ch, const ChannelsCalibration& snapshot);
+    void changeEvent(QEvent *event);
 };
 
 #endif // ASCANPAGE_H

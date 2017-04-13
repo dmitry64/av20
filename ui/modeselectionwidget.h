@@ -7,7 +7,8 @@
 
 #include "ui/controls/modeselectionbutton.h"
 
-namespace Ui {
+namespace Ui
+{
 class ModeSelectionWidget;
 }
 
@@ -29,6 +30,7 @@ signals:
     void closeWindow();
 private:
     Ui::ModeSelectionWidget *ui;
+    void changeEvent(QEvent *event);
 };
 
 #endif // MODESELECTIONWIDGET_H

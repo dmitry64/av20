@@ -26,6 +26,7 @@ private slots:
 
 private:
     Ui::DeleteDialog *ui;
+    void changeEvent(QEvent *event);
 };
 
 #endif // DELETEDIALOG_H

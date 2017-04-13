@@ -14,6 +14,14 @@ RegistrationWidget::RegistrationWidget(QWidget *parent) :
     _registrationEnabled = false;
 }
 
+void RegistrationWidget::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange) {
+        ui->retranslateUi(this);
+    }
+    QWidget::changeEvent(event);
+}
+
 void RegistrationWidget::setCore(Core *core)
 {
     _core = core;

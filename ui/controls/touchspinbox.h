@@ -41,6 +41,7 @@ public:
 
 private:
     Ui::TouchSpinBox *ui;
+    void changeEvent(QEvent *event);
 signals:
     void valueChanged(double value);
 

@@ -25,6 +25,7 @@ signals:
     void schemeSelected(uint8_t index);
 private:
     Ui::SchemeSelectionButton *ui;
+    void changeEvent(QEvent *event);
 };
 
 #endif // SCHEMESELECTIONBUTTON_H

@@ -14,6 +14,14 @@ CalibrationsWidget::CalibrationsWidget(QWidget *parent) :
     _keyboard = 0;
 }
 
+void CalibrationsWidget::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange) {
+        ui->retranslateUi(this);
+    }
+    QWidget::changeEvent(event);
+}
+
 void CalibrationsWidget::clearButtons()
 {
     for(auto it=_buttons.begin(); it!=_buttons.end(); it++) {

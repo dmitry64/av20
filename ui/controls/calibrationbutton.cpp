@@ -20,6 +20,11 @@ CalibrationButton::~CalibrationButton()
     delete ui;
 }
 
+void CalibrationButton::changeEvent(QEvent *event)
+{
+    QWidget::changeEvent(event);
+}
+
 void CalibrationButton::setCalibrationInfo(const CalibrationInfo &info)
 {
     _info = info;

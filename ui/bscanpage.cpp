@@ -38,6 +38,14 @@ BScanPage::~BScanPage()
     delete ui;
 }
 
+void BScanPage::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange) {
+        ui->retranslateUi(this);
+    }
+    QWidget::changeEvent(event);
+}
+
 void BScanPage::setCore(Core *core)
 {
     _core = core;

@@ -38,6 +38,7 @@ signals:
     void channelSelected(ChannelsInfo);
 private:
     Ui::ChannelButton *ui;
+    void changeEvent(QEvent *event);
 };
 
 #endif // CHANNELBUTTON_H

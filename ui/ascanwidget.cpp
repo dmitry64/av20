@@ -84,6 +84,14 @@ AScanWidget::~AScanWidget()
     delete ui;
 }
 
+void AScanWidget::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange) {
+        ui->retranslateUi(this);
+    }
+    QWidget::changeEvent(event);
+}
+
 void AScanWidget::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event);

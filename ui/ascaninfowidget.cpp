@@ -13,6 +13,14 @@ AScanInfoWidget::~AScanInfoWidget()
     delete ui;
 }
 
+void AScanInfoWidget::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange) {
+        ui->retranslateUi(this);
+    }
+    QWidget::changeEvent(event);
+}
+
 void AScanInfoWidget::setHValue(int value)
 {
     ui->hLabel->setText(QString::number(value)+" us");

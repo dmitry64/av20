@@ -21,6 +21,7 @@ public:
 
 private:
     Ui::AScanInfoWidget *ui;
+    void changeEvent(QEvent *event);
 };
 
 #endif // ASCANINFOWIDGET_H

@@ -65,6 +65,18 @@ ChannelsView::~ChannelsView()
     delete ui;
 }
 
+void ChannelsView::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange) {
+        ui->retranslateUi(this);
+        initChannelsWidget();
+        initTactWidget();
+
+        init();
+    }
+    QWidget::changeEvent(event);
+}
+
 void ChannelsView::init()
 {
     Q_ASSERT(_core);
@@ -147,7 +159,7 @@ void ChannelsView::init(const ChannelsCalibration & calibrationsSnapshot, const 
             QTableWidgetItem * item = new QTableWidgetItem(tr("Chan #") + QString::number(i));
             item->setBackgroundColor(QColor(chan.getColorRed(),chan.getColorGreen(),chan.getColorBlue()));
             ui->channelsWidget->setItem(channelsRow,0,item);
-            item = new QTableWidgetItem((chan.getActiveDisplayChannelIndex() == j) ? "yes" : "no");
+            item = new QTableWidgetItem((chan.getActiveDisplayChannelIndex() == j) ? tr("yes") : tr("no"));
             item->setTextAlignment( Qt::AlignHCenter | Qt::AlignCenter );
             ui->channelsWidget->setItem(channelsRow,1,item);
             item = new QTableWidgetItem(QString::number(disp.angle()));

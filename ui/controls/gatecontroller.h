@@ -28,13 +28,10 @@ public:
 private slots:
     void on_gateButton_released();
     void on_deleteButton_released();
-
     void onStartChanged(double value);
     void onFinishChanged(double value);
     void onLevelChanged(double value);
-
     void onDeleteGate();
-
 
 signals:
     void deleteGate(Gate gate, GateController * controller);
@@ -42,6 +39,7 @@ signals:
 
 private:
     Ui::GateController *ui;
+    void changeEvent(QEvent *event);
 };
 
 #endif // GATECONTROLLER_H

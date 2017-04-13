@@ -41,6 +41,7 @@ private:
     void drawGates(QPainter &painter, int width, int height);
 
     void drawFps(QPainter &painter, int posx, int posy);
+    void changeEvent(QEvent *event);
 public:
     explicit AScanPlot(QWidget *parent = 0);
     ~AScanPlot();

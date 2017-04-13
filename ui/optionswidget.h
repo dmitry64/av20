@@ -5,6 +5,7 @@
 #include "common/definitions.h"
 #include "common/commonfunctions.h"
 #include "system/system.h"
+#include "localization/localization.h"
 
 namespace Ui
 {
@@ -35,6 +36,7 @@ private slots:
     void on_selectOperatorButton_released();
     void on_removeOperatorButton_released();
     void on_addOperatorButton_released();
+    void onLanguageChanged(size_t index);
 
     void onOperatorsListChanged();
 private:
@@ -44,6 +46,7 @@ private:
     void initBrightness(System* system);
     void initSound(System* system);
     void initDebug(const Settings* settings);
+    void changeEvent(QEvent *event);
 };
 
 #endif // OPTIONSWIDGET_H

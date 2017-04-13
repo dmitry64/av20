@@ -36,6 +36,14 @@ OptionsWidget::~OptionsWidget()
     delete ui;
 }
 
+void OptionsWidget::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange) {
+        ui->retranslateUi(this);
+    }
+    QWidget::changeEvent(event);
+}
+
 void OptionsWidget::initColorSchemes(const Settings* settings)
 {
     std::vector<QString> colorSchemes;
@@ -49,10 +57,15 @@ void OptionsWidget::initColorSchemes(const Settings* settings)
 
 void OptionsWidget::initLanguages()
 {
+    Localization * localization = Localization::getInstance();
     std::vector<QString> languages;
-    languages.push_back(QString(tr("English")));
+    languages.push_back(localization->getLanguageName(Lang::LANG_ENGLISH));
+    languages.push_back(localization->getLanguageName(Lang::LANG_RUSSIAN));
+
     ui->languageWidget->setValues(languages);
+    ui->languageWidget->setIndex(static_cast<size_t>(localization->getCurrentLanguage()));
     ui->languageWidget->setName(tr("Language"));
+    connect(ui->languageWidget,SIGNAL(indexChanged(size_t)),this,SLOT(onLanguageChanged(size_t)));
 }
 
 void OptionsWidget::initBrightness(System* system)
@@ -141,6 +154,15 @@ void OptionsWidget::on_addOperatorButton_released()
     Keyboard * keyboard = new Keyboard(this);
     connect(keyboard,SIGNAL(textReady(QString)),this,SLOT(addOperatorWithName(QString)));
     keyboard->show();
+}
+
+void OptionsWidget::onLanguageChanged(size_t index)
+{
+    Localization * localization = Localization::getInstance();
+    Lang lang = static_cast<Lang>(index);
+    logEvent("Options","Language changed to " + localization->getLanguageName(lang));
+
+    localization->setLanguage(lang);
 }
 
 void OptionsWidget::onOperatorsListChanged()

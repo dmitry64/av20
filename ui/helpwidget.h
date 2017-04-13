@@ -22,6 +22,7 @@ private slots:
 
 private:
     Ui::HelpWidget *ui;
+    void changeEvent(QEvent *event);
 };
 
 #endif // HELPWIDGET_H

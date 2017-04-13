@@ -43,6 +43,7 @@ public:
 
 private:
     void showEvent(QShowEvent *event);
+    void changeEvent(QEvent *event);
 
 signals:
 

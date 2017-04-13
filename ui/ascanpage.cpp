@@ -23,6 +23,14 @@ AScanPage::~AScanPage()
     delete ui;
 }
 
+void AScanPage::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange) {
+        ui->retranslateUi(this);
+    }
+    QWidget::changeEvent(event);
+}
+
 void AScanPage::reset()
 {
     ui->ascanWidget->reset();

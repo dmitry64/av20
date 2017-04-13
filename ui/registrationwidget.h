@@ -26,6 +26,7 @@ private slots:
 
 private:
     Ui::RegistrationWidget *ui;
+    void changeEvent(QEvent *event);
 };
 
 #endif // REGISTRATIONWIDGET_H

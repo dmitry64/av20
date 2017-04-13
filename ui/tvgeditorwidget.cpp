@@ -9,6 +9,14 @@ void TVGEditorWidget::showEvent(QShowEvent *event)
     switchToSelectedChannel();
 }
 
+void TVGEditorWidget::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange) {
+        ui->retranslateUi(this);
+    }
+    QWidget::changeEvent(event);
+}
+
 TVGTwoPoints *TVGEditorWidget::createTVGTwoPointsFromValues()
 {
     double base = ui->singleBase->value();
