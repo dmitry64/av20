@@ -2245,8 +2245,8 @@
                          <object>{b9c20d78-aeeb-4d59-b8f5-7ad6ecc3fc10}</object>
                          <context>Av20</context>
                          <name>Core</name>
-                         <pos>x:1010;y:890</pos>
-                         <rect>x:-235;y:-115;w:470;h:230</rect>
+                         <pos>x:2255;y:905</pos>
+                         <rect>x:-235;y:-120;w:470;h:240</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
                         </DObject>
@@ -2305,7 +2305,7 @@
                          <object>{183b09e7-b31c-431b-8b22-5614c47d621f}</object>
                          <context>Channel</context>
                          <name>Channel</name>
-                         <pos>x:1820;y:420</pos>
+                         <pos>x:2460;y:430</pos>
                          <rect>x:-145;y:-60;w:290;h:120</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -2328,7 +2328,7 @@
                          <object>{0782a746-05b5-4c44-bdcb-4c93aee48793}</object>
                          <context>Channel</context>
                          <name>RxChannel</name>
-                         <pos>x:2080;y:430</pos>
+                         <pos>x:2720;y:440</pos>
                          <rect>x:-75;y:-60;w:150;h:120</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -2351,7 +2351,7 @@
                          <object>{e9ed76b0-3d6c-4eb0-ab28-ea52b4dab2aa}</object>
                          <context>Channel</context>
                          <name>TxChannel</name>
-                         <pos>x:2080;y:560</pos>
+                         <pos>x:2720;y:570</pos>
                          <rect>x:-75;y:-55;w:150;h:110</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -2374,7 +2374,7 @@
                          <object>{68b702e5-398f-4667-a141-da73de6f34bd}</object>
                          <context>Channel</context>
                          <name>DisplayChannel</name>
-                         <pos>x:1815;y:565</pos>
+                         <pos>x:2455;y:575</pos>
                          <rect>x:-140;y:-60;w:280;h:120</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -2397,7 +2397,7 @@
                          <object>{cee2a0e5-8ad3-44f8-8e76-8d483cb35bc8}</object>
                          <context>Device</context>
                          <name>ChannelsCalibration</name>
-                         <pos>x:1505;y:425</pos>
+                         <pos>x:2145;y:435</pos>
                          <rect>x:-105;y:-55;w:210;h:110</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -2557,7 +2557,7 @@
                          <object>{e52f87c5-daba-4cda-b882-edeb3bea646a}</object>
                          <context>Device</context>
                          <name>Channel</name>
-                         <pos>x:1905;y:470</pos>
+                         <pos>x:2545;y:480</pos>
                          <rect>x:-260;y:-165;w:520;h:330</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>6</visual-role>
@@ -2578,7 +2578,7 @@
                          </base-DElement>
                          <object>{e1038c4a-5c7d-4f6b-b634-e8f6ee0ffd19}</object>
                          <name>Device</name>
-                         <pos>x:2050;y:865</pos>
+                         <pos>x:2690;y:875</pos>
                          <rect>x:-670;y:-595;w:1340;h:1190</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -2600,7 +2600,7 @@
                          <object>{a787cdac-a7f6-4690-919c-4d6c7e67c467}</object>
                          <context>Modificators</context>
                          <name>Modificator</name>
-                         <pos>x:1685;y:1140</pos>
+                         <pos>x:2325;y:1150</pos>
                          <rect>x:-65;y:-30;w:130;h:60</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -2622,7 +2622,7 @@
                          <object>{d61080cf-c101-487a-b846-77fd87c3e871}</object>
                          <context>Device</context>
                          <name>Modificators</name>
-                         <pos>x:1685;y:1180</pos>
+                         <pos>x:2325;y:1190</pos>
                          <rect>x:-295;y:-135;w:590;h:270</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>6</visual-role>
@@ -2644,7 +2644,7 @@
                          <object>{6d3db2be-f0bd-4103-8fde-680490819ec4}</object>
                          <context>Modificators</context>
                          <name>AddGateModificator</name>
-                         <pos>x:1485;y:1140</pos>
+                         <pos>x:2125;y:1150</pos>
                          <rect>x:-70;y:-35;w:140;h:70</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -2666,7 +2666,7 @@
                          <object>{a4287833-59c4-4653-9e1e-9376147ed786}</object>
                          <context>Modificators</context>
                          <name>GateModificator</name>
-                         <pos>x:1480;y:1250</pos>
+                         <pos>x:2120;y:1260</pos>
                          <rect>x:-60;y:-35;w:120;h:70</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -2688,7 +2688,7 @@
                          <object>{152ec528-36a5-4cfc-a51c-58ab2f6df07d}</object>
                          <context>Modificators</context>
                          <name>PrismTimeModificator</name>
-                         <pos>x:1680;y:1250</pos>
+                         <pos>x:2320;y:1260</pos>
                          <rect>x:-75;y:-35;w:150;h:70</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -2710,7 +2710,7 @@
                          <object>{30d4c072-9ad9-4a02-b483-5df6b840ee16}</object>
                          <context>Modificators</context>
                          <name>RemoveGateModificator</name>
-                         <pos>x:1880;y:1255</pos>
+                         <pos>x:2520;y:1265</pos>
                          <rect>x:-80;y:-35;w:160;h:70</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -2732,7 +2732,7 @@
                          <object>{9a539904-436a-4ccc-abd6-618d28f1a3a0}</object>
                          <context>Modificators</context>
                          <name>TVGModificator</name>
-                         <pos>x:1875;y:1140</pos>
+                         <pos>x:2515;y:1150</pos>
                          <rect>x:-70;y:-35;w:140;h:70</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -2873,7 +2873,7 @@
                          <object>{f3456065-6d68-4372-87e2-04f9817246fd}</object>
                          <context>Device</context>
                          <name>CalibrationManager</name>
-                         <pos>x:1605;y:695</pos>
+                         <pos>x:2245;y:705</pos>
                          <rect>x:-200;y:-45;w:400;h:90</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -2925,7 +2925,7 @@
                          <object>{13f5ccb0-6236-4369-a7ed-e1d034a1a1e1}</object>
                          <context>Tact</context>
                          <name>Tact</name>
-                         <pos>x:2390;y:785</pos>
+                         <pos>x:3030;y:795</pos>
                          <rect>x:-65;y:-105;w:130;h:210</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -2948,7 +2948,7 @@
                          <object>{77702c68-5bf0-42f6-bc7d-c1c7284639b2}</object>
                          <context>Device</context>
                          <name>Tact</name>
-                         <pos>x:2500;y:770</pos>
+                         <pos>x:3140;y:780</pos>
                          <rect>x:-190;y:-130;w:380;h:260</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>6</visual-role>
@@ -2970,7 +2970,7 @@
                          <object>{b6e73739-8f88-467e-9158-e70181280f3e}</object>
                          <context>Tact</context>
                          <name>TactTable</name>
-                         <pos>x:2580;y:730</pos>
+                         <pos>x:3220;y:740</pos>
                          <rect>x:-95;y:-50;w:190;h:100</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -3022,7 +3022,7 @@
                          <object>{3f7be03e-e657-4640-89f8-ff3c671d96ad}</object>
                          <context>Device</context>
                          <name>DeviceMode</name>
-                         <pos>x:2580;y:965</pos>
+                         <pos>x:3220;y:975</pos>
                          <rect>x:-115;y:-50;w:230;h:100</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -3074,7 +3074,7 @@
                          <object>{c9858df8-e8a9-4af5-bb36-fd7c8cf4b23e}</object>
                          <context>Device</context>
                          <name>ModeManager</name>
-                         <pos>x:2295;y:965</pos>
+                         <pos>x:2935;y:975</pos>
                          <rect>x:-110;y:-50;w:220;h:100</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -3155,7 +3155,7 @@
                          <object>{5ff3a734-d79f-494c-9176-4184f7f2af00}</object>
                          <context>Tvg</context>
                          <name>TVGCurve</name>
-                         <pos>x:2455;y:435</pos>
+                         <pos>x:3095;y:445</pos>
                          <rect>x:-225;y:-75;w:450;h:150</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -3178,7 +3178,7 @@
                          <object>{edaf5905-a907-42f1-b5ed-ba02bb1b3519}</object>
                          <context>Device</context>
                          <name>Tvg</name>
-                         <pos>x:2455;y:480</pos>
+                         <pos>x:3095;y:490</pos>
                          <rect>x:-235;y:-155;w:470;h:310</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>6</visual-role>
@@ -3200,7 +3200,7 @@
                          <object>{59508bef-6e7d-46df-9cd3-6a9b3de46f69}</object>
                          <context>Tvg</context>
                          <name>TVGSinglePoint</name>
-                         <pos>x:2450;y:580</pos>
+                         <pos>x:3090;y:590</pos>
                          <rect>x:-70;y:-40;w:140;h:80</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -3583,8 +3583,8 @@
                          <object>{d31307d6-a4ef-450f-a441-66e296561003}</object>
                          <context>Ui</context>
                          <name>MainWindow</name>
-                         <pos>x:540;y:1090</pos>
-                         <rect>x:-105;y:-85;w:210;h:170</rect>
+                         <pos>x:1070;y:935</pos>
+                         <rect>x:-190;y:-130;w:380;h:260</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
                         </DObject>
@@ -3604,8 +3604,8 @@
                          </base-DElement>
                          <object>{c9249c7f-4381-49e1-8dc6-38fd66d77c3f}</object>
                          <name>Ui</name>
-                         <pos>x:360;y:975</pos>
-                         <rect>x:-340;y:-365;w:680;h:730</rect>
+                         <pos>x:830;y:1100</pos>
+                         <rect>x:-755;y:-480;w:1510;h:960</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>9</visual-role>
                         </DObject>
@@ -3649,12 +3649,13 @@
                          <object>{782cd09b-040f-4a77-96d6-56d168e6241e}</object>
                          <context>Ui</context>
                          <name>AScanPage</name>
-                         <pos>x:340;y:830</pos>
-                         <rect>x:-90;y:-60;w:180;h:120</rect>
+                         <pos>x:630;y:930</pos>
+                         <rect>x:-210;y:-60;w:420;h:120</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
                         </DObject>
                        </base-DObject>
+                       <show-all-members>true</show-all-members>
                       </DClass>
                      </instance>
                     </item>
@@ -3694,12 +3695,13 @@
                          <object>{e54ff3e4-3f03-454a-a8a6-588dc23d5208}</object>
                          <context>Ui</context>
                          <name>BScanPage</name>
-                         <pos>x:305;y:975</pos>
-                         <rect>x:-85;y:-50;w:170;h:100</rect>
+                         <pos>x:630;y:1170</pos>
+                         <rect>x:-210;y:-65;w:420;h:130</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
                         </DObject>
                        </base-DObject>
+                       <show-all-members>true</show-all-members>
                       </DClass>
                      </instance>
                     </item>
@@ -3739,12 +3741,13 @@
                          <object>{1ebed1d0-6095-4278-b214-2501372f3bf0}</object>
                          <context>Ui</context>
                          <name>AScanWidget</name>
-                         <pos>x:105;y:715</pos>
-                         <rect>x:-70;y:-45;w:140;h:90</rect>
+                         <pos>x:225;y:760</pos>
+                         <rect>x:-140;y:-60;w:280;h:120</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
                         </DObject>
                        </base-DObject>
+                       <show-all-members>true</show-all-members>
                       </DClass>
                      </instance>
                     </item>
@@ -3784,12 +3787,13 @@
                          <object>{0378687f-aede-4363-a6e8-598b1331efb5}</object>
                          <context>Ui</context>
                          <name>BScanWidget</name>
-                         <pos>x:100;y:950</pos>
-                         <rect>x:-70;y:-45;w:140;h:90</rect>
+                         <pos>x:225;y:1160</pos>
+                         <rect>x:-140;y:-60;w:280;h:120</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
                         </DObject>
                        </base-DObject>
+                       <show-all-members>true</show-all-members>
                       </DClass>
                      </instance>
                     </item>
@@ -3852,12 +3856,13 @@
                          <object>{a86b5971-c2e0-4059-939c-83e0d8004ad1}</object>
                          <context>Ui</context>
                          <name>ChannelSelector</name>
-                         <pos>x:100;y:835</pos>
-                         <rect>x:-70;y:-40;w:140;h:80</rect>
+                         <pos>x:225;y:930</pos>
+                         <rect>x:-145;y:-50;w:290;h:100</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
                         </DObject>
                        </base-DObject>
+                       <show-all-members>true</show-all-members>
                       </DClass>
                      </instance>
                     </item>
@@ -3920,12 +3925,13 @@
                          <object>{bd26eb03-b4f1-4ad6-b7b5-b0ca031ee884}</object>
                          <context>Ui</context>
                          <name>TVGEditorWidget</name>
-                         <pos>x:335;y:700</pos>
-                         <rect>x:-90;y:-50;w:180;h:100</rect>
+                         <pos>x:630;y:745</pos>
+                         <rect>x:-210;y:-60;w:420;h:120</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
                         </DObject>
                        </base-DObject>
+                       <show-all-members>true</show-all-members>
                       </DClass>
                      </instance>
                     </item>
@@ -3988,8 +3994,8 @@
                          <object>{381d1217-c01d-4ef1-94a0-44cbb010be29}</object>
                          <context>Ui</context>
                          <name>ControlPanel</name>
-                         <pos>x:545;y:785</pos>
-                         <rect>x:-75;y:-45;w:150;h:90</rect>
+                         <pos>x:630;y:1050</pos>
+                         <rect>x:-65;y:-30;w:130;h:60</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
                         </DObject>
@@ -4033,8 +4039,8 @@
                          <object>{24f178f9-e648-4495-bbe1-de6add30d1ae}</object>
                          <context>Ui</context>
                          <name>MenuPanel</name>
-                         <pos>x:100;y:1035</pos>
-                         <rect>x:-65;y:-25;w:130;h:50</rect>
+                         <pos>x:900;y:750</pos>
+                         <rect>x:-40;y:-25;w:80;h:50</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
                         </DObject>
@@ -4078,8 +4084,8 @@
                          <object>{575a9376-f5cc-4d1a-85b1-d1175bf47f98}</object>
                          <context>Ui</context>
                          <name>StatusBar</name>
-                         <pos>x:100;y:1095</pos>
-                         <rect>x:-65;y:-25;w:130;h:50</rect>
+                         <pos>x:1035;y:750</pos>
+                         <rect>x:-45;y:-25;w:90;h:50</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
                         </DObject>
@@ -4123,8 +4129,8 @@
                          <object>{3727b7d4-3ccf-4093-8274-be67ed2678d9}</object>
                          <context>Ui</context>
                          <name>SystemWidget</name>
-                         <pos>x:100;y:1160</pos>
-                         <rect>x:-65;y:-30;w:130;h:60</rect>
+                         <pos>x:915;y:1120</pos>
+                         <rect>x:-50;y:-25;w:100;h:50</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
                         </DObject>
@@ -4168,8 +4174,9 @@
                          <object>{46339a94-6c9d-47da-80d8-99dc235273bb}</object>
                          <context>Ui</context>
                          <name>RegistrationWidget</name>
-                         <pos>x:100;y:1230</pos>
-                         <rect>x:-65;y:-30;w:130;h:60</rect>
+                         <pos>x:945;y:1190</pos>
+                         <rect>x:-65;y:-25;w:130;h:50</rect>
+                         <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
                         </DObject>
                        </base-DObject>
@@ -4212,8 +4219,8 @@
                          <object>{26c27a64-4d96-4d16-9775-7ca7cf1fe5bf}</object>
                          <context>Ui</context>
                          <name>OptionsWidget</name>
-                         <pos>x:100;y:1300</pos>
-                         <rect>x:-65;y:-30;w:130;h:60</rect>
+                         <pos>x:1185;y:1130</pos>
+                         <rect>x:-50;y:-25;w:100;h:50</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
                         </DObject>
@@ -4257,8 +4264,9 @@
                          <object>{6a2f3a01-e754-412b-b4cf-16e6fa3eb1fc}</object>
                          <context>Ui</context>
                          <name>ModeSelectionWidget</name>
-                         <pos>x:480;y:1300</pos>
-                         <rect>x:-70;y:-30;w:140;h:60</rect>
+                         <pos>x:1130;y:1195</pos>
+                         <rect>x:-70;y:-25;w:140;h:50</rect>
+                         <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
                         </DObject>
                        </base-DObject>
@@ -4301,8 +4309,9 @@
                          <object>{ac12db91-cc42-4350-8114-8b64dfb5ae55}</object>
                          <context>Ui</context>
                          <name>MemoryWidget</name>
-                         <pos>x:340;y:1300</pos>
-                         <rect>x:-55;y:-30;w:110;h:60</rect>
+                         <pos>x:1050;y:1130</pos>
+                         <rect>x:-55;y:-25;w:110;h:50</rect>
+                         <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
                         </DObject>
                        </base-DObject>
@@ -4345,8 +4354,9 @@
                          <object>{f9310e81-7b39-4164-be3e-b4b1fabd91bf}</object>
                          <context>Ui</context>
                          <name>HelpWidget</name>
-                         <pos>x:225;y:1300</pos>
-                         <rect>x:-45;y:-30;w:90;h:60</rect>
+                         <pos>x:1115;y:685</pos>
+                         <rect>x:-50;y:-25;w:100;h:50</rect>
+                         <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
                         </DObject>
                        </base-DObject>
@@ -4389,8 +4399,8 @@
                          <object>{d1188b92-0932-43d0-ba5d-3fbe1d127539}</object>
                          <context>Ui</context>
                          <name>ChannelsView</name>
-                         <pos>x:545;y:885</pos>
-                         <rect>x:-75;y:-40;w:150;h:80</rect>
+                         <pos>x:935;y:690</pos>
+                         <rect>x:-50;y:-25;w:100;h:50</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
                         </DObject>
@@ -4434,8 +4444,9 @@
                          <object>{d49546a0-c6ce-4ee2-9040-bd7e185c1ae5}</object>
                          <context>Ui</context>
                          <name>CalibrationsWidget</name>
-                         <pos>x:630;y:1300</pos>
-                         <rect>x:-65;y:-30;w:130;h:60</rect>
+                         <pos>x:1185;y:755</pos>
+                         <rect>x:-65;y:-25;w:130;h:50</rect>
+                         <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
                         </DObject>
                        </base-DObject>
@@ -4534,7 +4545,7 @@
                          <object>{dfce759b-9569-4145-b44b-4b6252c20a4c}</object>
                          <context>Device</context>
                          <name>Device</name>
-                         <pos>x:2335;y:1280</pos>
+                         <pos>x:2975;y:1290</pos>
                          <rect>x:-270;y:-150;w:540;h:300</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -4568,29 +4579,31 @@
                      </instance>
                     </item>
                     <item>
-                     <instance type="DPackage">
-                      <DPackage>
-                       <base-DObject>
-                        <DObject>
+                     <instance type="DAssociation">
+                      <DAssociation>
+                       <base-DRelation>
+                        <DRelation>
                          <base-DElement>
                           <DElement>
-                           <uid>{55bb7912-0c30-488b-a720-cb4f5430ae4b}</uid>
+                           <uid>{16c53da5-2bc8-4bde-b45f-a6e0a4b462bf}</uid>
                           </DElement>
                          </base-DElement>
-                         <object>{d958d647-270d-461f-9bc7-72d8f945f5b1}</object>
-                         <name>Av20</name>
-                         <pos>x:1015;y:860</pos>
-                         <rect>x:-300;y:-200;w:600;h:400</rect>
-                         <auto-sized>false</auto-sized>
-                         <visual-role>0</visual-role>
-                        </DObject>
-                       </base-DObject>
-                      </DPackage>
+                         <object>{2fe556e5-fe26-44eb-a805-0993b603bea9}</object>
+                         <a>{561f1168-28ac-4c83-b641-044283803796}</a>
+                         <b>{3ae955d5-183b-449d-9342-df9658eb4b09}</b>
+                        </DRelation>
+                       </base-DRelation>
+                       <b>
+                        <DAssociationEnd>
+                         <kind>2</kind>
+                        </DAssociationEnd>
+                       </b>
+                      </DAssociation>
                      </instance>
                     </item>
                    </qlist>
                   </elements>
-                  <last-modified>1491511136768</last-modified>
+                  <last-modified>1492183840951</last-modified>
                   <toolbarid>Classes</toolbarid>
                  </MDiagram>
                 </base-MDiagram>
@@ -7042,7 +7055,7 @@
                             <qlist>
                              <item>
                               <MClassMember>
-                               <uid>{3343ce04-37a2-4cdc-b5ed-1e4081130795}</uid>
+                               <uid>{afa9f0ef-18b7-43c9-8ad1-7016dfe83dc3}</uid>
                                <visibility>3</visibility>
                                <type>1</type>
                                <declaration>Device * _device</declaration>
@@ -7050,7 +7063,7 @@
                              </item>
                              <item>
                               <MClassMember>
-                               <uid>{8d4b0ff9-8121-4657-aa74-f41fe52722b9}</uid>
+                               <uid>{f5d821bf-a837-4e84-8c9d-953f6d8fdb5c}</uid>
                                <visibility>3</visibility>
                                <type>1</type>
                                <declaration>ModeManager * _modeManager</declaration>
@@ -7058,7 +7071,7 @@
                              </item>
                              <item>
                               <MClassMember>
-                               <uid>{bc71b66c-c5f2-43e9-b063-b976b1153a29}</uid>
+                               <uid>{9ba6c64f-7d48-41f4-952c-7fadfb30e120}</uid>
                                <visibility>3</visibility>
                                <type>1</type>
                                <declaration>CalibrationManager * _calibrationManager</declaration>
@@ -7066,7 +7079,7 @@
                              </item>
                              <item>
                               <MClassMember>
-                               <uid>{b76ad445-1239-4aba-b0bc-ef0d44a6e15c}</uid>
+                               <uid>{3ca3c931-b643-440c-9c7f-99d563b71fb2}</uid>
                                <visibility>1</visibility>
                                <type>2</type>
                                <declaration>Core(ModeManager * modeManager, CalibrationManager * calibrationManager)</declaration>
@@ -7074,7 +7087,7 @@
                              </item>
                              <item>
                               <MClassMember>
-                               <uid>{1bb42f6f-404f-48ae-9792-4bf65481bc71}</uid>
+                               <uid>{8155155a-bf78-4daa-8fe3-d74dd91df7d5}</uid>
                                <visibility>1</visibility>
                                <type>2</type>
                                <declaration>void run()</declaration>
@@ -7082,7 +7095,7 @@
                              </item>
                              <item>
                               <MClassMember>
-                               <uid>{118edd5a-710d-4299-88a8-4089ef7a237f}</uid>
+                               <uid>{7ca7f645-8ce9-4838-bb26-ebe3821e15e9}</uid>
                                <visibility>1</visibility>
                                <type>2</type>
                                <declaration>void stopCore()</declaration>
@@ -7090,7 +7103,7 @@
                              </item>
                              <item>
                               <MClassMember>
-                               <uid>{1d0b1272-45dd-4abd-87b1-19c7a87786a9}</uid>
+                               <uid>{5a32bb93-df73-4b0a-8164-14e8e7be0b43}</uid>
                                <visibility>1</visibility>
                                <type>2</type>
                                <declaration>ChannelsCalibration getCalibration()</declaration>
@@ -7098,7 +7111,7 @@
                              </item>
                              <item>
                               <MClassMember>
-                               <uid>{e329bed5-8df4-4071-8140-b5153c095437}</uid>
+                               <uid>{a9132eed-3157-4b57-8dd9-543d4ecfb303}</uid>
                                <visibility>1</visibility>
                                <type>2</type>
                                <declaration>void notifyChannel(const Channel &amp;channel)</declaration>
@@ -7106,7 +7119,7 @@
                              </item>
                              <item>
                               <MClassMember>
-                               <uid>{5afa8276-9f72-4e0c-aecd-7bd12a9cebb2}</uid>
+                               <uid>{b38567c6-d901-4d4a-8b45-e03e0558cf3e}</uid>
                                <visibility>1</visibility>
                                <type>2</type>
                                <declaration>void applyChannelsModification(ChannelID index, Channel channel)</declaration>
@@ -7114,7 +7127,7 @@
                              </item>
                              <item>
                               <MClassMember>
-                               <uid>{c1d783e1-d541-418a-8996-fa52eb32482f}</uid>
+                               <uid>{83d80aae-3fc4-40c3-8214-b5ba1f561863}</uid>
                                <visibility>1</visibility>
                                <type>2</type>
                                <declaration>void applyCurrentCalibrationToDevice()</declaration>
@@ -7122,7 +7135,7 @@
                              </item>
                              <item>
                               <MClassMember>
-                               <uid>{ced51dba-4a81-4a79-bb0e-5a9e558564fd}</uid>
+                               <uid>{3376488d-c3cf-4686-afc1-440052fe96fd}</uid>
                                <visibility>1</visibility>
                                <type>2</type>
                                <declaration>ChannelsCalibration getCalibrationsSnapshot()</declaration>
@@ -7130,7 +7143,7 @@
                              </item>
                              <item>
                               <MClassMember>
-                               <uid>{c4b7de66-abe7-42f0-9c4e-827a78e770b3}</uid>
+                               <uid>{159c83bf-aa40-4fd4-9a10-f8ae5d46a827}</uid>
                                <visibility>1</visibility>
                                <type>2</type>
                                <declaration>CalibrationsInfoList getAvailableCalibrationsSnapshot()</declaration>
@@ -7138,7 +7151,7 @@
                              </item>
                              <item>
                               <MClassMember>
-                               <uid>{8848ffa6-e46f-487f-9ce7-23a889a28fb7}</uid>
+                               <uid>{2ed5a49c-30fa-4751-80f5-c6c31d636862}</uid>
                                <visibility>1</visibility>
                                <type>2</type>
                                <declaration>TactTable getTactTableSnapshot()</declaration>
@@ -7796,6 +7809,42 @@
                              </relations>
                             </MObject>
                            </base-MObject>
+                           <members>
+                            <qlist>
+                             <item>
+                              <MClassMember>
+                               <uid>{d5eada3f-932a-41a0-a0d7-8fe617f467d0}</uid>
+                               <visibility>3</visibility>
+                               <type>1</type>
+                               <declaration>ChannelsInfo _current</declaration>
+                              </MClassMember>
+                             </item>
+                             <item>
+                              <MClassMember>
+                               <uid>{6a7ad982-a66f-4e40-9e95-fd406a4abbdc}</uid>
+                               <visibility>1</visibility>
+                               <type>2</type>
+                               <declaration>void init(const ChannelsInfo &amp; info)</declaration>
+                              </MClassMember>
+                             </item>
+                             <item>
+                              <MClassMember>
+                               <uid>{bec8179c-d04d-4265-a7fb-b160b9f2e479}</uid>
+                               <visibility>7</visibility>
+                               <type>2</type>
+                               <declaration>void onDisplayPackage(QSharedPointer&lt;DisplayPackage&gt; package)</declaration>
+                              </MClassMember>
+                             </item>
+                             <item>
+                              <MClassMember>
+                               <uid>{24d6b74d-a686-4e25-9fe0-62dd34e84da4}</uid>
+                               <visibility>7</visibility>
+                               <type>2</type>
+                               <declaration>void setChannel(const ChannelsInfo &amp; info)</declaration>
+                              </MClassMember>
+                             </item>
+                            </qlist>
+                           </members>
                           </MClass>
                          </instance>
                         </target>
@@ -7853,6 +7902,48 @@
                              </relations>
                             </MObject>
                            </base-MObject>
+                           <members>
+                            <qlist>
+                             <item>
+                              <MClassMember>
+                               <uid>{072ed218-2622-4d0c-b204-12a600fe20fb}</uid>
+                               <type>1</type>
+                               <declaration>Core * _core</declaration>
+                              </MClassMember>
+                             </item>
+                             <item>
+                              <MClassMember>
+                               <uid>{d121227e-34a7-40d0-8ade-f1107e706262}</uid>
+                               <type>1</type>
+                               <declaration>std::vector&lt;BScanWidget*&gt; _bScanWidgets</declaration>
+                              </MClassMember>
+                             </item>
+                             <item>
+                              <MClassMember>
+                               <uid>{c49fe236-c7df-40ad-8d31-e1ebbd7c54ee}</uid>
+                               <visibility>1</visibility>
+                               <type>2</type>
+                               <declaration>void init(const ChannelsCalibration &amp;snapshot)</declaration>
+                              </MClassMember>
+                             </item>
+                             <item>
+                              <MClassMember>
+                               <uid>{59936508-8368-4ff1-bda0-f87fbdfc1a9d}</uid>
+                               <visibility>7</visibility>
+                               <type>2</type>
+                               <declaration>void onDisplayPackage(QSharedPointer&lt;DisplayPackage&gt; package)</declaration>
+                              </MClassMember>
+                             </item>
+                             <item>
+                              <MClassMember>
+                               <uid>{33d2dfa1-fc39-4d33-9b30-d413df75f257}</uid>
+                               <visibility>7</visibility>
+                               <type>2</type>
+                               <declaration>void setChannel(const ChannelsInfo &amp; info)</declaration>
+                              </MClassMember>
+                             </item>
+                            </qlist>
+                           </members>
                           </MClass>
                          </instance>
                         </target>
@@ -7937,6 +8028,26 @@
                              </relations>
                             </MObject>
                            </base-MObject>
+                           <members>
+                            <qlist>
+                             <item>
+                              <MClassMember>
+                               <uid>{3715584b-826b-4595-8c34-8c1bbd6fb555}</uid>
+                               <visibility>1</visibility>
+                               <type>2</type>
+                               <declaration>void paintEvent(QPaintEvent * event)</declaration>
+                              </MClassMember>
+                             </item>
+                             <item>
+                              <MClassMember>
+                               <uid>{c0a898c2-4e53-46e1-9a9c-012e5e613201}</uid>
+                               <visibility>1</visibility>
+                               <type>2</type>
+                               <declaration>void onAScan(const AScanDrawData &amp;scan)</declaration>
+                              </MClassMember>
+                             </item>
+                            </qlist>
+                           </members>
                           </MClass>
                          </instance>
                         </target>
@@ -8021,6 +8132,26 @@
                              </relations>
                             </MObject>
                            </base-MObject>
+                           <members>
+                            <qlist>
+                             <item>
+                              <MClassMember>
+                               <uid>{7da965c9-5b31-46ff-975c-5048d239a34a}</uid>
+                               <visibility>1</visibility>
+                               <type>2</type>
+                               <declaration>void paintEvent(QPaintEvent * event)</declaration>
+                              </MClassMember>
+                             </item>
+                             <item>
+                              <MClassMember>
+                               <uid>{843a2358-ab31-4ab1-b339-a3670a46aff9}</uid>
+                               <visibility>1</visibility>
+                               <type>2</type>
+                               <declaration>void onBScan(const BScanDrawData &amp;scan)</declaration>
+                              </MClassMember>
+                             </item>
+                            </qlist>
+                           </members>
                           </MClass>
                          </instance>
                         </target>
@@ -8132,6 +8263,26 @@
                              </relations>
                             </MObject>
                            </base-MObject>
+                           <members>
+                            <qlist>
+                             <item>
+                              <MClassMember>
+                               <uid>{f8ab6f15-6fa9-4936-a8ef-a9b8cd5ddda9}</uid>
+                               <visibility>1</visibility>
+                               <type>2</type>
+                               <declaration>void init(const ChannelsCalibration &amp;snapshot)</declaration>
+                              </MClassMember>
+                             </item>
+                             <item>
+                              <MClassMember>
+                               <uid>{3f2c0f63-2bc1-450a-a7c4-5bada800fba5}</uid>
+                               <visibility>4</visibility>
+                               <type>2</type>
+                               <declaration>void channelChanged(ChannelsInfo info)</declaration>
+                              </MClassMember>
+                             </item>
+                            </qlist>
+                           </members>
                           </MClass>
                          </instance>
                         </target>
@@ -8183,12 +8334,74 @@
                                    </target>
                                   </handle>
                                  </item>
+                                 <item>
+                                  <handle>
+                                   <uid>{2fe556e5-fe26-44eb-a805-0993b603bea9}</uid>
+                                   <target>
+                                    <instance type="MAssociation">
+                                     <MAssociation>
+                                      <base-MRelation>
+                                       <MRelation>
+                                        <base-MElement>
+                                         <MElement>
+                                          <uid>{2fe556e5-fe26-44eb-a805-0993b603bea9}</uid>
+                                         </MElement>
+                                        </base-MElement>
+                                        <a>{bd26eb03-b4f1-4ad6-b7b5-b0ca031ee884}</a>
+                                        <b>{d31307d6-a4ef-450f-a441-66e296561003}</b>
+                                       </MRelation>
+                                      </base-MRelation>
+                                      <b>
+                                       <MAssociationEnd>
+                                        <kind>2</kind>
+                                       </MAssociationEnd>
+                                      </b>
+                                     </MAssociation>
+                                    </instance>
+                                   </target>
+                                  </handle>
+                                 </item>
                                 </qlist>
                                </handles>
                               </handles>
                              </relations>
                             </MObject>
                            </base-MObject>
+                           <members>
+                            <qlist>
+                             <item>
+                              <MClassMember>
+                               <uid>{b9c21419-e6db-41d7-b639-395d14111d98}</uid>
+                               <type>1</type>
+                               <declaration>ChannelsInfo _info</declaration>
+                              </MClassMember>
+                             </item>
+                             <item>
+                              <MClassMember>
+                               <uid>{2bb9777d-477f-4d15-8f84-97e475174dc3}</uid>
+                               <visibility>1</visibility>
+                               <type>2</type>
+                               <declaration>void init(const ChannelsInfo &amp;info)</declaration>
+                              </MClassMember>
+                             </item>
+                             <item>
+                              <MClassMember>
+                               <uid>{02ec037d-cec2-489d-aae3-0a0a597c33db}</uid>
+                               <visibility>7</visibility>
+                               <type>2</type>
+                               <declaration>void onDisplayPackage(QSharedPointer&lt;DisplayPackage&gt; package)</declaration>
+                              </MClassMember>
+                             </item>
+                             <item>
+                              <MClassMember>
+                               <uid>{67b84e06-39a6-45d1-b176-a766f1bcc270}</uid>
+                               <visibility>7</visibility>
+                               <type>2</type>
+                               <declaration>void setChannel(const ChannelsInfo &amp; info)</declaration>
+                              </MClassMember>
+                             </item>
+                            </qlist>
+                           </members>
                           </MClass>
                          </instance>
                         </target>
