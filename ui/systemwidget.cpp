@@ -32,6 +32,7 @@ void SystemWidget::changeEvent(QEvent *event)
     if (event->type() == QEvent::LanguageChange) {
         ui->retranslateUi(this);
         System * system = System::getInstance();
+        ui->operatorLabel->setText(system->getCurrentOperatorName());
         ui->softwareVersionLabel->setText(system->getSoftwareVersion());
         ui->osVersionLabel->setText(system->getOSVersion());
         ui->versionLabel->setText(_usmVersion);

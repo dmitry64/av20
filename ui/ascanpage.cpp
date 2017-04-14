@@ -37,7 +37,7 @@ void AScanPage::reset()
     ui->bscanWidget->reset();
 }
 
-void AScanPage::init(ChannelsInfo info)
+void AScanPage::init(const ChannelsInfo &info)
 {
     Q_ASSERT(_core);
     const ChannelsCalibration & snapshot = _core->getCalibrationsSnapshot();
@@ -61,7 +61,7 @@ void AScanPage::initBScan(ChannelsInfo info, const Channel& ch, const ChannelsCa
     ui->bscanWidget->setActiveChannelData(ch,info);
 }
 
-void AScanPage::init(ChannelsInfo info,const ChannelsCalibration & snapshot)
+void AScanPage::init(const ChannelsInfo &info, const ChannelsCalibration & snapshot)
 {
     logEvent("AScanPage","Initializing");
     const Channel & ch = snapshot.getChannel(info._channel);
@@ -110,7 +110,7 @@ void AScanPage::onChannelChanged(Channel channel)
     ui->controlPanel->init(channel);
 }
 
-void AScanPage::setChannel(ChannelsInfo info)
+void AScanPage::setChannel(const ChannelsInfo &info)
 {
     _current = info;
     const ChannelsCalibration & snapshot = _core->getCalibrationsSnapshot();
