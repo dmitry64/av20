@@ -2925,7 +2925,7 @@
                          <object>{13f5ccb0-6236-4369-a7ed-e1d034a1a1e1}</object>
                          <context>Tact</context>
                          <name>Tact</name>
-                         <pos>x:3030;y:795</pos>
+                         <pos>x:3005;y:795</pos>
                          <rect>x:-65;y:-105;w:130;h:210</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -2948,8 +2948,8 @@
                          <object>{77702c68-5bf0-42f6-bc7d-c1c7284639b2}</object>
                          <context>Device</context>
                          <name>Tact</name>
-                         <pos>x:3140;y:780</pos>
-                         <rect>x:-190;y:-130;w:380;h:260</rect>
+                         <pos>x:3125;y:780</pos>
+                         <rect>x:-205;y:-130;w:410;h:260</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>6</visual-role>
                         </DObject>
@@ -2970,7 +2970,7 @@
                          <object>{b6e73739-8f88-467e-9158-e70181280f3e}</object>
                          <context>Tact</context>
                          <name>TactTable</name>
-                         <pos>x:3220;y:740</pos>
+                         <pos>x:3220;y:795</pos>
                          <rect>x:-95;y:-50;w:190;h:100</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -3199,8 +3199,8 @@
                          </base-DElement>
                          <object>{59508bef-6e7d-46df-9cd3-6a9b3de46f69}</object>
                          <context>Tvg</context>
-                         <name>TVGSinglePoint</name>
-                         <pos>x:3090;y:590</pos>
+                         <name>TVGTwoPoint</name>
+                         <pos>x:2950;y:590</pos>
                          <rect>x:-70;y:-40;w:140;h:80</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -3269,7 +3269,7 @@
                          <object>{00c9e0d6-6831-47a9-9a48-d996227b639c}</object>
                          <context>System</context>
                          <name>System</name>
-                         <pos>x:355;y:435</pos>
+                         <pos>x:410;y:375</pos>
                          <rect>x:-110;y:-75;w:220;h:150</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -3291,8 +3291,8 @@
                          </base-DElement>
                          <object>{70c4a36a-e21b-4882-857c-a19e73d13e4d}</object>
                          <name>System</name>
-                         <pos>x:365;y:430</pos>
-                         <rect>x:-335;y:-165;w:670;h:330</rect>
+                         <pos>x:415;y:355</pos>
+                         <rect>x:-335;y:-185;w:670;h:370</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>5</visual-role>
                         </DObject>
@@ -3313,8 +3313,8 @@
                          <object>{c74545ef-ef43-45a8-9965-068c40a5afd2}</object>
                          <context>System</context>
                          <name>Sound</name>
-                         <pos>x:125;y:450</pos>
-                         <rect>x:-70;y:-40;w:140;h:80</rect>
+                         <pos>x:170;y:335</pos>
+                         <rect>x:-70;y:-30;w:140;h:60</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
                         </DObject>
@@ -3335,8 +3335,8 @@
                          <object>{c6e567a4-12de-4fed-abee-c3664cd7c50a}</object>
                          <context>System</context>
                          <name>Temperature</name>
-                         <pos>x:615;y:450</pos>
-                         <rect>x:-70;y:-40;w:140;h:80</rect>
+                         <pos>x:655;y:335</pos>
+                         <rect>x:-70;y:-30;w:140;h:60</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
                         </DObject>
@@ -3357,8 +3357,8 @@
                          <object>{daf47b4d-68a3-40bf-b526-b87f37ddd69e}</object>
                          <context>System</context>
                          <name>Filesystem</name>
-                         <pos>x:615;y:355</pos>
-                         <rect>x:-70;y:-45;w:140;h:90</rect>
+                         <pos>x:655;y:260</pos>
+                         <rect>x:-70;y:-30;w:140;h:60</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
                         </DObject>
@@ -3379,8 +3379,8 @@
                          <object>{358e0a00-20d2-4495-9ea2-3ab73d716680}</object>
                          <context>System</context>
                          <name>DateTimeController</name>
-                         <pos>x:125;y:355</pos>
-                         <rect>x:-70;y:-45;w:140;h:90</rect>
+                         <pos>x:170;y:260</pos>
+                         <rect>x:-70;y:-30;w:140;h:60</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
                         </DObject>
@@ -3401,8 +3401,8 @@
                          <object>{4f041464-0cfc-415f-97a2-776a46b19e6c}</object>
                          <context>System</context>
                          <name>BrightnessController</name>
-                         <pos>x:125;y:545</pos>
-                         <rect>x:-70;y:-40;w:140;h:80</rect>
+                         <pos>x:170;y:410</pos>
+                         <rect>x:-70;y:-30;w:140;h:60</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
                         </DObject>
@@ -3423,8 +3423,8 @@
                          <object>{f441702a-a6d3-4ba5-a518-2fa1953608ef}</object>
                          <context>System</context>
                          <name>BatteryController</name>
-                         <pos>x:615;y:540</pos>
-                         <rect>x:-70;y:-40;w:140;h:80</rect>
+                         <pos>x:655;y:410</pos>
+                         <rect>x:-70;y:-30;w:140;h:60</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
                         </DObject>
@@ -3583,7 +3583,7 @@
                          <object>{d31307d6-a4ef-450f-a441-66e296561003}</object>
                          <context>Ui</context>
                          <name>MainWindow</name>
-                         <pos>x:1070;y:935</pos>
+                         <pos>x:960;y:915</pos>
                          <rect>x:-190;y:-130;w:380;h:260</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -3604,7 +3604,7 @@
                          </base-DElement>
                          <object>{c9249c7f-4381-49e1-8dc6-38fd66d77c3f}</object>
                          <name>Ui</name>
-                         <pos>x:830;y:1100</pos>
+                         <pos>x:720;y:1080</pos>
                          <rect>x:-755;y:-480;w:1510;h:960</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>9</visual-role>
@@ -3649,7 +3649,7 @@
                          <object>{782cd09b-040f-4a77-96d6-56d168e6241e}</object>
                          <context>Ui</context>
                          <name>AScanPage</name>
-                         <pos>x:630;y:930</pos>
+                         <pos>x:520;y:910</pos>
                          <rect>x:-210;y:-60;w:420;h:120</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -3695,7 +3695,7 @@
                          <object>{e54ff3e4-3f03-454a-a8a6-588dc23d5208}</object>
                          <context>Ui</context>
                          <name>BScanPage</name>
-                         <pos>x:630;y:1170</pos>
+                         <pos>x:520;y:1150</pos>
                          <rect>x:-210;y:-65;w:420;h:130</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -3741,7 +3741,7 @@
                          <object>{1ebed1d0-6095-4278-b214-2501372f3bf0}</object>
                          <context>Ui</context>
                          <name>AScanWidget</name>
-                         <pos>x:225;y:760</pos>
+                         <pos>x:115;y:740</pos>
                          <rect>x:-140;y:-60;w:280;h:120</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -3787,7 +3787,7 @@
                          <object>{0378687f-aede-4363-a6e8-598b1331efb5}</object>
                          <context>Ui</context>
                          <name>BScanWidget</name>
-                         <pos>x:225;y:1160</pos>
+                         <pos>x:115;y:1140</pos>
                          <rect>x:-140;y:-60;w:280;h:120</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -3856,7 +3856,7 @@
                          <object>{a86b5971-c2e0-4059-939c-83e0d8004ad1}</object>
                          <context>Ui</context>
                          <name>ChannelSelector</name>
-                         <pos>x:225;y:930</pos>
+                         <pos>x:115;y:910</pos>
                          <rect>x:-145;y:-50;w:290;h:100</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -3925,7 +3925,7 @@
                          <object>{bd26eb03-b4f1-4ad6-b7b5-b0ca031ee884}</object>
                          <context>Ui</context>
                          <name>TVGEditorWidget</name>
-                         <pos>x:630;y:745</pos>
+                         <pos>x:520;y:725</pos>
                          <rect>x:-210;y:-60;w:420;h:120</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -3994,7 +3994,7 @@
                          <object>{381d1217-c01d-4ef1-94a0-44cbb010be29}</object>
                          <context>Ui</context>
                          <name>ControlPanel</name>
-                         <pos>x:630;y:1050</pos>
+                         <pos>x:520;y:1030</pos>
                          <rect>x:-65;y:-30;w:130;h:60</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -4039,7 +4039,7 @@
                          <object>{24f178f9-e648-4495-bbe1-de6add30d1ae}</object>
                          <context>Ui</context>
                          <name>MenuPanel</name>
-                         <pos>x:900;y:750</pos>
+                         <pos>x:790;y:730</pos>
                          <rect>x:-40;y:-25;w:80;h:50</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -4084,7 +4084,7 @@
                          <object>{575a9376-f5cc-4d1a-85b1-d1175bf47f98}</object>
                          <context>Ui</context>
                          <name>StatusBar</name>
-                         <pos>x:1035;y:750</pos>
+                         <pos>x:925;y:730</pos>
                          <rect>x:-45;y:-25;w:90;h:50</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -4129,7 +4129,7 @@
                          <object>{3727b7d4-3ccf-4093-8274-be67ed2678d9}</object>
                          <context>Ui</context>
                          <name>SystemWidget</name>
-                         <pos>x:915;y:1120</pos>
+                         <pos>x:805;y:1100</pos>
                          <rect>x:-50;y:-25;w:100;h:50</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -4174,7 +4174,7 @@
                          <object>{46339a94-6c9d-47da-80d8-99dc235273bb}</object>
                          <context>Ui</context>
                          <name>RegistrationWidget</name>
-                         <pos>x:945;y:1190</pos>
+                         <pos>x:835;y:1170</pos>
                          <rect>x:-65;y:-25;w:130;h:50</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -4219,7 +4219,7 @@
                          <object>{26c27a64-4d96-4d16-9775-7ca7cf1fe5bf}</object>
                          <context>Ui</context>
                          <name>OptionsWidget</name>
-                         <pos>x:1185;y:1130</pos>
+                         <pos>x:1075;y:1110</pos>
                          <rect>x:-50;y:-25;w:100;h:50</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -4264,7 +4264,7 @@
                          <object>{6a2f3a01-e754-412b-b4cf-16e6fa3eb1fc}</object>
                          <context>Ui</context>
                          <name>ModeSelectionWidget</name>
-                         <pos>x:1130;y:1195</pos>
+                         <pos>x:1020;y:1175</pos>
                          <rect>x:-70;y:-25;w:140;h:50</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -4309,7 +4309,7 @@
                          <object>{ac12db91-cc42-4350-8114-8b64dfb5ae55}</object>
                          <context>Ui</context>
                          <name>MemoryWidget</name>
-                         <pos>x:1050;y:1130</pos>
+                         <pos>x:940;y:1110</pos>
                          <rect>x:-55;y:-25;w:110;h:50</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -4354,7 +4354,7 @@
                          <object>{f9310e81-7b39-4164-be3e-b4b1fabd91bf}</object>
                          <context>Ui</context>
                          <name>HelpWidget</name>
-                         <pos>x:1115;y:685</pos>
+                         <pos>x:1005;y:665</pos>
                          <rect>x:-50;y:-25;w:100;h:50</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -4399,7 +4399,7 @@
                          <object>{d1188b92-0932-43d0-ba5d-3fbe1d127539}</object>
                          <context>Ui</context>
                          <name>ChannelsView</name>
-                         <pos>x:935;y:690</pos>
+                         <pos>x:825;y:670</pos>
                          <rect>x:-50;y:-25;w:100;h:50</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -4444,7 +4444,7 @@
                          <object>{d49546a0-c6ce-4ee2-9040-bd7e185c1ae5}</object>
                          <context>Ui</context>
                          <name>CalibrationsWidget</name>
-                         <pos>x:1185;y:755</pos>
+                         <pos>x:1075;y:735</pos>
                          <rect>x:-65;y:-25;w:130;h:50</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -4601,9 +4601,139 @@
                       </DAssociation>
                      </instance>
                     </item>
+                    <item>
+                     <instance type="DClass">
+                      <DClass>
+                       <base-DObject>
+                        <DObject>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{d89174b0-fda3-4c70-ba0f-bf3f7e11b289}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{02e14d6b-22a3-4e52-a450-9a5ddb95fce0}</object>
+                         <context>System</context>
+                         <name>Operators</name>
+                         <pos>x:655;y:480</pos>
+                         <rect>x:-70;y:-25;w:140;h:50</rect>
+                         <auto-sized>false</auto-sized>
+                         <visual-role>0</visual-role>
+                        </DObject>
+                       </base-DObject>
+                      </DClass>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DAssociation">
+                      <DAssociation>
+                       <base-DRelation>
+                        <DRelation>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{aafe2c48-7acc-438c-b3da-8004d969ead3}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{cce407a9-e04b-4f70-8b1e-bdecd6d2e6b9}</object>
+                         <a>{d89174b0-fda3-4c70-ba0f-bf3f7e11b289}</a>
+                         <b>{088fe30f-3fef-423a-a01c-eb48ef0725d9}</b>
+                        </DRelation>
+                       </base-DRelation>
+                       <b>
+                        <DAssociationEnd>
+                         <kind>2</kind>
+                        </DAssociationEnd>
+                       </b>
+                      </DAssociation>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DClass">
+                      <DClass>
+                       <base-DObject>
+                        <DObject>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{ac232d6a-f272-4c0f-ae35-67b7740f7422}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{601dd2c9-fce7-4f3b-8e40-5ec32d1e9770}</object>
+                         <context>System</context>
+                         <name>Settings</name>
+                         <pos>x:170;y:480</pos>
+                         <rect>x:-70;y:-25;w:140;h:50</rect>
+                         <auto-sized>false</auto-sized>
+                         <visual-role>0</visual-role>
+                        </DObject>
+                       </base-DObject>
+                      </DClass>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DAssociation">
+                      <DAssociation>
+                       <base-DRelation>
+                        <DRelation>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{aad6ff0d-1bba-402e-ac35-634f4a155ffb}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{c6a92e2f-f882-4ffd-b0d2-0b2f1dc75554}</object>
+                         <a>{ac232d6a-f272-4c0f-ae35-67b7740f7422}</a>
+                         <b>{088fe30f-3fef-423a-a01c-eb48ef0725d9}</b>
+                        </DRelation>
+                       </base-DRelation>
+                       <b>
+                        <DAssociationEnd>
+                         <kind>2</kind>
+                        </DAssociationEnd>
+                       </b>
+                      </DAssociation>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DClass">
+                      <DClass>
+                       <base-DObject>
+                        <DObject>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{89ee9bdd-8b00-4192-9494-0cd1d4f7e5d9}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{3f735e9d-1260-4ac3-8f34-b2722a7660f5}</object>
+                         <context>Tvg</context>
+                         <name>TVGNPoints</name>
+                         <pos>x:3245;y:590</pos>
+                         <rect>x:-70;y:-40;w:140;h:80</rect>
+                         <auto-sized>false</auto-sized>
+                         <visual-role>0</visual-role>
+                        </DObject>
+                       </base-DObject>
+                      </DClass>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DInheritance">
+                      <DInheritance>
+                       <base-DRelation>
+                        <DRelation>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{ca920b4d-c7f8-4a91-ae76-fc9a490d20c3}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{f61ca488-c0c7-4ac5-a2a9-fc7e9f3f719d}</object>
+                         <a>{89ee9bdd-8b00-4192-9494-0cd1d4f7e5d9}</a>
+                         <b>{5587cb1b-0faa-434f-b1b2-d5d7bbedec1d}</b>
+                        </DRelation>
+                       </base-DRelation>
+                      </DInheritance>
+                     </instance>
+                    </item>
                    </qlist>
                   </elements>
-                  <last-modified>1492183840951</last-modified>
+                  <last-modified>1492192668213</last-modified>
                   <toolbarid>Classes</toolbarid>
                  </MDiagram>
                 </base-MDiagram>
@@ -5968,7 +6098,7 @@
                                        <qlist>
                                         <item>
                                          <MClassMember>
-                                          <uid>{f21c2674-1ac4-4630-819c-89ad57e57330}</uid>
+                                          <uid>{75850210-6608-4754-b964-21c20f2db5b1}</uid>
                                           <visibility>3</visibility>
                                           <type>1</type>
                                           <declaration>bool _tactEnabled</declaration>
@@ -5976,7 +6106,7 @@
                                         </item>
                                         <item>
                                          <MClassMember>
-                                          <uid>{9ac1940b-17db-497e-8d2f-aaa684ab12ba}</uid>
+                                          <uid>{f07a1048-46fc-46c4-9172-3a1b5a984c2e}</uid>
                                           <visibility>3</visibility>
                                           <type>1</type>
                                           <declaration>bool _diffMode</declaration>
@@ -5984,7 +6114,7 @@
                                         </item>
                                         <item>
                                          <MClassMember>
-                                          <uid>{1cd1bfee-8f21-4a5c-a34a-04f7b647d842}</uid>
+                                          <uid>{672c85fc-7181-4867-bf7e-78be639d5b62}</uid>
                                           <visibility>3</visibility>
                                           <type>1</type>
                                           <declaration>bool _tx1Enabled</declaration>
@@ -5992,7 +6122,7 @@
                                         </item>
                                         <item>
                                          <MClassMember>
-                                          <uid>{977e95ac-d871-4885-946d-0aa9463588fe}</uid>
+                                          <uid>{03dc9a9c-e334-4c72-8187-0efafbe286f1}</uid>
                                           <visibility>3</visibility>
                                           <type>1</type>
                                           <declaration>uint8_t _tx1</declaration>
@@ -6000,7 +6130,7 @@
                                         </item>
                                         <item>
                                          <MClassMember>
-                                          <uid>{72e05ef4-1568-499c-9cd8-e103c82f0893}</uid>
+                                          <uid>{264bbe23-b0cf-4f61-9185-f8d148e4f2d8}</uid>
                                           <visibility>3</visibility>
                                           <type>1</type>
                                           <declaration>bool _rx1Enabled</declaration>
@@ -6008,7 +6138,7 @@
                                         </item>
                                         <item>
                                          <MClassMember>
-                                          <uid>{1003e365-73ef-4bcc-b6c4-35ed66af79fc}</uid>
+                                          <uid>{3d56ca6f-2f54-4b11-9ce4-e7e5bb9e225b}</uid>
                                           <visibility>3</visibility>
                                           <type>1</type>
                                           <declaration>uint8_t _rx1</declaration>
@@ -6016,7 +6146,7 @@
                                         </item>
                                         <item>
                                          <MClassMember>
-                                          <uid>{095d2d9d-c0ce-4ec6-afc8-15404440833a}</uid>
+                                          <uid>{2f98f1f6-99de-48b8-b246-58fdca01ea41}</uid>
                                           <visibility>3</visibility>
                                           <type>1</type>
                                           <declaration>bool _tx2Enabled</declaration>
@@ -6024,7 +6154,7 @@
                                         </item>
                                         <item>
                                          <MClassMember>
-                                          <uid>{ee11322e-041b-414d-83eb-bddd5b6b6962}</uid>
+                                          <uid>{5d9338f9-7cc7-4b6a-b7ee-5d07cedf2295}</uid>
                                           <visibility>3</visibility>
                                           <type>1</type>
                                           <declaration>uint8_t _tx2</declaration>
@@ -6032,7 +6162,7 @@
                                         </item>
                                         <item>
                                          <MClassMember>
-                                          <uid>{d4a3e61b-61df-4165-a2d5-5031013123b4}</uid>
+                                          <uid>{c08aeeeb-d0b8-4f33-8e18-e2870657cf4c}</uid>
                                           <visibility>3</visibility>
                                           <type>1</type>
                                           <declaration>bool _rx2Enabled</declaration>
@@ -6040,7 +6170,7 @@
                                         </item>
                                         <item>
                                          <MClassMember>
-                                          <uid>{d04f8593-eabf-4df6-a5ac-e8cf03a0d897}</uid>
+                                          <uid>{b562a925-0cb8-453a-8cc4-9333d10061f9}</uid>
                                           <visibility>3</visibility>
                                           <type>1</type>
                                           <declaration>uint8_t _rx2</declaration>
@@ -6137,7 +6267,7 @@
                                        <qlist>
                                         <item>
                                          <MClassMember>
-                                          <uid>{5382bec5-72e5-40f5-9660-90c017cd6b39}</uid>
+                                          <uid>{35042924-b175-45cc-af51-934d42e1347d}</uid>
                                           <visibility>3</visibility>
                                           <type>1</type>
                                           <declaration>TactID _id</declaration>
@@ -6145,7 +6275,7 @@
                                         </item>
                                         <item>
                                          <MClassMember>
-                                          <uid>{be6fbe45-4bb6-48c0-9099-1427ec207a92}</uid>
+                                          <uid>{c99fe139-5004-476e-9676-03f5d2943bfa}</uid>
                                           <visibility>3</visibility>
                                           <type>1</type>
                                           <declaration>std::vector&lt;Tact&gt; _tactTable</declaration>
@@ -6314,7 +6444,7 @@
                             <qlist>
                              <item>
                               <MClassMember>
-                               <uid>{ff0956c2-9ff1-4245-83a0-f39111937ce3}</uid>
+                               <uid>{18c8b113-fead-4587-b280-70969f890edc}</uid>
                                <visibility>3</visibility>
                                <type>1</type>
                                <declaration>std::vector&lt;DeviceMode&gt; _modes</declaration>
@@ -6480,7 +6610,7 @@
                                           <flags>1</flags>
                                          </MElement>
                                         </base-MElement>
-                                        <name>TVGSinglePoint</name>
+                                        <name>TVGTwoPoint</name>
                                         <relations>
                                          <handles>
                                           <handles>
@@ -6499,6 +6629,58 @@
                                                     </MElement>
                                                    </base-MElement>
                                                    <a>{59508bef-6e7d-46df-9cd3-6a9b3de46f69}</a>
+                                                   <b>{5ff3a734-d79f-494c-9176-4184f7f2af00}</b>
+                                                  </MRelation>
+                                                 </base-MRelation>
+                                                </MInheritance>
+                                               </instance>
+                                              </target>
+                                             </handle>
+                                            </item>
+                                           </qlist>
+                                          </handles>
+                                         </handles>
+                                        </relations>
+                                       </MObject>
+                                      </base-MObject>
+                                     </MClass>
+                                    </instance>
+                                   </target>
+                                  </handle>
+                                 </item>
+                                 <item>
+                                  <handle>
+                                   <uid>{3f735e9d-1260-4ac3-8f34-b2722a7660f5}</uid>
+                                   <target>
+                                    <instance type="MClass">
+                                     <MClass>
+                                      <base-MObject>
+                                       <MObject>
+                                        <base-MElement>
+                                         <MElement>
+                                          <uid>{3f735e9d-1260-4ac3-8f34-b2722a7660f5}</uid>
+                                          <flags>1</flags>
+                                         </MElement>
+                                        </base-MElement>
+                                        <name>TVGNPoints</name>
+                                        <relations>
+                                         <handles>
+                                          <handles>
+                                           <qlist>
+                                            <item>
+                                             <handle>
+                                              <uid>{f61ca488-c0c7-4ac5-a2a9-fc7e9f3f719d}</uid>
+                                              <target>
+                                               <instance type="MInheritance">
+                                                <MInheritance>
+                                                 <base-MRelation>
+                                                  <MRelation>
+                                                   <base-MElement>
+                                                    <MElement>
+                                                     <uid>{f61ca488-c0c7-4ac5-a2a9-fc7e9f3f719d}</uid>
+                                                    </MElement>
+                                                   </base-MElement>
+                                                   <a>{3f735e9d-1260-4ac3-8f34-b2722a7660f5}</a>
                                                    <b>{5ff3a734-d79f-494c-9176-4184f7f2af00}</b>
                                                   </MRelation>
                                                  </base-MRelation>
@@ -7215,7 +7397,7 @@
                             <qlist>
                              <item>
                               <MClassMember>
-                               <uid>{881ab076-9ae2-4fc4-8fde-ae03219d2059}</uid>
+                               <uid>{ae81c98c-c380-4451-90ba-51bd4eb185c2}</uid>
                                <visibility>3</visibility>
                                <type>1</type>
                                <declaration>Filesystem * _filesystem</declaration>
@@ -7223,7 +7405,7 @@
                              </item>
                              <item>
                               <MClassMember>
-                               <uid>{d104cabc-2773-4258-9e94-a2e09b211a69}</uid>
+                               <uid>{29f81fa3-7407-401e-981a-3bc5dfcfbdda}</uid>
                                <visibility>3</visibility>
                                <type>1</type>
                                <declaration>BrightnessController * _brightness</declaration>
@@ -7231,7 +7413,7 @@
                              </item>
                              <item>
                               <MClassMember>
-                               <uid>{af8a5ff7-b7fd-4f73-bc91-b45bb7f7584a}</uid>
+                               <uid>{d0adcba3-411e-441a-8c6d-6870f53fed26}</uid>
                                <visibility>3</visibility>
                                <type>1</type>
                                <declaration>Temperature * _temperature</declaration>
@@ -7239,7 +7421,7 @@
                              </item>
                              <item>
                               <MClassMember>
-                               <uid>{5ac7db6e-72b9-4568-b6c7-1f0b47a48c91}</uid>
+                               <uid>{cfc548bc-f326-4080-8ee8-6d3d48abd98f}</uid>
                                <visibility>3</visibility>
                                <type>1</type>
                                <declaration>Sound * _sound</declaration>
@@ -7247,7 +7429,7 @@
                              </item>
                              <item>
                               <MClassMember>
-                               <uid>{e292a942-7362-40a3-aa30-9f41105f9304}</uid>
+                               <uid>{fa547d38-df30-4d4c-b98f-5c880ad5f5dd}</uid>
                                <visibility>3</visibility>
                                <type>1</type>
                                <declaration>BatteryController * _battery</declaration>
@@ -7255,7 +7437,7 @@
                              </item>
                              <item>
                               <MClassMember>
-                               <uid>{a86c282e-005c-4f2a-87f6-55352cb38cc0}</uid>
+                               <uid>{803dc5be-6bf6-4f46-8ae0-d110527d26b1}</uid>
                                <visibility>3</visibility>
                                <type>1</type>
                                <declaration>DateTimeController * _dateTime</declaration>
@@ -7701,6 +7883,120 @@
                             </MObject>
                            </base-MObject>
                           </MComponent>
+                         </instance>
+                        </target>
+                       </handle>
+                      </item>
+                      <item>
+                       <handle>
+                        <uid>{02e14d6b-22a3-4e52-a450-9a5ddb95fce0}</uid>
+                        <target>
+                         <instance type="MClass">
+                          <MClass>
+                           <base-MObject>
+                            <MObject>
+                             <base-MElement>
+                              <MElement>
+                               <uid>{02e14d6b-22a3-4e52-a450-9a5ddb95fce0}</uid>
+                               <flags>1</flags>
+                              </MElement>
+                             </base-MElement>
+                             <name>Operators</name>
+                             <relations>
+                              <handles>
+                               <handles>
+                                <qlist>
+                                 <item>
+                                  <handle>
+                                   <uid>{cce407a9-e04b-4f70-8b1e-bdecd6d2e6b9}</uid>
+                                   <target>
+                                    <instance type="MAssociation">
+                                     <MAssociation>
+                                      <base-MRelation>
+                                       <MRelation>
+                                        <base-MElement>
+                                         <MElement>
+                                          <uid>{cce407a9-e04b-4f70-8b1e-bdecd6d2e6b9}</uid>
+                                         </MElement>
+                                        </base-MElement>
+                                        <a>{02e14d6b-22a3-4e52-a450-9a5ddb95fce0}</a>
+                                        <b>{00c9e0d6-6831-47a9-9a48-d996227b639c}</b>
+                                       </MRelation>
+                                      </base-MRelation>
+                                      <b>
+                                       <MAssociationEnd>
+                                        <kind>2</kind>
+                                       </MAssociationEnd>
+                                      </b>
+                                     </MAssociation>
+                                    </instance>
+                                   </target>
+                                  </handle>
+                                 </item>
+                                </qlist>
+                               </handles>
+                              </handles>
+                             </relations>
+                            </MObject>
+                           </base-MObject>
+                          </MClass>
+                         </instance>
+                        </target>
+                       </handle>
+                      </item>
+                      <item>
+                       <handle>
+                        <uid>{601dd2c9-fce7-4f3b-8e40-5ec32d1e9770}</uid>
+                        <target>
+                         <instance type="MClass">
+                          <MClass>
+                           <base-MObject>
+                            <MObject>
+                             <base-MElement>
+                              <MElement>
+                               <uid>{601dd2c9-fce7-4f3b-8e40-5ec32d1e9770}</uid>
+                               <flags>1</flags>
+                              </MElement>
+                             </base-MElement>
+                             <name>Settings</name>
+                             <relations>
+                              <handles>
+                               <handles>
+                                <qlist>
+                                 <item>
+                                  <handle>
+                                   <uid>{c6a92e2f-f882-4ffd-b0d2-0b2f1dc75554}</uid>
+                                   <target>
+                                    <instance type="MAssociation">
+                                     <MAssociation>
+                                      <base-MRelation>
+                                       <MRelation>
+                                        <base-MElement>
+                                         <MElement>
+                                          <uid>{c6a92e2f-f882-4ffd-b0d2-0b2f1dc75554}</uid>
+                                         </MElement>
+                                        </base-MElement>
+                                        <a>{601dd2c9-fce7-4f3b-8e40-5ec32d1e9770}</a>
+                                        <b>{00c9e0d6-6831-47a9-9a48-d996227b639c}</b>
+                                       </MRelation>
+                                      </base-MRelation>
+                                      <b>
+                                       <MAssociationEnd>
+                                        <kind>2</kind>
+                                       </MAssociationEnd>
+                                      </b>
+                                     </MAssociation>
+                                    </instance>
+                                   </target>
+                                  </handle>
+                                 </item>
+                                </qlist>
+                               </handles>
+                              </handles>
+                             </relations>
+                            </MObject>
+                           </base-MObject>
+                          </MClass>
                          </instance>
                         </target>
                        </handle>
