@@ -13,6 +13,7 @@ void TVGEditorWidget::changeEvent(QEvent *event)
 {
     if (event->type() == QEvent::LanguageChange) {
         ui->retranslateUi(this);
+        setupTwoPoint();
     }
     QWidget::changeEvent(event);
 }
@@ -70,33 +71,36 @@ void TVGEditorWidget::updateNPointsTVG()
     delete curve;
 }
 
-void TVGEditorWidget::setupTwoPoint()
+void TVGEditorWidget::connectTwoPoint()
 {
-    ui->singleOffset->setName(tr("Offset - To (us)"));
-    ui->singleOffset->setValue(100);
-    ui->singleOffset->setMax(200.0);
-    ui->singleOffset->setSuffix("us");
-    ui->singleHeight->setName(tr("Height - A (dB)"));
-    ui->singleHeight->setValue(30);
-    ui->singleHeight->setMax(80.0);
-    ui->singleHeight->setSuffix("dB");
-    ui->singleForm->setName(tr("Form - Ki (0 - 50)"));
-    ui->singleForm->setValue(15);
-    ui->singleForm->setMax(50);
-    ui->singleWidth->setName(tr("Width - T (us)"));
-    ui->singleWidth->setValue(60);
-    ui->singleWidth->setMax(200.0);
-    ui->singleWidth->setSuffix("us");
-    ui->singleBase->setName(tr("Base - B (dB)"));
-    ui->singleBase->setValue(70);
-    ui->singleBase->setMax(80.0);
-    ui->singleBase->setSuffix("dB");
-
     connect(ui->singleHeight,SIGNAL(valueChanged(double)),this,SLOT(onSingleHeightChanged(double)));
     connect(ui->singleOffset,SIGNAL(valueChanged(double)),this,SLOT(onSingleOffsetChanged(double)));
     connect(ui->singleWidth,SIGNAL(valueChanged(double)),this,SLOT(onSingleWidthChanged(double)));
     connect(ui->singleBase,SIGNAL(valueChanged(double)),this,SLOT(onSingleBaseChanged(double)));
     connect(ui->singleForm,SIGNAL(valueChanged(double)),this,SLOT(onSingleFormChanged(double)));
+}
+
+void TVGEditorWidget::setupTwoPoint()
+{
+    ui->singleOffset->setName(tr("Offset - T(0)"));
+    ui->singleOffset->setValue(100);
+    ui->singleOffset->setMax(200.0);
+    ui->singleOffset->setSuffix(tr("us"));
+    ui->singleHeight->setName(tr("Height - A"));
+    ui->singleHeight->setValue(30);
+    ui->singleHeight->setMax(80.0);
+    ui->singleHeight->setSuffix(tr("dB"));
+    ui->singleForm->setName(tr("Form - K(i)"));
+    ui->singleForm->setValue(15);
+    ui->singleForm->setMax(50);
+    ui->singleWidth->setName(tr("Width - T"));
+    ui->singleWidth->setValue(60);
+    ui->singleWidth->setMax(200.0);
+    ui->singleWidth->setSuffix(tr("us"));
+    ui->singleBase->setName(tr("Base - B"));
+    ui->singleBase->setValue(70);
+    ui->singleBase->setMax(80.0);
+    ui->singleBase->setSuffix(tr("dB"));
 }
 
 TVGEditorWidget::TVGEditorWidget(QWidget *parent) :
@@ -109,6 +113,7 @@ TVGEditorWidget::TVGEditorWidget(QWidget *parent) :
     _info._displayChannel = 0;
 
     setupTwoPoint();
+    connectTwoPoint();
 
     ui->npointNumber->setName("N");
     ui->npointNumber->setMin(2);

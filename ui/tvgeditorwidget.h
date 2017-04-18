@@ -57,6 +57,7 @@ private:
     Ui::TVGEditorWidget *ui;
     void setupTwoPoint();
     void changeEvent(QEvent *event);
+    void connectTwoPoint();
 };
 
 #endif // TVGEDITORWIDGET_H
