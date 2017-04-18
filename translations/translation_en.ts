@@ -19,22 +19,17 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/ascaninfowidget.ui" line="90"/>
-        <source>Channel:</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/ascaninfowidget.ui" line="100"/>
+        <location filename="../ui/ascaninfowidget.ui" line="87"/>
         <source>Left 1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/ascaninfowidget.ui" line="117"/>
+        <location filename="../ui/ascaninfowidget.ui" line="107"/>
         <source>Angle:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/ascaninfowidget.ui" line="127"/>
+        <location filename="../ui/ascaninfowidget.ui" line="117"/>
         <source>30</source>
         <translation></translation>
     </message>
@@ -329,24 +324,24 @@ prog</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/channelsview.cpp" line="147"/>
+        <location filename="../ui/channelsview.cpp" line="159"/>
         <source>Chan #</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/channelsview.cpp" line="150"/>
-        <location filename="../ui/channelsview.cpp" line="176"/>
+        <location filename="../ui/channelsview.cpp" line="162"/>
+        <location filename="../ui/channelsview.cpp" line="188"/>
         <source>yes</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/channelsview.cpp" line="150"/>
-        <location filename="../ui/channelsview.cpp" line="176"/>
+        <location filename="../ui/channelsview.cpp" line="162"/>
+        <location filename="../ui/channelsview.cpp" line="188"/>
         <source>no</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/channelsview.cpp" line="156"/>
+        <location filename="../ui/channelsview.cpp" line="168"/>
         <source> us</source>
         <translation></translation>
     </message>
@@ -360,21 +355,25 @@ prog</source>
     </message>
     <message>
         <location filename="../ui/controlpanel.cpp" line="8"/>
+        <location filename="../ui/controlpanel.cpp" line="93"/>
         <source>Prism time</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../ui/controlpanel.cpp" line="20"/>
+        <location filename="../ui/controlpanel.cpp" line="94"/>
         <source>Marker</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../ui/controlpanel.cpp" line="33"/>
+        <location filename="../ui/controlpanel.cpp" line="95"/>
         <source>Frequency</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../ui/controlpanel.cpp" line="42"/>
+        <location filename="../ui/controlpanel.cpp" line="96"/>
         <source>Program</source>
         <translation></translation>
     </message>
@@ -555,37 +554,45 @@ prog</source>
     </message>
     <message>
         <location filename="../ui/controls/gatecontroller.cpp" line="10"/>
+        <location filename="../ui/controls/gatecontroller.cpp" line="53"/>
         <source>Gate: </source>
         <translation></translation>
     </message>
     <message>
         <location filename="../ui/controls/gatecontroller.cpp" line="11"/>
+        <location filename="../ui/controls/gatecontroller.cpp" line="54"/>
         <source>Level: </source>
         <translation></translation>
     </message>
     <message>
         <location filename="../ui/controls/gatecontroller.cpp" line="21"/>
+        <location filename="../ui/controls/gatecontroller.cpp" line="47"/>
         <source>Gate start</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../ui/controls/gatecontroller.cpp" line="22"/>
         <location filename="../ui/controls/gatecontroller.cpp" line="24"/>
+        <location filename="../ui/controls/gatecontroller.cpp" line="48"/>
+        <location filename="../ui/controls/gatecontroller.cpp" line="50"/>
         <source>us</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../ui/controls/gatecontroller.cpp" line="23"/>
+        <location filename="../ui/controls/gatecontroller.cpp" line="49"/>
         <source>Gate end</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../ui/controls/gatecontroller.cpp" line="25"/>
+        <location filename="../ui/controls/gatecontroller.cpp" line="51"/>
         <source>Gate level</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../ui/controls/gatecontroller.cpp" line="26"/>
+        <location filename="../ui/controls/gatecontroller.cpp" line="52"/>
         <source>mV</source>
         <translation></translation>
     </message>
@@ -612,7 +619,7 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/helpwidget.cpp" line="47"/>
+        <location filename="../ui/helpwidget.cpp" line="55"/>
         <source>Error! Cannot open file!</source>
         <translation></translation>
     </message>
@@ -780,27 +787,27 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/controls/modeselectionbutton.cpp" line="25"/>
+        <location filename="../ui/controls/modeselectionbutton.cpp" line="33"/>
         <source>Search modes:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/controls/modeselectionbutton.cpp" line="28"/>
+        <location filename="../ui/controls/modeselectionbutton.cpp" line="36"/>
         <source>Hand modes:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/controls/modeselectionbutton.cpp" line="31"/>
+        <location filename="../ui/controls/modeselectionbutton.cpp" line="39"/>
         <source>Head scanner modes:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/controls/modeselectionbutton.cpp" line="34"/>
+        <location filename="../ui/controls/modeselectionbutton.cpp" line="42"/>
         <source>Wheel modes:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/controls/modeselectionbutton.cpp" line="37"/>
+        <location filename="../ui/controls/modeselectionbutton.cpp" line="45"/>
         <source>Unknown</source>
         <translation></translation>
     </message>
@@ -965,7 +972,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../ui/optionswidget.ui" line="96"/>
-        <location filename="../ui/optionswidget.cpp" line="60"/>
+        <location filename="../ui/optionswidget.cpp" line="73"/>
         <source>Brightness</source>
         <translation></translation>
     </message>
@@ -981,13 +988,13 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../ui/optionswidget.ui" line="168"/>
-        <location filename="../ui/optionswidget.cpp" line="46"/>
+        <location filename="../ui/optionswidget.cpp" line="54"/>
         <source>Color scheme</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../ui/optionswidget.ui" line="197"/>
-        <location filename="../ui/optionswidget.cpp" line="55"/>
+        <location filename="../ui/optionswidget.cpp" line="67"/>
         <source>Language</source>
         <translation></translation>
     </message>
@@ -1027,22 +1034,17 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/optionswidget.cpp" line="42"/>
+        <location filename="../ui/optionswidget.cpp" line="50"/>
         <source>Default</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/optionswidget.cpp" line="43"/>
+        <location filename="../ui/optionswidget.cpp" line="51"/>
         <source>Alternative</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/optionswidget.cpp" line="53"/>
-        <source>English</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/optionswidget.cpp" line="69"/>
+        <location filename="../ui/optionswidget.cpp" line="82"/>
         <source>Volume</source>
         <translation></translation>
     </message>
@@ -1072,12 +1074,12 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../ui/registrationwidget.ui" line="101"/>
-        <location filename="../ui/registrationwidget.cpp" line="41"/>
+        <location filename="../ui/registrationwidget.cpp" line="49"/>
         <source>Start registration</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/registrationwidget.cpp" line="36"/>
+        <location filename="../ui/registrationwidget.cpp" line="44"/>
         <source>Stop registration</source>
         <translation></translation>
     </message>
@@ -1181,8 +1183,9 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/statusbar.cpp" line="25"/>
-        <location filename="../ui/statusbar.cpp" line="74"/>
+        <location filename="../ui/statusbar.cpp" line="26"/>
+        <location filename="../ui/statusbar.cpp" line="35"/>
+        <location filename="../ui/statusbar.cpp" line="84"/>
         <source>Operator: </source>
         <translation></translation>
     </message>
@@ -1328,44 +1331,43 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/tvgeditorwidget.ui" line="304"/>
-        <source>Curve 6-point</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/tvgeditorwidget.cpp" line="46"/>
+        <location filename="../ui/tvgeditorwidget.cpp" line="55"/>
+        <location filename="../ui/tvgeditorwidget.cpp" line="88"/>
+        <location filename="../ui/tvgeditorwidget.cpp" line="99"/>
         <source>us</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/tvgeditorwidget.cpp" line="49"/>
+        <location filename="../ui/tvgeditorwidget.cpp" line="58"/>
+        <location filename="../ui/tvgeditorwidget.cpp" line="92"/>
+        <location filename="../ui/tvgeditorwidget.cpp" line="103"/>
         <source>dB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/tvgeditorwidget.cpp" line="67"/>
-        <source>Offset - To (us)</source>
-        <translation></translation>
+        <location filename="../ui/tvgeditorwidget.cpp" line="85"/>
+        <source>Offset - T(0)</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/tvgeditorwidget.cpp" line="71"/>
-        <source>Height - A (dB)</source>
-        <translation></translation>
+        <location filename="../ui/tvgeditorwidget.cpp" line="93"/>
+        <source>Form - K(i)</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/tvgeditorwidget.cpp" line="75"/>
-        <source>Form - Ki (0 - 50)</source>
-        <translation></translation>
+        <location filename="../ui/tvgeditorwidget.cpp" line="96"/>
+        <source>Width - T</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/tvgeditorwidget.cpp" line="78"/>
-        <source>Width - T (us)</source>
-        <translation></translation>
+        <location filename="../ui/tvgeditorwidget.cpp" line="89"/>
+        <source>Height - A</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/tvgeditorwidget.cpp" line="82"/>
-        <source>Base - B (dB)</source>
-        <translation></translation>
+        <location filename="../ui/tvgeditorwidget.cpp" line="100"/>
+        <source>Base - B</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
