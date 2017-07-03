@@ -15,10 +15,10 @@ public:
     explicit CoreTest(QObject *parent = 0);
 private slots:
     void coreCreate();
-    void coreSimpleConfig();
+    /*void coreSimpleConfig();
     void coreCommunicationSimple();
     void coreGateSetup();
-    void coreTvgSetup();
+    void coreTvgSetup();*/
 
 signals:
 

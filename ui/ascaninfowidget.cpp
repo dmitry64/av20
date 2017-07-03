@@ -23,7 +23,7 @@ void AScanInfoWidget::changeEvent(QEvent *event)
 
 void AScanInfoWidget::setHValue(int value)
 {
-    ui->hLabel->setText(QString::number(value)+" us");
+    ui->hLabel->setText(QString::number(value)+tr(" us"));
 }
 
 void AScanInfoWidget::setChannel(const Channel &chan, DisplayChannelID dispIndex)

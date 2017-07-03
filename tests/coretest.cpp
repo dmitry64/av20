@@ -14,16 +14,25 @@ void CoreTest::coreCreate()
 
     ModeManager * modeManager = new ModeManager();
     modeManager->init();
+
     Core * core = new Core(modeManager,calibrationManager);
 
-    core->start();
+    QThread* thread = new QThread();
+
+    core->moveToThread(thread);
+    QObject::connect(thread, SIGNAL(started()), core, SLOT(work()));
+    QObject::connect(core, SIGNAL(finished()), thread, SLOT(quit()));
+
+    thread->start();
+    thread->setPriority(QThread::HighPriority);
+
 
     core->stopCore();
     delete core;
     delete modeManager;
     delete calibrationManager;
 }
-
+/*
 void CoreTest::coreSimpleConfig()
 {
     ModeManager * manager = generateManager();
@@ -222,3 +231,4 @@ void CoreTest::coreTvgSetup()
     delete manager;
     delete calib;
 }
+*/

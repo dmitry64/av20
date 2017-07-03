@@ -172,25 +172,30 @@ CalibrationManager::~CalibrationManager()
 void CalibrationManager::saveAll()
 {
     logEvent("CalibMan","Saving all calibrations...");
-    for(auto it=_calibrations.begin(); it!=_calibrations.end(); it++) {
-        TactID id = it.operator *().first;
-        QDir dir(_savePath);
+    if(_savePath.length()>0) {
+        for(auto it=_calibrations.begin(); it!=_calibrations.end(); it++) {
+            TactID id = it.operator *().first;
+            QDir dir(_savePath);
 
-        QDir tactPath(_savePath+"/"+QString::number(id));
-        if(tactPath.exists()) {
-            tactPath.removeRecursively();
-        }
+            QDir tactPath(_savePath+"/"+QString::number(id));
+            if(tactPath.exists()) {
+                tactPath.removeRecursively();
+            }
 
-        dir.mkdir(QString::number(id));
-        const std::vector<ChannelsCalibration> & channels = it.operator *().second;
-        size_t activeCounter = 0;
-        for(size_t i=0; i<channels.size(); i++) {
-            if(channels.at(i).getActive()) {
-                QString filePath = _savePath+"/"+QString::number(id)+"/"+QString::number(activeCounter)+".xml";
-                channels.at(i).saveToFile(filePath,activeCounter);
-                activeCounter++;
+            dir.mkdir(QString::number(id));
+            const std::vector<ChannelsCalibration> & channels = it.operator *().second;
+            size_t activeCounter = 0;
+            for(size_t i=0; i<channels.size(); i++) {
+                if(channels.at(i).getActive()) {
+                    QString filePath = _savePath+"/"+QString::number(id)+"/"+QString::number(activeCounter)+".xml";
+                    channels.at(i).saveToFile(filePath,activeCounter);
+                    activeCounter++;
+                }
             }
         }
+    }
+    else {
+        logEvent("CalibMan","Not saved calibrations...");
     }
 }
 

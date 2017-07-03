@@ -94,6 +94,7 @@ ModeManager::ModeManager()
 
 void ModeManager::init()
 {
+    logEvent("ModeManager","Initializing...");
     _modes.push_back(generateSearchMode());
     _modes.push_back(generateHandMode());
 }

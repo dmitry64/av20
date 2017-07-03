@@ -19,8 +19,8 @@ public slots:
 
 private slots:
     void simpleCreateTest();
-    void simpleCreateWithCore();
-    void simpleMenuClicking();
+    //void simpleCreateWithCore();
+    //void simpleMenuClicking();
 };
 
 #endif // MAINWINDOWTEST_H

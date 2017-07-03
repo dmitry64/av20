@@ -29,6 +29,10 @@ OptionsWidget::OptionsWidget(QWidget *parent) :
     System * system = System::getInstance();
     Q_ASSERT(system);
     connect(system->getOperators(),SIGNAL(operatorsListChanged()),this,SLOT(onOperatorsListChanged()));
+    connect(ui->soundWidget,SIGNAL(valueChanged(double)),this,SLOT(onSoundVolumeChanged(double)));
+    connect(ui->brightnessWidget,SIGNAL(valueChanged(double)),this,SLOT(onBrightnessChanged(double)));
+    connect(ui->languageWidget,SIGNAL(indexChanged(size_t)),this,SLOT(onLanguageChanged(size_t)));
+    connect(ui->colorSchemeWidget,SIGNAL(indexChanged(size_t)),this,SLOT(onColorSchemeIndexChanged(size_t)));
 }
 
 OptionsWidget::~OptionsWidget()
@@ -52,7 +56,7 @@ void OptionsWidget::initColorSchemes(const Settings* settings)
     ui->colorSchemeWidget->setValues(colorSchemes);
     ui->colorSchemeWidget->setIndex(static_cast<size_t>(settings->getGlobalUiTheme()));
     ui->colorSchemeWidget->setName(tr("Color scheme"));
-    connect(ui->colorSchemeWidget,SIGNAL(indexChanged(size_t)),this,SLOT(onColorSchemeIndexChanged(size_t)));
+
 }
 
 void OptionsWidget::initLanguages()
@@ -65,7 +69,7 @@ void OptionsWidget::initLanguages()
     ui->languageWidget->setValues(languages);
     ui->languageWidget->setIndex(static_cast<size_t>(localization->getCurrentLanguage()));
     ui->languageWidget->setName(tr("Language"));
-    connect(ui->languageWidget,SIGNAL(indexChanged(size_t)),this,SLOT(onLanguageChanged(size_t)));
+
 }
 
 void OptionsWidget::initBrightness(System* system)
@@ -74,7 +78,7 @@ void OptionsWidget::initBrightness(System* system)
     ui->brightnessWidget->setSuffix("%");
     ui->brightnessWidget->setMax(100);
     ui->brightnessWidget->setValue(system->getBrightness());
-    connect(ui->brightnessWidget,SIGNAL(valueChanged(double)),this,SLOT(onBrightnessChanged(double)));
+
 }
 
 void OptionsWidget::initSound(System* system)
@@ -83,7 +87,7 @@ void OptionsWidget::initSound(System* system)
     ui->soundWidget->setSuffix("%");
     ui->soundWidget->setMax(100);
     ui->soundWidget->setValue(system->getSoundVolume());
-    connect(ui->soundWidget,SIGNAL(valueChanged(double)),this,SLOT(onSoundVolumeChanged(double)));
+
 }
 
 void OptionsWidget::initDebug(const Settings* settings)

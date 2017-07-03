@@ -9,7 +9,7 @@ void ControlPanel::initPrismTime()
     _prismTimeSpinbox->setMin(0);
     _prismTimeSpinbox->setMax(50);
     _prismTimeSpinbox->setValue(0);
-    _prismTimeSpinbox->setSuffix("us");
+    _prismTimeSpinbox->setSuffix(tr("us"));
     ui->scrollLayout->addWidget(_prismTimeSpinbox);
     connect(_prismTimeSpinbox,SIGNAL(valueChanged(double)),this,SLOT(onPrismTimeChanged(double)));
 }
@@ -21,7 +21,7 @@ void ControlPanel::initMerkerPos()
     _markerPositionSpinbox->setMin(0);
     _markerPositionSpinbox->setMax(800);
     _markerPositionSpinbox->setValue(0);
-    _markerPositionSpinbox->setSuffix("us");
+    _markerPositionSpinbox->setSuffix(tr("us"));
     _markerPositionSpinbox->hide();
     ui->scrollLayout->addWidget(_markerPositionSpinbox);
 }
@@ -91,6 +91,7 @@ void ControlPanel::changeEvent(QEvent *event)
 {
     if (event->type() == QEvent::LanguageChange) {
         _prismTimeSpinbox->setName(tr("Prism time"));
+        _prismTimeSpinbox->setSuffix(tr("us"));
         _markerPositionSpinbox->setName(tr("Marker"));
         _frequencySpinbox->setName(tr("Frequency"));
         _progSpinbox->setName(tr("Program"));

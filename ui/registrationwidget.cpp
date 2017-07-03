@@ -18,6 +18,9 @@ void RegistrationWidget::changeEvent(QEvent *event)
 {
     if (event->type() == QEvent::LanguageChange) {
         ui->retranslateUi(this);
+        System * system = System::getInstance();
+        ui->dateLabel->setText(system->getDate().toString(Qt::DefaultLocaleShortDate));
+        ui->operatorLabel->setText(system->getCurrentOperatorName());
     }
     QWidget::changeEvent(event);
 }

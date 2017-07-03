@@ -132,7 +132,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
-    qDebug() << "Destoying main window";
     delete _backgroundWidget;
     delete _calibrationsWidget;
     delete _helpWidget;

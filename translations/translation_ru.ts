@@ -37,6 +37,11 @@
         <source>30</source>
         <translation></translation>
     </message>
+    <message>
+        <location filename="../ui/ascaninfowidget.cpp" line="26"/>
+        <source> us</source>
+        <translation> мкс</translation>
+    </message>
 </context>
 <context>
     <name>AScanPage</name>
@@ -364,6 +369,12 @@ prog</source>
         <location filename="../ui/controlpanel.cpp" line="93"/>
         <source>Prism time</source>
         <translation>Время в призме</translation>
+    </message>
+    <message>
+        <location filename="../ui/controlpanel.cpp" line="12"/>
+        <location filename="../ui/controlpanel.cpp" line="24"/>
+        <source>us</source>
+        <translation>мкс</translation>
     </message>
     <message>
         <location filename="../ui/controlpanel.cpp" line="20"/>
@@ -982,7 +993,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../ui/optionswidget.ui" line="96"/>
-        <location filename="../ui/optionswidget.cpp" line="73"/>
+        <location filename="../ui/optionswidget.cpp" line="77"/>
         <source>Brightness</source>
         <translation>Яркость</translation>
     </message>
@@ -998,13 +1009,13 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../ui/optionswidget.ui" line="168"/>
-        <location filename="../ui/optionswidget.cpp" line="54"/>
+        <location filename="../ui/optionswidget.cpp" line="58"/>
         <source>Color scheme</source>
         <translation>Цветовая схема</translation>
     </message>
     <message>
         <location filename="../ui/optionswidget.ui" line="197"/>
-        <location filename="../ui/optionswidget.cpp" line="67"/>
+        <location filename="../ui/optionswidget.cpp" line="71"/>
         <source>Language</source>
         <translation>Язык</translation>
     </message>
@@ -1044,12 +1055,12 @@ p, li { white-space: pre-wrap; }
         <translation>Показывать FPS</translation>
     </message>
     <message>
-        <location filename="../ui/optionswidget.cpp" line="50"/>
+        <location filename="../ui/optionswidget.cpp" line="54"/>
         <source>Default</source>
         <translation>Стандарт</translation>
     </message>
     <message>
-        <location filename="../ui/optionswidget.cpp" line="51"/>
+        <location filename="../ui/optionswidget.cpp" line="55"/>
         <source>Alternative</source>
         <translation>Альтернативная</translation>
     </message>
@@ -1058,7 +1069,7 @@ p, li { white-space: pre-wrap; }
         <translation type="vanished">Английский</translation>
     </message>
     <message>
-        <location filename="../ui/optionswidget.cpp" line="82"/>
+        <location filename="../ui/optionswidget.cpp" line="86"/>
         <source>Volume</source>
         <translation>Громкость</translation>
     </message>
@@ -1087,13 +1098,18 @@ p, li { white-space: pre-wrap; }
         <translation>Дата</translation>
     </message>
     <message>
-        <location filename="../ui/registrationwidget.ui" line="101"/>
-        <location filename="../ui/registrationwidget.cpp" line="49"/>
+        <location filename="../ui/registrationwidget.ui" line="77"/>
+        <source>Information</source>
+        <translation>Информация</translation>
+    </message>
+    <message>
+        <location filename="../ui/registrationwidget.ui" line="118"/>
+        <location filename="../ui/registrationwidget.cpp" line="52"/>
         <source>Start registration</source>
         <translation>Начать регистрацию</translation>
     </message>
     <message>
-        <location filename="../ui/registrationwidget.cpp" line="44"/>
+        <location filename="../ui/registrationwidget.cpp" line="47"/>
         <source>Stop registration</source>
         <translation>Остановить регистрацию</translation>
     </message>

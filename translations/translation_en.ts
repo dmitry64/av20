@@ -33,6 +33,11 @@
         <source>30</source>
         <translation></translation>
     </message>
+    <message>
+        <location filename="../ui/ascaninfowidget.cpp" line="26"/>
+        <source> us</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AScanPage</name>
@@ -358,6 +363,12 @@ prog</source>
         <location filename="../ui/controlpanel.cpp" line="93"/>
         <source>Prism time</source>
         <translation></translation>
+    </message>
+    <message>
+        <location filename="../ui/controlpanel.cpp" line="12"/>
+        <location filename="../ui/controlpanel.cpp" line="24"/>
+        <source>us</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/controlpanel.cpp" line="20"/>
@@ -972,7 +983,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../ui/optionswidget.ui" line="96"/>
-        <location filename="../ui/optionswidget.cpp" line="73"/>
+        <location filename="../ui/optionswidget.cpp" line="77"/>
         <source>Brightness</source>
         <translation></translation>
     </message>
@@ -988,13 +999,13 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../ui/optionswidget.ui" line="168"/>
-        <location filename="../ui/optionswidget.cpp" line="54"/>
+        <location filename="../ui/optionswidget.cpp" line="58"/>
         <source>Color scheme</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../ui/optionswidget.ui" line="197"/>
-        <location filename="../ui/optionswidget.cpp" line="67"/>
+        <location filename="../ui/optionswidget.cpp" line="71"/>
         <source>Language</source>
         <translation></translation>
     </message>
@@ -1034,17 +1045,17 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/optionswidget.cpp" line="50"/>
+        <location filename="../ui/optionswidget.cpp" line="54"/>
         <source>Default</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/optionswidget.cpp" line="51"/>
+        <location filename="../ui/optionswidget.cpp" line="55"/>
         <source>Alternative</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/optionswidget.cpp" line="82"/>
+        <location filename="../ui/optionswidget.cpp" line="86"/>
         <source>Volume</source>
         <translation></translation>
     </message>
@@ -1073,13 +1084,18 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/registrationwidget.ui" line="101"/>
-        <location filename="../ui/registrationwidget.cpp" line="49"/>
+        <location filename="../ui/registrationwidget.ui" line="77"/>
+        <source>Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/registrationwidget.ui" line="118"/>
+        <location filename="../ui/registrationwidget.cpp" line="52"/>
         <source>Start registration</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/registrationwidget.cpp" line="44"/>
+        <location filename="../ui/registrationwidget.cpp" line="47"/>
         <source>Stop registration</source>
         <translation></translation>
     </message>

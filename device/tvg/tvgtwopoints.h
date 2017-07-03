@@ -30,6 +30,11 @@ public:
     QDomElement generateXML(QDomDocument &doc);
     TVGType getType() const;
     void fillTVGFromXML(const QDomNode &tvg);
+    void setYBase(double yBase);
+    void setXOffset(double xOffset);
+    void setYHeight(double yHeight);
+    void setXWidth(double xWidth);
+    void setCurve(double curve);
 };
 
 #endif // TVGTWOPOINTS_H

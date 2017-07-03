@@ -27,6 +27,31 @@ double TVGTwoPoints::getCurve() const
     return _curve;
 }
 
+void TVGTwoPoints::setYBase(double yBase)
+{
+    _yBase = yBase;
+}
+
+void TVGTwoPoints::setXOffset(double xOffset)
+{
+    _xOffset = xOffset;
+}
+
+void TVGTwoPoints::setYHeight(double yHeight)
+{
+    _yHeight = yHeight;
+}
+
+void TVGTwoPoints::setXWidth(double xWidth)
+{
+    _xWidth = xWidth;
+}
+
+void TVGTwoPoints::setCurve(double curve)
+{
+    _curve = curve;
+}
+
 TVGTwoPoints::TVGTwoPoints() : _yBase(60), _xOffset(50), _yHeight(20), _xWidth(50), _curve(25)
 {
 

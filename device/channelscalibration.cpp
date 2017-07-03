@@ -59,6 +59,7 @@ ChannelsCalibration::~ChannelsCalibration()
 
 void ChannelsCalibration::saveToFile(const QString &path, size_t saveIndex) const
 {
+    Q_ASSERT(path.length()>0);
     QFile outFile(path);
     logEvent("ChanCalib","Saving to file:"+path);
     if(outFile.open(QIODevice::WriteOnly | QIODevice::Text)) {
